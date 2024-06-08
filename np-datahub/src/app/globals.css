@@ -2,6 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+  font-family: 'PT Serif';
+  src: url('/fonts/PTSerif-Regular.woff2') format('woff2'),
+       url('/fonts/PTSerif-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  src: url('/fonts/PTSerif-Bold.woff2') format('woff2'),
+       url('/fonts/PTSerif-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TTNorms-Regular.woff2') format('woff2'),
+        url('/fonts/TTNorms-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TTNorms-Bold.woff2') format('woff2')
+        url('/fonts/TTNorms-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -31,3 +65,29 @@ body {
     text-wrap: balance;
   }
 }
+
+/* The entire scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 6px;
+
+}
+
+/* The background of the scrollbar tray */
+::-webkit-scrollbar-track {
+  background: transparent;
+  /*rgba(255, 255, 255, 0.30);  White with 30% opacity */
+  border-radius: 6px;
+}
+
+/* The scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+
+/* The scrollbar handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
