@@ -108,19 +108,5 @@
       "revenue": 2733590,
       "expenses": 2866649
     }
-  },
-  {
-    "EIN": "123456789",
-    "name": "Example Nonprofit Inc",
-    "ntee_sector": "T310",
-    "subsection_code": "3",
-    "2021": {
-      "revenue": 500000,
-      "expenses": 300000
-    },
-    "2020": {
-      "revenue": 450000,
-      "expenses": 280000
-    }
   }
 ]
