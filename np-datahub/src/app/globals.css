@@ -21,16 +21,16 @@
 
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TTNorms-Regular.woff2') format('woff2'),
-        url('/fonts/TTNorms-Regular.woff') format('woff');
+  src: url('/fonts/TT-Norms-Pro-Regular.woff2') format('woff2'),
+        url('/fonts/TT-Norms-Pro-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TTNorms-Bold.woff2') format('woff2')
-        url('/fonts/TTNorms-Bold.woff') format('woff');
+  src: url('/fonts/TT-Norms-Pro-Bold.woff2') format('woff2')
+        url('/fonts/TT-Norms-Pro-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
 }
@@ -91,3 +91,14 @@ body {
   background: #555;
 }
 
+.even-shadow{
+  box-shadow: 0 0 10px rgba(0,0,0,0.3); /* Even shadow on all sides */
+}
+
+.profile {
+  transition: transform 0.3s ease;
+}
+
+.profile:hover {
+  transform: scale(1.02);
+}
