@@ -36,11 +36,11 @@ Incorporate findings within the chosen open-source data visualization libraries.
 Construct data visualization dashboard.
 Launch V1.0 of the platform for user testing and presentation.  
 
-Process Requirements
+PROCESS REQUIREMENTS
 
 The desired deployment focuses on the development of a web-based browser application. The most universal programming solution appears to be the most intuitive and appropriate for this project and given the data-base structure and emphasis on data intelligence gathering, this is important for current and future developments as expected iterations of this language must be compatible for upgrade purposes. The project client defers to the developers to establish this framework. 
 
-Data Source
+DATA SOURCE
 
 As noted above and given this stage of the project, any open source option can be used as the focus will be more on the sample of IRS data within a certain NTEE sector in New York State, and not the full data population. As of now, based on preliminary discussions with the developers, a streamlined MongoDB or MySQL solution is more than welcomed. Since these solutions are open source and widely accepted, there is an emphasis on making strategic decisions as future developers and iterations must understand the building blocks, so to speak, for this platform. Currently, the data-wrangling aspect of the project is completed, meaning the developers can focus on algorithmic, platform, and data visualization construction, of which the last takes priority. 
 
