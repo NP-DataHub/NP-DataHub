@@ -16,7 +16,7 @@ PROJECT TIMELINE
 
 The project is designed to be three-month explorations with three key deliverable checkpoints:
 
-Key Date Benchmarks
+KEY DATE BENCHMARKS
 
 May 28: Exploration begins
 June 17: Functionality V1, troubleshooting, key findings, pivot, and new features
