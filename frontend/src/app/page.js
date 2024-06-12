@@ -38,7 +38,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
           <div className="flex flex-col items-center text-center">
-            <img draggable = {false} src="/img/four_bar_final.png" alt="Graph and Magnifying Glass" className="w-1/2 sm:w-full max-w-full" />
+            <img draggable = {false} src="/img/four_bar_final.png" alt="Graph and Magnifying Glass" className="w-1/2 sm:w-1/2 max-w-full" />
           </div>
           <div className="flex flex-col justify-center text-left text-lg md:text-2xl mt-6 font-serif">
             <div className="mb-6 md:mb-10">
