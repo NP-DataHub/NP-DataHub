@@ -3,6 +3,9 @@ import { HiOutlineMail } from "react-icons/hi";
 import { FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
+import dynamic from 'next/dynamic';
+
+const MyBarChart = dynamic(() => import('../components/MyBarChart'), { ssr: false });
 
 export default function Home() {
   return (
