@@ -1,7 +1,7 @@
 import Navbar from "./components/Navbar";
 import dynamic from 'next/dynamic';
 
-const MyBarChart = dynamic(() => import('../components/MyBarChart'), { ssr: false });
+const BarChart = dynamic(() => import('./components/BarChart'), { ssr: false });
 
 export default function Home() {
   return (
@@ -12,8 +12,8 @@ export default function Home() {
         <div className="flex flex-col justify-center items-center text-center py-40">
           <h2 className="text-2xl md:text-5xl mb-4 md:mb-6">Second Chance Inc.</h2>
           <h1>My Nivo Bar Chart</h1>
-          <div style={{ height: '500px' }}>
-            <MyBarChart />
+          <div style={{ height: '500px', width: '500px' }}>
+            <BarChart />
           </div>
         </div>
       </section>

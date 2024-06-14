@@ -1,3 +1,4 @@
+'use client';
 // components/BarChart.js
 import { ResponsiveBar } from '@nivo/bar';
 
