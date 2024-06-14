@@ -1,5 +1,7 @@
 import os
 import xml.etree.ElementTree as ET
+import json
+import requests
 from pymongo import MongoClient
 
 class Database:
@@ -66,6 +68,19 @@ class Database:
 
         # Insert data into the collection
         collection.insert_many(self.public_data)
+
+    def get_from_api(ein):
+        url = "https://projects.propublica.org/nonprofits/api/v2/organizations/"+ein+".json"
+        response = requests.get(url)
+
+        if response.status_code == 200:
+            data = response.json()
+            ntee  = data["organization"]["ntee_code"]
+            ntee_section = ntee[0];
+            subsection = data["organization"]["subsection_code"]
+            return [ntee, ntee_section, subsection]
+        else:
+            print("ERROR: Could not find the company") 
 
 if __name__ == "__main__":
 
