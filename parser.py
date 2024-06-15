@@ -58,14 +58,14 @@ class Database:
         return total_revenue,total_assets,total_liabilities,total_expenses
 
     def get_EZ_financial_information(self,file_path):
-        total_revenue_element = (self.root).find('.//irs:TotalRevenueGrp/irs:TotalRevenueColumnAmt', self.namespace)
-        total_revenue = total_revenue_element.text if total_revenue_element is not None else print("revenue not found in file: ",file_path) or None
-        total_assets_element = (self.root).find('.//irs:TotalAssetsGrp/irs:EOYAmt', self.namespace)
+        total_revenue_element = (self.root).find('.//irs:TotalRevenueAmt', self.namespace)
+        total_revenue = total_revenue_element.text if total_revenue_element is not None else print("revenue not found in file ((only one var found)): ",file_path) or None
+        total_assets_element = (self.root).find('.//irs:Form990TotalAssetsGrp/irs:EOYAmt', self.namespace)
         total_assets = total_assets_element.text if total_assets_element is not None else print("assets not found in file: ",file_path) or None
-        total_liabilities_element = (self.root).find('.//irs:TotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
-        total_liabilities = total_liabilities_element.text if total_liabilities_element is not None else print("Liabilities not found in file: ",file_path) or None
-        total_expenses_element = (self.root).find('.//irs:TotalFunctionalExpensesGrp/irs:TotalAmt', self.namespace)
-        total_expenses = total_expenses_element.text if total_expenses_element is not None else print("expenses not found in file: ",file_path) or None
+        total_liabilities_element = (self.root).find('.//irs:SumOfTotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
+        total_liabilities = total_liabilities_element.text if total_liabilities_element is not None else print("Liabilities (only one var found) not found in file: ",file_path) or None
+        total_expenses_element = (self.root).find('.//irs:TotalExpensesAmt', self.namespace)
+        total_expenses = total_expenses_element.text if total_expenses_element is not None else print("expenses not found in file (only one var found): ",file_path) or None
         #total_contributions = (self.root).find('.//irs:TotalContributionsAmt', self.namespace)
         return total_revenue,total_assets,total_liabilities,total_expenses
 
@@ -77,7 +77,7 @@ class Database:
         return_type = return_type_element.text if return_type_element is not None else print("return type not found in file: ",file_path) or None
 
         if return_type == "990":
-            ein,tax_period = self.get_ein_and_tax_period()
+            ein,tax_period = self.get_ein_and_tax_period(file_path)
             if ein not in self.public_data:
                 name,state,city,zip_code,ntee,major_group,subsection_code = self.get_general_information(ein,file_path)
                 total_revenue,total_assets,total_liabilities,total_expenses = self.get_master_financial_information(file_path)
@@ -97,10 +97,10 @@ class Database:
                     }
                 }
             else :
-                print("two MASTER filings of same company in same folder spotted:" file_path, ein)
+                print("two MASTER filings of same company in same folder spotted:", file_path, ein)
                 if tax_period not in self.public_data[ein]:
                     total_revenue,total_assets,total_liabilities,total_expenses = self.get_master_financial_information(file_path)
-                   self.public_data[ein][tax_period] = {
+                    self.public_data[ein][tax_period] = {
                         "Total Revenue": total_revenue,
                         "Total Assets" : total_assets,
                         "Total Liabilities" : total_liabilities,
@@ -111,7 +111,7 @@ class Database:
                     print("This shouldn't happen, two MASTER files of same company of same tax year exists",file_path)
 
         elif return_type == "990EZ":
-            ein,tax_period = self.get_ein_and_tax_period()
+            ein,tax_period = self.get_ein_and_tax_period(file_path)
             if ein not in self.public_data:
                 name,state,city,zip_code,ntee,major_group,subsection_code = self.get_general_information(ein,file_path)
                 total_revenue,total_assets,total_liabilities,total_expenses = self.get_EZ_financial_information(file_path)
@@ -131,10 +131,10 @@ class Database:
                     }
                 }
             else :
-                print("two EZ filings of same company in same folder spotted:" file_path, ein)
+                print("two EZ filings of same company in same folder spotted:", file_path, ein)
                 if tax_period not in self.public_data[ein]:
                     total_revenue,total_assets,total_liabilities,total_expenses = self.get_EZ_financial_information(file_path)
-                   self.public_data[ein][tax_period] = {
+                    self.public_data[ein][tax_period] = {
                         "Total Revenue": total_revenue,
                         "Total Assets" : total_assets,
                         "Total Liabilities" : total_liabilities,
