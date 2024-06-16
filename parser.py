@@ -13,10 +13,10 @@ class Database:
 
     def get_ein_and_tax_period(self,file_path):
         ein_element = (self.root).find('.//irs:Filer/irs:EIN', self.namespace)
-        ein = int(ein_element.text) if ein_element is not None else print("ein not found in file: ",file_path) or None
+        ein = int(ein_element.text) if ein_element is not None else "None"
         # Extract Tax period
         tax_period_element = (self.root).find('.//irs:TaxYr', self.namespace)
-        tax_period = tax_period_element.text if tax_period_element is not None else print("taxyear not found in file: ",file_path) or None
+        tax_period = tax_period_element.text if tax_period_element is not None else "None"
         return ein,tax_period
 
     def get_ntee_and_subsection(self,ein):
@@ -25,47 +25,47 @@ class Database:
 
         if response.status_code == 200:
             data = response.json()
-            ntee = data["organization"]["ntee_code"] if data["organization"]["ntee_code"] else print("ntee not found at  ", ein) or "None"
+            ntee = data["organization"]["ntee_code"] if data["organization"]["ntee_code"] else "None"
             major_group = ntee[0];
-            subsection = data["organization"]["subsection_code"] if data["organization"]["subsection_code"] else print("subsection code not found at  ", ein) or "None"
+            subsection = data["organization"]["subsection_code"] if data["organization"]["subsection_code"] else "None"
             return ntee, major_group, subsection
         else:
-            print("ERROR: Could not find the company") 
+            return "None","N","None"
 
     def get_general_information(self,ein,file_path):
         name_element = (self.root).find('.//irs:Filer/irs:BusinessName/irs:BusinessNameLine1Txt', self.namespace)
-        name = name_element.text if name_element is not None else print("name not found in file: ",file_path) or None
+        name = name_element.text if name_element is not None else "None"
         state_element = (self.root).find('.//irs:Filer/irs:USAddress/irs:StateAbbreviationCd', self.namespace)
-        state = state_element.text if state_element is not None else print("state not found in file: ",file_path) or None
+        state = state_element.text if state_element is not None else  "None"
         city_element = (self.root).find('.//irs:Filer/irs:USAddress/irs:CityNm', self.namespace)
-        city = city_element.text if city_element is not None else print("city not found in file: ",file_path) or None
+        city = city_element.text if city_element is not None else "None"
         zip_code_element = (self.root).find('.//irs:Filer/irs:USAddress/irs:ZIPCd', self.namespace)
-        zip_code = zip_code_element.text if zip_code_element is not None else print("zipcode not found in file: ",file_path) or None
+        zip_code = zip_code_element.text if zip_code_element is not None else "None"
         ntee,major_group,subsection_code = self.get_ntee_and_subsection(str(ein))
         return name,state,city,zip_code,ntee,major_group,subsection_code
 
 
     def get_master_financial_information(self,file_path):
         total_revenue_element = (self.root).find('.//irs:TotalRevenueGrp/irs:TotalRevenueColumnAmt', self.namespace)
-        total_revenue = total_revenue_element.text if total_revenue_element is not None else print("revenue not found in file: ",file_path) or None
+        total_revenue = total_revenue_element.text if total_revenue_element is not None else "0"
         total_assets_element = (self.root).find('.//irs:TotalAssetsGrp/irs:EOYAmt', self.namespace)
-        total_assets = total_assets_element.text if total_assets_element is not None else print("assets not found in file: ",file_path) or None
+        total_assets = total_assets_element.text if total_assets_element is not None else "0"
         total_liabilities_element = (self.root).find('.//irs:TotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
-        total_liabilities = total_liabilities_element.text if total_liabilities_element is not None else print("Liabilities not found in file: ",file_path) or None
+        total_liabilities = total_liabilities_element.text if total_liabilities_element is not None else "0"
         total_expenses_element = (self.root).find('.//irs:TotalFunctionalExpensesGrp/irs:TotalAmt', self.namespace)
-        total_expenses = total_expenses_element.text if total_expenses_element is not None else print("expenses not found in file: ",file_path) or None
+        total_expenses = total_expenses_element.text if total_expenses_element is not None else "0"
         #total_contributions = (self.root).find('.//irs:TotalContributionsAmt', self.namespace)
         return total_revenue,total_assets,total_liabilities,total_expenses
 
     def get_EZ_financial_information(self,file_path):
         total_revenue_element = (self.root).find('.//irs:TotalRevenueAmt', self.namespace)
-        total_revenue = total_revenue_element.text if total_revenue_element is not None else print("revenue not found in file ((only one var found)): ",file_path) or None
+        total_revenue = total_revenue_element.text if total_revenue_element is not None else "0"
         total_assets_element = (self.root).find('.//irs:Form990TotalAssetsGrp/irs:EOYAmt', self.namespace)
-        total_assets = total_assets_element.text if total_assets_element is not None else print("assets not found in file: ",file_path) or None
+        total_assets = total_assets_element.text if total_assets_element is not None else "0"
         total_liabilities_element = (self.root).find('.//irs:SumOfTotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
-        total_liabilities = total_liabilities_element.text if total_liabilities_element is not None else print("Liabilities (only one var found) not found in file: ",file_path) or None
+        total_liabilities = total_liabilities_element.text if total_liabilities_element is not None else "0"
         total_expenses_element = (self.root).find('.//irs:TotalExpensesAmt', self.namespace)
-        total_expenses = total_expenses_element.text if total_expenses_element is not None else print("expenses not found in file (only one var found): ",file_path) or None
+        total_expenses = total_expenses_element.text if total_expenses_element is not None else "0"
         #total_contributions = (self.root).find('.//irs:TotalContributionsAmt', self.namespace)
         return total_revenue,total_assets,total_liabilities,total_expenses
 
@@ -74,7 +74,7 @@ class Database:
 
         #Check for public or private
         return_type_element = (self.root).find('.//irs:ReturnTypeCd', self.namespace)
-        return_type = return_type_element.text if return_type_element is not None else print("return type not found in file: ",file_path) or None
+        return_type = return_type_element.text if return_type_element is not None else  "0"
 
         if return_type == "990":
             ein,tax_period = self.get_ein_and_tax_period(file_path)
@@ -97,7 +97,7 @@ class Database:
                     }
                 }
             else :
-                print("two MASTER filings of same company in same folder spotted:", file_path, ein)
+                #print("two MASTER filings of same company in same folder spotted:", file_path, ein)
                 if tax_period not in self.public_data[ein]:
                     total_revenue,total_assets,total_liabilities,total_expenses = self.get_master_financial_information(file_path)
                     self.public_data[ein][tax_period] = {
@@ -131,7 +131,7 @@ class Database:
                     }
                 }
             else :
-                print("two EZ filings of same company in same folder spotted:", file_path, ein)
+                #print("two EZ filings of same company in same folder spotted:", file_path, ein)
                 if tax_period not in self.public_data[ein]:
                     total_revenue,total_assets,total_liabilities,total_expenses = self.get_EZ_financial_information(file_path)
                     self.public_data[ein][tax_period] = {
@@ -147,7 +147,11 @@ class Database:
 
     def process_all_xml_files(self,directory):
         # List all files in the directory
+        count = 0
         for filename in os.listdir(directory):
+            count = count + 1
+            if count%100 == 0 :
+                print("counted files:", count)
             if filename.endswith('.xml'):
                 file_path = os.path.join(directory, filename)
                 self.build_database(file_path)
