@@ -3,14 +3,17 @@ import requests
 from lxml import etree as ET
 from pymongo import MongoClient, UpdateOne
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import multiprocessing
 
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
         self.mongo_client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
-        self.database = self.mongo_client["Test"]
-        self.collection = self.database["test"]
+        self.database = self.mongo_client["Np-Datahub"]
+        self.collections = {
+            "990": self.database["Master"],
+            "990EZ": self.database["EZ"],
+            "990PF": self.database["Private"]
+        }
         self.cache = {}
 
     def get_ein_and_tax_period(self, root):
@@ -58,6 +61,12 @@ class Database:
             total_assets_element = root.find('.//irs:Form990TotalAssetsGrp/irs:EOYAmt', self.namespace)
             total_liabilities_element = root.find('.//irs:SumOfTotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
             total_expenses_element = root.find('.//irs:TotalExpensesAmt', self.namespace)
+        elif return_type == "990PF":
+            total_revenue_element = root.find('.//irs:TotalRevAndExpnssAmt', self.namespace)
+            total_assets_element = root.find('.//irs:TotalAssetsEOYAmt', self.namespace)
+            total_liabilities_element = root.find('.//irs:DividendsRevAndExpnssAmt/irs:EOYAmt', self.namespace) #its not liabilities, its
+            total_expenses_element = root.find('.//irs:TotalExpensesRevAndExpnssAmt', self.namespace)
+
         total_revenue = int(total_revenue_element.text) if total_revenue_element is not None else 0
         total_assets = int(total_assets_element.text) if total_assets_element is not None else 0
         total_liabilities = int(total_liabilities_element.text) if total_liabilities_element is not None else 0
@@ -69,12 +78,12 @@ class Database:
         return_type_element = root.find('.//irs:ReturnTypeCd', self.namespace)
         return_type = return_type_element.text if return_type_element is not None else None
 
-        if return_type not in ["990", "990EZ"]:
-            return None
+        if return_type not in ["990", "990EZ", "990PF"]:
+            return None, None
 
         ein, tax_period = self.get_ein_and_tax_period(root)
         if not ein or not tax_period:
-            return None
+            return None, None
 
         name, state, city, zip_code = self.get_general_information(root)
         ntee, major_group, subsection_code = self.get_ntee_and_subsection(ein)
@@ -99,11 +108,11 @@ class Database:
             {"$set": update_fields},
             upsert=True
         )
-        return insertion
+        return return_type, insertion
 
     def process_all_xml_files(self, directory):
-        num_cores = multiprocessing.cpu_count()
-        insertions = []
+        num_cores = os.cpu_count()
+        insertions = {"990": [], "990EZ": [], "990PF": []}
         with ThreadPoolExecutor(max_workers=num_cores) as executor:
             futures = []
             for filename in os.listdir(directory):
@@ -113,21 +122,23 @@ class Database:
                     futures.append(future)
 
             for future in as_completed(futures):
-                insertion = future.result()
+                return_type, insertion = future.result()
                 if insertion:
-                    insertions.append(insertion)
-                if len(insertions) >= 1000:  # Perform bulk write every 1000 operations
-                    self.bulk_write_to_mongo(insertions)
-                    insertions = []
+                    insertions[return_type].append(insertion)
+                    if len(insertions[return_type]) >= 1000:  # Perform bulk write every 1000 operations
+                        self.bulk_write_to_mongo(insertions[return_type], return_type)
+                        insertions[return_type] = []
 
-        if insertions:  # Write remaining operations
-            self.bulk_write_to_mongo(insertions)
+        for return_type in insertions:
+            if insertions[return_type]:  # Write remaining operations
+                self.bulk_write_to_mongo(insertions[return_type], return_type)
 
-    def bulk_write_to_mongo(self, operations):
-        self.collection.bulk_write(operations)
+    def bulk_write_to_mongo(self, operations, return_type):
+        collection = self.collections[return_type]
+        collection.bulk_write(operations)
 
 if __name__ == "__main__":
-    directory = '/Users/mr.youssef/Desktop/NpDataHub/unitTesting'
+    directory = '/Users/mr.youssef/Desktop/NpDatahub/unitTesting'
     obj = Database()
     obj.process_all_xml_files(directory)
     print("Data has been successfully inserted into MongoDB.")
