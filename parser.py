@@ -187,15 +187,21 @@ class Database:
         database = client["Np-Datahub"]
 
         def insert_data(collection_name, data_dict):
-            lst = []
+            requests = []
             for ein, details in data_dict.items():
                 new_ein = str(ein) if len(str(ein)) == 9 else '0' + str(ein)
                 new_dict = {"EIN": new_ein}
                 new_dict.update(details)
-                lst.append(new_dict)
-            if lst:
+                requests.append(
+                    UpdateOne(
+                        {"EIN": new_ein},  # Filter to match documents by EIN
+                        {"$set": new_dict},  # Update operation to set the new data
+                        upsert=True  # If no document matches, insert a new one
+                    )
+                )
+            if requests:
                 collection = database[collection_name]
-                collection.insert_many(lst)
+                collection.bulk_write(requests)
 
         insert_data("Master", self.master)
         insert_data("EZ", self.ez)
