@@ -3,13 +3,14 @@ import requests
 from lxml import etree as ET
 from pymongo import MongoClient, UpdateOne
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import multiprocessing
 
 class Database:
     def __init__(self):
-        self.public_data = {}
-        self.namespace = {'irs': 'http://www.irs.gov/efile'}
+        self.master = {}
+        self.private = {}
+        self.ez = {}
         self.cache = {}
+        self.namespace = {'irs': 'http://www.irs.gov/efile'}
 
     def get_ein_and_tax_period(self, root):
         ein_element = root.find('.//irs:Filer/irs:EIN', self.namespace)
@@ -56,6 +57,11 @@ class Database:
             total_assets_element = root.find('.//irs:Form990TotalAssetsGrp/irs:EOYAmt', self.namespace)
             total_liabilities_element = root.find('.//irs:SumOfTotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
             total_expenses_element = root.find('.//irs:TotalExpensesAmt', self.namespace)
+        elif return_type == "990PF":
+            total_revenue_element = root.find('.//irs:TotalRevAndExpnssAmt', self.namespace)
+            total_assets_element = root.find('.//irs:TotalAssetsEOYAmt', self.namespace)
+            total_liabilities_element = root.find('.//irs:DividendsRevAndExpnssAmt/irs:EOYAmt', self.namespace) #its not liabilities, its
+            total_expenses_element = root.find('.//irs:TotalExpensesRevAndExpnssAmt', self.namespace)
         total_revenue = int(total_revenue_element.text) if total_revenue_element is not None else 0
         total_assets = int(total_assets_element.text) if total_assets_element is not None else 0
         total_liabilities = int(total_liabilities_element.text) if total_liabilities_element is not None else 0
@@ -68,7 +74,7 @@ class Database:
         return_type_element = root.find('.//irs:ReturnTypeCd', self.namespace)
         return_type = return_type_element.text if return_type_element is not None else None
 
-        if return_type not in ["990", "990EZ"]:
+        if return_type not in ["990", "990EZ" , "990PF"]:
             return None
 
         ein, tax_period = self.get_ein_and_tax_period(root)
@@ -79,37 +85,92 @@ class Database:
         ntee, major_group, subsection_code = self.get_ntee_and_subsection(str(ein))
         total_revenue, total_assets, total_liabilities, total_expenses = self.get_financial_information(root, return_type)
 
-        if ein not in self.public_data:
-            self.public_data[ein] = {
-                "Name": name,
-                "City": city,
-                "State": state,
-                "Zipcode": zip_code,
-                "NTEE": ntee,
-                "Major Group": major_group,
-                "Subsection code": subsection_code,
-                tax_period: {
-                    "Total Revenue": total_revenue,
-                    "Total Assets": total_assets,
-                    "Total Liabilities": total_liabilities,
-                    "Total Expenses": total_expenses
+        if return_type == "990" :
+            if ein not in self.master:
+                self.master[ein] = {
+                    "Name": name,
+                    "City": city,
+                    "State": state,
+                    "Zipcode": zip_code,
+                    "NTEE": ntee,
+                    "Major Group": major_group,
+                    "Subsection code": subsection_code,
+                    tax_period: {
+                        "Total Revenue": total_revenue,
+                        "Total Assets": total_assets,
+                        "Total Liabilities": total_liabilities,
+                        "Total Expenses": total_expenses
+                    }
                 }
-            }
-        else:
-            if tax_period not in self.public_data[ein]:
-                self.public_data[ein][tax_period] = {
-                    "Total Revenue": total_revenue,
-                    "Total Assets": total_assets,
-                    "Total Liabilities": total_liabilities,
-                    "Total Expenses": total_expenses
+            else:
+                if tax_period not in self.master[ein]:
+                    self.master[ein][tax_period] = {
+                        "Total Revenue": total_revenue,
+                        "Total Assets": total_assets,
+                        "Total Liabilities": total_liabilities,
+                        "Total Expenses": total_expenses
+                    }
+                #else:
+                   # print("This shouldn't happen, two files of the same company for the same tax year exist:", file_path)
+        elif return_type == "990EZ":
+            if ein not in self.ez:
+                self.ez[ein] = {
+                    "Name": name,
+                    "City": city,
+                    "State": state,
+                    "Zipcode": zip_code,
+                    "NTEE": ntee,
+                    "Major Group": major_group,
+                    "Subsection code": subsection_code,
+                    tax_period: {
+                        "Total Revenue": total_revenue,
+                        "Total Assets": total_assets,
+                        "Total Liabilities": total_liabilities,
+                        "Total Expenses": total_expenses
+                    }
                 }
-            #else:
-               # print("This shouldn't happen, two files of the same company for the same tax year exist:", file_path)
+            else:
+                if tax_period not in self.ez[ein]:
+                    self.ez[ein][tax_period] = {
+                        "Total Revenue": total_revenue,
+                        "Total Assets": total_assets,
+                        "Total Liabilities": total_liabilities,
+                        "Total Expenses": total_expenses
+                    }
+                #else:
+                   # print("This shouldn't happen, two files of the same company for the same tax year exist:", file_path)
+        elif return_type == "990PF":
+            if ein not in self.private:
+                self.private[ein] = {
+                    "Name": name,
+                    "City": city,
+                    "State": state,
+                    "Zipcode": zip_code,
+                    "NTEE": ntee,
+                    "Major Group": major_group,
+                    "Subsection code": subsection_code,
+                    tax_period: {
+                        "Total Revenue": total_revenue,
+                        "Total Assets": total_assets,
+                        "Total Liabilities": total_liabilities,
+                        "Total Expenses": total_expenses
+                    }
+                }
+            else:
+                if tax_period not in self.private[ein]:
+                    self.private[ein][tax_period] = {
+                        "Total Revenue": total_revenue,
+                        "Total Assets": total_assets,
+                        "Total Liabilities": total_liabilities,
+                        "Total Expenses": total_expenses
+                    }
+                #else:
+                   # print("This shouldn't happen, two files of the same company for the same tax year exist:", file_path)
 
         return ein, tax_period
 
     def process_all_xml_files(self, directory):
-        num_cores = multiprocessing.cpu_count()
+        num_cores = os.cpu_count()
         with ThreadPoolExecutor(max_workers=num_cores) as executor:
             futures = []
             for filename in os.listdir(directory):
@@ -122,16 +183,23 @@ class Database:
                 future.result()
 
     def insert_into_mongo(self):
-        lst = []
-        for ein, details in self.public_data.items():
-            new_ein = str(ein) if len(str(ein)) == 9 else '0' + str(ein)
-            new_dict = {"EIN": new_ein}
-            new_dict.update(details)
-            lst.append(new_dict)
         client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
-        database = client["Test"]
-        collection = database["test"]
-        collection.insert_many(lst)
+        database = client["Np-Datahub"]
+
+        def insert_data(collection_name, data_dict):
+            lst = []
+            for ein, details in data_dict.items():
+                new_ein = str(ein) if len(str(ein)) == 9 else '0' + str(ein)
+                new_dict = {"EIN": new_ein}
+                new_dict.update(details)
+                lst.append(new_dict)
+            if lst:
+                collection = database[collection_name]
+                collection.insert_many(lst)
+
+        insert_data("Master", self.master)
+        insert_data("EZ", self.ez)
+        insert_data("Private", self.private)
 
 if __name__ == "__main__":
     directory = '/Users/mr.youssef/Desktop/NpDataHub/unitTesting'

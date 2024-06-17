@@ -19,6 +19,7 @@ class Database:
     def get_ein_and_tax_period(self, root):
         ein_element = root.find('.//irs:Filer/irs:EIN', self.namespace)
         ein = ein_element.text if ein_element is not None else "None"
+        ein = '0' + ein if len(str(ein)) == 8 else ein
         tax_period_element = root.find('.//irs:TaxYr', self.namespace)
         tax_period = tax_period_element.text if tax_period_element is not None else "None"
         return ein, tax_period
