@@ -1,6 +1,7 @@
 "use client"
 import Sidebar from "./components/Sidebar";
-import BasicBarChart from "./components/BasicBarChart"
+import BasicBarChart from "./components/BasicBarChart";
+import LineCompareChart from "./components/LineCompareChart";
 import DashboardNavbar from "./components/dashboardNav";
 import React, { useState } from 'react';
 
@@ -10,9 +11,11 @@ export default function Dashboard() {
     const [subNteeCode, setSubNteeCode] = useState('');
     const [searchResults, setSearchResults] = useState(null);
 
-    const variable = "Revenue"
-    const values = [52,64,73,67,86,95];
-    const style = { height: 306, width: 515 }
+    const variable1 = "Revenue";
+    const values1 = [52,64,73,67,86,95];
+    const variable2 = "Expenses";
+    const values2 = [50,55,58,63,69,80];
+    const style = { height: 306, width: 515 };
 
     const handleSearch = () => {
       // Implement your search logic here
@@ -59,13 +62,13 @@ export default function Dashboard() {
                                 <h2 className="text-xl text-center font-semibold mb-2">HISTORICAL PERFORMANCE</h2>
                                 <p className="text-center mb-2">Plan: add percent change to hover, add variable selection, modify styling</p>
                                 <div className = "flex justify-center">
-                                  <BasicBarChart variable={variable} values={values} style={style}/>
+                                  <BasicBarChart variable={variable1} values={values1} style={style}/>
                                 </div>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 <h2 className="text-xl font-semibold mb-2 text-center ">VARIABLE COMPARE</h2>
                                 <div className = "flex justify-center">
-                                    
+                                  <LineCompareChart variable1={variable1} variable2={variable2} values1={values1} values2={values2} style={style}/>
                                 </div>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">

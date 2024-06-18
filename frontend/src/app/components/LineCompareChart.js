@@ -5,88 +5,135 @@ import ReactECharts from 'echarts-for-react';
 
 
 /**
- * @param variable - string containing the variable recorded in the graph
- * @param values -   an array of values measured each year
+ * TO DO: Account for two variables with a different number of data points.
+ *        Account for data that doesn't start in 2017
+ */
+
+/**
+ * @param variable1 - string containing the first variable recorded in the graph
+ * @param values1 -   an array of values measured each year for the first variable
+ * @param variable2 - string containing the second variable recorded in the graph
+ * @param values2 -   an array of values measured each year for the second variable
  * @param style -    a struct containing format options - height and width
  *                   must be defined as numbers.
 */
-const BasicBarChart = ({variable, values, style}) => {
-  // ensures arg is an array
-  if (!Array.isArray(values) || values.length === 0) {
+const LineCompareChart = ({variable1, values1, variable2, values2, style}) => {
+  // ensures args are arrays
+  if (!Array.isArray(values1) || values1.length === 0 || !Array.isArray(values2) || values2.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
   }
-  let scale = Math.round((style.width+style.height)/2)
+  let scale = Math.round((style.width+style.height)/2);
 
   const option = {
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'none'
-      },
-      formatter: function (params) {
-        // params is an array containing the information for each series in the tooltip
-        const tooltipContent = params.map(item => {
-          return `${item.name}: $${item.value}`;
-        }).join('<br/>');
-        return tooltipContent;
-      }
-    },
-    grid: {
-      left: Math.round(0.06*scale),
-      bottom: Math.round(0.06*scale),
-      containLabel: true
-    },
-    xAxis: [
-      {
-        name: 'Year',
-        nameLocation: 'middle',
-        nameTextStyle: {
-          fontWeight: 'bold',
-          fontSize: Math.round(0.03*scale),
-          padding: Math.round(0.03*scale)
+        title: {
+            left: 'center',
+            text: `${variable1} vs. ${variable2}`
         },
-        type: 'category',
-        data: Array.from({ length: values.length }, (_, index) => index + 2017),
-        axisTick: {
-          alignWithLabel: true
+        legend: {
+            top: 'bottom',
+            data: ['Intention']
         },
-        axisLabel: {
-          fontSize: Math.round(0.018*scale)
-        }
-      }
-    ],
-    yAxis: [
-      {
-        name: variable,
-        type: 'value',
-        nameLocation: 'middle',
-        nameRotate: 90,
-        nameTextStyle: {
-          fontWeight: 'bold',
-          fontSize: Math.round(0.03*scale),
-          padding: Math.round(0.03*scale)
+        tooltip: {
+            trigger: 'axis',
+            position: function (pt) {
+            return [pt[0], 130];
+            }
         },
-        axisLabel: {
-          formatter: function (value) {
-            return '$' + value;
-          },
-          fontSize: Math.round(0.018*scale)
-        }
-      }
-    ],
-    series: [
-      {
-        name: 'Direct',
-        type: 'bar',
-        barWidth: '80%',
-        data: values
-      }
-    ]
-  };
+        xAxis: {
+            name: 'Year',
+            nameLocation: 'middle',
+            nameTextStyle: {
+                fontWeight: 'bold',
+                fontSize: Math.round(0.03*scale),
+                padding: Math.round(0.03*scale)
+            },
+            type: 'category',
+            data: Array.from({ length: values1.length }, (_, index) => index + 2017),
+            handle: {
+                show: true,
+                color: '#7581BD'
+            },
+            splitLine: {
+            show: false
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisTick: {
+            inside: true
+            },
+            splitLine: {
+            show: false
+            },
+            axisLabel: {
+            inside: true,
+            formatter: '{value}\n'
+            },
+            z: 10
+        },
+        grid: {
+            top: 110,
+            left: 15,
+            right: 15,
+            height: 160
+        },
+        series: [
+            {
+            name: variable1,
+            type: 'line',
+            smooth: true,
+            symbol: 'circle',
+            symbolSize: 5,
+            sampling: 'average',
+            itemStyle: {
+                color: '#0770FF'
+            },
+            stack: 'a',
+            areaStyle: {
+                color: new ReactECharts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                    offset: 0,
+                    color: 'rgba(58,77,233,0.8)'
+                },
+                {
+                    offset: 1,
+                    color: 'rgba(58,77,233,0.3)'
+                }
+                ])
+            },
+            data: values1
+            },
+            {
+            name: variable2,
+            type: 'line',
+            smooth: true,
+            stack: 'a',
+            symbol: 'circle',
+            symbolSize: 5,
+            sampling: 'average',
+            itemStyle: {
+                color: '#F2597F'
+            },
+            areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                    offset: 0,
+                    color: 'rgba(213,72,120,0.8)'
+                },
+                {
+                    offset: 1,
+                    color: 'rgba(213,72,120,0.3)'
+                }
+                ])
+            },
+            data: values2
+            }
+        ]
+    };
 
   return (
     <ReactECharts option={option} style={style} />
   );
 };
 
-export default BasicBarChart;
+export default LineCompareChart;

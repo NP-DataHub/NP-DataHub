@@ -15,7 +15,7 @@ const BasicBarChart = ({variable, values, style}) => {
   if (!Array.isArray(values) || values.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
   }
-  let scale = Math.round((style.width+style.height)/2)
+  let scale = Math.round((style.width+style.height)/2);
 
   const option = {
     tooltip: {
