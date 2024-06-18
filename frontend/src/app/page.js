@@ -65,81 +65,13 @@ export default function Dashboard() {
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 <h2 className="text-xl font-semibold mb-2 text-center ">VARIABLE COMPARE</h2>
                                 <div className = "flex justify-center">
-                                    <svg  width="515" height="306" viewBox="0 0 215 106" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.99623 9.02717C11.5503 13.8053 31.0025 23.3614 32.3783 23.3614C33.7541 23.3614 40.5948 23.3614 43.8432 23.3614L71.9323 15.3342L96.0086 30.2418H109.767L133.843 13.0408L145.881 17.0543L182.569 42.2826L191.167 38.269L212.378 1" stroke="#A9DFD8" stroke-width="1.14674" stroke-linecap="round"/>
-                                        <path d="M32.3783 23.9349L1.99623 9.60066V71.4998H212.951V0.999756L190.956 38.9998L182.569 42.8561L145.881 17.6278L133.843 13.6142L109.767 30.8153H102.888H96.0086L71.9323 15.9077L43.8432 23.9349H32.3783Z" fill="url(#paint0_linear_1237_654)"/>
-                                        <circle cx="1.99721" cy="9" r="2" fill="#A9DFD8"/>
-                                        <circle cx="31.9913" cy="23" r="2" fill="#A9DFD8"/>
-                                        <circle cx="43.9883" cy="23" r="2" fill="#A9DFD8"/>
-                                        <circle cx="70.9825" cy="15" r="2" fill="#A9DFD8"/>
-                                        <circle cx="95.9767" cy="30" r="2" fill="#A9DFD8"/>
-                                        <circle cx="109.974" cy="30" r="2" fill="#A9DFD8"/>
-                                        <circle cx="133.969" cy="13" r="2" fill="#A9DFD8"/>
-                                        <circle cx="145.966" cy="17" r="2" fill="#A9DFD8"/>
-                                        <circle cx="182.958" cy="42" r="2" fill="#A9DFD8"/>
-                                        <circle cx="190.957" cy="38" r="2" fill="#A9DFD8"/>
-                                        <circle cx="211.952" cy="2" r="2" fill="#A9DFD8"/>
-                                        <path d="M1.99623 52.7894L18.6204 51.0693L40.977 40.1753L70.7858 71.1372H102.314L138.429 60.2432L184.289 63.1101L212.378 43.0421" stroke="#F2C8ED" stroke-width="1.14674" stroke-linecap="round"/>
-                                        <path d="M18.6204 51.6426L1.99623 53.3627V106H212.951V43.042L184.289 63.6833L161.962 62L137.967 60.5L102.314 71.7105H70.4815L40.977 40.7485L18.6204 51.6426Z" fill="url(#paint1_linear_1237_654)"/>
-                                        <circle cx="1.99721" cy="53" r="2" fill="#F2C8ED"/>
-                                        <circle cx="17.9943" cy="51" r="2" fill="#F2C8ED"/>
-                                        <circle cx="40.9894" cy="40" r="2" fill="#F2C8ED"/>
-                                        <circle cx="70.9825" cy="71" r="2" fill="#F2C8ED"/>
-                                        <circle cx="101.976" cy="71" r="2" fill="#F2C8ED"/>
-                                        <circle cx="137.968" cy="60" r="2" fill="#F2C8ED"/>
-                                        <circle cx="183.958" cy="63" r="2" fill="#F2C8ED"/>
-                                        <circle cx="212.952" cy="42" r="2" fill="#F2C8ED"/>
-                                        <defs>
-                                        <linearGradient id="paint0_linear_1237_654" x1="105.474" y1="-3.88177" x2="106.95" y2="78.4434" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#A9DFD8"/>
-                                        <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
-                                        </linearGradient>
-                                        <linearGradient id="paint1_linear_1237_654" x1="105.974" y1="37.1053" x2="106.465" y2="106.496" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#F2C8ED"/>
-                                        <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
-                                        </linearGradient>
-                                        </defs>
-                                    </svg>
+                                    
                                 </div>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 <h2 className="text-xl font-semibold mb-2 text-center">NETWORKS + PATHS</h2>
                                 <div className = "flex justify-center">
-                                    <svg  width="515" height="306" viewBox="0 0 215 106" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.99623 9.02717C11.5503 13.8053 31.0025 23.3614 32.3783 23.3614C33.7541 23.3614 40.5948 23.3614 43.8432 23.3614L71.9323 15.3342L96.0086 30.2418H109.767L133.843 13.0408L145.881 17.0543L182.569 42.2826L191.167 38.269L212.378 1" stroke="#A9DFD8" stroke-width="1.14674" stroke-linecap="round"/>
-                                        <path d="M32.3783 23.9349L1.99623 9.60066V71.4998H212.951V0.999756L190.956 38.9998L182.569 42.8561L145.881 17.6278L133.843 13.6142L109.767 30.8153H102.888H96.0086L71.9323 15.9077L43.8432 23.9349H32.3783Z" fill="url(#paint0_linear_1237_654)"/>
-                                        <circle cx="1.99721" cy="9" r="2" fill="#A9DFD8"/>
-                                        <circle cx="31.9913" cy="23" r="2" fill="#A9DFD8"/>
-                                        <circle cx="43.9883" cy="23" r="2" fill="#A9DFD8"/>
-                                        <circle cx="70.9825" cy="15" r="2" fill="#A9DFD8"/>
-                                        <circle cx="95.9767" cy="30" r="2" fill="#A9DFD8"/>
-                                        <circle cx="109.974" cy="30" r="2" fill="#A9DFD8"/>
-                                        <circle cx="133.969" cy="13" r="2" fill="#A9DFD8"/>
-                                        <circle cx="145.966" cy="17" r="2" fill="#A9DFD8"/>
-                                        <circle cx="182.958" cy="42" r="2" fill="#A9DFD8"/>
-                                        <circle cx="190.957" cy="38" r="2" fill="#A9DFD8"/>
-                                        <circle cx="211.952" cy="2" r="2" fill="#A9DFD8"/>
-                                        <path d="M1.99623 52.7894L18.6204 51.0693L40.977 40.1753L70.7858 71.1372H102.314L138.429 60.2432L184.289 63.1101L212.378 43.0421" stroke="#F2C8ED" stroke-width="1.14674" stroke-linecap="round"/>
-                                        <path d="M18.6204 51.6426L1.99623 53.3627V106H212.951V43.042L184.289 63.6833L161.962 62L137.967 60.5L102.314 71.7105H70.4815L40.977 40.7485L18.6204 51.6426Z" fill="url(#paint1_linear_1237_654)"/>
-                                        <circle cx="1.99721" cy="53" r="2" fill="#F2C8ED"/>
-                                        <circle cx="17.9943" cy="51" r="2" fill="#F2C8ED"/>
-                                        <circle cx="40.9894" cy="40" r="2" fill="#F2C8ED"/>
-                                        <circle cx="70.9825" cy="71" r="2" fill="#F2C8ED"/>
-                                        <circle cx="101.976" cy="71" r="2" fill="#F2C8ED"/>
-                                        <circle cx="137.968" cy="60" r="2" fill="#F2C8ED"/>
-                                        <circle cx="183.958" cy="63" r="2" fill="#F2C8ED"/>
-                                        <circle cx="212.952" cy="42" r="2" fill="#F2C8ED"/>
-                                        <defs>
-                                        <linearGradient id="paint0_linear_1237_654" x1="105.474" y1="-3.88177" x2="106.95" y2="78.4434" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#A9DFD8"/>
-                                        <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
-                                        </linearGradient>
-                                        <linearGradient id="paint1_linear_1237_654" x1="105.974" y1="37.1053" x2="106.465" y2="106.496" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#F2C8ED"/>
-                                        <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
-                                        </linearGradient>
-                                        </defs>
-                                    </svg>
+                                    
                                 </div>
                             </div>
                         </div>
