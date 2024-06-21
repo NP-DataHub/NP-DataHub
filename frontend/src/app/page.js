@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Sidebar from "./components/Sidebar";
 import BasicBarChart from "./components/BasicBarChart";
 import LineCompareChart from "./components/LineCompareChart";
@@ -14,7 +14,7 @@ export default function Dashboard() {
     const variable1 = "Revenue";
     const values1 = [52,64,73,67,86,95];
     const variable2 = "Expenses";
-    const values2 = [50,55,58,63,69,80];
+    const values2 = [70,55,58,63,69,80];
     const style = { height: 306, width: 515 };
 
     const handleSearch = () => {
@@ -67,12 +67,13 @@ export default function Dashboard() {
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 <h2 className="text-xl font-semibold mb-2 text-center ">VARIABLE COMPARE</h2>
+                                <p className="text-center mb-2">Plan: add percent difference on hover, add variable selection, modify styling</p>
                                 <div className = "flex justify-center">
                                   <LineCompareChart variable1={variable1} variable2={variable2} values1={values1} values2={values2} style={style}/>
                                 </div>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                                <h2 className="text-xl font-semibold mb-2 text-center">NETWORKS + PATHS</h2>
+                                <h2 className="text-xl font-semibold mb-2 text-center">Comparision section</h2>
                                 <div className = "flex justify-center">
                                     
                                 </div>

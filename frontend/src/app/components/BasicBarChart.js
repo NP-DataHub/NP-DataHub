@@ -32,8 +32,10 @@ const BasicBarChart = ({variable, values, style}) => {
       }
     },
     grid: {
-      left: Math.round(0.06*scale),
-      bottom: Math.round(0.06*scale),
+      left: Math.round(0.03*scale),
+      bottom: Math.round(0.03*scale),
+      right: Math.round(0.01*scale),
+      top: Math.round(0.01*scale),
       containLabel: true
     },
     xAxis: [
@@ -51,21 +53,12 @@ const BasicBarChart = ({variable, values, style}) => {
           alignWithLabel: true
         },
         axisLabel: {
-          fontSize: Math.round(0.018*scale)
+          fontSize: Math.round(0.022*scale)
         }
       }
     ],
     yAxis: [
       {
-        name: variable,
-        type: 'value',
-        nameLocation: 'middle',
-        nameRotate: 90,
-        nameTextStyle: {
-          fontWeight: 'bold',
-          fontSize: Math.round(0.03*scale),
-          padding: Math.round(0.03*scale)
-        },
         axisLabel: {
           formatter: function (value) {
             return '$' + value;
