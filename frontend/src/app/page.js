@@ -84,30 +84,30 @@ export default function Home() {
             <div className="w-24 md:w-96 rounded-full h-1 bg-gray-900"></div>
           </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 gap-y-8 md:gap-6 md:gap-y-10 mx-auto mt-12">
+        <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 gap-y-8 md:gap-4 md:gap-y-10 mx-auto mt-12">
           <div className="flex flex-col items-center text-center">
-            <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 1" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+            <a href="https://www.linkedin.com/in/brettorzechowski/" target="_blank" rel="noopener noreferrer">
+              <img draggable = {false} src="/img/profo.png" alt="Image 1" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile " />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">Brett Orzechowski</h3>
           </div>
           <div className="flex flex-col items-center text-center">
-            <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 2" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+            <a href="https://www.linkedin.com/in/troy-schipf-75388624a/" target="_blank" rel="noopener noreferrer">
+              <img draggable = {false} src="/img/troy.png" alt="Image 2" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile" />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">Troy Schipf</h3>
           </div>
           <div className="flex flex-col items-center text-center">
-            <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 3" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+            <a href="https://www.linkedin.com/in/thomasorifici/" target="_blank" rel="noopener noreferrer">
+              <img draggable = {false} src="/img/thomas.jpg" alt="Image 3" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile" />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">Thomas Orifici</h3>
           </div>
           <div className="flex flex-col items-center text-center">
-            <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 4" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+            <a href="https://www.linkedin.com/in/macallan-ringstad-404298251/" target="_blank" rel="noopener noreferrer">
+              <img draggable = {false} src="/img/macallan.jpeg" alt="Image 4" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile" />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">Macallan Ringstad</h3>
           </div>
           <div className="flex flex-col items-center text-center">
             <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
