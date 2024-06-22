@@ -102,24 +102,24 @@ export default function Dashboard() {
                         <div className="grid grid-cols-3 gap-4 mt-10">
 
                         <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ">
-                                // add chart here box size will update with chart
+                                {/*add chart here box size will update with chart*/}
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300  ">
 
-                                // add chart here box size will update with chart
+                              {/*add chart here box size will update with chart*/}
                             </div>
                             <div className = "bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ">
-                                // add chart here box size will update with chart
+                                {/*add chart here box size will update with chart*/}
                             </div>
                         </div>
                         <div className="grid grid-cols-3 gap-4 mt-10">
 
                         <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 col-span-2">
-                                // add chart here box size will update with chart
+                                {/*add chart here box size will update with chart*/}
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300  ">
 
-                                // add chart here box size will update with chart
+                               {/*add chart here box size will update with chart*/}
                             </div>
 
                         </div>
