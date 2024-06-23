@@ -1,8 +1,10 @@
 import Navbar from "./components/Navbar";
 import { HiOutlineMail } from "react-icons/hi";
-import { FaFacebook, FaTwitter, FaInstagramSquare } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
 
-const HomeContent = () => {
+export default function HomeContent() {
   return (
     <div className="overflow-auto h-screen">
       <Navbar/>
@@ -82,30 +84,30 @@ const HomeContent = () => {
             <div className="w-24 md:w-96 rounded-full h-1 bg-gray-900"></div>
           </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 gap-y-8 md:gap-6 md:gap-y-10 mx-auto mt-12">
+        <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 gap-y-8 md:gap-4 md:gap-y-10 mx-auto mt-12">
           <div className="flex flex-col items-center text-center">
-            <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 1" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+            <a href="https://www.linkedin.com/in/brettorzechowski/" target="_blank" rel="noopener noreferrer">
+              <img draggable = {false} src="/img/profo.png" alt="Image 1" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile " />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">Brett Orzechowski</h3>
           </div>
           <div className="flex flex-col items-center text-center">
-            <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 2" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+            <a href="https://www.linkedin.com/in/troy-schipf-75388624a/" target="_blank" rel="noopener noreferrer">
+              <img draggable = {false} src="/img/troy.png" alt="Image 2" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile" />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">Troy Schipf</h3>
           </div>
           <div className="flex flex-col items-center text-center">
-            <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 3" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+            <a href="https://www.linkedin.com/in/thomasorifici/" target="_blank" rel="noopener noreferrer">
+              <img draggable = {false} src="/img/thomas.jpg" alt="Image 3" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile" />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">Thomas Orifici</h3>
           </div>
           <div className="flex flex-col items-center text-center">
-            <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 4" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+            <a href="https://www.linkedin.com/in/macallan-ringstad-404298251/" target="_blank" rel="noopener noreferrer">
+              <img draggable = {false} src="/img/macallan.jpeg" alt="Image 4" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile" />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">Macallan Ringstad</h3>
           </div>
           <div className="flex flex-col items-center text-center">
             <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
@@ -139,7 +141,7 @@ const HomeContent = () => {
             Ready to collaborate?
           </h1>
           <p className="text-lg md:text-2xl mt-2 font-sans">Try any of our three platforms today.</p>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 sgap-4 max-w-md mx-auto lg:mx-0">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto lg:mx-0">
             <button className="text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
               Data
             </button>
@@ -176,6 +178,4 @@ const HomeContent = () => {
       </section>
     </div>
   );
-};
-
-export default HomeContent;
+}

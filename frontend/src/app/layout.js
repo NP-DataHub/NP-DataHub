@@ -15,7 +15,6 @@ export default function RootLayout({ children }) {
     <html lang="en" className="dashboard-color">
       <body className={inter.className}>
         <AuthProvider>
-          <Home />
           {children}
         </AuthProvider>
       </body>
