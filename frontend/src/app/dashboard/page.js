@@ -1,18 +1,24 @@
-"use client"
+"use client";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import DashboardNavbar from "../components/dashboardNav";
 import React, { useState } from 'react';
+import Autosuggest from 'react-autosuggest';
+import cities from "../components/cities";
+import ntee_codes from "../components/ntee";
 
 export default function Dashboard() {
     const [state, setState] = useState('');
     const [nteeCode, setNteeCode] = useState('');
-    const [subNteeCode, setSubNteeCode] = useState('');
+    const [city, setCity] = useState('');
     const [searchResults, setSearchResults] = useState(null);
+    const [suggestions, setSuggestions] = useState([]);
+    const [NteeSuggestions, setNteeSuggestions] = useState([]);
+
 
     const handleSearch = () => {
       // Implement your search logic here
-      console.log('Searching with:', { state, nteeCode, subNteeCode });
+      console.log('Searching with:', { state, city, nteeCode});
   
       // Mock search results data
       const results = [
@@ -39,7 +45,96 @@ export default function Dashboard() {
   
       setSearchResults(results);
     };
-  
+
+    const getNteeSuggestions = value => {
+        const inputValue = value.trim().toLowerCase();
+        const inputLength = inputValue.length;
+        const nteeArray = Object.keys(ntee_codes).map(key => ({
+            code: key,
+            description: ntee_codes[key]
+        }));
+        return inputLength === 0 ? [] : nteeArray.filter(
+            ntee => 
+                ntee.code.toLowerCase().slice(0, inputLength) === inputValue ||
+                ntee.description.toLowerCase().includes(inputValue)
+        );
+    };
+
+    const getNteeSuggestionValue = suggestion => suggestion.code;
+
+    const renderNteeSuggestion = suggestion => (
+        <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+            {suggestion.code} - {suggestion.description}
+        </div>
+    );
+
+    const onNteeSuggestionsFetchRequested = ({ value }) => {
+        setNteeSuggestions(getNteeSuggestions(value));
+    };
+    
+    const onNteeSuggestionsClearRequested = () => {
+        setNteeSuggestions([]);
+    };
+    
+    const onNteeChange = (event, { newValue }) => {
+        setNteeCode(newValue);
+    };
+    
+
+    const NteeInputProps = {
+        placeholder: 'Enter NTEE Code or Description',
+        value: nteeCode,
+        onChange: onNteeChange,
+        className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
+    };
+    
+
+    const renderNteeSuggestionsContainer = ({ containerProps, children }) => (
+        <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-x-auto rounded z-10 ${NteeSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+            {children}
+        </div>
+    );
+    const getSuggestions = value => {
+        const inputValue = value.trim().toLowerCase();
+        const inputLength = inputValue.length;
+        return inputLength === 0 ? [] : cities.filter(
+            city => city.toLowerCase().slice(0, inputLength) === inputValue
+        );
+    };
+
+    const getSuggestionValue = suggestion => suggestion;
+
+    const renderSuggestion = suggestion => (
+        <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+            {suggestion}
+        </div>
+    );
+
+    const onSuggestionsFetchRequested = ({ value }) => {
+        setSuggestions(getSuggestions(value));
+    };
+
+    const onSuggestionsClearRequested = () => {
+        setSuggestions([]);
+    };
+
+    const onChange = (event, { newValue }) => {
+        setCity(newValue);
+    };
+
+    const inputProps = {
+        placeholder: 'Enter City',
+        value: city,
+        onChange: onChange,
+        className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
+    };
+
+    const renderSuggestionsContainer = ({ containerProps, children }) => (
+        <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-x-auto rounded z-10 ${suggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+            {children}
+        </div>
+    );
+
     return(
         <div>
             <div className = "flex dashboard-color text-white font-sans">
@@ -285,22 +380,30 @@ export default function Dashboard() {
                             </select>
                             </div>
                             <div className="bg-[#21222D] p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                            <input 
-                                type="text" 
-                                className="mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]" 
-                                placeholder="Enter NTEE Code"
-                                value={nteeCode}
-                                onChange={(e) => setNteeCode(e.target.value)}
-                            />
+                                <div className="relative">
+                                    <Autosuggest
+                                        suggestions={suggestions}
+                                        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                                        onSuggestionsClearRequested={onSuggestionsClearRequested}
+                                        getSuggestionValue={getSuggestionValue}
+                                        renderSuggestion={renderSuggestion}
+                                        inputProps={inputProps}
+                                        renderSuggestionsContainer={renderSuggestionsContainer}
+                                    />
+                                </div>
                             </div>
                             <div className="bg-[#21222D] p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                            <input 
-                                type="text" 
-                                className="mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]" 
-                                placeholder="Enter Sub NTEE Code"
-                                value={subNteeCode}
-                                onChange={(e) => setSubNteeCode(e.target.value)}
-                            />
+                                <div className="relative">
+                                        <Autosuggest
+                                            suggestions={NteeSuggestions}
+                                            onSuggestionsFetchRequested={onNteeSuggestionsFetchRequested}
+                                            onSuggestionsClearRequested={onNteeSuggestionsClearRequested}
+                                            getSuggestionValue={getNteeSuggestionValue}
+                                            renderSuggestion={renderNteeSuggestion}
+                                            inputProps={NteeInputProps}
+                                            renderSuggestionsContainer={renderNteeSuggestionsContainer}
+                                        />
+                                    </div>
                             </div>
                             <div className="bg-[#21222D] p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center justify-center">
                             <button 
