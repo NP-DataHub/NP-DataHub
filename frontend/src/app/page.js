@@ -41,6 +41,15 @@ export default function Dashboard() {
             zip: '12345',
             annualRev: '$17,564,456.12',
             annualExpenses: '$16,567,435.21'
+        },
+        {
+            nonprofitName: 'Emmets Baller Nonprofit',
+            address: 'The Moon',
+            city: 'Moon City',
+            state: 'Luxurious',
+            zip: '100000',
+            annualRev: '$ all the money $',
+            annualExpenses: '$ like 4 dollars $'
         }
         // Add more results as needed
       ];
