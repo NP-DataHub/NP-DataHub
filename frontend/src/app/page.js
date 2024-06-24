@@ -4,6 +4,7 @@ import BasicBarChart from "./components/BasicBarChart";
 import LineCompareChart from "./components/LineCompareChart";
 import DashboardNavbar from "./components/dashboardNav";
 import React, { useState } from 'react';
+import BasicTimeSeries from "./components/BasicTimeSeries";
 
 export default function Dashboard() {
     const [state, setState] = useState('');
@@ -73,8 +74,10 @@ export default function Dashboard() {
                                 </div>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                                <h2 className="text-xl font-semibold mb-2 text-center">Comparision section</h2>
+                                <h2 className="text-xl font-semibold mb-2 text-center">TIME SERIES</h2>
+                                <p className="text-center mb-2">TO DO: Add in 2 years of predictions, and add a conf int 95% with shaded "triangle". Also, see bar chart to do.</p>
                                 <div className = "flex justify-center">
+                                    <BasicTimeSeries variable={variable1} values={values1} style={style}/>
                                     
                                 </div>
                             </div>
