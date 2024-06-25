@@ -57,22 +57,26 @@ class Database:
             total_assets_element = root.find('.//irs:TotalAssetsGrp/irs:EOYAmt', self.namespace)
             total_liabilities_element = root.find('.//irs:TotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
             total_expenses_element = root.find('.//irs:TotalFunctionalExpensesGrp/irs:TotalAmt', self.namespace)
+            total_contributons_amt = root.find('.//irs:TotalContributionsAmt', self.namespace)
         elif return_type == "990EZ":
             total_revenue_element = root.find('.//irs:TotalRevenueAmt', self.namespace)
             total_assets_element = root.find('.//irs:Form990TotalAssetsGrp/irs:EOYAmt', self.namespace)
             total_liabilities_element = root.find('.//irs:SumOfTotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
             total_expenses_element = root.find('.//irs:TotalExpensesAmt', self.namespace)
+            total_contributons_amt = root.find('.//irs:TotalContributionsAmt', self.namespace)
         elif return_type == "990PF":
             total_revenue_element = root.find('.//irs:TotalRevAndExpnssAmt', self.namespace)
             total_assets_element = root.find('.//irs:TotalAssetsEOYAmt', self.namespace)
             total_liabilities_element = root.find('.//irs:DividendsRevAndExpnssAmt/irs:EOYAmt', self.namespace) #its not liabilities, its
             total_expenses_element = root.find('.//irs:TotalExpensesRevAndExpnssAmt', self.namespace)
+            total_contributons_amt = root.find('.//irs:TotalContributionsAmt', self.namespace)
 
         total_revenue = int(total_revenue_element.text) if total_revenue_element is not None else 0
         total_assets = int(total_assets_element.text) if total_assets_element is not None else 0
         total_liabilities = int(total_liabilities_element.text) if total_liabilities_element is not None else 0
         total_expenses = int(total_expenses_element.text) if total_expenses_element is not None else 0
-        return total_revenue, total_assets, total_liabilities, total_expenses
+        total_contributions = int(total_contributions_amt.text) if total_contributons_amt is not None else 0
+        return total_revenue, total_assets, total_liabilities, total_expenses, total_contributons
 
     def build_database(self, file_path):
         root = ET.parse(file_path).getroot()
@@ -88,7 +92,7 @@ class Database:
 
         name, state, city, zip_code = self.get_general_information(root)
         ntee, major_group, subsection_code = self.get_ntee_and_subsection(ein)
-        total_revenue, total_assets, total_liabilities, total_expenses = self.get_financial_information(root, return_type)
+        total_revenue, total_assets, total_liabilities, total_expenses, total_contributons = self.get_financial_information(root, return_type)
 
         update_fields = {
             "Name": name,
@@ -101,7 +105,8 @@ class Database:
             f"{tax_period}.Total Revenue": total_revenue,
             f"{tax_period}.Total Assets": total_assets,
             f"{tax_period}.Total Liabilities": total_liabilities,
-            f"{tax_period}.Total Expenses": total_expenses
+            f"{tax_period}.Total Expenses": total_expenses,
+            f"{tax_period}.Total Contributions": total_contributons
         }
 
         insertion = UpdateOne(
