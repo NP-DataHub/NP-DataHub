@@ -43,14 +43,14 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, style }) => 
         return tooltipContent;
       }
     },
+    grid: {
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      containLabel: true
+    },
     xAxis: {
-      name: 'Year',
-      nameLocation: 'middle',
-      nameTextStyle: {
-        fontWeight: 'bold',
-        fontSize: Math.round(0.03 * scale),
-        padding: Math.round(0.03 * scale)
-      },
       type: 'category',
       data: Array.from({ length: values1.length }, (_, index) => index + 2017),
       handle: {
@@ -61,7 +61,8 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, style }) => 
         alignWithLabel: true
       },
       axisLabel: {
-        fontSize: Math.round(0.022*scale)
+        fontSize: Math.round(0.036*style.width),
+        fontWeight: 'bold'
       }
     },
     yAxis: {
@@ -78,13 +79,9 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, style }) => 
         formatter: function (value) {
           return '$' + value;
         },
-        fontSize: Math.round(0.018*scale)
+        fontSize: Math.round(0.018*scale),
+        show: false
       },
-    },
-    grid: {
-        left: Math.round(0.06*scale),
-        bottom: Math.round(0.06*scale),
-        containLabel: true
     },
     series: [
       {

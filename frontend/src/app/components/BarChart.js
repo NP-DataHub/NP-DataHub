@@ -34,26 +34,32 @@ const BarChart = ({variable, values, style}) => {
         }
         else percent = (0).toFixed(1);
         if (percent >= 0) tooltipContent += `<br/><span style="color:#32CD32;">&#x25B2;</span> +`;
-        else tooltipContent += `<br/><span style="color:#E60000;">&#x25BC;</span>`
+        else tooltipContent += `<br/><span style="color:#E60000;">&#x25BC;</span> `
         tooltipContent += `${percent}%`;
         return tooltipContent;
       }
     },
     grid: {
-      left: 0.01 * scale,
-      right: 0.01 * scale,
-      bottom: 0.045 * scale,
-      top: 0
+      left: 0,
+      right: 0,
+      bottom: 0,
+      top: 0,
+      containLabel: true
     },
     xAxis: [
       {
         type: 'category',
         data: Array.from({ length: values.length }, (_, index) => index + 2017),
         axisTick: {
-          //alignWithLabel: true
+          alignWithLabel: true,
+          show: false
+        },
+        axisLine: {
+          //show: false
         },
         axisLabel: {
-          fontSize: Math.round(0.034*scale)
+          fontSize: Math.round(0.036*style.width),
+          fontWeight: 'bold'
         }
       }
     ],
@@ -67,10 +73,10 @@ const BarChart = ({variable, values, style}) => {
           show: false
         },
         axisLine: {
-          show: true
+          show: false
         },
         axisTick: {
-          show: true
+          show: false
         }
       },
       {
@@ -79,7 +85,7 @@ const BarChart = ({variable, values, style}) => {
           show: true
         },
         axisLine: {
-          show: true
+          show: false
         },
         splitLine: {
           show: false
