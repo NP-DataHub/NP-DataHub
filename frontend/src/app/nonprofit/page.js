@@ -1,9 +1,7 @@
 "use client";
 import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
 import DashboardNavbar from "../components/dashboardNav";
-import BarChart from "../components/BarChart";
-import LineCompareChart from "../componenets/LineCompareChart";
-import TimeSeries from "../components/TimeSeries";
 import React, { useState } from 'react';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -94,7 +92,7 @@ export default function non_profit() {
                     <div className="flex-col mx-10 font-sans">
                         <div className="grid grid-cols-3 gap-4 mt-10">
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                                {/*<BarChart variable={variable1} values={values1} style={style}/>*/}
+                                {/*add chart here box size will update with chart*/}
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 {/*add chart here box size will update with chart*/}
