@@ -97,10 +97,12 @@ export default function non_profit() {
                         <div className="grid grid-cols-3 gap-4 mt-10">
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 {/*add chart here box size will update with chart*/}
+                                <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue</h1>
                                 <BarChart variable={variable1} values={values1} style={style}/>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 {/*add chart here box size will update with chart*/}
+                                <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue vs. Expenses</h1>
                                 <LineCompareChart variable1={variable1} variable2={variable2} values1={values1} values2={values2} style={style}/>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">

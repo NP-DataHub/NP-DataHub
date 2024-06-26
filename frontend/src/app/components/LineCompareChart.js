@@ -37,15 +37,24 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, style }) => 
     tooltip: {
       trigger: 'axis',
       formatter: function (params) {
-        const tooltipContent = params.map(item => {
-          return `${item.seriesName}: $${item.value} <span style="color:#32CD32;">&#x25B2;</span>`;
-        }).join('<br/>');
+        let tooltipContent = `<div>${params[0].name}<br/>`;
+        params.forEach(item => {
+          tooltipContent += `
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span>
+                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:${item.color};margin-right:5px;"></span>
+                ${item.seriesName}: 
+              </span>
+              <span style="text-align: right;">&nbsp;$${item.value}</span>
+            </div>`;
+        });
+        tooltipContent += `</div>`;
         return tooltipContent;
       }
     },
     grid: {
-      left: 0,
-      right: 0,
+      left: 0.045*style.width,
+      right: 0.045*style.width,
       top: 0,
       bottom: 0,
       containLabel: true
@@ -53,6 +62,7 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, style }) => 
     xAxis: {
       type: 'category',
       data: Array.from({ length: values1.length }, (_, index) => index + 2017),
+      boundaryGap: false,
       handle: {
         show: true,
         color: '#7581BD'
@@ -67,19 +77,16 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, style }) => 
     },
     yAxis: {
       type: 'value',
-      min: min - buffer,
-      max: max + buffer,
       axisTick: {
-        inside: true
+        show: false
+      },
+      axisLine: {
+        show: false
       },
       splitLine: {
         show: false
       },
       axisLabel: {
-        formatter: function (value) {
-          return '$' + value;
-        },
-        fontSize: Math.round(0.018*scale),
         show: false
       },
     },
