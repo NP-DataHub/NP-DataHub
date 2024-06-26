@@ -18,6 +18,8 @@ const StackChart = ({revenues, expenses, assets, liabilities, style}) => {
     return <div>ERROR: chart arg must be an array</div>;
   }
 
+  let scale = Math.round((style.width+style.height)/2);
+
   revenues = [...revenues].reverse();
   expenses = [...expenses].reverse();
   assets = [...assets].reverse()
@@ -132,7 +134,10 @@ const StackChart = ({revenues, expenses, assets, liabilities, style}) => {
         emphasis: {
           focus: 'series'
         },
-        data: liabilities
+        data: liabilities,
+        itemStyle: {
+            barBorderRadius: [0, 0.017*scale, 0.017*scale, 0],
+        }
       }
     ]
   };
