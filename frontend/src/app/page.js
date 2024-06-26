@@ -1,59 +1,57 @@
-"use client";
-import Sidebar from "./components/Sidebar";
-import BarChart from "./components/BarChart";
-import LineCompareChart from "./components/LineCompareChart";
-import DashboardNavbar from "./components/dashboardNav";
-import TimeSeries from "./components/TimeSeries";
-import React, { useState } from 'react';
+import Navbar from "./components/Navbar";
+import { HiOutlineMail } from "react-icons/hi";
+import { FaFacebook } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
 
-export default function Dashboard() {
-    const [state, setState] = useState('');
-    const [nteeCode, setNteeCode] = useState('');
-    const [subNteeCode, setSubNteeCode] = useState('');
-    const [searchResults, setSearchResults] = useState(null);
-
-    
-
-    const handleSearch = () => {
-      // Implement your search logic here
-      console.log('Searching with:', { state, nteeCode, subNteeCode });
-  
-      // Mock search results data
-      const results = [
-        {
-          nonprofitName: 'ALBANY MEDICAL NETWORK',
-          address: '123 Main Street',
-          city: 'Albany',
-          state: 'NY',
-          zip: '12345',
-          annualRev: '$17,564,456.12',
-          annualExpenses: '$16,567,435.21'
-        },
-        {
-            nonprofitName: 'ALBANY MEDICAL NETWORK',
-            address: '123 Main Street',
-            city: 'Albany',
-            state: 'NY',
-            zip: '12345',
-            annualRev: '$17,564,456.12',
-            annualExpenses: '$16,567,435.21'
-        },
-        {
-            nonprofitName: 'Emmets Baller Nonprofit',
-            address: 'The Moon',
-            city: 'Moon City',
-            state: 'Luxurious',
-            zip: '100000',
-            annualRev: '$ all the money $',
-            annualExpenses: '$ like 4 dollars $'
-        }
-        // Add more results as needed
-      ];
-  
-      setSearchResults(results);
-    };
-  
-    return(
+export default function Home() {
+  return (
+    <div className="overflow-auto h-screen">
+      <Navbar/>
+      <section className="flex flex-col lg:flex-row justify-between items-center min-h-screen bg-cover bg-center bg-[url('/img/gradient_back_one.png')] px-6 lg:px-12 py-40">
+        <div className="flex-1 text-center lg:text-left">
+          <h1 className="text-3xl lg:text-6xl font-bold text-gray-900 font-serif ">
+            Creating nonprofit ecosystems through data.
+          </h1>
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto lg:mx-0">
+            <button className="text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
+              Data
+            </button>
+            <button className="text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
+              Visualize
+            </button>
+            <button className="col-span-1 sm:col-span-2 text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
+              Ecosystem Insights
+            </button>
+          </div>
+        </div>
+        <div className="flex-1 flex justify-center items-center mt-8 lg:mt-[-12]">
+          <img draggable = {false} src="/img/node_edge_final.png" alt="Network Visualization" className="w-5/6 h-5/6 max-w-full max-h-full" />
+        </div>
+      </section>
+      <section className="min-h-screen bg-gray-900 text-white px-6 md:px-12 font-serif sm:py-40">
+        <div className="flex flex-col justify-start items-center text-center py-20 ">
+          <h2 className="text-2xl md:text-5xl mb-4 md:mb-6">Insights for Impact</h2>
+          <div className="flex justify-center mb-4 md:mb-6">
+            <div className="w-24 md:w-72 rounded-full h-1 bg-white"></div>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
+          <div className="flex flex-col items-center text-center">
+            <img draggable = {false} src="/img/four_bar_final.png" alt="Graph and Magnifying Glass" className="w-1/2 sm:w-1/2 max-w-full" />
+          </div>
+          <div className="flex flex-col justify-center text-left text-lg md:text-2xl mt-6 font-serif">
+            <div className="mb-6 md:mb-10">
+              <p className="mb-6 md:mb-8">
+                NP DataHub is a cloud-based data intelligence platform for philanthropies and nonprofits that offers algorithmic-based insights for more strategic community investment.
+              </p>
+              <p>
+                Even though there are databases that cater to donors and monitor baseline financial activity for nonprofits based on documents, there is no one resource that allows the end-user to visualize fiscal performance and examine longitudinal data for each nonprofit and an entire non-profit sector - until now.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="min-h-screen bg-gray-900 text-white px-6 md:px-12 font-serif  sm:py-40">
         <div className="flex flex-col justify-start text-center">
           <h2 className="text-2xl md:text-5xl mb-4 md:mb-6">Connecting billions of data points</h2>
@@ -178,5 +176,6 @@ export default function Dashboard() {
           </div>
         </div>
       </section>
+    </div>
   );
 }
