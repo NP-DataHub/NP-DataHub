@@ -9,6 +9,14 @@ import Slider from "react-slick";
 
 export default function non_profit() {
 
+    const variable1 = "Revenue";
+    const values1 = [52,64,73,67,86,95];
+    const variable2 = "Expenses";
+    const values2 = [70,55,58,63,69,80];
+    const style = { height: 306, width: 515 };
+    //<LineCompareChart variable1={variable1} variable2={variable2} values1={values1} values2={values2} style={style}/>
+    //<BarChart variable={variable1} values={values1} style={style}/>
+
     const indicators = [
         { value: '$245K', label: 'REVENUES', barColor: 'bg-[#A6F7E2]', ranking: '74%', diff: '+6.5%', diffColor: 'border-2 border-[#029F04] bg-[#A6F7E2]' },
         { value: '$222K', label: 'EXPENSES', barColor: 'bg-[#CCCCFF]', ranking: '61%', diff: '+5.4%', diffColor: 'border-2 border-[#029F04]  bg-[#171821]' },
