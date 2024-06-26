@@ -5,6 +5,7 @@ import DashboardNavbar from "../components/dashboardNav";
 import BarChart from "../components/BarChart";
 import LineCompareChart from "../components/LineCompareChart";
 import TimeSeries from "../components/TimeSeries";
+import StackChart from "../components/StackChart";
 import React, { useState } from 'react';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -12,14 +13,15 @@ import Slider from "react-slick";
 
 export default function non_profit() {
 
-    const variable1 = "Revenue";
-    const values1 = [52,64,73,67,86,95];
-    const variable2 = "Expenses";
-    const values2 = [70,55,58,63,69,80];
+    const revenues = [52,64,73,67,86,95];
+    const expenses = [70,55,58,63,69,80];
+    const assets = [42,43,45,47,47,49];
+    const liabilities = [41,42,41,43,45,43];
     const style = { height: 250, width: 350 };
-    //<BarChart variable={variable1} values={values1} style={style}/>
-    //<LineCompareChart variable1={variable1} variable2={variable2} values1={values1} values2={values2} style={style}/>
-    //<TimeSeries variable={variable1} values={values1} style={style}/>
+    const styleWide = {height: 250, width: 750}
+    //<BarChart variable={variable1} values={revenues} style={style}/>
+    //<LineCompareChart variable1={variable1} variable2={variable2} revenues={revenues} expenses={expenses} style={style}/>
+    //<TimeSeries variable={variable1} values={revenues} style={style}/>
 
     const indicators = [
         { value: '$245K', label: 'REVENUES', barColor: 'bg-[#A6F7E2]', ranking: '74%', diff: '+6.5%', diffColor: 'border-2 border-[#029F04] bg-[#A6F7E2]' },
@@ -98,23 +100,28 @@ export default function non_profit() {
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 {/*add chart here box size will update with chart*/}
                                 <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue</h1>
-                                <BarChart variable={variable1} values={values1} style={style}/>
+                                <BarChart values={revenues} style={style}/>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 {/*add chart here box size will update with chart*/}
                                 <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue vs. Expenses</h1>
-                                <LineCompareChart variable1={variable1} variable2={variable2} values1={values1} values2={values2} style={style}/>
+                                <LineCompareChart variable1="Revenue" variable2="Expenses" values1={revenues} values2={expenses} style={style}/>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 {/*add chart here box size will update with chart*/}
+                                <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Overall Growth</h1>
+                                <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities} style={style}/>
                             </div>
                         </div>
                         <div className="grid grid-cols-3 gap-4 mt-10">
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 col-span-2">
                                 {/*add chart here box size will update with chart*/}
+                                <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Time Series</h1>
+                                <TimeSeries variable="Revenue" values={revenues} style={styleWide}/>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 {/*add chart here box size will update with chart*/}
+                                <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Compared to State</h1>
                             </div>
                         </div>
                     </div>

@@ -22,8 +22,6 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, style }) => 
     return <div>ERROR: chart arg must be an array</div>;
   }
 
-  let scale = Math.round((style.width + style.height) / 2);
-
   // used for scaling the y axis
   const min = Math.min(...values1, ...values2);
   const max = Math.max(...values1, ...values2);

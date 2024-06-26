@@ -5,12 +5,11 @@ import ReactECharts from 'echarts-for-react';
 
 
 /**
- * @param variable - string containing the variable recorded in the graph
  * @param values -   an array of values measured each year
  * @param style -    a struct containing format options - height and width
  *                   must be defined as numbers.
 */
-const BarChart = ({variable, values, style}) => {
+const BarChart = ({values, style}) => {
   // ensures arg is an array
   if (!Array.isArray(values) || values.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
