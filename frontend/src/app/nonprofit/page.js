@@ -2,6 +2,9 @@
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import DashboardNavbar from "../components/dashboardNav";
+import BarChart from "../components/BarChart";
+import LineCompareChart from "../components/LineCompareChart";
+import TimeSeries from "../components/TimeSeries";
 import React, { useState } from 'react';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
