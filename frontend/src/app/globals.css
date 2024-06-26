@@ -102,7 +102,3 @@ body {
 .profile:hover {
   transform: scale(1.02);
 }
-
-.dashboard-color{
-  background: #171821;
-}
