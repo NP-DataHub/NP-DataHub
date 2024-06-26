@@ -25,54 +25,90 @@ const BarChart = ({variable, values, style}) => {
       },
       formatter: function (params) {
         // params is an array containing the information for each series in the tooltip
-        const tooltipContent = params.map(item => {
-          return `${item.name}: $${item.value}`;
-        }).join('<br/>');
+        const index = params[0].dataIndex;
+        let tooltipContent = `${params[0].name}: $${params[0].value}`;
+        let percent;
+        if (index > 0) {
+          const previousValue = values[index - 1];
+          percent = (((params[0].value - previousValue) / previousValue) * 100).toFixed(1);
+        }
+        else percent = (0).toFixed(1);
+        if (percent >= 0) tooltipContent += `<br/><span style="color:#32CD32;">&#x25B2;</span> +`;
+        else tooltipContent += `<br/><span style="color:#E60000;">&#x25BC;</span>`
+        tooltipContent += `${percent}%`;
         return tooltipContent;
       }
     },
     grid: {
-      left: Math.round(0.03*scale),
-      bottom: Math.round(0.03*scale),
-      right: Math.round(0.01*scale),
-      top: Math.round(0.01*scale),
-      containLabel: true
+      left: 0.01 * scale,
+      right: 0.01 * scale,
+      bottom: 0.045 * scale,
+      top: 0
     },
     xAxis: [
       {
-        name: 'Year',
-        nameLocation: 'middle',
-        nameTextStyle: {
-          fontWeight: 'bold',
-          fontSize: Math.round(0.03*scale),
-          padding: Math.round(0.03*scale)
-        },
         type: 'category',
         data: Array.from({ length: values.length }, (_, index) => index + 2017),
         axisTick: {
-          alignWithLabel: true
+          //alignWithLabel: true
         },
         axisLabel: {
-          fontSize: Math.round(0.022*scale)
+          fontSize: Math.round(0.034*scale)
         }
       }
     ],
     yAxis: [
       {
+        position: 'left',
         axisLabel: {
-          formatter: function (value) {
-            return '$' + value;
-          },
-          fontSize: Math.round(0.018*scale)
+          show: false,
+        },
+        splitLine: {
+          show: false
+        },
+        axisLine: {
+          show: true
+        },
+        axisTick: {
+          show: true
+        }
+      },
+      {
+        position: 'right',
+        axisTick: {
+          show: true
+        },
+        axisLine: {
+          show: true
+        },
+        splitLine: {
+          show: false
         }
       }
+      
     ],
     series: [
       {
         name: 'Direct',
         type: 'bar',
-        barWidth: '80%',
-        data: values
+        barWidth: '90%',
+        data: values,
+        itemStyle: {
+          color: function (params) {
+            // Customize color based on percent change
+            const index = params.dataIndex;
+            if (index > 0) {
+              const previousValue = values[index - 1];
+              const currentValue = params.value;
+              const percentChange = ((currentValue - previousValue) / previousValue) * 100;
+              if (percentChange < 0) {
+                return 'rgb(255, 110, 140)'; // Pink color for decreasing percent change
+              }
+            }
+            return 'rgb(80, 110, 237)'; // Default blue color
+          },
+          barBorderRadius: [0.02 * scale, 0.02 * scale, 0, 0]
+        },
       }
     ]
   };

@@ -21,7 +21,13 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, style }) => 
   if (!Array.isArray(values1) || values1.length === 0 || !Array.isArray(values2) || values2.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
   }
+
   let scale = Math.round((style.width + style.height) / 2);
+
+  // used for scaling the y axis
+  const min = Math.min(...values1, ...values2);
+  const max = Math.max(...values1, ...values2);
+  const buffer = (max-min)*0.05;
 
   const option = {
     legend: {
@@ -60,6 +66,8 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, style }) => 
     },
     yAxis: {
       type: 'value',
+      min: min - buffer,
+      max: max + buffer,
       axisTick: {
         inside: true
       },
