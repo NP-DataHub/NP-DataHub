@@ -2,7 +2,6 @@
 
 import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import EChartsStat from 'echarts-stat';
 
 /**
  * @param variable - string containing the variable recorded in the graph
@@ -11,7 +10,7 @@ import EChartsStat from 'echarts-stat';
  *                   must be defined as numbers.
 */
 
-const BasicTimeSeries = ({variable, values, style}) => {
+const TimeSeries = ({variable, values, style}) => {
       // ensures arg is an array
   if (!Array.isArray(values) || values.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
@@ -116,4 +115,4 @@ const BasicTimeSeries = ({variable, values, style}) => {
       );
 };
 
-export default BasicTimeSeries;
+export default TimeSeries;

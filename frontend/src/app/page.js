@@ -1,10 +1,10 @@
 "use client";
 import Sidebar from "./components/Sidebar";
-import BasicBarChart from "./components/BasicBarChart";
+import BarChart from "./components/BarChart";
 import LineCompareChart from "./components/LineCompareChart";
 import DashboardNavbar from "./components/dashboardNav";
+import TimeSeries from "./components/TimeSeries";
 import React, { useState } from 'react';
-import BasicTimeSeries from "./components/BasicTimeSeries";
 
 export default function Dashboard() {
     const [state, setState] = useState('');
@@ -72,7 +72,7 @@ export default function Dashboard() {
                                 <h2 className="text-xl text-center font-semibold mb-2">HISTORICAL PERFORMANCE</h2>
                                 <p className="text-center mb-2">Plan: add percent change to hover, add variable selection, modify styling</p>
                                 <div className = "flex justify-center">
-                                  <BasicBarChart variable={variable1} values={values1} style={style}/>
+                                  <BarChart variable={variable1} values={values1} style={style}/>
                                 </div>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
@@ -86,7 +86,7 @@ export default function Dashboard() {
                                 <h2 className="text-xl font-semibold mb-2 text-center">TIME SERIES</h2>
                                 <p className="text-center mb-2">TO DO: Add in 2 years of predictions, and add a conf int 95% with shaded "triangle". Also, see bar chart to do.</p>
                                 <div className = "flex justify-center">
-                                    <BasicTimeSeries variable={variable1} values={values1} style={style}/>
+                                    <TimeSeries variable={variable1} values={values1} style={style}/>
                                     
                                 </div>
                             </div>

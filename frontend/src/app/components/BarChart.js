@@ -10,7 +10,7 @@ import ReactECharts from 'echarts-for-react';
  * @param style -    a struct containing format options - height and width
  *                   must be defined as numbers.
 */
-const BasicBarChart = ({variable, values, style}) => {
+const BarChart = ({variable, values, style}) => {
   // ensures arg is an array
   if (!Array.isArray(values) || values.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
@@ -82,4 +82,4 @@ const BasicBarChart = ({variable, values, style}) => {
   );
 };
 
-export default BasicBarChart;
+export default BarChart;
