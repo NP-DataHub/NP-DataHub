@@ -25,9 +25,9 @@ class Database:
         return ein, tax_period
 
     def get_ntee_and_subsection(self, ein):
-        if ein in self.cache:
-            return self.cache[ein]
-
+        # if ein in self.cache:
+        #     return self.cache[ein]
+        return "None", "None", "None"
         url = f"https://projects.propublica.org/nonprofits/api/v2/organizations/{ein}.json"
         response = requests.get(url)
         if response.status_code == 200:
@@ -144,7 +144,7 @@ class Database:
         collection.bulk_write(operations)
 
 if __name__ == "__main__":
-    directory = '/Users/mr.youssef/Desktop/NpDatahub/unitTesting'
+    directory = '/Users/mr.youssef/Desktop/2018-may'
     obj = Database()
     obj.process_all_xml_files(directory)
     print("Data has been successfully inserted into MongoDB.")

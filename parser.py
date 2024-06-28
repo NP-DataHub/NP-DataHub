@@ -208,7 +208,7 @@ class Database:
         insert_data("Private", self.private)
 
 if __name__ == "__main__":
-    directory = '/Users/mr.youssef/Desktop/NpDataHub/unitTesting'
+    directory = '/Users/mr.youssef/Desktop/2018-may'
     obj = Database()
     obj.process_all_xml_files(directory)
     obj.insert_into_mongo()
