@@ -297,9 +297,6 @@ class Database:
                 return_type, insertion = future.result()
                 if insertion:
                     insertions[return_type].append(insertion)
-                    if len(insertions[return_type]) >= 1000:  # Perform bulk write every 1000 operations
-                        self.bulk_write_to_mongo(insertions[return_type], return_type)
-                        insertions[return_type] = []
 
         for return_type in insertions:
             if insertions[return_type]:  # Write remaining operations
