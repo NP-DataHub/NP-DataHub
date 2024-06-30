@@ -3,7 +3,6 @@ import requests
 from lxml import etree as ET
 from pymongo import MongoClient, UpdateOne
 from concurrent.futures import ThreadPoolExecutor, as_completed
-
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
@@ -42,28 +41,148 @@ class Database:
             zip_code = zip_code_element.text if zip_code_element is not None else "None"
         return name, state, city, zip_code
 
-    def get_financial_information(self, root, return_type):
-        if return_type == "990":
+    def get_990_financial_information(self, root):
+        total_revenue_element = root.find('.//irs:CYTotalRevenueAmt', self.namespace)
+        if total_revenue_element is None:
             total_revenue_element = root.find('.//irs:TotalRevenueGrp/irs:TotalRevenueColumnAmt', self.namespace)
-            total_assets_element = root.find('.//irs:TotalAssetsGrp/irs:EOYAmt', self.namespace)
-            total_liabilities_element = root.find('.//irs:TotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
-            total_expenses_element = root.find('.//irs:TotalFunctionalExpensesGrp/irs:TotalAmt', self.namespace)
-        elif return_type == "990EZ":
-            total_revenue_element = root.find('.//irs:TotalRevenueAmt', self.namespace)
-            total_assets_element = root.find('.//irs:Form990TotalAssetsGrp/irs:EOYAmt', self.namespace)
-            total_liabilities_element = root.find('.//irs:SumOfTotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
-            total_expenses_element = root.find('.//irs:TotalExpensesAmt', self.namespace)
-        elif return_type == "990PF":
-            total_revenue_element = root.find('.//irs:TotalRevAndExpnssAmt', self.namespace)
-            total_assets_element = root.find('.//irs:TotalAssetsEOYAmt', self.namespace)
-            total_liabilities_element = root.find('.//irs:TotalLiabilitiesEOYAmt', self.namespace) #its not liabilities, its
-            total_expenses_element = root.find('.//irs:TotalExpensesRevAndExpnssAmt', self.namespace)
 
-        total_revenue = int(total_revenue_element.text) if total_revenue_element is not None else 0
-        total_assets = int(total_assets_element.text) if total_assets_element is not None else 0
-        total_liabilities = int(total_liabilities_element.text) if total_liabilities_element is not None else 0
-        total_expenses = int(total_expenses_element.text) if total_expenses_element is not None else 0
-        return total_revenue, total_assets, total_liabilities, total_expenses
+        total_assets_element = root.find('.//irs:TotalAssetsEOYAmt', self.namespace)
+        if total_assets_element is None:
+            total_assets_element = root.find('.//irs:TotalAssetsGrp/irs:EOYAmt', self.namespace)
+      
+        total_liabilities_element = root.find('.//irs:TotalLiabilitiesEOYAmt', self.namespace)
+        if total_liabilities_element is None:
+            total_liabilities_element = root.find('.//irs:TotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
+        
+        total_expenses_element = root.find('.//irs:TotalFunctionalExpensesGrp/irs:TotalAmt', self.namespace)
+        if total_expenses_element is None:
+            total_expenses_element = root.find('.//irs:CYTotalExpensesAmt', self.namespace)
+        
+        total_contributions_element = root.find('.//irs:TotalContributionsAmt', self.namespace)
+        
+        program_service_revenue_element = root.find('.//irs:TotalProgramServiceRevenueAmt', self.namespace)
+        if program_service_revenue_element is None:
+            program_service_revenue_element = root.find('.//irs:CYProgramServiceRevenueAmt', self.namespace)
+        
+        investment_income_element = root.find('.//irs:CYInvestmentIncomeAmt', self.namespace)
+        if investment_income_element is None:
+            investment_income_element = root.find('.//irs:InvestmentIncomeGrp/irs:TotalRevenueColumnAmt', self.namespace)
+        
+        gross_receipts_element = root.find('.//irs:GrossReceiptsAmt', self.namespace)
+        
+        fundraising_income_element = root.find('.//irs:NetIncmFromFundraisingEvtGrp/irs:TotalRevenueColumnAmt', self.namespace)
+        
+        fundraising_expenses_element = root.find('.//irs:FundraisingDirectExpensesAmt', self.namespace)
+        
+        compensation_of_current_officers_element = root.find('.//irs:CompCurrentOfcrDirectorsGrp/irs:TotalAmt', self.namespace)
+        
+        other_salaries_and_wages_element = root.find('.//irs:OtherSalariesAndWagesGrp/irs:TotalAmt', self.namespace)
+        
+        payroll_taxes_element = root.find('.//irs:PayrollTaxesGrp/irs:TotalAmt', self.namespace)
+        
+        gifts_grants_membership_fees_received_509_element = root.find('.//irs:GiftsGrantsContrisRcvd509Grp/irs:TotalAmt', self.namespace)
+        
+        number_of_employee_element = root.find('.//irs:TotalEmployeeCnt', self.namespace)
+        
+        return (
+            int(total_revenue_element.text) if total_revenue_element is not None else 0,
+            int(total_assets_element.text) if total_assets_element is not None else 0,
+            int(total_liabilities_element.text) if total_liabilities_element is not None else 0,
+            int(total_expenses_element.text) if total_expenses_element is not None else 0,
+            int(total_contributions_element.text) if total_contributions_element is not None else 0,
+            int(program_service_revenue_element.text) if program_service_revenue_element is not None else 0,
+            int(investment_income_element.text) if investment_income_element is not None else 0,
+            int(gross_receipts_element.text) if gross_receipts_element is not None else 0,
+            int(fundraising_income_element.text) if fundraising_income_element is not None else 0,
+            int(fundraising_expenses_element.text) if fundraising_expenses_element is not None else 0,
+            int(compensation_of_current_officers_element.text) if compensation_of_current_officers_element is not None else 0,
+            int(other_salaries_and_wages_element.text) if other_salaries_and_wages_element is not None else 0,
+            int(payroll_taxes_element.text) if payroll_taxes_element is not None else 0,
+            int(gifts_grants_membership_fees_received_509_element.text) if gifts_grants_membership_fees_received_509_element is not None else 0,
+            int(number_of_employee_element.text) if number_of_employee_element is not None else 0
+        )
+
+    def get_990EZ_financial_information(self, root):
+        total_revenue_element = root.find('.//irs:TotalRevenueAmt', self.namespace)
+        
+        total_assets_element = root.find('.//irs:Form990TotalAssetsGrp/irs:EOYAmt', self.namespace)
+        
+        total_liabilities_element = root.find('.//irs:SumOfTotalLiabilitiesGrp/irs:EOYAmt', self.namespace)
+        
+        total_expenses_element = root.find('.//irs:TotalExpensesAmt', self.namespace)
+        
+        program_service_revenue_element = root.find('.//irs:ProgramServiceRevenueAmt', self.namespace)
+        
+        investment_income_element = root.find('.//irs:InvestmentIncomeAmt', self.namespace)
+        
+        gifts_grants_membership_fees_received_509_element = root.find('.//irs:GiftsGrantsContrisRcvd509Grp/irs:TotalAmt', self.namespace)
+        
+        return (
+            int(total_revenue_element.text) if total_revenue_element is not None else 0,
+            int(total_assets_element.text) if total_assets_element is not None else 0,
+            int(total_liabilities_element.text) if total_liabilities_element is not None else 0,
+            int(total_expenses_element.text) if total_expenses_element is not None else 0,
+            int(program_service_revenue_element.text) if program_service_revenue_element is not None else 0,
+            int(investment_income_element.text) if investment_income_element is not None else 0,
+            int(gifts_grants_membership_fees_received_509_element.text) if gifts_grants_membership_fees_received_509_element is not None else 0
+        )
+
+    def get_990PF_financial_information(self, root):
+        total_revenue_element = root.find('.//irs:TotalRevAndExpnssAmt', self.namespace)
+        
+        total_expenses_element = root.find('.//irs:TotalExpensesRevAndExpnssAmt', self.namespace)
+        
+        total_assets_element = root.find('.//irs:TotalAssetsEOYAmt', self.namespace)
+        
+        total_liabilities_element = root.find('.//irs:TotalLiabilitiesEOYAmt', self.namespace)
+        
+        net_income_element = root.find('.//irs:ExcessRevenueOverExpensesAmt', self.namespace)
+        
+        contributions_received_element = root.find('.//irs:ContriRcvdRevAndExpnssAmt', self.namespace)
+        
+        interest_revenue_element = root.find('.//irs:InterestOnSavNetInvstIncmAmt', self.namespace)
+        
+        dividends_element = root.find('.//irs:DividendsRevAndExpnssAmt', self.namespace)
+        
+        net_gain_sales_assets_element = root.find('.//irs:NetGainSaleAstRevAndExpnssAmt', self.namespace)
+        
+        other_income_element = root.find('.//irs:OtherIncomeRevAndExpnssAmt', self.namespace)
+        
+        compensation_of_officers_element = root.find('.//irs:CompOfcrDirTrstRevAndExpnssAmt', self.namespace)
+        
+        total_fund_net_worth_element = root.find('.//irs:TotNetAstOrFundBalancesEOYAmt', self.namespace)
+        
+        investments_in_us_gov_obligations_element = root.find('.//irs:USGovernmentObligationsEOYAmt', self.namespace)
+        if investments_in_us_gov_obligations_element is None:
+            investments_in_us_gov_obligations_element = root.find('.//irs:USGovtObligationsEOYFMVAmt', self.namespace)
+        
+        investments_in_corporate_stock_element = root.find('.//irs:CorporateStockEOYAmt', self.namespace)
+        
+        investments_in_corporate_bonds_element = root.find('.//irs:CorporateBondsEOYAmt', self.namespace)
+        
+        cash_non_interest_bearing_element = root.find('.//irs:CashEOYAmt', self.namespace)
+        
+        adjusted_net_income_element = root.find('.//irs:TotalAdjNetIncmAmt', self.namespace)
+        
+        return (
+            int(total_revenue_element.text) if total_revenue_element is not None else 0,
+            int(total_expenses_element.text) if total_expenses_element is not None else 0,
+            int(total_assets_element.text) if total_assets_element is not None else 0,
+            int(total_liabilities_element.text) if total_liabilities_element is not None else 0,
+            int(net_income_element.text) if net_income_element is not None else 0,
+            int(contributions_received_element.text) if contributions_received_element is not None else 0,
+            int(interest_revenue_element.text) if interest_revenue_element is not None else 0,
+            int(dividends_element.text) if dividends_element is not None else 0,
+            int(net_gain_sales_assets_element.text) if net_gain_sales_assets_element is not None else 0,
+            int(other_income_element.text) if other_income_element is not None else 0,
+            int(compensation_of_officers_element.text) if compensation_of_officers_element is not None else 0,
+            int(total_fund_net_worth_element.text) if total_fund_net_worth_element is not None else 0,
+            int(investments_in_us_gov_obligations_element.text) if investments_in_us_gov_obligations_element is not None else 0,
+            int(investments_in_corporate_stock_element.text) if investments_in_corporate_stock_element is not None else 0,
+            int(investments_in_corporate_bonds_element.text) if investments_in_corporate_bonds_element is not None else 0,
+            int(cash_non_interest_bearing_element.text) if cash_non_interest_bearing_element is not None else 0,
+            int(adjusted_net_income_element.text) if adjusted_net_income_element is not None else 0
+        )
 
     def build_database(self, file_path):
         root = ET.parse(file_path).getroot()
@@ -79,22 +198,82 @@ class Database:
 
         name, state, city, zip_code = self.get_general_information(root)
         ntee, major_group = 'None', 'Z'
-        total_revenue, total_assets, total_liabilities, total_expenses = self.get_financial_information(root, return_type)
 
-        update_fields = {
-            "Name": name,
-            "City": city,
-            "State": state,
-            "Zipcode": zip_code,
-            "EIN": ein,
-            "NTEE": ntee,
-            "Major Group": major_group,
-            "Filepath" : file_path[36:],
-            f"{tax_period}.Total Revenue": total_revenue,
-            f"{tax_period}.Total Assets": total_assets,
-            f"{tax_period}.Total Liabilities": total_liabilities,
-            f"{tax_period}.Total Expenses": total_expenses,
-        }
+        if return_type == "990":
+            financial_info = self.get_990_financial_information(root)
+            update_fields = {
+                "Name": name,
+                "City": city,
+                "State": state,
+                "Zipcode": zip_code,
+                "EIN": ein,
+                "NTEE": ntee,
+                "Major Group": major_group,
+                f"{tax_period}.Total Revenue": financial_info[0],
+                f"{tax_period}.Total Assets": financial_info[1],
+                f"{tax_period}.Total Liabilities": financial_info[2],
+                f"{tax_period}.Total Expenses": financial_info[3],
+                f"{tax_period}.Total Contributions": financial_info[4],
+                f"{tax_period}.Program Service Revenue": financial_info[5],
+                f"{tax_period}.Investment Income": financial_info[6],
+                f"{tax_period}.Gross Receipts": financial_info[7],
+                f"{tax_period}.Fundraising Income": financial_info[8],
+                f"{tax_period}.Fundraising Expenses": financial_info[9],
+                f"{tax_period}.Compensation of current officers": financial_info[10],
+                f"{tax_period}.Other salaries and wages": financial_info[11],
+                f"{tax_period}.Payroll Taxes": financial_info[12],
+                f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[13],
+                f"{tax_period}.Number of employee": financial_info[14],
+                f"{tax_period}.Filepath": file_path[36:]
+            }
+        elif return_type == "990EZ":
+            financial_info = self.get_990EZ_financial_information(root)
+            update_fields = {
+                "Name": name,
+                "City": city,
+                "State": state,
+                "Zipcode": zip_code,
+                "EIN": ein,
+                "NTEE": ntee,
+                "Major Group": major_group,
+                f"{tax_period}.Total Revenue": financial_info[0],
+                f"{tax_period}.Total Assets": financial_info[1],
+                f"{tax_period}.Total Liabilities": financial_info[2],
+                f"{tax_period}.Total Expenses": financial_info[3],
+                f"{tax_period}.Program Service Revenue": financial_info[4],
+                f"{tax_period}.Investment Income": financial_info[5],
+                f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[6],
+                f"{tax_period}.Filepath": file_path[36:]
+            }
+        elif return_type == "990PF":
+            financial_info = self.get_990PF_financial_information(root)
+            update_fields = {
+                "Name": name,
+                "City": city,
+                "State": state,
+                "Zipcode": zip_code,
+                "EIN": ein,
+                "NTEE": ntee,
+                "Major Group": major_group,
+                f"{tax_period}.Total Revenue": financial_info[0],
+                f"{tax_period}.Total Expenses": financial_info[1],
+                f"{tax_period}.Total Assets": financial_info[2],
+                f"{tax_period}.Total Liabilities": financial_info[3],
+                f"{tax_period}.Net Income (Less Deficit)": financial_info[4],
+                f"{tax_period}.Contributions Received": financial_info[5],
+                f"{tax_period}.Interest Revenue": financial_info[6],
+                f"{tax_period}.Dividends": financial_info[7],
+                f"{tax_period}.Net Gain (Sales of Assets)": financial_info[8],
+                f"{tax_period}.Other Income": financial_info[9],
+                f"{tax_period}.Compensation of Officers": financial_info[10],
+                f"{tax_period}.Total Fund net worth": financial_info[11],
+                f"{tax_period}.Investments in US Gov Obligations": financial_info[12],
+                f"{tax_period}.Investments in Corporate Stock": financial_info[13],
+                f"{tax_period}.Investments in Corporate Bonds": financial_info[14],
+                f"{tax_period}.Cash": financial_info[15],
+                f"{tax_period}.Adjusted net income": financial_info[16],
+                f"{tax_period}.Filepath": file_path[36:]
+            }
 
         insertion = UpdateOne(
             {"EIN": ein},
@@ -103,7 +282,7 @@ class Database:
         )
         return return_type, insertion
 
-    def process_all_xml_files(self,directory):
+    def process_all_xml_files(self, directory):
         num_cores = os.cpu_count()
         insertions = {"990": [], "990EZ": [], "990PF": []}
         with ThreadPoolExecutor(max_workers=num_cores) as executor:
