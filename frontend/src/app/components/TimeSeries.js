@@ -55,7 +55,7 @@ const TimeSeries = ({variable, values, style}) => {
         },
         grid: {
           left: Math.round(0.03*scale),
-          bottom: Math.round(0.03*scale),
+          bottom: Math.round(0.04*scale),
           right: Math.round(0.01*scale),
           top: Math.round(0.01*scale),
           containLabel: true
@@ -67,7 +67,7 @@ const TimeSeries = ({variable, values, style}) => {
             nameTextStyle: {
               fontWeight: 'bold',
               fontSize: Math.round(0.03*scale),
-              padding: Math.round(0.03*scale)
+              padding: Math.round(0.00*scale)
             },
             type: 'category',
             data: Array.from({ length: values.length }, (_, index) => index + 2017),

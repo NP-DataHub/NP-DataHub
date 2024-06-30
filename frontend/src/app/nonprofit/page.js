@@ -100,24 +100,33 @@ export default function non_profit() {
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 {/*add chart here box size will update with chart*/}
                                 <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue</h1>
-                                <BarChart values={revenues} style={style}/>
+                                <div className="flex items-center justify-center mb-12" style={{ width: '100%', height: '100%' }}>
+                                    <BarChart values={revenues} style={style}/>
+                                    </div>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 {/*add chart here box size will update with chart*/}
                                 <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue vs. Expenses</h1>
+                                <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
                                 <LineCompareChart variable1="Revenue" variable2="Expenses" values1={revenues} values2={expenses} style={style}/>
+                                </div>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 {/*add chart here box size will update with chart*/}
                                 <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Overall Growth</h1>
+                                <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
                                 <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities} style={style}/>
+                                </div>
                             </div>
                         </div>
-                        <div className="grid grid-cols-3 gap-4 mt-10">
+                        <div className="grid grid-cols-3 gap-4 mt-10 mb-10">
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 col-span-2">
                                 {/*add chart here box size will update with chart*/}
                                 <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Time Series</h1>
-                                <TimeSeries variable="Revenue" values={revenues} style={styleWide}/>
+                                <div className="flex items-center justify-center mb-12" style={{ width: '100%', height: '100%' }}>
+                                    <TimeSeries variable="Revenue" values={revenues} style={styleWide} />
+                                </div>
+
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 {/*add chart here box size will update with chart*/}
