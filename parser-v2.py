@@ -197,7 +197,7 @@ class Database:
             return None, None
 
         name, state, city, zip_code = self.get_general_information(root)
-        ntee, major_group = 'None', 'Z'
+        ntee, subsec_cd = 'None', '0'
 
         if return_type == "990":
             financial_info = self.get_990_financial_information(root)
@@ -208,7 +208,7 @@ class Database:
                 "Zipcode": zip_code,
                 "EIN": ein,
                 "NTEE": ntee,
-                "Major Group": major_group,
+                "Subsection Code": subsec_cd,
                 f"{tax_period}.Total Revenue": financial_info[0],
                 f"{tax_period}.Total Assets": financial_info[1],
                 f"{tax_period}.Total Liabilities": financial_info[2],
@@ -235,7 +235,7 @@ class Database:
                 "Zipcode": zip_code,
                 "EIN": ein,
                 "NTEE": ntee,
-                "Major Group": major_group,
+                "Subsection Code": subsec_cd,
                 f"{tax_period}.Total Revenue": financial_info[0],
                 f"{tax_period}.Total Assets": financial_info[1],
                 f"{tax_period}.Total Liabilities": financial_info[2],
@@ -245,7 +245,7 @@ class Database:
                 f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[6],
                 f"{tax_period}.Filepath": file_path[36:]
             }
-        elif return_type == "990PF":
+        else:
             financial_info = self.get_990PF_financial_information(root)
             update_fields = {
                 "Name": name,
@@ -254,7 +254,7 @@ class Database:
                 "Zipcode": zip_code,
                 "EIN": ein,
                 "NTEE": ntee,
-                "Major Group": major_group,
+                "Subsection Code": subsec_cd,
                 f"{tax_period}.Total Revenue": financial_info[0],
                 f"{tax_period}.Total Expenses": financial_info[1],
                 f"{tax_period}.Total Assets": financial_info[2],
