@@ -19,7 +19,7 @@ def update_document(ein, subsection, ntee_cd):
         if result:
             collection.update_one(
                 {"ein": ein},
-                {"$set": {"NTEE": ntee_cd}}
+                {"$set": {"NTEE": ntee_cd, "Subsection Code": subsection}},
             )
             return
 
@@ -27,6 +27,7 @@ def update_document(ein, subsection, ntee_cd):
 def process_row(row):
     ein = row['EIN']
     ntee_cd = row['NTEE_CD']
+    #subsection = row['SUBSECTION']
     update_document(ein, subsection, ntee_cd)
 
 if __name__ == "__main__":
