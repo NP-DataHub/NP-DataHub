@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
-        self.mongo_client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
+        self.mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
         self.database = self.mongo_client["Np-Datahub"]
         self.collections = {
             "990": self.database["Master"],

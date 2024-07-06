@@ -4,7 +4,7 @@ from pymongo import MongoClient
 from concurrent.futures import ThreadPoolExecutor
 
 # Define the MongoDB connection and collections
-mongo_client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
+mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
 database = mongo_client["Np-Datahub"]
 collections = {
     "990": database["Master"],
