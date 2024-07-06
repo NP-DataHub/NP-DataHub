@@ -26,7 +26,7 @@
       <PhoneNum>4107719900</PhoneNum>
       <USAddress>
         <AddressLine1Txt>4081 MT ZION ROAD</AddressLine1Txt>
-        <CityNm>UPPERCO</CityNm>
+        <CityNm>UPPRCO</CityNm>
         <StateAbbreviationCd>MD</StateAbbreviationCd>
         <ZIPCd>211559328</ZIPCd>
       </USAddress>
@@ -101,7 +101,7 @@
       </AnalysisOfRevenueAndExpenses>
       <Form990PFBalanceSheetsGrp>
         <CashBOYAmt>9088</CashBOYAmt>
-        <CashEOYAmt>4836</CashEOYAmt>
+        <CashEOYAmt>43836</CashEOYAmt>
         <CashEOYFMVAmt>4836</CashEOYFMVAmt>
         <OtherInvestmentsBOYAmt>974312</OtherInvestmentsBOYAmt>
         <OtherInvestmentsEOYAmt referenceDocumentId="RetDoc2018100001">906832</OtherInvestmentsEOYAmt>

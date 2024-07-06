@@ -274,9 +274,9 @@ class Database:
                 "NTEE": ntee,
                 "Subsection Code": subsec_cd,
                 f"{tax_period}.Total Revenue": financial_info[0],
-                f"{tax_period}.Total Expenses": financial_info[1],
                 f"{tax_period}.Total Assets": financial_info[2],
                 f"{tax_period}.Total Liabilities": financial_info[3],
+                f"{tax_period}.Total Expenses": financial_info[1],
                 f"{tax_period}.Net Income (Less Deficit)": financial_info[4],
                 f"{tax_period}.Contributions Received": financial_info[5],
                 f"{tax_period}.Interest Revenue": financial_info[6],
@@ -331,50 +331,91 @@ class Database:
         collection = self.collections[return_type]
         collection.bulk_write(operations)
 
+
     def check_duplicates(self):
         dictionaries = {
             "master": self.master_duplicate_files,
             "ez": self.ez_duplicate_files,
             "private": self.private_duplicate_files
         }
+
+        def compare_and_find_differences(info1, info2, labels):
+            differences = []
+            for i in range(len(info1)):
+                if info1[i] != info2[i]:
+                    differences.append((labels[i],info1[i], info2[i]))
+            return differences
+
         for collection_name, dictionary in dictionaries.items():
             print(f"Checking '{collection_name}' for duplicates")
             for ein, tax_periods in dictionary.items():
                 for tax_period, file_paths in tax_periods.items():
                     if len(file_paths) > 1:
                         extracted_info = []
-                        
                         for file_path in file_paths:
                             root = ET.parse(file_path).getroot()
-                            return_type_element = root.find('.//irs:ReturnTypeCd', self.namespace)
-                            return_type = return_type_element.text if return_type_element is not None else None
-
-                            if return_type not in ["990", "990EZ", "990PF"]:
-                                continue
-
                             name, state, city, zip_code = self.get_general_information(root)
-
-                            if return_type == "990":
+                            if collection_name == "master":
                                 financial_info = self.get_990_financial_information(root)
-                            elif return_type == "990EZ":
+                                labels = [
+                                    "Name", "State", "City", "Zip Code",
+                                    "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
+                                    "Total Contributions", "Program Service Revenue", "Investment Income",
+                                    "Gross Receipts", "Fundraising Income", "Fundraising Expenses",
+                                    "Compensation of current officers", "Other salaries and wages",
+                                    "Payroll Taxes", "Gift Grants Membership Fees received 509",
+                                    "Number of employees"
+                                ]
+                            elif collection_name == "ez":
                                 financial_info = self.get_990EZ_financial_information(root)
+                                labels = [
+                                    "Name", "State", "City", "Zip Code",
+                                    "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
+                                    "Program Service Revenue", "Investment Income",
+                                    "Gift Grants Membership Fees received 509"
+                                ]
                             else:
                                 financial_info = self.get_990PF_financial_information(root)
+                                labels = [
+                                    "Name", "State", "City", "Zip Code",
+                                    "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
+                                    "Net Income (Less Deficit)", "Contributions Received", "Interest Revenue",
+                                    "Dividends", "Net Gain (Sales of Assets)", "Other Income",
+                                    "Compensation of Officers", "Total Fund net worth",
+                                    "Investments in US Gov Obligations", "Investments in Corporate Stock",
+                                    "Investments in Corporate Bonds", "Cash", "Adjusted net income"
+                                ]
 
                             extracted_info.append((file_path, name, state, city, zip_code, financial_info))
-                        # Perform pairwise comparison
-                        for i in range(len(extracted_info)):
-                            for j in range(i + 1, len(extracted_info)):
-                                if extracted_info[i][1:] != extracted_info[j][1:]:
-                                    print(f"Error: Duplicate files with different information found :")
-                                    print(f"- File Path 1: {extracted_info[i][0]}")
-                                    print(extracted_info[i][1:])
-                                    print(f"- File Path 2: {extracted_info[j][0]}")
-                                    print(extracted_info[j][1:])
-                                    break
+
+                        if len(extracted_info) > 1:
+                            base_file_path = extracted_info[0][0]
+                            base_info = extracted_info[0][1:]  # Extract base file information
+                            differences = []
+
+                            for info in extracted_info[1:]:
+                                diff = compare_and_find_differences(base_info, info[1:], labels)
+                                if diff:
+                                    differences.append((info[0], diff))
+                            
+                            if differences:
+                                print(f"===> Error: Duplicate files with different information found. The following is different:")
+                                print(f"- Base File Path: {base_file_path}")
+                                for file_info, diff in differences:
+                                    print(f"- File Path: {file_info}")
+                                    for label, base_val, diff_val in diff:
+                                        if not isinstance(diff_val, tuple) :
+                                            print(f"  - {label}: {diff_val} (base value: {base_val})")
+                                        else: 
+                                            for i in range(len(diff_val)):
+                                                if (diff_val[i] != base_val[i]):
+                                                    print(f"  - {labels[i+4]}: {diff_val[i]} (base value: {base_val[i]})")
+                                break
+
+            print("==" * 50)
 
 if __name__ == "__main__":
-    directory = '/Users/mr.youssef/Desktop/NpDataHub/unitTesting'
+    directory = '/tmp/2018-5'
     obj = Database()
     obj.process_all_xml_files(directory)
     print("Data has been successfully inserted into MongoDB.")

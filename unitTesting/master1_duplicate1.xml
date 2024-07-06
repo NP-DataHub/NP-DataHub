@@ -16,7 +16,7 @@
     </PreparerFirmGrp>
     <ReturnTypeCd>990</ReturnTypeCd>
     <TaxPeriodBeginDt>2019-01-01</TaxPeriodBeginDt>
-    <Filer>
+    <Filer> 
       <EIN>273132560</EIN>
       <BusinessName>
         <BusinessNameLine1Txt>Sacred Hajj NFP</BusinessNameLine1Txt>
@@ -62,7 +62,7 @@
       <ActivityOrMissionDesc>Sacred Hajj is an Illinois registered not-for-profit Hajj Operator committed to providing Muslims with the opportunity to perform the obligation of Hajj with proper guidance, reliable operators and affordability.</ActivityOrMissionDesc>
       <VotingMembersGoverningBodyCnt>3</VotingMembersGoverningBodyCnt>
       <VotingMembersIndependentCnt>3</VotingMembersIndependentCnt>
-      <TotalEmployeeCnt>0</TotalEmployeeCnt>
+      <TotalEmployeeCnt>100</TotalEmployeeCnt>
       <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
       <PYContributionsGrantsAmt>29444</PYContributionsGrantsAmt>
       <CYContributionsGrantsAmt>37976</CYContributionsGrantsAmt>
@@ -239,7 +239,7 @@
         <TotalRevenueColumnAmt>206553</TotalRevenueColumnAmt>
         <RelatedOrExemptFuncIncomeAmt>206553</RelatedOrExemptFuncIncomeAmt>
       </ProgramServiceRevenueGrp>
-      <TotalProgramServiceRevenueAmt>206553</TotalProgramServiceRevenueAmt>
+      <TotalProgramServiceRevenueAmt>2065453</TotalProgramServiceRevenueAmt>
       <InvestmentIncomeGrp>
         <TotalRevenueColumnAmt>0</TotalRevenueColumnAmt>
       </InvestmentIncomeGrp>
