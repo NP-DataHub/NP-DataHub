@@ -13,6 +13,9 @@ class Database:
             "990EZ": self.database["EZ"],
             "990PF": self.database["Private"]
         }
+        self.master_duplicate_files = {}
+        self.private_duplicate_files = {}
+        self.ez_duplicate_files = {}
 
     def get_ein_and_tax_period(self, root):
         ein_element = root.find('.//irs:Filer/irs:EIN', self.namespace)
@@ -89,7 +92,7 @@ class Database:
             int(total_assets_element.text) if total_assets_element is not None else 0,
             int(total_liabilities_element.text) if total_liabilities_element is not None else 0,
             int(total_expenses_element.text) if total_expenses_element is not None else 0,
-            int(total_contributions_element.text) if total_contributions_element is not None else 0,
+            "R" if total_contributions_element is not None and total_contributions_element.text == "RESTRICTED" else (int(total_contributions_element.text) if total_contributions_element is not None else 0),
             int(program_service_revenue_element.text) if program_service_revenue_element is not None else 0,
             int(investment_income_element.text) if investment_income_element is not None else 0,
             int(gross_receipts_element.text) if gross_receipts_element is not None else 0,
@@ -224,8 +227,16 @@ class Database:
                 f"{tax_period}.Payroll Taxes": financial_info[12],
                 f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[13],
                 f"{tax_period}.Number of employee": financial_info[14],
-                f"{tax_period}.Filepath": file_path[36:]
+                f"{tax_period}.Filepath": file_path
             }
+            if ein not in self.master_duplicate_files:
+                self.master_duplicate_files[ein] = {tax_period: [file_path]  }
+            else:
+                if tax_period not in self.master_duplicate_files[ein]:
+                    self.master_duplicate_files[ein][tax_period] = [file_path]
+                else :
+                    self.master_duplicate_files[ein][tax_period].append(file_path)
+
         elif return_type == "990EZ":
             financial_info = self.get_990EZ_financial_information(root)
             update_fields = {
@@ -243,8 +254,15 @@ class Database:
                 f"{tax_period}.Program Service Revenue": financial_info[4],
                 f"{tax_period}.Investment Income": financial_info[5],
                 f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[6],
-                f"{tax_period}.Filepath": file_path[36:]
+                f"{tax_period}.Filepath": file_path
             }
+            if ein not in self.ez_duplicate_files:
+                self.ez_duplicate_files[ein] = {tax_period: [file_path]  }
+            else:
+                if tax_period not in self.ez_duplicate_files[ein]:
+                    self.ez_duplicate_files[ein][tax_period] = [file_path]
+                else :
+                    self.ez_duplicate_files[ein][tax_period].append(file_path)
         else:
             financial_info = self.get_990PF_financial_information(root)
             update_fields = {
@@ -272,8 +290,15 @@ class Database:
                 f"{tax_period}.Investments in Corporate Bonds": financial_info[14],
                 f"{tax_period}.Cash": financial_info[15],
                 f"{tax_period}.Adjusted net income": financial_info[16],
-                f"{tax_period}.Filepath": file_path[36:]
+                f"{tax_period}.Filepath": file_path
             }
+            if ein not in self.private_duplicate_files:
+                self.private_duplicate_files[ein] = {tax_period: [file_path]  }
+            else:
+                if tax_period not in self.private_duplicate_files[ein]:
+                    self.private_duplicate_files[ein][tax_period] = [file_path]
+                else :
+                    self.private_duplicate_files[ein][tax_period].append(file_path)
 
         insertion = UpdateOne(
             {"EIN": ein},
@@ -306,9 +331,51 @@ class Database:
         collection = self.collections[return_type]
         collection.bulk_write(operations)
 
+    def check_duplicates(self):
+        dictionaries = {
+            "master": self.master_duplicate_files,
+            "ez": self.ez_duplicate_files,
+            "private": self.private_duplicate_files
+        }
+        for collection_name, dictionary in dictionaries.items():
+            print(f"Checking '{collection_name}' for duplicates")
+            for ein, tax_periods in dictionary.items():
+                for tax_period, file_paths in tax_periods.items():
+                    if len(file_paths) > 1:
+                        extracted_info = []
+                        
+                        for file_path in file_paths:
+                            root = ET.parse(file_path).getroot()
+                            return_type_element = root.find('.//irs:ReturnTypeCd', self.namespace)
+                            return_type = return_type_element.text if return_type_element is not None else None
+
+                            if return_type not in ["990", "990EZ", "990PF"]:
+                                continue
+
+                            name, state, city, zip_code = self.get_general_information(root)
+
+                            if return_type == "990":
+                                financial_info = self.get_990_financial_information(root)
+                            elif return_type == "990EZ":
+                                financial_info = self.get_990EZ_financial_information(root)
+                            else:
+                                financial_info = self.get_990PF_financial_information(root)
+
+                            extracted_info.append((file_path, name, state, city, zip_code, financial_info))
+                        # Perform pairwise comparison
+                        for i in range(len(extracted_info)):
+                            for j in range(i + 1, len(extracted_info)):
+                                if extracted_info[i][1:] != extracted_info[j][1:]:
+                                    print(f"Error: Duplicate files with different information found :")
+                                    print(f"- File Path 1: {extracted_info[i][0]}")
+                                    print(extracted_info[i][1:])
+                                    print(f"- File Path 2: {extracted_info[j][0]}")
+                                    print(extracted_info[j][1:])
+                                    break
+
 if __name__ == "__main__":
-    #Change index for Filepath everytime before running script
-    directory = '/Users/mr.youssef/Desktop/NpDatahub/unitTesting'
+    directory = '/Users/mr.youssef/Desktop/NpDataHub/unitTesting'
     obj = Database()
     obj.process_all_xml_files(directory)
     print("Data has been successfully inserted into MongoDB.")
+    obj.check_duplicates()
