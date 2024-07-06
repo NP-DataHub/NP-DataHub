@@ -3,7 +3,6 @@ import os
 from pymongo import MongoClient
 from concurrent.futures import ThreadPoolExecutor
 
-# Define the MongoDB connection and collections
 mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
 database = mongo_client["Np-Datahub"]
 collections = {
@@ -12,7 +11,6 @@ collections = {
     "990PF": database["Private"]
 }
 
-# Function to update the document in the appropriate collection
 def update_document(ein, subsection, ntee_cd):
     for collection_name, collection in collections.items():
         result = collection.find_one({"ein": ein})
@@ -23,7 +21,6 @@ def update_document(ein, subsection, ntee_cd):
             )
             return
 
-# Function to process a row from the CSV file
 def process_row(row):
     ein = row['EIN']
     ntee_cd = row['NTEE_CD']
