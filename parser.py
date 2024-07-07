@@ -3,10 +3,11 @@ import requests
 from lxml import etree as ET
 from pymongo import MongoClient, UpdateOne
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
-        self.mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
+        self.mongo_client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
         self.database = self.mongo_client["Np-Datahub"]
         self.collections = {
             "990": self.database["Master"],
@@ -16,7 +17,7 @@ class Database:
         self.master_duplicate_files = {}
         self.private_duplicate_files = {}
         self.ez_duplicate_files = {}
-
+        self.output = []
     def get_ein_and_tax_period(self, root):
         ein_element = root.find('.//irs:Filer/irs:EIN', self.namespace)
         ein = ein_element.text if ein_element is not None else "None"
@@ -42,7 +43,7 @@ class Database:
             city = city_element.text if city_element is not None else "None"
             zip_code_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:ForeignPostalCd', self.namespace)
             zip_code = zip_code_element.text if zip_code_element is not None else "None"
-        return name, state, city, zip_code
+        return [name, state, city, zip_code]
 
     def get_990_financial_information(self, root):
         total_revenue_element = root.find('.//irs:CYTotalRevenueAmt', self.namespace)
@@ -87,7 +88,7 @@ class Database:
         
         number_of_employee_element = root.find('.//irs:TotalEmployeeCnt', self.namespace)
         
-        return (
+        return [
             int(total_revenue_element.text) if total_revenue_element is not None else 0,
             int(total_assets_element.text) if total_assets_element is not None else 0,
             int(total_liabilities_element.text) if total_liabilities_element is not None else 0,
@@ -103,7 +104,7 @@ class Database:
             int(payroll_taxes_element.text) if payroll_taxes_element is not None else 0,
             int(gifts_grants_membership_fees_received_509_element.text) if gifts_grants_membership_fees_received_509_element is not None else 0,
             int(number_of_employee_element.text) if number_of_employee_element is not None else 0
-        )
+        ]
 
     def get_990EZ_financial_information(self, root):
         total_revenue_element = root.find('.//irs:TotalRevenueAmt', self.namespace)
@@ -120,7 +121,7 @@ class Database:
         
         gifts_grants_membership_fees_received_509_element = root.find('.//irs:GiftsGrantsContrisRcvd509Grp/irs:TotalAmt', self.namespace)
         
-        return (
+        return [
             int(total_revenue_element.text) if total_revenue_element is not None else 0,
             int(total_assets_element.text) if total_assets_element is not None else 0,
             int(total_liabilities_element.text) if total_liabilities_element is not None else 0,
@@ -128,7 +129,7 @@ class Database:
             int(program_service_revenue_element.text) if program_service_revenue_element is not None else 0,
             int(investment_income_element.text) if investment_income_element is not None else 0,
             int(gifts_grants_membership_fees_received_509_element.text) if gifts_grants_membership_fees_received_509_element is not None else 0
-        )
+        ]
 
     def get_990PF_financial_information(self, root):
         total_revenue_element = root.find('.//irs:TotalRevAndExpnssAmt', self.namespace)
@@ -167,7 +168,7 @@ class Database:
         
         adjusted_net_income_element = root.find('.//irs:TotalAdjNetIncmAmt', self.namespace)
         
-        return (
+        return [
             int(total_revenue_element.text) if total_revenue_element is not None else 0,
             int(total_expenses_element.text) if total_expenses_element is not None else 0,
             int(total_assets_element.text) if total_assets_element is not None else 0,
@@ -185,13 +186,51 @@ class Database:
             int(investments_in_corporate_bonds_element.text) if investments_in_corporate_bonds_element is not None else 0,
             int(cash_non_interest_bearing_element.text) if cash_non_interest_bearing_element is not None else 0,
             int(adjusted_net_income_element.text) if adjusted_net_income_element is not None else 0
-        )
+        ]
+    def compare_and_find_differences(self,prev_info, curr_info, prev_file, curr_file, return_type ):
+        differences = []
+        labels = []
+        if return_type == "990":
+            labels = [
+                "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
+                "Total Contributions", "Program Service Revenue", "Investment Income",
+                "Gross Receipts", "Fundraising Income", "Fundraising Expenses",
+                "Compensation of current officers", "Other salaries and wages",
+                "Payroll Taxes", "Gift Grants Membership Fees received 509",
+                "Number of employees","Name", "State", "City", "Zip Code"
+            ]
+        elif return_type == "990EZ":
+            labels = [
+                "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
+                "Program Service Revenue", "Investment Income",
+                "Gift Grants Membership Fees received 509", "Name", "State", "City", 
+                "Zip Code"
+            ]
+        else:
+            labels = [
+                "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
+                "Net Income (Less Deficit)", "Contributions Received", "Interest Revenue",
+                "Dividends", "Net Gain (Sales of Assets)", "Other Income",
+                "Compensation of Officers", "Total Fund net worth",
+                "Investments in US Gov Obligations", "Investments in Corporate Stock",
+                "Investments in Corporate Bonds", "Cash", "Adjusted net income", "Name", 
+                "State", "City", "Zip Code"
+            ]
+        lst = [prev_file[0],prev_file[1],curr_file[0],curr_file[1]]
+        for i in range(len(prev_info)):
+            if prev_info[i] != curr_info[i]:
+                lst.append(labels[i])
+                lst.append(prev_info[i])
+                lst.append(curr_info[i])
+        self.output.append(lst)
+        return
 
     def build_database(self, file_path):
+
         root = ET.parse(file_path).getroot()
         return_type_element = root.find('.//irs:ReturnTypeCd', self.namespace)
         return_type = return_type_element.text if return_type_element is not None else None
-
+        
         if return_type not in ["990", "990EZ", "990PF"]:
             return None, None
 
@@ -199,106 +238,392 @@ class Database:
         if not ein or not tax_period:
             return None, None
 
-        name, state, city, zip_code = self.get_general_information(root)
+        timestamp_element = root.find('.//irs:ReturnTs', self.namespace)
+        current_timestamp = timestamp_element.text if timestamp_element is not None else "None"
         ntee, subsec_cd = 'None', '0'
+        update_fields = None
 
         if return_type == "990":
-            financial_info = self.get_990_financial_information(root)
-            update_fields = {
-                "Name": name,
-                "City": city,
-                "State": state,
-                "Zipcode": zip_code,
-                "EIN": ein,
-                "NTEE": ntee,
-                "Subsection Code": subsec_cd,
-                f"{tax_period}.Total Revenue": financial_info[0],
-                f"{tax_period}.Total Assets": financial_info[1],
-                f"{tax_period}.Total Liabilities": financial_info[2],
-                f"{tax_period}.Total Expenses": financial_info[3],
-                f"{tax_period}.Total Contributions": financial_info[4],
-                f"{tax_period}.Program Service Revenue": financial_info[5],
-                f"{tax_period}.Investment Income": financial_info[6],
-                f"{tax_period}.Gross Receipts": financial_info[7],
-                f"{tax_period}.Fundraising Income": financial_info[8],
-                f"{tax_period}.Fundraising Expenses": financial_info[9],
-                f"{tax_period}.Compensation of current officers": financial_info[10],
-                f"{tax_period}.Other salaries and wages": financial_info[11],
-                f"{tax_period}.Payroll Taxes": financial_info[12],
-                f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[13],
-                f"{tax_period}.Number of employee": financial_info[14],
-                f"{tax_period}.Filepath": file_path
-            }
             if ein not in self.master_duplicate_files:
-                self.master_duplicate_files[ein] = {tax_period: [file_path]  }
+                self.master_duplicate_files[ein] = {tax_period: (file_path,current_timestamp) }
+                financial_info = self.get_990_financial_information(root)
+                general_info = self.get_general_information(root)
+                update_fields = {
+                    "Name": general_info[0],
+                    "City": general_info[1],
+                    "State": general_info[2],
+                    "Zipcode": general_info[3],
+                    "EIN": ein,
+                    "NTEE": ntee,
+                    "Subsection Code": subsec_cd,
+                    f"{tax_period}.Total Revenue": financial_info[0],
+                    f"{tax_period}.Total Assets": financial_info[1],
+                    f"{tax_period}.Total Liabilities": financial_info[2],
+                    f"{tax_period}.Total Expenses": financial_info[3],
+                    f"{tax_period}.Total Contributions": financial_info[4],
+                    f"{tax_period}.Program Service Revenue": financial_info[5],
+                    f"{tax_period}.Investment Income": financial_info[6],
+                    f"{tax_period}.Gross Receipts": financial_info[7],
+                    f"{tax_period}.Fundraising Income": financial_info[8],
+                    f"{tax_period}.Fundraising Expenses": financial_info[9],
+                    f"{tax_period}.Compensation of current officers": financial_info[10],
+                    f"{tax_period}.Other salaries and wages": financial_info[11],
+                    f"{tax_period}.Payroll Taxes": financial_info[12],
+                    f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[13],
+                    f"{tax_period}.Number of employee": financial_info[14],
+                    f"{tax_period}.Filepath": file_path
+                }
             else:
                 if tax_period not in self.master_duplicate_files[ein]:
-                    self.master_duplicate_files[ein][tax_period] = [file_path]
+                    self.master_duplicate_files[ein][tax_period]= file_path,current_timestamp
+                    financial_info = self.get_990_financial_information(root)
+                    update_fields = {
+                        f"{tax_period}.Total Revenue": financial_info[0],
+                        f"{tax_period}.Total Assets": financial_info[1],
+                        f"{tax_period}.Total Liabilities": financial_info[2],
+                        f"{tax_period}.Total Expenses": financial_info[3],
+                        f"{tax_period}.Total Contributions": financial_info[4],
+                        f"{tax_period}.Program Service Revenue": financial_info[5],
+                        f"{tax_period}.Investment Income": financial_info[6],
+                        f"{tax_period}.Gross Receipts": financial_info[7],
+                        f"{tax_period}.Fundraising Income": financial_info[8],
+                        f"{tax_period}.Fundraising Expenses": financial_info[9],
+                        f"{tax_period}.Compensation of current officers": financial_info[10],
+                        f"{tax_period}.Other salaries and wages": financial_info[11],
+                        f"{tax_period}.Payroll Taxes": financial_info[12],
+                        f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[13],
+                        f"{tax_period}.Number of employee": financial_info[14],
+                        f"{tax_period}.Filepath": file_path
+                    }
                 else :
-                    self.master_duplicate_files[ein][tax_period].append(file_path)
+                    previous_timestamp = self.master_duplicate_files[ein][tax_period][1]
+                    if current_timestamp != "None" and previous_timestamp != "None":
+                        try:
+                            previous_dt = datetime.fromisoformat(previous_timestamp)
+                        except ValueError:
+                            previous_dt = None
+                        try:
+                            current_dt = datetime.fromisoformat(current_timestamp)
+                        except ValueError:
+                            current_dt = None
+                        if current_dt != None and previous_dt != None:
+                            if current_dt > previous_dt:
+                                self.master_duplicate_files[ein][tax_period][1] = current_timestamp
+                                financial_info = self.get_990_financial_information(root)
+                                general_info = self.get_general_information(root)
+                                update_fields = {
+                                    "Name": general_info[0],
+                                    "City": general_info[1],
+                                    "State": general_info[2],
+                                    "Zipcode": general_info[3],
+                                    "EIN": ein,
+                                    "NTEE": ntee,
+                                    "Subsection Code": subsec_cd,
+                                    f"{tax_period}.Total Revenue": financial_info[0],
+                                    f"{tax_period}.Total Assets": financial_info[1],
+                                    f"{tax_period}.Total Liabilities": financial_info[2],
+                                    f"{tax_period}.Total Expenses": financial_info[3],
+                                    f"{tax_period}.Total Contributions": financial_info[4],
+                                    f"{tax_period}.Program Service Revenue": financial_info[5],
+                                    f"{tax_period}.Investment Income": financial_info[6],
+                                    f"{tax_period}.Gross Receipts": financial_info[7],
+                                    f"{tax_period}.Fundraising Income": financial_info[8],
+                                    f"{tax_period}.Fundraising Expenses": financial_info[9],
+                                    f"{tax_period}.Compensation of current officers": financial_info[10],
+                                    f"{tax_period}.Other salaries and wages": financial_info[11],
+                                    f"{tax_period}.Payroll Taxes": financial_info[12],
+                                    f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[13],
+                                    f"{tax_period}.Number of employee": financial_info[14],
+                                    f"{tax_period}.Filepath": file_path
+                                }
+                            # if current_dt < previous_dt, do nothing and keep previous one
+                            elif current_dt == previous_dt:
+                                prev_filepath = self.master_duplicate_files[ein][tax_period][0]
+                                prev_root = ET.parse(prev_filepath).getroot()
+                                prev_general_info = self.get_general_information(prev_root)
+                                prev_financial_info = self.get_990_financial_information(prev_root)
+                                prev_financial_info.extend(prev_general_info)                                
+                                current_general_info = self.get_general_information(root)
+                                current_financial_info = self.get_990_financial_information(root)
+                                current_financial_info.extend(current_general_info)
+                                prev_file = prev_filepath,previous_dt
+                                new_file = file_path,current_dt
+                                self.compare_and_find_differences(prev_financial_info,current_financial_info,prev_file,new_file,return_type)
+
+                        elif current_dt == None or previous_dt == None:
+                            prev_filepath = self.master_duplicate_files[ein][tax_period][0]
+                            prev_root = ET.parse(prev_filepath).getroot()
+                            prev_general_info = self.get_general_information(prev_root)
+                            prev_financial_info = self.get_990_financial_information(prev_root)
+                            prev_financial_info.extend(prev_general_info)                                
+                            current_general_info = self.get_general_information(root)
+                            current_financial_info = self.get_990_financial_information(root)
+                            current_financial_info.extend(current_general_info)
+                            prev_file = prev_filepath,previous_dt
+                            new_file = file_path,current_dt
+                            self.compare_and_find_differences(prev_financial_info,current_financial_info,prev_file,new_file,return_type)
+                    elif current_timestamp == "None" or previous_timestamp == "None":
+                        prev_filepath = self.master_duplicate_files[ein][tax_period][0]
+                        prev_root = ET.parse(prev_filepath).getroot()
+                        prev_general_info = self.get_general_information(prev_root)
+                        prev_financial_info = self.get_990_financial_information(prev_root)
+                        prev_financial_info.extend(prev_general_info)                                
+                        current_general_info = self.get_general_information(root)
+                        current_financial_info = self.get_990_financial_information(root)
+                        current_financial_info.extend(current_general_info)
+                        prev_file = prev_filepath,previous_dt
+                        new_file = file_path,current_dt
+                        self.compare_and_find_differences(prev_financial_info,current_financial_info,prev_file,new_file,return_type)
+
 
         elif return_type == "990EZ":
-            financial_info = self.get_990EZ_financial_information(root)
-            update_fields = {
-                "Name": name,
-                "City": city,
-                "State": state,
-                "Zipcode": zip_code,
-                "EIN": ein,
-                "NTEE": ntee,
-                "Subsection Code": subsec_cd,
-                f"{tax_period}.Total Revenue": financial_info[0],
-                f"{tax_period}.Total Assets": financial_info[1],
-                f"{tax_period}.Total Liabilities": financial_info[2],
-                f"{tax_period}.Total Expenses": financial_info[3],
-                f"{tax_period}.Program Service Revenue": financial_info[4],
-                f"{tax_period}.Investment Income": financial_info[5],
-                f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[6],
-                f"{tax_period}.Filepath": file_path
-            }
             if ein not in self.ez_duplicate_files:
-                self.ez_duplicate_files[ein] = {tax_period: [file_path]  }
+                self.ez_duplicate_files[ein] = {tax_period: (file_path,current_timestamp) }
+                financial_info = self.get_990EZ_financial_information(root)
+                general_info = self.get_general_information(root)
+                update_fields = {
+                    "Name": general_info[0],
+                    "City": general_info[1],
+                    "State": general_info[2],
+                    "Zipcode": general_info[3],
+                    "EIN": ein,
+                    "NTEE": ntee,
+                    "Subsection Code": subsec_cd,
+                    f"{tax_period}.Total Revenue": financial_info[0],
+                    f"{tax_period}.Total Assets": financial_info[1],
+                    f"{tax_period}.Total Liabilities": financial_info[2],
+                    f"{tax_period}.Total Expenses": financial_info[3],
+                    f"{tax_period}.Program Service Revenue": financial_info[4],
+                    f"{tax_period}.Investment Income": financial_info[5],
+                    f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[6],
+                    f"{tax_period}.Filepath": file_path
+                }
             else:
                 if tax_period not in self.ez_duplicate_files[ein]:
-                    self.ez_duplicate_files[ein][tax_period] = [file_path]
+                    self.ez_duplicate_files[ein][tax_period] = file_path,current_timestamp
+                    financial_info = self.get_990EZ_financial_information(root)
+                    update_fields = {
+                        f"{tax_period}.Total Revenue": financial_info[0],
+                        f"{tax_period}.Total Assets": financial_info[1],
+                        f"{tax_period}.Total Liabilities": financial_info[2],
+                        f"{tax_period}.Total Expenses": financial_info[3],
+                        f"{tax_period}.Program Service Revenue": financial_info[4],
+                        f"{tax_period}.Investment Income": financial_info[5],
+                        f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[6],
+                        f"{tax_period}.Filepath": file_path
+                    }
                 else :
-                    self.ez_duplicate_files[ein][tax_period].append(file_path)
+                    previous_timestamp = self.ez_duplicate_files[ein][tax_period][1]
+                    if current_timestamp != "None" and previous_timestamp != "None":
+                        try:
+                            previous_dt = datetime.fromisoformat(previous_timestamp)
+                        except ValueError:
+                            previous_dt = None
+                        try:
+                            current_dt = datetime.fromisoformat(current_timestamp)
+                        except ValueError:
+                            current_dt = None
+                        if current_dt != None and previous_dt != None:
+                            if current_dt > previous_dt:
+                                self.ez_duplicate_files[ein][tax_period][1] = current_timestamp
+                                financial_info = self.get_990EZ_financial_information(root)
+                                general_info = self.get_general_information(root)
+                                update_fields = {
+                                    "Name": general_info[0],
+                                    "City": general_info[1],
+                                    "State": general_info[2],
+                                    "Zipcode": general_info[3],
+                                    "EIN": ein,
+                                    "NTEE": ntee,
+                                    "Subsection Code": subsec_cd,
+                                    f"{tax_period}.Total Revenue": financial_info[0],
+                                    f"{tax_period}.Total Assets": financial_info[1],
+                                    f"{tax_period}.Total Liabilities": financial_info[2],
+                                    f"{tax_period}.Total Expenses": financial_info[3],
+                                    f"{tax_period}.Program Service Revenue": financial_info[4],
+                                    f"{tax_period}.Investment Income": financial_info[5],
+                                    f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[6],
+                                    f"{tax_period}.Filepath": file_path
+                                }
+                            # if current_dt < previous_dt, do nothing and keep previous one
+                            elif current_dt == previous_dt:
+                                prev_filepath = self.ez_duplicate_files[ein][tax_period][0]
+                                prev_root = ET.parse(prev_filepath).getroot()
+                                prev_general_info = self.get_general_information(prev_root)
+                                prev_financial_info = self.get_990EZ_financial_information(prev_root)
+                                prev_financial_info.extend(prev_general_info)                                
+                                current_general_info = self.get_general_information(root)
+                                current_financial_info = self.get_990EZ_financial_information(root)
+                                current_financial_info.extend(current_general_info)
+                                prev_file = prev_filepath,previous_dt
+                                new_file = file_path,current_dt
+                                self.compare_and_find_differences(prev_financial_info,current_financial_info,prev_file,new_file,return_type)
+
+                        elif current_dt == None or previous_dt == None:
+                            prev_filepath = self.ez_duplicate_files[ein][tax_period][0]
+                            prev_root = ET.parse(prev_filepath).getroot()
+                            prev_general_info = self.get_general_information(prev_root)
+                            prev_financial_info = self.get_990EZ_financial_information(prev_root)
+                            prev_financial_info.extend(prev_general_info)                                
+                            current_general_info = self.get_general_information(root)
+                            current_financial_info = self.get_990EZ_financial_information(root)
+                            current_financial_info.extend(current_general_info)
+                            prev_file = prev_filepath,previous_dt
+                            new_file = file_path,current_dt
+                            self.compare_and_find_differences(prev_financial_info,current_financial_info,prev_file,new_file,return_type)
+                    elif current_timestamp == "None" or previous_timestamp == "None":
+                        prev_filepath = self.ez_duplicate_files[ein][tax_period][0]
+                        prev_root = ET.parse(prev_filepath).getroot()
+                        prev_general_info = self.get_general_information(prev_root)
+                        prev_financial_info = self.get_990EZ_financial_information(prev_root)
+                        prev_financial_info.extend(prev_general_info)                                
+                        current_general_info = self.get_general_information(root)
+                        current_financial_info = self.get_990EZ_financial_information(root)
+                        current_financial_info.extend(current_general_info)
+                        prev_file = prev_filepath,previous_dt
+                        new_file = file_path,current_dt
+                        self.compare_and_find_differences(prev_financial_info,current_financial_info,prev_file,new_file,return_type)
+        
         else:
-            financial_info = self.get_990PF_financial_information(root)
-            update_fields = {
-                "Name": name,
-                "City": city,
-                "State": state,
-                "Zipcode": zip_code,
-                "EIN": ein,
-                "NTEE": ntee,
-                "Subsection Code": subsec_cd,
-                f"{tax_period}.Total Revenue": financial_info[0],
-                f"{tax_period}.Total Assets": financial_info[2],
-                f"{tax_period}.Total Liabilities": financial_info[3],
-                f"{tax_period}.Total Expenses": financial_info[1],
-                f"{tax_period}.Net Income (Less Deficit)": financial_info[4],
-                f"{tax_period}.Contributions Received": financial_info[5],
-                f"{tax_period}.Interest Revenue": financial_info[6],
-                f"{tax_period}.Dividends": financial_info[7],
-                f"{tax_period}.Net Gain (Sales of Assets)": financial_info[8],
-                f"{tax_period}.Other Income": financial_info[9],
-                f"{tax_period}.Compensation of Officers": financial_info[10],
-                f"{tax_period}.Total Fund net worth": financial_info[11],
-                f"{tax_period}.Investments in US Gov Obligations": financial_info[12],
-                f"{tax_period}.Investments in Corporate Stock": financial_info[13],
-                f"{tax_period}.Investments in Corporate Bonds": financial_info[14],
-                f"{tax_period}.Cash": financial_info[15],
-                f"{tax_period}.Adjusted net income": financial_info[16],
-                f"{tax_period}.Filepath": file_path
-            }
             if ein not in self.private_duplicate_files:
-                self.private_duplicate_files[ein] = {tax_period: [file_path]  }
+                self.private_duplicate_files[ein] = {tax_period: (file_path,current_timestamp) }
+                financial_info = self.get_990PF_financial_information(root)
+                general_info = self.get_general_information(root)
+                update_fields = {
+                    "Name": general_info[0],
+                    "City": general_info[1],
+                    "State": general_info[2],
+                    "Zipcode": general_info[3],
+                    "EIN": ein,
+                    "NTEE": ntee,
+                    "Subsection Code": subsec_cd,
+                    f"{tax_period}.Total Revenue": financial_info[0],
+                    f"{tax_period}.Total Assets": financial_info[2],
+                    f"{tax_period}.Total Liabilities": financial_info[3],
+                    f"{tax_period}.Total Expenses": financial_info[1],
+                    f"{tax_period}.Net Income (Less Deficit)": financial_info[4],
+                    f"{tax_period}.Contributions Received": financial_info[5],
+                    f"{tax_period}.Interest Revenue": financial_info[6],
+                    f"{tax_period}.Dividends": financial_info[7],
+                    f"{tax_period}.Net Gain (Sales of Assets)": financial_info[8],
+                    f"{tax_period}.Other Income": financial_info[9],
+                    f"{tax_period}.Compensation of Officers": financial_info[10],
+                    f"{tax_period}.Total Fund net worth": financial_info[11],
+                    f"{tax_period}.Investments in US Gov Obligations": financial_info[12],
+                    f"{tax_period}.Investments in Corporate Stock": financial_info[13],
+                    f"{tax_period}.Investments in Corporate Bonds": financial_info[14],
+                    f"{tax_period}.Cash": financial_info[15],
+                    f"{tax_period}.Adjusted net income": financial_info[16],
+                    f"{tax_period}.Filepath": file_path
+                }
             else:
                 if tax_period not in self.private_duplicate_files[ein]:
-                    self.private_duplicate_files[ein][tax_period] = [file_path]
+                    self.private_duplicate_files[ein][tax_period] = file_path,current_timestamp
+                    financial_info = self.get_990PF_financial_information(root)
+                    update_fields = {
+                        f"{tax_period}.Total Revenue": financial_info[0],
+                        f"{tax_period}.Total Assets": financial_info[2],
+                        f"{tax_period}.Total Liabilities": financial_info[3],
+                        f"{tax_period}.Total Expenses": financial_info[1],
+                        f"{tax_period}.Net Income (Less Deficit)": financial_info[4],
+                        f"{tax_period}.Contributions Received": financial_info[5],
+                        f"{tax_period}.Interest Revenue": financial_info[6],
+                        f"{tax_period}.Dividends": financial_info[7],
+                        f"{tax_period}.Net Gain (Sales of Assets)": financial_info[8],
+                        f"{tax_period}.Other Income": financial_info[9],
+                        f"{tax_period}.Compensation of Officers": financial_info[10],
+                        f"{tax_period}.Total Fund net worth": financial_info[11],
+                        f"{tax_period}.Investments in US Gov Obligations": financial_info[12],
+                        f"{tax_period}.Investments in Corporate Stock": financial_info[13],
+                        f"{tax_period}.Investments in Corporate Bonds": financial_info[14],
+                        f"{tax_period}.Cash": financial_info[15],
+                        f"{tax_period}.Adjusted net income": financial_info[16],
+                        f"{tax_period}.Filepath": file_path
+                    }
                 else :
-                    self.private_duplicate_files[ein][tax_period].append(file_path)
+                    previous_timestamp = self.private_duplicate_files[ein][tax_period][1]
+                    if current_timestamp != "None" and previous_timestamp != "None":
+                        try:
+                            previous_dt = datetime.fromisoformat(previous_timestamp)
+                        except ValueError:
+                            previous_dt = None
+                        try:
+                            current_dt = datetime.fromisoformat(current_timestamp)
+                        except ValueError:
+                            current_dt = None
+                        if current_dt != None and previous_dt != None:
+                            if current_dt > previous_dt:
+                                self.private_duplicate_files[ein][tax_period][1] = current_timestamp
+                                financial_info = self.get_990PF_financial_information(root)
+                                general_info = self.get_general_information(root)
+                                update_fields = {
+                                    "Name": general_info[0],
+                                    "City": general_info[1],
+                                    "State": general_info[2],
+                                    "Zipcode": general_info[3],
+                                    "EIN": ein,
+                                    "NTEE": ntee,
+                                    "Subsection Code": subsec_cd,
+                                    f"{tax_period}.Total Revenue": financial_info[0],
+                                    f"{tax_period}.Total Assets": financial_info[2],
+                                    f"{tax_period}.Total Liabilities": financial_info[3],
+                                    f"{tax_period}.Total Expenses": financial_info[1],
+                                    f"{tax_period}.Net Income (Less Deficit)": financial_info[4],
+                                    f"{tax_period}.Contributions Received": financial_info[5],
+                                    f"{tax_period}.Interest Revenue": financial_info[6],
+                                    f"{tax_period}.Dividends": financial_info[7],
+                                    f"{tax_period}.Net Gain (Sales of Assets)": financial_info[8],
+                                    f"{tax_period}.Other Income": financial_info[9],
+                                    f"{tax_period}.Compensation of Officers": financial_info[10],
+                                    f"{tax_period}.Total Fund net worth": financial_info[11],
+                                    f"{tax_period}.Investments in US Gov Obligations": financial_info[12],
+                                    f"{tax_period}.Investments in Corporate Stock": financial_info[13],
+                                    f"{tax_period}.Investments in Corporate Bonds": financial_info[14],
+                                    f"{tax_period}.Cash": financial_info[15],
+                                    f"{tax_period}.Adjusted net income": financial_info[16],
+                                    f"{tax_period}.Filepath": file_path
+                                }
+                            # if current_dt < previous_dt, do nothing and keep previous one
+                            elif current_dt == previous_dt:
+                                prev_filepath = self.private_duplicate_files[ein][tax_period][0]
+                                prev_root = ET.parse(prev_filepath).getroot()
+                                prev_general_info = self.get_general_information(prev_root)
+                                prev_financial_info = self.get_990PF_financial_information(prev_root)
+                                prev_financial_info.extend(prev_general_info)                                
+                                current_general_info = self.get_general_information(root)
+                                current_financial_info = self.get_990PF_financial_information(root)
+                                current_financial_info.extend(current_general_info)
+                                prev_file = prev_filepath,previous_dt
+                                new_file = file_path,current_dt
+                                self.compare_and_find_differences(prev_financial_info,current_financial_info,prev_file,new_file,return_type)
+
+                        elif current_dt == None or previous_dt == None:
+                            prev_filepath = self.private_duplicate_files[ein][tax_period][0]
+                            prev_root = ET.parse(prev_filepath).getroot()
+                            prev_general_info = self.get_general_information(prev_root)
+                            prev_financial_info = self.get_990PF_financial_information(prev_root)
+                            prev_financial_info.extend(prev_general_info)                                
+                            current_general_info = self.get_general_information(root)
+                            current_financial_info = self.get_990PF_financial_information(root)
+                            current_financial_info.extend(current_general_info)
+                            prev_file = prev_filepath,previous_dt
+                            new_file = file_path,current_dt
+                            self.compare_and_find_differences(prev_financial_info,current_financial_info,prev_file,new_file,return_type)
+                    elif current_timestamp == "None" or previous_timestamp == "None":
+                        prev_filepath = self.private_duplicate_files[ein][tax_period][0]
+                        prev_root = ET.parse(prev_filepath).getroot()
+                        prev_general_info = self.get_general_information(prev_root)
+                        prev_financial_info = self.get_990PF_financial_information(prev_root)
+                        prev_financial_info.extend(prev_general_info)                                
+                        current_general_info = self.get_general_information(root)
+                        current_financial_info = self.get_990PF_financial_information(root)
+                        current_financial_info.extend(current_general_info)
+                        prev_file = prev_filepath,previous_dt
+                        new_file = file_path,current_dt
+                        self.compare_and_find_differences(prev_financial_info,current_financial_info,prev_file,new_file,return_type)
+
+        if update_fields is None:
+            return None,None
 
         insertion = UpdateOne(
             {"EIN": ein},
@@ -316,8 +641,7 @@ class Database:
                 if filename.endswith('.xml'):
                     file_path = os.path.join(directory, filename)
                     future = executor.submit(self.build_database, file_path)
-                    futures.append(future)
-
+                    futures.append(future) 
             for future in as_completed(futures):
                 return_type, insertion = future.result()
                 if insertion:
@@ -330,93 +654,29 @@ class Database:
     def bulk_write_to_mongo(self, operations, return_type):
         collection = self.collections[return_type]
         collection.bulk_write(operations)
+    def output_duplicates(self):
+        for lst in self.output:
+            prev_filepath = lst[0]
+            prev_timestamp = lst[1]
+            curr_filepath = lst[2]
+            curr_timestamp = lst[3]
 
-
-    def check_duplicates(self):
-        dictionaries = {
-            "master": self.master_duplicate_files,
-            "ez": self.ez_duplicate_files,
-            "private": self.private_duplicate_files
-        }
-
-        def compare_and_find_differences(info1, info2, labels):
-            differences = []
-            for i in range(len(info1)):
-                if info1[i] != info2[i]:
-                    differences.append((labels[i],info1[i], info2[i]))
-            return differences
-
-        for collection_name, dictionary in dictionaries.items():
-            print(f"Checking '{collection_name}' for duplicates")
-            for ein, tax_periods in dictionary.items():
-                for tax_period, file_paths in tax_periods.items():
-                    if len(file_paths) > 1:
-                        extracted_info = []
-                        for file_path in file_paths:
-                            root = ET.parse(file_path).getroot()
-                            name, state, city, zip_code = self.get_general_information(root)
-                            if collection_name == "master":
-                                financial_info = self.get_990_financial_information(root)
-                                labels = [
-                                    "Name", "State", "City", "Zip Code",
-                                    "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
-                                    "Total Contributions", "Program Service Revenue", "Investment Income",
-                                    "Gross Receipts", "Fundraising Income", "Fundraising Expenses",
-                                    "Compensation of current officers", "Other salaries and wages",
-                                    "Payroll Taxes", "Gift Grants Membership Fees received 509",
-                                    "Number of employees"
-                                ]
-                            elif collection_name == "ez":
-                                financial_info = self.get_990EZ_financial_information(root)
-                                labels = [
-                                    "Name", "State", "City", "Zip Code",
-                                    "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
-                                    "Program Service Revenue", "Investment Income",
-                                    "Gift Grants Membership Fees received 509"
-                                ]
-                            else:
-                                financial_info = self.get_990PF_financial_information(root)
-                                labels = [
-                                    "Name", "State", "City", "Zip Code",
-                                    "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
-                                    "Net Income (Less Deficit)", "Contributions Received", "Interest Revenue",
-                                    "Dividends", "Net Gain (Sales of Assets)", "Other Income",
-                                    "Compensation of Officers", "Total Fund net worth",
-                                    "Investments in US Gov Obligations", "Investments in Corporate Stock",
-                                    "Investments in Corporate Bonds", "Cash", "Adjusted net income"
-                                ]
-
-                            extracted_info.append((file_path, name, state, city, zip_code, financial_info))
-
-                        if len(extracted_info) > 1:
-                            base_file_path = extracted_info[0][0]
-                            base_info = extracted_info[0][1:]  # Extract base file information
-                            differences = []
-
-                            for info in extracted_info[1:]:
-                                diff = compare_and_find_differences(base_info, info[1:], labels)
-                                if diff:
-                                    differences.append((info[0], diff))
-                            
-                            if differences:
-                                print(f"===> Error: Duplicate files with different information found. The following is different:")
-                                print(f"- Base File Path: {base_file_path}")
-                                for file_info, diff in differences:
-                                    print(f"- File Path: {file_info}")
-                                    for label, base_val, diff_val in diff:
-                                        if not isinstance(diff_val, tuple) :
-                                            print(f"  - {label}: {diff_val} (base value: {base_val})")
-                                        else: 
-                                            for i in range(len(diff_val)):
-                                                if (diff_val[i] != base_val[i]):
-                                                    print(f"  - {labels[i+4]}: {diff_val[i]} (base value: {base_val[i]})")
-                                break
-
-            print("==" * 50)
+            print(f"Previous filepath: {prev_filepath} and timestamp: {prev_timestamp}")
+            print(f"Current filepath: {curr_filepath} and timestamp: {curr_timestamp}")
+            
+            if len(lst) == 4:
+                print("No difference found")
+            else:
+                for i in range(4, len(lst), 3):
+                    label = lst[i]
+                    prev_info = lst[i + 1]
+                    curr_info = lst[i + 2]
+                    print(f"{label}: previous is {prev_info} and current is: {curr_info}")
+            print(50*"=")
 
 if __name__ == "__main__":
-    directory = '/tmp/2018-5'
+    directory = '/Users/mr.youssef/Desktop/NpDataHub/unitTesting'
     obj = Database()
     obj.process_all_xml_files(directory)
+    obj.output_duplicates()
     print("Data has been successfully inserted into MongoDB.")
-    obj.check_duplicates()
