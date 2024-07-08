@@ -1,6 +1,6 @@
 <Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" returnVersion="2019v5.0" xsi:schemaLocation="http://www.irs.gov/efile">
   <ReturnHeader binaryAttachmentCnt="0">
-    <ReturnTs>2020-10-14T10:56:12-07:00</ReturnTs>
+    <ReturnTs>2020-10-14T10:56:12-07:0</ReturnTs>
     <TaxPeriodEndDt>2020-05-31</TaxPeriodEndDt>
     <PreparerFirmGrp>
       <PreparerFirmName>
