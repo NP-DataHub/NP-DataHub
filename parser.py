@@ -7,7 +7,7 @@ from datetime import datetime
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
-        self.mongo_client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
+        self.mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
         self.database = self.mongo_client["Np-Datahub"]
         self.collections = {
             "990": self.database["Master"],
@@ -457,9 +457,10 @@ class Database:
                 collection = self.collections[return_type]
                 collection.bulk_write(insertions[return_type])
 
-    def output_duplicates(self, directory):
+    def output_duplicates(self, name):
         if self.output:
-            file_name = f"{directory[36:]}_ErrorOutput.txt"
+            os.makedirs("/Users/mr.youssef/Desktop/NpDataHub", exist_ok=True)
+            file_name = os.path.join(directory, f"{name}_ErrorOutput.txt")
             with open(file_name, 'w') as file:
                 for lst in self.output:
                     prev_filepath = lst[0]
@@ -484,8 +485,13 @@ class Database:
             print("No duplicate files to handle manually")
 
 if __name__ == "__main__":
-    directory = '/Users/mr.youssef/Desktop/NpDataHub/unitTesting'
+    directory = '/tmp/2018-5'
+    name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
+    input(f'Is the following directory correct "{directory}"? Press enter if it is.')
+    input('Is MongoDB client declared in the object correct? Press enter if it is.')
+    input(f'Is the name passed to output_duplicates correct "{name_of_file}"? Press enter if it is.')
+    input('Is the directory, where the error file will be created, correct? Press enter if it is.')
     obj = Database()
     obj.process_all_xml_files(directory)
     print("Data has been successfully inserted into MongoDB.")
-    obj.output_duplicates(directory)
+    obj.output_duplicates(name_of_file)
