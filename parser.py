@@ -487,7 +487,7 @@ class Database:
 if __name__ == "__main__":
     directory = '/tmp/2018-5'
     name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
-    input(f'Is the following directory correct "{directory}"? Press enter if it is.')
+    input(f'Is the following directory, where the input files are located, correct "{directory}"? Press enter if it is.')
     input('Is MongoDB client declared in the object correct? Press enter if it is.')
     input(f'Is the name passed to output_duplicates correct "{name_of_file}"? Press enter if it is.')
     input('Is the directory, where the error file will be created, correct? Press enter if it is.')
