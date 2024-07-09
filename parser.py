@@ -170,9 +170,9 @@ class Database:
         
         return [
             int(total_revenue_element.text) if total_revenue_element is not None else 0,
-            int(total_expenses_element.text) if total_expenses_element is not None else 0,
             int(total_assets_element.text) if total_assets_element is not None else 0,
             int(total_liabilities_element.text) if total_liabilities_element is not None else 0,
+            int(total_expenses_element.text) if total_expenses_element is not None else 0,
             int(net_income_element.text) if net_income_element is not None else 0,
             int(contributions_received_element.text) if contributions_received_element is not None else 0,
             int(interest_revenue_element.text) if interest_revenue_element is not None else 0,
@@ -226,9 +226,9 @@ class Database:
             financial_info = self.get_990PF_financial_information(root)
             update_fields = {
                 f"{tax_period}.Total Revenue": financial_info[0],
-                f"{tax_period}.Total Assets": financial_info[2],
-                f"{tax_period}.Total Liabilities": financial_info[3],
-                f"{tax_period}.Total Expenses": financial_info[1],
+                f"{tax_period}.Total Assets": financial_info[1],
+                f"{tax_period}.Total Liabilities": financial_info[2],
+                f"{tax_period}.Total Expenses": financial_info[3],
                 f"{tax_period}.Net Income (Less Deficit)": financial_info[4],
                 f"{tax_period}.Contributions Received": financial_info[5],
                 f"{tax_period}.Interest Revenue": financial_info[6],
