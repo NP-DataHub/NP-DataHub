@@ -7,7 +7,7 @@ from datetime import datetime
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
-        self.mongo_client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
+        self.mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
         self.database = self.mongo_client["Np-Datahub"]
         self.collections = {
             "990": self.database["Master"],
@@ -258,7 +258,6 @@ class Database:
         return update_fields
 
     def compare_and_find_differences(self,prev_info, curr_info, prev_file, curr_file, return_type ):
-        differences = []
         labels = []
         if return_type == "990":
             labels = [
@@ -336,96 +335,45 @@ class Database:
 
         timestamp_element = root.find('.//irs:ReturnTs', self.namespace)
         current_timestamp = timestamp_element.text if timestamp_element is not None else "None"
+
+        def build_database_helper(cache):
+            nonlocal update_fields
+            if ein not in cache:
+                cache[ein] = {tax_period: [file_path, current_timestamp]}
+                update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
+            else:
+                if tax_period not in cache[ein]:
+                    cache[ein][tax_period] = [file_path, current_timestamp]
+                    update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 0)
+                else:
+                    previous_timestamp = cache[ein][tax_period][1]
+                    if current_timestamp != "None" and previous_timestamp != "None":
+                        try:
+                            previous_dt = datetime.fromisoformat(previous_timestamp)
+                        except ValueError:
+                            previous_dt = None
+                        try:
+                            current_dt = datetime.fromisoformat(current_timestamp)
+                        except ValueError:
+                            current_dt = None
+                        if current_dt is not None and previous_dt is not None:
+                            if current_dt > previous_dt:
+                                cache[ein][tax_period][1] = current_timestamp
+                                update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
+                            elif current_dt == previous_dt:
+                                self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
+                        elif current_dt is None or previous_dt is None:
+                            self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
+                    elif current_timestamp == "None" or previous_timestamp == "None":
+                        self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
+
         update_fields = None
-
         if return_type == "990":
-            if ein not in self.master_cache:
-                self.master_cache[ein] = {tax_period: [file_path,current_timestamp] }
-                update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
-            else:
-                if tax_period not in self.master_cache[ein]:
-                    self.master_cache[ein][tax_period]= [file_path,current_timestamp]
-                    update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 0)
-                else :
-                    previous_timestamp = self.master_cache[ein][tax_period][1]
-                    if current_timestamp != "None" and previous_timestamp != "None":
-                        try:
-                            previous_dt = datetime.fromisoformat(previous_timestamp)
-                        except ValueError:
-                            previous_dt = None
-                        try:
-                            current_dt = datetime.fromisoformat(current_timestamp)
-                        except ValueError:
-                            current_dt = None
-                        if current_dt != None and previous_dt != None:
-                            if current_dt > previous_dt:
-                                self.master_cache[ein][tax_period][1] = current_timestamp
-                                update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
-                            elif current_dt == previous_dt:
-                                self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
-                        elif current_dt == None or previous_dt == None:
-                            self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
-                    elif current_timestamp == "None" or previous_timestamp == "None":
-                        self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
-
+            build_database_helper(self.master_cache)
         elif return_type == "990EZ":
-            if ein not in self.ez_cache:
-                self.ez_cache[ein] = {tax_period: [file_path,current_timestamp] }
-                update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
-            else:
-                if tax_period not in self.ez_cache[ein]:
-                    self.ez_cache[ein][tax_period] = [file_path,current_timestamp]
-                    update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 0)
-                else :
-                    previous_timestamp = self.ez_cache[ein][tax_period][1]
-                    if current_timestamp != "None" and previous_timestamp != "None":
-                        try:
-                            previous_dt = datetime.fromisoformat(previous_timestamp)
-                        except ValueError:
-                            previous_dt = None
-                        try:
-                            current_dt = datetime.fromisoformat(current_timestamp)
-                        except ValueError:
-                            current_dt = None
-                        if current_dt != None and previous_dt != None:
-                            if current_dt > previous_dt:
-                                self.ez_cache[ein][tax_period][1] = current_timestamp
-                                update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
-                            elif current_dt == previous_dt:
-                                self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
-                        elif current_dt == None or previous_dt == None:
-                            self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
-                    elif current_timestamp == "None" or previous_timestamp == "None":
-                        self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
+            build_database_helper(self.ez_cache)
         else:
-            if ein not in self.private_cache:
-                self.private_cache[ein] = {tax_period: [file_path,current_timestamp] }
-                update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
-            else:
-                if tax_period not in self.private_cache[ein]:
-                    self.private_cache[ein][tax_period] = [file_path,current_timestamp]
-                    update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 0)
-                else :
-                    previous_timestamp = self.private_cache[ein][tax_period][1]
-                    if current_timestamp != "None" and previous_timestamp != "None":
-                        try:
-                            previous_dt = datetime.fromisoformat(previous_timestamp)
-                        except ValueError:
-                            previous_dt = None
-                        try:
-                            current_dt = datetime.fromisoformat(current_timestamp)
-                        except ValueError:
-                            current_dt = None
-                        if current_dt != None and previous_dt != None:
-                            if current_dt > previous_dt:
-                                self.private_cache[ein][tax_period][1] = current_timestamp
-                                update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
-                            elif current_dt == previous_dt:
-                                self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
-                        elif current_dt == None or previous_dt == None:
-                            self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
-                    elif current_timestamp == "None" or previous_timestamp == "None":
-                        self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
+            build_database_helper(self.private_cache)
 
         if update_fields is None:
             return None,None
@@ -457,10 +405,10 @@ class Database:
                 collection = self.collections[return_type]
                 collection.bulk_write(insertions[return_type])
 
-    def output_duplicates(self, name):
+    def output_duplicates(self, name, directory):
         if self.output:
-            os.makedirs("/Users/mr.youssef/Desktop/NpDataHub", exist_ok=True)
-            file_name = os.path.join("/Users/mr.youssef/Desktop/NpDataHub", f"{name}_ErrorOutput.txt")
+            os.makedirs(directory, exist_ok=True)
+            file_name = os.path.join(directory, f"{name}_ErrorOutput.txt")
             with open(file_name, 'w') as file:
                 for lst in self.output:
                     prev_filepath = lst[0]
@@ -486,12 +434,13 @@ class Database:
 
 if __name__ == "__main__":
     directory = '/tmp/2018-5'
+    output_directory = '/Users/mr.youssef/Desktop/NpDataHub'
     name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
-    input(f'Is the following directory, where the input files are located, correct "{directory}"? Press enter if it is.')
+    input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
     input('Is MongoDB client declared in the object correct? Press enter if it is.')
-    input(f'Is the name passed to output_duplicates correct "{name_of_file}"? Press enter if it is.')
-    input('Is the directory, where the error file will be created, correct? Press enter if it is.')
+    input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')
+    input(f'Is the directory, where the error file will be created, correct "{output_directory}" ? Press enter if it is.')
     obj = Database()
     obj.process_all_xml_files(directory)
     print("Data has been successfully inserted into MongoDB.")
-    obj.output_duplicates(name_of_file)
+    obj.output_duplicates(name_of_file,output_directory)
