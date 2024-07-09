@@ -159,7 +159,7 @@ class Database:
         investments_in_us_gov_obligations_element = root.find('.//irs:USGovernmentObligationsEOYAmt', self.namespace)
         if investments_in_us_gov_obligations_element is None:
             investments_in_us_gov_obligations_element = root.find('.//irs:USGovernmentObligationsBOYAmt', self.namespace)
-        
+
         investments_in_corporate_stock_element = root.find('.//irs:CorporateStockEOYAmt', self.namespace)
         
         investments_in_corporate_bonds_element = root.find('.//irs:CorporateBondsEOYAmt', self.namespace)
@@ -248,8 +248,8 @@ class Database:
             general_info = self.get_general_information(root)
             update_fields.update({
                 "Name": general_info[0],
-                "City": general_info[1],
-                "State": general_info[2],
+                "State": general_info[1],
+                "City": general_info[2],
                 "Zipcode": general_info[3],
                 "EIN": ein,
                 "NTEE": "None",
@@ -433,7 +433,7 @@ class Database:
             print("No duplicate files to handle manually")
 
 if __name__ == "__main__":
-    directory = '/tmp/2018-5'
+    directory = '/tmp/2018-1A'
     output_directory = '/Users/mr.youssef/Desktop/NpDataHub'
     name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
     input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
