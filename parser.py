@@ -7,16 +7,16 @@ from datetime import datetime
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
-        self.mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
+        self.mongo_client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
         self.database = self.mongo_client["Np-Datahub"]
         self.collections = {
             "990": self.database["Master"],
             "990EZ": self.database["EZ"],
             "990PF": self.database["Private"]
         }
-        self.master_duplicate_files = {}
-        self.private_duplicate_files = {}
-        self.ez_duplicate_files = {}
+        self.master_cache = {}
+        self.ez_cache = {}
+        self.private_cache = {}
         self.output = []
     def get_ein_and_tax_period(self, root):
         ein_element = root.find('.//irs:Filer/irs:EIN', self.namespace)
@@ -298,17 +298,17 @@ class Database:
     def handle_duplicate_files_helper(self, root, file_path, return_type, ein, tax_period, previous_dt,current_dt):
         prev_filepath = prev_root = prev_financial_info = current_financial_info = None
         if return_type == "990":
-            prev_filepath = self.master_duplicate_files[ein][tax_period][0]
+            prev_filepath = self.master_cache[ein][tax_period][0]
             prev_root = ET.parse(prev_filepath).getroot()
             prev_financial_info = self.get_990_financial_information(prev_root)
             current_financial_info = self.get_990_financial_information(root)
         elif return_type == "990EZ":
-            prev_filepath = self.ez_duplicate_files[ein][tax_period][0]
+            prev_filepath = self.ez_cache[ein][tax_period][0]
             prev_root = ET.parse(prev_filepath).getroot()
             prev_financial_info = self.get_990EZ_financial_information(prev_root)
             current_financial_info = self.get_990EZ_financial_information(root)
         else:
-            prev_filepath = self.private_duplicate_files[ein][tax_period][0]
+            prev_filepath = self.private_cache[ein][tax_period][0]
             prev_root = ET.parse(prev_filepath).getroot()
             prev_financial_info = self.get_990PF_financial_information(prev_root)
             current_financial_info = self.get_990PF_financial_information(root)
@@ -339,15 +339,15 @@ class Database:
         update_fields = None
 
         if return_type == "990":
-            if ein not in self.master_duplicate_files:
-                self.master_duplicate_files[ein] = {tax_period: [file_path,current_timestamp] }
+            if ein not in self.master_cache:
+                self.master_cache[ein] = {tax_period: [file_path,current_timestamp] }
                 update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
             else:
-                if tax_period not in self.master_duplicate_files[ein]:
-                    self.master_duplicate_files[ein][tax_period]= [file_path,current_timestamp]
+                if tax_period not in self.master_cache[ein]:
+                    self.master_cache[ein][tax_period]= [file_path,current_timestamp]
                     update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 0)
                 else :
-                    previous_timestamp = self.master_duplicate_files[ein][tax_period][1]
+                    previous_timestamp = self.master_cache[ein][tax_period][1]
                     if current_timestamp != "None" and previous_timestamp != "None":
                         try:
                             previous_dt = datetime.fromisoformat(previous_timestamp)
@@ -359,7 +359,7 @@ class Database:
                             current_dt = None
                         if current_dt != None and previous_dt != None:
                             if current_dt > previous_dt:
-                                self.master_duplicate_files[ein][tax_period][1] = current_timestamp
+                                self.master_cache[ein][tax_period][1] = current_timestamp
                                 update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
                             elif current_dt == previous_dt:
                                 self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
@@ -369,15 +369,15 @@ class Database:
                         self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
 
         elif return_type == "990EZ":
-            if ein not in self.ez_duplicate_files:
-                self.ez_duplicate_files[ein] = {tax_period: [file_path,current_timestamp] }
+            if ein not in self.ez_cache:
+                self.ez_cache[ein] = {tax_period: [file_path,current_timestamp] }
                 update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
             else:
-                if tax_period not in self.ez_duplicate_files[ein]:
-                    self.ez_duplicate_files[ein][tax_period] = [file_path,current_timestamp]
+                if tax_period not in self.ez_cache[ein]:
+                    self.ez_cache[ein][tax_period] = [file_path,current_timestamp]
                     update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 0)
                 else :
-                    previous_timestamp = self.ez_duplicate_files[ein][tax_period][1]
+                    previous_timestamp = self.ez_cache[ein][tax_period][1]
                     if current_timestamp != "None" and previous_timestamp != "None":
                         try:
                             previous_dt = datetime.fromisoformat(previous_timestamp)
@@ -389,7 +389,7 @@ class Database:
                             current_dt = None
                         if current_dt != None and previous_dt != None:
                             if current_dt > previous_dt:
-                                self.ez_duplicate_files[ein][tax_period][1] = current_timestamp
+                                self.ez_cache[ein][tax_period][1] = current_timestamp
                                 update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
                             elif current_dt == previous_dt:
                                 self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
@@ -398,15 +398,15 @@ class Database:
                     elif current_timestamp == "None" or previous_timestamp == "None":
                         self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
         else:
-            if ein not in self.private_duplicate_files:
-                self.private_duplicate_files[ein] = {tax_period: [file_path,current_timestamp] }
+            if ein not in self.private_cache:
+                self.private_cache[ein] = {tax_period: [file_path,current_timestamp] }
                 update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
             else:
-                if tax_period not in self.private_duplicate_files[ein]:
-                    self.private_duplicate_files[ein][tax_period] = [file_path,current_timestamp]
+                if tax_period not in self.private_cache[ein]:
+                    self.private_cache[ein][tax_period] = [file_path,current_timestamp]
                     update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 0)
                 else :
-                    previous_timestamp = self.private_duplicate_files[ein][tax_period][1]
+                    previous_timestamp = self.private_cache[ein][tax_period][1]
                     if current_timestamp != "None" and previous_timestamp != "None":
                         try:
                             previous_dt = datetime.fromisoformat(previous_timestamp)
@@ -418,7 +418,7 @@ class Database:
                             current_dt = None
                         if current_dt != None and previous_dt != None:
                             if current_dt > previous_dt:
-                                self.private_duplicate_files[ein][tax_period][1] = current_timestamp
+                                self.private_cache[ein][tax_period][1] = current_timestamp
                                 update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
                             elif current_dt == previous_dt:
                                 self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
@@ -460,7 +460,7 @@ class Database:
     def output_duplicates(self, name):
         if self.output:
             os.makedirs("/Users/mr.youssef/Desktop/NpDataHub", exist_ok=True)
-            file_name = os.path.join(directory, f"{name}_ErrorOutput.txt")
+            file_name = os.path.join("/Users/mr.youssef/Desktop/NpDataHub", f"{name}_ErrorOutput.txt")
             with open(file_name, 'w') as file:
                 for lst in self.output:
                     prev_filepath = lst[0]
