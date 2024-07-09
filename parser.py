@@ -158,7 +158,7 @@ class Database:
         
         investments_in_us_gov_obligations_element = root.find('.//irs:USGovernmentObligationsEOYAmt', self.namespace)
         if investments_in_us_gov_obligations_element is None:
-            investments_in_us_gov_obligations_element = root.find('.//irs:USGovtObligationsEOYFMVAmt', self.namespace)
+            investments_in_us_gov_obligations_element = root.find('.//irs:USGovernmentObligationsBOYAmt', self.namespace)
         
         investments_in_corporate_stock_element = root.find('.//irs:CorporateStockEOYAmt', self.namespace)
         

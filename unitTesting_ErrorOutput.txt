@@ -6,36 +6,27 @@ Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez2_duplicate
 Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez2_duplicate3.xml and timestamp: 2020-10-14 13:07:18-04:00
 No difference found
 ==================================================
-Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf2_duplicate1.xml and timestamp: 2020-10-15 11:28:07-05:00
-Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf2_duplicate3.xml and timestamp: 2020-10-15 11:28:07-05:00
-Cash: previous is 43836 and current is: 4836
-City: previous is UPPRCO and current is: UPPERCO
-==================================================
 Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez4_duplicate4.xml and timestamp: None
 Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez4_duplicate5.xml and timestamp: None
 Total Revenue: previous is 74800 and current is: 74730
 Zip Code: previous is 902669 and current is: 902660
 ==================================================
+Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf2_duplicate3.xml and timestamp: 2020-10-15 11:28:07-05:00
+Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf2_duplicate1.xml and timestamp: 2020-10-15 11:28:07-05:00
+Cash: previous is 4836 and current is: 43836
+City: previous is UPPERCO and current is: UPPRCO
+==================================================
 Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez5_duplicate3.xml and timestamp: 2020-10-14 11:08:47-07:00
 Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez5_duplicate5.xml and timestamp: 2020-10-14 11:08:47-07:00
-No difference found
-==================================================
-Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez3_duplicate2.xml and timestamp: 2020-10-08 11:42:24+00:00
-Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez3_duplicate3.xml and timestamp: 2020-10-08 11:42:24+00:00
 No difference found
 ==================================================
 Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf5_duplicate2.xml and timestamp: 2020-10-15 13:05:35-05:00
 Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf5_duplicate4.xml and timestamp: 2020-10-15 13:05:35-05:00
 No difference found
 ==================================================
-Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf4_duplicate4.xml and timestamp: 2020-10-15 12:34:54-05:00
-Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf4_duplicate2.xml and timestamp: 2020-10-15 12:34:54-05:00
+Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez3_duplicate2.xml and timestamp: 2020-10-08 11:42:24+00:00
+Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez3_duplicate3.xml and timestamp: 2020-10-08 11:42:24+00:00
 No difference found
-==================================================
-Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez4_duplicate4.xml and timestamp: None
-Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez4_duplicate3.xml and timestamp: 2020-10-14 10:56:12-07:00
-Total Revenue: previous is 74800 and current is: 747009
-Zip Code: previous is 902669 and current is: 902667
 ==================================================
 Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/master1_duplicate2.xml and timestamp: 2020-11-16 15:36:50-08:00
 Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/master1_duplicate1.xml and timestamp: 2020-11-16 15:36:50-08:00
@@ -43,16 +34,25 @@ Program Service Revenue: previous is 206553 and current is: 2065453
 Number of employees: previous is 0 and current is: 100
 City: previous is queens and current is: Lincolnwood
 ==================================================
+Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez4_duplicate4.xml and timestamp: None
+Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez4_duplicate3.xml and timestamp: 2020-10-14 10:56:12-07:00
+Total Revenue: previous is 74800 and current is: 747009
+Zip Code: previous is 902669 and current is: 902667
+==================================================
+Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf4_duplicate4.xml and timestamp: 2020-10-15 12:34:54-05:00
+Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf4_duplicate2.xml and timestamp: 2020-10-15 12:34:54-05:00
+No difference found
+==================================================
 Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez6_duplicate2.xml and timestamp: 2020-10-14 14:10:18-05:00
 Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez6_duplicate3.xml and timestamp: 2020-10-14 14:10:18-05:00
 No difference found
 ==================================================
-Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf1_duplicate2.xml and timestamp: 2020-02-03 16:03:33-06:00
-Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf1_duplicate3.xml and timestamp: 2020-02-03 16:03:33-06:00
-No difference found
-==================================================
 Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez6_duplicate1.xml and timestamp: 2020-10-14 14:10:18-05:00
 Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/ez6_duplicate4.xml and timestamp: 2020-10-14 14:10:18-05:00
+No difference found
+==================================================
+Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf1_duplicate2.xml and timestamp: 2020-02-03 16:03:33-06:00
+Current filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/pf1_duplicate3.xml and timestamp: 2020-02-03 16:03:33-06:00
 No difference found
 ==================================================
 Previous filepath: /Users/mr.youssef/Desktop/NpDataHub/unitTesting/master3_duplicate3.xml and timestamp: 2020-11-16 17:33:50-06:00

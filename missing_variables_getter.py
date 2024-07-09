@@ -22,9 +22,9 @@ def update_document(ein, subsection, ntee_cd):
             return
 
 def process_row(row):
-    ein = row['EIN']
-    ntee_cd = row['NTEE_CD']
-    #subsection = row['SUBSECTION']
+    ein = row['EIN'] 
+    ntee_cd = row['NTEE_CD'] # add check if empty, then keep None
+    #subsection = row['SUBSECTION'] # add check if empty, then keep None
     update_document(ein, subsection, ntee_cd)
 
 if __name__ == "__main__":
