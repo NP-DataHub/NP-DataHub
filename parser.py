@@ -1,9 +1,10 @@
 import os
-import requests
+import sys
 from lxml import etree as ET
 from pymongo import MongoClient, UpdateOne
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
+
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
@@ -321,8 +322,11 @@ class Database:
         return
 
     def build_database(self, file_path):
-
-        root = ET.parse(file_path).getroot()
+        try:
+            root = ET.parse(file_path).getroot()
+        except ET.ParseError:
+            print(f"Skipping invalid XML file: {file_path}")
+            return None, None
         return_type_element = root.find('.//irs:ReturnTypeCd', self.namespace)
         return_type = return_type_element.text if return_type_element is not None else None
         
@@ -433,13 +437,13 @@ class Database:
             print("No duplicate files to handle manually")
 
 if __name__ == "__main__":
-    directory = '/tmp/2018-1A'
-    output_directory = '/Users/mr.youssef/Desktop/NpDataHub'
+    directory = sys.argv[1]
+    output_directory = '/Users/mr.youssef/Desktop/NpDataHub/errorOutputs'
     name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
-    input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
-    input('Is MongoDB client declared in the object correct? Press enter if it is.')
-    input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')
-    input(f'Is the directory, where the error file will be created, correct "{output_directory}" ? Press enter if it is.')
+    # input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
+    # input('Is MongoDB client declared in the object correct? Press enter if it is.')
+    # input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')
+    # input(f'Is the directory, where the error file will be created, correct "{output_directory}" ? Press enter if it is.')
     obj = Database()
     obj.process_all_xml_files(directory)
     print("Data has been successfully inserted into MongoDB.")
