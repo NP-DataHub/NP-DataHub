@@ -16,7 +16,7 @@ const TimeSeries = ({variable, values, style}) => {
     return <div>ERROR: chart arg must be an array</div>;
   }
 
-    let scale = Math.round((style.width+style.height)/2);
+    //let scale = Math.round((style.width+style.height)/2);
 
     
     
@@ -54,10 +54,10 @@ const TimeSeries = ({variable, values, style}) => {
           }
         },
         grid: {
-          left: Math.round(0.03*scale),
-          bottom: Math.round(0.04*scale),
-          right: Math.round(0.01*scale),
-          top: Math.round(0.01*scale),
+          //left: Math.round(0.03*scale),
+          //bottom: Math.round(0.04*scale),
+          //right: Math.round(0.01*scale),
+          //top: Math.round(0.01*scale),
           containLabel: true
         },
         xAxis: [
@@ -66,8 +66,8 @@ const TimeSeries = ({variable, values, style}) => {
             nameLocation: 'middle',
             nameTextStyle: {
               fontWeight: 'bold',
-              fontSize: Math.round(0.03*scale),
-              padding: Math.round(0.00*scale)
+              //fontSize: Math.round(0.03*scale),
+              //padding: Math.round(0.00*scale)
             },
             type: 'category',
             data: Array.from({ length: values.length }, (_, index) => index + 2017),
@@ -75,7 +75,7 @@ const TimeSeries = ({variable, values, style}) => {
               alignWithLabel: true
             },
             axisLabel: {
-              fontSize: Math.round(0.022*scale)
+              //fontSize: Math.round(0.022*scale)
             }
           }
         ],
@@ -85,7 +85,7 @@ const TimeSeries = ({variable, values, style}) => {
               formatter: function (value) {
                 return '$' + value;
               },
-              fontSize: Math.round(0.018*scale)
+              //fontSize: Math.round(0.018*scale)
             }
           }
         ],

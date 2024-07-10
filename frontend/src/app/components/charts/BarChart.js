@@ -14,7 +14,6 @@ const BarChart = ({values, style}) => {
   if (!Array.isArray(values) || values.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
   }
-  let scale = Math.round((style.width+style.height)/2);
 
   const option = {
     tooltip: {
@@ -111,8 +110,8 @@ const BarChart = ({values, style}) => {
               }
             }
             return 'rgb(80, 110, 237)'; // Default blue color
-          },
-          barBorderRadius: [0.02 * scale, 0.02 * scale, 0, 0]
+          }//,
+          //barBorderRadius: [0.02 * scale, 0.02 * scale, 0, 0]
         },
       }
     ]

@@ -51,8 +51,8 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, style }) => 
       }
     },
     grid: {
-      left: 0.045*style.width,
-      right: 0.045*style.width,
+      //left: 0.045*style.width,
+      //right: 0.045*style.width,
       top: 0,
       bottom: 0,
       containLabel: true
@@ -69,7 +69,7 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, style }) => 
         alignWithLabel: true
       },
       axisLabel: {
-        fontSize: Math.round(0.036*style.width),
+        //fontSize: Math.round(0.036*style.width),
         fontWeight: 'bold'
       }
     },
