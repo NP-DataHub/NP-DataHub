@@ -5,6 +5,9 @@ import LineCompareChart from "./components/LineCompareChart";
 import DashboardNavbar from "./components/dashboardNav";
 import TimeSeries from "./components/TimeSeries";
 import React, { useState } from 'react';
+import SectorGraph from "./components/SectorGraph";
+import PerformanceMeter from "./components/PerformanceMeter";
+
 
 export default function Dashboard() {
     const [state, setState] = useState('');
@@ -72,14 +75,14 @@ export default function Dashboard() {
                                 <h2 className="text-xl text-center font-semibold mb-2">HISTORICAL PERFORMANCE</h2>
                                 <p className="text-center mb-2">Plan: add percent change to hover, add variable selection, modify styling</p>
                                 <div className = "flex justify-center">
-                                  <BarChart variable={variable1} values={values1} style={style}/>
+                                  <PerformanceMeter variable={variable1} values={values1} style={style}/>
                                 </div>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 <h2 className="text-xl font-semibold mb-2 text-center ">VARIABLE COMPARE</h2>
                                 <p className="text-center mb-2">Plan: add percent difference on hover, add variable selection, modify styling</p>
                                 <div className = "flex justify-center">
-                                  <LineCompareChart variable1={variable1} variable2={variable2} values1={values1} values2={values2} style={style}/>
+                                  <SectorGraph input_data={variable1} style={style}/>
                                 </div>
                             </div>
                             <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
