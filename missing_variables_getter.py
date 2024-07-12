@@ -23,7 +23,9 @@ def update_document(ein, subsection, ntee_cd):
 
 def process_row(row):
     ein = row['EIN'] 
-    ntee_cd = row['NTEE_CD'] # add check if empty, then keep None
+    ntee_cd = row['NTEE_CD']
+    if(ntee_cd == "" or ntee_cd is None):
+        ntee_cd = "None"
     #subsection = row['SUBSECTION'] # add check if empty, then keep None
     update_document(ein, subsection, ntee_cd)
 
