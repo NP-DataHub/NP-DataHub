@@ -413,6 +413,7 @@ class Database:
         if self.output:
             os.makedirs(directory, exist_ok=True)
             file_name = os.path.join(directory, f"{name}_ErrorOutput.txt")
+            differences_found = False  # Flag to check if any differences are found
             with open(file_name, 'w') as file:
                 for lst in self.output:
                     prev_filepath = lst[0]
@@ -426,13 +427,18 @@ class Database:
                     if len(lst) == 4:
                         file.write("No difference found\n")
                     else:
+                        differences_found = True
                         for i in range(4, len(lst), 3):
                             label = lst[i]
                             prev_info = lst[i + 1]
                             curr_info = lst[i + 2]
                             file.write(f"{label}: previous is {prev_info} and current is: {curr_info}\n")
                     file.write("=" * 50 + "\n")
-            print("Error output file has been successfully created")
+            if not differences_found:
+                os.remove(file_name)
+                print("No duplicate files to handle manually")
+            else:
+                print("Error output file has been successfully created")
         else:
             print("No duplicate files to handle manually")
 
