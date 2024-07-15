@@ -12,12 +12,27 @@ const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const saveUserToMongo = async (email) => {
+    try {
+      await fetch('/api/saveUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, name: email.split('@')[0] }), 
+      });
+    } catch (error) {
+      console.error('Error saving user to Mongo:', error);
+    }
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!isSigningIn) {
       setIsSigningIn(true);
       try {
         await doSignInWithEmailAndPassword(email, password);
+        await saveUserToMongo(email);
         onSuccess();
       } catch (error) {
         setErrorMessage(error.message);
@@ -31,15 +46,23 @@ const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {
     if (!isSigningIn) {
       setIsSigningIn(true);
       try {
-        await doSignInWithGoogle();
-        onSuccess();
+        const user = await doSignInWithGoogle();
+        console.log('Google Sign-In Result:', user);
+        const userEmail = user?.email;
+        if (userEmail) {
+          await saveUserToMongo(userEmail);
+          onSuccess();
+        } else {
+          throw new Error('Failed to retrieve user email');
+        }
       } catch (error) {
+        console.error('Error during Google sign-in:', error);
         setErrorMessage(error.message);
         setIsSigningIn(false);
       }
     }
   };
-
+  
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
       <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl bg-white">
