@@ -125,7 +125,7 @@ const BarChart = ({ values }) => {
 
   return (
     <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
-      <ReactECharts option={option} style={{ width: dimensions.width, height: dimensions.height }} />
+      <ReactECharts option={option}/>
     </div>
   );
 };
