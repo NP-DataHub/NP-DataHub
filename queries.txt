@@ -232,8 +232,78 @@
 
 5. Overall dollar difference between revenues and expenses for a single nonprofit or foundation (from five years ago)
 
+
+
 6. Overall dollar difference between assets and liabilities for a single nonprofit or foundation (from five years ago)
+
+
 
 7. Overall percentage difference between revenues and expenses for a single nonprofit or foundation (from five years ago)
 
+
+
 8. Overall percentage difference between assets and liabilities for a single nonprofit or foundation (from five years ago)
+
+
+
+9. (Revenue) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+10. (Expenses) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+11. (Assets) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+12. (Liabilities) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+13. (Revenue) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+14. (Expenses) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+15. (Assets) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+16. (Liabilities) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+17. (Revenue) Overall average of each NTEE sector nationally (year over year)
+
+
+
+18. (Expenses) Overall average of each NTEE sector nationally (year over year)
+
+
+
+19. (Assets) Overall average of each NTEE sector nationally (year over year)
+
+
+
+20. (Liabilities) Overall average of each NTEE sector nationally (year over year)
+
+
+
+21. (Revenue) Overall median of each NTEE sector nationally (year over year)
+
+
+
+22. (Expenses) Overall median of each NTEE sector nationally (year over year)
+
+
+
+23. (Assets) Overall median of each NTEE sector nationally (year over year)
+
+
+
+24. (Liabilities) Overall median of each NTEE sector nationally (year over year)
