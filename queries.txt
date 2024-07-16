@@ -1,0 +1,309 @@
+1. Overall dollar difference between revenues and expenses for a single nonprofit or foundation (year over year)
+
+[
+    {
+        '$project': {
+            'Name': 1, 
+            'EIN': 1, 
+            '2019-Difference': {
+                '$subtract': [
+                    '$2019.Total Revenue', '$2019.Total Expenses'
+                ]
+            }, 
+            '2018-Difference': {
+                '$subtract': [
+                    '$2018.Total Revenue', '$2018.Total Expenses'
+                ]
+            }, 
+            '2017-Difference': {
+                '$subtract': [
+                    '$2017.Total Revenue', '$2017.Total Expenses'
+                ]
+            }
+        }
+    }
+]
+
+2. Overall dollar difference between assets and liabilities for a single nonprofit or foundation (year over year)
+
+{
+  Name: 1,
+  _id: 0,
+  "2019.AssetLiabilityDifference": {
+    $subtract: [
+      "$2019.Total Assets",
+      "$2019.Total Liabilities"
+    ]
+  },
+  "2018.AssetLiabilityDifference": {
+    $subtract: [
+      "$2018.Total Assets",
+      "$2018.Total Liabilities"
+    ]
+  },
+  "2017.AssetLiabilityDifference": {
+    $subtract: [
+      "$2017.Total Assets",
+      "$2017.Total Liabilities"
+    ]
+  }
+}
+
+3. Overall percentage difference between revenues and expenses for a single nonprofit or foundation (year over year)
+
+{
+  Name: 1,
+  "2016_2017_Rev_Percent_Inc": {
+    $multiply: [
+      {
+        $divide: [
+          {
+            $subtract: [
+              "$2017.Total Revenue",
+              "$2016.Total Revenue"
+            ]
+          },
+          "$2016.Total Revenue"
+        ]
+      },
+      100
+    ]
+  },
+  "2017_2018_Rev_Percent_Inc": {
+    $multiply: [
+      {
+        $divide: [
+          {
+            $subtract: [
+              "$2018.Total Revenue",
+              "$2017.Total Revenue"
+            ]
+          },
+          "$2017.Total Revenue"
+        ]
+      },
+      100
+    ]
+  },
+  "2018_2019_Rev_Percent_Inc": {
+    $multiply: [
+      {
+        $divide: [
+          {
+            $subtract: [
+              "$2019.Total Revenue",
+              "$2018.Total Revenue"
+            ]
+          },
+          "$2018.Total Revenue"
+        ]
+      },
+      100
+    ]
+  },
+  "2016_2017_Exp_Percent_Inc": {
+    $multiply: [
+      {
+        $divide: [
+          {
+            $subtract: [
+              "$2017.Total Expenses",
+              "$2016.Total Expenses"
+            ]
+          },
+          "$2016.Total Expenses"
+        ]
+      },
+      100
+    ]
+  },
+  "2017_2018_Exp_Percent_Inc": {
+    $multiply: [
+      {
+        $divide: [
+          {
+            $subtract: [
+              "$2018.Total Expenses",
+              "$2017.Total Expenses"
+            ]
+          },
+          "$2017.Total Expenses"
+        ]
+      },
+      100
+    ]
+  },
+  "2018_2019_Exp_Percent_Inc": {
+    $multiply: [
+      {
+        $divide: [
+          {
+            $subtract: [
+              "$2019.Total Expenses",
+              "$2018.Total Expenses"
+            ]
+          },
+          "$2018.Total Expenses"
+        ]
+      },
+      100
+    ]
+  }
+}
+
+4. Overall percentage difference between assets and liabilities for a single nonprofit or foundation (year over year)
+
+{
+  Name: 1,
+  EIN: 1,
+  "2019_Percent_Diff": {
+    $cond: {
+      if: {
+        $gt: ["$2019.Total Assets", 0]
+      },
+      then: {
+        $multiply: [
+          {
+            $divide: [
+              {
+                $subtract: [
+                  "$2019.Total Assets",
+                  "$2019.Total Liabilities"
+                ]
+              },
+              "$2019.Total Assets"
+            ]
+          },
+          100
+        ]
+      },
+      else: null
+    }
+  },
+  "2018_Percent_Diff": {
+    $cond: {
+      if: {
+        $gt: ["$2018.Total Assets", 0]
+      },
+      then: {
+        $multiply: [
+          {
+            $divide: [
+              {
+                $subtract: [
+                  "$2018.Total Assets",
+                  "$2018.Total Liabilities"
+                ]
+              },
+              "$2018.Total Assets"
+            ]
+          },
+          100
+        ]
+      },
+      else: null
+    }
+  },
+  "2017_Percent_Diff": {
+    $cond: {
+      if: {
+        $gt: ["$2017.Total Assets", 0]
+      },
+      then: {
+        $multiply: [
+          {
+            $divide: [
+              {
+                $subtract: [
+                  "$2017.Total Assets",
+                  "$2017.Total Liabilities"
+                ]
+              },
+              "$2017.Total Assets"
+            ]
+          },
+          100
+        ]
+      },
+      else: null
+    }
+  }
+}
+
+5. Overall dollar difference between revenues and expenses for a single nonprofit or foundation (from five years ago)
+
+
+
+6. Overall dollar difference between assets and liabilities for a single nonprofit or foundation (from five years ago)
+
+
+
+7. Overall percentage difference between revenues and expenses for a single nonprofit or foundation (from five years ago)
+
+
+
+8. Overall percentage difference between assets and liabilities for a single nonprofit or foundation (from five years ago)
+
+
+
+9. (Revenue) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+10. (Expenses) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+11. (Assets) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+12. (Liabilities) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+13. (Revenue) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+14. (Expenses) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+15. (Assets) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+16. (Liabilities) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+
+
+17. (Revenue) Overall average of each NTEE sector nationally (year over year)
+
+
+
+18. (Expenses) Overall average of each NTEE sector nationally (year over year)
+
+
+
+19. (Assets) Overall average of each NTEE sector nationally (year over year)
+
+
+
+20. (Liabilities) Overall average of each NTEE sector nationally (year over year)
+
+
+
+21. (Revenue) Overall median of each NTEE sector nationally (year over year)
+
+
+
+22. (Expenses) Overall median of each NTEE sector nationally (year over year)
+
+
+
+23. (Assets) Overall median of each NTEE sector nationally (year over year)
+
+
+
+24. (Liabilities) Overall median of each NTEE sector nationally (year over year)
