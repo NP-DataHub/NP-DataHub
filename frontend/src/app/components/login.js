@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth'; 
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth';
 import { useAuth } from './context';
+import { db } from '../firebase/firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore'; 
 
 const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {
   const { userLoggedIn } = useAuth();
@@ -12,17 +14,26 @@ const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const saveUserToMongo = async (email) => {
+  const saveUserToFirestore = async (user) => {
     try {
-      await fetch('/api/saveUser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, name: email.split('@')[0] }), 
-      });
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDoc = await getDoc(userDocRef);
+      if (!userDoc.exists()) {
+        await setDoc(userDocRef, {
+          email: user.email,
+          createdAt: new Date(),
+          firstName: '',
+          lastName: '',
+          image: '',
+          organization: '',
+          city: '',
+          state: '',
+          zip: '',
+          nteeCode: ''
+        });
+      }
     } catch (error) {
-      console.error('Error saving user to Mongo:', error);
+      console.error('Error saving user to Firestore:', error);
     }
   };
 
@@ -31,8 +42,8 @@ const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {
     if (!isSigningIn) {
       setIsSigningIn(true);
       try {
-        await doSignInWithEmailAndPassword(email, password);
-        await saveUserToMongo(email);
+        const userCredential = await doSignInWithEmailAndPassword(email, password);
+        await saveUserToFirestore(userCredential.user);
         onSuccess();
       } catch (error) {
         setErrorMessage(error.message);
@@ -47,13 +58,11 @@ const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {
       setIsSigningIn(true);
       try {
         const user = await doSignInWithGoogle();
-        console.log('Google Sign-In Result:', user);
-        const userEmail = user?.email;
-        if (userEmail) {
-          await saveUserToMongo(userEmail);
+        if (user) {
+          await saveUserToFirestore(user);
           onSuccess();
         } else {
-          throw new Error('Failed to retrieve user email');
+          throw new Error('Failed to retrieve user');
         }
       } catch (error) {
         console.error('Error during Google sign-in:', error);
@@ -62,7 +71,7 @@ const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {
       }
     }
   };
-  
+
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
       <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl bg-white">
