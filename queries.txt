@@ -1,23 +1,27 @@
 1. Overall dollar difference between revenues and expenses for a single nonprofit or foundation (year over year)
+(if you can the dash after the year to a dot it will create a drop down menu per year)
 
 [
     {
         '$project': {
             'Name': 1, 
             'EIN': 1, 
-            '2019-Difference': {
+            '2019-Revenue-vs-Expenses': {
                 '$subtract': [
-                    '$2019.Total Revenue', '$2019.Total Expenses'
+                    '$2019.Total Revenue', 
+                    '$2019.Total Expenses'
                 ]
             }, 
-            '2018-Difference': {
+            '2018-Revenue-vs-Expenses': {
                 '$subtract': [
-                    '$2018.Total Revenue', '$2018.Total Expenses'
+                    '$2018.Total Revenue', 
+                    '$2018.Total Expenses'
                 ]
             }, 
-            '2017-Difference': {
+            '2017-Revenue-vs-Expenses': {
                 '$subtract': [
-                    '$2017.Total Revenue', '$2017.Total Expenses'
+                    '$2017.Total Revenue',
+                    '$2017.Total Expenses'
                 ]
             }
         }
@@ -25,31 +29,37 @@
 ]
 
 2. Overall dollar difference between assets and liabilities for a single nonprofit or foundation (year over year)
+(if you can the dash after the year to a dot it will create a drop down menu per year)
 
-{
-  Name: 1,
-  _id: 0,
-  "2019.AssetLiabilityDifference": {
-    $subtract: [
-      "$2019.Total Assets",
-      "$2019.Total Liabilities"
-    ]
-  },
-  "2018.AssetLiabilityDifference": {
-    $subtract: [
-      "$2018.Total Assets",
-      "$2018.Total Liabilities"
-    ]
-  },
-  "2017.AssetLiabilityDifference": {
-    $subtract: [
-      "$2017.Total Assets",
-      "$2017.Total Liabilities"
-    ]
+[
+  {
+    "$project": {
+      "Name": 1,
+      "_id": 0,
+      "2019-Asset-vs-Liability": {
+        "$subtract": [
+          "$2019.Total Assets",
+          "$2019.Total Liabilities"
+        ]
+      },
+      "2018-Asset-vs-Liability": {
+        "$subtract": [
+          "$2018.Total Assets",
+          "$2018.Total Liabilities"
+        ]
+      },
+      "2017-Asset-vs-Liability": {
+        "$subtract": [
+          "$2017.Total Assets",
+          "$2017.Total Liabilities"
+        ]
+      }
+    }
   }
-}
+]
 
 3. Overall percentage difference between revenues and expenses for a single nonprofit or foundation (year over year)
+(this one is wrong and needs to be reimplemented)
 
 {
   Name: 1,
@@ -152,6 +162,7 @@
 }
 
 4. Overall percentage difference between assets and liabilities for a single nonprofit or foundation (year over year)
+(this one is also wrong and needs to be reimplemented)
 
 {
   Name: 1,
@@ -248,75 +259,91 @@
 
 9. (Revenue) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
 
-{
-  _id: {
-    ntee: "$NTEE",
-    state: "$State"
-  },
-  avgRevenue2017: {
-    $avg: "$2017.Total Revenue"
-  },
-  avgRevenue2018: {
-    $avg: "$2018.Total Revenue"
-  },
-  avgRevenue2019: {
-    $avg: "$2019.Total Revenue"
+[
+  {
+    $group: {
+      _id: {
+        ntee: "$NTEE",
+        state: "$State"
+      },
+      avgRevenue2017: {
+        $avg: "$2017.Total Revenue"
+      },
+      avgRevenue2018: {
+        $avg: "$2018.Total Revenue"
+      },
+      avgRevenue2019: {
+        $avg: "$2019.Total Revenue"
+      }
+    }
   }
-}
+]
 
 10. (Expenses) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
 
-{
-  _id: {
-    ntee: "$NTEE",
-    state: "$State"
-  },
-  avgExpenses2017: {
-    $avg: "$2017.Total Expenses"
-  },
-  avgExpenses2018: {
-    $avg: "$2018.Total Expenses"
-  },
-  avgExpenses2019: {
-    $avg: "$2019.Total Expenses"
+[
+  {
+    $group: {
+      _id: {
+      ntee: "$NTEE",
+      state: "$State"
+      },
+      avgExpenses2017: {
+        $avg: "$2017.Total Expenses"
+      },
+      avgExpenses2018: {
+        $avg: "$2018.Total Expenses"
+      },
+      avgExpenses2019: {
+        $avg: "$2019.Total Expenses"
+      }
+    }
   }
-}
+]
 
 11. (Assets) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
 
-{
-  _id: {
-    ntee: "$NTEE",
-    state: "$State"
-  },
-  avgAssets2017: {
-    $avg: "$2017.Total Assets"
-  },
-  avgAssets2018: {
-    $avg: "$2018.Total Assets"
-  },
-  avgAssets2019: {
-    $avg: "$2019.Total Assets"
+[
+  {
+    $group: {
+      _id: {
+        ntee: "$NTEE",
+        state: "$State"
+      },
+      avgAssets2017: {
+        $avg: "$2017.Total Assets"
+      },
+      avgAssets2018: {
+        $avg: "$2018.Total Assets"
+      },
+      avgAssets2019: {
+        $avg: "$2019.Total Assets"
+      }
+    }
   }
-}
+]
 
 12. (Liabilities) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
 
-{
-  _id: {
-    ntee: "$NTEE",
-    state: "$State"
-  },
-  avgLiabilities2017: {
-    $avg: "$2017.Total Liabilities"
-  },
-  avgLiabilities2018: {
-    $avg: "$2018.Total Liabilities"
-  },
-  avgLiabilities2019: {
-    $avg: "$2019.Total Liabilities"
+[
+  {
+    $group: {
+      _id: {
+        ntee: "$NTEE",
+        state: "$State"
+      },
+      avgLiabilities2017: {
+        $avg: "$2017.Total Liabilities"
+      },
+      avgLiabilities2018: {
+        $avg: "$2018.Total Liabilities"
+      },
+      avgLiabilities2019: {
+        $avg: "$2019.Total Liabilities"
+      }
+    }
   }
-}
+]
 
 13. (Revenue) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
 
@@ -336,71 +363,89 @@
 
 17. (Revenue) Overall average of each NTEE sector nationally (year over year)
 
-{
-  _id: {
-    ntee: "$NTEE"
-  },
-  avgRevenue2017: {
-    $avg: "$2017.Total Revenue"
-  },
-  avgRevenue2018: {
-    $avg: "$2018.Total Revenue"
-  },
-  avgRevenue2019: {
-    $avg: "$2019.Total Revenue"
+[
+  {
+    $group:{
+      _id: {
+        ntee: "$NTEE"
+      },
+      avgRevenue2017: {
+        $avg: "$2017.Total Revenue"
+      },
+      avgRevenue2018: {
+        $avg: "$2018.Total Revenue"
+      },
+      avgRevenue2019: {
+        $avg: "$2019.Total Revenue"
+      }
+    }
   }
-}
+]
 
 18. (Expenses) Overall average of each NTEE sector nationally (year over year)
 
-{
-  _id: {
-    ntee: "$NTEE"
-  },
-  avgExpenses2017: {
-    $avg: "$2017.Total Expenses"
-  },
-  avgExpenses2018: {
-    $avg: "$2018.Total Expenses"
-  },
-  avgExpenses2019: {
-    $avg: "$2019.Total Expenses"
+[
+  {
+    $group:{
+      _id: {
+        ntee: "$NTEE"
+      },
+      avgExpenses2017: {
+        $avg: "$2017.Total Expenses"
+      },
+      avgExpenses2018: {
+        $avg: "$2018.Total Expenses"
+      },
+      avgExpenses2019: {
+        $avg: "$2019.Total Expenses"
+      }
+    }
   }
-}
+]
 
 19. (Assets) Overall average of each NTEE sector nationally (year over year)
 
-{
-  _id: {
-    ntee: "$NTEE"
-  },
-  avgAssets2017: {
-    $avg: "$2017.Total Assets"
-  },
-  avgAssets2018: {
-    $avg: "$2018.Total Assets"
-  },
-  avgAssets2019: {
-    $avg: "$2019.Total Assets"
+
+]
+  {
+    $group:{
+      _id: {
+        ntee: "$NTEE"
+      },
+      avgAssets2017: {
+        $avg: "$2017.Total Assets"
+      },
+      avgAssets2018: {
+        $avg: "$2018.Total Assets"
+      },
+      avgAssets2019: {
+        $avg: "$2019.Total Assets"
+      }
+    }
   }
-}
+]
 
 20. (Liabilities) Overall average of each NTEE sector nationally (year over year)
 
-{
-  _id: {
-    ntee: "$NTEE"
-  },
-  avgLiabilities2017: {
-    $avg: "$2017.Total Liabilities"
-  },
-  avgLiabilities2018: {
-    $avg: "$2018.Total Liabilities"
-  },
-  avgLiabilities2019: {
-    $avg: "$2019.Total Liabilities"
+
+[
+  {
+    $group:{
+      _id: {
+        ntee: "$NTEE"
+      },
+      avgLiabilities2017: {
+        $avg: "$2017.Total Liabilities"
+      },
+      avgLiabilities2018: {
+        $avg: "$2018.Total Liabilities"
+      },
+      avgLiabilities2019: {
+        $avg: "$2019.Total Liabilities"
+      }
+    }
   }
-}
+]
 
 21. (Revenue) Overall median of each NTEE sector nationally (year over year)
 
