@@ -248,19 +248,75 @@
 
 9. (Revenue) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
 
-
+{
+  _id: {
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  avgRevenue2017: {
+    $avg: "$2017.Total Revenue"
+  },
+  avgRevenue2018: {
+    $avg: "$2018.Total Revenue"
+  },
+  avgRevenue2019: {
+    $avg: "$2019.Total Revenue"
+  }
+}
 
 10. (Expenses) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
 
-
+{
+  _id: {
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  avgExpenses2017: {
+    $avg: "$2017.Total Expenses"
+  },
+  avgExpenses2018: {
+    $avg: "$2018.Total Expenses"
+  },
+  avgExpenses2019: {
+    $avg: "$2019.Total Expenses"
+  }
+}
 
 11. (Assets) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
 
-
+{
+  _id: {
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  avgAssets2017: {
+    $avg: "$2017.Total Assets"
+  },
+  avgAssets2018: {
+    $avg: "$2018.Total Assets"
+  },
+  avgAssets2019: {
+    $avg: "$2019.Total Assets"
+  }
+}
 
 12. (Liabilities) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
 
-
+{
+  _id: {
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  avgLiabilities2017: {
+    $avg: "$2017.Total Liabilities"
+  },
+  avgLiabilities2018: {
+    $avg: "$2018.Total Liabilities"
+  },
+  avgLiabilities2019: {
+    $avg: "$2019.Total Liabilities"
+  }
+}
 
 13. (Revenue) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
 
@@ -280,19 +336,71 @@
 
 17. (Revenue) Overall average of each NTEE sector nationally (year over year)
 
-
+{
+  _id: {
+    ntee: "$NTEE"
+  },
+  avgRevenue2017: {
+    $avg: "$2017.Total Revenue"
+  },
+  avgRevenue2018: {
+    $avg: "$2018.Total Revenue"
+  },
+  avgRevenue2019: {
+    $avg: "$2019.Total Revenue"
+  }
+}
 
 18. (Expenses) Overall average of each NTEE sector nationally (year over year)
 
-
+{
+  _id: {
+    ntee: "$NTEE"
+  },
+  avgExpenses2017: {
+    $avg: "$2017.Total Expenses"
+  },
+  avgExpenses2018: {
+    $avg: "$2018.Total Expenses"
+  },
+  avgExpenses2019: {
+    $avg: "$2019.Total Expenses"
+  }
+}
 
 19. (Assets) Overall average of each NTEE sector nationally (year over year)
 
-
+{
+  _id: {
+    ntee: "$NTEE"
+  },
+  avgAssets2017: {
+    $avg: "$2017.Total Assets"
+  },
+  avgAssets2018: {
+    $avg: "$2018.Total Assets"
+  },
+  avgAssets2019: {
+    $avg: "$2019.Total Assets"
+  }
+}
 
 20. (Liabilities) Overall average of each NTEE sector nationally (year over year)
 
-
+{
+  _id: {
+    ntee: "$NTEE"
+  },
+  avgLiabilities2017: {
+    $avg: "$2017.Total Liabilities"
+  },
+  avgLiabilities2018: {
+    $avg: "$2018.Total Liabilities"
+  },
+  avgLiabilities2019: {
+    $avg: "$2019.Total Liabilities"
+  }
+}
 
 21. (Revenue) Overall median of each NTEE sector nationally (year over year)
 
