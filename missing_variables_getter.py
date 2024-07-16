@@ -40,7 +40,7 @@ class DatabaseStarter:
 
     def insert_data(self):
         if self.initial_data:
-            self.database["Table1"].insert_many(self.initial_data)
+            self.database["NonProfitData"].insert_many(self.initial_data)
 
 if __name__ == "__main__":
     file_path = '/Users/mr.youssef/Desktop/'
