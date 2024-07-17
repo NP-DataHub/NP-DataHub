@@ -151,7 +151,7 @@ const StackChart = ({revenues, expenses, assets, liabilities, style}) => {
         },
         data: liabilities,
         itemStyle: {
-            //barBorderRadius: [0, 0.017*scale, 0.017*scale, 0],
+            barBorderRadius: [0, 0.016*dimensions.width, 0.016*dimensions.width, 0],
         }
       }
     ]

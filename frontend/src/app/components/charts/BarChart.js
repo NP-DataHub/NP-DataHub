@@ -117,9 +117,10 @@ const BarChart = ({ values }) => {
               }
             }
             return 'rgb(80, 110, 237)'; // Default blue color
-          }
-        },
-      }
+          },
+          barBorderRadius: [0.016*dimensions.width, 0.016*dimensions.width, 0, 0],
+        }
+      },
     ]
   };
 
