@@ -5,6 +5,8 @@ import BarChart from "@/app/components/charts/BarChart";
 import LineCompareChart from "@/app/components/charts/LineCompareChart";
 import TimeSeries from "@/app/components/charts/TimeSeries";
 import StackChart from "@/app/components/charts/StackChart";
+import Gauge from "@/app/components/charts/Gauge";
+//import Choropleth from "@/app/components/charts/Choropleth";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -130,21 +132,21 @@ const Nonprofit = () => {
                               {/*add chart here box size will update with chart*/}
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue</h1>
                               <div className="flex items-center justify-center mb-12" style={{ width: '100%', height: '100%' }}>
-                                  <BarChart values={revenues} style={style}/>
+                                  <BarChart values={revenues}/>
                               </div>
                           </div>
                           <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                               {/*add chart here box size will update with chart*/}
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue vs. Expenses</h1>
-                              <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
-                                  <LineCompareChart variable1="Revenue" variable2="Expenses" values1={revenues} values2={expenses} style={style}/>
+                              <div className="flex items-center justify-center">
+                                  <LineCompareChart variable1="Revenue" variable2="Expenses" values1={revenues} values2={expenses}/>
                               </div>
                           </div>
                           <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                               {/*add chart here box size will update with chart*/}
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Overall Growth</h1>
-                              <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
-                                  <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities} style={style}/>
+                              <div className="flex items-center justify-center">
+                                  <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities}/>
                               </div>
                           </div>
                       </div>
@@ -152,14 +154,18 @@ const Nonprofit = () => {
                           <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 col-span-2">
                               {/*add chart here box size will update with chart*/}
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Time Series</h1>
-                              <div className="flex items-center justify-center mb-24 mt-12" style={{ width: '90%', height: '90%' }}>
-                                  <TimeSeries variable="Revenue" values={revenues} style={style} />
+                              <div className="flex items-center justify-center mb-24 mt-12">
+                                  {<TimeSeries variable="Revenue" values={revenues}/>}
+                                  {/*<Choropleth/>*/}
                               </div>
 
                           </div>
                           <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                               {/*add chart here box size will update with chart*/}
-                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Compared to State</h1>
+                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Compared to Averages</h1>
+                              <div className="flex items-center justify-center mb-24 mt-12">
+                                  <Gauge orgName={nonprofitData.name} orgVal={62} stateName={"New York Avg"} stateVal={100} nationalVal={48}/>
+                              </div>
                           </div>
                       </div>
                   </div>

@@ -50,9 +50,9 @@ const TimeSeries = ({values}) => {
     },
     grid: {
       left: 0,
-      bottom: 0,
+      bottom: 0.036*dimensions.width,
       right: 0,
-      top: 0,
+      top: 0.01*dimensions.width,
       containLabel: true
     },
     xAxis: [

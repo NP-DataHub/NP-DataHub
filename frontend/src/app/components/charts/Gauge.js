@@ -1,52 +1,75 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
 
 /**
  * @param values -   an array of values measured each year
- * @param style -    a struct containing format options - height and width
- *                   must be defined as numbers.
 */
-const PerformanceMeter = ({values, style}) => {
+const Gauge = ({orgName, orgVal, stateName, stateVal, nationalVal}) => {
     const gaugeData = [
         {
-          value: 66,
-          name: 'Assets/Liabilities',
+          value: orgVal,
+          name: "Your Org",
           title: {
             offsetCenter: ['0%', '-30%']
           },
           detail: {
             valueAnimation: true,
-            offsetCenter: ['0%', '-20%']
+            offsetCenter: ['0%', '-18%']
           }
         },
         {
-          value: 98,
-          name: 'Revenue/Expenses',
+          value: stateVal,
+          name: stateName,
           title: {
             offsetCenter: ['0%', '0%']
           },
           detail: {
             valueAnimation: true,
-            offsetCenter: ['0%', '10%']
+            offsetCenter: ['0%', '12%']
           }
         },
         {
-          value: 60,
-          name: 'Health?',
+          value: nationalVal,
+          name: 'National Avg',
           title: {
             offsetCenter: ['0%', '30%']
           },
           detail: {
             valueAnimation: true,
-            offsetCenter: ['0%', '40%']
+            offsetCenter: ['0%', '42%']
           }
         }
-      ];
+    ];
+
+    const chartContainerRef = useRef(null);
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+    useEffect(() => {
+      const handleResize = () => {
+        if (chartContainerRef.current) {
+          setDimensions({
+            width: chartContainerRef.current.offsetWidth,
+            height: chartContainerRef.current.offsetHeight,
+          });
+        }
+      };
+
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const option = {
+        grid: {
+          left: 0,
+          right: 0,
+          bottom: 0,
+          top: 0,
+          containLabel: true
+        },
         series: [
             {
               type: 'gauge',
@@ -67,9 +90,12 @@ const PerformanceMeter = ({values, style}) => {
               },
               axisLine: {
                 lineStyle: {
-                  width: 40
+                    width: 40,
+                    color: [
+                        [1, '#464646'], // Empty portion color
+                    ]
                 }
-              },
+            },
               splitLine: {
                 show: false,
                 distance: 0,
@@ -83,18 +109,14 @@ const PerformanceMeter = ({values, style}) => {
                 distance: 50
               },
               data: gaugeData,
-
               title: {
-                fontSize: 14
+                fontSize: 0.036*dimensions.width
               },
               detail: {
-                width: 50,
-                height: 14,
-                fontSize: 14,
+                width: dimensions.width,
+                height: dimensions.height,
+                fontSize: 0.036*dimensions.width,
                 color: 'inherit',
-                borderColor: 'inherit',
-                borderRadius: 20,
-                borderWidth: 1,
                 formatter: '{value}%'
               }
             }
@@ -102,9 +124,11 @@ const PerformanceMeter = ({values, style}) => {
     };
 
     return (
-        <ReactECharts option={option} style={style} />
+      <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
+        <ReactECharts option={option}/>
+      </div>
     );
 
 };
 
-export default PerformanceMeter;
+export default Gauge;
