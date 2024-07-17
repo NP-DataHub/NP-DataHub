@@ -1,26 +1,34 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
 /**
- * @param variable - string containing the variable recorded in the graph
  * @param values -   an array of values measured each year
- * @param style -    a struct containing format options - height and width
- *                   must be defined as numbers.
 */
-
-const TimeSeries = ({variable, values, style}) => {
+const TimeSeries = ({values}) => {
   // ensures arg is an array
   if (!Array.isArray(values) || values.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
   }
 
-  const width = typeof style.width === 'number' ? style.width : parseInt(style.width, 10);
-  const height = typeof style.height === 'number' ? style.height : parseInt(style.height, 10);
+  const chartContainerRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-  let scale = Math.round((width + height)/2);
-  console.log(scale);
+  useEffect(() => {
+    const handleResize = () => {
+      if (chartContainerRef.current) {
+        setDimensions({
+          width: chartContainerRef.current.offsetWidth,
+          height: chartContainerRef.current.offsetHeight,
+        });
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const option = {
     dataset: [
@@ -41,10 +49,10 @@ const TimeSeries = ({variable, values, style}) => {
       }
     },
     grid: {
-      left: Math.round(0.90 * scale),
-      bottom: Math.round(0.25 * scale),
-      right: Math.round(0.90 * scale),
-      top: Math.round(0.1 * scale),
+      left: 0,
+      bottom: 0,
+      right: 0,
+      top: 0,
       containLabel: true
     },
     xAxis: [
@@ -53,8 +61,7 @@ const TimeSeries = ({variable, values, style}) => {
         nameLocation: 'middle',
         nameTextStyle: {
           fontWeight: 'bold',
-          fontSize: Math.round(0.20*scale),
-          padding: Math.round(0.10*scale),
+          fontSize: Math.round(0.036*dimensions.width),
         },
         type: 'category',
         data: Array.from({ length: values.length }, (_, index) => index + 2017),
@@ -62,7 +69,7 @@ const TimeSeries = ({variable, values, style}) => {
           alignWithLabel: true
         },
         axisLabel: {
-          fontSize: Math.round(0.15* scale)
+          fontSize: Math.round(0.015* dimensions.width)
         }
       }
     ],
@@ -72,7 +79,7 @@ const TimeSeries = ({variable, values, style}) => {
           formatter: function (value) {
             return '$' + value;
           },
-          fontSize: Math.round(0.15 * scale)
+          fontSize: Math.round(0.015 * dimensions.width)
         }
       }
     ],
@@ -87,7 +94,9 @@ const TimeSeries = ({variable, values, style}) => {
   console.log(option)
 
   return (
-    <ReactECharts option={option} style={style} />
+    <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
+      <ReactECharts option={option}/>
+    </div>
   );
 };
 

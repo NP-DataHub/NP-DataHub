@@ -9,10 +9,8 @@ import ReactECharts from 'echarts-for-react';
  * @param expenses -    an array of expenses measured each year
  * @param assets -      an array of assets measured each year
  * @param liabilities - an array of liabilities measured each year
- * @param style -       a struct containing format options - height and width
- *                      must be defined as numbers.
 */
-const StackChart = ({revenues, expenses, assets, liabilities, style}) => {
+const StackChart = ({revenues, expenses, assets, liabilities}) => {
   // ensures arg is an array
   if (!Array.isArray(revenues) || !Array.isArray(expenses) || !Array.isArray(assets) || !Array.isArray(liabilities)) {
     return <div>ERROR: chart arg must be an array</div>;
