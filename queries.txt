@@ -59,187 +59,115 @@
 ]
 
 3. Overall percentage difference between revenues and expenses for a single nonprofit or foundation (year over year)
-(this one is wrong and needs to be reimplemented)
+(this one is more of the right idea but examples seem to have a lot of nulls, need to be fixed)
 
-{
-  Name: 1,
-  "2016_2017_Rev_Percent_Inc": {
-    $multiply: [
-      {
-        $divide: [
-          {
-            $subtract: [
-              "$2017.Total Revenue",
-              "$2016.Total Revenue"
-            ]
-          },
-          "$2016.Total Revenue"
-        ]
-      },
-      100
-    ]
+
+[
+  {
+    "$project": {
+      "name": "$Name",
+      "expensesRevenueDiff": {
+        "2016": {
+          "$subtract": ["$2016.Total Revenue", "$2016.Total Expenses"]
+        },
+        "2017": {
+          "$subtract": ["$2017.Total Revenue", "$2017.Total Expenses"]
+        },
+        "2018": {
+          "$subtract": ["$2018.Total Revenue", "$2018.Total Expenses"]
+        },
+        "2019": {
+          "$subtract": ["$2019.Total Revenue", "$2019.Total Expenses"]
+        }
+      }
+    }
   },
-  "2017_2018_Rev_Percent_Inc": {
-    $multiply: [
-      {
-        $divide: [
-          {
-            $subtract: [
-              "$2018.Total Revenue",
-              "$2017.Total Revenue"
-            ]
-          },
-          "$2017.Total Revenue"
-        ]
+  {
+    "$project": {
+      "name": 1,
+      "expenseRevenueDiff2016": "$expensesRevenueDiff.2016",
+      "diff2017_2016": {
+        "$subtract": ["$expensesRevenueDiff.2017", "$expensesRevenueDiff.2016"]
       },
-      100
-    ]
+      "diff2018_2017": {
+        "$subtract": ["$expensesRevenueDiff.2018", "$expensesRevenueDiff.2017"]
+      },
+      "diff2019_2018": {
+        "$subtract": ["$expensesRevenueDiff.2019", "$expensesRevenueDiff.2018"]
+      }
+    }
   },
-  "2018_2019_Rev_Percent_Inc": {
-    $multiply: [
-      {
-        $divide: [
+  {
+    "$project": {
+      "name": 1,
+      "increasePerc2017-2016": {
+        "$multiply": [
           {
-            $subtract: [
-              "$2019.Total Revenue",
-              "$2018.Total Revenue"
-            ]
+            "$divide": ["$diff2017_2016", "$expenseRevenueDiff2016"]
           },
-          "$2018.Total Revenue"
+          100
         ]
       },
-      100
-    ]
-  },
-  "2016_2017_Exp_Percent_Inc": {
-    $multiply: [
-      {
-        $divide: [
+      "increasePerc2018-2017": {
+        "$multiply": [
           {
-            $subtract: [
-              "$2017.Total Expenses",
-              "$2016.Total Expenses"
-            ]
+            "$divide": ["$diff2018_2017", "$expensesRevenueDiff.2017"]
           },
-          "$2016.Total Expenses"
+          100
         ]
       },
-      100
-    ]
-  },
-  "2017_2018_Exp_Percent_Inc": {
-    $multiply: [
-      {
-        $divide: [
+      "increasePerc2019-2018": {
+        "$multiply": [
           {
-            $subtract: [
-              "$2018.Total Expenses",
-              "$2017.Total Expenses"
-            ]
+            "$divide": ["$diff2019_2018", "$expensesRevenueDiff.2018"]
           },
-          "$2017.Total Expenses"
+          100
         ]
-      },
-      100
-    ]
-  },
-  "2018_2019_Exp_Percent_Inc": {
-    $multiply: [
-      {
-        $divide: [
-          {
-            $subtract: [
-              "$2019.Total Expenses",
-              "$2018.Total Expenses"
-            ]
-          },
-          "$2018.Total Expenses"
-        ]
-      },
-      100
-    ]
+      }
+    }
   }
-}
+]
 
 4. Overall percentage difference between assets and liabilities for a single nonprofit or foundation (year over year)
-(this one is also wrong and needs to be reimplemented)
+(this one is more of the right idea but examples seem to have a lot of nulls, need to be fixed)
 
-{
-  Name: 1,
-  EIN: 1,
-  "2019_Percent_Diff": {
-    $cond: {
-      if: {
-        $gt: ["$2019.Total Assets", 0]
-      },
-      then: {
-        $multiply: [
-          {
-            $divide: [
-              {
-                $subtract: [
-                  "$2019.Total Assets",
-                  "$2019.Total Liabilities"
-                ]
-              },
-              "$2019.Total Assets"
-            ]
-          },
-          100
-        ]
-      },
-      else: null
+
+[
+  {
+    "$addFields": {
+      "2016.Difference": { "$subtract": ["$2016.Total Assets", "$2016.Total Liabilities"] },
+      "2017.Difference": { "$subtract": ["$2017.Total Assets", "$2017.Total Liabilities"] },
+      "2018.Difference": { "$subtract": ["$2018.Total Assets", "$2018.Total Liabilities"] },
+      "2019.Difference": { "$subtract": ["$2019.Total Assets", "$2019.Total Liabilities"] }
     }
   },
-  "2018_Percent_Diff": {
-    $cond: {
-      if: {
-        $gt: ["$2018.Total Assets", 0]
+  {
+    "$project": {
+      "Name": 1,
+      "Increase_2016-2017": {
+        "$cond": {
+          "if": { "$eq": ["$2016.Difference", 0] },
+          "then": 0,
+          "else": { "$multiply": [{ "$divide": [{ "$subtract": ["$2017.Difference", "$2016.Difference"] }, "$2016.Difference"] }, 100] }
+        }
       },
-      then: {
-        $multiply: [
-          {
-            $divide: [
-              {
-                $subtract: [
-                  "$2018.Total Assets",
-                  "$2018.Total Liabilities"
-                ]
-              },
-              "$2018.Total Assets"
-            ]
-          },
-          100
-        ]
+      "Increase_2017-2018": {
+        "$cond": {
+          "if": { "$eq": ["$2017.Difference", 0] },
+          "then": 0,
+          "else": { "$multiply": [{ "$divide": [{ "$subtract": ["$2018.Difference", "$2017.Difference"] }, "$2017.Difference"] }, 100] }
+        }
       },
-      else: null
-    }
-  },
-  "2017_Percent_Diff": {
-    $cond: {
-      if: {
-        $gt: ["$2017.Total Assets", 0]
-      },
-      then: {
-        $multiply: [
-          {
-            $divide: [
-              {
-                $subtract: [
-                  "$2017.Total Assets",
-                  "$2017.Total Liabilities"
-                ]
-              },
-              "$2017.Total Assets"
-            ]
-          },
-          100
-        ]
-      },
-      else: null
+      "Increase_2018-2019": {
+        "$cond": {
+          "if": { "$eq": ["$2018.Difference", 0] },
+          "then": 0,
+          "else": { "$multiply": [{ "$divide": [{ "$subtract": ["$2019.Difference", "$2018.Difference"] }, "$2017.Difference"] }, 100] }
+        }
+      }
     }
   }
-}
+]
 
 5. Overall dollar difference between revenues and expenses for a single nonprofit or foundation (from five years ago)
 
