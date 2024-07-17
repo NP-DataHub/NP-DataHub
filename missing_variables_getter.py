@@ -1,42 +1,52 @@
-import csv
 import os
-from pymongo import MongoClient
-from concurrent.futures import ThreadPoolExecutor
+import pandas as pd
+from pymongo import MongoClient, InsertOne
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
-database = mongo_client["Np-Datahub"]
-collections = {
-    "990": database["Master"],
-    "990EZ": database["EZ"],
-    "990PF": database["Private"]
-}
+class DatabaseStarter:
+    def __init__(self):
+        self.mongo_client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
+        self.database = self.mongo_client["Np-Datahub"]
+        self.initial_data = []
 
-def update_document(ein, subsection, ntee_cd):
-    for collection_name, collection in collections.items():
-        result = collection.find_one({"ein": ein})
-        if result:
-            collection.update_one(
-                {"ein": ein},
-                {"$set": {"NTEE": ntee_cd, "Subsection Code": subsection}},
-            )
-            return
+    def update_documents(self, batch):
 
-def process_row(row):
-    ein = row['EIN'] 
-    ntee_cd = row['NTEE_CD']
-    if(ntee_cd == "" or ntee_cd is None):
-        ntee_cd = "None"
-    #subsection = row['SUBSECTION'] # add check if empty, then keep None
-    update_document(ein, subsection, ntee_cd)
+        for row in batch:
+            ein = str(row.get('EIN'))
+
+            while len(ein) < 9:
+                ein = '0' + ein
+            
+            ntee_cd = str(row.get('NTEE_CD'))
+            if ntee_cd == "nan":
+                ntee_cd = "Z"
+            subsection_code = str(row.get('SUBSECTION'))
+            if subsection_code == "nan": # wont happen they re all present
+                subsection_code = "Z"
+
+            self.initial_data.append({
+                "EIN": ein,
+                "NTEE": ntee_cd,
+                "Subsection Code": subsection_code
+            })
+
+    def process_csv(self, file_path):
+        df = pd.read_csv(file_path)
+        rows = df.to_dict(orient='records')
+        with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
+            futures = [executor.submit(self.update_documents, [row]) for row in rows]
+            for future in as_completed(futures):
+                future.result()
+
+    def insert_data(self):
+        if self.initial_data:
+            self.database["NonProfitData"].insert_many(self.initial_data)
 
 if __name__ == "__main__":
-    # Read the CSV file and process each row in parallel
-    with open('/Users/mr.youssef/Desktop/eo1.csv', newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        rows = list(reader)
-
-    num_cores = os.cpu_count()
-    with ThreadPoolExecutor(max_workers=num_cores) as executor:
-        executor.map(process_row, rows)
-
-    print("Update process completed.")
+    file_path = '/Users/mr.youssef/Desktop/'
+    files = ['eo1.csv','eo2.csv','eo3.csv','eo4.csv']
+    obj = DatabaseStarter()
+    for file in files:
+        obj.process_csv(file_path+file)
+    obj.insert_data()
+    print("Process Completed.")

@@ -8,16 +8,9 @@ from datetime import datetime
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
-        self.mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
+        self.mongo_client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
         self.database = self.mongo_client["Np-Datahub"]
-        self.collections = {
-            "990": self.database["Master"],
-            "990EZ": self.database["EZ"],
-            "990PF": self.database["Private"]
-        }
-        self.master_cache = {}
-        self.ez_cache = {}
-        self.private_cache = {}
+        self.cache = {"990": {} , "990EZ": {} , "990PF" : {} }
         self.output = []
     def get_ein_and_tax_period(self, root):
         ein_element = root.find('.//irs:Filer/irs:EIN', self.namespace)
@@ -204,11 +197,11 @@ class Database:
                 f"{tax_period}.Gross Receipts": financial_info[7],
                 f"{tax_period}.Fundraising Income": financial_info[8],
                 f"{tax_period}.Fundraising Expenses": financial_info[9],
-                f"{tax_period}.Compensation of current officers": financial_info[10],
+                f"{tax_period}.Compensation of Current Officers": financial_info[10],
                 f"{tax_period}.Other salaries and wages": financial_info[11],
                 f"{tax_period}.Payroll Taxes": financial_info[12],
                 f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[13],
-                f"{tax_period}.Number of employee": financial_info[14],
+                f"{tax_period}.Number of Employee": financial_info[14],
                 f"{tax_period}.Filepath": file_path
             }
         elif return_type == "990EZ":
@@ -237,12 +230,12 @@ class Database:
                 f"{tax_period}.Net Gain (Sales of Assets)": financial_info[8],
                 f"{tax_period}.Other Income": financial_info[9],
                 f"{tax_period}.Compensation of Officers": financial_info[10],
-                f"{tax_period}.Total Fund net worth": financial_info[11],
+                f"{tax_period}.Total Fund Net Worth": financial_info[11],
                 f"{tax_period}.Investments in US Gov Obligations": financial_info[12],
                 f"{tax_period}.Investments in Corporate Stock": financial_info[13],
                 f"{tax_period}.Investments in Corporate Bonds": financial_info[14],
                 f"{tax_period}.Cash": financial_info[15],
-                f"{tax_period}.Adjusted net income": financial_info[16],
+                f"{tax_period}.Adjusted Net Income": financial_info[16],
                 f"{tax_period}.Filepath": file_path
             }
         if include_general_info == 1:
@@ -252,9 +245,7 @@ class Database:
                 "State": general_info[1],
                 "City": general_info[2],
                 "Zipcode": general_info[3],
-                "EIN": ein,
-                "NTEE": "None",
-                "Subsection Code": "None"
+                "Return type" : return_type
             })
         return update_fields
 
@@ -298,17 +289,17 @@ class Database:
     def handle_duplicate_files_helper(self, root, file_path, return_type, ein, tax_period, previous_dt,current_dt):
         prev_filepath = prev_root = prev_financial_info = current_financial_info = None
         if return_type == "990":
-            prev_filepath = self.master_cache[ein][tax_period][0]
+            prev_filepath = self.cache[return_type][ein][tax_period][0]
             prev_root = ET.parse(prev_filepath).getroot()
             prev_financial_info = self.get_990_financial_information(prev_root)
             current_financial_info = self.get_990_financial_information(root)
         elif return_type == "990EZ":
-            prev_filepath = self.ez_cache[ein][tax_period][0]
+            prev_filepath = self.cache[return_type][ein][tax_period][0]
             prev_root = ET.parse(prev_filepath).getroot()
             prev_financial_info = self.get_990EZ_financial_information(prev_root)
             current_financial_info = self.get_990EZ_financial_information(root)
         else:
-            prev_filepath = self.private_cache[ein][tax_period][0]
+            prev_filepath = self.cache[return_type][ein][tax_period][0]
             prev_root = ET.parse(prev_filepath).getroot()
             prev_financial_info = self.get_990PF_financial_information(prev_root)
             current_financial_info = self.get_990PF_financial_information(root)
@@ -340,44 +331,35 @@ class Database:
         timestamp_element = root.find('.//irs:ReturnTs', self.namespace)
         current_timestamp = timestamp_element.text if timestamp_element is not None else "None"
 
-        def build_database_helper(cache):
-            nonlocal update_fields
-            if ein not in cache:
-                cache[ein] = {tax_period: [file_path, current_timestamp]}
-                update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
-            else:
-                if tax_period not in cache[ein]:
-                    cache[ein][tax_period] = [file_path, current_timestamp]
-                    update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 0)
-                else:
-                    previous_timestamp = cache[ein][tax_period][1]
-                    if current_timestamp != "None" and previous_timestamp != "None":
-                        try:
-                            previous_dt = datetime.fromisoformat(previous_timestamp)
-                        except ValueError:
-                            previous_dt = None
-                        try:
-                            current_dt = datetime.fromisoformat(current_timestamp)
-                        except ValueError:
-                            current_dt = None
-                        if current_dt is not None and previous_dt is not None:
-                            if current_dt > previous_dt:
-                                cache[ein][tax_period][1] = current_timestamp
-                                update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
-                            elif current_dt == previous_dt:
-                                self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
-                        elif current_dt is None or previous_dt is None:
-                            self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
-                    elif current_timestamp == "None" or previous_timestamp == "None":
-                        self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
-
         update_fields = None
-        if return_type == "990":
-            build_database_helper(self.master_cache)
-        elif return_type == "990EZ":
-            build_database_helper(self.ez_cache)
+        if ein not in self.cache[return_type]:
+            self.cache[return_type][ein] = {tax_period: [file_path, current_timestamp]}
+            update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
         else:
-            build_database_helper(self.private_cache)
+            if tax_period not in self.cache[return_type][ein]:
+                self.cache[return_type][ein][tax_period] = [file_path, current_timestamp]
+                update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 0)
+            else:
+                previous_timestamp = self.cache[return_type][ein][tax_period][1]
+                if current_timestamp != "None" and previous_timestamp != "None":
+                    try:
+                        previous_dt = datetime.fromisoformat(previous_timestamp)
+                    except ValueError:
+                        previous_dt = None
+                    try:
+                        current_dt = datetime.fromisoformat(current_timestamp)
+                    except ValueError:
+                        current_dt = None
+                    if current_dt is not None and previous_dt is not None:
+                        if current_dt > previous_dt:
+                            self.cache[return_type][ein][tax_period][1] = current_timestamp
+                            update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
+                        elif current_dt == previous_dt:
+                            self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
+                    elif current_dt is None or previous_dt is None:
+                        self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
+                elif current_timestamp == "None" or previous_timestamp == "None":
+                    self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
 
         if update_fields is None:
             return None,None
@@ -391,7 +373,7 @@ class Database:
 
     def process_all_xml_files(self, directory):
         num_cores = os.cpu_count()
-        insertions = {"990": [], "990EZ": [], "990PF": []}
+        insertions = []
         with ThreadPoolExecutor(max_workers=num_cores) as executor:
             futures = []
             for filename in os.listdir(directory):
@@ -402,17 +384,19 @@ class Database:
             for future in as_completed(futures):
                 return_type, insertion = future.result()
                 if insertion:
-                    insertions[return_type].append(insertion)
+                    insertions.append(insertion)
 
-        for return_type in insertions:
-            if insertions[return_type]:
-                collection = self.collections[return_type]
-                collection.bulk_write(insertions[return_type])
+        self.database["NonProfitData"].bulk_write(insertions)
+        missing_ntee = {"NTEE": {"$exists": False}}
+        missing_subsection_code = {"Subsection Code": {"$exists": False}}
+        self.database["NonProfitData"].update_many(missing_ntee, {"$set": {"NTEE": "Z"}})
+        self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"subsection_code": "Z"}})
 
     def output_duplicates(self, name, directory):
         if self.output:
             os.makedirs(directory, exist_ok=True)
             file_name = os.path.join(directory, f"{name}_ErrorOutput.txt")
+            differences_found = False  # Flag to check if any differences are found
             with open(file_name, 'w') as file:
                 for lst in self.output:
                     prev_filepath = lst[0]
@@ -426,18 +410,23 @@ class Database:
                     if len(lst) == 4:
                         file.write("No difference found\n")
                     else:
+                        differences_found = True
                         for i in range(4, len(lst), 3):
                             label = lst[i]
                             prev_info = lst[i + 1]
                             curr_info = lst[i + 2]
                             file.write(f"{label}: previous is {prev_info} and current is: {curr_info}\n")
                     file.write("=" * 50 + "\n")
-            print("Error output file has been successfully created")
+            if not differences_found:
+                os.remove(file_name)
+                print("No duplicate files to handle manually")
+            else:
+                print("Error output file has been successfully created")
         else:
             print("No duplicate files to handle manually")
 
 if __name__ == "__main__":
-    directory = sys.argv[1]
+    directory = '/tmp/2018-5'
     output_directory = '/Users/mr.youssef/Desktop/NpDataHub/errorOutputs'
     name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
     # input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')

@@ -1,0 +1,4 @@
+Previous filepath: /tmp/2020-1B/202002089349200000_public.xml and timestamp: None
+Current filepath: /tmp/2020-1B/202002099349200100_public.xml and timestamp: None
+No difference found
+==================================================

@@ -1,0 +1,15 @@
+Previous filepath: /tmp/2018-3B/201812569349100216_public.xml and timestamp: 2018-09-13 13:45:22-05:00
+Current filepath: /tmp/2018-3B/201812569349100111_public.xml and timestamp: 2018-09-13 13:45:22-05:00
+Total Revenue: previous is 2 and current is: 0
+Total Assets: previous is 21671 and current is: 0
+Total Expenses: previous is 0 and current is: 425
+Net Income (Less Deficit): previous is 2 and current is: -425
+Interest Revenue: previous is 2 and current is: 0
+Total Fund net worth: previous is 21671 and current is: 0
+Cash: previous is 21671 and current is: 0
+Adjusted net income: previous is 2 and current is: 0
+==================================================
+Previous filepath: /tmp/2018-3B/201812129349200521_public.xml and timestamp: None
+Current filepath: /tmp/2018-3B/201812149349200201_public.xml and timestamp: None
+Total Assets: previous is 26671 and current is: 26579
+==================================================
