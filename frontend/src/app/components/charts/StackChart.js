@@ -1,6 +1,6 @@
 'use client';
 // BarChartComponent.js
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
 
@@ -18,7 +18,23 @@ const StackChart = ({revenues, expenses, assets, liabilities, style}) => {
     return <div>ERROR: chart arg must be an array</div>;
   }
 
-  //let scale = Math.round((style.width+style.height)/2);
+  const chartContainerRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (chartContainerRef.current) {
+        setDimensions({
+          width: chartContainerRef.current.offsetWidth,
+          height: chartContainerRef.current.offsetHeight,
+        });
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   revenues = [...revenues].reverse();
   expenses = [...expenses].reverse();
@@ -48,9 +64,8 @@ const StackChart = ({revenues, expenses, assets, liabilities, style}) => {
         return tooltipContent;
       }
     },
-    //legend: {},
     grid: {
-      //left: 0.01*style.width,
+      left: 0.01 * dimensions.width,
       right: 0,
       bottom: 0,
       top: 0,
@@ -73,13 +88,13 @@ const StackChart = ({revenues, expenses, assets, liabilities, style}) => {
       data: Array.from({ length: revenues.length }, (_, index) => 2017 + revenues.length - 1 - index),
       handle: {
         show: true,
-        color: '#7581BD'
+        color: '#7581BD',
+        fontSize: Math.round(0.036 * dimensions.width),
       },
       axisTick: {
         alignWithLabel: true
       },
       axisLabel: {
-        //fontSize: Math.round(0.036*style.width),
         fontWeight: 'bold'
       }
     },
@@ -136,14 +151,16 @@ const StackChart = ({revenues, expenses, assets, liabilities, style}) => {
         },
         data: liabilities,
         itemStyle: {
-            //barBorderRadius: [0, 0.017*scale, 0.017*scale, 0],
+            barBorderRadius: [0, 0.016*dimensions.width, 0.016*dimensions.width, 0],
         }
       }
     ]
   };
 
   return (
-    <ReactECharts option={option} style={style} />
+    <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
+      <ReactECharts option={option}/>
+    </div>
   );
 };
 
