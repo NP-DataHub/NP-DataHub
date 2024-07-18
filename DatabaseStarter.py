@@ -21,7 +21,7 @@ class DatabaseStarter:
             if ntee_cd == "nan":
                 ntee_cd = "Z"
             subsection_code = str(row.get('SUBSECTION'))
-            if subsection_code == "nan": # wont happen they re all present
+            if subsection_code == "nan": # wont happen they're all present
                 subsection_code = "Z"
 
             self.initial_data.append({

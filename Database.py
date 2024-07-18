@@ -426,9 +426,9 @@ class Database:
             print("No duplicate files to handle manually")
 
 if __name__ == "__main__":
-    directory = '/tmp/2018-5'
+    directory = "/Users/mr.youssef/Desktop/NpDataHub/unitTesting"
     output_directory = '/Users/mr.youssef/Desktop/NpDataHub/errorOutputs'
-    name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
+    name_of_file = directory[36:] #it needs to start with last folder name (no "/" inside string)
     # input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
     # input('Is MongoDB client declared in the object correct? Press enter if it is.')
     # input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')
