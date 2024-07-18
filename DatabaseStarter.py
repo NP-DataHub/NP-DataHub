@@ -9,32 +9,29 @@ class DatabaseStarter:
         self.database = self.mongo_client["Np-Datahub"]
         self.initial_data = []
 
-    def update_documents(self, batch):
-
-        for row in batch:
-            ein = str(row.get('EIN'))
-
-            while len(ein) < 9:
-                ein = '0' + ein
-            
-            ntee_cd = str(row.get('NTEE_CD'))
-            if ntee_cd == "nan":
-                ntee_cd = "Z"
-            subsection_code = str(row.get('SUBSECTION'))
-            if subsection_code == "nan": # wont happen they're all present
-                subsection_code = "Z"
-
-            self.initial_data.append({
-                "EIN": ein,
-                "NTEE": ntee_cd,
-                "Subsection Code": subsection_code
-            })
+    def update_documents(self, row):
+        ein = str(row.get('EIN'))
+        while len(ein) < 9:
+            ein = '0' + ein
+        ntee_cd = str(row.get('NTEE_CD'))
+        if ntee_cd == "nan":
+            ntee_cd = "Z"
+        subsection_code = str(row.get('SUBSECTION'))
+        if subsection_code == "nan": # wont happen they're all present
+            subsection_code = "Z"
+        self.initial_data.append({
+            "EIN": ein,
+            "NTEE": ntee_cd,
+            "Subsection Code": subsection_code
+        })
 
     def process_csv(self, file_path):
         df = pd.read_csv(file_path)
         rows = df.to_dict(orient='records')
         with ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
-            futures = [executor.submit(self.update_documents, [row]) for row in rows]
+            futures = []
+            for row in rows: # each row in the csv represents a dictionnary
+                futures.append(executor.submit(self.update_documents, row))
             for future in as_completed(futures):
                 future.result()
 
