@@ -9,7 +9,7 @@ from progress.bar import Bar
 os.environ['DGLBACKEND'] = 'pytorch'  # tell DGL what backend to use, not really used but it complains if you dont
 
 # Connect to MongoDB
-uri = "mongodb+srv://ingress:HuoRitgcs5TsmcZX@np-data.fytln2i.mongodb.net/Np-Datahub"
+uri = "whoops"
 client = pymongo.MongoClient(uri)
 database = client['Np-Datahub']
 collection = database['EZ']
