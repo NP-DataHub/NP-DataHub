@@ -27,9 +27,11 @@ class Database:
         if (state_element is not None):
             state = state_element.text
             city_element = root.find('.//irs:Filer/irs:USAddress/irs:CityNm', self.namespace)
-            city = city_element.text
+            city = city_element.text if city_element is not None else "None"
             zip_code_element = root.find('.//irs:Filer/irs:USAddress/irs:ZIPCd', self.namespace)
-            zip_code = zip_code_element.text
+            zip_code = zip_code_element.text if zip_code_element is not None else "None"
+            address_element = root.find('.//irs:Filer/irs:USAddress/irs:AddressLine1Txt', self.namespace)
+            address = address_element.text if address_element is not None else "None"
         else : #Foreign Address
             state_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:CountryCd', self.namespace)
             state = state_element.text if state_element is not None else "None"
@@ -37,7 +39,9 @@ class Database:
             city = city_element.text if city_element is not None else "None"
             zip_code_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:ForeignPostalCd', self.namespace)
             zip_code = zip_code_element.text if zip_code_element is not None else "None"
-        return [name, state, city, zip_code]
+            address_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:AddressLine1Txt', self.namespace)
+            address = address_element.text if address_element is not None else "None"
+        return [name, state, city, zip_code, address]
 
     def get_990_financial_information(self, root):
         total_revenue_element = root.find('.//irs:CYTotalRevenueAmt', self.namespace)
@@ -245,6 +249,7 @@ class Database:
                 "State": general_info[1],
                 "City": general_info[2],
                 "Zipcode": general_info[3],
+                "Address": general_info[4],
                 "Return type" : return_type
             })
         return update_fields
@@ -258,14 +263,14 @@ class Database:
                 "Gross Receipts", "Fundraising Income", "Fundraising Expenses",
                 "Compensation of current officers", "Other salaries and wages",
                 "Payroll Taxes", "Gift Grants Membership Fees received 509",
-                "Number of employees","Name", "State", "City", "Zip Code"
+                "Number of employees","Name", "State", "City", "Zip Code", "Address"
             ]
         elif return_type == "990EZ":
             labels = [
                 "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
                 "Program Service Revenue", "Investment Income",
                 "Gift Grants Membership Fees received 509", "Name", "State", "City", 
-                "Zip Code"
+                "Zip Code", "Address"
             ]
         else:
             labels = [
@@ -275,7 +280,7 @@ class Database:
                 "Compensation of Officers", "Total Fund net worth",
                 "Investments in US Gov Obligations", "Investments in Corporate Stock",
                 "Investments in Corporate Bonds", "Cash", "Adjusted net income", "Name", 
-                "State", "City", "Zip Code"
+                "State", "City", "Zip Code", "Address"
             ]
         lst = [prev_file[0],prev_file[1],curr_file[0],curr_file[1]]
         for i in range(len(prev_info)):
