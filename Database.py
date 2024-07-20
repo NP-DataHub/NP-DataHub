@@ -10,7 +10,7 @@ class Database:
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
         self.mongo_client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
         self.database = self.mongo_client["Np-Datahub"]
-        self.cache = {"990": {} , "990EZ": {} , "990PF" : {} }
+        self.cache = {}
         self.output = []
     def get_ein_and_tax_period(self, root):
         ein_element = root.find('.//irs:Filer/irs:EIN', self.namespace)
@@ -289,17 +289,17 @@ class Database:
     def handle_duplicate_files_helper(self, root, file_path, return_type, ein, tax_period, previous_dt,current_dt):
         prev_filepath = prev_root = prev_financial_info = current_financial_info = None
         if return_type == "990":
-            prev_filepath = self.cache[return_type][ein][tax_period][0]
+            prev_filepath = self.cache[ein][tax_period][0]
             prev_root = ET.parse(prev_filepath).getroot()
             prev_financial_info = self.get_990_financial_information(prev_root)
             current_financial_info = self.get_990_financial_information(root)
         elif return_type == "990EZ":
-            prev_filepath = self.cache[return_type][ein][tax_period][0]
+            prev_filepath = self.cache[ein][tax_period][0]
             prev_root = ET.parse(prev_filepath).getroot()
             prev_financial_info = self.get_990EZ_financial_information(prev_root)
             current_financial_info = self.get_990EZ_financial_information(root)
         else:
-            prev_filepath = self.cache[return_type][ein][tax_period][0]
+            prev_filepath = self.cache[ein][tax_period][0]
             prev_root = ET.parse(prev_filepath).getroot()
             prev_financial_info = self.get_990PF_financial_information(prev_root)
             current_financial_info = self.get_990PF_financial_information(root)
@@ -317,30 +317,30 @@ class Database:
             root = ET.parse(file_path).getroot()
         except ET.ParseError:
             print(f"Skipping invalid XML file: {file_path}")
-            return None, None
+            return None
         return_type_element = root.find('.//irs:ReturnTypeCd', self.namespace)
         return_type = return_type_element.text if return_type_element is not None else None
         
         if return_type not in ["990", "990EZ", "990PF"]:
-            return None, None
+            return None
 
         ein, tax_period = self.get_ein_and_tax_period(root)
         if not ein or not tax_period:
-            return None, None
+            return None
 
         timestamp_element = root.find('.//irs:ReturnTs', self.namespace)
         current_timestamp = timestamp_element.text if timestamp_element is not None else "None"
 
         update_fields = None
-        if ein not in self.cache[return_type]:
-            self.cache[return_type][ein] = {tax_period: [file_path, current_timestamp]}
+        if ein not in self.cache:
+            self.cache[ein] = {tax_period: [file_path, current_timestamp]}
             update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
         else:
-            if tax_period not in self.cache[return_type][ein]:
-                self.cache[return_type][ein][tax_period] = [file_path, current_timestamp]
+            if tax_period not in self.cache[ein]:
+                self.cache[ein][tax_period] = [file_path, current_timestamp]
                 update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 0)
             else:
-                previous_timestamp = self.cache[return_type][ein][tax_period][1]
+                previous_timestamp = self.cache[ein][tax_period][1]
                 if current_timestamp != "None" and previous_timestamp != "None":
                     try:
                         previous_dt = datetime.fromisoformat(previous_timestamp)
@@ -352,7 +352,7 @@ class Database:
                         current_dt = None
                     if current_dt is not None and previous_dt is not None:
                         if current_dt > previous_dt:
-                            self.cache[return_type][ein][tax_period][1] = current_timestamp
+                            self.cache[ein][tax_period][1] = current_timestamp
                             update_fields = self.get_update_fields(root, ein, tax_period, return_type, file_path, 1)
                         elif current_dt == previous_dt:
                             self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
@@ -362,14 +362,14 @@ class Database:
                     self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
 
         if update_fields is None:
-            return None,None
+            return None
 
         insertion = UpdateOne(
             {"EIN": ein},
             {"$set": update_fields},
             upsert=True
         )
-        return return_type, insertion
+        return insertion
 
     def process_all_xml_files(self, directory):
         num_cores = os.cpu_count()
@@ -380,17 +380,20 @@ class Database:
                 if filename.endswith('.xml'):
                     file_path = os.path.join(directory, filename)
                     future = executor.submit(self.build_database, file_path)
-                    futures.append(future) 
+                    futures.append(future)
             for future in as_completed(futures):
-                return_type, insertion = future.result()
+                insertion = future.result()
                 if insertion:
                     insertions.append(insertion)
 
-        self.database["NonProfitData"].bulk_write(insertions)
-        missing_ntee = {"NTEE": {"$exists": False}}
-        missing_subsection_code = {"Subsection Code": {"$exists": False}}
-        self.database["NonProfitData"].update_many(missing_ntee, {"$set": {"NTEE": "Z"}})
-        self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"subsection_code": "Z"}})
+        if insertions:
+            collection = self.database["NonProfitData"]
+            collection.bulk_write(insertions)
+            self.database["NonProfitData"].bulk_write(insertions)
+            missing_ntee = {"NTEE": {"$exists": False}}
+            missing_subsection_code = {"Subsection Code": {"$exists": False}}
+            self.database["NonProfitData"].update_many(missing_ntee, {"$set": {"NTEE": "Z"}})
+            self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"subsection_code": "Z"}})
 
     def output_duplicates(self, name, directory):
         if self.output:
