@@ -61,7 +61,6 @@
 3. Overall percentage difference between revenues and expenses for a single nonprofit or foundation (year over year)
 (this one is more of the right idea but examples seem to have a lot of nulls, need to be fixed)
 
-
 [
   {
     "$project": {
@@ -171,11 +170,37 @@
 
 5. Overall dollar difference between revenues and expenses for a single nonprofit or foundation (from five years ago)
 
-
+[
+    {
+        '$project': {
+            'Name': 1, 
+            'EIN': 1, 
+            'Rev-vs-Exp-fiveYearsAgo': {
+                '$subtract': [
+                    '$2019.Total Revenue', 
+                    '$2019.Total Expenses'
+                ]
+            }
+        }
+    }
+]
 
 6. Overall dollar difference between assets and liabilities for a single nonprofit or foundation (from five years ago)
 
-
+[
+  {
+    "$project": {
+      "Name": 1,
+      "_id": 0,
+      "Asset-vs-Liab-fiveYearsAgo": {
+        "$subtract": [
+          "$2019.Total Assets",
+          "$2019.Total Liabilities"
+        ]
+      }
+    }
+  }
+]
 
 7. Overall percentage difference between revenues and expenses for a single nonprofit or foundation (from five years ago)
 
@@ -275,19 +300,111 @@
 
 13. (Revenue) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
 
-
+{
+  _id:{
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  medRev2017:{
+    $median:{
+      input: "$2017.Total Revenue",
+      method: 'approximate'
+    }
+  },
+  medRev2018: {
+    $median:{
+      input: "$2018.Total Revenue",
+      method: 'approximate'
+    }
+  },
+  medRev2019:{
+    $median:{
+      input: "$2019.Total Revenue",
+      method: 'approximate'
+    }
+  }
+}
 
 14. (Expenses) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
 
-
+{
+  _id:{
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  medExp2017:{
+    $median:{
+      input: "$2017.Total Expenses",
+      method: 'approximate'
+    }
+  },
+  medExp2018: {
+    $median:{
+      input: "$2018.Total Expenses",
+      method: 'approximate'
+    }
+  },
+  medExp2019:{
+    $median:{
+      input: "$2019.Total Expenses",
+      method: 'approximate'
+    }
+  }
+}
 
 15. (Assets) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
 
-
+{
+  _id:{
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  medAss2017:{
+    $median:{
+      input: "$2017.Total Assets",
+      method: 'approximate'
+    }
+  },
+  medAss2018: {
+    $median:{
+      input: "$2018.Total Assets",
+      method: 'approximate'
+    }
+  },
+  medAss2019:{
+    $median:{
+      input: "$2019.Total Assets",
+      method: 'approximate'
+    }
+  }
+}
 
 16. (Liabilities) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
 
-
+{
+  _id:{
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  medLiab2017:{
+    $median:{
+      input: "$2017.Total Liabilities",
+      method: 'approximate'
+    }
+  },
+  medLiab2018: {
+    $median:{
+      input: "$2018.Total Liabilities",
+      method: 'approximate'
+    }
+  },
+  medLiab2019:{
+    $median:{
+      input: "$2019.Total Liabilities",
+      method: 'approximate'
+    }
+  }
+}
 
 17. (Revenue) Overall average of each NTEE sector nationally (year over year)
 
@@ -377,14 +494,105 @@
 
 21. (Revenue) Overall median of each NTEE sector nationally (year over year)
 
+{
+  _id:{
+    ntee: "$NTEE"
+  },
+  medRev2017:{
+    $median:{
+      input: "$2017.Total Revenue",
+      method: 'approximate'
+    }
+  },
+  medRev2018: {
+    $median:{
+      input: "$2018.Total Revenue",
+      method: 'approximate'
+    }
+  },
+  medRev2019:{
+    $median:{
+      input: "$2019.Total Revenue",
+      method: 'approximate'
+    }
+  }
+}
 
 
 22. (Expenses) Overall median of each NTEE sector nationally (year over year)
 
-
+{
+  _id:{
+    ntee: "$NTEE"
+  },
+  medExp2017:{
+    $median:{
+      input: "$2017.Total Expenses",
+      method: 'approximate'
+    }
+  },
+  medExp2018: {
+    $median:{
+      input: "$2018.Total Expenses",
+      method: 'approximate'
+    }
+  },
+  medExp2019:{
+    $median:{
+      input: "$2019.Total Expenses",
+      method: 'approximate'
+    }
+  }
+}
 
 23. (Assets) Overall median of each NTEE sector nationally (year over year)
 
-
+{
+  _id:{
+    ntee: "$NTEE"
+  },
+  medAss2017:{
+    $median:{
+      input: "$2017.Total Assets",
+      method: 'approximate'
+    }
+  },
+  medAss2018: {
+    $median:{
+      input: "$2018.Total Assets",
+      method: 'approximate'
+    }
+  },
+  medAss2019:{
+    $median:{
+      input: "$2019.Total Assets",
+      method: 'approximate'
+    }
+  }
+}
 
 24. (Liabilities) Overall median of each NTEE sector nationally (year over year)
+
+{
+  _id:{
+    ntee: "$NTEE"
+  },
+  medLiab2017:{
+    $median:{
+      input: "$2017.Total Liabilities",
+      method: 'approximate'
+    }
+  },
+  medLiab2018: {
+    $median:{
+      input: "$2018.Total Liabilities",
+      method: 'approximate'
+    }
+  },
+  medLiab2019:{
+    $median:{
+      input: "$2019.Total Liabilities",
+      method: 'approximate'
+    }
+  }
+}
