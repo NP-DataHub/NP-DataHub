@@ -88,6 +88,14 @@ const Nonprofit = () => {
     return `${diff >= 0 ? '+' : ''}${diff.toFixed(1)}%`;
   };
 
+  const capitalizeFirstLetter = (str) => {
+    return str.split(' ')
+        .map(word => 
+            word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        )
+        .join(' ');
+};
+
   const formatNumber = (num) => {
     if (num >= 1000000000) {
       return (num / 1000000000).toFixed(1) + 'B';
@@ -190,7 +198,7 @@ const Nonprofit = () => {
               <div className="flex-col w-10/12 mx-auto dashboard-color ">
                   <DashboardNavbar />
                   <div className="flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
-                      <h1 className="text-2xl font-semibold">{nonprofitData.Name}</h1>
+                      <h1 className="text-2xl font-semibold">{capitalizeFirstLetter(nonprofitData.Name)}</h1>
                       <span className="text-sm text-[#A0A0A0]">123 Some Street</span>
                       <div className="mt-6 ">
                           <Slider {...settings}>

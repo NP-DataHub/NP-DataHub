@@ -2,7 +2,7 @@
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import DashboardNavbar from "../components/dashboardNav";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Autosuggest from 'react-autosuggest';
 import cities from "../components/cities";
 import ntee_codes from "../components/ntee";
@@ -54,6 +54,8 @@ export default function Dashboard() {
     };
 
 
+    const searchResultsRef = useRef(null); // Create a ref for the search results div
+
     const handleSearch = async () => {
         try {
           const response = await fetch(`/api/items?state=${state}&city=${city}&nteeCode=${nteeCode}`);
@@ -72,6 +74,13 @@ export default function Dashboard() {
             setAllResults(processedData);
             setCurrentPage(1);
             setHasSearched(true);
+
+            // Scroll to the search results div
+            setTimeout(() => {
+              if (searchResultsRef.current) {
+                searchResultsRef.current.scrollIntoView({ behavior: 'smooth' });
+              }
+            }, 2);
           } else {
             console.error('Failed to fetch items:', data.error);
           }
@@ -79,7 +88,6 @@ export default function Dashboard() {
           console.error('Failed to fetch items:', error);
         }
       };
-
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -498,7 +506,7 @@ export default function Dashboard() {
                             </button>
                             </div>
                             {hasSearched && (
-                                <div className="flex-col mt-10 bg-[#21222D] p-4 rounded-lg shadow-md mx-40 w-screen max-w-7xl">
+                                <div ref={searchResultsRef} className="flex-col mt-10 bg-[#21222D] p-4 rounded-lg shadow-md mx-40 w-screen max-w-7xl">
                                     {currentResults.length > 0 ? (
                                         <>
                                             <div className="grid grid-cols-7 gap-4 mb-4 font-semibold text-sm text-center">
