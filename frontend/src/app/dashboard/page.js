@@ -18,6 +18,7 @@ export default function Dashboard() {
     const [allResults, setAllResults] = useState([]); // Store all results
     const [currentPage, setCurrentPage] = useState(1); // Track current page
     const [itemsPerPage] = useState(10); // Set items per page
+    const [hasSearched, setHasSearched] = useState(false);
     
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -28,6 +29,16 @@ export default function Dashboard() {
         router.push(`/nonprofit/${id}`);
     };
 
+
+    const capitalizeFirstLetter = (str) => {
+        return str.split(' ')
+            .map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+            )
+            .join(' ');
+    };
+
+
     const handleSearch = async () => {
         try {
           const response = await fetch(`/api/items?state=${state}&city=${city}&nteeCode=${nteeCode}`);
@@ -35,6 +46,7 @@ export default function Dashboard() {
           if (data.success) {
             setAllResults(data.data);
             setCurrentPage(1); // Reset to first page on new search
+            setHasSearched(true);
           } else {
             console.error('Failed to fetch items:', data.error);
           }
@@ -460,47 +472,51 @@ export default function Dashboard() {
                                 SEARCH
                             </button>
                             </div>
-                                {currentResults && Array.isArray(currentResults) && currentResults.length > 0 && (
-                                    <div className="flex-col mt-10 bg-[#21222D] p-4 rounded-lg shadow-md mx-40 w-screen max-w-7xl">
-                                        <div className="grid grid-cols-7 gap-4 mb-4 font-semibold text-sm text-center">
-                                            <div>NONPROFIT NAME</div>
-                                            <div>ADDRESS</div>
-                                            <div>CITY</div>
-                                            <div>STATE</div>
-                                            <div>ZIP</div>
-                                            <div>ANNUAL REV.</div>
-                                            <div>ANNUAL EXPENSES</div>
-                                        </div>
-                                        <div className="flex flex-col justify-between overflow-x-auto" style={{ maxHeight: '400px' }}>
-                                            <div>
-                                                {currentResults.map((result, index) => (
-                                                    <div key={index} className="grid grid-cols-7 gap-4 text-sm mb-2 text-center">
-                                                        <div>
-                                                            <a 
-                                                                href="#"
-                                                                onClick={() => handleNonprofitClick(result.Name, result.State)}
-                                                                className="text-blue-500 hover:underline"
-                                                            >
-                                                                {result.Name}
-                                                            </a>
-                                                        </div>
-                                                        <div>Missing</div>
-                                                        <div>{result.City}</div>
-                                                        <div>{result.State}</div>
-                                                        <div>{result.Zipcode}</div>
-                                                        <div>Missing</div>
-                                                        <div>Missing</div>
-                                                    </div>
-                                                ))}
+                            {hasSearched && (
+                                <div className="flex-col mt-10 bg-[#21222D] p-4 rounded-lg shadow-md mx-40 w-screen max-w-7xl">
+                                    {currentResults.length > 0 ? (
+                                        <>
+                                            <div className="grid grid-cols-7 gap-4 mb-4 font-semibold text-sm text-center">
+                                                <div>NONPROFIT NAME</div>
+                                                <div>ADDRESS</div>
+                                                <div>CITY</div>
+                                                <div>STATE</div>
+                                                <div>ZIP</div>
+                                                <div>ANNUAL REV.</div>
+                                                <div>ANNUAL EXPENSES</div>
                                             </div>
-                                        </div>
-                                        <div className="flex justify-center mt-4">
-                                            {renderPaginationControls()}
-                                        </div>
+                                            <div className="flex flex-col justify-between overflow-x-auto" style={{ maxHeight: '400px' }}>
+                                                <div>
+                                                    {currentResults.map((result, index) => (
+                                                        <div key={index} className="grid grid-cols-7 gap-4 text-sm mb-2 text-center">
+                                                            <div>
+                                                                <a 
+                                                                    href="#"
+                                                                    onClick={() => handleNonprofitClick(result._id)}
+                                                                    className="text-[#A9DFD8] hover:underline font-semibold"
+                                                                >
+                                                                    {capitalizeFirstLetter(result.Name)}
+                                                                </a>
+                                                            </div>
+                                                            <div>123 some street </div>
+                                                            <div>{capitalizeFirstLetter(result.City)}</div>
+                                                            <div>{result.State}</div>
+                                                            <div>{result.Zipcode}</div>
+                                                            <div>Missing</div>
+                                                            <div>Missing</div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div className="text-center text-white text-lg flex items-center justify-center">No search results found.</div>
+                                    )}
+                                    <div className="flex justify-center mt-4">
+                                        {renderPaginationControls()}
                                     </div>
-                                )}
-
-
+                                </div>
+                            )}
 
                         </div>
                         </div>
