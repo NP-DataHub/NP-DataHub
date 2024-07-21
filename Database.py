@@ -8,16 +8,18 @@ from datetime import datetime
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
-        self.mongo_client = MongoClient("mongodb+srv://youssef:TryAgain@youssef.bl2lv86.mongodb.net/")
+        self.mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
         self.database = self.mongo_client["Np-Datahub"]
         self.cache = {}
         self.output = []
     def get_ein_and_tax_period(self, root):
         ein_element = root.find('.//irs:Filer/irs:EIN', self.namespace)
-        ein = ein_element.text if ein_element is not None else "None"
-        ein = '0' + ein if len(str(ein)) == 8 else ein
+        ein = ein_element.text if ein_element is not None else None
+        if not ein:
+            while len(ein) < 9:
+                ein = '0' + ein
         tax_period_element = root.find('.//irs:TaxYr', self.namespace)
-        tax_period = tax_period_element.text if tax_period_element is not None else "None"
+        tax_period = tax_period_element.text if tax_period_element is not None else None
         return ein, tax_period
 
     def get_general_information(self, root):
@@ -398,7 +400,7 @@ class Database:
             missing_ntee = {"NTEE": {"$exists": False}}
             missing_subsection_code = {"Subsection Code": {"$exists": False}}
             self.database["NonProfitData"].update_many(missing_ntee, {"$set": {"NTEE": "Z"}})
-            self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"subsection_code": "Z"}})
+            self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"Subsection Code": "Z"}})
 
     def output_duplicates(self, name, directory):
         if self.output:
@@ -434,9 +436,9 @@ class Database:
             print("No duplicate files to handle manually")
 
 if __name__ == "__main__":
-    directory = "/Users/mr.youssef/Desktop/NpDataHub/unitTesting"
+    directory = "/tmp/2023-1A"
     output_directory = '/Users/mr.youssef/Desktop/NpDataHub/errorOutputs'
-    name_of_file = directory[36:] #it needs to start with last folder name (no "/" inside string)
+    name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
     # input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
     # input('Is MongoDB client declared in the object correct? Press enter if it is.')
     # input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')
