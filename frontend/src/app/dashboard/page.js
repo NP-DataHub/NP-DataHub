@@ -24,6 +24,21 @@ export default function Dashboard() {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentResults = allResults.slice(indexOfFirstItem, indexOfLastItem);
     const router = useRouter();
+    let mostRecentYear = 0
+
+    const formatNumber = (num) => {
+        if (num >= 1000000000) {
+          return (num / 1000000000).toFixed(1) + 'B';
+        }
+        if (num >= 1000000) {
+          return (num / 1000000).toFixed(1) + 'M';
+        }
+        if (num >= 1000) {
+          return (num / 1000).toFixed(1) + 'K';
+        }
+        return num;
+      };
+
 
     const handleNonprofitClick = (id) => {
         router.push(`/nonprofit/${id}`);
@@ -44,8 +59,18 @@ export default function Dashboard() {
           const response = await fetch(`/api/items?state=${state}&city=${city}&nteeCode=${nteeCode}`);
           const data = await response.json();
           if (data.success) {
-            setAllResults(data.data);
-            setCurrentPage(1); // Reset to first page on new search
+            // Process data to include most recent year's revenue and expenses
+            const processedData = data.data.map(item => {
+              const years = Object.keys(item).filter(year => !isNaN(year)).sort();
+              mostRecentYear = years[years.length - 1];
+              return {
+                ...item,
+                annualRevenue: mostRecentYear ? item[mostRecentYear]['Total Revenue'] : 'N/A',
+                annualExpenses: mostRecentYear ? item[mostRecentYear]['Total Expenses'] : 'N/A'
+              };
+            });
+            setAllResults(processedData);
+            setCurrentPage(1);
             setHasSearched(true);
           } else {
             console.error('Failed to fetch items:', data.error);
@@ -53,7 +78,7 @@ export default function Dashboard() {
         } catch (error) {
           console.error('Failed to fetch items:', error);
         }
-    };
+      };
 
 
     const handlePageChange = (pageNumber) => {
@@ -482,8 +507,8 @@ export default function Dashboard() {
                                                 <div>CITY</div>
                                                 <div>STATE</div>
                                                 <div>ZIP</div>
-                                                <div>ANNUAL REV.</div>
-                                                <div>ANNUAL EXPENSES</div>
+                                                <div>LAST RECORDED REV.</div>
+                                                <div>LAST RECORDED EXP.</div>
                                             </div>
                                             <div className="flex flex-col justify-between overflow-x-auto" style={{ maxHeight: '400px' }}>
                                                 <div>
@@ -502,8 +527,8 @@ export default function Dashboard() {
                                                             <div>{capitalizeFirstLetter(result.City)}</div>
                                                             <div>{result.State}</div>
                                                             <div>{result.Zipcode}</div>
-                                                            <div>Missing</div>
-                                                            <div>Missing</div>
+                                                            <div>{formatNumber(result.annualRevenue)}</div>
+                                                            <div>{formatNumber(result.annualExpenses)}</div>
                                                         </div>
                                                     ))}
                                                 </div>
