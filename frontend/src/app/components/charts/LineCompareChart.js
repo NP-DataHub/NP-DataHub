@@ -3,13 +3,26 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
-const LineCompareChart = ({ variable1, values1, variable2, values2 }) => {
+const LineCompareChart = ({ variable1, values1, variable2, values2, minYear }) => {
   if (!Array.isArray(values1) || values1.length === 0 || !Array.isArray(values2) || values2.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
   }
 
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  const formatNumber = (num) => {
+    if (num >= 1000000000) {
+      return (num / 1000000000).toFixed(1) + 'B';
+    }
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + 'M';
+    }
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num;
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,7 +55,7 @@ const LineCompareChart = ({ variable1, values1, variable2, values2 }) => {
                 <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:${item.color};margin-right:5px;"></span>
                 ${item.seriesName}: 
               </span>
-              <span style="text-align: right;">&nbsp;$${item.value}</span>
+              <span style="text-align: right;">&nbsp;$${formatNumber(item.value)}</span>
             </div>`;
         });
         tooltipContent += `</div>`;
@@ -56,7 +69,7 @@ const LineCompareChart = ({ variable1, values1, variable2, values2 }) => {
     },
     xAxis: {
       type: 'category',
-      data: Array.from({ length: values1.length }, (_, index) => index + 2017),
+      data: Array.from({ length: values1.length }, (_, index) => index + parseInt(minYear)),
       boundaryGap: false,
       handle: {
         show: true,

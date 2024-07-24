@@ -6,7 +6,8 @@ import ReactECharts from 'echarts-for-react';
 /**
  * @param values -   an array of values measured each year
 */
-const TimeSeries = ({values}) => {
+
+const TimeSeries = ({values, minYear}) => {
   // ensures arg is an array
   if (!Array.isArray(values) || values.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
@@ -14,6 +15,18 @@ const TimeSeries = ({values}) => {
 
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const formatNumber = (num) => {
+    if (num >= 1000000000) {
+      return (num / 1000000000).toFixed(1) + 'B';
+    }
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + 'M';
+    }
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num;
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,7 +56,7 @@ const TimeSeries = ({values}) => {
       },
       formatter: function (params) {
         const tooltipContent = params.map(item => {
-          return `${item.name}: $${item.value}`;
+          return `${item.name}: $${formatNumber(item.value)}`;
         }).join('<br/>');
         return tooltipContent;
       }
@@ -64,7 +77,7 @@ const TimeSeries = ({values}) => {
           fontSize: Math.round(0.036*dimensions.width),
         },
         type: 'category',
-        data: Array.from({ length: values.length }, (_, index) => index + 2017),
+        data: Array.from({ length: values.length }, (_, index) => index + parseInt(minYear)),
         axisTick: {
           alignWithLabel: true
         },
@@ -77,7 +90,7 @@ const TimeSeries = ({values}) => {
       {
         axisLabel: {
           formatter: function (value) {
-            return '$' + value;
+            return '$' + formatNumber(value);
           },
           fontSize: Math.round(0.015 * dimensions.width)
         }
