@@ -13,7 +13,8 @@ const Gauge = ({orgName, orgVal, stateName, stateVal, nationalVal}) => {
           value: orgVal,
           name: "Your Org",
           title: {
-            offsetCenter: ['0%', '-30%']
+            offsetCenter: ['0%', '-30%'],
+            color: '#666666',
           },
           detail: {
             valueAnimation: true,
@@ -24,7 +25,8 @@ const Gauge = ({orgName, orgVal, stateName, stateVal, nationalVal}) => {
           value: stateVal,
           name: stateName,
           title: {
-            offsetCenter: ['0%', '0%']
+            offsetCenter: ['0%', '0%'],
+            color: '#666666',
           },
           detail: {
             valueAnimation: true,
@@ -35,7 +37,8 @@ const Gauge = ({orgName, orgVal, stateName, stateVal, nationalVal}) => {
           value: nationalVal,
           name: 'National Avg',
           title: {
-            offsetCenter: ['0%', '30%']
+            offsetCenter: ['0%', '30%'],
+            color: '#666666',
           },
           detail: {
             valueAnimation: true,
@@ -85,14 +88,14 @@ const Gauge = ({orgName, orgVal, stateName, stateVal, nationalVal}) => {
                 clip: false,
                 itemStyle: {
                     borderWidth: 1,
-                    borderColor: '#464646' //change as needed for styling
+                    borderColor: '#464646'
                 }
               },
               axisLine: {
                 lineStyle: {
                     width: 40,
                     color: [
-                        [1, '#464646'], // Empty portion color
+                        [1, '#464646'],
                     ]
                 }
             },

@@ -6,7 +6,7 @@ import LineCompareChart from "@/app/components/charts/LineCompareChart";
 import TimeSeries from "@/app/components/charts/TimeSeries";
 import StackChart from "@/app/components/charts/StackChart";
 import Gauge from "@/app/components/charts/Gauge";
-//import Choropleth from "@/app/components/charts/Choropleth";
+import Choropleth from "@/app/components/charts/Choropleth";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -157,7 +157,6 @@ const Nonprofit = () => {
   const expenses = years.map(year => nonprofitData[year]['Total Expenses']);
   const assets = years.map(year => nonprofitData[year]['Total Assets']);
   const liabilities = years.map(year => nonprofitData[year]['Total Liabilities']);
-  const style = { width: '100%', height: '100%' };
 
   const settings = {
       dots: true,
@@ -249,9 +248,9 @@ const Nonprofit = () => {
                       <div className="grid grid-cols-3 gap-4 mt-10 mb-10">
                           <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 col-span-2">
                               {/*add chart here box size will update with chart*/}
-                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Time Series</h1>
-                              <div className="flex items-center justify-center mb-24 mt-12" style={{ width: '90%', height: '90%' }}>
-                                  <TimeSeries variable="Revenue" values={revenues} minYear = {previousYear}/>
+                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue By State</h1>
+                              <div className="flex items-center justify-center mb-24 mt-12" style={{ width: '100%', height: '100%' }}>
+                                  <Choropleth/>
                               </div>
 
                           </div>
