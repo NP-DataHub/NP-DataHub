@@ -3,23 +3,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
-const BarChart = ({ values, minYear }) => {
+const BarChart = ({ values }) => {
   if (!Array.isArray(values) || values.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
   }
 
-  const formatNumber = (num) => {
-    if (num >= 1000000000) {
-      return (num / 1000000000).toFixed(1) + 'B';
-    }
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
-    }
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
-    }
-    return num;
-  };
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -46,7 +34,7 @@ const BarChart = ({ values, minYear }) => {
       },
       formatter: function (params) {
         const index = params[0].dataIndex;
-        let tooltipContent = `${params[0].name}: $${formatNumber(params[0].value)}`;
+        let tooltipContent = `${params[0].name}: $${params[0].value}`;
         let percent;
         if (index > 0) {
           const previousValue = values[index - 1];
@@ -68,7 +56,7 @@ const BarChart = ({ values, minYear }) => {
     xAxis: [
       {
         type: 'category',
-        data: Array.from({ length: values.length }, (_, index) => index + parseInt(minYear)),
+        data: Array.from({ length: values.length }, (_, index) => index + 2017),
         axisTick: {
           alignWithLabel: true,
           show: false

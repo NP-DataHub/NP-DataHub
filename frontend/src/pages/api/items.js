@@ -1,5 +1,4 @@
 import clientPromise from "@/app/lib/mongodb";
-import { ObjectId } from "mongodb";
 
 export default async function handler(req, res) {
   const { method, query } = req;
@@ -9,7 +8,7 @@ export default async function handler(req, res) {
 
     switch (method) {
       case 'GET':
-        const { state, city, nteeCode, Name, _id } = query;
+        const { state, city, nteeCode, Name } = query;
 
         const filters = {};
         if (Name) {
@@ -27,18 +26,11 @@ export default async function handler(req, res) {
         if (nteeCode) {
           filters.NTEE = { $regex: new RegExp(nteeCode, 'i') };
         }
-        if (_id) {
-          try {
-            filters._id = new ObjectId(_id);
-          } catch (err) {
-            return res.status(400).json({ success: false, error: 'Invalid ID format' });
-          }
-        }
 
         console.log("Filters:", filters); // Log filters for debugging
 
         const items = await db.collection('Master')
-          .find(filters) // Include relevant fields for debugging
+          .find(filters, { projection: { Name: 1, City: 1, State: 1, NTEE: 1, Zipcode: 1} }) // Include relevant fields for debugging
           .toArray();
 
         console.log("Items found:", items.length); // Log the number of items found for debugging

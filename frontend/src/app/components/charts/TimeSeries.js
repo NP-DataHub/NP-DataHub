@@ -10,24 +10,12 @@ import ReactECharts from 'echarts-for-react';
  *                   must be defined as numbers.
 */
 
-const TimeSeries = ({variable, values, style, minYear}) => {
+const TimeSeries = ({variable, values, style}) => {
   // ensures arg is an array
   if (!Array.isArray(values) || values.length === 0) {
     return <div>ERROR: chart arg must be an array</div>;
   }
 
-  const formatNumber = (num) => {
-    if (num >= 1000000000) {
-      return (num / 1000000000).toFixed(1) + 'B';
-    }
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
-    }
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
-    }
-    return num;
-  };
   const width = typeof style.width === 'number' ? style.width : parseInt(style.width, 10);
   const height = typeof style.height === 'number' ? style.height : parseInt(style.height, 10);
 
@@ -47,7 +35,7 @@ const TimeSeries = ({variable, values, style, minYear}) => {
       },
       formatter: function (params) {
         const tooltipContent = params.map(item => {
-          return `${item.name}: $${formatNumber(item.value)}`;
+          return `${item.name}: $${item.value}`;
         }).join('<br/>');
         return tooltipContent;
       }
@@ -69,7 +57,7 @@ const TimeSeries = ({variable, values, style, minYear}) => {
           padding: Math.round(0.10*scale),
         },
         type: 'category',
-        data: Array.from({ length: values.length }, (_, index) => index + parseInt(minYear)),
+        data: Array.from({ length: values.length }, (_, index) => index + 2017),
         axisTick: {
           alignWithLabel: true
         },
@@ -82,7 +70,7 @@ const TimeSeries = ({variable, values, style, minYear}) => {
       {
         axisLabel: {
           formatter: function (value) {
-            return '$' + formatNumber(value);
+            return '$' + value;
           },
           fontSize: Math.round(0.15 * scale)
         }

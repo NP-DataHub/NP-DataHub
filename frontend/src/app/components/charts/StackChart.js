@@ -12,25 +12,14 @@ import ReactECharts from 'echarts-for-react';
  * @param style -       a struct containing format options - height and width
  *                      must be defined as numbers.
 */
-const StackChart = ({revenues, expenses, assets, liabilities, style, minYear}) => {
+const StackChart = ({revenues, expenses, assets, liabilities, style}) => {
   // ensures arg is an array
   if (!Array.isArray(revenues) || !Array.isArray(expenses) || !Array.isArray(assets) || !Array.isArray(liabilities)) {
     return <div>ERROR: chart arg must be an array</div>;
   }
 
   //let scale = Math.round((style.width+style.height)/2);
-  const formatNumber = (num) => {
-    if (num >= 1000000000) {
-      return (num / 1000000000).toFixed(1) + 'B';
-    }
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
-    }
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
-    }
-    return num;
-  };
+
   revenues = [...revenues].reverse();
   expenses = [...expenses].reverse();
   assets = [...assets].reverse()
@@ -52,7 +41,7 @@ const StackChart = ({revenues, expenses, assets, liabilities, style, minYear}) =
                 <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:${item.color};margin-right:5px;"></span>
                 ${item.seriesName}: 
               </span>
-              <span style="text-align: right;">&nbsp;$${formatNumber(item.value)}</span>
+              <span style="text-align: right;">&nbsp;$${item.value}</span>
             </div>`;
         });
         tooltipContent += `</div>`;
@@ -81,7 +70,7 @@ const StackChart = ({revenues, expenses, assets, liabilities, style, minYear}) =
     },
     yAxis: {
       type: 'category',
-      data: Array.from({ length: revenues.length }, (_, index) => parseInt(minYear) + revenues.length - 1 - index),
+      data: Array.from({ length: revenues.length }, (_, index) => 2017 + revenues.length - 1 - index),
       handle: {
         show: true,
         color: '#7581BD'
