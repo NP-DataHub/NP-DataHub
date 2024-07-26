@@ -2,10 +2,27 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import ReactECharts from 'echarts-for-react';
-import * as echarts from "echarts";
+import * as echarts from 'echarts';
 
-const Choropleth = () => {
+/**
+ * @param data an array of objects in the format { name: __ , value: __ }
+ */
+const Choropleth = (data) => {
+
   const [option, setOption] = useState(null);
+
+  const formatNumber = (num) => {
+    if (num >= 1000000000) {
+      return (num / 1000000000).toFixed(1) + 'B';
+    }
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + 'M';
+    }
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num;
+  };
 
   const chartContainerRef = useRef(null);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -39,7 +56,7 @@ const Choropleth = () => {
         },
         Hawaii: {
           left: -110,
-          top: 28,
+          top: 24,
           width: 5
         },
         'Puerto Rico': {
@@ -50,16 +67,13 @@ const Choropleth = () => {
       });
 
       const chartOption = {
-        title: {
-          text: 'USA Population Estimates (2012)',
-          subtext: 'Data from www.census.gov',
-          sublink: 'http://www.census.gov/popest/data/datasets.html',
-          left: 'right'
-        },
         tooltip: {
           trigger: 'item',
           showDelay: 0,
           transitionDuration: 0.2
+        },
+        formatter: function (params) {
+          return `${params.name}: $${formatNumber(params.value)}`;
         },
         visualMap: {
           left: 'right',
@@ -81,17 +95,19 @@ const Choropleth = () => {
             ]
           },
           text: ['High', 'Low'],
-          calculable: true
-        },
-        toolbox: {
+          textStyle: {
+            fontWeight: 'bold',
+            color: '#666666',
+          },
+          calculable: true,
           show: true,
-          left: 'left',
-          top: 'top',
-          feature: {
-            dataView: { readOnly: false },
-            restore: {},
-            saveAsImage: {}
-          }
+        },
+        grid: {
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          containLabel: false
         },
         series: [
           {
