@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
+import ecStat from 'echarts-stat';
 
 /**
  * @param values -   an array of values measured each year
@@ -43,10 +44,22 @@ const TimeSeries = ({values, minYear}) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const data = values.map((value, index) => [index, value]);
+  const regression = ecStat.regression('linear', data);
+  //debug prints
+  console.log(regression);
+  console.log(data);
+
   const option = {
+    legend: {
+      data: ['line', 'trend']
+    },
     dataset: [
       {
-        source: values
+        source: data
+      },
+      {
+        source: regression.points
       }
     ],
     tooltip: {
@@ -63,9 +76,9 @@ const TimeSeries = ({values, minYear}) => {
     },
     grid: {
       left: 0,
-      bottom: 0.036*dimensions.width,
+      bottom: 0.036 * dimensions.width,
       right: 0,
-      top: 0.01*dimensions.width,
+      top: 0.01 * dimensions.width,
       containLabel: true
     },
     xAxis: [
@@ -74,7 +87,7 @@ const TimeSeries = ({values, minYear}) => {
         nameLocation: 'middle',
         nameTextStyle: {
           fontWeight: 'bold',
-          fontSize: Math.round(0.036*dimensions.width),
+          fontSize: Math.round(0.036 * dimensions.width),
         },
         type: 'category',
         data: Array.from({ length: values.length }, (_, index) => index + parseInt(minYear)),
@@ -82,7 +95,7 @@ const TimeSeries = ({values, minYear}) => {
           alignWithLabel: true
         },
         axisLabel: {
-          fontSize: Math.round(0.015* dimensions.width)
+          fontSize: Math.round(0.015 * dimensions.width)
         }
       }
     ],
@@ -100,9 +113,30 @@ const TimeSeries = ({values, minYear}) => {
       {
         name: 'line',
         type: 'line',
-        data: values
+        datasetIndex: 0,
+      },
+      {
+        name: 'trend',
+        type: 'line',
+        datasetIndex: 1,
+        symbol: 'none',
+        color: 'red', // Set the color of the regression line here
+        smooth: true,
+        lineStyle: {
+          width: 2 // Adjust the width of the regression line if needed
+        }
       }
-    ]
+    ],
+    graphic: {
+      type: 'text',
+      left: '5%',
+      top: 'bottom',
+      style: {
+        text: 'Accuracy (R²): ' + regression.parameter.r2,
+        fontSize: 16,
+        fontWeight: 'bold'
+      }
+    }
   };
   console.log(option)
 
