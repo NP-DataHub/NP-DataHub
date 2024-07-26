@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { doCreateUserWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth'; 
 import { useAuth } from './context';
+import { db } from '../firebase/firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore'; 
 
 const Register = ({ onClose, onSuccess, onSwitchToLogin }) => {
   const { userLoggedIn } = useAuth();
@@ -11,12 +13,36 @@ const Register = ({ onClose, onSuccess, onSwitchToLogin }) => {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const saveUserToFirestore = async (user) => {
+    try {
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDoc = await getDoc(userDocRef);
+      if (!userDoc.exists()) {
+        await setDoc(userDocRef, {
+          email: user.email,
+          createdAt: new Date(),
+          firstName: '',
+          lastName: '',
+          image: '',
+          organization: '',
+          city: '',
+          state: '',
+          zip: '',
+          nteeCode: ''
+        });
+      }
+    } catch (error) {
+      console.error('Error saving user to Firestore:', error);
+    }
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!isSigningIn) {
       setIsSigningIn(true);
       try {
-        await doCreateUserWithEmailAndPassword(email, password);
+        const userCredential = await doCreateUserWithEmailAndPassword(email, password);
+        await saveUserToFirestore(userCredential.user);
         onSuccess();
       } catch (error) {
         setErrorMessage(error.message);
@@ -30,9 +56,15 @@ const Register = ({ onClose, onSuccess, onSwitchToLogin }) => {
     if (!isSigningIn) {
       setIsSigningIn(true);
       try {
-        await doSignInWithGoogle();
-        onSuccess();
+        const user = await doSignInWithGoogle();
+        if (user) {
+          await saveUserToFirestore(user);
+          onSuccess();
+        } else {
+          throw new Error('Failed to retrieve user email');
+        }
       } catch (error) {
+        console.error('Error during Google sign-in:', error);
         setErrorMessage(error.message);
         setIsSigningIn(false);
       }

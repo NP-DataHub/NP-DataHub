@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth'; 
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth';
 import { useAuth } from './context';
+import { db } from '../firebase/firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore'; 
 
 const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {
   const { userLoggedIn } = useAuth();
@@ -12,12 +14,36 @@ const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const saveUserToFirestore = async (user) => {
+    try {
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDoc = await getDoc(userDocRef);
+      if (!userDoc.exists()) {
+        await setDoc(userDocRef, {
+          email: user.email,
+          createdAt: new Date(),
+          firstName: '',
+          lastName: '',
+          image: '',
+          organization: '',
+          city: '',
+          state: '',
+          zip: '',
+          nteeCode: ''
+        });
+      }
+    } catch (error) {
+      console.error('Error saving user to Firestore:', error);
+    }
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!isSigningIn) {
       setIsSigningIn(true);
       try {
-        await doSignInWithEmailAndPassword(email, password);
+        const userCredential = await doSignInWithEmailAndPassword(email, password);
+        await saveUserToFirestore(userCredential.user);
         onSuccess();
       } catch (error) {
         setErrorMessage(error.message);
@@ -31,9 +57,15 @@ const Login = ({ onClose, onSuccess, onSwitchToRegister }) => {
     if (!isSigningIn) {
       setIsSigningIn(true);
       try {
-        await doSignInWithGoogle();
-        onSuccess();
+        const user = await doSignInWithGoogle();
+        if (user) {
+          await saveUserToFirestore(user);
+          onSuccess();
+        } else {
+          throw new Error('Failed to retrieve user');
+        }
       } catch (error) {
+        console.error('Error during Google sign-in:', error);
         setErrorMessage(error.message);
         setIsSigningIn(false);
       }
