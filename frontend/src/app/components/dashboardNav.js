@@ -64,7 +64,7 @@ const DashboardNavbar = () => {
         </div>
       </div>
 
-      <div className={`fixed top-0 right-0 h-full bg-[#21222D] text-white shadow-lg transition-transform transform ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'}`} style={{ width: '300px', borderRadius: '10px 0 0 10px' }}>
+      <div className={`fixed top-0 right-0 h-full bg-[#21222D] z-40 text-white shadow-lg transition-transform transform ${sidebarOpen ? 'translate-x-0' : 'translate-x-full '}`} style={{ width: '300px', borderRadius: '10px 0 0 10px' }}>
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center space-x-3">
             <img src={userData.image || 'https://via.placeholder.com/150'} alt="User" className="w-12 h-12 rounded-full object-cover" />
