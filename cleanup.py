@@ -1,8 +1,8 @@
 from pymongo import MongoClient
 
 if __name__ == "__main__":
-	mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
-	database = mongo_client["Np-Datahub"]
+	mongo_client = MongoClient("mongodb+srv://hassay:TryAgain@npdatahub.f3sg8sf.mongodb.net/")
+	database = mongo_client["NpDatahub"]
 	collection = database["NonProfitData"]
-	result = collection.delete_many({"Name": {"$exists": False}})
+	result = collection.delete_many({"Nm": {"$exists": False}})
 	print(f"Deleted {result.deleted_count} incomplete rows.")

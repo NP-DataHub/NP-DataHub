@@ -8,8 +8,8 @@ from datetime import datetime
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
-        self.mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
-        self.database = self.mongo_client["Np-Datahub"]
+        self.mongo_client = MongoClient("mongodb+srv://hassay:TryAgain@npdatahub.f3sg8sf.mongodb.net/")
+        self.database = self.mongo_client["NpDatahub"]
         self.cache = {}
         self.output = []
     def get_ein_and_tax_period(self, root):
@@ -193,66 +193,66 @@ class Database:
         if return_type == "990":
             financial_info = self.get_990_financial_information(root)
             update_fields = {
-                f"{tax_period}.Total Revenue": financial_info[0],
-                f"{tax_period}.Total Assets": financial_info[1],
-                f"{tax_period}.Total Liabilities": financial_info[2],
-                f"{tax_period}.Total Expenses": financial_info[3],
-                f"{tax_period}.Total Contributions": financial_info[4],
-                f"{tax_period}.Program Service Revenue": financial_info[5],
-                f"{tax_period}.Investment Income": financial_info[6],
-                f"{tax_period}.Gross Receipts": financial_info[7],
-                f"{tax_period}.Fundraising Income": financial_info[8],
-                f"{tax_period}.Fundraising Expenses": financial_info[9],
-                f"{tax_period}.Compensation of Current Officers": financial_info[10],
-                f"{tax_period}.Other salaries and wages": financial_info[11],
-                f"{tax_period}.Payroll Taxes": financial_info[12],
-                f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[13],
-                f"{tax_period}.Number of Employee": financial_info[14],
-                f"{tax_period}.Filepath": file_path
+                f"{tax_period}.TotRev": financial_info[0],
+                f"{tax_period}.TotAst": financial_info[1],
+                f"{tax_period}.TotLia": financial_info[2],
+                f"{tax_period}.TotExp": financial_info[3],
+                f"{tax_period}.TotCon": financial_info[4],
+                f"{tax_period}.ProgRev": financial_info[5],
+                f"{tax_period}.InvInc": financial_info[6],
+                f"{tax_period}.GroRec": financial_info[7],
+                f"{tax_period}.FunInc": financial_info[8],
+                f"{tax_period}.FunExp": financial_info[9],
+                f"{tax_period}.OffComp": financial_info[10],
+                f"{tax_period}.OthSal": financial_info[11],
+                f"{tax_period}.PayTax": financial_info[12],
+                f"{tax_period}.GGMF": financial_info[13],
+                f"{tax_period}.NumEmp": financial_info[14],
+                f"{tax_period}.File": file_path
             }
         elif return_type == "990EZ":
             financial_info = self.get_990EZ_financial_information(root)
             update_fields = {
-                f"{tax_period}.Total Revenue": financial_info[0],
-                f"{tax_period}.Total Assets": financial_info[1],
-                f"{tax_period}.Total Liabilities": financial_info[2],
-                f"{tax_period}.Total Expenses": financial_info[3],
-                f"{tax_period}.Program Service Revenue": financial_info[4],
-                f"{tax_period}.Investment Income": financial_info[5],
-                f"{tax_period}.Gift Grants Membership Fees received 509": financial_info[6],
-                f"{tax_period}.Filepath": file_path
+                f"{tax_period}.TotRev": financial_info[0],
+                f"{tax_period}.TotAst": financial_info[1],
+                f"{tax_period}.TotLia": financial_info[2],
+                f"{tax_period}.TotExp": financial_info[3],
+                f"{tax_period}.ProgRev": financial_info[4],
+                f"{tax_period}.InvInc": financial_info[5],
+                f"{tax_period}.GGMF": financial_info[6],
+                f"{tax_period}.File": file_path
             }
         else:
             financial_info = self.get_990PF_financial_information(root)
             update_fields = {
-                f"{tax_period}.Total Revenue": financial_info[0],
-                f"{tax_period}.Total Assets": financial_info[1],
-                f"{tax_period}.Total Liabilities": financial_info[2],
-                f"{tax_period}.Total Expenses": financial_info[3],
-                f"{tax_period}.Net Income (Less Deficit)": financial_info[4],
-                f"{tax_period}.Contributions Received": financial_info[5],
-                f"{tax_period}.Interest Revenue": financial_info[6],
-                f"{tax_period}.Dividends": financial_info[7],
-                f"{tax_period}.Net Gain (Sales of Assets)": financial_info[8],
-                f"{tax_period}.Other Income": financial_info[9],
-                f"{tax_period}.Compensation of Officers": financial_info[10],
-                f"{tax_period}.Total Fund Net Worth": financial_info[11],
-                f"{tax_period}.Investments in US Gov Obligations": financial_info[12],
-                f"{tax_period}.Investments in Corporate Stock": financial_info[13],
-                f"{tax_period}.Investments in Corporate Bonds": financial_info[14],
+                f"{tax_period}.TotRev": financial_info[0],
+                f"{tax_period}.TotAst": financial_info[1],
+                f"{tax_period}.TotLia": financial_info[2],
+                f"{tax_period}.TotExp": financial_info[3],
+                f"{tax_period}.NetInc": financial_info[4],
+                f"{tax_period}.ConRec": financial_info[5],
+                f"{tax_period}.IntRev": financial_info[6],
+                f"{tax_period}.Div": financial_info[7],
+                f"{tax_period}.NetGain": financial_info[8],
+                f"{tax_period}.OthInc": financial_info[9],
+                f"{tax_period}.OffComp": financial_info[10],
+                f"{tax_period}.FundNet": financial_info[11],
+                f"{tax_period}.USGovInv": financial_info[12],
+                f"{tax_period}.CorpStockInv": financial_info[13],
+                f"{tax_period}.CorpBondInv": financial_info[14],
                 f"{tax_period}.Cash": financial_info[15],
-                f"{tax_period}.Adjusted Net Income": financial_info[16],
-                f"{tax_period}.Filepath": file_path
+                f"{tax_period}.AdjNetInc": financial_info[16],
+                f"{tax_period}.File": file_path
             }
         if include_general_info == 1:
             general_info = self.get_general_information(root)
             update_fields.update({
-                "Name": general_info[0],
-                "State": general_info[1],
-                "City": general_info[2],
-                "Zipcode": general_info[3],
-                "Address": general_info[4],
-                "Return type" : return_type
+                "Nm": general_info[0],
+                "St": general_info[1],
+                "Cty": general_info[2],
+                "Zip": general_info[3],
+                "Addr": general_info[4],
+                "RetTyp" : return_type
             })
         return update_fields
 
@@ -265,14 +265,14 @@ class Database:
                 "Gross Receipts", "Fundraising Income", "Fundraising Expenses",
                 "Compensation of current officers", "Other salaries and wages",
                 "Payroll Taxes", "Gift Grants Membership Fees received 509",
-                "Number of employees","Name", "State", "City", "Zip Code", "Address"
+                "Number of employees","Name", "State", "City", "Zip Code", "Address", "Return Type"
             ]
         elif return_type == "990EZ":
             labels = [
                 "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
                 "Program Service Revenue", "Investment Income",
                 "Gift Grants Membership Fees received 509", "Name", "State", "City", 
-                "Zip Code", "Address"
+                "Zip Code", "Address", "Return Type"
             ]
         else:
             labels = [
@@ -282,7 +282,7 @@ class Database:
                 "Compensation of Officers", "Total Fund net worth",
                 "Investments in US Gov Obligations", "Investments in Corporate Stock",
                 "Investments in Corporate Bonds", "Cash", "Adjusted net income", "Name", 
-                "State", "City", "Zip Code", "Address"
+                "State", "City", "Zip Code", "Address", "Return Type"
             ]
         lst = [prev_file[0],prev_file[1],curr_file[0],curr_file[1]]
         for i in range(len(prev_info)):
@@ -398,9 +398,9 @@ class Database:
             collection.bulk_write(insertions)
             self.database["NonProfitData"].bulk_write(insertions)
             missing_ntee = {"NTEE": {"$exists": False}}
-            missing_subsection_code = {"Subsection Code": {"$exists": False}}
+            missing_subsection_code = {"SubCode": {"$exists": False}}
             self.database["NonProfitData"].update_many(missing_ntee, {"$set": {"NTEE": "Z"}})
-            self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"Subsection Code": "Z"}})
+            self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"SubCode": "Z"}})
 
     def output_duplicates(self, name, directory):
         if self.output:
@@ -436,9 +436,9 @@ class Database:
             print("No duplicate files to handle manually")
 
 if __name__ == "__main__":
-    directory = "/tmp/2023-1A"
+    directory = "/Users/mr.youssef/Desktop/2023-1A"
     output_directory = '/Users/mr.youssef/Desktop/NpDataHub/errorOutputs'
-    name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
+    name_of_file = directory[26:] #it needs to start with last folder name (no "/" inside string)
     # input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
     # input('Is MongoDB client declared in the object correct? Press enter if it is.')
     # input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')

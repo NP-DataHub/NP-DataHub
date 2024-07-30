@@ -5,8 +5,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class DatabaseStarter:
     def __init__(self):
-        self.mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
-        self.database = self.mongo_client["Np-Datahub"]
+        self.mongo_client = MongoClient("mongodb+srv://hassay:TryAgain@npdatahub.f3sg8sf.mongodb.net/")
+        self.database = self.mongo_client["NpDatahub"]
         self.initial_data = []
 
     def update_documents(self, row):
@@ -22,7 +22,7 @@ class DatabaseStarter:
         self.initial_data.append({
             "EIN": ein,
             "NTEE": ntee_cd,
-            "Subsection Code": subsection_code
+            "SubCode": subsection_code
         })
 
     def process_csv(self, file_path):
