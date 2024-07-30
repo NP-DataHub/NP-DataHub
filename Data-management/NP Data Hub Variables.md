@@ -1,8 +1,60 @@
-### Note
 
-Each row in each table below represents a column in each table in our database. Each variable represents either general information about the non-profit or financial information. Additionally, this document shows the equivalent XML fields found in the IRS database as well as the ProPublica fields equivalent to the variable.
+### Table 1, NonProfitData :  Variable Names and Descriptions
 
-### Table 1: Master
+| Description                                      | Variable Name  |
+|--------------------------------------------------|----------------|
+| Total Revenue                                    | TotRev         |
+| Total Assets                                     | TotAst         |
+| Total Liabilities                                | TotLia         |
+| Total Expenses                                   | TotExp         |
+| Total Contributions                              | TotCon         |
+| Program Service Revenue                          | ProgRev        |
+| Investment Income                                | InvInc         |
+| Gross Receipts                                   | GroRec         |
+| Fundraising Income                               | FunInc         |
+| Fundraising Expenses                             | FunExp         |
+| Compensation of current officers                 | OffComp        |
+| Other salaries and wages                         | OthSal         |
+| Payroll Taxes                                    | PayTax         |
+| Gift Grants Membership Fees received 509         | GGMF           |
+| Number of employees                              | NumEmp         |
+| Net Income (Less Deficit)                        | NetInc         |
+| Contributions Received                           | ConRec         |
+| Interest Revenue                                 | IntRev         |
+| Dividends                                        | Div            |
+| Net Gain (Sales of Assets)                       | NetGain        |
+| Other Income                                     | OthInc         |
+| Total Fund net worth - EOY                       | FundNet        |
+| Investments in US Gov Obligations (EOY Book Value)| USGovInv       |
+| Investments in Corporate Stock (EOY Book Value)  | CorpStockInv   |
+| Investments in Corporate Bonds (EOY Book Value)  | CorpBondInv    |
+| Cash (Non-Interest Bearing, EOY Book Value)      | Cash           |
+| Adjusted net income                              | AdjNetInc      |
+
+### Table 2, NationalAndStateStatistics : Variable Names and Descriptions
+
+| Description                      | Variable Name  |
+|----------------------------------|----------------|
+| National Average Revenue         | NatAvgRev      |
+| National Average Expenses        | NatAvgExp      |
+| National Average Liabilities     | NatAvgLia      |
+| National Average Assets          | NatAvgAst      |
+| National Median Revenue          | NatMedRev      |
+| National Median Expenses         | NatMedExp      |
+| National Median Liabilities      | NatMedLia      |
+| National Median Assets           | NatMedAst      |
+| Revenue Average                  | RevAvg         |
+| Expenses Average                 | ExpAvg         |
+| Liabilities Average              | LiaAvg         |
+| Assets Average                   | AstAvg         |
+| Revenue Median                   | RevMed         |
+| Expenses Median                  | ExpMed         |
+| Liabilities Median               | LiaMed         |
+| Assets Median                    | AstMed         |
+
+Below is the equivalent XML fields found in the IRS database as well as the ProPublica fields equivalent to the variable. This is separated by 3 tables because the variables change based on the return type.
+
+### Master return type
 
 | Description                              | Variable name in XML files                                                              | Variable names in API for easy search |
 | ---------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------- |
@@ -30,7 +82,7 @@ Each row in each table below represents a column in each table in our database. 
 | Gift Grants Membership Fees recieved 509 | GiftsGrantsContrisRcvd509Grp/TotalAmt                                                   | totgftgrntrcvd509                     |
 | Number of employee                       | TotalEmployeeCnt                                                                        | N/a                                   |
 
-### Table 2: EZ
+### EZ return type
 
 | Description                              | Variable name in XML files                                                              | Variable names in API for easy search |
 | ---------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------- |
@@ -50,7 +102,7 @@ Each row in each table below represents a column in each table in our database. 
 | Investment Income                        | InvestmentIncomeAmt                                                                     | othrinvstinc                          |
 | Gift Grants Membership Fees recieved 509 | GiftsGrantsContrisRcvd509Grp/TotalAmt                                                   | totgftgrntrcvd509                     |
 
-### Table 3: PF
+### PF return type
 
 | Description                                        | Variable name in XML files                                                              | Variable names in API for easy search |
 | -------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------- |
