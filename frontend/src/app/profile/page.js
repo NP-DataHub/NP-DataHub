@@ -9,6 +9,7 @@ import Autosuggest from 'react-autosuggest';
 import cities from "../components/cities";
 import ntee_codes from "../components/ntee";
 import { v4 } from 'uuid';
+import { deleteObject } from 'firebase/storage';
 
 export default function Profile() {
   const { currentUser } = useAuth();
@@ -30,18 +31,6 @@ export default function Profile() {
   const [imageUrls, setImageUrls] = useState([]);
 
   const imagesListRef = ref(storage, "images/");
-  const uploadFile = () => {
-    if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-    setUploadingImage(true);
-    uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        setImageUrls((prev) => [...prev, url]);
-        setUserData((prev) => ({ ...prev, image: url }));
-        setUploadingImage(false);
-      });
-    });
-  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -65,6 +54,19 @@ export default function Profile() {
     });
   }, [currentUser]);
 
+  useEffect(() => {
+    if (currentUser) {
+      const updateUserData = async () => {
+        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+        if (userDoc.exists()) {
+          setUserData(userDoc.data());
+        }
+      };
+
+      updateUserData();
+    }
+  }, [userData.image]);
+
   const handleChange = (e) => {
     setUserData({
       ...userData,
@@ -73,14 +75,45 @@ export default function Profile() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await setDoc(doc(db, 'users', currentUser.uid), userData, { merge: true });
-      alert('Profile updated successfully');
-    } catch (error) {
-      console.error('Error updating profile:', error);
-      alert('Failed to update profile');
-    }
+      e.preventDefault();
+      try {
+          let imageUrl = userData.image;
+  
+          if (userData.image) {
+              try {
+                  const oldImageRef = ref(storage, userData.image);
+                  await getDownloadURL(oldImageRef);
+                  await deleteObject(oldImageRef);
+                  console.log('Previous image deleted successfully');
+              } catch (deleteError) {
+                  if (deleteError.code === 'storage/object-not-found') {
+                      console.log('Previous image does not exist');
+                  } else {
+                      console.error('Error deleting previous image:', deleteError);
+                      alert('Failed to delete previous image');
+                      return;
+                  }
+              }
+          }
+  
+          if (imageUpload) {
+              const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+              setUploadingImage(true);
+              await uploadBytes(imageRef, imageUpload);
+              const fullPath = imageRef.fullPath;
+              imageUrl = await getDownloadURL(imageRef);
+              setUserData((prev) => ({ ...prev, image: fullPath }));
+              setUserData((prev) => ({ ...prev, image: imageUrl }));
+          }
+  
+          await setDoc(doc(db, 'users', currentUser.uid), { ...userData, image: imageUrl }, { merge: true });
+          alert('Profile updated successfully');
+      } catch (error) {
+          console.error('Error updating profile:', error);
+          alert('Failed to update profile');
+      } finally {
+          setUploadingImage(false);
+      }
   };
 
   const getSuggestions = value => {
@@ -179,9 +212,11 @@ export default function Profile() {
       <div className="flex-col w-screen p-4">
         <h1 className="text-2xl font-bold mb-4">Profile</h1>
         <div className="flex space-x-8">
-          <div className="w-1/3 bg-gray-800 p-4 rounded-md">
+          <div className="w-1/3 bg-gray-800 p-4 rounded-md ">
             <h2 className="text-xl font-semibold mb-2">User Information</h2>
-            <img src={userData.image || 'https://via.placeholder.com/150'} alt="User" className="mb-2 w-24 h-24 rounded-full object-cover" />
+            <div className="border-b border-gray-500 mx-0.5 mb-5"></div>
+            <img src={userData.image || 'https://via.placeholder.com/150'} alt="User" className="mb-2 w-24 h-24 rounded-md object-cover" />
+
             <p><strong>Email:</strong> {currentUser.email}</p>
             <p><strong>First Name:</strong> {userData.firstName}</p>
             <p><strong>Last Name:</strong> {userData.lastName}</p>
@@ -193,6 +228,7 @@ export default function Profile() {
           </div>
           <div className="w-2/5 bg-gray-700 p-4 rounded-md">
             <h2 className="text-xl font-semibold mb-2">Edit Profile</h2>
+            <div className="border-b border-gray-500 mx-0.5 mb-5"></div>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium">First Name</label>
@@ -214,7 +250,6 @@ export default function Profile() {
                   className="w-full mt-1 px-3 py-2 text-white-900 bg-gray-500 rounded-md"
                 />
               </div>
-
               <div>
                 <label className="block text-sm font-small">Image</label>
                 <input
@@ -222,19 +257,9 @@ export default function Profile() {
                   onChange={(event) => {
                     setImageUpload(event.target.files[0]);
                   }}
-                  className="w-full mt-1 px-3 py-2 text-white-900 bg-gray-500 rounded-md flex"
+                  className="w-full mt-1 px-3 py-2 text-white-900 bg-gray-500 rounded-md"
                 />
-                <button
-                  type="button"
-                  onClick={uploadFile}
-                  disabled={uploadingImage}
-                  className="mt-2 px-1 py-1 text-white font-medium bg-gray-800 rounded-md hover:bg-indigo-700 transition duration-300"
-                >
-                  {uploadingImage ? 'Uploading...' : 'Upload Image'}
-                </button>
               </div>
-
-
               <div>
                 <label className="block text-sm font-medium">Organization</label>
                 <input
@@ -247,7 +272,7 @@ export default function Profile() {
               </div>
               <div>
                 <label className="block text-sm font-medium">State</label>
-                <select 
+                <select
                   name="state"
                   value={userData.state}
                   onChange={handleChange}
@@ -318,11 +343,11 @@ export default function Profile() {
                     renderSuggestion={renderSuggestion}
                     inputProps={inputProps}
                     renderSuggestionsContainer={({ containerProps, children }) => (
-                      <div {...containerProps} className="w-full relative text-white-900 bg-gray-500 rounded-md shadow-lg z-10 max-h-60 overflow-auto">
+                      <div {...containerProps} className="w-3/4 relative text-white-900 bg-gray-500 rounded-md shadow-lg z-10 max-h-60 overflow-auto">
                         {children}
                       </div>
                     )}
-                    className = "text-white-900 bg-gray-500"
+                    className="text-white-900 bg-gray-500"
                   />
                 </div>
               </div>
@@ -359,8 +384,7 @@ export default function Profile() {
                 type="submit"
                 className="w-full px-4 py-2 text-white font-medium bg-gray-800 rounded-md hover:bg-indigo-700 transition duration-300"
               >
-                 
-                Save
+                {uploadingImage ? 'Uploading and Saving...' : 'Save'}
               </button>
             </form>
           </div>
