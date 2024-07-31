@@ -250,7 +250,7 @@ const Nonprofit = () => {
                               {/*add chart here box size will update with chart*/}
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue By State</h1>
                               <div className="flex items-center justify-center mb-24 mt-12" style={{ width: '100%', height: '100%' }}>
-                                  <Choropleth/>
+                                  <Choropleth sector="A"/>
                               </div>
 
                           </div>

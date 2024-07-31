@@ -5,11 +5,67 @@ import ReactECharts from 'echarts-for-react';
 import * as echarts from 'echarts';
 
 /**
- * @param data an array of objects in the format { name: __ , value: __ }
+ * @param sector the non-profit sector to pull data from
  */
-const Choropleth = (data) => {
+const Choropleth = (sector) => {
 
   const [option, setOption] = useState(null);
+
+  // used to convert abbreviatoms from db to full names
+  const abbreviationToName = {
+    AL: 'Alabama',
+    AK: 'Alaska',
+    AZ: 'Arizona',
+    AR: 'Arkansas',
+    CA: 'California',
+    CO: 'Colorado',
+    CT: 'Connecticut',
+    DE: 'Delaware',
+    DC: 'District of Columbia',
+    FL: 'Florida',
+    GA: 'Georgia',
+    HI: 'Hawaii',
+    ID: 'Idaho',
+    IL: 'Illinois',
+    IN: 'Indiana',
+    IA: 'Iowa',
+    KS: 'Kansas',
+    KY: 'Kentucky',
+    LA: 'Louisiana',
+    ME: 'Maine',
+    MD: 'Maryland',
+    MA: 'Massachusetts',
+    MI: 'Michigan',
+    MN: 'Minnesota',
+    MS: 'Mississippi',
+    MO: 'Missouri',
+    MT: 'Montana',
+    NE: 'Nebraska',
+    NV: 'Nevada',
+    NH: 'New Hampshire',
+    NJ: 'New Jersey',
+    NM: 'New Mexico',
+    NY: 'New York',
+    NC: 'North Carolina',
+    ND: 'North Dakota',
+    OH: 'Ohio',
+    OK: 'Oklahoma',
+    OR: 'Oregon',
+    PA: 'Pennsylvania',
+    RI: 'Rhode Island',
+    SC: 'South Carolina',
+    SD: 'South Dakota',
+    TN: 'Tennessee',
+    TX: 'Texas',
+    UT: 'Utah',
+    VT: 'Vermont',
+    VA: 'Virginia',
+    WA: 'Washington',
+    WV: 'West Virginia',
+    WI: 'Wisconsin',
+    WY: 'Wyoming',
+    PR: 'Puerto Rico',
+  };
 
   const formatNumber = (num) => {
     if (num >= 1000000000) {
@@ -44,8 +100,18 @@ const Choropleth = (data) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // retrieve state by state sector information
+      let response = await fetch(`/api/averages?MajGrp=A`);
+      const data = await response.json();
+      console.log(data);
+
+      const sectorYears = Object.keys(data).filter(year => !isNaN(year)).sort();
+      const mostRecentSectorYear = sectorYears[sectorYears.length - 1];
+      const previousSectorYear = sectorYears[sectorYears.length - 2];
+
+      // retrieve map data
       const PATH = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/95368/USA_geo.json';
-      const response = await fetch(PATH);
+      response = await fetch(PATH);
       const usaJson = await response.json();
 
       echarts.registerMap('USA', usaJson, {
