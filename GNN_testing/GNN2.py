@@ -178,7 +178,7 @@ optimizer = torch.optim.Adam(
 
 # ----------- 4. training -------------------------------- #
 all_logits = []
-for e in range(100):
+for e in range(200):
     # forward
     h = model(train_g, train_g.ndata["AllFeatures"])
     pos_score = pred(train_pos_g, h)
@@ -206,9 +206,9 @@ print(pred(test_neg_g, h))
 import networkx as nx
 import matplotlib.pyplot as plt
 
-nx_g = g.to_networkx().to_undirected()
-nx.draw(nx_g, with_labels=True)
-plt.show()
+# nx_g = g.to_networkx().to_undirected()
+# nx.draw(nx_g, with_labels=True)
+# plt.show()
 
 
 # create a new graph with the predicted edges

@@ -28,7 +28,7 @@ ntee_encoder = LabelEncoder()
 
 
 # Grab nodes from the collection
-num_test_nodes = 100
+num_test_nodes = 1000
 print(f"Grabbing the first {num_test_nodes} nodes from the collection")
 
 nonprofits = list(collection.find().limit(num_test_nodes))
@@ -119,9 +119,9 @@ dgl.save_graphs("REAL.dgl", dgl_G)
 
 
 # print the networkx graph in graph format
-plt.figure(figsize=(10, 10))
-nx.draw(G, with_labels=True)
-plt.show()
+# plt.figure(figsize=(10, 10))
+# nx.draw(G, with_labels=True)
+# plt.show()
 
 
 # # Create the nodes using the encoders and the data
