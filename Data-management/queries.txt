@@ -204,11 +204,67 @@
 
 7. Overall percentage difference between revenues and expenses for a single nonprofit or foundation (from five years ago)
 
-
+{
+  Name: 1,
+  "2019_Total_Revenue": "$2019.Total Revenue",
+  "2019_Total_Expenses": "$2019.Total Expenses",
+  Percentage_Difference: {
+    $cond: {
+      if: {
+        $eq: ["$2019.Total Expenses", 0]
+      },
+      then: 0,
+      else: {
+        $multiply: [
+          {
+            $divide: [
+              {
+                $subtract: [
+                  "$2019.Total Revenue",
+                  "$2019.Total Expenses"
+                ]
+              },
+              "$2019.Total Expenses"
+            ]
+          },
+          100
+        ]
+      }
+    }
+  }
+}
 
 8. Overall percentage difference between assets and liabilities for a single nonprofit or foundation (from five years ago)
 
-
+{
+  Name: 1,
+  TotalAssets2019: "$2019.Total Assets",
+  TotalLiabilities2019: "$2019.Total Liabilities",
+  PercentageDifference2019: {
+    $cond: [
+      {
+        $eq: ["$2019.Total Liabilities", 0]
+      },
+      null,
+      {
+        $multiply: [
+          {
+            $divide: [
+              {
+                $subtract: [
+                  "$2019.Total Assets",
+                  "$2019.Total Liabilities"
+                ]
+              },
+              "$2019.Total Liabilities"
+            ]
+          },
+          100
+        ]
+      }
+    ]
+  }
+}
 
 9. (Revenue) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
 
