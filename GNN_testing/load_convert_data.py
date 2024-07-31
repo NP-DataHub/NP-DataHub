@@ -28,7 +28,7 @@ ntee_encoder = LabelEncoder()
 
 
 # Grab nodes from the collection
-num_test_nodes = 1000
+num_test_nodes = 100
 print(f"Grabbing the first {num_test_nodes} nodes from the collection")
 
 nonprofits = list(collection.find().limit(num_test_nodes))
@@ -89,14 +89,15 @@ for node_id in list(G.nodes)[:5]:
 
 
 # create edges between the nodes:
-# connect the nodes with edges if they share an NTEE code
-bar = Bar('Creating Edges between the nodes', max=num_test_nodes)
-for cur_np in nonprofits:
-    name_encoded = name_encoder.transform([cur_np['Nm']])[0]
-    ntee = ntee_encoder.transform([cur_np['NTEE'][0]])[0]
-    for node_id in list(G.nodes):
-        if G.nodes[node_id]['NTEE'] == ntee and node_id != name_encoded:
-            G.add_edge(name_encoded, node_id)
+# connect the nodes with edges if they share an NTEE code and are in the same state
+# 
+bar = Bar('Creating Edges between Nodes', max=num_test_nodes)
+for node1 in G.nodes:
+    for node2 in G.nodes:
+        if(node1 == node2):
+            continue
+        if G.nodes[node1]['State'] == G.nodes[node2]['State'] and G.nodes[node1]['NTEE'] == G.nodes[node2]['NTEE']:
+            G.add_edge(node1, node2)
     bar.next()
 bar.finish()
 
