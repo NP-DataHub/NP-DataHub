@@ -122,7 +122,7 @@ class MLPPredictor(nn.Module):
 
 # Assuming train_g.ndata contains all the relevant fields
 #state = train_g.ndata["State"]
-print(train_g.ndata)
+#print(train_g.ndata)
 
 
 # convert all the features to float
@@ -225,3 +225,7 @@ print("Number of edges in the new graph:", new_g.num_edges())
 nx_new_g = new_g.to_networkx().to_undirected()
 nx.draw(nx_new_g, with_labels=True) 
 plt.show()
+
+
+# save the model
+torch.save(model.state_dict(), "REALmodel.pth")
