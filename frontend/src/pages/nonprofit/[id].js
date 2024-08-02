@@ -13,6 +13,11 @@ import Slider from "react-slick";
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import '@/app/globals.css';
+import { AuthProvider } from "@/app/components/context";
+import Select from 'react-select';
+import { Tooltip as ReactTooltip } from 'react-tooltip'
+
+
 
 const Nonprofit = () => {
   const router = useRouter();
@@ -20,6 +25,19 @@ const Nonprofit = () => {
   console.log(id)
   const [nonprofitData, setNonprofitData] = useState(null);
 
+  const [selectedMetric, setSelectedMetric] = useState('Total Revenue');
+  const [selectedComparison, setSelectedComparison] = useState({ variable1: 'Total Revenue', variable2: 'Total Expenses' });
+  const metricOptions = [
+    { value: 'Total Revenue', label: 'Revenue' },
+    { value: 'Total Expenses', label: 'Expenses' },
+    { value: 'Total Assets', label: 'Assets' },
+    { value: 'Total Liabilities', label: 'Liabilities' },
+  ];
+  const getValuesForMetric = (metric) => {
+    return years.map(year => nonprofitData[year][metric]);
+  };
+  
+  
   useEffect(() => {
     if (id) {
       // Fetch the nonprofit data using the id
@@ -223,23 +241,71 @@ const Nonprofit = () => {
                   </div>
                   <div className="flex-col mx-10 font-sans">
                       <div className="grid grid-cols-3 gap-4 mt-10 h-400px">
-                          <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                              {/*add chart here box size will update with chart*/}
-                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue</h1>
-                              <div className="flex items-center justify-center mb-12" style={{ width: '100%', height: '100%' }}>
-                                  <BarChart values={revenues} minYear = {previousYear}/>
-                              </div>
+                        <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                          <div className="flex justify-between items-center">
+                            <h1 className="mb-8" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>
+                              {metricOptions.find(option => option.value === selectedMetric)?.label}
+                            </h1>
+                            
+                            <div className="flex items-center">
+                              <Select
+                                options={metricOptions}
+                                value={metricOptions.find(option => option.value === selectedMetric)}
+                                onChange={(option) => setSelectedMetric(option.value)}
+                                className="text-black"
+                              />
+                              <a data-tooltip-id="my-tooltip" className="ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.">
+                                  ℹ️
+                              </a>
+                              <ReactTooltip  place="top" effect="solid" id="my-tooltip" />
+                            </div>
                           </div>
-                          <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                              {/*add chart here box size will update with chart*/}
-                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue vs. Expenses</h1>
-                              <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
-                                  <LineCompareChart variable1="Revenue" variable2="Expenses" values1={revenues} values2={expenses} minYear = {previousYear}/>
-                              </div>
+                          <div className="flex items-center justify-center mb-8" style={{ width: '100%', height: '100%' }}>
+                            <BarChart values={getValuesForMetric(selectedMetric)} minYear={previousYear} style={style} />
                           </div>
+                        </div>
+
+
+                        <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                          <div className="flex justify-between items-center">
+                            <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>
+                              {`${metricOptions.find(option => option.value === selectedComparison.variable1)?.label} vs. ${metricOptions.find(option => option.value === selectedComparison.variable2)?.label}`}
+                            </h1>
+                            <div className="flex space-x-2 items-center">
+                              <Select
+                                options={metricOptions}
+                                value={metricOptions.find(option => option.value === selectedComparison.variable1)}
+                                onChange={(option) => setSelectedComparison(prev => ({ ...prev, variable1: option.value }))}
+                                className="text-black"
+                              />
+                              <Select
+                                options={metricOptions}
+                                value={metricOptions.find(option => option.value === selectedComparison.variable2)}
+                                onChange={(option) => setSelectedComparison(prev => ({ ...prev, variable2: option.value }))}
+                                className="text-black"
+                              />
+                              <a data-tooltip-id="my-tooltip" className=" ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="Lorem ipsum dolor sit amet">
+                                  ℹ️
+                              </a>
+                              <ReactTooltip  place="top" effect="solid" id="my-tooltip" />
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
+                            <LineCompareChart 
+                              variable1={selectedComparison.variable1} 
+                              variable2={selectedComparison.variable2} 
+                              values1={getValuesForMetric(selectedComparison.variable1)} 
+                              values2={getValuesForMetric(selectedComparison.variable2)} 
+                              minYear={previousYear} 
+                              style={style} 
+                            />
+                          </div>
+                        </div>
+
                           <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                               {/*add chart here box size will update with chart*/}
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Overall Growth</h1>
+                              
                               <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
                                   <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities} minYear = {previousYear}/>
                               </div>
