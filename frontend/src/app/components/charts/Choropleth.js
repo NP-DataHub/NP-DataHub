@@ -102,7 +102,8 @@ const Choropleth = (sector) => {
     const fetchData = async () => {
       // retrieve state by state sector information
       let response = await fetch(`/api/averages?MajGrp=A`);
-      const data = await response.json();
+      response = await response.json();
+      let data = response.data[0]
       console.log(data);
 
       const sectorYears = Object.keys(data).filter(year => !isNaN(year)).sort();

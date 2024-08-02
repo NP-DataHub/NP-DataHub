@@ -261,7 +261,7 @@ const Nonprofit = () => {
                             </div>
                           </div>
                           <div className="flex items-center justify-center mb-8" style={{ width: '100%', height: '100%' }}>
-                            <BarChart values={getValuesForMetric(selectedMetric)} minYear={previousYear} style={style} />
+                            <BarChart values={getValuesForMetric(selectedMetric)} minYear={previousYear}/>
                           </div>
                         </div>
 
@@ -296,8 +296,7 @@ const Nonprofit = () => {
                               variable2={selectedComparison.variable2} 
                               values1={getValuesForMetric(selectedComparison.variable1)} 
                               values2={getValuesForMetric(selectedComparison.variable2)} 
-                              minYear={previousYear} 
-                              style={style} 
+                              minYear={previousYear}
                             />
                           </div>
                         </div>
