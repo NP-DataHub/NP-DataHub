@@ -2,8 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
-import ecStat from 'echarts-stat';
-
+import regression from 'regression';
 /**
  * @param values -   an array of values measured each year
 */
@@ -11,6 +10,7 @@ import ecStat from 'echarts-stat';
 const TimeSeries = ({values, minYear}) => {
   // ensures arg is an array
   if (!Array.isArray(values) || values.length === 0) {
+    console.log(values);
     return <div>ERROR: chart arg must be an array</div>;
   }
 
@@ -45,21 +45,21 @@ const TimeSeries = ({values, minYear}) => {
   }, []);
 
   const data = values.map((value, index) => [index, value]);
-  const regression = ecStat.regression('linear', data);
-  //debug prints
-  console.log(regression);
-  console.log(data);
+  const fitted_line = regression.linear(data);
+
+  // print the regression line
+  console.log(fitted_line);
 
   const option = {
     legend: {
-      data: ['line', 'trend']
+      data: ['Data', 'Predicted']
     },
     dataset: [
       {
         source: data
       },
       {
-        source: regression.points
+        source: Array.from({ length: values.length }, (_, index) => [index, fitted_line.predict(index)[1]])
       }
     ],
     tooltip: {
@@ -111,12 +111,12 @@ const TimeSeries = ({values, minYear}) => {
     ],
     series: [
       {
-        name: 'line',
+        name: 'Data',
         type: 'line',
         datasetIndex: 0,
       },
       {
-        name: 'trend',
+        name: 'Predicted',
         type: 'line',
         datasetIndex: 1,
         symbol: 'none',
@@ -130,11 +130,12 @@ const TimeSeries = ({values, minYear}) => {
     graphic: {
       type: 'text',
       left: '5%',
-      top: 'bottom',
+      bottom: 'bottom',
       style: {
-        text: 'Accuracy (R²): ' + regression.parameter.r2,
+        text: 'Accuracy (R²): ' + fitted_line.r2.toFixed(2),
         fontSize: 16,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fill: 'white'
       }
     }
   };
