@@ -24,8 +24,9 @@ export const doSignInWithGoogle = async () => {
   return result.user;
 };
 
-export const doSignOut = () => {
-  return auth.signOut();
+export const doSignOut = async () => {
+  await auth.signOut();
+  window.location.href = '/';
 };
 
 export const doPasswordReset = (email) => {
