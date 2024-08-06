@@ -151,14 +151,14 @@ export default function Toolbox() {
                                 <p className = "text-sm text-[#20AEF3]">Search from a host of other variables and compare where others stand regionally in the same or different sectors.</p>
                             </div>
                         </div>
+                        {regional === true && (
+                            <div>
+                                <RegionalHealth />
+                            </div>
+                        )} 
                     </div>
                 </div>
             </div>
-            {regional === true && (
-                <div>
-                    <RegionalHealth />
-                </div>
-            )} 
         </div>
     );
 }
