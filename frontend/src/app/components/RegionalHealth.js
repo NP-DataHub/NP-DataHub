@@ -10,11 +10,10 @@ const RegionalHealth = () => {
   });
 
   return (
-    <div className="flex dashboard-color text-white font-sans">
-        <Sidebar />
-          <div className="flex-col w-10/12 mx-auto dashboard-color ">
-              <DashboardNavbar />
-          </div>
+    <div>
+        <p>
+          Hello world!
+        </p>
     </div>
   );
 }

@@ -7,8 +7,10 @@ import Autosuggest from 'react-autosuggest';
 import cities from "../components/cities";
 import ntee_codes from "../components/ntee";
 import { useRouter } from 'next/navigation';
+import RegionalHealth from "../components/RegionalHealth";
 
 export default function Toolbox() {
+    const [regional, setRegional] = useState(false);
     return(
         <div>
             <div className = "flex dashboard-color text-white font-sans">
@@ -29,7 +31,7 @@ export default function Toolbox() {
                                 <h2 className="text-xl font-semibold mb-2">FISCAL HEALTH</h2>
                                 <p className="text-sm text-[#FEB95A]">Assess a nonprofit{"’"}s fiscal health based on a weighted score of various data variables. Compare the scores side-by-side with other nonproifts.</p>
                             </div>
-                            <div className="bg-[#171821] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <div onClick={setRegional(true)} className="bg-[#171821] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 <svg className = "mb-4" width="36" height="39" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12.6897 19.0367L7.93192 12.318C7.15315 11.3985 6.65164 10.2767 6.48579 9.08319C6.31994 7.8897 6.49657 6.67366 6.99513 5.57668C7.49368 4.4797 8.29363 3.54693 9.30181 2.88702C10.31 2.2271 11.4849 1.86719 12.6897 1.84921C14.3598 1.86572 15.9553 2.54343 17.1268 3.73391C18.2982 4.9244 18.9501 6.53061 18.9397 8.20078C18.9404 9.65776 18.4443 11.0714 17.5335 12.2086L12.6897 19.0367ZM12.6897 3.41171C11.4334 3.42614 10.2341 3.93857 9.35521 4.83648C8.47634 5.7344 7.98973 6.94439 8.00223 8.20078C8.00814 9.34739 8.42062 10.4547 9.16629 11.3258L12.6897 16.318L16.3069 11.2242C16.9945 10.366 17.3717 9.30046 17.3772 8.20078C17.3897 6.94439 16.9031 5.7344 16.0243 4.83648C15.1454 3.93857 13.9461 3.42614 12.6897 3.41171Z" fill="#A9DFD8"/>
                                     <path d="M12.6897 8.88046C13.5527 8.88046 14.2522 8.18091 14.2522 7.31796C14.2522 6.45502 13.5527 5.75546 12.6897 5.75546C11.8268 5.75546 11.1272 6.45502 11.1272 7.31796C11.1272 8.18091 11.8268 8.88046 12.6897 8.88046Z" fill="#A9DFD8"/>
@@ -146,7 +148,11 @@ export default function Toolbox() {
                     </div>
                 </div>
             </div>
-                    
+            {regional === true && (
+                <div>
+                    <RegionalHealth />
+                </div>
+            )} 
         </div>
     );
 }
