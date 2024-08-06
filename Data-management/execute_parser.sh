@@ -1,15 +1,14 @@
 #!/bin/bash
 
-#List of directories (example)
-echo "Executing DatabaseStarter.py"
-time python3 DatabaseStarter.py
-echo ""
-
+#List of directories
 directories=(
-    "/tmp/2023-1A"
-    "/tmp/2023-2A"
-    "/tmp/2023-3A"
-    "/tmp/2023-4A"
+    "/tmp/2024-1A"
+    "/tmp/2024-2A"
+    "/tmp/2024-3A"
+    "/tmp/2024-4A"
+    "/tmp/2024-5A"
+    "/tmp/2024-5B"
+    "/tmp/2024-6A"
 )
 # Number of times to execute the parser.py script
 num_executions=${#directories[@]}

@@ -2,11 +2,13 @@ from pymongo import MongoClient
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import statistics
 import os
+from dotenv import load_dotenv
 
 class NationalAndStateStatistics:
     def __init__(self):
-        self.mongo_client = MongoClient("mongodb+srv://hassay:TryAgain@npdatahub.f3sg8sf.mongodb.net/")
-        self.database = self.mongo_client["NpDatahub"]
+        load_dotenv('../frontend/.env')
+        self.mongo_client = MongoClient(os.getenv('MONGODB_URI'))
+        self.database = self.mongo_client["Nonprofitly"]
         self.source_collection = self.database["NonProfitData"]
         self.new_collection = self.database["NationalAndStateStatistics"]
         self.table = {}
@@ -18,6 +20,8 @@ class NationalAndStateStatistics:
         return statistics.median(values) if values else 0
 
     def get_data(self, row):
+        if len(row) == 4:
+            return
         ntee_code = row["NTEE"]
         major_group = ntee_code[0]
         if major_group not in self.table:

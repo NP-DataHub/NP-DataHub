@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 import sys
 from lxml import etree as ET
 from pymongo import MongoClient, UpdateOne
@@ -8,8 +9,9 @@ from datetime import datetime
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
-        self.mongo_client = MongoClient("mongodb+srv://hassay:TryAgain@npdatahub.f3sg8sf.mongodb.net/")
-        self.database = self.mongo_client["test"]
+        load_dotenv('../frontend/.env')
+        self.mongo_client = MongoClient(os.getenv('MONGODB_URI'))
+        self.database = self.mongo_client["Nonprofitly"]
         self.cache = {}
         self.output = []
     def get_ein_and_tax_period(self, root):
@@ -328,16 +330,16 @@ class Database:
             root = ET.parse(file_path).getroot()
         except ET.ParseError:
             print(f"Skipping invalid XML file: {file_path}")
-            return None
+            return
         return_type_element = root.find('.//irs:ReturnTypeCd', self.namespace)
         return_type = return_type_element.text if return_type_element is not None else None
         
         if return_type not in ["990", "990EZ", "990PF"]:
-            return None
+            return
 
         ein, tax_period = self.get_ein_and_tax_period(root)
         if not ein or not tax_period:
-            return None
+            return
 
         timestamp_element = root.find('.//irs:ReturnTs', self.namespace)
         current_timestamp = timestamp_element.text if timestamp_element is not None else "None"
@@ -373,14 +375,14 @@ class Database:
                     self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
 
         if update_fields is None:
-            return None
+            return
 
-        insertion = UpdateOne(
+        self.database["NonProfitData"].update_one(
             {"EIN": ein},
             {"$set": update_fields},
             upsert=True
         )
-        return insertion
+        return
 
     def process_all_xml_files(self, directory):
         num_cores = os.cpu_count()
@@ -393,18 +395,12 @@ class Database:
                     future = executor.submit(self.build_database, file_path)
                     futures.append(future)
             for future in as_completed(futures):
-                insertion = future.result()
-                if insertion:
-                    insertions.append(insertion)
+                future.result()
 
-        if insertions:
-            collection = self.database["NonProfitData"]
-            collection.bulk_write(insertions)
-            self.database["NonProfitData"].bulk_write(insertions)
-            missing_ntee = {"NTEE": {"$exists": False}}
-            missing_subsection_code = {"SubCode": {"$exists": False}}
-            self.database["NonProfitData"].update_many(missing_ntee, {"$set": {"NTEE": "Z"}})
-            self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"SubCode": "Z"}})
+        missing_ntee = {"NTEE": {"$exists": False}}
+        missing_subsection_code = {"SubCode": {"$exists": False}}
+        self.database["NonProfitData"].update_many(missing_ntee, {"$set": {"NTEE": "Z"}})
+        self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"SubCode": "Z"}})
 
     def output_duplicates(self, name, directory):
         if self.output:
@@ -440,13 +436,13 @@ class Database:
             print("No duplicate files to handle manually")
 
 if __name__ == "__main__":
-    directory = "/Users/mr.youssef/Desktop/NpDataHub/Data-management/unitTesting"
+    directory = sys.argv[1]
     output_directory = '/Users/mr.youssef/Desktop/NpDataHub/Data-management/errorOutputs'
-    name_of_file = directory[52:] #it needs to start with last folder name (no "/" inside string)
-    # input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
-    # input('Is MongoDB client declared in the object correct? Press enter if it is.')
-    # input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')
-    # input(f'Is the directory, where the error file will be created, correct "{output_directory}" ? Press enter if it is.')
+    name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
+    input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
+    input('Is MongoDB client declared in the object correct? Press enter if it is.')
+    input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')
+    input(f'Is the directory, where the error file will be created, correct "{output_directory}" ? Press enter if it is.')
     obj = Database()
     obj.process_all_xml_files(directory)
     print("Data has been successfully inserted into MongoDB.")

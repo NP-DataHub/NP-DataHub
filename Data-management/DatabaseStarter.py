@@ -1,12 +1,14 @@
 import os
+from dotenv import load_dotenv
 import pandas as pd
 from pymongo import MongoClient, InsertOne
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class DatabaseStarter:
     def __init__(self):
-        self.mongo_client = MongoClient("mongodb+srv://hassay:TryAgain@npdatahub.f3sg8sf.mongodb.net/")
-        self.database = self.mongo_client["NpDatahub"]
+        load_dotenv('../frontend/.env')
+        self.mongo_client = MongoClient(os.getenv('MONGODB_URI'))
+        self.database = self.mongo_client["Nonprofitly"]
         self.initial_data = []
 
     def update_documents(self, row):
@@ -14,6 +16,7 @@ class DatabaseStarter:
         while len(ein) < 9:
             ein = '0' + ein
         ntee_cd = str(row.get('NTEE_CD'))
+        ntee_cd = ntee_cd.upper() # in case lowercase NTEE was given
         if ntee_cd == "nan":
             ntee_cd = "Z"
         subsection_code = str(row.get('SUBSECTION'))

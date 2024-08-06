@@ -1,5 +1,7 @@
 import pandas as pd
 from pymongo import MongoClient, InsertOne
+from dotenv import load_dotenv
+import os
 
 def count_incomplete_ntee_in_csv():
     file_path = '/Users/mr.youssef/Desktop/'
@@ -33,7 +35,8 @@ def count_incomplete_ntee_in_csv():
     return counts, pf_counts, total_rows
 
 def count_incomplete_rows_and_ntee():
-    mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
+    load_dotenv('../frontend/.env')
+    mongo_client = MongoClient(os.getenv('MONGODB_URI'))
     database = mongo_client["Nonprofitly"]
     collection = database["NonProfitData"]
     imcomplete_rows = collection.count_documents({"Nm": {"$exists": False}})
@@ -65,7 +68,8 @@ def count_incomplete_rows_and_ntee():
     return complete_rows
 
 def count_years_per_row(complete_rows):
-    mongo_client = MongoClient("mongodb+srv://Admin:Admin@np-data.fytln2i.mongodb.net/?retryWrites=true&w=majority&appName=NP-Data")
+    load_dotenv('../frontend/.env')
+    mongo_client = MongoClient(os.getenv('MONGODB_URI'))
     database = mongo_client["Nonprofitly"]
     collection = database["NonProfitData"]
     total = 0 #seems to start with 2022
