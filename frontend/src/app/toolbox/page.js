@@ -151,12 +151,15 @@ export default function Toolbox() {
                                 <p className = "text-sm text-[#20AEF3]">Search from a host of other variables and compare where others stand regionally in the same or different sectors.</p>
                             </div>
                         </div>
-                        {regional === true && (
+                    </div>
+                    {regional === true && (
+                        <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
+                            <h1 className = "text-2xl font-semibold">Regional Health Indicator Search</h1>
                             <div>
                                 <RegionalHealth />
                             </div>
-                        )} 
-                    </div>
+                        </div>
+                    )} 
                 </div>
             </div>
         </div>
