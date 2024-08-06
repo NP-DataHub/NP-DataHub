@@ -153,7 +153,7 @@ export default function Toolbox() {
                         </div>
                     </div>
                     {regional === true && (
-                        <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
+                        <div style={{ marginTop: '1.5rem' }} className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
                             <h1 className = "text-2xl font-semibold">Regional Health Indicator Search</h1>
                             <div>
                                 <RegionalHealth />
