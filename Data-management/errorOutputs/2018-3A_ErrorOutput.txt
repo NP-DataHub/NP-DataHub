@@ -5,6 +5,7 @@ Total Assets: previous is 8606 and current is: 7004
 Total Expenses: previous is 39729 and current is: 41996
 Name: previous is FRATERNAL ORDER OF EAGLES AERIE 2773 and current is: FRATERNAL ORDER OF EAGLES
 City: previous is Wood River and current is: WOOD RIVER
+Address: previous is 74 East Ferguson and current is: 74 E FERGUSON AVE
 ==================================================
 Previous filepath: /tmp/2018-3A/201841069349100514_public.xml and timestamp: None
 Current filepath: /tmp/2018-3A/201832119349100403_public.xml and timestamp: None

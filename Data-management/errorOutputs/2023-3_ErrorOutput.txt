@@ -1,0 +1,56 @@
+Previous filepath: /tmp/2023-3/202330709349200038_public.xml and timestamp: None
+Current filepath: /tmp/2023-3/202330719349200303_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-3/202300699349201360_public.xml and timestamp: None
+Current filepath: /tmp/2023-3/202330829349200333_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 95344 and current is: 96493
+==================================================
+Previous filepath: /tmp/2023-3/202300659349200800_public.xml and timestamp: None
+Current filepath: /tmp/2023-3/202300729349201810_public.xml and timestamp: None
+Total Revenue: previous is 51943 and current is: 52142
+Total Expenses: previous is 20630 and current is: 41622
+Investment Income: previous is 0 and current is: 4
+Name: previous is patterson assn of teachers and current is: Patterson Association of Teachers
+Address: previous is 20203 crystal dr and current is: 20203 Crystal Drive
+==================================================
+Previous filepath: /tmp/2023-3/202340679349201009_public.xml and timestamp: None
+Current filepath: /tmp/2023-3/202320809349201407_public.xml and timestamp: None
+Total Expenses: previous is 20824 and current is: 39421
+==================================================
+Previous filepath: /tmp/2023-3/202320559349201037_public.xml and timestamp: None
+Current filepath: /tmp/2023-3/202300609349200300_public.xml and timestamp: 2023-03-01 05:47:18-05:00
+Gift Grants Membership Fees received 509: previous is 92800 and current is: 91400
+Zip Code: previous is 72206 and current is: 722066529
+Address: previous is 2718 SOUTH ARCH and current is: 2718 S ARCH ST
+==================================================
+Previous filepath: /tmp/2023-3/202300749349101005_public.xml and timestamp: None
+Current filepath: /tmp/2023-3/202320709349100117_public.xml and timestamp: None
+Total Revenue: previous is 2295 and current is: 0
+Total Assets: previous is 6489 and current is: 0
+Total Expenses: previous is 6220 and current is: 0
+Net Income (Less Deficit): previous is -3925 and current is: 0
+Contributions Received: previous is 2295 and current is: 0
+Cash: previous is 6489 and current is: 0
+==================================================
+Previous filepath: /tmp/2023-3/202340759349201524_public.xml and timestamp: None
+Current filepath: /tmp/2023-3/202340729349201849_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-3/202330689349201913_public.xml and timestamp: None
+Current filepath: /tmp/2023-3/202300739349200225_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-3/202330729349200748_public.xml and timestamp: None
+Current filepath: /tmp/2023-3/202330749349201503_public.xml and timestamp: None
+Total Revenue: previous is 65716 and current is: 72716
+Total Assets: previous is 10707 and current is: 8139
+Total Liabilities: previous is 26671 and current is: 7000
+Total Expenses: previous is 108123 and current is: 100296
+==================================================
+Previous filepath: /tmp/2023-3/202340609349200239_public.xml and timestamp: None
+Current filepath: /tmp/2023-3/202310589349200341_public.xml and timestamp: None
+Total Revenue: previous is 1595 and current is: 159522
+Total Assets: previous is 1285 and current is: 128505
+Total Expenses: previous is 310 and current is: 31017
+==================================================
