@@ -1,0 +1,25 @@
+Previous filepath: /tmp/2023-11B/202333059349300603_public.xml and timestamp: 2023-11-01 05:21:16-04:00
+Current filepath: /tmp/2023-11B/202323039349202007_public.xml and timestamp: None
+Total Revenue: previous is 0 and current is: 97018
+Total Assets: previous is 0 and current is: 10364
+Total Liabilities: previous is 0 and current is: 26321
+Total Expenses: previous is 0 and current is: 111687
+Program Service Revenue: previous is 0 and current is: 52357
+Gift Grants Membership Fees received 509: previous is 211969 and current is: 218410
+Zip Code: previous is 956509418 and current is: 95650
+Return Type: previous is 990 and current is: 990EZ
+==================================================
+Previous filepath: /tmp/2023-11B/202333099349300203_public.xml and timestamp: None
+Current filepath: /tmp/2023-11B/202333139349304038_public.xml and timestamp: None
+Total Assets: previous is 0 and current is: 1489785
+Total Liabilities: previous is 0 and current is: 800515
+==================================================
+Previous filepath: /tmp/2023-11B/202323179349203742_public.xml and timestamp: None
+Current filepath: /tmp/2023-11B/202333069349201518_public.xml and timestamp: None
+Total Revenue: previous is 97598 and current is: 98305
+Total Expenses: previous is 85926 and current is: 86631
+==================================================
+Previous filepath: /tmp/2023-11B/202333059349201648_public.xml and timestamp: None
+Current filepath: /tmp/2023-11B/202323069349201042_public.xml and timestamp: None
+No difference found
+==================================================

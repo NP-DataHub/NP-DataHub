@@ -1,0 +1,21 @@
+Previous filepath: /tmp/2024-1A/202410229349200016_public.xml and timestamp: None
+Current filepath: /tmp/2024-1A/202400249349200010_public.xml and timestamp: None
+Total Revenue: previous is 58251 and current is: 58796
+Total Assets: previous is 0 and current is: 9088
+Total Expenses: previous is 49371 and current is: 49916
+Program Service Revenue: previous is 43498 and current is: 44222
+==================================================
+Previous filepath: /tmp/2024-1A/202410179349301416_public.xml and timestamp: 2024-01-17 12:23:20-05:00
+Current filepath: /tmp/2024-1A/202400179349301320_public.xml and timestamp: 2024-01-17 12:23:20-05:00
+Total Revenue: previous is 1321444 and current is: 1146392
+Total Assets: previous is 646743 and current is: 1297715
+Total Liabilities: previous is 19215 and current is: 34174
+Total Expenses: previous is 1983076 and current is: 600080
+Total Contributions: previous is 1329801 and current is: 1140983
+Investment Income: previous is 0 and current is: 91
+Gross Receipts: previous is 1345860 and current is: 1147332
+Compensation of current officers: previous is 420196 and current is: 116172
+Other salaries and wages: previous is 632173 and current is: 200848
+Payroll Taxes: previous is 84867 and current is: 13417
+Number of employees: previous is 21 and current is: 17
+==================================================

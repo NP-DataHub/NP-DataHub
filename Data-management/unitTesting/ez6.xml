@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" returnVersion="2019v5.0">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2020-10-14T14:10:18-05:00</ReturnTs>
+    <TaxPeriodEndDt>2020-05-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>043035636</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>LEE YEE &amp; COMPANY PC</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>20 SOUTHWEST PARK</AddressLine1Txt>
+        <CityNm>WESTWOOD</CityNm>
+        <StateAbbreviationCd>MA</StateAbbreviationCd>
+        <ZIPCd>020901548</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990EZ</ReturnTypeCd>
+    <TaxPeriodBeginDt>2019-06-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>042608078</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>FRIENDS OF THE NEEDHAM</BusinessNameLine1Txt>
+        <BusinessNameLine2Txt>PUBLIC LIBRARY</BusinessNameLine2Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>FRIE</BusinessNameControlTxt>
+      <PhoneNum>7814557559</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>1139 HIGHLAND AVENUE</AddressLine1Txt>
+        <CityNm>NEEDHAM</CityNm>
+        <StateAbbreviationCd>MA</StateAbbreviationCd>
+        <ZIPCd>024943268</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>SUSAN CHERN</PersonNm>
+      <PersonTitleTxt>TREASURER</PersonTitleTxt>
+      <PhoneNum>7814557559</PhoneNum>
+      <SignatureDt>2020-10-09</SignatureDt>
+      <DiscussWithPaidPreparerInd>true</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>RICHARD H LEE</PreparerPersonNm>
+      <PTIN>P00956473</PTIN>
+      <PhoneNum>7812372525</PhoneNum>
+      <PreparationDt>2020-10-13</PreparationDt>
+    </PreparerPersonGrp>
+    <FilingSecurityInformation>
+      <IPAddress>
+        <IPv4AddressTxt>71.248.169.34</IPv4AddressTxt>
+      </IPAddress>
+      <IPDt>2020-10-14</IPDt>
+      <IPTm>14:10:18</IPTm>
+      <IPTimezoneCd>CD</IPTimezoneCd>
+      <FilingLicenseTypeCd>P</FilingLicenseTypeCd>
+      <AtSubmissionCreationDeviceId>B4DC7C83E4D842D24E1E1DD3370C73C656B1401C</AtSubmissionCreationDeviceId>
+      <AtSubmissionFilingDeviceId>B86354FCA1AC92562EB17715820897284349FCD3</AtSubmissionFilingDeviceId>
+    </FilingSecurityInformation>
+    <TaxYr>2019</TaxYr>
+    <BuildTS>2021-01-29 14:40:06Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="3">
+    <IRS990EZ documentId="RetDoc1" referenceDocumentId="RetDoc2">
+      <MethodOfAccountingCashInd>X</MethodOfAccountingCashInd>
+      <ScheduleBNotRequiredInd>X</ScheduleBNotRequiredInd>
+      <WebsiteAddressTxt>FRIENDSNEEDHAMLIBRARY.ORG</WebsiteAddressTxt>
+      <Organization501c3Ind referenceDocumentId="RetDoc3">X</Organization501c3Ind>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <GrossReceiptsAmt>81527</GrossReceiptsAmt>
+      <InfoInScheduleOPartIInd>X</InfoInScheduleOPartIInd>
+      <ContributionsGiftsGrantsEtcAmt>3136</ContributionsGiftsGrantsEtcAmt>
+      <ProgramServiceRevenueAmt>77680</ProgramServiceRevenueAmt>
+      <InvestmentIncomeAmt>711</InvestmentIncomeAmt>
+      <TotalRevenueAmt>81527</TotalRevenueAmt>
+      <FeesAndOtherPymtToIndCntrctAmt>5400</FeesAndOtherPymtToIndCntrctAmt>
+      <OtherExpensesTotalAmt>94580</OtherExpensesTotalAmt>
+      <TotalExpensesAmt>99980</TotalExpensesAmt>
+      <ExcessOrDeficitForYearAmt>-18453</ExcessOrDeficitForYearAmt>
+      <NetAssetsOrFundBalancesBOYAmt>183713</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>165260</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIInd>X</InfoInScheduleOPartIIInd>
+      <CashSavingsAndInvestmentsGrp>
+        <BOYAmt>183878</BOYAmt>
+        <EOYAmt>166990</EOYAmt>
+      </CashSavingsAndInvestmentsGrp>
+      <OtherAssetsTotalDetail>
+        <BOYAmt>775</BOYAmt>
+        <EOYAmt>650</EOYAmt>
+      </OtherAssetsTotalDetail>
+      <Form990TotalAssetsGrp>
+        <BOYAmt>184653</BOYAmt>
+        <EOYAmt>167640</EOYAmt>
+      </Form990TotalAssetsGrp>
+      <SumOfTotalLiabilitiesGrp>
+        <BOYAmt>940</BOYAmt>
+        <EOYAmt>2380</EOYAmt>
+      </SumOfTotalLiabilitiesGrp>
+      <NetAssetsOrFundBalancesGrp>
+        <BOYAmt>183713</BOYAmt>
+        <EOYAmt>165260</EOYAmt>
+      </NetAssetsOrFundBalancesGrp>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <PrimaryExemptPurposeTxt>THE FRIENDS OF THE NEEDHAM PUBLIC LIBRARY IS A 501(C)(3) NONPROFIT WHOSE PURPOSE LIES IN ADVANCING THE GOALS AND ENRICHING THE RESOURCES OF THE NEEDHAM FREE PUBLIC LIBRARY. THE FRIENDS SUPPORT FOR THE LIBRARY INCLUDES SUPPLEMENTING THE TOWNS BUDGET FOR THE PURCHASE OF MATERIALS, EQUIPMENT, AND MUSEUM PASSES, AS WELL AS PLANNING AND SUPPORTING VARIOUS PROGRAMS OF ENRICHMENT THROUGHOUT THE YEAR.</PrimaryExemptPurposeTxt>
+      <ProgramSrvcAccomplishmentGrp>
+        <DescriptionProgramSrvcAccomTxt>THE FRIENDS SUPPORT FOR THE LIBRARY INCLUDES SUPPLEMENTING THE TOWNS BUDGET FOR THE PURCHASE OF MATERIALS, EQUIPMENT, AND MUSEUM PASSES, AS WELL AS PLANNING AND SUPPORTING VARIOUS PROGRAMS OF ENRICHMENT THROUGHOUT THE YEAR.</DescriptionProgramSrvcAccomTxt>
+      </ProgramSrvcAccomplishmentGrp>
+      <ProgramSrvcAccomplishmentGrp>
+        <DescriptionProgramSrvcAccomTxt>THE FRIENDS SUPPORT FOR THE LIBRARY INCLUDES SUPPLEMENTING THE TOWNS BUDGET FOR THE PURCHASE OF MATERIALS, EQUIPMENT, AND MUSEUM PASSES, AS WELL AS PLANNING AND SUPPORTING VARIOUS PROGRAMS OF ENRICHMENT THROUGHOUT THE YEAR.</DescriptionProgramSrvcAccomTxt>
+        <ProgramServiceExpensesAmt>89644</ProgramServiceExpensesAmt>
+      </ProgramSrvcAccomplishmentGrp>
+      <TotalProgramServiceExpensesAmt>89644</TotalProgramServiceExpensesAmt>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>SUSAN CHERN</PersonNm>
+        <TitleTxt>TREASURER</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>JOHN LECHNER</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>MARY MACMAHON</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>JIM SAUM</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>SIMONE SCOTT-WALKER</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>LOIS BACON</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>BRUCE BARNETT</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>PAUL CHERN</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>ANN DER MARDEROSIAN</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>MARGARET PANTRIDGE</PersonNm>
+        <TitleTxt>VICE PRESIDE</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>JANE SWETT</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>JAN BOWEN</PersonNm>
+        <TitleTxt>RECORDING SE</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>ERNA PLACE</PersonNm>
+        <TitleTxt>COR. SECRETA</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>2.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>LINDA NOVAK</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>GREGORY SHESKO</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>LYNN MCCLELLAND</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>GAIL HEDGES</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>EMILIE HITRON</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>JAY FIALKOV</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>000.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <ActivitiesNotPreviouslyRptInd>false</ActivitiesNotPreviouslyRptInd>
+      <ChgMadeToOrgnzngDocNotRptInd>false</ChgMadeToOrgnzngDocNotRptInd>
+      <OrganizationHadUBIInd>false</OrganizationHadUBIInd>
+      <SubjectToProxyTaxInd>false</SubjectToProxyTaxInd>
+      <OrganizationDissolvedEtcInd>false</OrganizationDissolvedEtcInd>
+      <Form1120PolFiledInd>false</Form1120PolFiledInd>
+      <MadeLoansToFromOfficersInd>false</MadeLoansToFromOfficersInd>
+      <EngagedInExcessBenefitTransInd>false</EngagedInExcessBenefitTransInd>
+      <ProhibitedTaxShelterTransInd>false</ProhibitedTaxShelterTransInd>
+      <StatesWhereCopyOfReturnIsFldCd>MA</StatesWhereCopyOfReturnIsFldCd>
+      <BooksInCareOfDetail>
+        <BusinessName>
+          <BusinessNameLine1Txt>FRIENDS OF THE NEEDHAM PUBLIC LIB</BusinessNameLine1Txt>
+        </BusinessName>
+        <USAddress>
+          <AddressLine1Txt>1139 HIGHLAND AVENUE</AddressLine1Txt>
+          <CityNm>NEEDHAM</CityNm>
+          <StateAbbreviationCd>MA</StateAbbreviationCd>
+          <ZIPCd>02494</ZIPCd>
+        </USAddress>
+        <PhoneNum>7814557559</PhoneNum>
+      </BooksInCareOfDetail>
+      <ForeignFinancialAccountInd>false</ForeignFinancialAccountInd>
+      <ForeignOfficeInd>false</ForeignOfficeInd>
+      <DonorAdvisedFndsInd>false</DonorAdvisedFndsInd>
+      <OperateHospitalInd>false</OperateHospitalInd>
+      <TanningServicesProvidedInd>false</TanningServicesProvidedInd>
+      <RelatedOrganizationCtrlEntInd>false</RelatedOrganizationCtrlEntInd>
+      <TransactionWithControlEntInd>false</TransactionWithControlEntInd>
+      <PoliticalCampaignActyInd>false</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>false</LobbyingActivitiesInd>
+      <SchoolOperatingInd>false</SchoolOperatingInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>false</TrnsfrExmptNonChrtblRltdOrgInd>
+      <PartVIOfCompOfHghstPdEmplTxt>NONE</PartVIOfCompOfHghstPdEmplTxt>
+      <PartVIHghstPdCntrctProfSrvcTxt>NONE</PartVIHghstPdCntrctProfSrvcTxt>
+      <FiledScheduleAInd>true</FiledScheduleAInd>
+    </IRS990EZ>
+    <IRS990ScheduleA documentId="RetDoc3">
+      <PubliclySupportedOrg509a2Ind>X</PubliclySupportedOrg509a2Ind>
+      <GiftsGrantsContrisRcvd509Grp>
+        <CurrentTaxYearMinus4YearsAmt>9881</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>6440</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>7014</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>24423</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>3136</CurrentTaxYearAmt>
+        <TotalAmt>50894</TotalAmt>
+      </GiftsGrantsContrisRcvd509Grp>
+      <GrossReceiptsAdmissionsGrp>
+        <CurrentTaxYearMinus4YearsAmt>90749</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>93496</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>97469</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>103590</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>77680</CurrentTaxYearAmt>
+        <TotalAmt>462984</TotalAmt>
+      </GrossReceiptsAdmissionsGrp>
+      <Total509Grp>
+        <CurrentTaxYearMinus4YearsAmt>100630</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>99936</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>104483</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>128013</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>80816</CurrentTaxYearAmt>
+        <TotalAmt>513878</TotalAmt>
+      </Total509Grp>
+      <PublicSupportTotal509Amt>513878</PublicSupportTotal509Amt>
+      <GrossInvestmentIncome509Grp>
+        <CurrentTaxYearMinus4YearsAmt>543</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>505</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>529</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>580</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>711</CurrentTaxYearAmt>
+        <TotalAmt>2868</TotalAmt>
+      </GrossInvestmentIncome509Grp>
+      <InvestmentIncomeAndUBTIGrp>
+        <CurrentTaxYearMinus4YearsAmt>543</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>505</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>529</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>580</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>711</CurrentTaxYearAmt>
+        <TotalAmt>2868</TotalAmt>
+      </InvestmentIncomeAndUBTIGrp>
+      <TotalSupportCalendarYearGrp>
+        <CurrentTaxYearMinus4YearsAmt>101173</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>100441</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>105012</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>128593</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>81527</CurrentTaxYearAmt>
+        <TotalAmt>516746</TotalAmt>
+      </TotalSupportCalendarYearGrp>
+      <PublicSupportCY509Pct>0.99440</PublicSupportCY509Pct>
+      <PublicSupportPY509Pct>0.99470</PublicSupportPY509Pct>
+      <InvestmentIncomeCYPct>0.01000</InvestmentIncomeCYPct>
+      <InvestmentIncomePYPct>0.01000</InvestmentIncomePYPct>
+      <ThirtyThrPctSuprtTestsCY509Ind>X</ThirtyThrPctSuprtTestsCY509Ind>
+    </IRS990ScheduleA>
+    <IRS990ScheduleO documentId="RetDoc2">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART I, LINE 16</FormAndLineReferenceDesc>
+        <ExplanationTxt>EXPENSES SUPPLIES AND EQUIPMENT 1,878 BANK CHARGES 37 BOOK SALES 3,589 COMMISSIONS &amp; FEES 20 ECOMMERCE EXPENSES 2,362 EXISTENTIAL EXPENSES 159 MUSEUM PASSES 3,205 DONATIONS 30 PRINTER-COPIER EXPENSES 3,484 PROGRAM EXPENSES 22,125 PURCHASES FOR LIBRARY 55,005 STAFF APPRECIATION 666 DISCREPANCIES 1 POSTAGE AND SHIPPING 255 OTHER 1,764 TOTAL 94,580</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART II, LINE 24</FormAndLineReferenceDesc>
+        <ExplanationTxt>DUE FROM TRUSTEE 775 650 TOTAL 775 650</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART II, LINE 26</FormAndLineReferenceDesc>
+        <ExplanationTxt>CREDIT CARD PAYABLE 940 2,380</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART III</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE FRIENDS OF THE NEEDHAM PUBLIC LIBRARY IS A 501(C)(3) NONPROFIT WHOSE PURPOSE LIES IN ADVANCING THE GOALS AND ENRICHING THE RESOURCES OF THE NEEDHAM FREE PUBLIC LIBRARY. THE FRIENDS SUPPORT FOR THE LIBRARY INCLUDES SUPPLEMENTING THE TOWNS BUDGET FOR THE PURCHASE OF MATERIALS, EQUIPMENT, AND MUSEUM PASSES, AS WELL AS PLANNING AND SUPPORTING VARIOUS PROGRAMS OF ENRICHMENT THROUGHOUT THE YEAR.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART III, LINE 28</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE FRIENDS SUPPORT FOR THE LIBRARY INCLUDES SUPPLEMENTING THE TOWNS BUDGET FOR THE PURCHASE OF MATERIALS, EQUIPMENT, AND MUSEUM PASSES, AS WELL AS PLANNING AND SUPPORTING VARIOUS PROGRAMS OF ENRICHMENT THROUGHOUT THE YEAR.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART III, LINE 31</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE FRIENDS SUPPORT FOR THE LIBRARY INCLUDES SUPPLEMENTING THE TOWNS BUDGET FOR THE PURCHASE OF MATERIALS, EQUIPMENT, AND MUSEUM PASSES, AS WELL AS PLANNING AND SUPPORTING VARIOUS PROGRAMS OF ENRICHMENT THROUGHOUT THE YEAR.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

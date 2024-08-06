@@ -1,0 +1,4 @@
+Previous filepath: /tmp/2018-6/201840579349300849_public.xml and timestamp: None
+Current filepath: /tmp/2018-6/201840459349300029_public.xml and timestamp: None
+Name: previous is SICKLE CELL ANEMIA FOUNDATION OF OREGON INC and current is: SICKLE CELL ANEMIA FOUNDATION OF OREGON
+==================================================

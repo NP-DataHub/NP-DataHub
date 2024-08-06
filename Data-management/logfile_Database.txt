@@ -1,0 +1,351 @@
+mr.youssef@gybe-245 ~ % cd Desktop/NpDataHub/Data-management
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh 
+Executing Database.py with argument: /tmp/2023-1
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 1 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh 
+Executing Database.py with argument: /tmp/2023-2
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2023-3
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2023-4
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 3 completed.
+
+Executing Database.py with argument: /tmp/2023-5A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 4 completed.
+
+Executing Database.py with argument: /tmp/2023-5B
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 5 completed.
+
+Executing Database.py with argument: /tmp/2023-6
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 6 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2023-7
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2023-8
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2023-9
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 3 completed.
+
+Executing Database.py with argument: /tmp/2023-10
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 4 completed.
+
+Executing Database.py with argument: /tmp/2023-11A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 5 completed.
+
+Executing Database.py with argument: /tmp/2023-11B
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 6 completed.
+
+Executing Database.py with argument: /tmp/2023-11C
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 7 completed.
+
+Executing Database.py with argument: /tmp/2023-12
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 8 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2022-1A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2022-1B
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2022-1C
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 3 completed.
+
+Executing Database.py with argument: /tmp/2022-1D
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 4 completed.
+
+Executing Database.py with argument: /tmp/2022-1E
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 5 completed.
+
+Executing Database.py with argument: /tmp/2022-1F
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 6 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2022-11A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2022-11B
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2022-11C
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 3 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2021-1A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2021-1B
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2021-1C
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 3 completed.
+
+Executing Database.py with argument: /tmp/2021-1D
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 4 completed.
+
+Executing Database.py with argument: /tmp/2021-1E
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 5 completed.
+
+Executing Database.py with argument: /tmp/2021-1F
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 6 completed.
+
+Executing Database.py with argument: /tmp/2021-1H
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 7 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2021-1G
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 1 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2020-1A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2020-1B
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2020-2
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 3 completed.
+
+Executing Database.py with argument: /tmp/2020-3
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 4 completed.
+
+Executing Database.py with argument: /tmp/2020-4
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 5 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2020-5
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2020-6
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2020-7
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 3 completed.
+
+Executing Database.py with argument: /tmp/2020-8
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 4 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2019-1A
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2019-1B
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2019-2
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 3 completed.
+
+Executing Database.py with argument: /tmp/2019-3
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 4 completed.
+
+Executing Database.py with argument: /tmp/2019-4
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 5 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2019-5
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2019-6
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2019-7
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 3 completed.
+
+Executing Database.py with argument: /tmp/2019-8
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 4 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2018-1A
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2018-2A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2018-3A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 3 completed.
+
+Executing Database.py with argument: /tmp/2018-1B
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 4 completed.
+
+Executing Database.py with argument: /tmp/2018-2B
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 5 completed.
+
+Executing Database.py with argument: /tmp/2018-3B
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 6 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2018-4
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2018-5
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2018-6
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 3 completed.
+
+Executing Database.py with argument: /tmp/2018-7
+Data has been successfully inserted into MongoDB.
+No duplicate files to handle manually
+Execution 4 completed.
+
+mr.youssef@gybe-245 Data-management % ./execute_parser.sh
+Executing Database.py with argument: /tmp/2024-1A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 1 completed.
+
+Executing Database.py with argument: /tmp/2024-2A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 2 completed.
+
+Executing Database.py with argument: /tmp/2024-3A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 3 completed.
+
+Executing Database.py with argument: /tmp/2024-4A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 4 completed.
+
+Executing Database.py with argument: /tmp/2024-5A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 5 completed.
+
+Executing Database.py with argument: /tmp/2024-5B
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 6 completed.
+
+Executing Database.py with argument: /tmp/2024-6A
+Data has been successfully inserted into MongoDB.
+Error output file has been successfully created
+Execution 7 completed.
+
+mr.youssef@gybe-245 Data-management % 

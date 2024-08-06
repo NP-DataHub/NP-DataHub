@@ -1,0 +1,767 @@
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2019v5.1">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2020-11-16T17:29:15-06:00</ReturnTs>
+    <TaxPeriodEndDt>2019-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>430673920</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>HOCHSCHILD BLOOM &amp; CO LLP CPAS</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>15450 SOUTH OUTER 40 RD 135</AddressLine1Txt>
+        <CityNm>CHESTERFIELD</CityNm>
+        <StateAbbreviationCd>MO</StateAbbreviationCd>
+        <ZIPCd>63017</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990PF</ReturnTypeCd>
+    <TaxPeriodBeginDt>2019-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>946114214</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>AMERICAN ASSOCIATION OF BIOANALYSTS</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>AMER</BusinessNameControlTxt>
+      <PhoneNum>3142411445</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>906 OLIVE STREET SUITE 1200</AddressLine1Txt>
+        <CityNm>ST LOUIS</CityNm>
+        <StateAbbreviationCd>MO</StateAbbreviationCd>
+        <ZIPCd>631011434</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>DR MARK S BIRENBAUM PHD</PersonNm>
+      <PersonTitleTxt>ASSOCIATION MANGER</PersonTitleTxt>
+      <PhoneNum>3142411445</PhoneNum>
+      <SignatureDt>2020-11-16</SignatureDt>
+      <DiscussWithPaidPreparerInd>1</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>ROBERT B OFFERMAN CPA</PreparerPersonNm>
+      <PTIN>P00035353</PTIN>
+      <PhoneNum>6365329525</PhoneNum>
+      <PreparationDt>2020-11-16</PreparationDt>
+    </PreparerPersonGrp>
+    <FilingSecurityInformation>
+      <IPAddress>
+        <IPv4AddressTxt>97.86.167.250</IPv4AddressTxt>
+      </IPAddress>
+      <IPDt>2020-11-16</IPDt>
+      <IPTm>13:41:13</IPTm>
+      <IPTimezoneCd>CS</IPTimezoneCd>
+      <FilingLicenseTypeCd>P</FilingLicenseTypeCd>
+      <AtSubmissionCreationDeviceId>009A01FACAEAED40536441E5A5435C199EB2C5DF</AtSubmissionCreationDeviceId>
+      <AtSubmissionFilingDeviceId>34127A8B8A465DFC86F4A05216ABE2C788C53D1B</AtSubmissionFilingDeviceId>
+    </FilingSecurityInformation>
+    <TaxYr>20198</TaxYr>
+    <BuildTS>2021-04-22 16:20:28Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="8">
+    <IRS990 documentId="RetDoc1038000001" referenceDocumentId="RetDoc1044400001">
+      <PrincipalOfficerNm>JOSEPH D MUSTO PHD HCLD</PrincipalOfficerNm>
+      <USAddress>
+        <AddressLine1Txt>906 OLIVE STREET SUITE 1200</AddressLine1Txt>
+        <CityNm>ST LOUIS</CityNm>
+        <StateAbbreviationCd>MO</StateAbbreviationCd>
+        <ZIPCd>631011434</ZIPCd>
+      </USAddress>
+      <GrossReceiptsAmt>4965378</GrossReceiptsAmt>
+      <GroupReturnForAffiliatesInd>0</GroupReturnForAffiliatesInd>
+      <Organization501cInd organization501cTypeTxt="6">X</Organization501cInd>
+      <WebsiteAddressTxt>WWW.AAB.ORG</WebsiteAddressTxt>
+      <TypeOfOrganizationAssocInd>X</TypeOfOrganizationAssocInd>
+      <FormationYr>1956</FormationYr>
+      <LegalDomicileStateCd>CA</LegalDomicileStateCd>
+      <ActivityOrMissionDesc>THE ORGANIZATION IS COMMITTED TO THE PURSUIT OF EXCELLENCE IN CLINICAL LABORATORY SERVICES BY ENHANCING THE PROFESSIONAL SKILLS OF EACH OF ITS MEMBERS; PROMOTING MORE EFFICIENT AND PRODUCTIVE OPERATIONS; OFFERING EXTERNAL QUALITY CONTROL PROGRAMS; COLLABORATING WITH OTHER PROFESSIONAL ASSOCIATIONS AND GOVERNMENTAL AGENCIES; PROMOTING SAFE LABORATORY PRACTICES; AND EDUCATING LEGISLATORS, REGULATORS, AND THE GENERAL PUBLIC ABOUT CLINICAL LABORATORY TESTS AND PROCEDURES.</ActivityOrMissionDesc>
+      <VotingMembersGoverningBodyCnt>15</VotingMembersGoverningBodyCnt>
+      <VotingMembersIndependentCnt>15</VotingMembersIndependentCnt>
+      <TotalEmployeeCnt>0</TotalEmployeeCnt>
+      <TotalVolunteersCnt>0</TotalVolunteersCnt>
+      <TotalGrossUBIAmt>0</TotalGrossUBIAmt>
+      <NetUnrelatedBusTxblIncmAmt>0</NetUnrelatedBusTxblIncmAmt>
+      <PYContributionsGrantsAmt>97649</PYContributionsGrantsAmt>
+      <CYContributionsGrantsAmt>95223</CYContributionsGrantsAmt>
+      <PYProgramServiceRevenueAmt>4631845</PYProgramServiceRevenueAmt>
+      <CYProgramServiceRevenueAmt>4665259</CYProgramServiceRevenueAmt>
+      <PYInvestmentIncomeAmt>37672</PYInvestmentIncomeAmt>
+      <CYInvestmentIncomeAmt>115283</CYInvestmentIncomeAmt>
+      <PYOtherRevenueAmt>7870</PYOtherRevenueAmt>
+      <CYOtherRevenueAmt>6867</CYOtherRevenueAmt>
+      <PYTotalRevenueAmt>4775036</PYTotalRevenueAmt>
+      <CYTotalRevenueAmt>4882632</CYTotalRevenueAmt>
+      <PYGrantsAndSimilarPaidAmt>14450</PYGrantsAndSimilarPaidAmt>
+      <CYGrantsAndSimilarPaidAmt>12767</CYGrantsAndSimilarPaidAmt>
+      <PYBenefitsPaidToMembersAmt>0</PYBenefitsPaidToMembersAmt>
+      <CYBenefitsPaidToMembersAmt>0</CYBenefitsPaidToMembersAmt>
+      <PYSalariesCompEmpBnftPaidAmt>3000</PYSalariesCompEmpBnftPaidAmt>
+      <CYSalariesCompEmpBnftPaidAmt>0</CYSalariesCompEmpBnftPaidAmt>
+      <PYTotalProfFndrsngExpnsAmt>0</PYTotalProfFndrsngExpnsAmt>
+      <CYTotalProfFndrsngExpnsAmt>0</CYTotalProfFndrsngExpnsAmt>
+      <CYTotalFundraisingExpenseAmt>0</CYTotalFundraisingExpenseAmt>
+      <PYOtherExpensesAmt>4775105</PYOtherExpensesAmt>
+      <CYOtherExpensesAmt>4779280</CYOtherExpensesAmt>
+      <PYTotalExpensesAmt>4792555</PYTotalExpensesAmt>
+      <CYTotalExpensesAmt>4792047</CYTotalExpensesAmt>
+      <PYRevenuesLessExpensesAmt>-17519</PYRevenuesLessExpensesAmt>
+      <CYRevenuesLessExpensesAmt>90585</CYRevenuesLessExpensesAmt>
+      <TotalAssetsBOYAmt>1854954</TotalAssetsBOYAmt>
+      <TotalAssetsEOYAmt>2152958</TotalAssetsEOYAmt>
+      <TotalLiabilitiesBOYAmt>604142</TotalLiabilitiesBOYAmt>
+      <TotalLiabilitiesEOYAmt>643944</TotalLiabilitiesEOYAmt>
+      <NetAssetsOrFundBalancesBOYAmt>1250812</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>1509014</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <MissionDesc>THE ORANIZATION IS COMMITTED TO THE PURSUIT OF EXCELLENCE IN CLINICAL LABORATORY SERVICES BY ENHANCING THE PROFESSIONAL SKILLS OF EACH OF ITS MEMBERS; PROMOTING MORE EFFICIENT AND PRODUCTIVE OPERATIONS; OFFERING EXTERNAL QUALITY CONTROL PROGRAMS; COLLABORATING WITH OTHER PROFESSIONAL ASSOCIATIONS AND GOVERNMENTAL AGENCIES; PROMOTING SAFE LABORATORY PRACTICES; AND EDUCATING LEGISLATORS, REGULATORS, AND THE GENERAL PUBLIC ABOUT CLINICAL LABORATORY TESTS AND PROCEDURES.</MissionDesc>
+      <SignificantNewProgramSrvcInd>0</SignificantNewProgramSrvcInd>
+      <SignificantChangeInd>0</SignificantChangeInd>
+      <ExpenseAmt>3882829</ExpenseAmt>
+      <GrantAmt>12767</GrantAmt>
+      <Desc>PRODUCTION AND DISSEMINATION OF EDUCATIONAL MATERIALS, MAINTENANCE OF PROFESSIONAL COMPENTENCY OF MEMBERS, AND PROVIDING A FORUM FOR THE EXCHANGE OF INFORMATION AND KNOWLEDGE</Desc>
+      <TotalProgramServiceExpensesAmt>3882829</TotalProgramServiceExpensesAmt>
+      <DescribedInSection501c3Ind>0</DescribedInSection501c3Ind>
+      <ScheduleBRequiredInd referenceDocumentId="RetDoc1234500001">1</ScheduleBRequiredInd>
+      <PoliticalCampaignActyInd referenceDocumentId="RetDoc1039500001">1</PoliticalCampaignActyInd>
+      <SubjectToProxyTaxInd referenceDocumentId="RetDoc1039500001">1</SubjectToProxyTaxInd>
+      <DonorAdvisedFundInd referenceDocumentId="RetDoc1040000001">0</DonorAdvisedFundInd>
+      <ConservationEasementsInd referenceDocumentId="RetDoc1040000001">0</ConservationEasementsInd>
+      <CollectionsOfArtInd referenceDocumentId="RetDoc1040000001">0</CollectionsOfArtInd>
+      <CreditCounselingInd referenceDocumentId="RetDoc1040000001">0</CreditCounselingInd>
+      <DonorRstrOrQuasiEndowmentsInd>0</DonorRstrOrQuasiEndowmentsInd>
+      <ReportLandBuildingEquipmentInd referenceDocumentId="RetDoc1040000001">0</ReportLandBuildingEquipmentInd>
+      <ReportInvestmentsOtherSecInd referenceDocumentId="RetDoc1040000001">0</ReportInvestmentsOtherSecInd>
+      <ReportProgramRelatedInvstInd referenceDocumentId="RetDoc1040000001">0</ReportProgramRelatedInvstInd>
+      <ReportOtherAssetsInd referenceDocumentId="RetDoc1040000001">0</ReportOtherAssetsInd>
+      <ReportOtherLiabilitiesInd referenceDocumentId="RetDoc1040000001">0</ReportOtherLiabilitiesInd>
+      <IncludeFIN48FootnoteInd referenceDocumentId="RetDoc1040000001">1</IncludeFIN48FootnoteInd>
+      <IndependentAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">0</IndependentAuditFinclStmtInd>
+      <ConsolidatedAuditFinclStmtInd referenceDocumentId="RetDoc1040000001">0</ConsolidatedAuditFinclStmtInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <ForeignOfficeInd>0</ForeignOfficeInd>
+      <ForeignActivitiesInd>0</ForeignActivitiesInd>
+      <MoreThan5000KToOrgInd>0</MoreThan5000KToOrgInd>
+      <MoreThan5000KToIndividualsInd>0</MoreThan5000KToIndividualsInd>
+      <ProfessionalFundraisingInd>0</ProfessionalFundraisingInd>
+      <FundraisingActivitiesInd>0</FundraisingActivitiesInd>
+      <GamingActivitiesInd>0</GamingActivitiesInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <GrantsToOrganizationsInd referenceDocumentId="RetDoc1041900001">0</GrantsToOrganizationsInd>
+      <GrantsToIndividualsInd referenceDocumentId="RetDoc1041900001">1</GrantsToIndividualsInd>
+      <ScheduleJRequiredInd>0</ScheduleJRequiredInd>
+      <TaxExemptBondsInd>0</TaxExemptBondsInd>
+      <LoanOutstandingInd referenceDocumentId="RetDoc1042800001">0</LoanOutstandingInd>
+      <GrantToRelatedPersonInd referenceDocumentId="RetDoc1042800001">0</GrantToRelatedPersonInd>
+      <BusinessRlnWithOrgMemInd referenceDocumentId="RetDoc1042800001">0</BusinessRlnWithOrgMemInd>
+      <BusinessRlnWithFamMemInd referenceDocumentId="RetDoc1042800001">0</BusinessRlnWithFamMemInd>
+      <BusinessRlnWith35CtrlEntInd>1</BusinessRlnWith35CtrlEntInd>
+      <DeductibleNonCashContriInd>0</DeductibleNonCashContriInd>
+      <DeductibleArtContributionInd>0</DeductibleArtContributionInd>
+      <TerminateOperationsInd>0</TerminateOperationsInd>
+      <PartialLiquidationInd>0</PartialLiquidationInd>
+      <DisregardedEntityInd referenceDocumentId="RetDoc1043400001">0</DisregardedEntityInd>
+      <RelatedEntityInd referenceDocumentId="RetDoc1043400001">1</RelatedEntityInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <ActivitiesConductedPrtshpInd referenceDocumentId="RetDoc1043400001">0</ActivitiesConductedPrtshpInd>
+      <ScheduleORequiredInd>1</ScheduleORequiredInd>
+      <IRPDocumentCnt>23</IRPDocumentCnt>
+      <IRPDocumentW2GCnt>0</IRPDocumentW2GCnt>
+      <BackupWthldComplianceInd>1</BackupWthldComplianceInd>
+      <EmployeeCnt>0</EmployeeCnt>
+      <UnrelatedBusIncmOverLimitInd>0</UnrelatedBusIncmOverLimitInd>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <TaxablePartyNotificationInd>0</TaxablePartyNotificationInd>
+      <NondeductibleContributionsInd>0</NondeductibleContributionsInd>
+      <IndoorTanningServicesInd>0</IndoorTanningServicesInd>
+      <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      <SubjectToExcsTaxNetInvstIncInd>0</SubjectToExcsTaxNetInvstIncInd>
+      <InfoInScheduleOPartVIInd>X</InfoInScheduleOPartVIInd>
+      <GoverningBodyVotingMembersCnt>15</GoverningBodyVotingMembersCnt>
+      <IndependentVotingMemberCnt>15</IndependentVotingMemberCnt>
+      <FamilyOrBusinessRlnInd>0</FamilyOrBusinessRlnInd>
+      <DelegationOfMgmtDutiesInd>1</DelegationOfMgmtDutiesInd>
+      <ChangeToOrgDocumentsInd>0</ChangeToOrgDocumentsInd>
+      <MaterialDiversionOrMisuseInd>0</MaterialDiversionOrMisuseInd>
+      <MembersOrStockholdersInd>1</MembersOrStockholdersInd>
+      <ElectionOfBoardMembersInd>1</ElectionOfBoardMembersInd>
+      <DecisionsSubjectToApprovaInd>1</DecisionsSubjectToApprovaInd>
+      <MinutesOfGoverningBodyInd>1</MinutesOfGoverningBodyInd>
+      <MinutesOfCommitteesInd>1</MinutesOfCommitteesInd>
+      <OfficerMailingAddressInd>0</OfficerMailingAddressInd>
+      <LocalChaptersInd>1</LocalChaptersInd>
+      <PoliciesReferenceChaptersInd>1</PoliciesReferenceChaptersInd>
+      <Form990ProvidedToGvrnBodyInd>0</Form990ProvidedToGvrnBodyInd>
+      <ConflictOfInterestPolicyInd>0</ConflictOfInterestPolicyInd>
+      <WhistleblowerPolicyInd>0</WhistleblowerPolicyInd>
+      <DocumentRetentionPolicyInd>0</DocumentRetentionPolicyInd>
+      <CompensationProcessCEOInd>0</CompensationProcessCEOInd>
+      <CompensationProcessOtherInd>0</CompensationProcessOtherInd>
+      <InvestmentInJointVentureInd>0</InvestmentInJointVentureInd>
+      <UponRequestInd>X</UponRequestInd>
+      <BooksInCareOfDetail>
+        <BusinessName>
+          <BusinessNameLine1Txt>BIRENBAUM &amp; ASSOCIATES</BusinessNameLine1Txt>
+        </BusinessName>
+        <PhoneNum>3142411445</PhoneNum>
+        <USAddress>
+          <AddressLine1Txt>906 OLIVE ST SUITE 1200</AddressLine1Txt>
+          <CityNm>ST LOUIS</CityNm>
+          <StateAbbreviationCd>MO</StateAbbreviationCd>
+          <ZIPCd>631011434</ZIPCd>
+        </USAddress>
+      </BooksInCareOfDetail>
+      <NoListedPersonsCompensatedInd>X</NoListedPersonsCompensatedInd>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BARBARA K TIMM MSC ELDTS</PersonNm>
+        <TitleTxt>MANAGER REP</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>PAT LANZA</PersonNm>
+        <TitleTxt>CHAIR - NILA</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>ANNETTE IACONO</PersonNm>
+        <TitleTxt>SECOND VP</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>HEATHER FEHLING PHD HCLD</PersonNm>
+        <TitleTxt>THIRD VP</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JOHN J WEISS PHD</PersonNm>
+        <TitleTxt>REG ADM SECR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DAVID L SMALLEY PHD</PersonNm>
+        <TitleTxt>FIRST VP</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>JUDY KENNEDY</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>SUSAN M TARCHALA MSC TS</PersonNm>
+        <TitleTxt>SUPERVISOR REP</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>STANLEY G HARRIS ELDTS</PersonNm>
+        <TitleTxt>REG ADMIN SECR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>KRISTEN SCRAGG</PersonNm>
+        <TitleTxt>SECRETARY/TREAS</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <OfficerInd>X</OfficerInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>PIERRE CASSIGNEUL</PersonNm>
+        <TitleTxt>REG ADMIN SECR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>DARA SUZANNE BERGER PHD</PersonNm>
+        <TitleTxt>CRB PRESIDENT</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>RICHARD R JONES MT</PersonNm>
+        <TitleTxt>AMS LIAISON REP</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>BONNY LEWIS VAN PHD HCLD</PersonNm>
+        <TitleTxt>REG ADM SECR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <Form990PartVIISectionAGrp>
+        <PersonNm>NICHOLAS T SERAFY JR</PersonNm>
+        <TitleTxt>PTS CHAIR</TitleTxt>
+        <AverageHoursPerWeekRt>1.00</AverageHoursPerWeekRt>
+        <IndividualTrusteeOrDirectorInd>X</IndividualTrusteeOrDirectorInd>
+        <ReportableCompFromOrgAmt>0</ReportableCompFromOrgAmt>
+        <ReportableCompFromRltdOrgAmt>0</ReportableCompFromRltdOrgAmt>
+        <OtherCompensationAmt>0</OtherCompensationAmt>
+      </Form990PartVIISectionAGrp>
+      <TotalReportableCompFromOrgAmt>0</TotalReportableCompFromOrgAmt>
+      <TotReportableCompRltdOrgAmt>0</TotReportableCompRltdOrgAmt>
+      <TotalOtherCompensationAmt>0</TotalOtherCompensationAmt>
+      <IndivRcvdGreaterThan100KCnt>0</IndivRcvdGreaterThan100KCnt>
+      <FormerOfcrEmployeesListedInd>0</FormerOfcrEmployeesListedInd>
+      <TotalCompGreaterThan150KInd>0</TotalCompGreaterThan150KInd>
+      <CompensationFromOtherSrcsInd>0</CompensationFromOtherSrcsInd>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>PROFICIENCY TESTING SERVICES</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>205 WEST LEVEE</AddressLine1Txt>
+            <CityNm>BROWNSVILLE</CityNm>
+            <StateAbbreviationCd>TX</StateAbbreviationCd>
+            <ZIPCd>785205596</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>TESTING SERVICE</ServicesDesc>
+        <CompensationAmt>2871260</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>BIRENBAUM &amp; ASSOCIATES</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>906 OLIVE STREET SUITE 1200</AddressLine1Txt>
+            <CityNm>ST LOUIS</CityNm>
+            <StateAbbreviationCd>MO</StateAbbreviationCd>
+            <ZIPCd>63101</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>MANAGEMENT COMPANY</ServicesDesc>
+        <CompensationAmt>792303</CompensationAmt>
+      </ContractorCompensationGrp>
+      <ContractorCompensationGrp>
+        <ContractorName>
+          <BusinessName>
+            <BusinessNameLine1Txt>CAVAROCCHI RUSCIO DENNIS &amp; ASSOCIATES</BusinessNameLine1Txt>
+          </BusinessName>
+        </ContractorName>
+        <ContractorAddress>
+          <USAddress>
+            <AddressLine1Txt>600 MARYLAND AVE SW STE 835W</AddressLine1Txt>
+            <CityNm>WASHINGTON</CityNm>
+            <StateAbbreviationCd>DC</StateAbbreviationCd>
+            <ZIPCd>20024</ZIPCd>
+          </USAddress>
+        </ContractorAddress>
+        <ServicesDesc>LEGAL SERVICES</ServicesDesc>
+        <CompensationAmt>303600</CompensationAmt>
+      </ContractorCompensationGrp>
+      <CntrctRcvdGreaterThan100KCnt>3</CntrctRcvdGreaterThan100KCnt>
+      <AllOtherContributionsAmt>95223</AllOtherContributionsAmt>
+      <TotalContributionsAmt>95223</TotalContributionsAmt>
+      <ProgramServiceRevenueGrp>
+        <Desc>PROFICIENCY TESTING SV</Desc>
+        <BusinessCd>541380</BusinessCd>
+        <TotalRevenueColumnAmt>3203850</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>3203850</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <ProgramServiceRevenueGrp>
+        <Desc>MEMBERSHIP DUES &amp; ASSE</Desc>
+        <BusinessCd>541900</BusinessCd>
+        <TotalRevenueColumnAmt>742614</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>742614</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <ProgramServiceRevenueGrp>
+        <Desc>CONVENTIONS &amp; SEMINARS</Desc>
+        <BusinessCd>541900</BusinessCd>
+        <TotalRevenueColumnAmt>307549</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>307549</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <ProgramServiceRevenueGrp>
+        <Desc>CERTIFICATION/EXAM FEE</Desc>
+        <BusinessCd>541900</BusinessCd>
+        <TotalRevenueColumnAmt>256437</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>256437</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <ProgramServiceRevenueGrp>
+        <Desc>CE MATERIALS &amp; MANUALS</Desc>
+        <BusinessCd>541900</BusinessCd>
+        <TotalRevenueColumnAmt>154809</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>154809</RelatedOrExemptFuncIncomeAmt>
+      </ProgramServiceRevenueGrp>
+      <TotalProgramServiceRevenueAmt>4665259</TotalProgramServiceRevenueAmt>
+      <InvestmentIncomeGrp>
+        <TotalRevenueColumnAmt>42381</TotalRevenueColumnAmt>
+        <ExclusionAmt>42381</ExclusionAmt>
+      </InvestmentIncomeGrp>
+      <RoyaltiesRevenueGrp>
+        <TotalRevenueColumnAmt>1670</TotalRevenueColumnAmt>
+        <ExclusionAmt>1670</ExclusionAmt>
+      </RoyaltiesRevenueGrp>
+      <GrossAmountSalesAssetsGrp>
+        <SecuritiesAmt>155648</SecuritiesAmt>
+      </GrossAmountSalesAssetsGrp>
+      <LessCostOthBasisSalesExpnssGrp>
+        <SecuritiesAmt>82746</SecuritiesAmt>
+      </LessCostOthBasisSalesExpnssGrp>
+      <GainOrLossGrp>
+        <SecuritiesAmt>72902</SecuritiesAmt>
+      </GainOrLossGrp>
+      <NetGainOrLossInvestmentsGrp>
+        <TotalRevenueColumnAmt>72902</TotalRevenueColumnAmt>
+        <ExclusionAmt>72902</ExclusionAmt>
+      </NetGainOrLossInvestmentsGrp>
+      <OtherRevenueMiscGrp>
+        <Desc>REBATES</Desc>
+        <BusinessCd>541900</BusinessCd>
+        <TotalRevenueColumnAmt>3721</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>3721</RelatedOrExemptFuncIncomeAmt>
+      </OtherRevenueMiscGrp>
+      <OtherRevenueMiscGrp>
+        <Desc>MISCELLANEOUS INCOME</Desc>
+        <BusinessCd>541900</BusinessCd>
+        <TotalRevenueColumnAmt>1476</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>1476</RelatedOrExemptFuncIncomeAmt>
+      </OtherRevenueMiscGrp>
+      <OtherRevenueTotalAmt>5197</OtherRevenueTotalAmt>
+      <TotalRevenueGrp>
+        <TotalRevenueColumnAmt>4882632</TotalRevenueColumnAmt>
+        <RelatedOrExemptFuncIncomeAmt>4670456</RelatedOrExemptFuncIncomeAmt>
+        <UnrelatedBusinessRevenueAmt>0</UnrelatedBusinessRevenueAmt>
+        <ExclusionAmt>116953</ExclusionAmt>
+      </TotalRevenueGrp>
+      <InfoInScheduleOPartIXInd>X</InfoInScheduleOPartIXInd>
+      <GrantsToDomesticIndividualsGrp>
+        <TotalAmt>12767</TotalAmt>
+        <ProgramServicesAmt>12767</ProgramServicesAmt>
+      </GrantsToDomesticIndividualsGrp>
+      <FeesForServicesManagementGrp>
+        <TotalAmt>792303</TotalAmt>
+        <ProgramServicesAmt>115303</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>677000</ManagementAndGeneralAmt>
+      </FeesForServicesManagementGrp>
+      <FeesForServicesLegalGrp>
+        <TotalAmt>176002</TotalAmt>
+        <ProgramServicesAmt>72000</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>104002</ManagementAndGeneralAmt>
+      </FeesForServicesLegalGrp>
+      <FeesForServicesAccountingGrp>
+        <TotalAmt>25880</TotalAmt>
+        <ProgramServicesAmt>2400</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>23480</ManagementAndGeneralAmt>
+      </FeesForServicesAccountingGrp>
+      <AdvertisingGrp>
+        <TotalAmt>9379</TotalAmt>
+        <ProgramServicesAmt>9379</ProgramServicesAmt>
+      </AdvertisingGrp>
+      <OfficeExpensesGrp>
+        <TotalAmt>11345</TotalAmt>
+        <ProgramServicesAmt>8268</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3077</ManagementAndGeneralAmt>
+      </OfficeExpensesGrp>
+      <InformationTechnologyGrp>
+        <TotalAmt>39249</TotalAmt>
+        <ProgramServicesAmt>22229</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>17020</ManagementAndGeneralAmt>
+      </InformationTechnologyGrp>
+      <TravelGrp>
+        <TotalAmt>251122</TotalAmt>
+        <ProgramServicesAmt>218911</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>32211</ManagementAndGeneralAmt>
+      </TravelGrp>
+      <InsuranceGrp>
+        <TotalAmt>4132</TotalAmt>
+        <ProgramServicesAmt>343</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>3789</ManagementAndGeneralAmt>
+      </InsuranceGrp>
+      <OtherExpensesGrp>
+        <Desc>PROFICIENCY TESTING SVC</Desc>
+        <TotalAmt>2871391</TotalAmt>
+        <ProgramServicesAmt>2871391</ProgramServicesAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>DEFENSE FUND</Desc>
+        <TotalAmt>230503</TotalAmt>
+        <ProgramServicesAmt>230503</ProgramServicesAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>EXAMINATION DEVEL/ ADMI</Desc>
+        <TotalAmt>110354</TotalAmt>
+        <ProgramServicesAmt>110354</ProgramServicesAmt>
+      </OtherExpensesGrp>
+      <OtherExpensesGrp>
+        <Desc>CONTINUING EDUCATION</Desc>
+        <TotalAmt>55566</TotalAmt>
+        <ProgramServicesAmt>55566</ProgramServicesAmt>
+      </OtherExpensesGrp>
+      <AllOtherExpensesGrp>
+        <TotalAmt>202054</TotalAmt>
+        <ProgramServicesAmt>153415</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>48639</ManagementAndGeneralAmt>
+      </AllOtherExpensesGrp>
+      <TotalFunctionalExpensesGrp>
+        <TotalAmt>4792047</TotalAmt>
+        <ProgramServicesAmt>3882829</ProgramServicesAmt>
+        <ManagementAndGeneralAmt>909218</ManagementAndGeneralAmt>
+        <FundraisingAmt>0</FundraisingAmt>
+      </TotalFunctionalExpensesGrp>
+      <CashNonInterestBearingGrp>
+        <BOYAmt>107917</BOYAmt>
+        <EOYAmt>87251</EOYAmt>
+      </CashNonInterestBearingGrp>
+      <SavingsAndTempCashInvstGrp>
+        <BOYAmt>744710</BOYAmt>
+        <EOYAmt>859869</EOYAmt>
+      </SavingsAndTempCashInvstGrp>
+      <AccountsReceivableGrp>
+        <BOYAmt>645</BOYAmt>
+        <EOYAmt>2829</EOYAmt>
+      </AccountsReceivableGrp>
+      <PrepaidExpensesDefrdChargesGrp>
+        <BOYAmt>37283</BOYAmt>
+        <EOYAmt>29543</EOYAmt>
+      </PrepaidExpensesDefrdChargesGrp>
+      <InvestmentsPubTradedSecGrp>
+        <BOYAmt>959832</BOYAmt>
+        <EOYAmt>1167780</EOYAmt>
+      </InvestmentsPubTradedSecGrp>
+      <OtherAssetsTotalGrp>
+        <BOYAmt>4567</BOYAmt>
+        <EOYAmt>5686</EOYAmt>
+      </OtherAssetsTotalGrp>
+      <TotalAssetsGrp>
+        <BOYAmt>1854954</BOYAmt>
+        <EOYAmt>2152958</EOYAmt>
+      </TotalAssetsGrp>
+      <AccountsPayableAccrExpnssGrp>
+        <BOYAmt>101950</BOYAmt>
+        <EOYAmt>123956</EOYAmt>
+      </AccountsPayableAccrExpnssGrp>
+      <DeferredRevenueGrp>
+        <BOYAmt>502192</BOYAmt>
+        <EOYAmt>519988</EOYAmt>
+      </DeferredRevenueGrp>
+      <TotalLiabilitiesGrp>
+        <BOYAmt>604142</BOYAmt>
+        <EOYAmt>643944</EOYAmt>
+      </TotalLiabilitiesGrp>
+      <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+      <NoDonorRestrictionNetAssetsGrp>
+        <BOYAmt>1112650</BOYAmt>
+        <EOYAmt>1409608</EOYAmt>
+      </NoDonorRestrictionNetAssetsGrp>
+      <DonorRestrictionNetAssetsGrp>
+        <BOYAmt>138162</BOYAmt>
+        <EOYAmt>99406</EOYAmt>
+      </DonorRestrictionNetAssetsGrp>
+      <TotalNetAssetsFundBalanceGrp>
+        <BOYAmt>1250812</BOYAmt>
+        <EOYAmt>1509014</EOYAmt>
+      </TotalNetAssetsFundBalanceGrp>
+      <TotLiabNetAssetsFundBalanceGrp>
+        <BOYAmt>1854954</BOYAmt>
+        <EOYAmt>2152958</EOYAmt>
+      </TotLiabNetAssetsFundBalanceGrp>
+      <ReconcilationRevenueExpnssAmt>90585</ReconcilationRevenueExpnssAmt>
+      <NetUnrlzdGainsLossesInvstAmt>167617</NetUnrlzdGainsLossesInvstAmt>
+      <OtherChangesInNetAssetsAmt>0</OtherChangesInNetAssetsAmt>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <AccountantCompileOrReviewInd>1</AccountantCompileOrReviewInd>
+      <AcctCompileOrReviewBasisGrp>
+        <SeparateBasisFinclStmtInd>X</SeparateBasisFinclStmtInd>
+      </AcctCompileOrReviewBasisGrp>
+      <FSAuditedInd>0</FSAuditedInd>
+      <AuditCommitteeInd>1</AuditCommitteeInd>
+      <FederalGrantAuditRequiredInd>0</FederalGrantAuditRequiredInd>
+    </IRS990>
+    <IRS990ScheduleB documentId="RetDoc1234500001">
+      <ContributorInformationGrp>
+        <ContributorNum>RESTRICTED</ContributorNum>
+        <ContributorBusinessName>
+          <BusinessNameLine1>RESTRICTED</BusinessNameLine1>
+        </ContributorBusinessName>
+        <ContributorUSAddress>
+          <AddressLine1>RESTRICTED</AddressLine1>
+          <AddressLine2>RESTRICTED</AddressLine2>
+          <City>RESTRICTED</City>
+          <State>RESTRICTED</State>
+          <ZIPCode>RESTRICTED</ZIPCode>
+        </ContributorUSAddress>
+        <TotalContributionsAmt>RESTRICTED</TotalContributionsAmt>
+      </ContributorInformationGrp>
+    </IRS990ScheduleB>
+    <IRS990ScheduleC documentId="RetDoc1039500001">
+      <PoliticalExpendituresAmt>199944</PoliticalExpendituresAmt>
+      <SubstantiallyAllDuesNondedInd>0</SubstantiallyAllDuesNondedInd>
+      <OnlyInHouseLobbyingInd>0</OnlyInHouseLobbyingInd>
+      <AgreeCarryoverPriorYearInd>0</AgreeCarryoverPriorYearInd>
+      <DuesAssessmentsAmt>743617</DuesAssessmentsAmt>
+      <NonDeductibleLbbyngPltclCYAmt>306000</NonDeductibleLbbyngPltclCYAmt>
+      <NonDeductibleLbbyngPltclTotAmt>306000</NonDeductibleLbbyngPltclTotAmt>
+      <AggregateReportedDuesNtcAmt>306000</AggregateReportedDuesNtcAmt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART I-A, LINE 1:</FormAndLineReferenceDesc>
+        <ExplanationTxt>IN 1991, THE ORGANIZATION FORMED A POLITICAL ACTION COMMITTEE (PAC), TO CARRY OUT THE LOBBYING ACTIVITIES THAT ARE IN THE ORGANIZATION'S BEST INTEREST. THE PAC RECEIVES CONTRIBUTIONS AND MAKES POLITICAL DONATIONS. THEIR RECORDS AND FUNDS ARE SEPARATE FROM THE ORGANIZATION. THE PAC FILES AN 1120-POL EACH YEAR.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleC>
+    <IRS990ScheduleD documentId="RetDoc1040000001">
+      <TotalBookValueLandBuildingsAmt>0</TotalBookValueLandBuildingsAmt>
+      <FootnoteTextInd>X</FootnoteTextInd>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART X, LINE 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>THE ASSOCIATION FOLLOWS FASB ACCOUNTING STANDARDS FOR UNCERTAINTY IN INCOME TAXES. THESE STANDARDS REQUIRE THAT UNCERTAIN INCOME TAX POSITIONS BE MORE LIKELY THAN NOT BEFORE THE AMOUNTS ARE RECOGNIZED IN THE FINANCIAL STATEMENTS. FURTHER, THE STANDARDS REQUIRE THE BENEFIT OR EXPENSE BE RECORDED IN THE FINANCIAL STATEMENTS AS THE AMOUNT MOST LIKELY TO BE REALIZED ASSUMING A REVIEW BY TAX AUTHORITIES HAVING ALL RELEVANT INFORMATION AND APPLYING CURRENT CONVENTIONS. THE ASSOCIATION HAS ASSESSED ITS FEDERAL AND STATE TAX POSITIONS AND DETERMINED THERE WERE NO UNCERTAINTIES OR POSSIBLE RELATED EFFECTS THAT NEED TO BE RECORDED AS OF AND FOR THE YEARS ENDED DECEMBER 31, 2019 AND 2018. OPEN YEARS -- THE FEDERAL AND STATE INCOME TAX RETURNS OF THE ASSOCIATION ARE SUBJECT TO EXAMINATION BY THE RESPECTIVE TAXING AUTHORITIES GENERALLY FOR THREE YEARS AFTER THEY WERE FILED. INCOME TAX PENALTIES AND INTEREST POLICY -- PENALTIES AND INTEREST ASSESSED BY INCOME TAXING AUTHORITIES ARE INCLUDED IN OPERATING EXPENSES. THE ASSOCIATION DID NOT INCUR INCOME TAX PENALTIES OR INTEREST FOR THE YEARS ENDED DECEMBER 31, 2019 AND 2018.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleD>
+    <IRS990ScheduleI documentId="RetDoc1041900001">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <GrantsOtherAsstToIndivInUSGrp>
+        <GrantTypeTxt>SCHOLARSHIPS</GrantTypeTxt>
+        <RecipientCnt>19</RecipientCnt>
+        <CashGrantAmt>12767</CashGrantAmt>
+        <ValuationMethodUsedDesc>CASH VALUE</ValuationMethodUsedDesc>
+      </GrantsOtherAsstToIndivInUSGrp>
+    </IRS990ScheduleI>
+    <IRS990ScheduleL documentId="RetDoc1042800001">
+      <BusTrInvolveInterestedPrsnGrp>
+        <NameOfInterested>
+          <PersonNm>NICHOLAS T SERAFY JR</PersonNm>
+        </NameOfInterested>
+        <RelationshipDescriptionTxt>BOARD MEMBER</RelationshipDescriptionTxt>
+        <TransactionDesc>PROFICIENCY TESTING</TransactionDesc>
+        <SharingOfRevenuesInd>1</SharingOfRevenuesInd>
+      </BusTrInvolveInterestedPrsnGrp>
+      <BusTrInvolveInterestedPrsnGrp>
+        <NameOfInterested>
+          <PersonNm>MARK BIRENBAUM</PersonNm>
+        </NameOfInterested>
+        <RelationshipDescriptionTxt>ADMINISTRATOR</RelationshipDescriptionTxt>
+        <TransactionDesc>DATA PROCESSING</TransactionDesc>
+        <SharingOfRevenuesInd>1</SharingOfRevenuesInd>
+      </BusTrInvolveInterestedPrsnGrp>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>PART IV, LINE 1</FormAndLineReferenceDesc>
+        <ExplanationTxt>DESCRIPTION OF BUSINESS TRANSACTION - A BOARD MEMBER OF THE ORGANIZATION, NICHOLAS T. SERAFY, JR., OWNS OVER 35% OF THE ENTITY, PROFICIENCY TESTING SERVICE, INC., WHICH HAS A MULTI-YEAR CONTRACT WITH THE ORGANIZATION TO PROVIDE PROFICIENCY TESTING SERVICES IN EXCHANGE FOR THE AMOUNT LISTED ABOVE.THIS CONTRACT ENDED AT 12/31/2019, THE ASSOCIATION ASSUMED THE RESPONSIBILITY FOR PERFORMING THE ADMINISTRATIVE AND TECHNICAL RESPONSIBILITIES OF ITS PROFICIENCY TESTING PROGRAM AS OF 01/01/2020.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleL>
+    <IRS990ScheduleO documentId="RetDoc1044400001">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION A, LINE 3</FormAndLineReferenceDesc>
+        <ExplanationTxt>LINE 3 EXPLANATION - THE MANAGEMENT COMPANY, BIRENBAUM &amp; ASSOCIATES, PROVIDES THE BASIC PERSONNEL, FACILITIES, AND ADMINISTRATIVE SERVICES TO CARRY ON THE AFFAIRS OF THE ORGANIZATION, INCLUDING RECORD KEEPING, COMMUNICATIONS, BANKING, THE ANNUAL CONFERENCE ARRANGEMENTS, AND OTHER BASIC FUNCTIONS NECESSARY TO CARRY ON THE DAY-TO-DAY ACTIVITIES OF THE ORGANIZATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION A, LINE 6</FormAndLineReferenceDesc>
+        <ExplanationTxt>LINE 6 EXPLANATION - THE ORGANIZATION IS COMPRISED OF SEVERAL MEMBER ORGANIZATIONS, EACH WITH THEIR OWN GOVERNING BODIES AND MEMBERS. OPERATIONS OF ALL ORGANIZATIONS ARE GOVERNED BY THE RESPECTIVE ORGANIZATION'S BYLAWS. MEMBERS OF THE ORGANIZATIONS ELECT THEIR GOVERNING BODIES. DIFFERENT CATEGORIES OF MEMBERSHIP EXIST WITHIN THE MAIN CATEGORIES OF INDIVIDUAL AND CORPORATE. INDIVIDUAL MEMBERSHIP IS COMPRISED OF REGULAR, SPECIAL, ASSOCIATE, STUDENT, AND AFFILIATE MEMBERS AND CORPORATE MEMBERSHIP IS COMPRISED OF LABORATORY (ENTITIES THAT PROVIDE CLINICAL OR BIOANALYTICAL LABORATORY SERVICES AND THAT HAVE GROSS REVENUES LESS THAN $500 MILLION AND WHOSE APPLICATION HAS BEEN APPROVED BY THE BOARD ARE ALLOWED TO HAVE TWO REGULAR INDIVIDUAL MEMBERS WHO MUST BE EXECUTIVE OFFICERS OF THE MEMBER LABORATORY) AND SUSTAINING MEMBERSHIP (ENTITIES THAT MANUFACTURE, PRODUCE, DISTRIBUTE, SELL, OR LEASE PRODUCT, SUPPLIES, EQUIPMENT, OR SERVICES TO LABORATORIES, AND THAT EVIDENCE A SERIOUS INTEREST IN THE ACTIVITIES OF THE ORGANIZATION). INDIVIDUAL MEMBERS MUST BE ONE OF THE FOLLOWING: (1) DIRECTORS - LICENSED, QUALIFIED DIRECTOR OF A CLINICAL, BIOANALYTICAL, OR ENVIRONMENTAL LABORATORY; (2) OWNER MEMBERS - PERSONS HAVING 10% OR MORE OWNERSHIP SHARE OR FINANCIAL INTEREST IN A CLINICAL OR BIOANALYTICAL LABORATORY OR THE PARENT COMPANY OF A CLINICAL OR BIOANALYTICAL LABORATORY; (3) EXECUTIVE OFFICERS - INDIVIDUALS WHO ARE EXECUTIVE OFFICERS OF A CLINICAL OR BIOANALYTICAL LABORATORY THAT IS A MEMBER OF THE NILA SECTION OF THE ORGANIZATION; (4) MANAGERS - PERSONS HAVING LESS THAN 10% OWNERSHIP SHARE OR FINANCIAL INTEREST IN A LABORATORY OR PARENT COMPANY OF A LABORATORY, WHO DOES NOT QUALIFY AS A DIRECTOR, CONSULTANT, OR SUPERVISOR UNDER 1988 CLIA (CLINICAL LABORATORY IMPROVEMENT AMENDMENTS) REGULATIONS; (5) SUPERVISORS - INDIVIDUAL WHO IS QUALIFIED AS A LABORATORY SUPERVISOR UNDER THE CLIA 1988 REGULATIONS OR INDIVIDUAL WHO IS CERTIFIED AS A SUPERVISOR BY THE AMERICAN BOARD OF BIOANALYSIS OR ANOTHER NATIONAL CERTIFYING AGENCY; (6) FACULTY MEMBERS - DIRECTORS, MANAGERS, AND SUPERVISORS WHO ARE FULL-TIME UNIVERSITY FACULTY MEMBERS WITH TEACHING RESPONSIBILITIES IN THE BIOANALYTICAL SCIENCES; (7) ARMED FORCES - DIRECTORS, MANAGERS, AND SUPERVISORS WHO ARE FULL-TIME ACTIVE-DUTY MEMBERS OF THE US ARMED FORCES; AND (8) SPECIAL MEMBERS - AS DEFINED BY ONE OF THE FOLLOWING CATEGORIES: (A) EMERITUS MEMBER - REGULAR MEMBER WHO IS NO LONGER ACTIVELY ENGAGED IN PROFESSIONAL OR BUSINESS ENDEAVORS AND WHO HAS BEEN A REGULAR MEMBER FOR 10 OR MORE YEARS; (B) HONORARY MEMBER - INDIVIDUAL WHOSE ACHIEVEMENTS ENTITLE HIM/HER TO SPECIAL RECOGNITION BY THE ORGANIZATION MAY BE NOMINATED FOR ELECTION AS AN HONORARY MEMBER; (C) INACTIVE MEMBER - REGULAR MEMBER WHO HAS LEFT THE FIELD OF BIOANALYSIS FOR ANOTHER FIELD OF ENDEAVOR, BUT WHO WISHES TO RETAIN AFFILIATION WITH THE ORGANIZATION; (D) LIFE MEMBER - REGULAR MEMBER WHOSE CONTRIBUTIONS TO THE ORGANIZATION MERIT RECOGNITION BY THE AWARD OF A LIFETIME MEMBERSHIP; AND (E) SUPPORTING MEMBER - INDIVIDUAL EVIDENCING A SERIOUS INTEREST IN THE ACTIVITIES OF THE ORGANIZATION.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION A, LINE 7A</FormAndLineReferenceDesc>
+        <ExplanationTxt>LINE 7A EXPLANATION - THE ORGANIZATION HAS A NOMINATING COMMITTEE MADE UP OF RECENT AND CURRENT BOARD MEMBERS. THE COMMITTEE SUBMITS A LIST OF QUALIFIED CANDIDATES FOR BOARD APPROVAL. INTERESTED CANDIDATES IN GOOD STANDING WITH THE ORGANIZATION ARE ALLOWED TO BE PART OF THE ELECTION. CURRENT ORGANIZATION MEMBERS ARE ALLOWED TO VOTE IN THE SCHEDULED ELECTIONS. ELECTION TERMS ARE OUTLINED IN THE ORGANIZATION'S BYLAWS.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION A, LINE 7B</FormAndLineReferenceDesc>
+        <ExplanationTxt>LINE 7B EXPLANATION - EACH SECTION OF THE ORGANIZATION HAS AT LEAST ONE BOARD MEETING DURING THE YEAR AT WHICH TIME, ELECTIONS ARE HELD, MOTIONS ARE PASSED, AND BYLAWS RATIFIED, IF NECESSARY AND APPROVED BY THE BOARD. REGULATIONS FOR HOLDING BOARD MEETINGS ARE OUTLINED IN THE ORGANIZATION'S BYLAWS. BOARD MEETING MINUTES ARE TAKEN AND RETAINED BY THE ORGANIZATION AND APPROVED AT THE NEXT BOARD MEETING. COMMITTEES MEET AS NECESSARY TO FULFILL THEIR OBJECTIVE THROUGHOUT THE YEAR.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION B, LINE 11B</FormAndLineReferenceDesc>
+        <ExplanationTxt>LINE 11B EXPLANATION - FORM 990 IS PREPARED BY THE CERTIFIED PUBLIC ACCOUNTING FIRM THAT PREPARES THE ANNUAL FINANCIAL REPORTS FOR THE ORGANIZATION. THE FORM IS THEN PROVIDED TO THE MANAGER AND BOOKKEEPER FOR THE MANAGEMENT COMPANY, BIRENBAUM &amp; ASSOCIATES, FOR REVIEW. THE BOOKKEEPER AND MANAGER REVIEW THE RETURN AND COMPARE IT TO THE PREPARED FINANCIAL STATEMENTS THAT WERE PRESENTED TO AND APPROVED BY THE BOARD AT THE ANNUAL BOARD MEETINGS AND ANY OTHER SUPPORTING DOCUMENTATION. THE MANAGER SUGGESTS ANY CHANGES OR OBTAINS ANY NECESSARY EXPLANATIONS. THE RETURN IS THEN SIGNED BY THE ORGANIZATION'S SECRETARY/TREASURER AND THE RETURN IS THEN ELECTRONICALLY SUBMITTED TO THE IRS. COPIES OF THE RETURN ARE MAINTAINED AT BIRENBAUM &amp; ASSOCIATES.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART VI, SECTION C, LINE 19</FormAndLineReferenceDesc>
+        <ExplanationTxt>UPON REQUEST, A COPY OF THE ORGANIZATION'S TAX RETURN (FORM 990) WILL BE MADE AVAILABLE FOR INSPECTION FOR A PERIOD OF THREE YEARS FROM THE DATE THE RETURN IS REQUIRED TO BE FILED.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990, PART IX, LINE 24E</FormAndLineReferenceDesc>
+        <ExplanationTxt>BANK &amp; CHARGE CARD FEES: PROGRAM SERVICE EXPENSES 12,115. MANAGEMENT AND GENERAL EXPENSES 35,561. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 47,676. PRINTING AND PUBLICATIONS: PROGRAM SERVICE EXPENSES 28,638. MANAGEMENT AND GENERAL EXPENSES 2,851. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 31,489. PROFICIENCY TESTING PRG APPROV: PROGRAM SERVICE EXPENSES 27,388. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 27,388. MEMBERSHIP DEVEL/ MAINT: PROGRAM SERVICE EXPENSES 22,431. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 22,431. RENEWAL EXPENSES: PROGRAM SERVICE EXPENSES 21,373. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 21,373. POSTAGE AND SHIPPING: PROGRAM SERVICE EXPENSES 18,334. MANAGEMENT AND GENERAL EXPENSES 1,687. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 20,021. HONORARIA: PROGRAM SERVICE EXPENSES 8,823. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 8,823. BULLETIN: PROGRAM SERVICE EXPENSES 6,335. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 6,335. GOVERNMENT &amp; PROF REL: PROGRAM SERVICE EXPENSES 6,000. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 6,000. STORAGE FEE: PROGRAM SERVICE EXPENSES 660. MANAGEMENT AND GENERAL EXPENSES 3,000. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 3,660. PUBS, SUBS, &amp; DUES: PROGRAM SERVICE EXPENSES 38. MANAGEMENT AND GENERAL EXPENSES 2,970. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 3,008. TELEPHONE: PROGRAM SERVICE EXPENSES 900. MANAGEMENT AND GENERAL EXPENSES 1,577. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 2,477. MISCELLANEOUS: PROGRAM SERVICE EXPENSES 130. MANAGEMENT AND GENERAL EXPENSES 952. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 1,082. DONATIONS &amp; GIFTS: PROGRAM SERVICE EXPENSES 250. MANAGEMENT AND GENERAL EXPENSES 0. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 250. TAXES AND LICENSES: PROGRAM SERVICE EXPENSES 0. MANAGEMENT AND GENERAL EXPENSES 41. FUNDRAISING EXPENSES 0. TOTAL EXPENSES 41.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+    <IRS990ScheduleR documentId="RetDoc1043400001">
+      <IdRelatedTaxExemptOrgGrp>
+        <DisregardedEntityName>
+          <BusinessNameLine1Txt>AMERICAN BOARD OF BIOANALYSIS</BusinessNameLine1Txt>
+        </DisregardedEntityName>
+        <USAddress>
+          <AddressLine1Txt>906 OLIVE STREET 1200</AddressLine1Txt>
+          <CityNm>ST LOUIS</CityNm>
+          <StateAbbreviationCd>MO</StateAbbreviationCd>
+          <ZIPCd>631011434</ZIPCd>
+        </USAddress>
+        <EIN>237110975</EIN>
+        <PrimaryActivitiesTxt>PROFESSIONAL CERTIFICATION &amp; IMPROVEMENT</PrimaryActivitiesTxt>
+        <LegalDomicileStateCd>MO</LegalDomicileStateCd>
+        <ExemptCodeSectionTxt>501(C)(6)</ExemptCodeSectionTxt>
+        <ControlledOrganizationInd>0</ControlledOrganizationInd>
+      </IdRelatedTaxExemptOrgGrp>
+      <ReceiptOfIntAnntsRntsRyltsInd>0</ReceiptOfIntAnntsRntsRyltsInd>
+      <GiftGrntOrCapContriToOthOrgInd>0</GiftGrntOrCapContriToOthOrgInd>
+      <GiftGrntCapContriFromOthOrgInd>0</GiftGrntCapContriFromOthOrgInd>
+      <LoansOrGuaranteesToOtherOrgInd>0</LoansOrGuaranteesToOtherOrgInd>
+      <LoansOrGuaranteesFromOthOrgInd>0</LoansOrGuaranteesFromOthOrgInd>
+      <DivRelatedOrganizationInd>0</DivRelatedOrganizationInd>
+      <AssetSaleToOtherOrgInd>0</AssetSaleToOtherOrgInd>
+      <AssetPurchaseFromOtherOrgInd>0</AssetPurchaseFromOtherOrgInd>
+      <AssetExchangeInd>0</AssetExchangeInd>
+      <RentalOfFacilitiesToOthOrgInd>0</RentalOfFacilitiesToOthOrgInd>
+      <RentalOfFcltsFromOthOrgInd>0</RentalOfFcltsFromOthOrgInd>
+      <PerformOfServicesForOthOrgInd>0</PerformOfServicesForOthOrgInd>
+      <PerformOfServicesByOtherOrgInd>0</PerformOfServicesByOtherOrgInd>
+      <SharingOfFacilitiesInd>0</SharingOfFacilitiesInd>
+      <PaidEmployeesSharingInd>0</PaidEmployeesSharingInd>
+      <ReimbursementPaidToOtherOrgInd>0</ReimbursementPaidToOtherOrgInd>
+      <ReimbursementPaidByOtherOrgInd>0</ReimbursementPaidByOtherOrgInd>
+      <TransferToOtherOrgInd>0</TransferToOtherOrgInd>
+      <TransferFromOtherOrgInd>0</TransferFromOtherOrgInd>
+    </IRS990ScheduleR>
+  </ReturnData>
+</Return>

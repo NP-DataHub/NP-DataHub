@@ -1,0 +1,16 @@
+Previous filepath: /tmp/2021-1F/202131979349200303_public.xml and timestamp: None
+Current filepath: /tmp/2021-1F/202131969349200023_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2021-1F/202131659349200108_public.xml and timestamp: None
+Current filepath: /tmp/2021-1F/202131409349201453_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2021-1F/202132359349100703_public.xml and timestamp: 2021-08-23 09:50:46-05:00
+Current filepath: /tmp/2021-1F/202132359349100208_public.xml and timestamp: 2021-08-23 09:50:46-05:00
+Total Assets: previous is 0 and current is: 11518
+Total Expenses: previous is 11518 and current is: 310000
+Net Income (Less Deficit): previous is -11518 and current is: -310000
+Total Fund net worth: previous is 0 and current is: 11518
+Cash: previous is 0 and current is: 11518
+==================================================

@@ -1,0 +1,21 @@
+Previous filepath: /tmp/2021-1A/202101589349300910_public.xml and timestamp: None
+Current filepath: /tmp/2021-1A/202102179349300335_public.xml and timestamp: None
+Total Assets: previous is 1563458 and current is: 1572305
+Total Expenses: previous is 3439744 and current is: 3430897
+==================================================
+Previous filepath: /tmp/2021-1A/202101409349201500_public.xml and timestamp: None
+Current filepath: /tmp/2021-1A/202101419349200400_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2021-1A/202102079349200200_public.xml and timestamp: None
+Current filepath: /tmp/2021-1A/202102039349200240_public.xml and timestamp: None
+Total Assets: previous is 15839 and current is: 0
+Total Liabilities: previous is 680 and current is: 0
+Total Expenses: previous is 44241 and current is: 45857
+City: previous is NORFOLK and current is: Norfolk
+==================================================
+Previous filepath: /tmp/2021-1A/202102099349200040_public.xml and timestamp: None
+Current filepath: /tmp/2021-1A/202102189349200745_public.xml and timestamp: None
+Total Revenue: previous is -120755 and current is: 24100
+Total Expenses: previous is 67799 and current is: 135000
+==================================================

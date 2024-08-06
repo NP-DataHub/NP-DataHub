@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" returnVersion="2019v5.1">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2020-10-14T13:07:18-04:00</ReturnTs>
+    <TaxPeriodEndDt>2019-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>261402285</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>Vitela Business Services</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>9329 Call Street</AddressLine1Txt>
+        <CityNm>Pico Rivera</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>90660</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990EZ</ReturnTypeCd>
+    <TaxPeriodBeginDt>2019-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>832541955</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>MINISTERIOS EVANGELICOS JEHOVA RAPH</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>MINI</BusinessNameControlTxt>
+      <USAddress>
+        <AddressLine1Txt>15601 COBALT ST</AddressLine1Txt>
+        <CityNm>Sylmar</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>91342</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>MARIA L HERNANDEZ</PersonNm>
+      <PersonTitleTxt>president</PersonTitleTxt>
+      <PhoneNum>8182688859</PhoneNum>
+      <SignatureDt>2020-07-15</SignatureDt>
+      <DiscussWithPaidPreparerInd>false</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>Maria Lucila Hernandez</PreparerPersonNm>
+      <PTIN>P00689996</PTIN>
+      <PhoneNum>5629429602</PhoneNum>
+      <PreparationDt>2020-10-14</PreparationDt>
+      <SelfEmployedInd>X</SelfEmployedInd>
+    </PreparerPersonGrp>
+    <FilingSecurityInformation>
+      <IPAddress>
+        <IPv4AddressTxt>76.87.16.182</IPv4AddressTxt>
+      </IPAddress>
+      <IPDt>2020-10-14</IPDt>
+      <IPTm>13:11:56</IPTm>
+      <FederalOriginalSubmissionId>9623702020288o0apcyu</FederalOriginalSubmissionId>
+      <FederalOriginalSubmissionIdDt>2020-10-14</FederalOriginalSubmissionIdDt>
+      <FilingLicenseTypeCd>P</FilingLicenseTypeCd>
+      <AtSubmissionCreationDeviceId>EEE389D1FA984680939F24EB2A4F8F3FA417738D</AtSubmissionCreationDeviceId>
+      <AtSubmissionFilingDeviceId>EEE389D1FA984680939F24EB2A4F8F3FA417738D</AtSubmissionFilingDeviceId>
+    </FilingSecurityInformation>
+    <TaxYr>2019</TaxYr>
+    <BuildTS>2021-01-29 14:40:06Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="3">
+    <IRS990EZ documentId="IRS990EZ">
+      <MethodOfAccountingCashInd>X</MethodOfAccountingCashInd>
+      <ScheduleBNotRequiredInd>X</ScheduleBNotRequiredInd>
+      <Organization501c3Ind referenceDocumentId="990A">X</Organization501c3Ind>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <GrossReceiptsAmt>20159</GrossReceiptsAmt>
+      <InfoInScheduleOPartIInd>X</InfoInScheduleOPartIInd>
+      <ContributionsGiftsGrantsEtcAmt>20159</ContributionsGiftsGrantsEtcAmt>
+      <TotalRevenueAmt>20159</TotalRevenueAmt>
+      <BenefitsPaidToOrForMembersAmt>200</BenefitsPaidToOrForMembersAmt>
+      <OccupancyRentUtltsAndMaintAmt>10500</OccupancyRentUtltsAndMaintAmt>
+      <PrintingPublicationsPostageAmt>879</PrintingPublicationsPostageAmt>
+      <OtherExpensesTotalAmt>3994</OtherExpensesTotalAmt>
+      <TotalExpensesAmt>15573</TotalExpensesAmt>
+      <ExcessOrDeficitForYearAmt>4586</ExcessOrDeficitForYearAmt>
+      <NetAssetsOrFundBalancesBOYAmt>590</NetAssetsOrFundBalancesBOYAmt>
+      <NetAssetsOrFundBalancesEOYAmt>5176</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIInd>X</InfoInScheduleOPartIIInd>
+      <CashSavingsAndInvestmentsGrp>
+        <BOYAmt>590</BOYAmt>
+        <EOYAmt>4976</EOYAmt>
+      </CashSavingsAndInvestmentsGrp>
+      <LandAndBuildingsGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </LandAndBuildingsGrp>
+      <OtherAssetsTotalDetail>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>200</EOYAmt>
+      </OtherAssetsTotalDetail>
+      <Form990TotalAssetsGrp>
+        <BOYAmt>590</BOYAmt>
+        <EOYAmt>5176</EOYAmt>
+      </Form990TotalAssetsGrp>
+      <SumOfTotalLiabilitiesGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>0</EOYAmt>
+      </SumOfTotalLiabilitiesGrp>
+      <NetAssetsOrFundBalancesGrp>
+        <BOYAmt>590</BOYAmt>
+        <EOYAmt>5176</EOYAmt>
+      </NetAssetsOrFundBalancesGrp>
+      <PrimaryExemptPurposeTxt>SPREAD OUT THE WORD OF GOD</PrimaryExemptPurposeTxt>
+      <ProgramSrvcAccomplishmentGrp>
+        <DescriptionProgramSrvcAccomTxt>HELP SINGLE MOTHERS INDIVIDUALS WITH DRUG PROBLEMS AND HOMELESS FAMILIES</DescriptionProgramSrvcAccomTxt>
+      </ProgramSrvcAccomplishmentGrp>
+      <TotalProgramServiceExpensesAmt>0</TotalProgramServiceExpensesAmt>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>ARGELIA ANDINO</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>35.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <ActivitiesNotPreviouslyRptInd>false</ActivitiesNotPreviouslyRptInd>
+      <ChgMadeToOrgnzngDocNotRptInd>false</ChgMadeToOrgnzngDocNotRptInd>
+      <OrganizationHadUBIInd>false</OrganizationHadUBIInd>
+      <SubjectToProxyTaxInd>false</SubjectToProxyTaxInd>
+      <OrganizationDissolvedEtcInd>false</OrganizationDissolvedEtcInd>
+      <Form1120PolFiledInd>false</Form1120PolFiledInd>
+      <MadeLoansToFromOfficersInd>false</MadeLoansToFromOfficersInd>
+      <EngagedInExcessBenefitTransInd>false</EngagedInExcessBenefitTransInd>
+      <ProhibitedTaxShelterTransInd>false</ProhibitedTaxShelterTransInd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <BooksInCareOfDetail>
+        <PersonNm>ARGELIA ANDINO</PersonNm>
+        <USAddress>
+          <AddressLine1Txt>15601 COBALT ST</AddressLine1Txt>
+          <CityNm>Sylmar</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>91342</ZIPCd>
+        </USAddress>
+        <PhoneNum>8182688859</PhoneNum>
+      </BooksInCareOfDetail>
+      <ForeignFinancialAccountInd>false</ForeignFinancialAccountInd>
+      <ForeignOfficeInd>false</ForeignOfficeInd>
+      <DonorAdvisedFndsInd>false</DonorAdvisedFndsInd>
+      <OperateHospitalInd>false</OperateHospitalInd>
+      <TanningServicesProvidedInd>false</TanningServicesProvidedInd>
+      <RelatedOrganizationCtrlEntInd>false</RelatedOrganizationCtrlEntInd>
+      <TransactionWithControlEntInd>false</TransactionWithControlEntInd>
+      <PoliticalCampaignActyInd>false</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>false</LobbyingActivitiesInd>
+      <SchoolOperatingInd>false</SchoolOperatingInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>false</TrnsfrExmptNonChrtblRltdOrgInd>
+      <PartVIOfCompOfHghstPdEmplTxt>NONE</PartVIOfCompOfHghstPdEmplTxt>
+      <PartVIHghstPdCntrctProfSrvcTxt>NONE</PartVIHghstPdCntrctProfSrvcTxt>
+      <FiledScheduleAInd>true</FiledScheduleAInd>
+    </IRS990EZ>
+    <IRS990ScheduleA documentId="990A">
+      <ChurchInd>X</ChurchInd>
+    </IRS990ScheduleA>
+    <IRS990ScheduleO documentId="990O">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Description of other expenses Part I line 16</FormAndLineReferenceDesc>
+        <ExplanationTxt>Description AmountLOVE OFFERING PREACHERS 730PROFESSIONAL FEES 730ALTAR DECORATION 126BANK CHARGES 40BIBLES BOOKS &amp; SUPPLIES 121IRS FILING FEE 850EEVANGELISM AND SPEECIAL EVENTS 571GIFTS AND REWARDS 90HOLIDAY CELEBRATION EXPENSE 29LOVE OFFERING TO MEMBERS 50MEALS 26MUSICAL INSTRUMENTS ACCESSORIES 50OFFICE SUPPLIES 452SALES TAX 73SMALL KITCHEN APPLIANCES 18MUSICAL INSTRUMENTS WARRANTIES 38</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Description of other assets Part II line 24</FormAndLineReferenceDesc>
+        <ExplanationTxt>Category Beginning of Year End of YearMUSICAL INSTRUMENTS 0 200</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

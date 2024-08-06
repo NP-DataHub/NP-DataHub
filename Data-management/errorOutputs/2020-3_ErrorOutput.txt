@@ -1,0 +1,33 @@
+Previous filepath: /tmp/2020-3/202013219349308826_public.xml and timestamp: 2020-11-16 11:54:30-06:00
+Current filepath: /tmp/2020-3/202013219349309201_public.xml and timestamp: 2020-11-16 11:54:30-06:00
+Total Revenue: previous is 35142 and current is: 804969
+Total Assets: previous is 0 and current is: 3054907
+Total Liabilities: previous is 0 and current is: 12654
+Total Expenses: previous is 206964 and current is: 672344
+Total Contributions: previous is 0 and current is: 300751
+Program Service Revenue: previous is 6359 and current is: 179954
+Investment Income: previous is 24446 and current is: 309562
+Gross Receipts: previous is 55895 and current is: 893145
+Fundraising Income: previous is 0 and current is: 2129
+Fundraising Expenses: previous is 0 and current is: 8586
+Other salaries and wages: previous is 15964 and current is: 226620
+Payroll Taxes: previous is 588 and current is: 20546
+Gift Grants Membership Fees received 509: previous is 1536790 and current is: 1837541
+Number of employees: previous is 3 and current is: 41
+==================================================
+Previous filepath: /tmp/2020-3/202011979349303596_public.xml and timestamp: 2020-07-15 13:16:48-05:00
+Current filepath: /tmp/2020-3/202011979349303681_public.xml and timestamp: 2020-07-15 13:16:48-05:00
+Total Revenue: previous is 292153 and current is: 28593
+Total Assets: previous is 82355 and current is: 0
+Total Liabilities: previous is 12672 and current is: 0
+Total Expenses: previous is 372086 and current is: 99886
+Total Contributions: previous is 193922 and current is: 25126
+Program Service Revenue: previous is 99938 and current is: 14787
+Investment Income: previous is 11 and current is: -11320
+Gross Receipts: previous is 293871 and current is: 39913
+Fundraising Income: previous is -1718 and current is: 0
+Fundraising Expenses: previous is 1718 and current is: 0
+Other salaries and wages: previous is 177869 and current is: 30468
+Payroll Taxes: previous is 18457 and current is: 4481
+Number of employees: previous is 10 and current is: 18
+==================================================

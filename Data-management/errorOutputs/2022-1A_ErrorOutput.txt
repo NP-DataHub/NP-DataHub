@@ -1,0 +1,29 @@
+Previous filepath: /tmp/2022-1A/202200889349201405_public.xml and timestamp: None
+Current filepath: /tmp/2022-1A/202200979349201210_public.xml and timestamp: None
+Total Revenue: previous is 2538 and current is: 2930
+Total Assets: previous is 25 and current is: 7623
+Total Expenses: previous is 1919 and current is: 1779
+Program Service Revenue: previous is 2538 and current is: 2930
+==================================================
+Previous filepath: /tmp/2022-1A/202202019349200330_public.xml and timestamp: None
+Current filepath: /tmp/2022-1A/202202019349200200_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-1A/202201019349201100_public.xml and timestamp: None
+Current filepath: /tmp/2022-1A/202200999349200235_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-1A/202202089349200215_public.xml and timestamp: None
+Current filepath: /tmp/2022-1A/202202019349201005_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-1A/202201219349200155_public.xml and timestamp: None
+Current filepath: /tmp/2022-1A/202200749349201100_public.xml and timestamp: None
+Total Revenue: previous is 21741 and current is: 22245
+Total Assets: previous is 75213 and current is: 74086
+Total Liabilities: previous is 566 and current is: 0
+Total Expenses: previous is 26343 and current is: 27407
+Name: previous is HIGHER MOUNTAIN INC and current is: HIGHER MOUNTAIN INC DBA MOUNTAIN MEDICS INTERNATIONAL
+City: previous is DENVER and current is: Denver
+Address: previous is PO BOX 150682 and current is: PO Box 150682
+==================================================

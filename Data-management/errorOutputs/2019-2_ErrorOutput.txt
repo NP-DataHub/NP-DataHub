@@ -1,0 +1,12 @@
+Previous filepath: /tmp/2019-2/201903179349305215_public.xml and timestamp: 2019-11-13 13:37:53-06:00
+Current filepath: /tmp/2019-2/201903179349305295_public.xml and timestamp: 2019-11-13 13:37:53-06:00
+Total Revenue: previous is 60215 and current is: 5964
+Total Assets: previous is 0 and current is: 3140529
+Total Liabilities: previous is 0 and current is: 2774591
+Total Expenses: previous is 426153 and current is: 480611
+Investment Income: previous is -2715473 and current is: 0
+Gross Receipts: previous is 2793688 and current is: 5964
+Compensation of current officers: previous is 38500 and current is: 42192
+Other salaries and wages: previous is 100582 and current is: 155162
+Payroll Taxes: previous is 17898 and current is: 13553
+==================================================

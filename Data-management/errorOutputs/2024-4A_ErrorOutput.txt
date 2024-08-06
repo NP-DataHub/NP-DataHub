@@ -1,0 +1,99 @@
+Previous filepath: /tmp/2024-4A/202441139349202004_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202401069349201840_public.xml and timestamp: None
+Total Expenses: previous is 81564 and current is: 559613
+==================================================
+Previous filepath: /tmp/2024-4A/202410879349300431_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202410909349300711_public.xml and timestamp: None
+Other salaries and wages: previous is 72972 and current is: 480240
+==================================================
+Previous filepath: /tmp/2024-4A/202401089349100100_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202411089349100636_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-4A/202410949349201321_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202441089349200634_public.xml and timestamp: None
+Address: previous is 2678 Arctic Thyme Vw201 and current is: 2678 Arctic Thyme ViewAPT 201
+==================================================
+Previous filepath: /tmp/2024-4A/202441059349200649_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202401019349200105_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-4A/202440859349301824_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202420849349300612_public.xml and timestamp: None
+Total Revenue: previous is 224057 and current is: 153061
+Total Liabilities: previous is 26690 and current is: 126690
+Total Contributions: previous is 155995 and current is: 142831
+Program Service Revenue: previous is 78221 and current is: 0
+Gross Receipts: previous is 245493 and current is: 175497
+==================================================
+Previous filepath: /tmp/2024-4A/202431069349202453_public.xml and timestamp: 2024-04-15 17:18:24-07:00
+Current filepath: /tmp/2024-4A/202411039349202211_public.xml and timestamp: None
+Total Assets: previous is 64136 and current is: 64135
+Total Expenses: previous is 135816 and current is: 135817
+Name: previous is Children Writing for Children and current is: CHILDREN WRITING FOR CHILDREN
+==================================================
+Previous filepath: /tmp/2024-4A/202420849349200507_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202430849349200708_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-4A/202421149349201562_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202431089349200748_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-4A/202441139349201974_public.xml and timestamp: 2024-04-22 17:57:09-05:00
+Current filepath: /tmp/2024-4A/202401139349202100_public.xml and timestamp: 2024-04-22 17:57:09-05:00
+Total Assets: previous is 0 and current is: 26971
+Total Expenses: previous is 26971 and current is: 1010
+==================================================
+Previous filepath: /tmp/2024-4A/202400999349201300_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202430959349200203_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-4A/202411029349300626_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202411089349300921_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-4A/202401069349202465_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202430959349202153_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-4A/202401089349200745_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202421089349200147_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-4A/202441039349200524_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202411009349200716_public.xml and timestamp: None
+Total Revenue: previous is 19208 and current is: 18708
+==================================================
+Previous filepath: /tmp/2024-4A/202400999349300910_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202440999349301124_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-4A/202431059349300958_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202421099349301522_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-4A/202400889349200520_public.xml and timestamp: 2024-03-28 09:17:24-04:00
+Current filepath: /tmp/2024-4A/202430889349200013_public.xml and timestamp: 2024-03-28 09:17:24-04:00
+Total Revenue: previous is 16880 and current is: 0
+Total Assets: previous is 96488 and current is: 0
+Total Expenses: previous is 28482 and current is: 0
+Program Service Revenue: previous is 16741 and current is: 0
+Investment Income: previous is 139 and current is: 0
+==================================================
+Previous filepath: /tmp/2024-4A/202410939349301536_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202430889349300933_public.xml and timestamp: None
+Total Revenue: previous is 283522 and current is: 350522
+Total Assets: previous is 283522 and current is: 199107
+Total Liabilities: previous is 58046 and current is: 25062
+Total Expenses: previous is 163176 and current is: 114715
+Total Contributions: previous is 246822 and current is: 313822
+Gross Receipts: previous is 283522 and current is: 350522
+Other salaries and wages: previous is 55504 and current is: 21669
+Gift Grants Membership Fees received 509: previous is 1139874 and current is: 1170174
+Number of employees: previous is 0 and current is: 1
+==================================================
+Previous filepath: /tmp/2024-4A/202411029349300626_public.xml and timestamp: None
+Current filepath: /tmp/2024-4A/202411019349301216_public.xml and timestamp: None
+No difference found
+==================================================

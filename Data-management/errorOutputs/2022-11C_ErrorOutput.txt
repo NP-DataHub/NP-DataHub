@@ -1,0 +1,15 @@
+Previous filepath: /tmp/2022-11C/202243199349201229_public.xml and timestamp: 2022-11-15 08:32:10-05:00
+Current filepath: /tmp/2022-11C/202233199349201538_public.xml and timestamp: 2022-11-15 08:32:10-05:00
+Total Revenue: previous is 106766 and current is: 196259
+Total Assets: previous is 265448 and current is: 160665
+Total Expenses: previous is 1983 and current is: 122262
+==================================================
+Previous filepath: /tmp/2022-11C/202233559349300633_public.xml and timestamp: None
+Current filepath: /tmp/2022-11C/202233559349300618_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11C/202233399349200623_public.xml and timestamp: None
+Current filepath: /tmp/2022-11C/202242879349200849_public.xml and timestamp: None
+Name: previous is PARENTZWORK and current is: PARENTZ WORK
+City: previous is Victorville and current is: VICTORVILLE
+==================================================

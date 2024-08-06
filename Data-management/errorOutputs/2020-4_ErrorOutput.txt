@@ -1,0 +1,15 @@
+Previous filepath: /tmp/2020-4/202022669349200417_public.xml and timestamp: None
+Current filepath: /tmp/2020-4/202022779349200612_public.xml and timestamp: None
+Total Revenue: previous is 52431 and current is: 53806
+Total Assets: previous is 45113 and current is: 33784
+Total Expenses: previous is 59157 and current is: 71861
+==================================================
+Previous filepath: /tmp/2020-4/202022369349200352_public.xml and timestamp: None
+Current filepath: /tmp/2020-4/202022429349200802_public.xml and timestamp: None
+Total Revenue: previous is 6 and current is: 5951
+Total Assets: previous is 15 and current is: 15906
+==================================================
+Previous filepath: /tmp/2020-4/202013239349100806_public.xml and timestamp: 2020-11-17 11:51:08-05:00
+Current filepath: /tmp/2020-4/202013359349100306_public.xml and timestamp: 2020-11-17 11:51:08-05:00
+No difference found
+==================================================

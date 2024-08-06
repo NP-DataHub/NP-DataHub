@@ -1,0 +1,122 @@
+Previous filepath: /tmp/2023-10/202342739349200109_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202332749349200608_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-10/202342759349201224_public.xml and timestamp: 2023-10-02 11:49:50-05:00
+Current filepath: /tmp/2023-10/202312759349200926_public.xml and timestamp: 2023-10-02 11:49:50-05:00
+Total Revenue: previous is 108536 and current is: 4
+Total Assets: previous is 99071 and current is: 77483
+Total Expenses: previous is 82480 and current is: 21592
+Program Service Revenue: previous is 10278 and current is: 0
+Investment Income: previous is 41 and current is: 4
+==================================================
+Previous filepath: /tmp/2023-10/202332969349201023_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202312979349201221_public.xml and timestamp: None
+Total Revenue: previous is 16584 and current is: 95354
+Total Assets: previous is 91355 and current is: 76217
+Total Expenses: previous is 32447 and current is: 109286
+Program Service Revenue: previous is 16584 and current is: 91030
+Gift Grants Membership Fees received 509: previous is 0 and current is: 4324
+==================================================
+Previous filepath: /tmp/2023-10/202302689349200340_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202322709349201032_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-10/202342949349300504_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202302979349301745_public.xml and timestamp: None
+Total Assets: previous is 201292 and current is: 205064
+Total Liabilities: previous is 107689 and current is: 111463
+==================================================
+Previous filepath: /tmp/2023-10/202332929349200513_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202302949349200300_public.xml and timestamp: None
+Total Assets: previous is 85924 and current is: 78435
+Total Expenses: previous is 148431 and current is: 151598
+==================================================
+Previous filepath: /tmp/2023-10/202342689349300304_public.xml and timestamp: 2023-09-25 07:04:46-05:00
+Current filepath: /tmp/2023-10/202302689349300010_public.xml and timestamp: 2023-09-25 07:04:46-05:00
+Total Revenue: previous is 224175 and current is: 231734
+Total Assets: previous is 1081485 and current is: 963640
+Total Liabilities: previous is 0 and current is: 31109
+Total Expenses: previous is 94838 and current is: 380688
+Program Service Revenue: previous is 224130 and current is: 231237
+Investment Income: previous is 45 and current is: 497
+Gross Receipts: previous is 224175 and current is: 231734
+Compensation of current officers: previous is 8700 and current is: 67694
+Other salaries and wages: previous is 20866 and current is: 38745
+Payroll Taxes: previous is 3800 and current is: 7713
+==================================================
+Previous filepath: /tmp/2023-10/202322549349201107_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202332749349200103_public.xml and timestamp: None
+Total Revenue: previous is 91846 and current is: 91446
+Total Assets: previous is 65865 and current is: 65465
+Gift Grants Membership Fees received 509: previous is 384038 and current is: 383638
+==================================================
+Previous filepath: /tmp/2023-10/202302659349200015_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202322779349200302_public.xml and timestamp: 2023-10-04 03:31:53-04:00
+Zip Code: previous is 36353 and current is: 363537537
+==================================================
+Previous filepath: /tmp/2023-10/202342709349200729_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202312529349200706_public.xml and timestamp: None
+Total Revenue: previous is 62080 and current is: 0
+Total Assets: previous is 4880 and current is: 0
+Total Expenses: previous is 65289 and current is: 0
+Investment Income: previous is 29 and current is: 0
+==================================================
+Previous filepath: /tmp/2023-10/202332849349200523_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202342969349201104_public.xml and timestamp: None
+City: previous is POUGHKEEPSIE and current is: Poughkeepsie
+Address: previous is PO BOX 1777 and current is: PO Box 1777
+==================================================
+Previous filepath: /tmp/2023-10/202312749349200006_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202302749349200710_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-10/202302879349200320_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202312979349200316_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 475067 and current is: 472067
+Name: previous is Northampton Neighbors Inc and current is: NORTHAMPTON NEIGHBORS
+City: previous is Northampton and current is: NORTHAMPTON
+Address: previous is 168 Industrial Drive and current is: 168 INDUSTRIAL DRIVE
+==================================================
+Previous filepath: /tmp/2023-10/202342829349200504_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202302839349200205_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-10/202342789349200224_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202322909349201022_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-10/202312759349201221_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202342769349200839_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-10/202332839349201523_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202302849349200840_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-10/202302719349200005_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202312709349200306_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-10/202322879349200402_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202312879349200201_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-10/202302749349200000_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202302749349200305_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-10/202322959349200052_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202302829349201655_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-10/202322719349200627_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202332709349201353_public.xml and timestamp: None
+Total Revenue: previous is 175254 and current is: 149975
+Total Assets: previous is 345430 and current is: 320151
+Investment Income: previous is 329 and current is: 332
+==================================================
+Previous filepath: /tmp/2023-10/202332729349200728_public.xml and timestamp: None
+Current filepath: /tmp/2023-10/202322759349200702_public.xml and timestamp: None
+Name: previous is Four Seasons Rotary Club - Hendersonville and current is: Four Seasons Rotary Charitable Foundation
+==================================================

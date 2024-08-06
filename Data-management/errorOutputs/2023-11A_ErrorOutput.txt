@@ -1,0 +1,20 @@
+Previous filepath: /tmp/2023-11A/202303209349202700_public.xml and timestamp: 2023-11-16 15:57:35-05:00
+Current filepath: /tmp/2023-11A/202313139349200501_public.xml and timestamp: None
+Zip Code: previous is 142217091 and current is: 14221
+==================================================
+Previous filepath: /tmp/2023-11A/202303179349205875_public.xml and timestamp: None
+Current filepath: /tmp/2023-11A/202313179349203921_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-11A/202313139349304326_public.xml and timestamp: None
+Current filepath: /tmp/2023-11A/202313169349300056_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-11A/202313129349202246_public.xml and timestamp: None
+Current filepath: /tmp/2023-11A/202303119349202520_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-11A/202313119349201806_public.xml and timestamp: None
+Current filepath: /tmp/2023-11A/202313119349202316_public.xml and timestamp: None
+No difference found
+==================================================

@@ -1,0 +1,18 @@
+Previous filepath: /tmp/2019-1B/201901229349200605_public.xml and timestamp: None
+Current filepath: /tmp/2019-1B/201901509349200905_public.xml and timestamp: None
+Total Revenue: previous is 41366 and current is: 42866
+Total Assets: previous is 2696 and current is: 17427
+Total Expenses: previous is 28200 and current is: 28134
+==================================================
+Previous filepath: /tmp/2019-1B/201900249349300900_public.xml and timestamp: 2019-01-24 10:45:25-06:00
+Current filepath: /tmp/2019-1B/201900249349300515_public.xml and timestamp: 2019-01-24 10:45:25-06:00
+Total Assets: previous is 15487535 and current is: 0
+Total Liabilities: previous is 15497022 and current is: 0
+Total Expenses: previous is 9487 and current is: 0
+==================================================
+Previous filepath: /tmp/2019-1B/201901569349200210_public.xml and timestamp: 2019-06-05 10:23:57-05:00
+Current filepath: /tmp/2019-1B/201901569349200750_public.xml and timestamp: 2019-06-05 10:23:57-05:00
+Total Revenue: previous is 0 and current is: 13458
+Total Assets: previous is 0 and current is: 49988
+Total Expenses: previous is 49988 and current is: 227362
+==================================================
