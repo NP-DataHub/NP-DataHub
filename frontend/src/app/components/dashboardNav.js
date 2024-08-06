@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { useAuth } from './context';
 import { db } from '../firebase/firebase';
+import { doSignOut } from '../firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { IoClose } from "react-icons/io5";
 
@@ -29,6 +30,10 @@ const DashboardNavbar = () => {
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleSignOut = () => {
+    doSignOut();
   };
 
   return (
@@ -64,7 +69,7 @@ const DashboardNavbar = () => {
         </div>
       </div>
 
-      <div className={`fixed top-0 right-0 h-full bg-[#21222D] text-white shadow-lg transition-transform transform ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'}`} style={{ width: '300px', borderRadius: '10px 0 0 10px' }}>
+      <div className={`fixed top-0 right-0 h-full bg-[#21222D] z-40 text-white shadow-lg transition-transform transform ${sidebarOpen ? 'translate-x-0' : 'translate-x-full '}`} style={{ width: '300px', borderRadius: '10px 0 0 10px' }}>
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center space-x-3">
             <img src={userData.image || 'https://via.placeholder.com/150'} alt="User" className="w-12 h-12 rounded-full object-cover" />
@@ -91,7 +96,7 @@ const DashboardNavbar = () => {
             <span className = "mt-0">Settings</span>
           </a>
 
-          <a href="#" className="text-[#e7e7ea] text-md font-semibold flex items-center space-x-3 px-1 py-2 hover:bg-[#353637] rounded-md">
+          <a href="#" onClick={handleSignOut} className="text-[#e7e7ea] text-md font-semibold flex items-center space-x-3 px-1 py-2 hover:bg-[#353637] rounded-md">
             <svg width="21" height="21" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.2 4.10077V2.85949C8.19999 2.67145 8.16555 2.48545 8.09886 2.31325C8.03217 2.14106 7.93467 1.98641 7.81253 1.85908C7.69039 1.73175 7.54627 1.63452 7.38927 1.57352C7.23227 1.51252 7.0658 1.48908 6.9004 1.50469L2.1004 1.95742C1.80043 1.98573 1.52081 2.14073 1.31698 2.39167C1.11315 2.64262 1.00001 2.97119 1 3.31222V11.6871C1.00001 12.0281 1.11315 12.3567 1.31698 12.6076C1.52081 12.8586 1.80043 13.0136 2.1004 13.0419L6.9004 13.4953C7.06585 13.5109 7.23237 13.4875 7.38941 13.4264C7.54645 13.3654 7.6906 13.2681 7.81275 13.1407C7.9349 13.0133 8.03238 12.8586 8.09904 12.6863C8.1657 12.514 8.20008 12.3279 8.2 12.1398V10.8986M7.6 7.49966H13H7.6ZM13 7.49966L11.0002 4.78055L13 7.49966ZM13 7.49966L11.0002 10.2188L13 7.49966Z" stroke="#87888C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
