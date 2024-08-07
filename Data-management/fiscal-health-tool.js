@@ -38,11 +38,7 @@ Else :
           Entry2 will be an array with 2 entries: [NaN, [consecutive years available]]
 */
 
-async function main(npVSnp, specific_sector = null) {
-  const firstNp= 'SOCIETY OF COSMETIC CHEMISTS';
-  const firstAddr = '33 CHESTER ST';
-  const secondNp  = 'Beta Theta Pi Fraternity';
-  const secondAddr = '12 Munson Road';
+async function main(firstNp, firstAddr, secondNp, secondAddr, npVSnp, specific_sector = null) {
 
   if (npVSnp) {
     const firstFiscalHealthScore = await getNpFiscalHealthScore(firstNp, firstAddr);
@@ -294,4 +290,9 @@ function calculateStateFiscalHealthScore(data, years, state) {
 }
 
 // Call the main function
-main(false).then(console.log);
+const firstNp = 'SOCIETY OF COSMETIC CHEMISTS';
+const firstAddr = '33 CHESTER ST';
+const secondNp  = 'Beta Theta Pi Fraternity';
+const secondAddr = '12 Munson Road';
+
+main(firstNp,firstAddr,secondNp,secondAddr,false).then(console.log);
