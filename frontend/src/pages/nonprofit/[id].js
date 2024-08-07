@@ -24,6 +24,7 @@ const Nonprofit = () => {
   const { id } = router.query;
   console.log(id)
   const [nonprofitData, setNonprofitData] = useState(null);
+  const [sectorData, setSectorData] = useState(null);
 
   const [selectedMetric, setSelectedMetric] = useState('TotRev');
   const [selectedComparison, setSelectedComparison] = useState({ variable1: 'TotRev', variable2: 'TotExp' });
@@ -45,6 +46,12 @@ const Nonprofit = () => {
         const response = await fetch(`/api/items?_id=${id}`);
         const data = await response.json();
         setNonprofitData(data.data[0]);
+        // retrieve state by state sector information
+        let sectorResponse = await fetch(`/api/averages?MajGrp=${data.data[0].NTEE[0]}`);
+        sectorResponse = await sectorResponse.json();
+        let sectorData = sectorResponse.data[0]
+        setSectorData(sectorData);
+        console.log(sectorData);
       };
 
       fetchNonprofitData();
@@ -60,7 +67,7 @@ const Nonprofit = () => {
     </div>
   );
 
-  if (!nonprofitData) {
+  if (!nonprofitData || !sectorData) {
     return <div className='w-screen dashboard-color h-screen'><LoadingComponent /></div>;
   }
 
@@ -83,6 +90,10 @@ const Nonprofit = () => {
   const years = Object.keys(nonprofitData).filter(year => !isNaN(year)).sort();
   const mostRecentYear = years[years.length - 1];
   const previousYear = years[years.length - 2];
+
+  const sectorYears = Object.keys(sectorData).filter(year => !isNaN(year)).sort();
+  const mostRecentSectorYear = sectorYears[sectorYears.length - 1];
+  const previousSectorYear = sectorYears[sectorYears.length - 2];
 
   if (mostRecentYear) {
     const yearData = nonprofitData[mostRecentYear];
@@ -323,7 +334,7 @@ const Nonprofit = () => {
                               {/*add chart here box size will update with chart*/}
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Compared to Averages</h1>
                               <div className="flex items-center justify-center mb-24 mt-12">
-                                  <Gauge orgName={nonprofitData.nm} orgVal={62} stateName={"New York Avg"} stateVal={100} nationalVal={48}/>
+                                  <Gauge orgName={nonprofitData.nm} orgVal={62} stateName={nonprofitData.St} stateVal={69} nationalVal={48}/>
                               </div>
                           </div>
                       </div>

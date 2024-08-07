@@ -100,15 +100,6 @@ const Choropleth = (sector) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // retrieve state by state sector information
-      let response = await fetch(`/api/averages?MajGrp=A`);
-      response = await response.json();
-      let data = response.data[0]
-      console.log(data);
-
-      const sectorYears = Object.keys(data).filter(year => !isNaN(year)).sort();
-      const mostRecentSectorYear = sectorYears[sectorYears.length - 1];
-      const previousSectorYear = sectorYears[sectorYears.length - 2];
 
       // retrieve map data
       const PATH = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/95368/USA_geo.json';

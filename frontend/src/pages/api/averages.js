@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   const { method, query } = req;
   try {
     const client = await clientPromise;
-    const db = client.db('Np-Datahub');
+    const db = client.db('Nonprofitly');
 
     switch (method) {
       case 'GET':
