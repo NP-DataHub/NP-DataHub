@@ -146,7 +146,12 @@ const StackChart = ({revenues, expenses, assets, liabilities, minYear}) => {
         emphasis: {
           focus: 'series'
         },
-        data: assets
+        data: assets.map((value, index) => ({
+          value,
+          itemStyle: {
+            barBorderRadius:liabilities[index] ? 0 : [0, 0.016*dimensions.width, 0.016*dimensions.width, 0],
+          }
+        })),
       },
       {
         name: 'Liabilities',

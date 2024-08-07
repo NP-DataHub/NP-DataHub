@@ -25,13 +25,13 @@ const Nonprofit = () => {
   console.log(id)
   const [nonprofitData, setNonprofitData] = useState(null);
 
-  const [selectedMetric, setSelectedMetric] = useState('Total Revenue');
-  const [selectedComparison, setSelectedComparison] = useState({ variable1: 'Total Revenue', variable2: 'Total Expenses' });
+  const [selectedMetric, setSelectedMetric] = useState('TotRev');
+  const [selectedComparison, setSelectedComparison] = useState({ variable1: 'TotRev', variable2: 'TotExp' });
   const metricOptions = [
-    { value: 'Total Revenue', label: 'Revenue' },
-    { value: 'Total Expenses', label: 'Expenses' },
-    { value: 'Total Assets', label: 'Assets' },
-    { value: 'Total Liabilities', label: 'Liabilities' },
+    { value: 'TotRev', label: 'Revenue' },
+    { value: 'TotExp', label: 'Expenses' },
+    { value: 'TotAst', label: 'Assets' },
+    { value: 'TotLia', label: 'Liabilities' },
   ];
   const getValuesForMetric = (metric) => {
     return years.map(year => nonprofitData[year][metric]);
@@ -86,19 +86,19 @@ const Nonprofit = () => {
 
   if (mostRecentYear) {
     const yearData = nonprofitData[mostRecentYear];
-    cumulativeData.TotalRevenue = yearData['Total Revenue'] || 0;
-    cumulativeData.TotalExpenses = yearData['Total Expenses'] || 0;
-    cumulativeData.TotalAssets = yearData['Total Assets'] || 0;
-    cumulativeData.TotalLiabilities = yearData['Total Liabilities'] || 0;
+    cumulativeData.TotalRevenue = yearData['TotRev'] || 0;
+    cumulativeData.TotalExpenses = yearData['TotExp'] || 0;
+    cumulativeData.TotalAssets = yearData['TotAst'] || 0;
+    cumulativeData.TotalLiabilities = yearData['TotLia'] || 0;
     cumulativeData.FundraisingExpenses = yearData['Fundraising Expenses'] || 0;
   }
 
   if (previousYear) {
     const yearData = nonprofitData[previousYear];
-    previousYearData.TotalRevenue = yearData['Total Revenue'] || 0;
-    previousYearData.TotalExpenses = yearData['Total Expenses'] || 0;
-    previousYearData.TotalAssets = yearData['Total Assets'] || 0;
-    previousYearData.TotalLiabilities = yearData['Total Liabilities'] || 0;
+    previousYearData.TotalRevenue = yearData['TotRev'] || 0;
+    previousYearData.TotalExpenses = yearData['TotExp'] || 0;
+    previousYearData.TotalAssets = yearData['TotAst'] || 0;
+    previousYearData.TotalLiabilities = yearData['TotLia'] || 0;
     previousYearData.FundraisingExpenses = yearData['Fundraising Expenses'] || 0;
   }
 
@@ -171,10 +171,10 @@ const Nonprofit = () => {
       diffColor: 'border-2 border-[#6A1701] bg-[#171821]',
     },
   ];
-  const revenues = years.map(year => nonprofitData[year]['Total Revenue']);
-  const expenses = years.map(year => nonprofitData[year]['Total Expenses']);
-  const assets = years.map(year => nonprofitData[year]['Total Assets']);
-  const liabilities = years.map(year => nonprofitData[year]['Total Liabilities']);
+  const revenues = years.map(year => nonprofitData[year]['TotRev']);
+  const expenses = years.map(year => nonprofitData[year]['TotExp']);
+  const assets = years.map(year => nonprofitData[year]['TotAst']);
+  const liabilities = years.map(year => nonprofitData[year]['TotLia']);
 
   const settings = {
       dots: true,
@@ -217,7 +217,7 @@ const Nonprofit = () => {
               <div className="flex-col w-10/12 mx-auto dashboard-color ">
                   <DashboardNavbar />
                   <div className="flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
-                      <h1 className="text-2xl font-semibold">{capitalizeFirstLetter(nonprofitData.Name)}</h1>
+                      <h1 className="text-2xl font-semibold">{capitalizeFirstLetter(nonprofitData.Nm)}</h1>
                       <span className="text-sm text-[#A0A0A0]">123 Some Street</span>
                       <div className="mt-6 ">
                           <Slider {...settings}>
@@ -323,7 +323,7 @@ const Nonprofit = () => {
                               {/*add chart here box size will update with chart*/}
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Compared to Averages</h1>
                               <div className="flex items-center justify-center mb-24 mt-12">
-                                  <Gauge orgName={nonprofitData.name} orgVal={62} stateName={"New York Avg"} stateVal={100} nationalVal={48}/>
+                                  <Gauge orgName={nonprofitData.nm} orgVal={62} stateName={"New York Avg"} stateVal={100} nationalVal={48}/>
                               </div>
                           </div>
                       </div>

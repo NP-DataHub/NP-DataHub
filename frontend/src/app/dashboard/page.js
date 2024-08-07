@@ -67,8 +67,8 @@ export default function Dashboard() {
               mostRecentYear = years[years.length - 1];
               return {
                 ...item,
-                annualRevenue: mostRecentYear ? item[mostRecentYear]['Total Revenue'] : 'N/A',
-                annualExpenses: mostRecentYear ? item[mostRecentYear]['Total Expenses'] : 'N/A'
+                annualRevenue: mostRecentYear ? item[mostRecentYear]['TotRev'] : 'N/A',
+                annualExpenses: mostRecentYear ? item[mostRecentYear]['TotExp'] : 'N/A'
               };
             });
             setAllResults(processedData);
@@ -528,13 +528,13 @@ export default function Dashboard() {
                                                                     onClick={() => handleNonprofitClick(result._id)}
                                                                     className="text-[#A9DFD8] hover:underline font-semibold"
                                                                 >
-                                                                    {capitalizeFirstLetter(result.Name)}
+                                                                    {capitalizeFirstLetter(result.Nm)}
                                                                 </a>
                                                             </div>
                                                             <div>123 some street </div>
-                                                            <div>{capitalizeFirstLetter(result.City)}</div>
-                                                            <div>{result.State}</div>
-                                                            <div>{result.Zipcode}</div>
+                                                            <div>{capitalizeFirstLetter(result.Cty)}</div>
+                                                            <div>{result.St}</div>
+                                                            <div>{result.Zip}</div>
                                                             <div>{formatNumber(result.annualRevenue)}</div>
                                                             <div>{formatNumber(result.annualExpenses)}</div>
                                                         </div>
