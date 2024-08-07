@@ -89,6 +89,7 @@ const Nonprofit = () => {
 
   const years = Object.keys(nonprofitData).filter(year => !isNaN(year)).sort();
   const mostRecentYear = years[years.length - 1];
+  const minYear = years[0];
   const previousYear = years[years.length - 2];
 
   const sectorYears = Object.keys(sectorData).filter(year => !isNaN(year)).sort();
@@ -272,7 +273,7 @@ const Nonprofit = () => {
                             </div>
                           </div>
                           <div className="flex items-center justify-center mb-8" style={{ width: '100%', height: '100%' }}>
-                            <BarChart values={getValuesForMetric(selectedMetric)} minYear={previousYear}/>
+                            <BarChart values={getValuesForMetric(selectedMetric)} minYear={minYear}/>
                           </div>
                         </div>
 
@@ -307,7 +308,7 @@ const Nonprofit = () => {
                               variable2={selectedComparison.variable2} 
                               values1={getValuesForMetric(selectedComparison.variable1)} 
                               values2={getValuesForMetric(selectedComparison.variable2)} 
-                              minYear={previousYear}
+                              minYear={minYear}
                             />
                           </div>
                         </div>
@@ -317,7 +318,7 @@ const Nonprofit = () => {
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Overall Growth</h1>
                               
                               <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
-                                  <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities} minYear = {previousYear}/>
+                                  <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities} minYear = {minYear}/>
                               </div>
                           </div>
                       </div>
@@ -326,13 +327,13 @@ const Nonprofit = () => {
                               {/*add chart here box size will update with chart*/}
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue By State</h1>
                               <div className="flex items-center justify-center mb-24 mt-12" style={{ width: '100%', height: '100%' }}>
-                                  <TimeSeries values={revenues} minYear = {previousYear}/>
+                                  <TimeSeries values={revenues} minYear = {minYear}/>
                               </div>
 
                           </div>
                           <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                               {/*add chart here box size will update with chart*/}
-                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Compared to Averages</h1>
+                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Org Compared</h1>
                               <div className="flex items-center justify-center mb-24 mt-12">
                                   <Gauge orgName={capitalizeFirstLetter(nonprofitData.Nm)} orgVal={cumulativeData.TotalRevenue} stateName={nonprofitData.St} stateVal={sectorData[mostRecentSectorYear][nonprofitData.St].RevMed} nationalVal={sectorData[mostRecentSectorYear].NatMedRev}/>
                               </div>
