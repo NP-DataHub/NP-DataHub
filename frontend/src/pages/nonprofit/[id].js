@@ -334,7 +334,7 @@ const Nonprofit = () => {
                               {/*add chart here box size will update with chart*/}
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Compared to Averages</h1>
                               <div className="flex items-center justify-center mb-24 mt-12">
-                                  <Gauge orgName={nonprofitData.nm} orgVal={62} stateName={nonprofitData.St} stateVal={69} nationalVal={48}/>
+                                  <Gauge orgName={capitalizeFirstLetter(nonprofitData.Nm)} orgVal={cumulativeData.TotalRevenue} stateName={nonprofitData.St} stateVal={sectorData[mostRecentSectorYear][nonprofitData.St].RevMed} nationalVal={sectorData[mostRecentSectorYear].NatMedRev}/>
                               </div>
                           </div>
                       </div>

@@ -8,10 +8,24 @@ import ReactECharts from 'echarts-for-react';
  * @param values -   an array of values measured each year
 */
 const Gauge = ({orgName, orgVal, stateName, stateVal, nationalVal}) => {
+  
+    const formatNumber = (num) => {
+      if (num >= 1000000000) {
+        return (num / 1000000000).toFixed(1) + 'B';
+      }
+      if (num >= 1000000) {
+        return (num / 1000000).toFixed(1) + 'M';
+      }
+      if (num >= 1000) {
+        return (num / 1000).toFixed(1) + 'K';
+      }
+      return num;
+    };
+
     const gaugeData = [
         {
           value: orgVal,
-          name: "Your Org",
+          name: orgName,
           title: {
             offsetCenter: ['0%', '-30%'],
             color: '#666666',
@@ -23,7 +37,7 @@ const Gauge = ({orgName, orgVal, stateName, stateVal, nationalVal}) => {
         },
         {
           value: stateVal,
-          name: stateName,
+          name: stateName + " Median",
           title: {
             offsetCenter: ['0%', '0%'],
             color: '#666666',
@@ -35,7 +49,7 @@ const Gauge = ({orgName, orgVal, stateName, stateVal, nationalVal}) => {
         },
         {
           value: nationalVal,
-          name: 'National Avg',
+          name: 'National Median',
           title: {
             offsetCenter: ['0%', '30%'],
             color: '#666666',
@@ -120,7 +134,9 @@ const Gauge = ({orgName, orgVal, stateName, stateVal, nationalVal}) => {
                 height: dimensions.height,
                 fontSize: 0.036*dimensions.width,
                 color: 'inherit',
-                formatter: '{value}%'
+                formatter: function (value) {
+                  return `$${formatNumber(value)}`;
+                },
               }
             }
         ]
