@@ -90,7 +90,7 @@ const Nonprofit = () => {
     cumulativeData.TotalExpenses = yearData['TotExp'] || 0;
     cumulativeData.TotalAssets = yearData['TotAst'] || 0;
     cumulativeData.TotalLiabilities = yearData['TotLia'] || 0;
-    cumulativeData.FundraisingExpenses = yearData['Fundraising Expenses'] || 0;
+    cumulativeData.FundraisingExpenses = yearData['FunExp'] || 0;
   }
 
   if (previousYear) {
@@ -99,7 +99,7 @@ const Nonprofit = () => {
     previousYearData.TotalExpenses = yearData['TotExp'] || 0;
     previousYearData.TotalAssets = yearData['TotAst'] || 0;
     previousYearData.TotalLiabilities = yearData['TotLia'] || 0;
-    previousYearData.FundraisingExpenses = yearData['Fundraising Expenses'] || 0;
+    previousYearData.FundraisingExpenses = yearData['FunExp'] || 0;
   }
 
   const calculateDiff = (current, previous) => {
