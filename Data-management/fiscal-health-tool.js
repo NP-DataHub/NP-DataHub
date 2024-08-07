@@ -1,4 +1,6 @@
 const { MongoClient } = require('mongodb');
+require('dotenv').config({ path: '../frontend/.env' });
+
 /*
 Note: Multiple return values are negative
 All return paths of function main:
@@ -57,7 +59,7 @@ async function main(npVSnp, specific_sector = null) {
 }
 
 async function fetchData(Np, Addr, npVSnp, specific_sector = null) {
-  const Uri = 'mongodb+srv://developper:uSrWWscapoB0nIGm@data.fsgwq.mongodb.net/';
+  const Uri = process.env.MONGODB_URI;
   const client = new MongoClient(Uri);
   try {
     await client.connect();
