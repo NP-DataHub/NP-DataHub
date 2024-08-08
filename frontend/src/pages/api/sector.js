@@ -21,17 +21,17 @@ export default async function handler(req, res) {
         switch(method){
             case 'GET':
 
-                // This gotta be wrong
                 const {NTEE1, NTEE2, NTEE3, CITY, ZIP } = query;
-
-                const filters = {
-                    "Cty": CITY,
-                    "Zip": ZIP
-                }
+                const filters = {};
+                if (CITY) filters.Cty = CITY;
+                if (ZIP) filters.Zip = ZIP;
 
                 console.log("Filters:", filters);
 
-                const data = await database.collection("NonProfitData").find({NTEE: {$in: [NTEE1, NTEE2, NTEE3]}, filters}).toArray();
+                const data = await database.collection("NonProfitData").find({
+                    NTEE: { $in: [NTEE1, NTEE2, NTEE3] },
+                    ...filters
+                }).toArray();
 
                 console.log("Items found:", data.length);
 

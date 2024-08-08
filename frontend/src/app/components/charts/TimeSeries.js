@@ -49,7 +49,7 @@ const TimeSeries = ({values, minYear}) => {
   const fitted_line = regression.linear(data);
 
   // print the regression line
-  console.log(fitted_line);
+  //console.log(fitted_line);
 
 
   // extend the data to include the predicted values
@@ -58,9 +58,9 @@ const TimeSeries = ({values, minYear}) => {
   const predictedData = extendedData.slice(extendedData.length);
 
   // debug
-  console.log(extendedData);
-  console.log(FittedData);
-  console.log(predictedData);
+  //console.log(extendedData);
+  //console.log(FittedData);
+  //console.log(predictedData);
 
   const option = {
     legend: {
@@ -188,7 +188,7 @@ const TimeSeries = ({values, minYear}) => {
       }
     }
   };
-  console.log(option)
+  //console.log(option)
 
   return (
     <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>

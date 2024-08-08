@@ -5,13 +5,14 @@ import BarChart from "@/app/components/charts/BarChart";
 import LineCompareChart from "@/app/components/charts/LineCompareChart";
 import TimeSeries from "@/app/components/charts/TimeSeries";
 import StackChart from "@/app/components/charts/StackChart";
+import ScatterPlot from "@/app/components/charts/ScatterPlot";
 import Gauge from "@/app/components/charts/Gauge";
 import Choropleth from "@/app/components/charts/Choropleth";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import '@/app/globals.css';
 import { AuthProvider } from "@/app/components/context";
 import Select from 'react-select';
@@ -25,6 +26,7 @@ const Nonprofit = () => {
   console.log(id)
   const [nonprofitData, setNonprofitData] = useState(null);
   const [sectorData, setSectorData] = useState(null);
+  const [filtered_sector_data, setfiltered_sector_data] = useState(null);
 
   const [selectedMetric, setSelectedMetric] = useState('TotRev');
   const [selectedComparison, setSelectedComparison] = useState({ variable1: 'TotRev', variable2: 'TotExp' });
@@ -57,6 +59,34 @@ const Nonprofit = () => {
       fetchNonprofitData();
     }
   }, [id]);
+
+
+
+/**
+ * 
+ * This is testing for the sector.js data fetcher. Eventually, we want the queries in here to be live updated based on the filters the users selects.
+ * Also, this belongs on the sector page, not the single non profit page.
+ * 
+ */
+  useEffect(() => {
+    // Fetch the sector data based on the filters
+    const fetchSectorData = async () => {
+      const NTEE1 = 'Z';
+      const NTEE2 = 'A';
+      const ZIP = '95060';
+      let response = await fetch(`/api/sector?NTEE1=${NTEE1}&NTEE2=${NTEE2}&ZIP=${ZIP}`);
+      let filtered_sector_data = await response.json();
+
+      console.log("Sector Data fetch results:");
+      console.log(response);
+      console.log(filtered_sector_data); // probably cooked beyond repair...
+
+      setfiltered_sector_data(filtered_sector_data.data);
+    }
+
+    fetchSectorData();
+  }, []);
+
 
   const LoadingComponent = () => (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -273,7 +303,7 @@ const Nonprofit = () => {
                             </div>
                           </div>
                           <div className="flex items-center justify-center mb-8" style={{ width: '100%', height: '100%' }}>
-                            <BarChart values={getValuesForMetric(selectedMetric)} minYear={minYear}/>
+                            <ScatterPlot data = {filtered_sector_data} filters = {["A", "Z", "95060"]} minYear = {previousYear}/>
                           </div>
                         </div>
 
