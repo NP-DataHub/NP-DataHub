@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import regression from 'regression';
+import { split } from 'postcss/lib/list';
 /**
  * @param values -   an array of values measured each year
 */
@@ -50,16 +51,36 @@ const TimeSeries = ({values, minYear}) => {
   // print the regression line
   console.log(fitted_line);
 
+
+  // extend the data to include the predicted values
+  const extendedData = Array.from({ length: values.length + 2 }, (_, index) => [index, fitted_line.predict(index)[1]]);
+  const FittedData = extendedData.slice(0, values.length);
+  const predictedData = extendedData.slice(extendedData.length);
+
+  // debug
+  console.log(extendedData);
+  console.log(FittedData);
+  console.log(predictedData);
+
   const option = {
     legend: {
-      data: ['Data', 'Predicted']
+      data: ['Data', 'Trend Line'],
+      textStyle: {
+        color: 'white'
+      }
     },
     dataset: [
       {
+        // Real data
         source: data
       },
       {
-        source: Array.from({ length: values.length }, (_, index) => [index, fitted_line.predict(index)[1]])
+        // fitted data - for the dashed regression line
+        source: FittedData
+      },
+      {
+        // predicted data
+        source: extendedData
       }
     ],
     tooltip: {
@@ -67,10 +88,20 @@ const TimeSeries = ({values, minYear}) => {
       axisPointer: {
         type: 'none'
       },
+      trigger: 'axis',
       formatter: function (params) {
-        const tooltipContent = params.map(item => {
-          return `${item.name}: $${formatNumber(item.value)}`;
-        }).join('<br/>');
+        let tooltipContent = `<div>${params[0].name}<br/>`;
+        params.forEach(item => {
+          tooltipContent += `
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span>
+                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:${item.color};margin-right:5px;"></span>
+                ${item.seriesName}: 
+              </span>
+              <span style="text-align: right;">&nbsp;$${formatNumber(item.value)}</span>
+            </div>`;
+        });
+        tooltipContent += `</div>`;
         return tooltipContent;
       }
     },
@@ -83,14 +114,14 @@ const TimeSeries = ({values, minYear}) => {
     },
     xAxis: [
       {
-        name: 'Year',
+        //name: 'Year',
         nameLocation: 'middle',
         nameTextStyle: {
           fontWeight: 'bold',
           fontSize: Math.round(0.036 * dimensions.width),
         },
         type: 'category',
-        data: Array.from({ length: values.length }, (_, index) => index + parseInt(minYear)),
+        data: Array.from({ length: values.length + 2 }, (_, index) => index + parseInt(minYear)),
         axisTick: {
           alignWithLabel: true
         },
@@ -106,7 +137,11 @@ const TimeSeries = ({values, minYear}) => {
             return '$' + formatNumber(value);
           },
           fontSize: Math.round(0.015 * dimensions.width)
+        },
+        splitLine: {
+          show: false
         }
+
       }
     ],
     series: [
@@ -114,18 +149,32 @@ const TimeSeries = ({values, minYear}) => {
         name: 'Data',
         type: 'line',
         datasetIndex: 0,
+        symbol: 'circle',
+        itemStyle: {
+          color: '#0770FF'
+        },
+
       },
       {
-        name: 'Predicted',
+        name: 'Trend Line',
         type: 'line',
-        datasetIndex: 1,
-        symbol: 'none',
+        datasetIndex: 2,
         color: 'red', // Set the color of the regression line here
-        smooth: true,
         lineStyle: {
-          width: 2 // Adjust the width of the regression line if needed
+          type: 'dashed'
+        },
+        symbol: 'circle',
+        itemStyle: {
+          color: 'red'
         }
-      }
+      },
+      // {
+      //   name: 'Predicted',
+      //   type: 'line',
+      //   datasetIndex: 2,
+      //   symbol: 'none',
+      //   color: 'red'
+      // }
     ],
     graphic: {
       type: 'text',
