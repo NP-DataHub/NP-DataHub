@@ -1,0 +1,654 @@
+1. Overall dollar difference between revenues and expenses for a single nonprofit or foundation (year over year)
+(if you can the dash after the year to a dot it will create a drop down menu per year)
+
+[
+    {
+        '$project': {
+            'Name': 1, 
+            'EIN': 1, 
+            '2019-Revenue-vs-Expenses': {
+                '$subtract': [
+                    '$2019.Total Revenue', 
+                    '$2019.Total Expenses'
+                ]
+            }, 
+            '2018-Revenue-vs-Expenses': {
+                '$subtract': [
+                    '$2018.Total Revenue', 
+                    '$2018.Total Expenses'
+                ]
+            }, 
+            '2017-Revenue-vs-Expenses': {
+                '$subtract': [
+                    '$2017.Total Revenue',
+                    '$2017.Total Expenses'
+                ]
+            }
+        }
+    }
+]
+
+2. Overall dollar difference between assets and liabilities for a single nonprofit or foundation (year over year)
+(if you can the dash after the year to a dot it will create a drop down menu per year)
+
+[
+  {
+    "$project": {
+      "Name": 1,
+      "_id": 0,
+      "2019-Asset-vs-Liability": {
+        "$subtract": [
+          "$2019.Total Assets",
+          "$2019.Total Liabilities"
+        ]
+      },
+      "2018-Asset-vs-Liability": {
+        "$subtract": [
+          "$2018.Total Assets",
+          "$2018.Total Liabilities"
+        ]
+      },
+      "2017-Asset-vs-Liability": {
+        "$subtract": [
+          "$2017.Total Assets",
+          "$2017.Total Liabilities"
+        ]
+      }
+    }
+  }
+]
+
+3. Overall percentage difference between revenues and expenses for a single nonprofit or foundation (year over year)
+(this one is more of the right idea but examples seem to have a lot of nulls, need to be fixed)
+
+[
+  {
+    "$project": {
+      "name": "$Name",
+      "expensesRevenueDiff": {
+        "2016": {
+          "$subtract": ["$2016.Total Revenue", "$2016.Total Expenses"]
+        },
+        "2017": {
+          "$subtract": ["$2017.Total Revenue", "$2017.Total Expenses"]
+        },
+        "2018": {
+          "$subtract": ["$2018.Total Revenue", "$2018.Total Expenses"]
+        },
+        "2019": {
+          "$subtract": ["$2019.Total Revenue", "$2019.Total Expenses"]
+        }
+      }
+    }
+  },
+  {
+    "$project": {
+      "name": 1,
+      "expenseRevenueDiff2016": "$expensesRevenueDiff.2016",
+      "diff2017_2016": {
+        "$subtract": ["$expensesRevenueDiff.2017", "$expensesRevenueDiff.2016"]
+      },
+      "diff2018_2017": {
+        "$subtract": ["$expensesRevenueDiff.2018", "$expensesRevenueDiff.2017"]
+      },
+      "diff2019_2018": {
+        "$subtract": ["$expensesRevenueDiff.2019", "$expensesRevenueDiff.2018"]
+      }
+    }
+  },
+  {
+    "$project": {
+      "name": 1,
+      "increasePerc2017-2016": {
+        "$multiply": [
+          {
+            "$divide": ["$diff2017_2016", "$expenseRevenueDiff2016"]
+          },
+          100
+        ]
+      },
+      "increasePerc2018-2017": {
+        "$multiply": [
+          {
+            "$divide": ["$diff2018_2017", "$expensesRevenueDiff.2017"]
+          },
+          100
+        ]
+      },
+      "increasePerc2019-2018": {
+        "$multiply": [
+          {
+            "$divide": ["$diff2019_2018", "$expensesRevenueDiff.2018"]
+          },
+          100
+        ]
+      }
+    }
+  }
+]
+
+4. Overall percentage difference between assets and liabilities for a single nonprofit or foundation (year over year)
+(this one is more of the right idea but examples seem to have a lot of nulls, need to be fixed)
+
+
+[
+  {
+    "$addFields": {
+      "2016.Difference": { "$subtract": ["$2016.Total Assets", "$2016.Total Liabilities"] },
+      "2017.Difference": { "$subtract": ["$2017.Total Assets", "$2017.Total Liabilities"] },
+      "2018.Difference": { "$subtract": ["$2018.Total Assets", "$2018.Total Liabilities"] },
+      "2019.Difference": { "$subtract": ["$2019.Total Assets", "$2019.Total Liabilities"] }
+    }
+  },
+  {
+    "$project": {
+      "Name": 1,
+      "Increase_2016-2017": {
+        "$cond": {
+          "if": { "$eq": ["$2016.Difference", 0] },
+          "then": 0,
+          "else": { "$multiply": [{ "$divide": [{ "$subtract": ["$2017.Difference", "$2016.Difference"] }, "$2016.Difference"] }, 100] }
+        }
+      },
+      "Increase_2017-2018": {
+        "$cond": {
+          "if": { "$eq": ["$2017.Difference", 0] },
+          "then": 0,
+          "else": { "$multiply": [{ "$divide": [{ "$subtract": ["$2018.Difference", "$2017.Difference"] }, "$2017.Difference"] }, 100] }
+        }
+      },
+      "Increase_2018-2019": {
+        "$cond": {
+          "if": { "$eq": ["$2018.Difference", 0] },
+          "then": 0,
+          "else": { "$multiply": [{ "$divide": [{ "$subtract": ["$2019.Difference", "$2018.Difference"] }, "$2017.Difference"] }, 100] }
+        }
+      }
+    }
+  }
+]
+
+5. Overall dollar difference between revenues and expenses for a single nonprofit or foundation (from five years ago)
+
+[
+    {
+        '$project': {
+            'Name': 1, 
+            'EIN': 1, 
+            'Rev-vs-Exp-fiveYearsAgo': {
+                '$subtract': [
+                    '$2019.Total Revenue', 
+                    '$2019.Total Expenses'
+                ]
+            }
+        }
+    }
+]
+
+6. Overall dollar difference between assets and liabilities for a single nonprofit or foundation (from five years ago)
+
+[
+  {
+    "$project": {
+      "Name": 1,
+      "_id": 0,
+      "Asset-vs-Liab-fiveYearsAgo": {
+        "$subtract": [
+          "$2019.Total Assets",
+          "$2019.Total Liabilities"
+        ]
+      }
+    }
+  }
+]
+
+7. Overall percentage difference between revenues and expenses for a single nonprofit or foundation (from five years ago)
+
+{
+  Name: 1,
+  "2019_Total_Revenue": "$2019.Total Revenue",
+  "2019_Total_Expenses": "$2019.Total Expenses",
+  Percentage_Difference: {
+    $cond: {
+      if: {
+        $eq: ["$2019.Total Expenses", 0]
+      },
+      then: 0,
+      else: {
+        $multiply: [
+          {
+            $divide: [
+              {
+                $subtract: [
+                  "$2019.Total Revenue",
+                  "$2019.Total Expenses"
+                ]
+              },
+              "$2019.Total Expenses"
+            ]
+          },
+          100
+        ]
+      }
+    }
+  }
+}
+
+8. Overall percentage difference between assets and liabilities for a single nonprofit or foundation (from five years ago)
+
+{
+  Name: 1,
+  TotalAssets2019: "$2019.Total Assets",
+  TotalLiabilities2019: "$2019.Total Liabilities",
+  PercentageDifference2019: {
+    $cond: [
+      {
+        $eq: ["$2019.Total Liabilities", 0]
+      },
+      null,
+      {
+        $multiply: [
+          {
+            $divide: [
+              {
+                $subtract: [
+                  "$2019.Total Assets",
+                  "$2019.Total Liabilities"
+                ]
+              },
+              "$2019.Total Liabilities"
+            ]
+          },
+          100
+        ]
+      }
+    ]
+  }
+}
+
+9. (Revenue) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+[
+  {
+    $group: {
+      _id: {
+        ntee: "$NTEE",
+        state: "$State"
+      },
+      avgRevenue2017: {
+        $avg: "$2017.Total Revenue"
+      },
+      avgRevenue2018: {
+        $avg: "$2018.Total Revenue"
+      },
+      avgRevenue2019: {
+        $avg: "$2019.Total Revenue"
+      }
+    }
+  }
+]
+
+10. (Expenses) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+[
+  {
+    $group: {
+      _id: {
+      ntee: "$NTEE",
+      state: "$State"
+      },
+      avgExpenses2017: {
+        $avg: "$2017.Total Expenses"
+      },
+      avgExpenses2018: {
+        $avg: "$2018.Total Expenses"
+      },
+      avgExpenses2019: {
+        $avg: "$2019.Total Expenses"
+      }
+    }
+  }
+]
+
+11. (Assets) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+[
+  {
+    $group: {
+      _id: {
+        ntee: "$NTEE",
+        state: "$State"
+      },
+      avgAssets2017: {
+        $avg: "$2017.Total Assets"
+      },
+      avgAssets2018: {
+        $avg: "$2018.Total Assets"
+      },
+      avgAssets2019: {
+        $avg: "$2019.Total Assets"
+      }
+    }
+  }
+]
+
+12. (Liabilities) Overall average of a state-based nonprofit within the same NTEE sector (year over year)
+
+[
+  {
+    $group: {
+      _id: {
+        ntee: "$NTEE",
+        state: "$State"
+      },
+      avgLiabilities2017: {
+        $avg: "$2017.Total Liabilities"
+      },
+      avgLiabilities2018: {
+        $avg: "$2018.Total Liabilities"
+      },
+      avgLiabilities2019: {
+        $avg: "$2019.Total Liabilities"
+      }
+    }
+  }
+]
+
+13. (Revenue) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+{
+  _id:{
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  medRev2017:{
+    $median:{
+      input: "$2017.Total Revenue",
+      method: 'approximate'
+    }
+  },
+  medRev2018: {
+    $median:{
+      input: "$2018.Total Revenue",
+      method: 'approximate'
+    }
+  },
+  medRev2019:{
+    $median:{
+      input: "$2019.Total Revenue",
+      method: 'approximate'
+    }
+  }
+}
+
+14. (Expenses) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+{
+  _id:{
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  medExp2017:{
+    $median:{
+      input: "$2017.Total Expenses",
+      method: 'approximate'
+    }
+  },
+  medExp2018: {
+    $median:{
+      input: "$2018.Total Expenses",
+      method: 'approximate'
+    }
+  },
+  medExp2019:{
+    $median:{
+      input: "$2019.Total Expenses",
+      method: 'approximate'
+    }
+  }
+}
+
+15. (Assets) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+{
+  _id:{
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  medAss2017:{
+    $median:{
+      input: "$2017.Total Assets",
+      method: 'approximate'
+    }
+  },
+  medAss2018: {
+    $median:{
+      input: "$2018.Total Assets",
+      method: 'approximate'
+    }
+  },
+  medAss2019:{
+    $median:{
+      input: "$2019.Total Assets",
+      method: 'approximate'
+    }
+  }
+}
+
+16. (Liabilities) Overall median of a state-based nonprofit within the same NTEE sector (year over year)
+
+{
+  _id:{
+    ntee: "$NTEE",
+    state: "$State"
+  },
+  medLiab2017:{
+    $median:{
+      input: "$2017.Total Liabilities",
+      method: 'approximate'
+    }
+  },
+  medLiab2018: {
+    $median:{
+      input: "$2018.Total Liabilities",
+      method: 'approximate'
+    }
+  },
+  medLiab2019:{
+    $median:{
+      input: "$2019.Total Liabilities",
+      method: 'approximate'
+    }
+  }
+}
+
+17. (Revenue) Overall average of each NTEE sector nationally (year over year)
+
+[
+  {
+    $group:{
+      _id: {
+        ntee: "$NTEE"
+      },
+      avgRevenue2017: {
+        $avg: "$2017.Total Revenue"
+      },
+      avgRevenue2018: {
+        $avg: "$2018.Total Revenue"
+      },
+      avgRevenue2019: {
+        $avg: "$2019.Total Revenue"
+      }
+    }
+  }
+]
+
+18. (Expenses) Overall average of each NTEE sector nationally (year over year)
+
+[
+  {
+    $group:{
+      _id: {
+        ntee: "$NTEE"
+      },
+      avgExpenses2017: {
+        $avg: "$2017.Total Expenses"
+      },
+      avgExpenses2018: {
+        $avg: "$2018.Total Expenses"
+      },
+      avgExpenses2019: {
+        $avg: "$2019.Total Expenses"
+      }
+    }
+  }
+]
+
+19. (Assets) Overall average of each NTEE sector nationally (year over year)
+
+
+]
+  {
+    $group:{
+      _id: {
+        ntee: "$NTEE"
+      },
+      avgAssets2017: {
+        $avg: "$2017.Total Assets"
+      },
+      avgAssets2018: {
+        $avg: "$2018.Total Assets"
+      },
+      avgAssets2019: {
+        $avg: "$2019.Total Assets"
+      }
+    }
+  }
+]
+
+20. (Liabilities) Overall average of each NTEE sector nationally (year over year)
+
+
+[
+  {
+    $group:{
+      _id: {
+        ntee: "$NTEE"
+      },
+      avgLiabilities2017: {
+        $avg: "$2017.Total Liabilities"
+      },
+      avgLiabilities2018: {
+        $avg: "$2018.Total Liabilities"
+      },
+      avgLiabilities2019: {
+        $avg: "$2019.Total Liabilities"
+      }
+    }
+  }
+]
+
+21. (Revenue) Overall median of each NTEE sector nationally (year over year)
+
+{
+  _id:{
+    ntee: "$NTEE"
+  },
+  medRev2017:{
+    $median:{
+      input: "$2017.Total Revenue",
+      method: 'approximate'
+    }
+  },
+  medRev2018: {
+    $median:{
+      input: "$2018.Total Revenue",
+      method: 'approximate'
+    }
+  },
+  medRev2019:{
+    $median:{
+      input: "$2019.Total Revenue",
+      method: 'approximate'
+    }
+  }
+}
+
+
+22. (Expenses) Overall median of each NTEE sector nationally (year over year)
+
+{
+  _id:{
+    ntee: "$NTEE"
+  },
+  medExp2017:{
+    $median:{
+      input: "$2017.Total Expenses",
+      method: 'approximate'
+    }
+  },
+  medExp2018: {
+    $median:{
+      input: "$2018.Total Expenses",
+      method: 'approximate'
+    }
+  },
+  medExp2019:{
+    $median:{
+      input: "$2019.Total Expenses",
+      method: 'approximate'
+    }
+  }
+}
+
+23. (Assets) Overall median of each NTEE sector nationally (year over year)
+
+{
+  _id:{
+    ntee: "$NTEE"
+  },
+  medAss2017:{
+    $median:{
+      input: "$2017.Total Assets",
+      method: 'approximate'
+    }
+  },
+  medAss2018: {
+    $median:{
+      input: "$2018.Total Assets",
+      method: 'approximate'
+    }
+  },
+  medAss2019:{
+    $median:{
+      input: "$2019.Total Assets",
+      method: 'approximate'
+    }
+  }
+}
+
+24. (Liabilities) Overall median of each NTEE sector nationally (year over year)
+
+{
+  _id:{
+    ntee: "$NTEE"
+  },
+  medLiab2017:{
+    $median:{
+      input: "$2017.Total Liabilities",
+      method: 'approximate'
+    }
+  },
+  medLiab2018: {
+    $median:{
+      input: "$2018.Total Liabilities",
+      method: 'approximate'
+    }
+  },
+  medLiab2019:{
+    $median:{
+      input: "$2019.Total Liabilities",
+      method: 'approximate'
+    }
+  }
+}
