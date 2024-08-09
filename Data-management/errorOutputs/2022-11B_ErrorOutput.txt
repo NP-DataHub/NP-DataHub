@@ -1,0 +1,85 @@
+Previous filepath: /tmp/2022-11B/202223229349300622_public.xml and timestamp: None
+Current filepath: /tmp/2022-11B/202213409349300121_public.xml and timestamp: None
+Total Revenue: previous is 4679173 and current is: 4679312
+Total Assets: previous is 2009671 and current is: 2009673
+Total Expenses: previous is 4671655 and current is: 4687586
+Total Contributions: previous is 4669105 and current is: 4669104
+Program Service Revenue: previous is 10068 and current is: 10208
+Gross Receipts: previous is 4679173 and current is: 4679312
+Name: previous is CENTRAL COAST COMMISSION FOR SENIOR CITIZERNS and current is: CENTRAL COAST COMMISSION FOR SENIOR CITIZENS
+==================================================
+Previous filepath: /tmp/2022-11B/202213259349200956_public.xml and timestamp: None
+Current filepath: /tmp/2022-11B/202233009349200343_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11B/202213399349200531_public.xml and timestamp: None
+Current filepath: /tmp/2022-11B/202223359349200507_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11B/202223089349200642_public.xml and timestamp: None
+Current filepath: /tmp/2022-11B/202223069349201312_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11B/202223139349201127_public.xml and timestamp: 2022-11-09 13:25:04-07:00
+Current filepath: /tmp/2022-11B/202222989349201657_public.xml and timestamp: None
+Total Revenue: previous is 13974 and current is: 22206
+Total Assets: previous is 35272 and current is: 67891
+Total Expenses: previous is 9069 and current is: 20828
+City: previous is Lake Forest Park and current is: LK FOREST PK
+Address: previous is 3549 NE 182nd Street and current is: 3549 NE 182ND ST
+==================================================
+Previous filepath: /tmp/2022-11B/202223179349200427_public.xml and timestamp: None
+Current filepath: /tmp/2022-11B/202223189349202287_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11B/202213219349300036_public.xml and timestamp: 2022-11-17 13:45:12-05:00
+Current filepath: /tmp/2022-11B/202223219349300717_public.xml and timestamp: 2022-11-17 13:45:12-05:00
+Total Revenue: previous is 601307 and current is: 2677302
+Total Assets: previous is 2424511 and current is: 2225846
+Total Liabilities: previous is 52293 and current is: 155762
+Total Expenses: previous is 299173 and current is: 1103574
+Total Contributions: previous is 240532 and current is: 1944936
+Gross Receipts: previous is 757112 and current is: 3363589
+Fundraising Income: previous is 0 and current is: 92549
+Fundraising Expenses: previous is 0 and current is: 183494
+==================================================
+Previous filepath: /tmp/2022-11B/202223199349200937_public.xml and timestamp: None
+Current filepath: /tmp/2022-11B/202223199349205002_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 360081 and current is: 350984
+==================================================
+Previous filepath: /tmp/2022-11B/202233049349301263_public.xml and timestamp: 2022-10-31 11:33:31-04:00
+Current filepath: /tmp/2022-11B/202223049349300742_public.xml and timestamp: 2022-10-31 11:33:31-04:00
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11B/202213469349200416_public.xml and timestamp: None
+Current filepath: /tmp/2022-11B/202223269349201017_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11B/202222999349201632_public.xml and timestamp: None
+Current filepath: /tmp/2022-11B/202233069349200813_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11B/202233149349203223_public.xml and timestamp: 2022-11-10 16:27:21-05:00
+Current filepath: /tmp/2022-11B/202223149349203222_public.xml and timestamp: 2022-11-10 16:27:21-05:00
+Total Revenue: previous is 2472 and current is: 53880
+Total Assets: previous is 0 and current is: 29991
+Total Expenses: previous is 32463 and current is: 45821
+==================================================
+Previous filepath: /tmp/2022-11B/202223169349200707_public.xml and timestamp: 2022-11-11 20:19:22-07:00
+Current filepath: /tmp/2022-11B/202222879349200842_public.xml and timestamp: None
+Total Revenue: previous is 35084 and current is: 33159
+Total Assets: previous is 33673 and current is: 21802
+Total Expenses: previous is 23214 and current is: 18233
+Program Service Revenue: previous is 1105 and current is: 0
+Address: previous is 34 West 37th Street and current is: 34 WEST 37TH ST 2R
+==================================================
+Previous filepath: /tmp/2022-11B/202223429349300237_public.xml and timestamp: None
+Current filepath: /tmp/2022-11B/202233129349302438_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11B/202223209349201807_public.xml and timestamp: None
+Current filepath: /tmp/2022-11B/202223199349209457_public.xml and timestamp: None
+Total Assets: previous is 240049 and current is: 80007
+Total Liabilities: previous is 38279 and current is: 0
+Total Expenses: previous is 43283 and current is: 29646
+==================================================

@@ -1,0 +1,4 @@
+Previous filepath: /tmp/2019-6/201933109349201118_public.xml and timestamp: None
+Current filepath: /tmp/2019-6/201932609349200718_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 228834 and current is: 109651
+==================================================

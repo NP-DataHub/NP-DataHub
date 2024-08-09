@@ -1,0 +1,49 @@
+Previous filepath: /tmp/2022-11A/202213119349201626_public.xml and timestamp: None
+Current filepath: /tmp/2022-11A/202213129349201416_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11A/202203059349201665_public.xml and timestamp: None
+Current filepath: /tmp/2022-11A/202203189349209360_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11A/202213189349314401_public.xml and timestamp: 2022-11-14 15:21:05-06:00
+Current filepath: /tmp/2022-11A/202213189349314126_public.xml and timestamp: 2022-11-14 15:21:05-06:00
+Total Revenue: previous is 0 and current is: 66000
+Total Assets: previous is 0 and current is: 6515
+Total Liabilities: previous is 0 and current is: 6515
+Total Expenses: previous is 0 and current is: 117217
+Total Contributions: previous is 0 and current is: 66000
+Gross Receipts: previous is 0 and current is: 66000
+==================================================
+Previous filepath: /tmp/2022-11A/202213139349200201_public.xml and timestamp: None
+Current filepath: /tmp/2022-11A/202203129349202490_public.xml and timestamp: None
+Total Revenue: previous is 69452 and current is: 0
+Total Assets: previous is 97689 and current is: 0
+Total Expenses: previous is 35502 and current is: 0
+Program Service Revenue: previous is 22296 and current is: 0
+City: previous is Anchorage and current is: ANCHORAGE
+==================================================
+Previous filepath: /tmp/2022-11A/202203199349200045_public.xml and timestamp: None
+Current filepath: /tmp/2022-11A/202203189349200525_public.xml and timestamp: 2022-11-14 08:12:33-05:00
+Gift Grants Membership Fees received 509: previous is 298200 and current is: 156160
+City: previous is BOZEMAN and current is: Bozeman
+Zip Code: previous is 59715 and current is: 597153614
+Address: previous is 19 E LAMME ST and current is: 19 E Lamme St
+==================================================
+Previous filepath: /tmp/2022-11A/202213189349207146_public.xml and timestamp: None
+Current filepath: /tmp/2022-11A/202203139349202120_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11A/202213139349200201_public.xml and timestamp: None
+Current filepath: /tmp/2022-11A/202203139349200700_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2022-11A/202213159349202771_public.xml and timestamp: None
+Current filepath: /tmp/2022-11A/202203189349202460_public.xml and timestamp: None
+Total Assets: previous is 73755 and current is: 82189
+Total Expenses: previous is 24501 and current is: 16067
+==================================================
+Previous filepath: /tmp/2022-11A/202203209349200100_public.xml and timestamp: None
+Current filepath: /tmp/2022-11A/202203229349201225_public.xml and timestamp: None
+No difference found
+==================================================
