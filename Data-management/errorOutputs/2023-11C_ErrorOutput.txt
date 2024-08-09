@@ -1,0 +1,26 @@
+Previous filepath: /tmp/2023-11C/202343149349203239_public.xml and timestamp: None
+Current filepath: /tmp/2023-11C/202343169349200659_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-11C/202333269349200403_public.xml and timestamp: None
+Current filepath: /tmp/2023-11C/202343249349200504_public.xml and timestamp: None
+Name: previous is HEARTBEAT FOUNDATION CORP and current is: HEARTBEAT FOUNDATION CORP THE
+City: previous is Oakland Park and current is: OAKLAND PARK
+Address: previous is 5079 Dixie Hwy 281Number 281 and current is: 5079 NORTH FEDERAL HWY281
+==================================================
+Previous filepath: /tmp/2023-11C/202343189349317039_public.xml and timestamp: None
+Current filepath: /tmp/2023-11C/202343189349303509_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-11C/202343209349202034_public.xml and timestamp: None
+Current filepath: /tmp/2023-11C/202333219349200228_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-11C/202343199349207504_public.xml and timestamp: None
+Current filepath: /tmp/2023-11C/202343209349201419_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-11C/202343199349203259_public.xml and timestamp: None
+Current filepath: /tmp/2023-11C/202333169349200203_public.xml and timestamp: None
+No difference found
+==================================================

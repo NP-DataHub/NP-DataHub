@@ -1,0 +1,654 @@
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2019v5.1">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2020-10-15T13:58:46-05:00</ReturnTs>
+    <TaxPeriodEndDt>2019-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>232415973</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>HERBEIN COMPANY INC</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>2763 CENTURY BOULEVARD</AddressLine1Txt>
+        <CityNm>READING</CityNm>
+        <StateAbbreviationCd>PA</StateAbbreviationCd>
+        <ZIPCd>19610</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990PF</ReturnTypeCd>
+    <TaxPeriodBeginDt>2019-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>232973157</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>CHRISTIAN HERITAGE FOUNDATION</BusinessNameLine1Txt>
+        <BusinessNameLine2Txt>ATTN MICHAEL A KULP</BusinessNameLine2Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>CHRI</BusinessNameControlTxt>
+      <PhoneNum>6107974530</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>300 EAST ROCK ROAD</AddressLine1Txt>
+        <CityNm>ALLENTOWN</CityNm>
+        <StateAbbreviationCd>PA</StateAbbreviationCd>
+        <ZIPCd>18103</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>MICHAEL A KULP</PersonNm>
+      <PersonTitleTxt>TREASURER</PersonTitleTxt>
+      <PhoneNum>6107974530</PhoneNum>
+      <SignatureDt>2020-10-13</SignatureDt>
+      <DiscussWithPaidPreparerInd>1</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>JAMES H NEHR CPA</PreparerPersonNm>
+      <PTIN>P00647461</PTIN>
+      <PhoneNum>6103781175</PhoneNum>
+      <PreparationDt>2020-10-13</PreparationDt>
+    </PreparerPersonGrp>
+    <FilingSecurityInformation>
+      <IPAddress>
+        <IPv4AddressTxt>174.198.214.167</IPv4AddressTxt>
+      </IPAddress>
+      <IPDt>2020-10-13</IPDt>
+      <IPTm>19:36:07</IPTm>
+      <IPTimezoneCd>ED</IPTimezoneCd>
+      <FilingLicenseTypeCd>P</FilingLicenseTypeCd>
+      <AtSubmissionCreationDeviceId>DA39A3EE5E6B4B0D3255BFEF95601890AFD80709</AtSubmissionCreationDeviceId>
+      <AtSubmissionFilingDeviceId>8A28991F3C90438862704B043D5B090BDB53CE3B</AtSubmissionFilingDeviceId>
+    </FilingSecurityInformation>
+    <TaxYr>20192</TaxYr>
+    <BuildTS>2021-04-22 16:20:28Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="6">
+    <IRS990PF documentId="RetDoc1235000001">
+      <Organization501c3ExemptPFInd>X</Organization501c3ExemptPFInd>
+      <FMVAssetsEOYAmt>2476616</FMVAssetsEOYAmt>
+      <MethodOfAccountingCashInd>X</MethodOfAccountingCashInd>
+      <AnalysisOfRevenueAndExpenses>
+        <ScheduleBNotRequiredInd>X</ScheduleBNotRequiredInd>
+        <InterestOnSavRevAndExpnssAmt>41460</InterestOnSavRevAndExpnssAmt>
+        <InterestOnSavNetInvstIncmAmt>41460</InterestOnSavNetInvstIncmAmt>
+        <DividendsRevAndExpnssAmt>4118</DividendsRevAndExpnssAmt>
+        <DividendsNetInvstIncmAmt>4118</DividendsNetInvstIncmAmt>
+        <NetGainSaleAstRevAndExpnssAmt>0</NetGainSaleAstRevAndExpnssAmt>
+        <GrossSalesPriceAmt>615000</GrossSalesPriceAmt>
+        <CapGainNetIncmNetInvstIncmAmt>0</CapGainNetIncmNetInvstIncmAmt>
+        <OtherIncomeRevAndExpnssAmt referenceDocumentId="RetDoc2001500001">18986</OtherIncomeRevAndExpnssAmt>
+        <OtherIncomeNetInvstIncmAmt>18986</OtherIncomeNetInvstIncmAmt>
+        <TotalRevAndExpnssAmt>64564</TotalRevAndExpnssAmt>
+        <TotalNetInvstIncmAmt>64564</TotalNetInvstIncmAmt>
+        <CompOfcrDirTrstRevAndExpnssAmt>0</CompOfcrDirTrstRevAndExpnssAmt>
+        <CompOfcrDirTrstNetInvstIncmAmt>0</CompOfcrDirTrstNetInvstIncmAmt>
+        <CompOfcrDirTrstDsbrsChrtblAmt>0</CompOfcrDirTrstDsbrsChrtblAmt>
+        <OtherProfFeesRevAndExpnssAmt referenceDocumentId="RetDoc2002300001">5444</OtherProfFeesRevAndExpnssAmt>
+        <OtherProfFeesNetInvstIncmAmt>5444</OtherProfFeesNetInvstIncmAmt>
+        <OtherProfFeesDsbrsChrtblAmt>0</OtherProfFeesDsbrsChrtblAmt>
+        <TotOprExpensesRevAndExpnssAmt>5444</TotOprExpensesRevAndExpnssAmt>
+        <TotOprExpensesNetInvstIncmAmt>5444</TotOprExpensesNetInvstIncmAmt>
+        <TotOprExpensesDsbrsChrtblAmt>0</TotOprExpensesDsbrsChrtblAmt>
+        <ContriPaidRevAndExpnssAmt>88000</ContriPaidRevAndExpnssAmt>
+        <ContriPaidDsbrsChrtblAmt>88000</ContriPaidDsbrsChrtblAmt>
+        <TotalExpensesRevAndExpnssAmt>93444</TotalExpensesRevAndExpnssAmt>
+        <TotalExpensesNetInvstIncmAmt>5444</TotalExpensesNetInvstIncmAmt>
+        <TotalExpensesDsbrsChrtblAmt>88000</TotalExpensesDsbrsChrtblAmt>
+        <ExcessRevenueOverExpensesAmt>-28880</ExcessRevenueOverExpensesAmt>
+        <NetInvestmentIncomeAmt>59120</NetInvestmentIncomeAmt>
+      </AnalysisOfRevenueAndExpenses>
+      <Form990PFBalanceSheetsGrp>
+        <CashBOYAmt>343494</CashBOYAmt>
+        <CashEOYAmt>435891</CashEOYAmt>
+        <CashEOYFMVAmt>435891</CashEOYFMVAmt>
+        <SavAndTempCashInvstBOYAmt>424166</SavAndTempCashInvstBOYAmt>
+        <SavAndTempCashInvstEOYAmt>424673</SavAndTempCashInvstEOYAmt>
+        <SavAndTempCashInvstEOYFMVAmt>424673</SavAndTempCashInvstEOYFMVAmt>
+        <OtherNtsAndLoansRcvblAmt>394125</OtherNtsAndLoansRcvblAmt>
+        <OtherRcvblAllwncDbtflAcctAmt>0</OtherRcvblAllwncDbtflAcctAmt>
+        <OtherNtsAndLoansRcvblBOYAmt>555568</OtherNtsAndLoansRcvblBOYAmt>
+        <OtherNtsAndLoansRcvblEOYAmt>394125</OtherNtsAndLoansRcvblEOYAmt>
+        <OtherNtsAndLoansRcvblEOYFMVAmt>394125</OtherNtsAndLoansRcvblEOYFMVAmt>
+        <USGovernmentObligationsBOYAmt>671951</USGovernmentObligationsBOYAmt>
+        <USGovernmentObligationsEOYAmt referenceDocumentId="RetDoc2210400001">604806</USGovernmentObligationsEOYAmt>
+        <USGovtObligationsEOYFMVAmt>604806</USGovtObligationsEOYFMVAmt>
+        <CorporateBondsBOYAmt>466977</CorporateBondsBOYAmt>
+        <CorporateBondsEOYAmt referenceDocumentId="RetDoc2044400001">617121</CorporateBondsEOYAmt>
+        <CorporateBondsEOYFMVAmt>617121</CorporateBondsEOYFMVAmt>
+        <TotalAssetsBOYAmt>2462156</TotalAssetsBOYAmt>
+        <TotalAssetsEOYAmt>2476616</TotalAssetsEOYAmt>
+        <TotalAssetsEOYFMVAmt>2476616</TotalAssetsEOYFMVAmt>
+        <TotalLiabilitiesBOYAmt>0</TotalLiabilitiesBOYAmt>
+        <TotalLiabilitiesEOYAmt>0</TotalLiabilitiesEOYAmt>
+        <OrganizationFollowsFASB117Ind>X</OrganizationFollowsFASB117Ind>
+        <NoDonorRstrNetAssestsBOYAmt>2462156</NoDonorRstrNetAssestsBOYAmt>
+        <NoDonorRstrNetAssestsEOYAmt>2476616</NoDonorRstrNetAssestsEOYAmt>
+        <TotNetAstOrFundBalancesBOYAmt>2462156</TotNetAstOrFundBalancesBOYAmt>
+        <TotNetAstOrFundBalancesEOYAmt>2476616</TotNetAstOrFundBalancesEOYAmt>
+        <TotalLiabilitiesNetAstBOYAmt>2462156</TotalLiabilitiesNetAstBOYAmt>
+        <TotalLiabilitiesNetAstEOYAmt>2476616</TotalLiabilitiesNetAstEOYAmt>
+      </Form990PFBalanceSheetsGrp>
+      <ChgInNetAssetsFundBalancesGrp>
+        <TotNetAstOrFundBalancesBOYAmt>2462156</TotNetAstOrFundBalancesBOYAmt>
+        <ExcessRevenueOverExpensesAmt>-28880</ExcessRevenueOverExpensesAmt>
+        <OtherIncreasesAmt referenceDocumentId="RetDoc2049700001">43340</OtherIncreasesAmt>
+        <SubtotalAmt>2476616</SubtotalAmt>
+        <OtherDecreasesAmt>0</OtherDecreasesAmt>
+        <TotNetAstOrFundBalancesEOYAmt>2476616</TotNetAstOrFundBalancesEOYAmt>
+      </ChgInNetAssetsFundBalancesGrp>
+      <CapGainsLossTxInvstIncmDetail>
+        <CapGainsLossTxInvstIncmGrp>
+          <PropertyDesc>UNIVEST NONCOVERED - 8800</PropertyDesc>
+          <AcquiredDt>2011-08-31</AcquiredDt>
+          <SoldDt>2019-12-31</SoldDt>
+          <GrossSalesPriceAmt>135000</GrossSalesPriceAmt>
+          <CostOrOtherBasisAmt>135000</CostOrOtherBasisAmt>
+          <GainOrLossAmt>0</GainOrLossAmt>
+          <GainsMinusExcessOrLossesAmt>0</GainsMinusExcessOrLossesAmt>
+        </CapGainsLossTxInvstIncmGrp>
+        <CapGainsLossTxInvstIncmGrp>
+          <PropertyDesc>UNIVEST NONCOVERED - 8800</PropertyDesc>
+          <AcquiredDt>2017-12-31</AcquiredDt>
+          <SoldDt>2019-12-31</SoldDt>
+          <GrossSalesPriceAmt>380000</GrossSalesPriceAmt>
+          <CostOrOtherBasisAmt>380000</CostOrOtherBasisAmt>
+          <GainOrLossAmt>0</GainOrLossAmt>
+          <GainsMinusExcessOrLossesAmt>0</GainsMinusExcessOrLossesAmt>
+        </CapGainsLossTxInvstIncmGrp>
+        <CapGainsLossTxInvstIncmGrp>
+          <PropertyDesc>UNIVEST COVERED - 8800</PropertyDesc>
+          <AcquiredDt>2019-01-31</AcquiredDt>
+          <SoldDt>2019-12-31</SoldDt>
+          <GrossSalesPriceAmt>100000</GrossSalesPriceAmt>
+          <CostOrOtherBasisAmt>100000</CostOrOtherBasisAmt>
+          <GainOrLossAmt>0</GainOrLossAmt>
+          <GainsMinusExcessOrLossesAmt>0</GainsMinusExcessOrLossesAmt>
+        </CapGainsLossTxInvstIncmGrp>
+        <CapitalGainNetIncomeAmt>0</CapitalGainNetIncomeAmt>
+      </CapGainsLossTxInvstIncmDetail>
+      <QlfyUndSect4940eReducedTaxGrp>
+        <LiableSection4942TaxInd>0</LiableSection4942TaxInd>
+        <AdjustedQlfyDistriYr1Amt>164765</AdjustedQlfyDistriYr1Amt>
+        <NetVlNoncharitableAssetsYr1Amt>2294383</NetVlNoncharitableAssetsYr1Amt>
+        <DistributionYr1Rt>0.071812</DistributionYr1Rt>
+        <AdjustedQlfyDistriYr2Amt>138610</AdjustedQlfyDistriYr2Amt>
+        <NetVlNoncharitableAssetsYr2Amt>2558557</NetVlNoncharitableAssetsYr2Amt>
+        <DistributionYr2Rt>0.054175</DistributionYr2Rt>
+        <AdjustedQlfyDistriYr3Amt>92350</AdjustedQlfyDistriYr3Amt>
+        <NetVlNoncharitableAssetsYr3Amt>2895659</NetVlNoncharitableAssetsYr3Amt>
+        <DistributionYr3Rt>0.031893</DistributionYr3Rt>
+        <AdjustedQlfyDistriYr4Amt>93108</AdjustedQlfyDistriYr4Amt>
+        <NetVlNoncharitableAssetsYr4Amt>2755404</NetVlNoncharitableAssetsYr4Amt>
+        <DistributionYr4Rt>0.033791</DistributionYr4Rt>
+        <AdjustedQlfyDistriYr5Amt>105400</AdjustedQlfyDistriYr5Amt>
+        <NetVlNoncharitableAssetsYr5Amt>2688254</NetVlNoncharitableAssetsYr5Amt>
+        <DistributionYr5Rt>0.039208</DistributionYr5Rt>
+        <TotalDistributionRt>0.230879</TotalDistributionRt>
+        <AverageDistributionRt>0.046176</AverageDistributionRt>
+        <NetVlNoncharitableAssetsAmt>2352906</NetVlNoncharitableAssetsAmt>
+        <AdjNetVlNoncharitableAssetsAmt>108648</AdjNetVlNoncharitableAssetsAmt>
+        <NetInvestmentIncomePctAmt>591</NetInvestmentIncomePctAmt>
+        <AdjNonchrtblNetInvstIncmPctAmt>109239</AdjNonchrtblNetInvstIncmPctAmt>
+        <QualifyingDistributionsAmt>88000</QualifyingDistributionsAmt>
+      </QlfyUndSect4940eReducedTaxGrp>
+      <ExciseTaxBasedOnInvstIncmGrp>
+        <InvestmentIncomeExciseTaxAmt>1182</InvestmentIncomeExciseTaxAmt>
+        <TaxUnderSection511Amt>0</TaxUnderSection511Amt>
+        <SubtotalAmt>1182</SubtotalAmt>
+        <SubtitleATaxAmt>0</SubtitleATaxAmt>
+        <TaxBasedOnInvestmentIncomeAmt>1182</TaxBasedOnInvestmentIncomeAmt>
+        <EstimatedPlusOvpmtIncmTxAmt>3457</EstimatedPlusOvpmtIncmTxAmt>
+        <ExtsnRequestIncomeTaxPaidAmt>0</ExtsnRequestIncomeTaxPaidAmt>
+        <BackupWithholdingWithheldAmt>0</BackupWithholdingWithheldAmt>
+        <TotalPaymentsAndCreditsAmt>3457</TotalPaymentsAndCreditsAmt>
+        <EsPenaltyAmt>0</EsPenaltyAmt>
+        <OverpaymentAmt>2275</OverpaymentAmt>
+        <AppliedToESTaxAmt>2275</AppliedToESTaxAmt>
+        <RefundAmt>0</RefundAmt>
+      </ExciseTaxBasedOnInvstIncmGrp>
+      <StatementsRegardingActyGrp>
+        <LegislativePoliticalActyInd>0</LegislativePoliticalActyInd>
+        <MoreThan100SpentInd>0</MoreThan100SpentInd>
+        <Form1120POLFiledInd>0</Form1120POLFiledInd>
+        <Section4955OrganizationTaxAmt>0</Section4955OrganizationTaxAmt>
+        <Section4955ManagersTaxAmt>0</Section4955ManagersTaxAmt>
+        <TaxReimbursedAmt>0</TaxReimbursedAmt>
+        <ActivitiesNotPreviouslyRptInd>0</ActivitiesNotPreviouslyRptInd>
+        <ChangesToArticlesOrBylawsInd>0</ChangesToArticlesOrBylawsInd>
+        <UnrelatedBusIncmOverLimitInd>0</UnrelatedBusIncmOverLimitInd>
+        <OrganizationDissolvedEtcInd>0</OrganizationDissolvedEtcInd>
+        <Section508eRqrSatisfiedInd>0</Section508eRqrSatisfiedInd>
+        <AtLeast5000InAssetsInd>1</AtLeast5000InAssetsInd>
+        <OrgReportOrRegisterStateCd>PA</OrgReportOrRegisterStateCd>
+        <Form990PFFiledWithAttyGenInd>1</Form990PFFiledWithAttyGenInd>
+        <PrivateOperatingFoundationInd>0</PrivateOperatingFoundationInd>
+        <NewSubstantialContributorsInd>0</NewSubstantialContributorsInd>
+        <OwnControlledEntityInd>0</OwnControlledEntityInd>
+        <DonorAdvisedFundInd>0</DonorAdvisedFundInd>
+        <ComplyWithPublicInspRqrInd>1</ComplyWithPublicInspRqrInd>
+        <WebsiteAddressTxt>N/A</WebsiteAddressTxt>
+        <IndividualWithBooksNm>WENDY SHUBERT</IndividualWithBooksNm>
+        <PhoneNum>6107974530</PhoneNum>
+        <LocationOfBooksUSAddress>
+          <AddressLine1Txt>300 EAST ROCK ROAD</AddressLine1Txt>
+          <CityNm>ALLENTOWN</CityNm>
+          <StateAbbreviationCd>PA</StateAbbreviationCd>
+          <ZIPCd>181037519</ZIPCd>
+        </LocationOfBooksUSAddress>
+        <ForeignAccountsQuestionInd>0</ForeignAccountsQuestionInd>
+      </StatementsRegardingActyGrp>
+      <StatementsRegardingActy4720Grp>
+        <SaleOrExchDisqualifiedPrsnInd>0</SaleOrExchDisqualifiedPrsnInd>
+        <BrrwOrLendDisqualifiedPrsnInd>0</BrrwOrLendDisqualifiedPrsnInd>
+        <FurnGoodsDisqualifiedPrsnInd>0</FurnGoodsDisqualifiedPrsnInd>
+        <PayCompDisqualifiedPrsnInd>0</PayCompDisqualifiedPrsnInd>
+        <TransferAstDisqualifiedPrsnInd>0</TransferAstDisqualifiedPrsnInd>
+        <PaymentToGovernmentOfficialInd>0</PaymentToGovernmentOfficialInd>
+        <UncorrectedPriorActsInd>0</UncorrectedPriorActsInd>
+        <UndistributedIncomePYInd>0</UndistributedIncomePYInd>
+        <BusinessHoldingsInd>0</BusinessHoldingsInd>
+        <JeopardyInvestmentsInd>0</JeopardyInvestmentsInd>
+        <UncorrectedPYJeopardyInvstInd>0</UncorrectedPYJeopardyInvstInd>
+        <InfluenceLegislationInd>0</InfluenceLegislationInd>
+        <InfluenceElectionInd>0</InfluenceElectionInd>
+        <GrantsToIndividualsInd>0</GrantsToIndividualsInd>
+        <GrantsToOrganizationsInd>0</GrantsToOrganizationsInd>
+        <NoncharitablePurposeInd>0</NoncharitablePurposeInd>
+        <RcvFndsToPayPrsnlBnftCntrctInd>0</RcvFndsToPayPrsnlBnftCntrctInd>
+        <PayPremiumsPrsnlBnftCntrctInd>0</PayPremiumsPrsnlBnftCntrctInd>
+        <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+        <SubjToTaxRmnrtnExPrchtPymtInd>0</SubjToTaxRmnrtnExPrchtPymtInd>
+      </StatementsRegardingActy4720Grp>
+      <OfficerDirTrstKeyEmplInfoGrp>
+        <OfficerDirTrstKeyEmplGrp>
+          <PersonNm>WENDY D SHUBERT</PersonNm>
+          <USAddress>
+            <AddressLine1Txt>300 EAST ROCK ROAD</AddressLine1Txt>
+            <CityNm>ALLENTOWN</CityNm>
+            <StateAbbreviationCd>PA</StateAbbreviationCd>
+            <ZIPCd>18103</ZIPCd>
+          </USAddress>
+          <TitleTxt>PRESIDENT</TitleTxt>
+          <AverageHrsPerWkDevotedToPosRt>10.00</AverageHrsPerWkDevotedToPosRt>
+          <CompensationAmt>0</CompensationAmt>
+          <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+          <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+        </OfficerDirTrstKeyEmplGrp>
+        <OfficerDirTrstKeyEmplGrp>
+          <PersonNm>MICHAEL A KULP</PersonNm>
+          <USAddress>
+            <AddressLine1Txt>300 EAST ROCK ROAD</AddressLine1Txt>
+            <CityNm>ALLENTOWN</CityNm>
+            <StateAbbreviationCd>PA</StateAbbreviationCd>
+            <ZIPCd>18103</ZIPCd>
+          </USAddress>
+          <TitleTxt>SECRETARY/TREASURER</TitleTxt>
+          <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+          <CompensationAmt>0</CompensationAmt>
+          <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+          <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+        </OfficerDirTrstKeyEmplGrp>
+        <OfficerDirTrstKeyEmplGrp>
+          <PersonNm>BARRY N FISHER</PersonNm>
+          <USAddress>
+            <AddressLine1Txt>300 EAST ROCK ROAD</AddressLine1Txt>
+            <CityNm>ALLENTOWN</CityNm>
+            <StateAbbreviationCd>PA</StateAbbreviationCd>
+            <ZIPCd>18103</ZIPCd>
+          </USAddress>
+          <TitleTxt>DIRECTOR</TitleTxt>
+          <AverageHrsPerWkDevotedToPosRt>1.00</AverageHrsPerWkDevotedToPosRt>
+          <CompensationAmt>0</CompensationAmt>
+          <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+          <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+        </OfficerDirTrstKeyEmplGrp>
+        <CompOfHghstPdEmplOrNONETxt>NONE</CompOfHghstPdEmplOrNONETxt>
+        <OtherEmployeePaidOver50kCnt>0</OtherEmployeePaidOver50kCnt>
+        <CompOfHghstPdCntrctOrNONETxt>NONE</CompOfHghstPdCntrctOrNONETxt>
+        <ContractorPaidOver50kCnt>0</ContractorPaidOver50kCnt>
+      </OfficerDirTrstKeyEmplInfoGrp>
+      <SumOfProgramRelatedInvstGrp>
+        <TotalAmt>0</TotalAmt>
+      </SumOfProgramRelatedInvstGrp>
+      <MinimumInvestmentReturnGrp>
+        <AverageMonthlyFMVOfSecAmt>1615188</AverageMonthlyFMVOfSecAmt>
+        <AverageMonthlyCashBalancesAmt>379424</AverageMonthlyCashBalancesAmt>
+        <FMVAllOtherNoncharitableAstAmt>394125</FMVAllOtherNoncharitableAstAmt>
+        <TotalFMVOfUnusedAssetsAmt>2388737</TotalFMVOfUnusedAssetsAmt>
+        <ReductionClaimedAmt>0</ReductionClaimedAmt>
+        <AcquisitionIndebtednessAmt>0</AcquisitionIndebtednessAmt>
+        <AdjustedTotalFMVOfUnusedAstAmt>2388737</AdjustedTotalFMVOfUnusedAstAmt>
+        <CashDeemedCharitableAmt>35831</CashDeemedCharitableAmt>
+        <NetVlNoncharitableAssetsAmt>2352906</NetVlNoncharitableAssetsAmt>
+        <MinimumInvestmentReturnAmt>117645</MinimumInvestmentReturnAmt>
+      </MinimumInvestmentReturnGrp>
+      <DistributableAmountGrp>
+        <MinimumInvestmentReturnAmt>117645</MinimumInvestmentReturnAmt>
+        <TaxBasedOnInvestmentIncomeAmt>1182</TaxBasedOnInvestmentIncomeAmt>
+        <TotalTaxAmt>1182</TotalTaxAmt>
+        <DistributableBeforeAdjAmt>116463</DistributableBeforeAdjAmt>
+        <RecoveriesQualfiedDistriAmt>0</RecoveriesQualfiedDistriAmt>
+        <DistributableBeforeDedAmt>116463</DistributableBeforeDedAmt>
+        <DeductionFromDistributableAmt>0</DeductionFromDistributableAmt>
+        <DistributableAsAdjustedAmt>116463</DistributableAsAdjustedAmt>
+      </DistributableAmountGrp>
+      <QualifyingDistriPartXIIGrp>
+        <ExpensesAndContributionsAmt>88000</ExpensesAndContributionsAmt>
+        <ProgramRelatedInvstTotalAmt>0</ProgramRelatedInvstTotalAmt>
+        <QualifyingDistributionsAmt>88000</QualifyingDistributionsAmt>
+        <PctSect4940eOrgNetInvstIncmAmt>0</PctSect4940eOrgNetInvstIncmAmt>
+        <AdjustedQualifyingDistriAmt>88000</AdjustedQualifyingDistriAmt>
+      </QualifyingDistriPartXIIGrp>
+      <UndistributedIncomeGrp>
+        <DistributableAsAdjustedAmt>116463</DistributableAsAdjustedAmt>
+        <UndistributedIncomePYAmt>74070</UndistributedIncomePYAmt>
+        <TotalForPriorYearsAmt>0</TotalForPriorYearsAmt>
+        <TotalExcessDistributionCyovAmt>0</TotalExcessDistributionCyovAmt>
+        <QualifyingDistributionsAmt>88000</QualifyingDistributionsAmt>
+        <AppliedToYear1Amt>74070</AppliedToYear1Amt>
+        <AppliedToPriorYearsAmt>0</AppliedToPriorYearsAmt>
+        <TreatedAsDistriFromCorpusAmt>0</TreatedAsDistriFromCorpusAmt>
+        <AppliedToCurrentYearAmt>13930</AppliedToCurrentYearAmt>
+        <RemainingDistriFromCorpusAmt>0</RemainingDistriFromCorpusAmt>
+        <ExcessDistriCyovAppCYCorpusAmt>0</ExcessDistriCyovAppCYCorpusAmt>
+        <ExcessDistributionCyovAppCYAmt>0</ExcessDistributionCyovAppCYAmt>
+        <TotalCorpusAmt>0</TotalCorpusAmt>
+        <PriorYearUndistributedIncmAmt>0</PriorYearUndistributedIncmAmt>
+        <PriorYearDeficiencyOrTaxAmt>0</PriorYearDeficiencyOrTaxAmt>
+        <Taxable1Amt>0</Taxable1Amt>
+        <Taxable2Amt>0</Taxable2Amt>
+        <UndistributedIncomeCYAmt>102533</UndistributedIncomeCYAmt>
+        <CorpusDistri170b1EOr4942g3Amt>0</CorpusDistri170b1EOr4942g3Amt>
+        <ExcessDistriCyovFromYr5Amt>0</ExcessDistriCyovFromYr5Amt>
+        <ExcessDistriCyovToNextYrAmt>0</ExcessDistriCyovToNextYrAmt>
+      </UndistributedIncomeGrp>
+      <SupplementaryInformationGrp>
+        <OnlyContriToPreselectedInd>X</OnlyContriToPreselectedInd>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>800FOLLOWMECOM</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>PO BOX 11</AddressLine1Txt>
+            <CityNm>TELFORD</CityNm>
+            <StateAbbreviationCd>PA</StateAbbreviationCd>
+            <ZIPCd>18969</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>CHRISTIAN RADIO BROADCASTING</GrantOrContributionPurposeTxt>
+          <Amt>5500</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>ACLJ</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>PO BOX 90555</AddressLine1Txt>
+            <CityNm>WASHINGTON</CityNm>
+            <StateAbbreviationCd>DC</StateAbbreviationCd>
+            <ZIPCd>200900555</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>PROMOTE CHRISTIAN VALUES</GrantOrContributionPurposeTxt>
+          <Amt>20000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>NRB</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>600 NORTH CAPITAL STREET NW STE 210</AddressLine1Txt>
+            <CityNm>WASHINGTON</CityNm>
+            <StateAbbreviationCd>DC</StateAbbreviationCd>
+            <ZIPCd>20001</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>PROMOTE CHRISTIANITY THROUGH ELECTONIC MEDIUM</GrantOrContributionPurposeTxt>
+          <Amt>10000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>ORCHARD HILLS CHURCH</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>2488 TOWNSHIP LINE ROAD</AddressLine1Txt>
+            <CityNm>OREFIELD</CityNm>
+            <StateAbbreviationCd>PA</StateAbbreviationCd>
+            <ZIPCd>18069</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>CHRISTIAN MINISTRY</GrantOrContributionPurposeTxt>
+          <Amt>5000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>RIVERBEND COMMUNITY CHURCH</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>2080 W GRANADA BLVD</AddressLine1Txt>
+            <CityNm>ORMOND BEACH</CityNm>
+            <StateAbbreviationCd>FL</StateAbbreviationCd>
+            <ZIPCd>32174</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>CHRISTIAN MINISTRY</GrantOrContributionPurposeTxt>
+          <Amt>4000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>RUN MINISTRIES</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>PO BOX 6543</AddressLine1Txt>
+            <CityNm>VIRGINIA BEACH</CityNm>
+            <StateAbbreviationCd>VA</StateAbbreviationCd>
+            <ZIPCd>23456</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>CHRISTIAN MINISTRY</GrantOrContributionPurposeTxt>
+          <Amt>2000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>THOMAS ROAD BAPTIST CHURCH</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>ONE MOUNTAIN VIEW ROAD</AddressLine1Txt>
+            <CityNm>LYNCHBURG</CityNm>
+            <StateAbbreviationCd>VA</StateAbbreviationCd>
+            <ZIPCd>24502</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>CHRISTIAN MINISTRY</GrantOrContributionPurposeTxt>
+          <Amt>3000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>AND THEN THERE WERE NONE</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>PO BOX 2571</AddressLine1Txt>
+            <CityNm>ROUND ROCK</CityNm>
+            <StateAbbreviationCd>TX</StateAbbreviationCd>
+            <ZIPCd>78680</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>CHRISTIAN MINISTRY</GrantOrContributionPurposeTxt>
+          <Amt>500</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>DAVID HOROWITZ FOUNDATION</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>11480 COMMERCE PARK DRIVE 6TH FLOOR</AddressLine1Txt>
+            <CityNm>RESTON</CityNm>
+            <StateAbbreviationCd>VA</StateAbbreviationCd>
+            <ZIPCd>201911556</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>CONSERVATIVE VALUES</GrantOrContributionPurposeTxt>
+          <Amt>8000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>WORLD TEAM USA</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>1431 STUCKERT ROAD</AddressLine1Txt>
+            <CityNm>WARRINGTON</CityNm>
+            <StateAbbreviationCd>PA</StateAbbreviationCd>
+            <ZIPCd>18976</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>CHRISTIAN MINISTRY</GrantOrContributionPurposeTxt>
+          <Amt>7000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>DON SUNSHINE MINISTRIES</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>413 CEDAR GROVE ROAD</AddressLine1Txt>
+            <CityNm>JOHNSON CITY</CityNm>
+            <StateAbbreviationCd>TN</StateAbbreviationCd>
+            <ZIPCd>37601</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>CHRISTIAN MINISTRY</GrantOrContributionPurposeTxt>
+          <Amt>12000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>PROJECT VERITAS</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>1214 BOSTON POST ROAD NO 148</AddressLine1Txt>
+            <CityNm>MAMARONECK</CityNm>
+            <StateAbbreviationCd>NY</StateAbbreviationCd>
+            <ZIPCd>10543</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>CONSERVATIVE VALUES</GrantOrContributionPurposeTxt>
+          <Amt>5000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>THE LEADERSHIP INSTITUTE</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>1101 N HIGHLAND ST</AddressLine1Txt>
+            <CityNm>ARLINGTON</CityNm>
+            <StateAbbreviationCd>VA</StateAbbreviationCd>
+            <ZIPCd>22201</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>CONSERVATIVE VALUES</GrantOrContributionPurposeTxt>
+          <Amt>3000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <GrantOrContributionPdDurYrGrp>
+          <RecipientBusinessName>
+            <BusinessNameLine1Txt>WORLD CENTRAL KITCHEN</BusinessNameLine1Txt>
+          </RecipientBusinessName>
+          <RecipientUSAddress>
+            <AddressLine1Txt>1342 FLORIDA AVENUE NW</AddressLine1Txt>
+            <CityNm>WASHINGTON</CityNm>
+            <StateAbbreviationCd>DC</StateAbbreviationCd>
+            <ZIPCd>20009</ZIPCd>
+          </RecipientUSAddress>
+          <RecipientRelationshipTxt>N/A</RecipientRelationshipTxt>
+          <RecipientFoundationStatusTxt>501 (C)(3)</RecipientFoundationStatusTxt>
+          <GrantOrContributionPurposeTxt>EMERGENCY FOOD RELIEF</GrantOrContributionPurposeTxt>
+          <Amt>3000</Amt>
+        </GrantOrContributionPdDurYrGrp>
+        <TotalGrantOrContriPdDurYrAmt>88000</TotalGrantOrContriPdDurYrAmt>
+        <TotalGrantOrContriApprvFutAmt>0</TotalGrantOrContriApprvFutAmt>
+      </SupplementaryInformationGrp>
+      <AnalysisIncomeProducingActyGrp>
+        <IntOnSavAndTempCashInvstGrp>
+          <ExclusionCd>14</ExclusionCd>
+          <ExclusionAmt>41460</ExclusionAmt>
+        </IntOnSavAndTempCashInvstGrp>
+        <DivAndIntFromSecPartVIIGrp>
+          <ExclusionCd>14</ExclusionCd>
+          <ExclusionAmt>4118</ExclusionAmt>
+        </DivAndIntFromSecPartVIIGrp>
+        <OtherInvestmentIncmPartVIIGrp>
+          <ExclusionCd>14</ExclusionCd>
+          <ExclusionAmt>18986</ExclusionAmt>
+        </OtherInvestmentIncmPartVIIGrp>
+        <GainSalesAstOthThanInvntryGrp>
+          <ExclusionCd>18</ExclusionCd>
+        </GainSalesAstOthThanInvntryGrp>
+        <SubtotalsIncmProducingActyGrp>
+          <UnrelatedBusinessTaxblIncmAmt>0</UnrelatedBusinessTaxblIncmAmt>
+          <ExclusionAmt>64564</ExclusionAmt>
+          <RelatedOrExemptFunctionIncmAmt>0</RelatedOrExemptFunctionIncmAmt>
+        </SubtotalsIncmProducingActyGrp>
+        <TotalIncomeProducingActyAmt>64564</TotalIncomeProducingActyAmt>
+      </AnalysisIncomeProducingActyGrp>
+      <TrnsfrTransRlnNonchrtblEOGrp>
+        <TrnsfrOfCashToNonchrtblEOInd>0</TrnsfrOfCashToNonchrtblEOInd>
+        <TrnsfrOtherAssetNonchrtblEOInd>0</TrnsfrOtherAssetNonchrtblEOInd>
+        <SalesOrExchangesOfAssetsInd>0</SalesOrExchangesOfAssetsInd>
+        <PurchaseOfAssetsNonchrtblEOInd>0</PurchaseOfAssetsNonchrtblEOInd>
+        <RentalOfFacilitiesOthAssetsInd>0</RentalOfFacilitiesOthAssetsInd>
+        <ReimbursementArrangementsInd>0</ReimbursementArrangementsInd>
+        <LoansOrLoanGuaranteesInd>0</LoansOrLoanGuaranteesInd>
+        <PerformanceOfServicesEtcInd>0</PerformanceOfServicesEtcInd>
+        <SharingOfFacilitiesEtcInd>0</SharingOfFacilitiesEtcInd>
+        <RelationshipsNonchrtblEOInd>0</RelationshipsNonchrtblEOInd>
+      </TrnsfrTransRlnNonchrtblEOGrp>
+    </IRS990PF>
+    <InvestmentsCorpBondsSchedule documentId="RetDoc2044400001">
+      <InvestmentsCorporateBondsGrp>
+        <BondNm>CORPORATE BONDS</BondNm>
+        <EOYBookValueAmt>617121</EOYBookValueAmt>
+        <EOYFMVAmt>617121</EOYFMVAmt>
+      </InvestmentsCorporateBondsGrp>
+    </InvestmentsCorpBondsSchedule>
+    <InvestmentsGovtObligationsSch documentId="RetDoc2210400001">
+      <USGovtObligationsBookVlEOYAmt>604806</USGovtObligationsBookVlEOYAmt>
+      <USGovtObligationsEOYFMVAmt>604806</USGovtObligationsEOYFMVAmt>
+      <StateLocalSecBookVlEOYAmt>0</StateLocalSecBookVlEOYAmt>
+      <StateLocalSecEOYFMVAmt>0</StateLocalSecEOYFMVAmt>
+    </InvestmentsGovtObligationsSch>
+    <OtherIncomeSchedule2 documentId="RetDoc2001500001">
+      <OtherIncomeDetail>
+        <Desc>N/R INTEREST - S&amp;S</Desc>
+        <RevenueAndExpensesPerBooksAmt>18986</RevenueAndExpensesPerBooksAmt>
+        <NetInvestmentIncomeAmt>18986</NetInvestmentIncomeAmt>
+        <AdjustedNetIncomeAmt>18986</AdjustedNetIncomeAmt>
+      </OtherIncomeDetail>
+    </OtherIncomeSchedule2>
+    <OtherIncreasesSchedule documentId="RetDoc2049700001">
+      <OtherIncreasesDetail>
+        <Desc>UNREALIZED GAIN</Desc>
+        <Amt>43340</Amt>
+      </OtherIncreasesDetail>
+    </OtherIncreasesSchedule>
+    <OtherProfessionalFeesSchedule documentId="RetDoc2002300001">
+      <OtherProfessionalFeesDetail>
+        <CategoryTxt>INVESTMENT FEES</CategoryTxt>
+        <Amt>5371</Amt>
+        <NetInvestmentIncomeAmt>5371</NetInvestmentIncomeAmt>
+        <DisbursementsCharitablePrpsAmt>0</DisbursementsCharitablePrpsAmt>
+      </OtherProfessionalFeesDetail>
+      <OtherProfessionalFeesDetail>
+        <CategoryTxt>CHECKING FEES</CategoryTxt>
+        <Amt>73</Amt>
+        <NetInvestmentIncomeAmt>73</NetInvestmentIncomeAmt>
+        <DisbursementsCharitablePrpsAmt>0</DisbursementsCharitablePrpsAmt>
+      </OtherProfessionalFeesDetail>
+    </OtherProfessionalFeesSchedule>
+  </ReturnData>
+</Return>
