@@ -1,6 +1,6 @@
 'use client';
 // BarChartComponent.js
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
 
@@ -9,16 +9,31 @@ import ReactECharts from 'echarts-for-react';
  * @param expenses -    an array of expenses measured each year
  * @param assets -      an array of assets measured each year
  * @param liabilities - an array of liabilities measured each year
- * @param style -       a struct containing format options - height and width
- *                      must be defined as numbers.
 */
-const StackChart = ({revenues, expenses, assets, liabilities, style, minYear}) => {
+const StackChart = ({revenues, expenses, assets, liabilities, minYear}) => {
   // ensures arg is an array
   if (!Array.isArray(revenues) || !Array.isArray(expenses) || !Array.isArray(assets) || !Array.isArray(liabilities)) {
     return <div>ERROR: chart arg must be an array</div>;
   }
 
-  //let scale = Math.round((style.width+style.height)/2);
+  const chartContainerRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (chartContainerRef.current) {
+        setDimensions({
+          width: chartContainerRef.current.offsetWidth,
+          height: chartContainerRef.current.offsetHeight,
+        });
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const formatNumber = (num) => {
     if (num >= 1000000000) {
       return (num / 1000000000).toFixed(1) + 'B';
@@ -59,9 +74,8 @@ const StackChart = ({revenues, expenses, assets, liabilities, style, minYear}) =
         return tooltipContent;
       }
     },
-    //legend: {},
     grid: {
-      //left: 0.01*style.width,
+      left: 0.01 * dimensions.width,
       right: 0,
       bottom: 0,
       top: 0,
@@ -84,13 +98,13 @@ const StackChart = ({revenues, expenses, assets, liabilities, style, minYear}) =
       data: Array.from({ length: revenues.length }, (_, index) => parseInt(minYear) + revenues.length - 1 - index),
       handle: {
         show: true,
-        color: '#7581BD'
+        color: '#7581BD',
+        fontSize: Math.round(0.036 * dimensions.width),
       },
       axisTick: {
         alignWithLabel: true
       },
       axisLabel: {
-        //fontSize: Math.round(0.036*style.width),
         fontWeight: 'bold'
       }
     },
@@ -132,7 +146,12 @@ const StackChart = ({revenues, expenses, assets, liabilities, style, minYear}) =
         emphasis: {
           focus: 'series'
         },
-        data: assets
+        data: assets.map((value, index) => ({
+          value,
+          itemStyle: {
+            barBorderRadius:liabilities[index] ? 0 : [0, 0.016*dimensions.width, 0.016*dimensions.width, 0],
+          }
+        })),
       },
       {
         name: 'Liabilities',
@@ -147,14 +166,16 @@ const StackChart = ({revenues, expenses, assets, liabilities, style, minYear}) =
         },
         data: liabilities,
         itemStyle: {
-            //barBorderRadius: [0, 0.017*scale, 0.017*scale, 0],
+            barBorderRadius: [0, 0.016*dimensions.width, 0.016*dimensions.width, 0],
         }
       }
     ]
   };
 
   return (
-    <ReactECharts option={option} style={style} />
+    <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
+      <ReactECharts option={option}/>
+    </div>
   );
 };
 

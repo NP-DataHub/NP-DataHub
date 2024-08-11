@@ -5,39 +5,21 @@ export default async function handler(req, res) {
   const { method, query } = req;
   try {
     const client = await clientPromise;
-    const db = client.db('Nonprofitly'); // Replace with your actual database name
+    const db = client.db('Nonprofitly');
 
     switch (method) {
       case 'GET':
-        const { state, city, nteeCode, Name, _id } = query;
+        // the sector to pull averages for
+        const { MajGrp } = query;
 
         const filters = {};
-        if (Name) {
-          filters.Nm = { $regex: new RegExp(Name, 'i') };
-        }
-        if (city) {
-          // Extract city name if it includes state
-          const cityParts = city.split(',');
-          const cityName = cityParts[0].trim().toLowerCase();
-          filters.Cty = { $regex: new RegExp(`^${cityName}$`, 'i') }; // Case-insensitive exact match
-        }
-        if (state) {
-          filters.St = state;
-        }
-        if (nteeCode) {
-          filters.NTEE = { $regex: new RegExp(nteeCode, 'i') };
-        }
-        if (_id) {
-          try {
-            filters._id = new ObjectId(_id);
-          } catch (err) {
-            return res.status(400).json({ success: false, error: 'Invalid ID format' });
-          }
+        if (MajGrp) {
+          filters.MajGrp = { $regex: new RegExp(MajGrp, 'i') };
         }
 
         console.log("Filters:", filters); // Log filters for debugging
 
-        const items = await db.collection('NonProfitData')
+        const items = await db.collection('NationalAndStateStatistics')
           .find(filters) // Include relevant fields for debugging
           .toArray();
 

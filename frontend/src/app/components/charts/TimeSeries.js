@@ -1,21 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
-
+import regression from 'regression';
 /**
- * @param variable - string containing the variable recorded in the graph
  * @param values -   an array of values measured each year
- * @param style -    a struct containing format options - height and width
- *                   must be defined as numbers.
 */
 
-const TimeSeries = ({variable, values, style, minYear}) => {
+const TimeSeries = ({values, minYear}) => {
   // ensures arg is an array
   if (!Array.isArray(values) || values.length === 0) {
+    console.log(values);
     return <div>ERROR: chart arg must be an array</div>;
   }
 
+  const chartContainerRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const formatNumber = (num) => {
     if (num >= 1000000000) {
       return (num / 1000000000).toFixed(1) + 'B';
@@ -28,16 +28,38 @@ const TimeSeries = ({variable, values, style, minYear}) => {
     }
     return num;
   };
-  const width = typeof style.width === 'number' ? style.width : parseInt(style.width, 10);
-  const height = typeof style.height === 'number' ? style.height : parseInt(style.height, 10);
 
-  let scale = Math.round((width + height)/2);
-  console.log(scale);
+  useEffect(() => {
+    const handleResize = () => {
+      if (chartContainerRef.current) {
+        setDimensions({
+          width: chartContainerRef.current.offsetWidth,
+          height: chartContainerRef.current.offsetHeight,
+        });
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const data = values.map((value, index) => [index, value]);
+  const fitted_line = regression.linear(data);
+
+  // print the regression line
+  console.log(fitted_line);
 
   const option = {
+    legend: {
+      data: ['Data', 'Predicted']
+    },
     dataset: [
       {
-        source: values
+        source: data
+      },
+      {
+        source: Array.from({ length: values.length }, (_, index) => [index, fitted_line.predict(index)[1]])
       }
     ],
     tooltip: {
@@ -53,10 +75,10 @@ const TimeSeries = ({variable, values, style, minYear}) => {
       }
     },
     grid: {
-      left: Math.round(0.90 * scale),
-      bottom: Math.round(0.25 * scale),
-      right: Math.round(0.90 * scale),
-      top: Math.round(0.1 * scale),
+      left: 0,
+      bottom: 0.036 * dimensions.width,
+      right: 0,
+      top: 0.01 * dimensions.width,
       containLabel: true
     },
     xAxis: [
@@ -65,8 +87,7 @@ const TimeSeries = ({variable, values, style, minYear}) => {
         nameLocation: 'middle',
         nameTextStyle: {
           fontWeight: 'bold',
-          fontSize: Math.round(0.20*scale),
-          padding: Math.round(0.10*scale),
+          fontSize: Math.round(0.036 * dimensions.width),
         },
         type: 'category',
         data: Array.from({ length: values.length }, (_, index) => index + parseInt(minYear)),
@@ -74,7 +95,7 @@ const TimeSeries = ({variable, values, style, minYear}) => {
           alignWithLabel: true
         },
         axisLabel: {
-          fontSize: Math.round(0.15* scale)
+          fontSize: Math.round(0.015 * dimensions.width)
         }
       }
     ],
@@ -84,22 +105,46 @@ const TimeSeries = ({variable, values, style, minYear}) => {
           formatter: function (value) {
             return '$' + formatNumber(value);
           },
-          fontSize: Math.round(0.15 * scale)
+          fontSize: Math.round(0.015 * dimensions.width)
         }
       }
     ],
     series: [
       {
-        name: 'line',
+        name: 'Data',
         type: 'line',
-        data: values
+        datasetIndex: 0,
+      },
+      {
+        name: 'Predicted',
+        type: 'line',
+        datasetIndex: 1,
+        symbol: 'none',
+        color: 'red', // Set the color of the regression line here
+        smooth: true,
+        lineStyle: {
+          width: 2 // Adjust the width of the regression line if needed
+        }
       }
-    ]
+    ],
+    graphic: {
+      type: 'text',
+      left: '5%',
+      bottom: 'bottom',
+      style: {
+        text: 'Accuracy (R²): ' + fitted_line.r2.toFixed(2),
+        fontSize: 16,
+        fontWeight: 'bold',
+        fill: 'white'
+      }
+    }
   };
   console.log(option)
 
   return (
-    <ReactECharts option={option} style={style} />
+    <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
+      <ReactECharts option={option}/>
+    </div>
   );
 };
 
