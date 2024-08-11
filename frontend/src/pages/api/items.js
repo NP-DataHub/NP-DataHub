@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   const { method, query } = req;
   try {
     const client = await clientPromise;
-    const db = client.db('Np-Datahub'); // Replace with your actual database name
+    const db = client.db('Data');
 
     switch (method) {
       case 'GET':
@@ -13,16 +13,16 @@ export default async function handler(req, res) {
 
         const filters = {};
         if (Name) {
-          filters.Name = { $regex: new RegExp(Name, 'i') };
+          filters.Nm = { $regex: new RegExp(Name, 'i') };
         }
         if (city) {
           // Extract city name if it includes state
           const cityParts = city.split(',');
           const cityName = cityParts[0].trim().toLowerCase();
-          filters.City = { $regex: new RegExp(`^${cityName}$`, 'i') }; // Case-insensitive exact match
+          filters.Cty = { $regex: new RegExp(`^${cityName}$`, 'i') }; // Case-insensitive exact match
         }
         if (state) {
-          filters.State = state;
+          filters.St = state;
         }
         if (nteeCode) {
           filters.NTEE = { $regex: new RegExp(nteeCode, 'i') };
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
 
         console.log("Filters:", filters); // Log filters for debugging
 
-        const items = await db.collection('Master')
+        const items = await db.collection('NonProfitData')
           .find(filters) // Include relevant fields for debugging
           .toArray();
 

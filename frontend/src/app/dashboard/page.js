@@ -230,7 +230,7 @@ export default function Dashboard() {
     return(
         <div>
             <div className = "flex dashboard-color text-white font-sans">
-                <Sidebar/>
+                <Sidebar currentPage='/dashboard'/>
                 <div className = "flex-col w-screen">
                     <DashboardNavbar/>
                     <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
