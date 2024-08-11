@@ -1,0 +1,48 @@
+Previous filepath: /tmp/2024-2A/202420489349200107_public.xml and timestamp: None
+Current filepath: /tmp/2024-2A/202400489349200805_public.xml and timestamp: None
+Name: previous is WEST NYACK ELEMENTARY PTA and current is: PTA NEW YORK CONGRESS
+==================================================
+Previous filepath: /tmp/2024-2A/202420489349200107_public.xml and timestamp: None
+Current filepath: /tmp/2024-2A/202400489349200405_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-2A/202400459349300205_public.xml and timestamp: 2024-02-13 18:07:31-07:00
+Current filepath: /tmp/2024-2A/202400489349200605_public.xml and timestamp: None
+Total Revenue: previous is 0 and current is: 3746
+Total Assets: previous is 0 and current is: 19539
+Total Expenses: previous is 0 and current is: 3206
+Name: previous is Naval Order of the United States and current is: Naval Order of the United States Group
+Return Type: previous is 990 and current is: 990EZ
+==================================================
+Previous filepath: /tmp/2024-2A/202400489349200045_public.xml and timestamp: None
+Current filepath: /tmp/2024-2A/202400509349201175_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-2A/202410509349200301_public.xml and timestamp: None
+Current filepath: /tmp/2024-2A/202400489349201300_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-2A/202440509349201189_public.xml and timestamp: None
+Current filepath: /tmp/2024-2A/202430519349201508_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-2A/202430539349200903_public.xml and timestamp: None
+Current filepath: /tmp/2024-2A/202420499349200112_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-2A/202440489349200804_public.xml and timestamp: None
+Current filepath: /tmp/2024-2A/202420489349200207_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-2A/202430529349200213_public.xml and timestamp: None
+Current filepath: /tmp/2024-2A/202400509349201110_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-2A/202400509349201135_public.xml and timestamp: None
+Current filepath: /tmp/2024-2A/202420499349200367_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-2A/202430489349200108_public.xml and timestamp: None
+Current filepath: /tmp/2024-2A/202440489349200404_public.xml and timestamp: None
+No difference found
+==================================================

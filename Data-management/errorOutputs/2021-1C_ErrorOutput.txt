@@ -1,0 +1,5 @@
+Previous filepath: /tmp/2021-1C/202112729349200101_public.xml and timestamp: 2021-09-28 04:44:40-04:00
+Current filepath: /tmp/2021-1C/202112689349200056_public.xml and timestamp: None
+Name: previous is NATIONAL VOICES FOR EQUALITY EDUCATION AND ENLIGHTENMENT INC and current is: NATIONAL VOICES FOR EQUALITY EDUCATION AND ENLIGHTENMENT
+City: previous is BRICKELL and current is: MIAMI
+==================================================

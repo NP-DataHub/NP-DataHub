@@ -5,6 +5,8 @@ import BarChart from "@/app/components/charts/BarChart";
 import LineCompareChart from "@/app/components/charts/LineCompareChart";
 import TimeSeries from "@/app/components/charts/TimeSeries";
 import StackChart from "@/app/components/charts/StackChart";
+import Gauge from "@/app/components/charts/Gauge";
+import Choropleth from "@/app/components/charts/Choropleth";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -22,14 +24,15 @@ const Nonprofit = () => {
   const { id } = router.query;
   console.log(id)
   const [nonprofitData, setNonprofitData] = useState(null);
+  const [sectorData, setSectorData] = useState(null);
 
-  const [selectedMetric, setSelectedMetric] = useState('Total Revenue');
-  const [selectedComparison, setSelectedComparison] = useState({ variable1: 'Total Revenue', variable2: 'Total Expenses' });
+  const [selectedMetric, setSelectedMetric] = useState('TotRev');
+  const [selectedComparison, setSelectedComparison] = useState({ variable1: 'TotRev', variable2: 'TotExp' });
   const metricOptions = [
-    { value: 'Total Revenue', label: 'Revenue' },
-    { value: 'Total Expenses', label: 'Expenses' },
-    { value: 'Total Assets', label: 'Assets' },
-    { value: 'Total Liabilities', label: 'Liabilities' },
+    { value: 'TotRev', label: 'Revenue' },
+    { value: 'TotExp', label: 'Expenses' },
+    { value: 'TotAst', label: 'Assets' },
+    { value: 'TotLia', label: 'Liabilities' },
   ];
   const getValuesForMetric = (metric) => {
     return years.map(year => nonprofitData[year][metric]);
@@ -43,6 +46,12 @@ const Nonprofit = () => {
         const response = await fetch(`/api/items?_id=${id}`);
         const data = await response.json();
         setNonprofitData(data.data[0]);
+        // retrieve state by state sector information
+        let sectorResponse = await fetch(`/api/averages?MajGrp=${data.data[0].NTEE[0]}`);
+        sectorResponse = await sectorResponse.json();
+        let sectorData = sectorResponse.data[0]
+        setSectorData(sectorData);
+        console.log(sectorData);
       };
 
       fetchNonprofitData();
@@ -58,7 +67,7 @@ const Nonprofit = () => {
     </div>
   );
 
-  if (!nonprofitData) {
+  if (!nonprofitData || !sectorData) {
     return <div className='w-screen dashboard-color h-screen'><LoadingComponent /></div>;
   }
 
@@ -80,24 +89,29 @@ const Nonprofit = () => {
 
   const years = Object.keys(nonprofitData).filter(year => !isNaN(year)).sort();
   const mostRecentYear = years[years.length - 1];
+  const minYear = years[0];
   const previousYear = years[years.length - 2];
+
+  const sectorYears = Object.keys(sectorData).filter(year => !isNaN(year)).sort();
+  const mostRecentSectorYear = sectorYears[sectorYears.length - 1];
+  const previousSectorYear = sectorYears[sectorYears.length - 2];
 
   if (mostRecentYear) {
     const yearData = nonprofitData[mostRecentYear];
-    cumulativeData.TotalRevenue = yearData['Total Revenue'] || 0;
-    cumulativeData.TotalExpenses = yearData['Total Expenses'] || 0;
-    cumulativeData.TotalAssets = yearData['Total Assets'] || 0;
-    cumulativeData.TotalLiabilities = yearData['Total Liabilities'] || 0;
-    cumulativeData.FundraisingExpenses = yearData['Fundraising Expenses'] || 0;
+    cumulativeData.TotalRevenue = yearData['TotRev'] || 0;
+    cumulativeData.TotalExpenses = yearData['TotExp'] || 0;
+    cumulativeData.TotalAssets = yearData['TotAst'] || 0;
+    cumulativeData.TotalLiabilities = yearData['TotLia'] || 0;
+    cumulativeData.FundraisingExpenses = yearData['FunExp'] || 0;
   }
 
   if (previousYear) {
     const yearData = nonprofitData[previousYear];
-    previousYearData.TotalRevenue = yearData['Total Revenue'] || 0;
-    previousYearData.TotalExpenses = yearData['Total Expenses'] || 0;
-    previousYearData.TotalAssets = yearData['Total Assets'] || 0;
-    previousYearData.TotalLiabilities = yearData['Total Liabilities'] || 0;
-    previousYearData.FundraisingExpenses = yearData['Fundraising Expenses'] || 0;
+    previousYearData.TotalRevenue = yearData['TotRev'] || 0;
+    previousYearData.TotalExpenses = yearData['TotExp'] || 0;
+    previousYearData.TotalAssets = yearData['TotAst'] || 0;
+    previousYearData.TotalLiabilities = yearData['TotLia'] || 0;
+    previousYearData.FundraisingExpenses = yearData['FunExp'] || 0;
   }
 
   const calculateDiff = (current, previous) => {
@@ -169,11 +183,10 @@ const Nonprofit = () => {
       diffColor: 'border-2 border-[#6A1701] bg-[#171821]',
     },
   ];
-  const revenues = years.map(year => nonprofitData[year]['Total Revenue']);
-  const expenses = years.map(year => nonprofitData[year]['Total Expenses']);
-  const assets = years.map(year => nonprofitData[year]['Total Assets']);
-  const liabilities = years.map(year => nonprofitData[year]['Total Liabilities']);
-  const style = { width: '100%', height: '100%' };
+  const revenues = years.map(year => nonprofitData[year]['TotRev']);
+  const expenses = years.map(year => nonprofitData[year]['TotExp']);
+  const assets = years.map(year => nonprofitData[year]['TotAst']);
+  const liabilities = years.map(year => nonprofitData[year]['TotLia']);
 
   const settings = {
       dots: true,
@@ -216,7 +229,7 @@ const Nonprofit = () => {
               <div className="flex-col w-10/12 mx-auto dashboard-color ">
                   <DashboardNavbar />
                   <div className="flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
-                      <h1 className="text-2xl font-semibold">{capitalizeFirstLetter(nonprofitData.Name)}</h1>
+                      <h1 className="text-2xl font-semibold">{capitalizeFirstLetter(nonprofitData.Nm)}</h1>
                       <span className="text-sm text-[#A0A0A0]">123 Some Street</span>
                       <div className="mt-6 ">
                           <Slider {...settings}>
@@ -260,7 +273,7 @@ const Nonprofit = () => {
                             </div>
                           </div>
                           <div className="flex items-center justify-center mb-8" style={{ width: '100%', height: '100%' }}>
-                            <BarChart values={getValuesForMetric(selectedMetric)} minYear={previousYear} style={style} />
+                            <BarChart values={getValuesForMetric(selectedMetric)} minYear={minYear}/>
                           </div>
                         </div>
 
@@ -295,8 +308,7 @@ const Nonprofit = () => {
                               variable2={selectedComparison.variable2} 
                               values1={getValuesForMetric(selectedComparison.variable1)} 
                               values2={getValuesForMetric(selectedComparison.variable2)} 
-                              minYear={previousYear} 
-                              style={style} 
+                              minYear={minYear}
                             />
                           </div>
                         </div>
@@ -306,22 +318,25 @@ const Nonprofit = () => {
                               <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Overall Growth</h1>
                               
                               <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
-                                  <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities} minYear = {previousYear} style={style}/>
+                                  <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities} minYear = {minYear}/>
                               </div>
                           </div>
                       </div>
                       <div className="grid grid-cols-3 gap-4 mt-10 mb-10">
                           <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 col-span-2">
                               {/*add chart here box size will update with chart*/}
-                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Time Series</h1>
-                              <div className="flex items-center justify-center mb-24 mt-12" style={{ width: '90%', height: '90%' }}>
-                                  <TimeSeries variable="Revenue" values={revenues} minYear = {previousYear} style={style} />
+                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Revenue By State</h1>
+                              <div className="flex items-center justify-center mb-24 mt-12" style={{ width: '100%', height: '100%' }}>
+                                  <TimeSeries values={revenues} minYear = {minYear}/>
                               </div>
 
                           </div>
                           <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                               {/*add chart here box size will update with chart*/}
-                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Compared to State</h1>
+                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Org Compared</h1>
+                              <div className="flex items-center justify-center mb-24 mt-12">
+                                  <Gauge orgName={capitalizeFirstLetter(nonprofitData.Nm)} orgVal={cumulativeData.TotalRevenue} stateName={nonprofitData.St} stateVal={sectorData[mostRecentSectorYear][nonprofitData.St].RevMed} nationalVal={sectorData[mostRecentSectorYear].NatMedRev}/>
+                              </div>
                           </div>
                       </div>
                   </div>
