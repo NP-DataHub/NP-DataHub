@@ -1,0 +1,328 @@
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" returnVersion="2019v5.0" xsi:schemaLocation="http://www.irs.gov/efile">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2020-10-14T10:56:12-07:00</ReturnTs>
+    <TaxPeriodEndDt>2020-05-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>LeeAnne Richter CPA</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>853 6th Street</AddressLine1Txt>
+        <CityNm>Manhattan Beach</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>90266</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990EZ</ReturnTypeCd>
+    <TaxPeriodBeginDt>2019-06-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>270662022</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>NATIONAL CHARITY LEAGUE INC</BusinessNameLine1Txt>
+        <BusinessNameLine2Txt>MANHATTAN-HERMOSA CHAPTER</BusinessNameLine2Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>NATI</BusinessNameControlTxt>
+      <PhoneNum>3103741407</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>PO BOX 892</AddressLine1Txt>
+        <CityNm>MANHATTAN BEACH</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>90266</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>SANDRA MEYER</PersonNm>
+      <PersonTitleTxt>Treasurer</PersonTitleTxt>
+      <SignatureDt>2020-10-14</SignatureDt>
+      <DiscussWithPaidPreparerInd>true</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>LeeAnne Richter CPA</PreparerPersonNm>
+      <PTIN>P00624495</PTIN>
+      <PhoneNum>3109228561</PhoneNum>
+      <SelfEmployedInd>X</SelfEmployedInd>
+    </PreparerPersonGrp>
+    <TaxYr>20196</TaxYr>
+    <BuildTS>2021-01-29 14:40:06Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="3">
+    <IRS990EZ documentId="IRS990EZ" referenceDocumentId="IRS990ScheduleO TransfersPersonalBenefitsContr" softwareId="19009920" softwareVersionNum="2019v5.0">
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <ScheduleBNotRequiredInd>X</ScheduleBNotRequiredInd>
+      <WebsiteAddressTxt>www.nationalcharityleague.org/nclm-hbeach</WebsiteAddressTxt>
+      <Organization501c3Ind referenceDocumentId="IRS990ScheduleA">X</Organization501c3Ind>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <GrossReceiptsAmt>74700</GrossReceiptsAmt>
+      <InfoInScheduleOPartIInd>X</InfoInScheduleOPartIInd>
+      <ContributionsGiftsGrantsEtcAmt>74684</ContributionsGiftsGrantsEtcAmt>
+      <InvestmentIncomeAmt>16</InvestmentIncomeAmt>
+      <CostOrOtherBasisExpenseSaleAmt>0</CostOrOtherBasisExpenseSaleAmt>
+      <FundraisingGrossIncomeAmt>0</FundraisingGrossIncomeAmt>
+      <SpecialEventsDirectExpensesAmt>0</SpecialEventsDirectExpensesAmt>
+      <CostOfGoodsSoldAmt>0</CostOfGoodsSoldAmt>
+      <TotalRevenueAmt>74700</TotalRevenueAmt>
+      <FeesAndOtherPymtToIndCntrctAmt>873</FeesAndOtherPymtToIndCntrctAmt>
+      <OtherExpensesTotalAmt>56321</OtherExpensesTotalAmt>
+      <TotalExpensesAmt>57194</TotalExpensesAmt>
+      <ExcessOrDeficitForYearAmt>17506</ExcessOrDeficitForYearAmt>
+      <NetAssetsOrFundBalancesBOYAmt>44324</NetAssetsOrFundBalancesBOYAmt>
+      <OtherChangesInNetAssetsAmt>936</OtherChangesInNetAssetsAmt>
+      <NetAssetsOrFundBalancesEOYAmt>62766</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIInd>X</InfoInScheduleOPartIIInd>
+      <CashSavingsAndInvestmentsGrp>
+        <BOYAmt>116406</BOYAmt>
+        <EOYAmt>63416</EOYAmt>
+      </CashSavingsAndInvestmentsGrp>
+      <Form990TotalAssetsGrp>
+        <BOYAmt>116406</BOYAmt>
+        <EOYAmt>63416</EOYAmt>
+      </Form990TotalAssetsGrp>
+      <SumOfTotalLiabilitiesGrp>
+        <BOYAmt>72082</BOYAmt>
+        <EOYAmt>650</EOYAmt>
+      </SumOfTotalLiabilitiesGrp>
+      <NetAssetsOrFundBalancesGrp>
+        <BOYAmt>44324</BOYAmt>
+        <EOYAmt>62766</EOYAmt>
+      </NetAssetsOrFundBalancesGrp>
+      <PrimaryExemptPurposeTxt>To foster mother-daughter relationships in a philanthropic organization committed to community service, leadership development and cultural experiences.</PrimaryExemptPurposeTxt>
+      <ProgramSrvcAccomplishmentGrp>
+        <DescriptionProgramSrvcAccomTxt>The Organization held various meetings and events to build its membership, develop strategies for charitable endeavors and develop and strengthen the bond between mothers and daughters.</DescriptionProgramSrvcAccomTxt>
+        <GrantsAndAllocationsAmt>57194</GrantsAndAllocationsAmt>
+      </ProgramSrvcAccomplishmentGrp>
+      <TotalProgramServiceExpensesAmt>57194</TotalProgramServiceExpensesAmt>
+      <InfoInScheduleOPartIVInd>X</InfoInScheduleOPartIVInd>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>EMILY MACIAS</PersonNm>
+        <TitleTxt>Past Pres.</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>10.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>ANDREA BARKER</PersonNm>
+        <TitleTxt>Recording Secy</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>MICHELLE TRAYLOR</PersonNm>
+        <TitleTxt>Parlimentarian</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>MONIQUE VRANESH</PersonNm>
+        <TitleTxt>Pres. Elect</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>DEBBIE TRAN</PersonNm>
+        <TitleTxt>VP MEMBERSHIP</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>PAM SMITH</PersonNm>
+        <TitleTxt>VP TICKTOCKERS</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>MELISSA STEINBECK</PersonNm>
+        <TitleTxt>VP TICKTOCKERS</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>KATIE DRISCOLL</PersonNm>
+        <TitleTxt>VP PHILANTHROPY</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>LOUISA CUSHMAN</PersonNm>
+        <TitleTxt>VP PHILANTHROPY</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>JAMIE WOOD</PersonNm>
+        <TitleTxt>VP ACTIVITIES</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>LINDSEY SERRANO</PersonNm>
+        <TitleTxt>VP ACTIVITIES</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>10.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>CRISTINA KABEALO</PersonNm>
+        <TitleTxt>VP COMM</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>KATIE BRODKIN</PersonNm>
+        <TitleTxt>VP PROVISIONALS</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>SANDRA MEYER</PersonNm>
+        <TitleTxt>Treasurer</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>LISA VALDE SEVERIN</PersonNm>
+        <TitleTxt>Treasurer</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>5.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <ActivitiesNotPreviouslyRptInd>false</ActivitiesNotPreviouslyRptInd>
+      <ChgMadeToOrgnzngDocNotRptInd>false</ChgMadeToOrgnzngDocNotRptInd>
+      <OrganizationHadUBIInd>false</OrganizationHadUBIInd>
+      <SubjectToProxyTaxInd>false</SubjectToProxyTaxInd>
+      <OrganizationDissolvedEtcInd>false</OrganizationDissolvedEtcInd>
+      <Form1120PolFiledInd>false</Form1120PolFiledInd>
+      <MadeLoansToFromOfficersInd>false</MadeLoansToFromOfficersInd>
+      <TaxImposedUnderIRC4911Amt>0</TaxImposedUnderIRC4911Amt>
+      <TaxImposedUnderIRC4912Amt>0</TaxImposedUnderIRC4912Amt>
+      <TaxImposedUnderIRC4955Amt>0</TaxImposedUnderIRC4955Amt>
+      <EngagedInExcessBenefitTransInd>false</EngagedInExcessBenefitTransInd>
+      <TaxImposedOnOrganizationMgrAmt>0</TaxImposedOnOrganizationMgrAmt>
+      <TaxReimbursedByOrganizationAmt>0</TaxReimbursedByOrganizationAmt>
+      <ProhibitedTaxShelterTransInd>false</ProhibitedTaxShelterTransInd>
+      <StatesWhereCopyOfReturnIsFldCd>CA</StatesWhereCopyOfReturnIsFldCd>
+      <BooksInCareOfDetail>
+        <PersonNm>SANDRA MEYER</PersonNm>
+        <USAddress>
+          <AddressLine1Txt>PO BOX 892</AddressLine1Txt>
+          <CityNm>MANHATTAN BEACH</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>90266</ZIPCd>
+        </USAddress>
+        <PhoneNum>3103741407</PhoneNum>
+      </BooksInCareOfDetail>
+      <ForeignFinancialAccountInd>false</ForeignFinancialAccountInd>
+      <ForeignOfficeInd>false</ForeignOfficeInd>
+      <DonorAdvisedFndsInd>false</DonorAdvisedFndsInd>
+      <OperateHospitalInd>false</OperateHospitalInd>
+      <TanningServicesProvidedInd>false</TanningServicesProvidedInd>
+      <RelatedOrganizationCtrlEntInd>false</RelatedOrganizationCtrlEntInd>
+      <TransactionWithControlEntInd>false</TransactionWithControlEntInd>
+      <PoliticalCampaignActyInd>false</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>false</LobbyingActivitiesInd>
+      <SchoolOperatingInd>false</SchoolOperatingInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>false</TrnsfrExmptNonChrtblRltdOrgInd>
+      <PartVIOfCompOfHghstPdEmplTxt>NONE</PartVIOfCompOfHghstPdEmplTxt>
+      <PartVIHghstPdCntrctProfSrvcTxt>NONE</PartVIHghstPdCntrctProfSrvcTxt>
+      <FiledScheduleAInd>true</FiledScheduleAInd>
+    </IRS990EZ>
+    <IRS990ScheduleA documentId="IRS990ScheduleA" softwareId="19009920" softwareVersionNum="2019v5.0">
+      <PubliclySupportedOrg509a2Ind>X</PubliclySupportedOrg509a2Ind>
+      <GiftsGrantsContrisRcvd509Grp>
+        <CurrentTaxYearMinus4YearsAmt>60610</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>62200</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>70864</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>69590</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>74684</CurrentTaxYearAmt>
+        <TotalAmt>337948</TotalAmt>
+      </GiftsGrantsContrisRcvd509Grp>
+      <GrossReceiptsAdmissionsGrp>
+        <TotalAmt>0</TotalAmt>
+      </GrossReceiptsAdmissionsGrp>
+      <GrossReceiptsNonUnrltBusGrp>
+        <TotalAmt>0</TotalAmt>
+      </GrossReceiptsNonUnrltBusGrp>
+      <TaxRevLeviedOrgnztnlBnft509Grp>
+        <TotalAmt>0</TotalAmt>
+      </TaxRevLeviedOrgnztnlBnft509Grp>
+      <GovtFurnSrvcFcltsVl509Grp>
+        <TotalAmt>0</TotalAmt>
+      </GovtFurnSrvcFcltsVl509Grp>
+      <Total509Grp>
+        <CurrentTaxYearMinus4YearsAmt>60610</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>62200</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>70864</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>69590</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>74684</CurrentTaxYearAmt>
+        <TotalAmt>337948</TotalAmt>
+      </Total509Grp>
+      <AmountsRcvdDsqlfyPersonGrp>
+        <TotalAmt>0</TotalAmt>
+      </AmountsRcvdDsqlfyPersonGrp>
+      <SubstantialContributorsAmtGrp>
+        <TotalAmt>0</TotalAmt>
+      </SubstantialContributorsAmtGrp>
+      <PublicSupportTotal509Amt>337948</PublicSupportTotal509Amt>
+      <GrossInvestmentIncome509Grp>
+        <CurrentTaxYearMinus4YearsAmt>21</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>21</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>20</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>20</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>16</CurrentTaxYearAmt>
+        <TotalAmt>98</TotalAmt>
+      </GrossInvestmentIncome509Grp>
+      <Post1975UBTIGrp>
+        <TotalAmt>0</TotalAmt>
+      </Post1975UBTIGrp>
+      <InvestmentIncomeAndUBTIGrp>
+        <CurrentTaxYearMinus4YearsAmt>21</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>21</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>20</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>20</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>16</CurrentTaxYearAmt>
+        <TotalAmt>98</TotalAmt>
+      </InvestmentIncomeAndUBTIGrp>
+      <NetIncomeFromOtherUBIGrp>
+        <TotalAmt>0</TotalAmt>
+      </NetIncomeFromOtherUBIGrp>
+      <OtherIncome509Grp>
+        <TotalAmt>0</TotalAmt>
+      </OtherIncome509Grp>
+      <TotalSupportCalendarYearGrp>
+        <CurrentTaxYearMinus4YearsAmt>60631</CurrentTaxYearMinus4YearsAmt>
+        <CurrentTaxYearMinus3YearsAmt>62221</CurrentTaxYearMinus3YearsAmt>
+        <CurrentTaxYearMinus2YearsAmt>70884</CurrentTaxYearMinus2YearsAmt>
+        <CurrentTaxYearMinus1YearAmt>69610</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>74700</CurrentTaxYearAmt>
+        <TotalAmt>338046</TotalAmt>
+      </TotalSupportCalendarYearGrp>
+      <PublicSupportCY509Pct>0.99970</PublicSupportCY509Pct>
+      <PublicSupportPY509Pct>0.99970</PublicSupportPY509Pct>
+      <InvestmentIncomeCYPct>0.00030</InvestmentIncomeCYPct>
+      <InvestmentIncomePYPct>0.00030</InvestmentIncomePYPct>
+      <ThirtyThrPctSuprtTestsCY509Ind>X</ThirtyThrPctSuprtTestsCY509Ind>
+    </IRS990ScheduleA>
+    <IRS990ScheduleO documentId="IRS990ScheduleO" softwareId="19009920" softwareVersionNum="2019v5.0">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Other Expenses.1002</FormAndLineReferenceDesc>
+        <ExplanationTxt>Office Expenses $6134</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Other Expenses.1012</FormAndLineReferenceDesc>
+        <ExplanationTxt>Insurance $1936</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Other Expenses.1</FormAndLineReferenceDesc>
+        <ExplanationTxt>CLASS EVENTS $26387</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Other Expenses.2</FormAndLineReferenceDesc>
+        <ExplanationTxt>FEES TO NATIONAL ORGANIZATION $21601</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Other Expenses.3</FormAndLineReferenceDesc>
+        <ExplanationTxt>CLOTHING EXPENSES $263</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Total Liabilities.1003</FormAndLineReferenceDesc>
+        <ExplanationTxt>Deferred Revenue - Beginning $72082 Deferred Revenue - Ending $650</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+  </ReturnData>
+</Return>

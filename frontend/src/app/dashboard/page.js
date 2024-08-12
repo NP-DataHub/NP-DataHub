@@ -70,6 +70,8 @@ export default function Dashboard() {
               return {
                 ...item,
                 annualRevenue: mostRecentYear ? item[mostRecentYear]['TotRev'] : 'N/A',
+                annualExpenses: mostRecentYear ? item[mostRecentYear]['TotExp'] : 'N/A',
+                annualRevenue: mostRecentYear ? item[mostRecentYear]['TotRev'] : 'N/A',
                 annualExpenses: mostRecentYear ? item[mostRecentYear]['TotExp'] : 'N/A'
               };
             });
@@ -530,6 +532,7 @@ export default function Dashboard() {
                                                                     onClick={() => handleNonprofitClick(result._id)}
                                                                     className="text-[#A9DFD8] hover:underline font-semibold"
                                                                 >
+                                                                    {capitalizeFirstLetter(result.Nm)}
                                                                     {capitalizeFirstLetter(result.Nm)}
                                                                 </a>
                                                             </div>

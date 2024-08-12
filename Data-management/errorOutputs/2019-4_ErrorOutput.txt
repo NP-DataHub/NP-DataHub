@@ -1,0 +1,7 @@
+Previous filepath: /tmp/2019-4/201921019349101037_public.xml and timestamp: None
+Current filepath: /tmp/2019-4/201913309349100606_public.xml and timestamp: None
+Total Revenue: previous is 27755 and current is: 113082
+Total Expenses: previous is 32664 and current is: 96951
+Net Income (Less Deficit): previous is -4909 and current is: 16131
+Contributions Received: previous is 27755 and current is: 113082
+==================================================
