@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   const { method, query } = req;
   try {
     const client = await clientPromise;
-    const db = client.db('Data');
+    const db = client.db('Nonprofitly');
 
     switch (method) {
       case 'GET':
@@ -40,6 +40,8 @@ export default async function handler(req, res) {
         const items = await db.collection('NonProfitData')
           .find(filters) // Include relevant fields for debugging
           .toArray();
+
+        
 
         console.log("Items found:", items.length); // Log the number of items found for debugging
 

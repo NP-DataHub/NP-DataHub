@@ -111,27 +111,27 @@ export default function Home() {
           </div>
           <div className="flex flex-col items-center text-center">
             <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 5" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+              <img draggable = {false} src="/img/youssef.JPG" alt="Image 5" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile" />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">    Hassan</h3>
           </div>
           <div className="flex flex-col items-center text-center">
             <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 6" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+              <img draggable = {false} src="/img/emmet.jpg" alt="Image 6" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile" />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">Emmet Whitehead</h3>
           </div>
           <div className="flex flex-col items-center text-center">
-            <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 7" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+            <a href="https://www.linkedin.com/in/kaichen543/" target="_blank" rel="noopener noreferrer">
+              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 7" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile" />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">Kai Chen</h3>
           </div>
           <div className="flex flex-col items-center text-center">
-            <a href="https://en.wikipedia.org/wiki/John_Smith_(explorer)" target="_blank" rel="noopener noreferrer">
-              <img draggable = {false} src="/img/john_smith.jpg" alt="Image 8" className="max-w-full mx-auto border border-gray-900 rounded-xl even-shadow profile" />
+            <a href="https://www.linkedin.com/in/yothamsage" target="_blank" rel="noopener noreferrer">
+              <img draggable = {false} src="/img/yotham.jpg" alt="Image 8" className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile" />
             </a>
-            <h3 className="text-xl md:text-2xl mt-4">John Smith</h3>
+            <h3 className="text-xl md:text-2xl mt-4">Yotham Sage</h3>
           </div>
         </div>
       </section>   
