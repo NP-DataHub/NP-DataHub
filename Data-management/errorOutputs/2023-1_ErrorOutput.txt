@@ -1,0 +1,13 @@
+Previous filepath: /tmp/2023-1/202330199349200813_public.xml and timestamp: None
+Current filepath: /tmp/2023-1/202300219349200200_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-1/202320129349202807_public.xml and timestamp: None
+Current filepath: /tmp/2023-1/202330179349200638_public.xml and timestamp: None
+Total Revenue: previous is 193518 and current is: 193521
+Total Assets: previous is 232646 and current is: 232647
+Total Expenses: previous is 77942 and current is: 77944
+Program Service Revenue: previous is 9324 and current is: 9325
+Investment Income: previous is 14 and current is: 15
+Gift Grants Membership Fees received 509: previous is 324925 and current is: 333770
+==================================================

@@ -1,0 +1,25 @@
+Previous filepath: /tmp/2018-5/201823199349307212_public.xml and timestamp: 2018-11-15 12:24:08-05:00
+Current filepath: /tmp/2018-5/201823199349307602_public.xml and timestamp: 2018-11-15 12:24:08-05:00
+Total Revenue: previous is 191575 and current is: 5130
+Total Assets: previous is 44800 and current is: 0
+Total Liabilities: previous is 15000 and current is: 0
+Total Expenses: previous is 234788 and current is: 34930
+Total Contributions: previous is 57000 and current is: 0
+Program Service Revenue: previous is 134108 and current is: 5130
+Investment Income: previous is 467 and current is: 0
+Gross Receipts: previous is 191575 and current is: 5130
+Compensation of current officers: previous is 44132 and current is: 0
+Payroll Taxes: previous is 3633 and current is: 0
+Gift Grants Membership Fees received 509: previous is 573028 and current is: 588028
+Number of employees: previous is 1 and current is: 0
+==================================================
+Previous filepath: /tmp/2018-5/201831709349100723_public.xml and timestamp: 2018-06-19 17:19:20-05:00
+Current filepath: /tmp/2018-5/201831709349100318_public.xml and timestamp: 2018-06-19 17:19:20-05:00
+Total Revenue: previous is 50 and current is: 0
+Total Assets: previous is 548 and current is: 0
+Total Expenses: previous is 188 and current is: 548
+Net Income (Less Deficit): previous is -138 and current is: -548
+Contributions Received: previous is 50 and current is: 0
+Total Fund net worth: previous is 548 and current is: 0
+Cash: previous is 548 and current is: 0
+==================================================
