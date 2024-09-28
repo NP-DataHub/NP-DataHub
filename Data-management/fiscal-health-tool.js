@@ -13,7 +13,7 @@ require('dotenv').config({ path: '../frontend/.env' })
  * @param {boolean} npVSnp - Flag indicating if the comparison is between two nonprofits (true) or a nonprofit vs a sector (false).
  * @param {string|null} specific_sector - The specific sector for comparison (if applicable).
  *
- * @requires MongoDB connection
+ * @requires MongoDB connection, secondNp and secondAddr to be at least empty strings even if the npVSnp flag is false.
  * @effect Fetches data for nonprofit(s) and sector, calculates fiscal health scores, logs errors or warnings.
  * @modifies None
  * @throws None
@@ -515,6 +515,4 @@ const firstAddr = '33 CHESTER ST'
 const secondNp = 'Beta Theta Pi Fraternity'
 const secondAddr = '12 Munson Road'
 
-main(firstNp, firstAddr, (secondNp = ''), (secondAddr = ''), false).then(
-  console.log
-)
+main(firstNp, firstAddr, secondNp, secondAddr, false).then(console.log)
