@@ -2,53 +2,67 @@ import requests
 from bs4 import BeautifulSoup
 import os
 from zipfile import ZipFile
-import io
-from urllib.request import urlretrieve
+from dotenv import load_dotenv
+from pymongo import MongoClient, UpdateOne
 
-def changeToZIP(fp):
-    base, ext = os.path.splitext(fp)
-    if ext != '.zip':
-        newFP = base + '.zip'
-        os.rename(fp, newFP)
 
-def openAndDownload(ziplink):
-    path = os.path.join(os.getcwd(), 'ZIPfolders')
-    print(f"Current working directory: {os.getcwd()}")
-    print(f"Target directory: {path}")
+class UpdateDatabase:
+    #NOTE: THIS ONLY WORKS ASSUMING IRS DOESN'T CHANGE THE PREVIOUS URL LINKS, if they do, it will unnecessarily excecute main parser on already parsed folders
 
-    if not os.path.exists(path):
-        os.makedirs(path)
-        print(f"Created directory: {path}")
+    def __init__(self):
+        load_dotenv('../frontend/.env')
+        self.mongo_client = MongoClient(os.getenv('MONGODB_URI'))
+        self.database = self.mongo_client["Nonprofitly"]
+        self.processed_folders = set()
+        self.unprocessed_folders = list()
 
-    os.chdir(path)
-    print("Path changed to:", os.getcwd())
+    def get_already_parsed_folders(self):
+        with open('zip_files_processed.txt', 'r') as file:
+            for line in file:
+                self.processed_folders.add(line.strip())
+    def get_missing_zip_folders(self):
+        url = "https://www.irs.gov/charities-non-profits/form-990-series-downloads"
+        response = requests.get(url)
+        html_content = response.content
+        soup = BeautifulSoup(html_content, 'html.parser')
+        all_zip_folders = soup.select('a[href$=".zip"]')
+        for folder in all_zip_folders:
+            folder_link = folder['href']
+            if not folder_link in self.processed_folders:
+                self.unprocessed_folders.append(folder_link)
 
-    try:
-        r = requests.get(ziplink, allow_redirects=True)
-        r.raise_for_status()
-        filename = ziplink.split('/')[-1]
-        with open(filename, 'wb') as f:
-            f.write(r.content)
-        print(f"Downloaded and saved as: {filename}")
-        with ZipFile(filename, 'r') as zObject:
-        	zObject.extractall(path)
-    except Exception as e:
-        print(f"Error: {e}")
-        exit()
+    def download_missing_zip_folders(self):
+        # Iterate through each unprocessed folder link
+        for ziplink in self.unprocessed_folders:
+            try:
+                # Download the ZIP file
+                r = requests.get(ziplink, allow_redirects=True)
+                r.raise_for_status()  # Raise an error for bad responses
+                filename = ziplink.split('/')[-1]
 
-def extractZipsFromHtml():
-	url = "https://www.irs.gov/charities-non-profits/form-990-series-downloads"
-	response = requests.get(url)
-	html_content = response.content
-	soup = BeautifulSoup(html_content, 'html.parser')
-	zip_links = soup.select('a[href$=".zip"]')
-	for ziplink in zip_links:
-		zipfilelink = ziplink['href']
-		openAndDownload(zipfilelink)
-		exit()
+                # Save the downloaded ZIP file
+                with open(filename, 'wb') as f:
+                    f.write(r.content)
+                print(f"Downloaded and saved as: {filename}")
 
-def main():
-	extractZipsFromHtml()
+                # Create a folder name by removing the .zip extension
+                folder_name = filename.replace('.zip', '')
 
-if __name__ == '__main__':
-	main()
+                # Unzip the file
+                with ZipFile(filename, 'r') as zObject:
+                    zObject.extractall(folder_name)
+                print(f"Extracted: {filename} to folder: {folder_name}")
+
+                # Optionally, you can keep track of downloaded zip files
+                with open('zip_files_processed.txt', 'a') as processed_file:
+                    processed_file.write('\n' + ziplink )
+
+            except Exception as e:
+                print(f"Error downloading {ziplink}: {e}")
+
+# Example usage
+if __name__ == "__main__":
+    updater = UpdateDatabase()
+    updater.get_already_parsed_folders()
+    updater.get_missing_zip_folders()
+    updater.download_missing_zip_folders()
