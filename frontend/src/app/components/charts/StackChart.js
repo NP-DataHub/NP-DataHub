@@ -3,19 +3,14 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
-
 /**
  * @param revenues -     an array of revenues measured each year
  * @param expenses -    an array of expenses measured each year
  * @param assets -      an array of assets measured each year
  * @param liabilities - an array of liabilities measured each year
 */
-const StackChart = ({revenues, expenses, assets, liabilities, minYear}) => {
-  // ensures arg is an array
-  if (!Array.isArray(revenues) || !Array.isArray(expenses) || !Array.isArray(assets) || !Array.isArray(liabilities)) {
-    return <div>ERROR: chart arg must be an array</div>;
-  }
-
+const StackChart = ({ revenues, expenses, assets, liabilities, minYear }) => {
+  // Declare hooks before conditional checks
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -34,6 +29,11 @@ const StackChart = ({revenues, expenses, assets, liabilities, minYear}) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Check for invalid inputs after the hooks have been called
+  if (!Array.isArray(revenues) || !Array.isArray(expenses) || !Array.isArray(assets) || !Array.isArray(liabilities)) {
+    return <div>ERROR: chart arg must be an array</div>;
+  }
+
   const formatNumber = (num) => {
     if (num >= 1000000000) {
       return (num / 1000000000).toFixed(1) + 'B';
@@ -46,21 +46,21 @@ const StackChart = ({revenues, expenses, assets, liabilities, minYear}) => {
     }
     return num;
   };
+
   revenues = [...revenues].reverse();
   expenses = [...expenses].reverse();
-  assets = [...assets].reverse()
+  assets = [...assets].reverse();
   liabilities = [...liabilities].reverse();
 
   const option = {
     tooltip: {
       trigger: 'axis',
       axisPointer: {
-        // Use axis to trigger tooltip
-        type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+        type: 'shadow'
       },
       formatter: function (params) {
         let tooltipContent = `<div>${params[0].name}<br/>`;
-        params.forEach(item => {
+        params.forEach((item) => {
           tooltipContent += `
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span>
@@ -149,9 +149,9 @@ const StackChart = ({revenues, expenses, assets, liabilities, minYear}) => {
         data: assets.map((value, index) => ({
           value,
           itemStyle: {
-            barBorderRadius:liabilities[index] ? 0 : [0, 0.016*dimensions.width, 0.016*dimensions.width, 0],
+            barBorderRadius: liabilities[index] ? 0 : [0, 0.016 * dimensions.width, 0.016 * dimensions.width, 0],
           }
-        })),
+        }))
       },
       {
         name: 'Liabilities',
@@ -166,7 +166,7 @@ const StackChart = ({revenues, expenses, assets, liabilities, minYear}) => {
         },
         data: liabilities,
         itemStyle: {
-            barBorderRadius: [0, 0.016*dimensions.width, 0.016*dimensions.width, 0],
+          barBorderRadius: [0, 0.016 * dimensions.width, 0.016 * dimensions.width, 0],
         }
       }
     ]
@@ -174,7 +174,7 @@ const StackChart = ({revenues, expenses, assets, liabilities, minYear}) => {
 
   return (
     <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
-      <ReactECharts option={option}/>
+      <ReactECharts option={option} />
     </div>
   );
 };

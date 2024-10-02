@@ -4,22 +4,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
 const BarChart = ({ values, minYear }) => {
-  if (!Array.isArray(values) || values.length === 0) {
-    return <div>ERROR: chart arg must be an array</div>;
-  }
-
-  const formatNumber = (num) => {
-    if (num >= 1000000000) {
-      return (num / 1000000000).toFixed(1) + 'B';
-    }
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
-    }
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
-    }
-    return num;
-  };
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -38,11 +22,28 @@ const BarChart = ({ values, minYear }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const formatNumber = (num) => {
+    if (num >= 1000000000) {
+      return (num / 1000000000).toFixed(1) + 'B';
+    }
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + 'M';
+    }
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num;
+  };
+
+  if (!Array.isArray(values) || values.length === 0) {
+    return <div>ERROR: chart arg must be an array</div>;
+  }
+
   const option = {
     tooltip: {
       trigger: 'axis',
       axisPointer: {
-        type: 'none'
+        type: 'none',
       },
       formatter: function (params) {
         const index = params[0].dataIndex;
@@ -53,18 +54,19 @@ const BarChart = ({ values, minYear }) => {
           percent = (((params[0].value - previousValue) / previousValue) * 100).toFixed(1);
           if (isNaN(percent)) percent = 0.0;
         } else percent = (0).toFixed(1);
-        if (percent >= 0) tooltipContent += `<br/><span style="color:#32CD32;">&#x25B2;</span> +`;
+        if (percent >= 0)
+          tooltipContent += `<br/><span style="color:#32CD32;">&#x25B2;</span> +`;
         else tooltipContent += `<br/><span style="color:#E60000;">&#x25BC;</span> `;
         tooltipContent += `${percent}%`;
         return tooltipContent;
-      }
+      },
     },
     grid: {
       left: 0,
       right: 0,
       bottom: 0,
       top: 0,
-      containLabel: true
+      containLabel: true,
     },
     xAxis: [
       {
@@ -72,16 +74,13 @@ const BarChart = ({ values, minYear }) => {
         data: Array.from({ length: values.length }, (_, index) => index + parseInt(minYear)),
         axisTick: {
           alignWithLabel: true,
-          show: false
-        },
-        axisLine: {
-          //show: false
+          show: false,
         },
         axisLabel: {
           fontSize: Math.round(0.036 * dimensions.width),
-          fontWeight: 'bold'
-        }
-      }
+          fontWeight: 'bold',
+        },
+      },
     ],
     yAxis: [
       {
@@ -90,27 +89,21 @@ const BarChart = ({ values, minYear }) => {
           show: false,
         },
         splitLine: {
-          show: false
+          show: false,
         },
         axisLine: {
-          show: false
+          show: false,
         },
-        axisTick: {
-          show: false
-        }
       },
       {
         position: 'right',
         axisTick: {
-          show: true
+          show: true,
         },
         axisLine: {
-          show: false
+          show: false,
         },
-        splitLine: {
-          show: false
-        }
-      }
+      },
     ],
     series: [
       {
@@ -132,15 +125,15 @@ const BarChart = ({ values, minYear }) => {
             }
             return 'rgb(80, 110, 237)'; // Default blue color
           },
-          barBorderRadius: [0.016*dimensions.width, 0.016*dimensions.width, 0, 0],
-        }
+          barBorderRadius: [0.016 * dimensions.width, 0.016 * dimensions.width, 0, 0],
+        },
       },
-    ]
+    ],
   };
 
   return (
     <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
-      <ReactECharts option={option}/>
+      <ReactECharts option={option} />
     </div>
   );
 };

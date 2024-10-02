@@ -3,19 +3,15 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import regression from 'regression';
+
 /**
  * @param values -   an array of values measured each year
-*/
-
-const TimeSeries = ({values, minYear}) => {
-  // ensures arg is an array
-  if (!Array.isArray(values) || values.length === 0) {
-    console.log(values);
-    return <div>ERROR: chart arg must be an array</div>;
-  }
-
+ */
+const TimeSeries = ({ values, minYear }) => {
+  // Always declare hooks at the top level
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
   const formatNumber = (num) => {
     if (num >= 1000000000) {
       return (num / 1000000000).toFixed(1) + 'B';
@@ -44,10 +40,16 @@ const TimeSeries = ({values, minYear}) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Validation of input after hooks are called
+  if (!Array.isArray(values) || values.length === 0) {
+    console.log(values);
+    return <div>ERROR: chart arg must be an array</div>;
+  }
+
   const data = values.map((value, index) => [index, value]);
   const fitted_line = regression.linear(data);
 
-  // print the regression line
+  // Log the regression line for debugging
   console.log(fitted_line);
 
   const option = {
@@ -139,14 +141,15 @@ const TimeSeries = ({values, minYear}) => {
       }
     }
   };
-  console.log(option)
+
+  // Log the option for debugging
+  console.log(option);
 
   return (
     <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
-      <ReactECharts option={option}/>
+      <ReactECharts option={option} />
     </div>
   );
 };
 
 export default TimeSeries;
-
