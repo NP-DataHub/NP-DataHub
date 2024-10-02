@@ -4,10 +4,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
 const LineCompareChart = ({ variable1, values1, variable2, values2, minYear }) => {
-  if (!Array.isArray(values1) || values1.length === 0 || !Array.isArray(values2) || values2.length === 0) {
-    return <div>ERROR: chart arg must be an array</div>;
-  }
-
+  // Always call hooks at the top level
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -39,6 +36,11 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, minYear }) =
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Check for invalid data after hooks are called
+  if (!Array.isArray(values1) || values1.length === 0 || !Array.isArray(values2) || values2.length === 0) {
+    return <div>ERROR: chart arg must be an array</div>;
+  }
+
   const option = {
     legend: {
       top: 'bottom',
@@ -48,7 +50,7 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, minYear }) =
       trigger: 'axis',
       formatter: function (params) {
         let tooltipContent = `<div>${params[0].name}<br/>`;
-        params.forEach(item => {
+        params.forEach((item) => {
           tooltipContent += `
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span>
@@ -96,7 +98,7 @@ const LineCompareChart = ({ variable1, values1, variable2, values2, minYear }) =
       },
       axisLabel: {
         show: false
-      },
+      }
     },
     series: [
       {

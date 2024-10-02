@@ -7,9 +7,9 @@ import Autosuggest from 'react-autosuggest';
 import cities from "../components/cities";
 import ntee_codes from "../components/ntee";
 import { useRouter } from 'next/navigation';
-import ChoroplethMap from "../components/map";
-import SocialMediaMentions from "../components/media_mentions";
-import NewsFeedSection from "../components/newsfeed";
+
+import dynamic from 'next/dynamic';
+const ChoroplethMap = dynamic(() => import('../components/map'), { ssr: false });
 
 export default function Toolbox() {
     const [selectedSection, setSelectedSection] = useState("");
