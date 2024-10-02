@@ -4,6 +4,7 @@
     "dotenv": "^16.4.5",
     "fs": "^0.0.1-security",
     "react-icons": "^5.2.1",
-    "react-tooltip": "^5.27.1"
+    "react-tooltip": "^5.27.1",
+    "tippy.js": "^6.3.7"
   }
 }
