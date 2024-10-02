@@ -8,7 +8,8 @@ import cities from "../components/cities";
 import ntee_codes from "../components/ntee";
 import { useRouter } from 'next/navigation';
 import ChoroplethMap from "../components/map";
-
+import SocialMediaMentions from "../components/media_mentions";
+import NewsFeedSection from "../components/newsfeed";
 
 export default function Toolbox() {
     const [selectedSection, setSelectedSection] = useState("");
@@ -724,42 +725,32 @@ export default function Toolbox() {
                                 </div>
                             )}
                             {selectedSection === "News Feed" && (
-                                <div className="p-6 bg-[#171821] rounded-lg">
-                                <h3 className="text-xl font-semibold text-[#FEB95A]">
-                                    News Feeds
-                                </h3>
-                                <p className="text-white">
-                                    A tool to understanding larger scale problems and connecting to regional nonprofits via social media and search engines.
-                                </p>
-                                <div className="grid grid-cols-3 gap-4 p-4 mt-12">
-                                    <button className="flex items-center justify-center bg-[#34344c] text-white py-2 px-4 rounded-full">
-                                        <span className="mr-2">@</span>
-                                        NP MENTIONS
-                                    </button>
-                                    <button className="flex items-center justify-center bg-[#34344c] text-white py-2 px-4 rounded-full">
-                                        <span className="mr-2">🔍</span>
-                                        SEARCH
-                                    </button>
-                                    <button className="flex items-center justify-center bg-[#34344c] text-white py-2 px-4 rounded-full">
-                                        <span className="mr-2">🔎</span>
-                                        ADVANCED SEARCH
-                                    </button>
-                                    <button className="flex items-center justify-center bg-[#34344c] text-white py-2 px-4 rounded-full">
-                                        <span className="mr-2">📷</span>
-                                        INSTAGRAM
-                                    </button>
-                                    <button className="flex items-center justify-center bg-[#34344c] text-white py-2 px-4 rounded-full">
-                                        <span className="mr-2">➕</span>
-                                        ADD NTEE CODE STREAM
-                                    </button>
-                                    <button className="flex items-center justify-center bg-[#34344c] text-white py-2 px-4 rounded-full">
-                                        <span className="mr-2">➕</span>
-                                        ADD SOCIAL ACCOUNT
-                                    </button>
-                                    </div>
-                                    <img src = "../img/newsfeed.png" className = 'w-3/4 items-center mx-auto border-2 rounded-lg mt-12 even-shadow '>
-                                    </img>
-                                </div>
+                                <NewsFeedSection></NewsFeedSection>
+                                // <div className="p-6 bg-[#171821] rounded-lg">
+                                // <h3 className="text-xl font-semibold text-[#FEB95A]">
+                                //     News Feeds
+                                // </h3>
+                                // <p className="text-white">
+                                //     A tool to understanding larger scale problems and connecting to regional nonprofits via social media and search engines.
+                                // </p>
+                                // <div className="grid grid-cols-2 gap-4 p-4 mt-12">
+                                //     <button className="flex items-center justify-center bg-[#34344c] text-white py-2 px-4 rounded-full">
+                                //         <span className="mr-2">🔍</span>
+                                //         SEARCH
+                                //     </button>
+                                //     <button className="flex items-center justify-center bg-[#34344c] text-white py-2 px-4 rounded-full">
+                                //         <span className="mr-2">🔎</span>
+                                //         ADVANCED SEARCH
+                                //     </button>
+                                //     </div>
+                                //     <div className="mt-12">
+                                //     <SocialMediaMentions
+                                //         query="#nonprofits OR #Notforprofit OR #NonprofitsofInstagram OR #Supportnonprofits OR #Nonprofitorganizations"
+                                //         limit={25} // You can adjust the limit
+                                //         period="last7days" // You can adjust the period as needed
+                                //     />
+                                //     </div>
+                                // </div>
                             )}
                         </div>
                     </div>
