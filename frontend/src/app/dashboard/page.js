@@ -46,11 +46,13 @@ export default function Dashboard() {
 
 
     const capitalizeFirstLetter = (str) => {
-        return str.split(' ')
-            .map(word => 
-                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-            )
-            .join(' ');
+        if (str){
+            return str.split(' ')
+                .map(word => 
+                    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                )
+                .join(' ');
+            }
     };
 
 
@@ -67,6 +69,8 @@ export default function Dashboard() {
               mostRecentYear = years[years.length - 1];
               return {
                 ...item,
+                annualRevenue: mostRecentYear ? item[mostRecentYear]['TotRev'] : 'N/A',
+                annualExpenses: mostRecentYear ? item[mostRecentYear]['TotExp'] : 'N/A',
                 annualRevenue: mostRecentYear ? item[mostRecentYear]['TotRev'] : 'N/A',
                 annualExpenses: mostRecentYear ? item[mostRecentYear]['TotExp'] : 'N/A'
               };
@@ -230,7 +234,7 @@ export default function Dashboard() {
     return(
         <div>
             <div className = "flex dashboard-color text-white font-sans">
-                <Sidebar/>
+                <Sidebar currentPage='/dashboard'/>
                 <div className = "flex-col w-screen">
                     <DashboardNavbar/>
                     <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
@@ -529,9 +533,10 @@ export default function Dashboard() {
                                                                     className="text-[#A9DFD8] hover:underline font-semibold"
                                                                 >
                                                                     {capitalizeFirstLetter(result.Nm)}
+                                                                    {capitalizeFirstLetter(result.Nm)}
                                                                 </a>
                                                             </div>
-                                                            <div>123 some street </div>
+                                                            <div>{capitalizeFirstLetter(result.Addr)} </div>
                                                             <div>{capitalizeFirstLetter(result.Cty)}</div>
                                                             <div>{result.St}</div>
                                                             <div>{result.Zip}</div>

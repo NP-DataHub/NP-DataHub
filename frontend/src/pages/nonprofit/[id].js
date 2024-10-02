@@ -16,7 +16,7 @@ import '@/app/globals.css';
 import { AuthProvider } from "@/app/components/context";
 import Select from 'react-select';
 import { Tooltip as ReactTooltip } from 'react-tooltip'
-
+import { FaInfoCircle } from "react-icons/fa";
 
 
 const Nonprofit = () => {
@@ -35,6 +35,20 @@ const Nonprofit = () => {
     { value: 'TotLia', label: 'Liabilities' },
   ];
   const getValuesForMetric = (metric) => {
+    console.log(metric)
+    if (metric == 'Total Revenue') {
+      metric = 'TotRev'
+    }
+    if (metric == 'Total Expenses') {
+      metric = 'TotExp'
+    }
+    if (metric == 'Total Assets') {
+      metric = 'TotAst'
+    }
+    if (metric == 'Total Liabilities') {
+      metric = 'TotLia'
+    }
+
     return years.map(year => nonprofitData[year][metric]);
   };
   
@@ -126,7 +140,7 @@ const Nonprofit = () => {
             word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
         )
         .join(' ');
-};
+  };
 
   const formatNumber = (num) => {
     if (num >= 1000000000) {
@@ -187,6 +201,7 @@ const Nonprofit = () => {
   const expenses = years.map(year => nonprofitData[year]['TotExp']);
   const assets = years.map(year => nonprofitData[year]['TotAst']);
   const liabilities = years.map(year => nonprofitData[year]['TotLia']);
+  const style = { width: '100%', height: '100%' };
 
   const settings = {
       dots: true,
@@ -230,7 +245,7 @@ const Nonprofit = () => {
                   <DashboardNavbar />
                   <div className="flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
                       <h1 className="text-2xl font-semibold">{capitalizeFirstLetter(nonprofitData.Nm)}</h1>
-                      <span className="text-sm text-[#A0A0A0]">123 Some Street</span>
+                      <span className="text-sm text-[#A0A0A0]">{nonprofitData.Addr}</span>
                       <div className="mt-6 ">
                           <Slider {...settings}>
                               {indicators.map((indicator, index) => {
@@ -255,22 +270,23 @@ const Nonprofit = () => {
                       <div className="grid grid-cols-3 gap-4 mt-10 h-400px">
                         <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                           <div className="flex justify-between items-center">
-                            <h1 className="mb-8" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>
-                              {metricOptions.find(option => option.value === selectedMetric)?.label}
-                            </h1>
-                            
-                            <div className="flex items-center">
-                              <Select
-                                options={metricOptions}
-                                value={metricOptions.find(option => option.value === selectedMetric)}
-                                onChange={(option) => setSelectedMetric(option.value)}
-                                className="text-black"
-                              />
-                              <a data-tooltip-id="my-tooltip" className="ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.">
-                                  ℹ️
+                            <div className="flex items-center space-x-2">
+                            <a data-tooltip-id="comparison-tooltip" className=" ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="This is the tooltip content for the comparison box.">
+                                <FaInfoCircle/>
                               </a>
-                              <ReactTooltip  place="top" effect="solid" id="my-tooltip" />
+                              <ReactTooltip place="top" effect="solid" id="comparison-tooltip" />
+                              <h1 className="mb-16 text-xl text-center" style={{ textAlign: 'center', fontWeight: 'bold' }}>
+                                {metricOptions.find(option => option.value === selectedMetric)?.label}
+                              </h1>
                             </div>
+                            
+                            <Select
+                              options={metricOptions}
+                              value={metricOptions.find(option => option.value === selectedMetric)}
+                              onChange={(option) => setSelectedMetric(option.value)}
+                              className="text-black text-xl"
+                              styles={{ control: (base) => ({ ...base, width: '125px' }) }}
+                            />
                           </div>
                           <div className="flex items-center justify-center mb-8" style={{ width: '100%', height: '100%' }}>
                             <BarChart values={getValuesForMetric(selectedMetric)} minYear={minYear}/>
@@ -280,26 +296,30 @@ const Nonprofit = () => {
 
                         <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                           <div className="flex justify-between items-center">
-                            <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>
-                              {`${metricOptions.find(option => option.value === selectedComparison.variable1)?.label} vs. ${metricOptions.find(option => option.value === selectedComparison.variable2)?.label}`}
-                            </h1>
+                            <div className="flex items-center space-x-2">
+                            <a data-tooltip-id="comparison-tooltip" className=" ml-0 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="This is the tooltip content for the comparison box.">
+                                <FaInfoCircle/>
+                              </a>
+                              <ReactTooltip place="top" effect="solid" id="comparison-tooltip" />
+                              <h1 className="mb-10 text-xl" style={{ textAlign: 'center', fontWeight: 'bold' }}>
+                                {`${metricOptions.find(option => option.value === selectedComparison.variable1)?.label} vs. ${metricOptions.find(option => option.value === selectedComparison.variable2)?.label}`}
+                              </h1>
+                            </div>
                             <div className="flex space-x-2 items-center">
                               <Select
                                 options={metricOptions}
                                 value={metricOptions.find(option => option.value === selectedComparison.variable1)}
                                 onChange={(option) => setSelectedComparison(prev => ({ ...prev, variable1: option.value }))}
-                                className="text-black"
+                                className="text-black text-sm"
+                                styles={{ control: (base) => ({ ...base, width: '125px' }) }}
                               />
                               <Select
                                 options={metricOptions}
                                 value={metricOptions.find(option => option.value === selectedComparison.variable2)}
                                 onChange={(option) => setSelectedComparison(prev => ({ ...prev, variable2: option.value }))}
-                                className="text-black"
+                                className="text-black text-sm"
+                                styles={{ control: (base) => ({ ...base, width: '125px' }) }}
                               />
-                              <a data-tooltip-id="my-tooltip" className=" ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="Lorem ipsum dolor sit amet">
-                                  ℹ️
-                              </a>
-                              <ReactTooltip  place="top" effect="solid" id="my-tooltip" />
                             </div>
                           </div>
                           <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
@@ -315,7 +335,7 @@ const Nonprofit = () => {
 
                           <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                               {/*add chart here box size will update with chart*/}
-                              <h1 style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>Overall Growth</h1>
+                              <h1 style={{ textAlign: 'center', fontSize: '1.5em', fontWeight: 'bold' }}>Overall Growth</h1>
                               
                               <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
                                   <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities} minYear = {minYear}/>
@@ -345,6 +365,5 @@ const Nonprofit = () => {
       </div>
   );
 }
-
 
 export default Nonprofit;
