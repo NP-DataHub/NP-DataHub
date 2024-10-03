@@ -1,12 +1,34 @@
-
 /**
- * Designed to grab sector data from the mongodb based on filters passed in the query
- * These can be NTEE codes, ZIPs, States, Cities, etc. All or none can be passed in the query
+ *  This is a general search for the mongodb. It will take in a query object and return all the items that match the query object.
  * 
- * Probably doesn't work at all, need to talk to Yotham about this
+ *  Importantly, when you build your query, it should have key names that match the field names in the database.
+ *  So, dont call "CITY={some_city}" in the query object, instead call it "Cty={some_city}"
+ *  
+ *  The most frequent key names are:
+ * "EIN": "010055140",
+ * "NTEE": "Z",
+ * "SubCode": "13",
+ * "Addr": "10 LITCHFIELD ROAD",
+ * "Cty": "HALLOWELL",
+ * "Nm": "HALLOWELL CENTENNIAL BURIAL GROUND ASSOCIATION INC",
+ * "RetTyp": "990",
+ * "St": "ME",
+ * "Zip": "04347"
  * 
- * Emmet W.
+ *  The result will be an array of nonprofit objects that match the query object. 
+ * 
+ *  If you find any issues, let me know!
+ * 
+ *  - Emmet Whitehead
  */
+
+
+
+
+
+
+
+
 
 import clientPromise from "@/app/lib/mongodb";
 import { ObjectId } from "mongodb";
@@ -20,18 +42,22 @@ export default async function handler(req, res) {
 
         switch(method){
             case 'GET':
-
-                const {NTEE1, NTEE2, NTEE3, CITY, ZIP } = query;
                 const filters = {};
-                if (CITY) filters.Cty = CITY;
-                if (ZIP) filters.Zip = ZIP;
-
-                console.log("Filters:", filters);
-
-                const data = await database.collection("NonProfitData").find({
-                    NTEE: { $in: [NTEE1, NTEE2, NTEE3] },
+                console.log("Query:", query);
+                // From the passed in query, extract all the filters
+                for(const [key, value] of Object.entries(query)){
+                    if(value !== 'null'){
+                        filters[key] = value;
+                    }
+                }
+                
+                // Build the query object
+                const queryObject = {
                     ...filters
-                }).toArray();
+                };
+
+                console.log("Query Object:", queryObject);
+                const data = await database.collection("NonProfitData").find(queryObject).toArray();
 
                 console.log("Items found:", data.length);
 

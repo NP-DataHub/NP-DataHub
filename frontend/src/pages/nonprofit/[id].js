@@ -25,8 +25,12 @@ const Nonprofit = () => {
   const { id } = router.query;
   console.log(id)
   const [nonprofitData, setNonprofitData] = useState(null);
+
+
+  //These lowk should not even be in here, will update as I work
+
   const [sectorData, setSectorData] = useState(null);
-  const [filtered_sector_data, setfiltered_sector_data] = useState(null);
+  // const [filtered_sector_data, setfiltered_sector_data] = useState(null);
 
   const [selectedMetric, setSelectedMetric] = useState('TotRev');
   const [selectedComparison, setSelectedComparison] = useState({ variable1: 'TotRev', variable2: 'TotExp' });
@@ -60,32 +64,6 @@ const Nonprofit = () => {
     }
   }, [id]);
 
-
-
-/**
- * 
- * This is testing for the sector.js data fetcher. Eventually, we want the queries in here to be live updated based on the filters the users selects.
- * Also, this belongs on the sector page, not the single non profit page.
- * 
- */
-  useEffect(() => {
-    // Fetch the sector data based on the filters
-    const fetchSectorData = async () => {
-      const NTEE1 = 'Z';
-      const NTEE2 = 'A';
-      const ZIP = '95060';
-      let response = await fetch(`/api/sector?NTEE1=${NTEE1}&NTEE2=${NTEE2}&ZIP=${ZIP}`);
-      let filtered_sector_data = await response.json();
-
-      console.log("Sector Data fetch results:");
-      console.log(response);
-      console.log(filtered_sector_data); // probably cooked beyond repair...
-
-      setfiltered_sector_data(filtered_sector_data.data);
-    }
-
-    fetchSectorData();
-  }, []);
 
 
   const LoadingComponent = () => (
@@ -303,7 +281,7 @@ const Nonprofit = () => {
                             </div>
                           </div>
                           <div className="flex items-center justify-center mb-8" style={{ width: '100%', height: '100%' }}>
-                            <ScatterPlot data = {filtered_sector_data} filters = {["A", "Z", "95060"]} minYear = {previousYear}/>
+                            <TimeSeries values={revenues} minYear = {minYear}/>
                           </div>
                         </div>
 
