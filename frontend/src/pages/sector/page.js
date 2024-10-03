@@ -34,6 +34,8 @@ const Sector = () => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedSector, setSelectedSector] = useState(null);
   const [selectedZIP, setSelectedZIP] = useState(null);
+  const [selectedXAxis, setSelectedXAxis] = useState({ value: "TotRev", label: "Total Revenue" });
+  const [selectedYAxis, setSelectedYAxis] = useState({ value: "TotExp", label: "Total Expenses" });
 
 
   // Create the dropdown options for the sector selection dropdowns
@@ -72,6 +74,14 @@ const Sector = () => {
     { value: '95064', label: '95064' }
   ];
 
+  // Variable options for visualization tools
+  const varOptions = [
+    { value: 'TotRev', label: 'Total Revenue' },
+    { value: 'TotExp', label: 'Total Expenses' },
+    { value: 'TotAst', label: 'Total Assets' },
+    { value: 'TotLia', label: 'Total Liabilities' }
+  ];
+
 
 useEffect(() => {
   // Fetch the sector data based on the filters
@@ -90,17 +100,21 @@ useEffect(() => {
     let response = await fetch(`/api/sector?Cty=${CITY}`);
     let filtered_sector_data = await response.json();
 
-    console.log("Sector Data fetch results:");
-    console.log(response);
-    console.log(filtered_sector_data); // probably cooked beyond repair...
-
     setSectorData(filtered_sector_data);
   }
+  
 
   fetchSectorData();
 }, [selectedSector, selectedCity, selectedState, selectedZIP]);
 
+useEffect(() => {
+  // There must be a better way to do this
+  // Sole purpose is to re-render the scatter plot when the X or Y axis is changed
+  // But not to refetch the data
+}
+, [selectedXAxis, selectedYAxis]);
 
+console.log(selectedXAxis.value);
 return (
   <div className="flex dashboard-color text-white font-sans h-screen w-screen">
   <Sidebar />
@@ -159,7 +173,7 @@ return (
         </div>
         <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
           <div className="flex justify-between items-center">
-            <h1 className="mb-8" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>New Selection Tool</h1>
+            <h1 className="mb-8" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>NTEE Code</h1>
             <div className="flex items-center">
               <Select
                 options={[]}
@@ -174,8 +188,22 @@ return (
         </div>
       </div>
       <div className="mt-10">
-        { sectorData ? <ScatterPlot data={sectorData.data} filters={sectorData.filters} /> : <div>Loading...</div> }
+        { sectorData ? <ScatterPlot data={sectorData.data} X_axis_var={selectedXAxis.value} Y_axis_var={selectedYAxis.value} filters={sectorData.filters} /> : <div>Loading...</div> }
       </div>
+    </div>
+    <div className="flex justify-center mt-10">
+    <Select
+      options={varOptions}
+      value={selectedXAxis}
+      onChange={(option) => setSelectedXAxis(option)}
+      className="text-black"
+    />
+    <Select
+      options={varOptions}
+      value={selectedYAxis}
+      onChange={(option) => setSelectedYAxis(option)}
+      className="text-black"
+    />
     </div>
   </div>
 </div>

@@ -1,10 +1,16 @@
 /**
  *  This is a general search for the mongodb. It will take in a query object and return all the items that match the query object.
  * 
- *  Importantly, when you build your query, it should have key names that match the field names in the database.
- *  So, dont call "CITY={some_city}" in the query object, instead call it "Cty={some_city}"
+ *  Example usage:
+ *      let response = await fetch(`/api/sector?Cty=${CITY}`);
+        let filtered_sector_data = await response.json();
+    
+        This will return all the nonprofits in the city of Santa Cruz.
+ * 
+ *  ***Importantly, when you build your query, it should have key names that match the field names in the database.
+ *      So, dont call "CITY={some_city}" in the query object, instead call it "Cty={some_city}"
  *  
- *  The most frequent key names are:
+ *  Some frequent key names are:
  * "EIN": "010055140",
  * "NTEE": "Z",
  * "SubCode": "13",
@@ -21,13 +27,6 @@
  * 
  *  - Emmet Whitehead
  */
-
-
-
-
-
-
-
 
 
 import clientPromise from "@/app/lib/mongodb";

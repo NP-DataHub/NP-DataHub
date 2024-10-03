@@ -13,12 +13,11 @@ import ReactECharts from 'echarts-for-react';
  * @Overview Creates a scatter plot using the given variables, where they function as filters for the total data that we have
  *           Each NTEE code is a different color on the scatter plot
 */
-const ScatterPlot = ({data, filters, minYear}) => {
+const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters, minYear}) => {
 
     // placeholder for filters var for now
     const filters_placeholder = ["A", "B", "C"];
 
-    console.log("Data:", data);
 
     // Handles resizing of the chart
     const chartContainerRef = useRef(null);
@@ -53,28 +52,20 @@ const ScatterPlot = ({data, filters, minYear}) => {
       };
 
 
-      /**
-       *  As it stands right now, the data object contains a list of all nonprofits that have been filtered by the user.
-       *  However, we need to extract useful data. Right now I am assuming that there will be two more selectors that will 
-       *  determine the X and Y axis variables. Then we can extract the data from the data object and create the scatter plot.
-       *  For now we can use all the years for each nonprofit.
-       */
-
-      // Extract the X and Y axis variables from the filters
-      const X_axis_var = "TotRev"; // filters[4];
-      const Y_axis_var = "TotExp"; // filters[5];
-
       // Convert filters to actual english
       const labels = {
         "TotRev": "Total Revenue",
         "TotExp": "Total Expenses",
         "TotAst": "Total Assets",
-        "TotLiab": "Total Liabilities",
+        "TotLia": "Total Liabilities",
       }
 
       // Get the labels for the X and Y axis variables
       const X_axis_label = labels[X_axis_var];
       const Y_axis_label = labels[Y_axis_var];
+
+      console.log("X Axis Label:", X_axis_label);
+      console.log(X_axis_var);
 
       // Extract the data for the scatter plot, each 
       const scatter_data = [];
@@ -89,17 +80,16 @@ const ScatterPlot = ({data, filters, minYear}) => {
             const Y_axis = nonprofit[key][Y_axis_var];
 
             // Add the data to the scatter plot data
-            scatter_data.push([X_axis, Y_axis]);
+            scatter_data.push({
+              name: nonprofit["Nm"],
+              state: nonprofit["St"],
+              city: nonprofit["Cty"],
+              zip: nonprofit["Zip"],
+              value: [X_axis, Y_axis]
+            });
           }
         });
       });
-
-
-
-
-
-
-      console.log("Scatter Data:", scatter_data);
 
 
 
@@ -110,8 +100,12 @@ const ScatterPlot = ({data, filters, minYear}) => {
               type: 'none'
             },
             formatter: function (params) {
-              const tooltipContent = params.map(item => {
-                return `${item.name}: $${formatNumber(item.value)}`;
+              const tooltipContent = params.map(item => {       
+                return `<strong>${item.name}</strong><br/> 
+                        ${item.data.city}, ${item.data.state} ${item.data.zip}<br/>
+                        ${X_axis_label}: ${formatNumber(item.value[0])}<br/>
+                        ${Y_axis_label}: ${formatNumber(item.value[1])}
+                          `;
               }).join('<br/>');
               return tooltipContent;
             },
@@ -140,11 +134,11 @@ const ScatterPlot = ({data, filters, minYear}) => {
             }
         },
         brush: {},
-        legend: {
-            data: ["NTEE " + filters_placeholder[0].toString()],
-            left: 'center',
-            bottom: 5
-        },
+        // legend: {
+        //     data: ["NTEE " + filters_placeholder[0].toString()],
+        //     left: 'center',
+        //     bottom: 5
+        // },
         xAxis: {
             type: 'value',
             scale: true,
@@ -171,7 +165,6 @@ const ScatterPlot = ({data, filters, minYear}) => {
             {
                 name: "NTEE " + filters_placeholder[0].toString(),
                 type: 'scatter',
-                // get all the X_axis_var and Y_axis_var data from the data variable for NTEE1
                 
                 data: scatter_data
             }
