@@ -402,10 +402,9 @@ class Database:
         self.database["NonProfitData"].update_many(missing_ntee, {"$set": {"NTEE": "Z"}})
         self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"SubCode": "Z"}})
 
-    def output_duplicates(self, name, directory):
+    def output_duplicates(self, name):
         if self.output:
-            os.makedirs(directory, exist_ok=True)
-            file_name = os.path.join(directory, f"{name}_ErrorOutput.txt")
+            file_name = f"Data-management/errorOutputs/{name}_ErrorOutput.txt"
             differences_found = False  # Flag to check if any differences are found
             with open(file_name, 'w') as file:
                 for lst in self.output:
@@ -437,13 +436,12 @@ class Database:
 
 if __name__ == "__main__":
     directory = sys.argv[1]
-    output_directory = '/Users/mr.youssef/Desktop/NpDataHub/Data-management/errorOutputs'
     name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
-    input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
-    input('Is MongoDB client declared in the object correct? Press enter if it is.')
-    input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')
-    input(f'Is the directory, where the error file will be created, correct "{output_directory}" ? Press enter if it is.')
-    obj = Database()
-    obj.process_all_xml_files(directory)
-    print("Data has been successfully inserted into MongoDB.")
-    obj.output_duplicates(name_of_file,output_directory)
+    # input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
+    # input('Is MongoDB client declared in the object correct? Press enter if it is.')
+    # input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')
+    # input(f'Is the directory, where the error file will be created, correct "{output_directory}" ? Press enter if it is.')
+    # obj = Database()
+    # obj.process_all_xml_files(directory)
+    # print("Data has been successfully inserted into MongoDB.")
+    # obj.output_duplicates(name_of_file,output_directory)
