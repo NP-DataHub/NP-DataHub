@@ -7,7 +7,8 @@ import ReactECharts from 'echarts-for-react';
 /** 
  * @param data - a list of nonprofits that have been filtered by the user. This data is used to create the scatter plot
  * @param filters - the filters that are used to filter the data. These are used to label the data on the graph
- *                - Expects the following format: [NTEE1, NTEE2, City, Zip, X_axis_var, Y_axis_var]
+ * @param X_axis_var - the variable that is used for the x-axis of the scatter plot
+ * @param Y_axis_var - the variable that is used for the y-axis of the scatter plot
  * @param minYear - the minimum year for the data that we are graphing. This is used to determine the x-axis
  * 
  * @Overview Creates a scatter plot using the given variables, where they function as filters for the total data that we have
