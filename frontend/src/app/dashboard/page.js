@@ -233,14 +233,15 @@ export default function Dashboard() {
 
     return(
         <div>
-            <div className = "flex dashboard-color text-white font-sans">
-                <Sidebar currentPage='/dashboard'/>
+            {/* #21222D */}
+            <div className="flex flex-col lg:flex-row dashboard-color text-white font-sans">
+                <Sidebar currentPage='/dashboard' className="hidden lg:block" />
                 <div className = "flex-col w-screen">
                     <DashboardNavbar/>
-                    <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
+                    <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans" >
                         <h1 className = "text-2xl font-semibold">CREATING NONPROFIT ECOSYSTEMS THROUGH DATA</h1>
                         <span className = "text-sm text-[#A0A0A0]">Explore historical data and gain insight through prescriptive and predictive analytics.</span>
-                        <div className="grid grid-cols-4 gap-4 mt-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 mx-auto">
                             <div className="bg-[#171821] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                 <svg className = "mb-4" width="36" height="39" viewBox="0 0 23 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M21.1994 7.09144L11.2237 1.22339L1.24802 7.09144V18.8276L11.2237 24.6956L21.1994 18.8276V7.09144Z" stroke="#FEB95A" stroke-width="1.95" stroke-linejoin="round"/>
@@ -283,16 +284,16 @@ export default function Dashboard() {
                                     and federal agencies.</p>
                             </div>
                         </div>
-                    </div>
-                    <div className = "flex justify-center  m-8 text-2xl font-sans font-semibold">
-                        <h1>CHOOSE FROM A SUITE OF ANALYTICAL TOOLS</h1>
-                    </div>
-                    <div className = "flex-col mx-10 font-sans">
-                        <div className="grid grid-cols-3 gap-4 mt-6">
-                            <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                                <h2 className="text-xl text-center font-semibold mb-2">HISTORICAL PERFORMANCE</h2>
-                                <div className = "flex justify-center">
-                                    <svg  width="515" height="306" viewBox="0 0 215 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div className = "flex justify-center  m-8 text-2xl font-sans font-semibold">
+                            <h1>CHOOSE FROM A SUITE OF ANALYTICAL TOOLS</h1>
+                        </div>
+                    
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 mx-auto justify-center place-items-center">
+
+                            <div className="bg-[#171821] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+
+                                <h2 className="text-xl font-semibold mb-2 text-center">HISTORICAL PERFORMANCE</h2>
+                                <svg className="w-full h-auto" viewBox="0 0 215 106" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.99623 9.02717C11.5503 13.8053 31.0025 23.3614 32.3783 23.3614C33.7541 23.3614 40.5948 23.3614 43.8432 23.3614L71.9323 15.3342L96.0086 30.2418H109.767L133.843 13.0408L145.881 17.0543L182.569 42.2826L191.167 38.269L212.378 1" stroke="#A9DFD8" stroke-width="1.14674" stroke-linecap="round"/>
                                         <path d="M32.3783 23.9349L1.99623 9.60066V71.4998H212.951V0.999756L190.956 38.9998L182.569 42.8561L145.881 17.6278L133.843 13.6142L109.767 30.8153H102.888H96.0086L71.9323 15.9077L43.8432 23.9349H32.3783Z" fill="url(#paint0_linear_1237_654)"/>
                                         <circle cx="1.99721" cy="9" r="2" fill="#A9DFD8"/>
@@ -327,95 +328,90 @@ export default function Dashboard() {
                                         </linearGradient>
                                         </defs>
                                     </svg>
-                                </div>
                             </div>
-                            <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                                <h2 className="text-xl font-semibold mb-2 text-center ">PREDICTIVE ANALYTICS</h2>
-                                <div className = "flex justify-center">
-                                    <svg  width="515" height="306" viewBox="0 0 215 106" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.99623 9.02717C11.5503 13.8053 31.0025 23.3614 32.3783 23.3614C33.7541 23.3614 40.5948 23.3614 43.8432 23.3614L71.9323 15.3342L96.0086 30.2418H109.767L133.843 13.0408L145.881 17.0543L182.569 42.2826L191.167 38.269L212.378 1" stroke="#A9DFD8" stroke-width="1.14674" stroke-linecap="round"/>
-                                        <path d="M32.3783 23.9349L1.99623 9.60066V71.4998H212.951V0.999756L190.956 38.9998L182.569 42.8561L145.881 17.6278L133.843 13.6142L109.767 30.8153H102.888H96.0086L71.9323 15.9077L43.8432 23.9349H32.3783Z" fill="url(#paint0_linear_1237_654)"/>
-                                        <circle cx="1.99721" cy="9" r="2" fill="#A9DFD8"/>
-                                        <circle cx="31.9913" cy="23" r="2" fill="#A9DFD8"/>
-                                        <circle cx="43.9883" cy="23" r="2" fill="#A9DFD8"/>
-                                        <circle cx="70.9825" cy="15" r="2" fill="#A9DFD8"/>
-                                        <circle cx="95.9767" cy="30" r="2" fill="#A9DFD8"/>
-                                        <circle cx="109.974" cy="30" r="2" fill="#A9DFD8"/>
-                                        <circle cx="133.969" cy="13" r="2" fill="#A9DFD8"/>
-                                        <circle cx="145.966" cy="17" r="2" fill="#A9DFD8"/>
-                                        <circle cx="182.958" cy="42" r="2" fill="#A9DFD8"/>
-                                        <circle cx="190.957" cy="38" r="2" fill="#A9DFD8"/>
-                                        <circle cx="211.952" cy="2" r="2" fill="#A9DFD8"/>
-                                        <path d="M1.99623 52.7894L18.6204 51.0693L40.977 40.1753L70.7858 71.1372H102.314L138.429 60.2432L184.289 63.1101L212.378 43.0421" stroke="#F2C8ED" stroke-width="1.14674" stroke-linecap="round"/>
-                                        <path d="M18.6204 51.6426L1.99623 53.3627V106H212.951V43.042L184.289 63.6833L161.962 62L137.967 60.5L102.314 71.7105H70.4815L40.977 40.7485L18.6204 51.6426Z" fill="url(#paint1_linear_1237_654)"/>
-                                        <circle cx="1.99721" cy="53" r="2" fill="#F2C8ED"/>
-                                        <circle cx="17.9943" cy="51" r="2" fill="#F2C8ED"/>
-                                        <circle cx="40.9894" cy="40" r="2" fill="#F2C8ED"/>
-                                        <circle cx="70.9825" cy="71" r="2" fill="#F2C8ED"/>
-                                        <circle cx="101.976" cy="71" r="2" fill="#F2C8ED"/>
-                                        <circle cx="137.968" cy="60" r="2" fill="#F2C8ED"/>
-                                        <circle cx="183.958" cy="63" r="2" fill="#F2C8ED"/>
-                                        <circle cx="212.952" cy="42" r="2" fill="#F2C8ED"/>
-                                        <defs>
-                                        <linearGradient id="paint0_linear_1237_654" x1="105.474" y1="-3.88177" x2="106.95" y2="78.4434" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#A9DFD8"/>
-                                        <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
-                                        </linearGradient>
-                                        <linearGradient id="paint1_linear_1237_654" x1="105.974" y1="37.1053" x2="106.465" y2="106.496" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#F2C8ED"/>
-                                        <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
-                                        </linearGradient>
-                                        </defs>
-                                    </svg>
+                            <div className="bg-[#171821] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <h2 className="text-xl font-semibold mb-2 text-center">PREDICTIVE ANALYTICS</h2>
+                                    <svg className="w-full h-auto" viewBox="0 0 215 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1.99623 9.02717C11.5503 13.8053 31.0025 23.3614 32.3783 23.3614C33.7541 23.3614 40.5948 23.3614 43.8432 23.3614L71.9323 15.3342L96.0086 30.2418H109.767L133.843 13.0408L145.881 17.0543L182.569 42.2826L191.167 38.269L212.378 1" stroke="#A9DFD8" stroke-width="1.14674" stroke-linecap="round"/>
+                                            <path d="M32.3783 23.9349L1.99623 9.60066V71.4998H212.951V0.999756L190.956 38.9998L182.569 42.8561L145.881 17.6278L133.843 13.6142L109.767 30.8153H102.888H96.0086L71.9323 15.9077L43.8432 23.9349H32.3783Z" fill="url(#paint0_linear_1237_654)"/>
+                                            <circle cx="1.99721" cy="9" r="2" fill="#A9DFD8"/>
+                                            <circle cx="31.9913" cy="23" r="2" fill="#A9DFD8"/>
+                                            <circle cx="43.9883" cy="23" r="2" fill="#A9DFD8"/>
+                                            <circle cx="70.9825" cy="15" r="2" fill="#A9DFD8"/>
+                                            <circle cx="95.9767" cy="30" r="2" fill="#A9DFD8"/>
+                                            <circle cx="109.974" cy="30" r="2" fill="#A9DFD8"/>
+                                            <circle cx="133.969" cy="13" r="2" fill="#A9DFD8"/>
+                                            <circle cx="145.966" cy="17" r="2" fill="#A9DFD8"/>
+                                            <circle cx="182.958" cy="42" r="2" fill="#A9DFD8"/>
+                                            <circle cx="190.957" cy="38" r="2" fill="#A9DFD8"/>
+                                            <circle cx="211.952" cy="2" r="2" fill="#A9DFD8"/>
+                                            <path d="M1.99623 52.7894L18.6204 51.0693L40.977 40.1753L70.7858 71.1372H102.314L138.429 60.2432L184.289 63.1101L212.378 43.0421" stroke="#F2C8ED" stroke-width="1.14674" stroke-linecap="round"/>
+                                            <path d="M18.6204 51.6426L1.99623 53.3627V106H212.951V43.042L184.289 63.6833L161.962 62L137.967 60.5L102.314 71.7105H70.4815L40.977 40.7485L18.6204 51.6426Z" fill="url(#paint1_linear_1237_654)"/>
+                                            <circle cx="1.99721" cy="53" r="2" fill="#F2C8ED"/>
+                                            <circle cx="17.9943" cy="51" r="2" fill="#F2C8ED"/>
+                                            <circle cx="40.9894" cy="40" r="2" fill="#F2C8ED"/>
+                                            <circle cx="70.9825" cy="71" r="2" fill="#F2C8ED"/>
+                                            <circle cx="101.976" cy="71" r="2" fill="#F2C8ED"/>
+                                            <circle cx="137.968" cy="60" r="2" fill="#F2C8ED"/>
+                                            <circle cx="183.958" cy="63" r="2" fill="#F2C8ED"/>
+                                            <circle cx="212.952" cy="42" r="2" fill="#F2C8ED"/>
+                                            <defs>
+                                            <linearGradient id="paint0_linear_1237_654" x1="105.474" y1="-3.88177" x2="106.95" y2="78.4434" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#A9DFD8"/>
+                                            <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
+                                            </linearGradient>
+                                            <linearGradient id="paint1_linear_1237_654" x1="105.974" y1="37.1053" x2="106.465" y2="106.496" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#F2C8ED"/>
+                                            <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
+                                            </linearGradient>
+                                            </defs>
+                                        </svg>
                                 </div>
-                            </div>
-                            <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                                <h2 className="text-xl font-semibold mb-2 text-center">NETWORKS + PATHS</h2>
-                                <div className = "flex justify-center">
-                                    <svg  width="515" height="306" viewBox="0 0 215 106" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.99623 9.02717C11.5503 13.8053 31.0025 23.3614 32.3783 23.3614C33.7541 23.3614 40.5948 23.3614 43.8432 23.3614L71.9323 15.3342L96.0086 30.2418H109.767L133.843 13.0408L145.881 17.0543L182.569 42.2826L191.167 38.269L212.378 1" stroke="#A9DFD8" stroke-width="1.14674" stroke-linecap="round"/>
-                                        <path d="M32.3783 23.9349L1.99623 9.60066V71.4998H212.951V0.999756L190.956 38.9998L182.569 42.8561L145.881 17.6278L133.843 13.6142L109.767 30.8153H102.888H96.0086L71.9323 15.9077L43.8432 23.9349H32.3783Z" fill="url(#paint0_linear_1237_654)"/>
-                                        <circle cx="1.99721" cy="9" r="2" fill="#A9DFD8"/>
-                                        <circle cx="31.9913" cy="23" r="2" fill="#A9DFD8"/>
-                                        <circle cx="43.9883" cy="23" r="2" fill="#A9DFD8"/>
-                                        <circle cx="70.9825" cy="15" r="2" fill="#A9DFD8"/>
-                                        <circle cx="95.9767" cy="30" r="2" fill="#A9DFD8"/>
-                                        <circle cx="109.974" cy="30" r="2" fill="#A9DFD8"/>
-                                        <circle cx="133.969" cy="13" r="2" fill="#A9DFD8"/>
-                                        <circle cx="145.966" cy="17" r="2" fill="#A9DFD8"/>
-                                        <circle cx="182.958" cy="42" r="2" fill="#A9DFD8"/>
-                                        <circle cx="190.957" cy="38" r="2" fill="#A9DFD8"/>
-                                        <circle cx="211.952" cy="2" r="2" fill="#A9DFD8"/>
-                                        <path d="M1.99623 52.7894L18.6204 51.0693L40.977 40.1753L70.7858 71.1372H102.314L138.429 60.2432L184.289 63.1101L212.378 43.0421" stroke="#F2C8ED" stroke-width="1.14674" stroke-linecap="round"/>
-                                        <path d="M18.6204 51.6426L1.99623 53.3627V106H212.951V43.042L184.289 63.6833L161.962 62L137.967 60.5L102.314 71.7105H70.4815L40.977 40.7485L18.6204 51.6426Z" fill="url(#paint1_linear_1237_654)"/>
-                                        <circle cx="1.99721" cy="53" r="2" fill="#F2C8ED"/>
-                                        <circle cx="17.9943" cy="51" r="2" fill="#F2C8ED"/>
-                                        <circle cx="40.9894" cy="40" r="2" fill="#F2C8ED"/>
-                                        <circle cx="70.9825" cy="71" r="2" fill="#F2C8ED"/>
-                                        <circle cx="101.976" cy="71" r="2" fill="#F2C8ED"/>
-                                        <circle cx="137.968" cy="60" r="2" fill="#F2C8ED"/>
-                                        <circle cx="183.958" cy="63" r="2" fill="#F2C8ED"/>
-                                        <circle cx="212.952" cy="42" r="2" fill="#F2C8ED"/>
-                                        <defs>
-                                        <linearGradient id="paint0_linear_1237_654" x1="105.474" y1="-3.88177" x2="106.95" y2="78.4434" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#A9DFD8"/>
-                                        <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
-                                        </linearGradient>
-                                        <linearGradient id="paint1_linear_1237_654" x1="105.974" y1="37.1053" x2="106.465" y2="106.496" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#F2C8ED"/>
-                                        <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
-                                        </linearGradient>
-                                        </defs>
-                                    </svg>
+                                <div className="bg-[#171821] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <h2 className="text-xl font-semibold mb-2 text-center">NETWORKS + PATHS</h2>
+                                    <svg className="w-full h-auto" viewBox="0 0 215 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1.99623 9.02717C11.5503 13.8053 31.0025 23.3614 32.3783 23.3614C33.7541 23.3614 40.5948 23.3614 43.8432 23.3614L71.9323 15.3342L96.0086 30.2418H109.767L133.843 13.0408L145.881 17.0543L182.569 42.2826L191.167 38.269L212.378 1" stroke="#A9DFD8" stroke-width="1.14674" stroke-linecap="round"/>
+                                            <path d="M32.3783 23.9349L1.99623 9.60066V71.4998H212.951V0.999756L190.956 38.9998L182.569 42.8561L145.881 17.6278L133.843 13.6142L109.767 30.8153H102.888H96.0086L71.9323 15.9077L43.8432 23.9349H32.3783Z" fill="url(#paint0_linear_1237_654)"/>
+                                            <circle cx="1.99721" cy="9" r="2" fill="#A9DFD8"/>
+                                            <circle cx="31.9913" cy="23" r="2" fill="#A9DFD8"/>
+                                            <circle cx="43.9883" cy="23" r="2" fill="#A9DFD8"/>
+                                            <circle cx="70.9825" cy="15" r="2" fill="#A9DFD8"/>
+                                            <circle cx="95.9767" cy="30" r="2" fill="#A9DFD8"/>
+                                            <circle cx="109.974" cy="30" r="2" fill="#A9DFD8"/>
+                                            <circle cx="133.969" cy="13" r="2" fill="#A9DFD8"/>
+                                            <circle cx="145.966" cy="17" r="2" fill="#A9DFD8"/>
+                                            <circle cx="182.958" cy="42" r="2" fill="#A9DFD8"/>
+                                            <circle cx="190.957" cy="38" r="2" fill="#A9DFD8"/>
+                                            <circle cx="211.952" cy="2" r="2" fill="#A9DFD8"/>
+                                            <path d="M1.99623 52.7894L18.6204 51.0693L40.977 40.1753L70.7858 71.1372H102.314L138.429 60.2432L184.289 63.1101L212.378 43.0421" stroke="#F2C8ED" stroke-width="1.14674" stroke-linecap="round"/>
+                                            <path d="M18.6204 51.6426L1.99623 53.3627V106H212.951V43.042L184.289 63.6833L161.962 62L137.967 60.5L102.314 71.7105H70.4815L40.977 40.7485L18.6204 51.6426Z" fill="url(#paint1_linear_1237_654)"/>
+                                            <circle cx="1.99721" cy="53" r="2" fill="#F2C8ED"/>
+                                            <circle cx="17.9943" cy="51" r="2" fill="#F2C8ED"/>
+                                            <circle cx="40.9894" cy="40" r="2" fill="#F2C8ED"/>
+                                            <circle cx="70.9825" cy="71" r="2" fill="#F2C8ED"/>
+                                            <circle cx="101.976" cy="71" r="2" fill="#F2C8ED"/>
+                                            <circle cx="137.968" cy="60" r="2" fill="#F2C8ED"/>
+                                            <circle cx="183.958" cy="63" r="2" fill="#F2C8ED"/>
+                                            <circle cx="212.952" cy="42" r="2" fill="#F2C8ED"/>
+                                            <defs>
+                                            <linearGradient id="paint0_linear_1237_654" x1="105.474" y1="-3.88177" x2="106.95" y2="78.4434" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#A9DFD8"/>
+                                            <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
+                                            </linearGradient>
+                                            <linearGradient id="paint1_linear_1237_654" x1="105.974" y1="37.1053" x2="106.465" y2="106.496" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#F2C8ED"/>
+                                            <stop offset="1" stop-color="#1D1E26" stop-opacity="0"/>
+                                            </linearGradient>
+                                            </defs>
+                                        </svg>
                                 </div>
-                            </div>
                         </div>
                     </div>
                     <div className = "flex justify-center  m-8 text-2xl font-sans font-semibold">
                         <h1>BEGIN YOUR SEARCH</h1>
                     </div>
                     <div className="flex-col mx-10 font-sans mb-10">
-                        <div className="grid grid-cols-4 gap-4 mt-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
                             <div className="bg-[#21222D] p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ">
                             <select 
                                 className="mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]" 
@@ -509,46 +505,62 @@ export default function Dashboard() {
                                 SEARCH
                             </button>
                             </div>
+                            </div>
+                            <div>
                             {hasSearched && (
-                                <div ref={searchResultsRef} className="flex-col mt-10 bg-[#21222D] p-4 rounded-lg shadow-md mx-40 w-screen max-w-7xl">
+                                <div
+                                    ref={searchResultsRef}
+                                    className="flex flex-col justify-center items-center mt-10 bg-[#21222D] p-4 rounded-lg shadow-md mx-auto max-w-screen-lg w-full max-h-[80vh] overflow-y-auto"
+                                >
                                     {currentResults.length > 0 ? (
-                                        <>
-                                            <div className="grid grid-cols-7 gap-4 mb-4 font-semibold text-sm text-center">
-                                                <div>NONPROFIT NAME</div>
-                                                <div>ADDRESS</div>
-                                                <div>CITY</div>
-                                                <div>STATE</div>
-                                                <div>ZIP</div>
-                                                <div>LAST RECORDED REV.</div>
-                                                <div>LAST RECORDED EXP.</div>
-                                            </div>
-                                            <div className="flex flex-col justify-between overflow-x-auto" style={{ maxHeight: '400px' }}>
-                                                <div>
-                                                    {currentResults.map((result, index) => (
-                                                        <div key={index} className="grid grid-cols-7 gap-4 text-sm mb-2 text-center">
-                                                            <div>
-                                                                <a 
-                                                                    href="#"
-                                                                    onClick={() => handleNonprofitClick(result._id)}
-                                                                    className="text-[#A9DFD8] hover:underline font-semibold"
-                                                                >
-                                                                    {capitalizeFirstLetter(result.Nm)}
-                                                                    {capitalizeFirstLetter(result.Nm)}
-                                                                </a>
-                                                            </div>
-                                                            <div>{capitalizeFirstLetter(result.Addr)} </div>
-                                                            <div>{capitalizeFirstLetter(result.Cty)}</div>
-                                                            <div>{result.St}</div>
-                                                            <div>{result.Zip}</div>
-                                                            <div>{formatNumber(result.annualRevenue)}</div>
-                                                            <div>{formatNumber(result.annualExpenses)}</div>
-                                                        </div>
-                                                    ))}
+                                    <>
+                                        <div className="flex flex-col justify-between w-full overflow-x-auto">
+                                        <div>
+                                            {currentResults.map((result, index) => (
+                                            <div key={index} className="mb-4 p-4 border-b border-[#A9DFD8]">
+                                                <div className="flex justify-between mb-2">
+                                                <span className="font-semibold">Nonprofit Name:</span>
+                                                <a
+                                                    href="#"
+                                                    onClick={() => handleNonprofitClick(result._id)}
+                                                    className="text-[#A9DFD8] hover:underline font-semibold"
+                                                >
+                                                    {capitalizeFirstLetter(result.Nm)}
+                                                </a>
+                                                </div>
+                                                <div className="flex justify-between mb-2">
+                                                <span className="font-semibold">Address:</span>
+                                                <span>{capitalizeFirstLetter(result.Addr)}</span>
+                                                </div>
+                                                <div className="flex justify-between mb-2">
+                                                <span className="font-semibold">City:</span>
+                                                <span>{capitalizeFirstLetter(result.Cty)}</span>
+                                                </div>
+                                                <div className="flex justify-between mb-2">
+                                                <span className="font-semibold">State:</span>
+                                                <span>{result.St}</span>
+                                                </div>
+                                                <div className="flex justify-between mb-2">
+                                                <span className="font-semibold">ZIP:</span>
+                                                <span>{result.Zip}</span>
+                                                </div>
+                                                <div className="flex justify-between mb-2">
+                                                <span className="font-semibold">Last Recorded Revenue:</span>
+                                                <span>{formatNumber(result.annualRevenue)}</span>
+                                                </div>
+                                                <div className="flex justify-between">
+                                                <span className="font-semibold">Last Recorded Expenses:</span>
+                                                <span>{formatNumber(result.annualExpenses)}</span>
                                                 </div>
                                             </div>
-                                        </>
+                                            ))}
+                                        </div>
+                                        </div>
+                                    </>
                                     ) : (
-                                        <div className="text-center text-white text-lg flex items-center justify-center">No search results found.</div>
+                                    <div className="text-center text-white text-lg flex items-center justify-center">
+                                        No search results found.
+                                    </div>
                                     )}
                                     <div className="flex justify-center mt-4">
                                         {renderPaginationControls()}
