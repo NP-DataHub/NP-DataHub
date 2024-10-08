@@ -9,7 +9,10 @@ from datetime import datetime
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
-        load_dotenv('../frontend/.env')
+        # Only load .env if MONGODB_URI is not already in the environment, because
+        # it's already stored in the repository's settings as a secret
+        if not os.getenv('MONGODB_URI'):
+            load_dotenv('../frontend/.env')
         self.mongo_client = MongoClient(os.getenv('MONGODB_URI'))
         self.database = self.mongo_client["Nonprofitly"]
         self.cache = {}
