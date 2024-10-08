@@ -99,11 +99,11 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Dropdown Menu with Smooth Roll Down Effect */}
       <div
         className={`${
-          isMenuOpen ? 'block' : 'hidden'
-        } md:hidden bg-white shadow-lg mt-2 transition-all duration-300 ease-in-out`}
+          isMenuOpen ? 'max-h-[500px]' : 'max-h-0'
+        } overflow-hidden transition-max-height duration-700 ease-in-out md:hidden bg-white shadow-lg mt-2`}
       >
         <button
           onClick={handleLoginClick}
