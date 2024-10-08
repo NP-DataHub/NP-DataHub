@@ -14,3 +14,10 @@ The following irregularities have been identified in our database:
 - **Issue:** Some nonprofits do not disclose the amounts of contributions they receive.
 - **Explanation:** These entries are marked as "RESTRICTED" and, in our database, this is represented as "R" in the `TotCon` field.
 - **Resolution:** Ensure that any code involving total contributions correctly handles the "R" (restricted) value in the `TotCon` field.
+
+### 4. Missing XML Fields in IRS Data
+- **Issue:** When the XML file has a missing field.
+- **Resolution:** 
+   - For financial variables, the default value will be 0.
+   - For general information fields, the default value will be "None".
+   - For the NTEE code and Subsection code, the default value will be "Z".
