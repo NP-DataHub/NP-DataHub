@@ -112,6 +112,7 @@ class NationalAndStateStatistics:
             final_table.append(row)
         
         self.new_collection.insert_many(final_table)
+        print("NationalAndStateStatistics table has been successfully created")
 
 if __name__ == "__main__":
     obj = NationalAndStateStatistics()
