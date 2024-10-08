@@ -1,4 +1,12 @@
-### Building Database from Scratch (Skip if you already have the database setup)
+> **IMPORTANT:**  
+> The following instructions are for **manually updating the database**.  
+> The process is now automated via a GitHub Action, which runs every month. If the GitHub Action is not working, you can either manually trigger it from the Actions tab, or follow the instructions below.
+> 
+> Before proceeding manually, ensure the `zip_files_processed.txt` file is up to date. This file contains links to all processed zip folders. If you wish to reprocess specific folders, remove their links from `zip_files_processed.txt`. The file will automatically update after running the script.
+
+---
+
+### A. Building Database from Scratch (Skip to point B if you already have the database setup)
 
 1. **Ensure MongoDB is Running:**
    - Verify MongoDB is running and accessible.
@@ -15,43 +23,23 @@
 
    **Note:** `DatabaseStarter.py` initializes the main table with EIN, NTEE, and subsection codes. This is important because the XML files lack NTEE codes. The CSV files contain most non-profits declared in the XML files, which will make any database updates faster.
 
-### Running Database.py (XML Parser for Financial and General Information)
+---
 
-**Case 1: Full Database Rebuild or Updating Database**
+### B. Updating Database
 
-1. **Download Missing Folders:**
-   - Download the necessary folders from [IRS Form 990 Downloads](https://www.irs.gov/charities-non-profits/form-990-series-downloads).
-   - Rename (i.e. 2023-1) and unzip them, then place them in the `/tmp` directory.
-
-2. **Update execute_parser.sh:**
-   - Modify the list of directories in `execute_parser.sh` to match the new folders.
-
-3. **Prepare Environment:**
-   - Place the `.env` file in the frontend folder. **Do not commit this file.**
-
-4. **Run the Parser:**
-   - Execute `./execute_parser.sh` in its directory.
-   - If you encounter a permission error, run `chmod u+x execute_parser.sh`.
-   - The execution time depends on the folder size (typically a few minutes per folder).
-
-### Running National&StateStatistics.py for the Second Table
-
-1. **Prepare for Update:**
-   - If you recently updated the NonProfitData table (latest data is from 2024-6A), delete all documents from the existing NationalAndStateStatistics collection.
-
-2. **Prepare Environment:**
-   - Place the `.env` file in the frontend folder. **Do not commit this file.**
-
-3. **Run National&StateStatistics.py:**
-   - This script will take up to 30 minutes if run on a complete database.
-
-### Additional Scripts
-
-1. **Cleanup Incomplete Rows:**
+1. **Prepare Environment:**
    - Ensure the `.env` file is in the frontend folder. **Do not commit this file.**
-   - Run `cleanup.py`  **(this will delete incomplete rows permanently).**
 
-2. **Check Data Statistics:**
+2. **Run db_update_runner.py:**
+   - The script will handle fetching, processing, and updating the database automatically. It typically takes about a minute to fetch any new missing data, 2-3 minutes to process each folder, and about 30 minutes to rebuild the NationalAndStateStatistics table.
+
+   **Note:** See the **IMPORTANT** note above about updating the `zip_files_processed.txt` file.
+
+---
+
+### Additional Script
+
+3. **Check Data Statistics:**
    - Ensure the `.env` file is in the frontend folder. **Do not commit this file.**
    - Run `percentage_check.py` (takes about a minute).
-   - Note: Everytime the IRS releases folders for new years (2025,2026...), increment the starting value of `x` in the `count_years_per_row` function.
+   - **Note:** Every time the IRS releases folders for new years (2025, 2026...), increment the starting value of `x` in the `count_years_per_row` function.
