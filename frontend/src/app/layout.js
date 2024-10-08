@@ -5,7 +5,7 @@ import { AuthProvider } from "./components/context";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "NP Data Hub",
+  title: "NonProfitly",
   description: "",
 };
 

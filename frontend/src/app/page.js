@@ -1,10 +1,13 @@
+"use client"
 import Navbar from "./components/Navbar";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
+import { useRouter } from 'next/navigation'; // Use next/navigation instead of next/router
 
 export default function Home() {
+  const router = useRouter();
   return (
     <div className="overflow-auto h-screen">
       <Navbar/>
@@ -13,15 +16,15 @@ export default function Home() {
           <h1 className="text-3xl lg:text-6xl font-bold text-gray-900 font-serif ">
             Creating nonprofit ecosystems through data.
           </h1>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto lg:mx-0">
-            <button className="text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
-              Data
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-1 gap-4 max-w-md mx-auto lg:mx-0">
+            <button
+                className="text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition"
+                onClick={() => router.push('/dashboard')}
+              >
+                Explore Data
             </button>
             <button className="text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
-              Visualize
-            </button>
-            <button className="col-span-1 sm:col-span-2 text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
-              Ecosystem Insights
+              Explore Premium Tools
             </button>
           </div>
         </div>

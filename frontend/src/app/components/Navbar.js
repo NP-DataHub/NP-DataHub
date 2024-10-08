@@ -1,25 +1,26 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Login from './login';
 import Register from './register';
 import { useRouter } from 'next/navigation';
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const Navbar = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-  }, []);
 
   const handleLoginClick = () => {
     setShowLogin(true);
     setShowRegister(false);
+    setIsMenuOpen(false);
   };
 
   const handleRegisterClick = () => {
     setShowRegister(true);
     setShowLogin(false);
+    setIsMenuOpen(false);
   };
 
   const handleCloseLogin = () => {
@@ -52,27 +53,87 @@ const Navbar = () => {
     setShowRegister(false);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <nav className="bg-white shadow-md w-full sticky top-0 z-50 font-sans">
-      <div className="container px-4 py-4 flex mx-auto justify-between items-center">
-        <img className = "h-10"src = '/img/nonprofitly_primary_no_back.png' ></img>
-        <div className="ml-auto">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        {/* Responsive Logo */}
+        <picture>
+          {/* Logo for small screens */}
+          <source media="(max-width: 767px)" srcSet="/img/logo.jpg" />
+          {/* Logo for medium screens and larger */}
+          <img
+            className="h-10 md:h-12 max-h-full"  
+            src="/img/nonprofitly_primary_no_back.png"
+            alt="Logo"
+          />
+        </picture>
+
+        {/* Desktop Buttons */}
+        <div className="ml-auto hidden md:flex space-x-2">
           <button
             onClick={handleLoginClick}
-            className="mr-4 px-4 py-2 bg-gray-200 text-gray-900 rounded-md hover:bg-gray-300 transition"
+            className="px-4 py-2 rounded-md transition text-black border-2 border-gray-200  hover:bg-gray-300"
           >
             Login
           </button>
           <button
             onClick={handleRegisterClick}
-            className="px-4 py-2 bg-gray-200 text-gray-900 rounded-md hover:bg-gray-300 transition"
+            className="px-4 py-2 rounded-md transition text-black border-2 border-gray-200 hover:bg-gray-300"
           >
             Register
           </button>
         </div>
+
+        {/* Mobile Menu Button */}
+        <div className="ml-auto md:hidden">
+          <button
+            onClick={toggleMenu}
+            className="px-4 py-2 transition text-black "
+          >
+            <RxHamburgerMenu />
+          </button>
+        </div>
       </div>
-      {showLogin && <Login onClose={handleCloseLogin} onSuccess={handleLoginSuccess} onSwitchToRegister={handleSwitchToRegister} />}
-      {showRegister && <Register onClose={handleCloseRegister} onSuccess={handleRegisterSuccess} onSwitchToLogin={handleSwitchToLogin} />}
+
+      {/* Mobile Dropdown Menu */}
+      <div
+        className={`${
+          isMenuOpen ? 'block' : 'hidden'
+        } md:hidden bg-white shadow-lg mt-2 transition-all duration-300 ease-in-out`}
+      >
+        <button
+          onClick={handleLoginClick}
+          className="block w-full px-4 py-2 text-left bg-gray-200 text-gray-900 hover:bg-gray-300 transition"
+        >
+          Login
+        </button>
+        <button
+          onClick={handleRegisterClick}
+          className="block w-full px-4 py-2 text-left bg-gray-200 text-gray-900 hover:bg-gray-300 transition"
+        >
+          Register
+        </button>
+      </div>
+
+      {/* Modals for Login and Register */}
+      {showLogin && (
+        <Login
+          onClose={handleCloseLogin}
+          onSuccess={handleLoginSuccess}
+          onSwitchToRegister={handleSwitchToRegister}
+        />
+      )}
+      {showRegister && (
+        <Register
+          onClose={handleCloseRegister}
+          onSuccess={handleRegisterSuccess}
+          onSwitchToLogin={handleSwitchToLogin}
+        />
+      )}
     </nav>
   );
 };
