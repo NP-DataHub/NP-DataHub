@@ -45,7 +45,7 @@ export default async function handler(req, res) {
                 console.log("Query:", query);
                 // From the passed in query, extract all the filters
                 for(const [key, value] of Object.entries(query)){
-                    if(value !== 'null'){
+                    if(value != 'null'){
                         filters[key] = value;
                     }
                 }

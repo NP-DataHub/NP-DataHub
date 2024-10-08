@@ -68,7 +68,7 @@ const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters, minYear}) => {
       console.log("X Axis Label:", X_axis_label);
       console.log(X_axis_var);
 
-      // Extract the data for the scatter plot, each 
+      // Extract the data for the scatter plot
       const scatter_data = [];
 
       // Loop through the data and extract the X and Y axis variables
