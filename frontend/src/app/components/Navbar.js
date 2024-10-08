@@ -55,7 +55,7 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md w-full sticky top-0 z-50 font-sans">
       <div className="container px-4 py-4 flex mx-auto justify-between items-center">
-        <img src = '/img/NP_1-removebg-preview.png' ></img>
+        <img className = "h-10"src = '/img/nonprofitly_primary_no_back.png' ></img>
         <div className="ml-auto">
           <button
             onClick={handleLoginClick}

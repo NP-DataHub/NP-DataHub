@@ -77,7 +77,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="min-h-screen bg-white text-gray-900 px-6 md:px-12 py-20 lg:py-40 font-serif sm:py-40">
+      {/* <section className="min-h-screen bg-white text-gray-900 px-6 md:px-12 py-20 lg:py-40 font-serif sm:py-40">
         <div className="flex flex-col justify-start text-center">
           <h2 className="text-2xl md:text-5xl mb-4 md:mb-6">The NP Data Hub Team</h2>
           <div className="flex justify-center mb-4 md:mb-6">
@@ -134,7 +134,7 @@ export default function Home() {
             <h3 className="text-xl md:text-2xl mt-4">Yotham Sage</h3>
           </div>
         </div>
-      </section>   
+      </section>    */}
       <section className="flex flex-col lg:flex-row justify-between items-center min-h-screen bg-cover bg-center bg-[url('/img/gradient_two.png')] px-6 lg:px-12  py-40">
         <div className="flex-grow text-center lg:text-left">
           <h1 className="text-3xl lg:text-6xl font-bold text-gray-900 font-serif">
