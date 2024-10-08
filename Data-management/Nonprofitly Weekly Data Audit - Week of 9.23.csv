@@ -1,0 +1,39 @@
+"Brett (liabilities for the years 2018, 2019, 2021 for the following nonprofits)",,,,,Data Checks Out (Y/N),Report Issue
+,,,,,,
+Valor Texas Education Foundation,,,,,,
+New Jersey Environmental Justice Alliance Inc,,,,,,
+Washington Renaissance Arts & Education Society,,,,,,
+Pennsylvania Academy Of The Fine Arts,,,,,,
+Southern Oklahoma Sports Association,,,,,,
+,,,,,,
+"Emmet (revenues for the years 2019, 2020, 2022 for the following nonprofits)",,,,,Data Checks Out (Y/N),Report Issue
+,,,,,,
+Creighton University Arizona Health Education Alliance,,,,,,
+New York Water Environment Association Inc,,,,,,
+California College Of The Arts,,,,,,
+Dairy Barn Inc Southeastern Ohio Cultural Arts Center,,,,,,
+Indiana Sports Corporation,,,,,,
+,,,,,,
+"Cal (assets for the years 2018, 2020, 2022 for the following nonprofits)",,,,,Data Checks Out (Y/N),Report Issue
+,,,,,,
+Minnesota Continuing Legal Education — Minnesota C L E,,,,,N,"The Data is all shifted down one year, 2017 Data is the data from 2018, 2018 is 2019's and so on"
+Tennessee Environmental Council,,,,,Y,"No data in database for 2018, used 2019 instead"
+New Jersey Performing Arts Center Corporation,,,,,N,Same as Minnesota continuing Legal
+Oregon Center For Contemporary Art Inc,,,,,N,Same as New Jersey and Minnesota
+Pennsylvania Center For Adapted Sports,,,,,N,Sam as Others
+,,,,,,
+"Youssef (revenues for the years 2019, 2020, 2021 for the following nonprofits)",,,,,Data Checks Out (Y/N),Report Issue
+,,,,,,"Same issue as cal,"
+Florida Charter Educational Foundation Inc,,,,,Y,name in database is THE FLORIDA CHARTER EDUCATIONAL and all years are shifted down by 1
+New York City Environmental Justice Alliance Inc,,,,,Y,name in database is NEW YORK CITY ENVIRONMENTAL JUSTICE
+California School Of The Arts San Gabriel Valley,,,,,Y,name in database is CALIFORNIA SCHOOL OF THE ARTS SAN and all years are shifted down by 1
+Kansas City Art Institute,,,,,Y,all years are shifted down by 1
+Georgia Sports Hall Of Fame Foundation Inc,,,,,Y,"name in database is GEORGIA SPORTS HALL OF FAME, all years are shifted down by 1, and the year 2019 of Propublic doesnt exit in the database (the 2018 entry)"
+,,,,,,
+"Kai (expenses for the years 2019, 2020, 2021 for the following nonprofits)",,,,,Data Checks Out (Y/N),Report Issue
+,,,,,,
+Public Policy And Education Fund Of New York Inc,,,,,,
+Maine Timber Research And Environmental Education Foundation — Maine Tree Foundation,,,,,,
+Rensselaer Polytechnic Institute,,,,,,
+Pennsylvania College Of Technology Community Arts Center Inc,,,,,,
+Lutheran Sports Association Of Illinois Inc,,,,,,

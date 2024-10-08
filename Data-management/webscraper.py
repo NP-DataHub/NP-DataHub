@@ -1,54 +1,57 @@
 import requests
 from bs4 import BeautifulSoup
-import os
 from zipfile import ZipFile
-import io
-from urllib.request import urlretrieve
 
-def changeToZIP(fp):
-    base, ext = os.path.splitext(fp)
-    if ext != '.zip':
-        newFP = base + '.zip'
-        os.rename(fp, newFP)
+class WebScraper:
 
-def openAndDownload(ziplink):
-    path = os.path.join(os.getcwd(), 'ZIPfolders')
-    print(f"Current working directory: {os.getcwd()}")
-    print(f"Target directory: {path}")
+    #NOTE: ASSUMING IRS DOESN'T CHANGE THE PREVIOUS URL LINKS
+    # if they do, it will unnecessarily excecute main parser on already parsed folders
 
-    if not os.path.exists(path):
-        os.makedirs(path)
-        print(f"Created directory: {path}")
+    def __init__(self):
+        self.processed_folders = set()
+        self.unprocessed_folders = list()
+        self.created_files = []
+        self.created_folders = []
 
-    os.chdir(path)
-    print("Path changed to:", os.getcwd())
+    def check_already_parsed_folders(self):
+        with open('Data-management/zip_files_processed.txt', 'r') as file:
+            for line in file:
+                self.processed_folders.add(line.strip())
 
-    try:
-        r = requests.get(ziplink, allow_redirects=True)
-        r.raise_for_status()
-        filename = ziplink.split('/')[-1]
-        with open(filename, 'wb') as f:
-            f.write(r.content)
-        print(f"Downloaded and saved as: {filename}")
-        with ZipFile(filename, 'r') as zObject:
-        	zObject.extractall(path)
-    except Exception as e:
-        print(f"Error: {e}")
-        exit()
+    def check_missing_zip_folders(self):
+        url = "https://www.irs.gov/charities-non-profits/form-990-series-downloads"
+        response = requests.get(url)
+        html_content = response.content
+        soup = BeautifulSoup(html_content, 'html.parser')
+        all_zip_folders = soup.select('a[href$=".zip"]')
+        for folder in all_zip_folders:
+            folder_link = folder['href']
+            if not folder_link in self.processed_folders:
+                self.unprocessed_folders.append(folder_link)
 
-def extractZipsFromHtml():
-	url = "https://www.irs.gov/charities-non-profits/form-990-series-downloads"
-	response = requests.get(url)
-	html_content = response.content
-	soup = BeautifulSoup(html_content, 'html.parser')
-	zip_links = soup.select('a[href$=".zip"]')
-	for ziplink in zip_links:
-		zipfilelink = ziplink['href']
-		openAndDownload(zipfilelink)
-		exit()
+    def download_missing_zip_folders(self):
+        # Iterate through each unprocessed folder link
+        for ziplink in self.unprocessed_folders:
+            try:
+                # Download the ZIP file
+                r = requests.get(ziplink, allow_redirects=True)
+                r.raise_for_status()  # Raise an error for bad responses
+                filename = ziplink.split('/')[-2] + '-' + ziplink.split('_')[-1]
+                # Save the downloaded ZIP file
+                with open(f"/tmp/{filename}", 'wb') as f:
+                    f.write(r.content)
+                self.created_files.append(f"/tmp/{filename}")
+                print(f"Downloaded and saved as: {filename}")
+                # Create a folder name by removing the .zip extension
+                folder_name = filename.replace('.zip', '')
+                # Unzip the file
+                with ZipFile(f"/tmp/{filename}", 'r') as zObject:
+                    zObject.extractall(f"/tmp/{folder_name}")
+                self.created_folders.append(f"/tmp/{folder_name}")
+                print(f"Extracted: {filename} to folder: {folder_name}")
 
-def main():
-	extractZipsFromHtml()
-
-if __name__ == '__main__':
-	main()
+                # Keep track of downloaded zip files
+                with open('Data-management/zip_files_processed.txt', 'a') as processed_file:
+                    processed_file.write('\n' + ziplink )
+            except Exception as e:
+                print(f"Error downloading {ziplink}: {e}")

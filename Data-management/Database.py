@@ -9,7 +9,10 @@ from datetime import datetime
 class Database:
     def __init__(self):
         self.namespace = {'irs': 'http://www.irs.gov/efile'}
-        load_dotenv('../frontend/.env')
+        # Only load .env if MONGODB_URI is not already in the environment, because
+        # it's already stored in the repository's settings as a secret
+        if not os.getenv('MONGODB_URI'):
+            load_dotenv('../frontend/.env')
         self.mongo_client = MongoClient(os.getenv('MONGODB_URI'))
         self.database = self.mongo_client["Nonprofitly"]
         self.cache = {}
@@ -24,9 +27,23 @@ class Database:
         tax_period = tax_period_element.text if tax_period_element is not None else None
         return ein, tax_period
 
+    def get_information_from_multiple_lines(self, root, title, subtitle):
+        line = 1
+        value = ""
+        while True:
+            element = root.find(f'.//irs:Filer/irs:{title}/irs:{subtitle}{line}Txt', self.namespace)
+            if line == 1 and element is None:
+                value = "None"
+                break
+            elif line > 1 and element is None:
+                break
+            else:
+                value += element.text if line == 1 else " " + element.text
+                line += 1
+        return value
+
     def get_general_information(self, root):
-        name_element = root.find('.//irs:Filer/irs:BusinessName/irs:BusinessNameLine1Txt', self.namespace)
-        name = name_element.text if name_element is not None else "None"
+        name = self.get_information_from_multiple_lines(root, "BusinessName", "BusinessNameLine")
         state_element = root.find('.//irs:Filer/irs:USAddress/irs:StateAbbreviationCd', self.namespace)
         if (state_element is not None):
             state = state_element.text
@@ -34,8 +51,7 @@ class Database:
             city = city_element.text if city_element is not None else "None"
             zip_code_element = root.find('.//irs:Filer/irs:USAddress/irs:ZIPCd', self.namespace)
             zip_code = zip_code_element.text if zip_code_element is not None else "None"
-            address_element = root.find('.//irs:Filer/irs:USAddress/irs:AddressLine1Txt', self.namespace)
-            address = address_element.text if address_element is not None else "None"
+            address = self.get_information_from_multiple_lines(root, "USAddress", "AddressLine")
         else : #Foreign Address
             state_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:CountryCd', self.namespace)
             state = state_element.text if state_element is not None else "None"
@@ -43,8 +59,7 @@ class Database:
             city = city_element.text if city_element is not None else "None"
             zip_code_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:ForeignPostalCd', self.namespace)
             zip_code = zip_code_element.text if zip_code_element is not None else "None"
-            address_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:AddressLine1Txt', self.namespace)
-            address = address_element.text if address_element is not None else "None"
+            address = self.get_information_from_multiple_lines(root, "ForeignAddress", "AddressLine")
         return [name, state, city, zip_code, address]
 
     def get_990_financial_information(self, root):
@@ -401,11 +416,11 @@ class Database:
         missing_subsection_code = {"SubCode": {"$exists": False}}
         self.database["NonProfitData"].update_many(missing_ntee, {"$set": {"NTEE": "Z"}})
         self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"SubCode": "Z"}})
+        print("Data has been successfully inserted into MongoDB.")
 
-    def output_duplicates(self, name, directory):
+    def output_duplicates(self, name):
         if self.output:
-            os.makedirs(directory, exist_ok=True)
-            file_name = os.path.join(directory, f"{name}_ErrorOutput.txt")
+            file_name = f"Data-management/errorOutputs/{name}_ErrorOutput.txt"
             differences_found = False  # Flag to check if any differences are found
             with open(file_name, 'w') as file:
                 for lst in self.output:
@@ -437,13 +452,11 @@ class Database:
 
 if __name__ == "__main__":
     directory = sys.argv[1]
-    output_directory = '/Users/mr.youssef/Desktop/NpDataHub/Data-management/errorOutputs'
     name_of_file = directory[5:] #it needs to start with last folder name (no "/" inside string)
-    input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
-    input('Is MongoDB client declared in the object correct? Press enter if it is.')
-    input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')
-    input(f'Is the directory, where the error file will be created, correct "{output_directory}" ? Press enter if it is.')
+    # input(f'Is the following directory, where the input files are located, correct "{directory}" ? Press enter if it is.')
+    # input('Is MongoDB client declared in the object correct? Press enter if it is.')
+    # input(f'Is the name passed to output_duplicates correct "{name_of_file}" ? Press enter if it is.')
+    # input(f'Is the directory, where the error file will be created, correct "{output_directory}" ? Press enter if it is.')
     obj = Database()
     obj.process_all_xml_files(directory)
-    print("Data has been successfully inserted into MongoDB.")
-    obj.output_duplicates(name_of_file,output_directory)
+    obj.output_duplicates(name_of_file)
