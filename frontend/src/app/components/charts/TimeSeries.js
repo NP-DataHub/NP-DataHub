@@ -48,23 +48,16 @@ const TimeSeries = ({values, minYear}) => {
   const data = values.map((value, index) => [index, value]);
   const fitted_line = regression.linear(data);
 
-  // print the regression line
-  //console.log(fitted_line);
-
-
   // extend the data to include the predicted values
   const extendedData = Array.from({ length: values.length + 2 }, (_, index) => [index, fitted_line.predict(index)[1]]);
   const FittedData = extendedData.slice(0, values.length);
-  const predictedData = extendedData.slice(extendedData.length);
 
-  // debug
-  //console.log(extendedData);
-  //console.log(FittedData);
-  //console.log(predictedData);
+  // combine the last year of the real data with two years of predicted data
+  const predictedData = data.slice(-1).concat(extendedData.slice(values.length));
 
   const option = {
     legend: {
-      data: ['Data', 'Trend Line'],
+      data: ['Data', 'Predicted Values'],
       textStyle: {
         color: 'white'
       }
@@ -75,12 +68,8 @@ const TimeSeries = ({values, minYear}) => {
         source: data
       },
       {
-        // fitted data - for the dashed regression line
-        source: FittedData
-      },
-      {
         // predicted data
-        source: extendedData
+        source: predictedData
       }
     ],
     tooltip: {
@@ -127,6 +116,9 @@ const TimeSeries = ({values, minYear}) => {
         },
         axisLabel: {
           fontSize: Math.round(0.015 * dimensions.width)
+        },
+        splitLine: {
+          show: false
         }
       }
     ],
@@ -138,9 +130,19 @@ const TimeSeries = ({values, minYear}) => {
           },
           fontSize: Math.round(0.015 * dimensions.width)
         },
+        axisLine: {
+          show: true
+        },
         splitLine: {
-          show: false
+          show: true,
+          lineStyle: {
+            color: 'rgba(255, 255, 255, 0.1)',
+            type: 'dashed',
+            
+
+          }
         }
+
 
       }
     ],
@@ -156,9 +158,9 @@ const TimeSeries = ({values, minYear}) => {
 
       },
       {
-        name: 'Trend Line',
+        name: 'Predicted Values',
         type: 'line',
-        datasetIndex: 2,
+        datasetIndex: 1,
         color: 'red', // Set the color of the regression line here
         lineStyle: {
           type: 'dashed'
@@ -167,21 +169,14 @@ const TimeSeries = ({values, minYear}) => {
         itemStyle: {
           color: 'red'
         }
-      },
-      // {
-      //   name: 'Predicted',
-      //   type: 'line',
-      //   datasetIndex: 2,
-      //   symbol: 'none',
-      //   color: 'red'
-      // }
+      }
     ],
     graphic: {
       type: 'text',
       left: '5%',
       bottom: 'bottom',
       style: {
-        text: 'Accuracy (R²): ' + fitted_line.r2.toFixed(2),
+        text: 'Prediction Confidence (R²): ' + (fitted_line.r2.toFixed(2))*100 + '%',
         fontSize: 16,
         fontWeight: 'bold',
         fill: 'white'
