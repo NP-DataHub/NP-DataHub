@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
+import { Tooltip } from 'react-tooltip';
 
 /**
  * 
@@ -10,6 +11,14 @@ import ReactECharts from 'echarts-for-react';
  */
 
 const COLAB_graph = ({data, filters}) => {
+
+    // Check for invalid inputs
+    if (!Array.isArray(data)) {
+        return <div>ERROR: chart arg must be an array</div>;
+    }
+
+    console.log("COLAB Data:", data);
+    console.log("COLAB Filters:", filters);
 
     // Handles resizing of the chart
     const chartContainerRef = useRef(null);
@@ -47,7 +56,7 @@ const COLAB_graph = ({data, filters}) => {
         const B_years = Object.keys(B).filter((key) => key.includes('TotRev') || key.includes('TotExp') || key.includes('TotAst') || key.includes('TotLia'));
         
         const most_recent_year = Math.max(...A_years, ...B_years);
-        const score = 0;
+        let score = 0;
 
         // Check if the NTEE codes are the same
         if (A.NTEE === B.NTEE) {
@@ -70,6 +79,30 @@ const COLAB_graph = ({data, filters}) => {
         return score;
       }
 
+      // Find the min and max revenue for scaling the nodes
+      let min_revenue = 0;
+      let max_revenue = 0;
+
+      // loop through each nonprofit, find the most recent year, and get the revenue
+      data.forEach((nonprofit) => {
+        // Get the year most recent year with financial data
+        const years = Object.keys(nonprofit).filter(year => !isNaN(year)).sort();
+        let mostRecentYear = years[years.length - 1];
+        const revenue = nonprofit[mostRecentYear]['TotRev'];
+
+
+        // Update the min and max revenue
+        if(min_revenue === 0){
+          min_revenue = revenue;
+        }
+        if (revenue < min_revenue && revenue > 0) {
+          min_revenue = revenue;
+        }
+        if (revenue > max_revenue) {
+          max_revenue = revenue;
+        }
+      });
+
 
       /**
        *  Create a graph of all the nonprofits in the data
@@ -80,12 +113,42 @@ const COLAB_graph = ({data, filters}) => {
        */
 
       // Create the nodes
+      let i = 0;
       const nodes = data.map((nonprofit) => {
+
+        // --- Dynamic Size Calculation ---
+        // Get the most recent year with financial data
+        const years = Object.keys(nonprofit).filter(year => !isNaN(year)).sort();
+        let mostRecentYear = years[years.length - 1];
+        const revenue = nonprofit[mostRecentYear]['TotRev'];
+
+        // Scale the size of the node based on the revenue.
+        // Scale should be in the range [6, 20], scaled exponentially based on the revenue
+        let node_size = 6;
+        if(revenue > 0){
+          node_size = 6 + 12 * Math.log(revenue / min_revenue) / Math.log(max_revenue / min_revenue);
+        }
+
         return {
-          name: nonprofit.Name,
-          symbolSize: nonprofit.Rev / 1000000,
+          id: i++,
+          name: nonprofit.Nm,
           category: nonprofit.NTEE,
-          value: nonprofit.Rev,
+
+          /**
+           *  TODO: Add color coding based on the NTEE code
+           */
+
+          /**
+           *  TODO: Create a smarter way of placing nodes on the graph. Not exactly sure how to do this yet
+           */
+          x: Math.random() * dimensions.width,
+          y: Math.random() * dimensions.height,
+
+          symbolSize: node_size,
+          
+
+          //symbolSize: nonprofit.Rev / 1000000,
+          //value: nonprofit.Rev,
           label: {
             show: true,
             position: 'inside',
@@ -94,19 +157,29 @@ const COLAB_graph = ({data, filters}) => {
         };
       });
 
+      console.log("Nodes:", nodes);
+
       // Create the edges
       const edges = [];
-      for (let i = 0; i < data.length; i++) {
-        for (let j = i + 1; j < data.length; j++) {
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          // Calculate the similarity score between the two nonprofits
           const score = SimilarityScore(data[i], data[j]);
-          if (score > 3) {
+          
+          //console.log("Computed similarity score between", data[i].Nm, "and", data[j].Nm);
+          //console.log("Score:", score);
+
+          if (score > 1) {
             edges.push({
-              source: data[i].Name,
-              target: data[j].Name,
+              source: nodes[i].id,
+              target: nodes[j].id,
+              value: score
             });
           }
         }
       }
+
+      console.log("Edges:", edges);
 
       // const categories = [];
       // const NTEE_codes = new Set(data.map((nonprofit) => nonprofit.NTEE));
@@ -121,11 +194,12 @@ const COLAB_graph = ({data, filters}) => {
       const NTEE_codes = new Set(filters.map((filter) => filter.NTEE));
 
       const option = {
-        formatter: function (params) {
-          const tooltipContent = params.map(item => {
-            return `${item.name}: $${formatNumber(item.value)}`;
-          }).join('<br/>');
-          return tooltipContent;
+        tooltip: {
+          formatter: function (params) {
+            //console.log("Params:", params);
+            let tooltipContent = `<div>${params.name}<br/>`;
+            return tooltipContent;
+            }
         },
         grid: {
           left: 0,
@@ -134,11 +208,12 @@ const COLAB_graph = ({data, filters}) => {
           top: 0.01 * dimensions.width,
           containLabel: true
         },
-        legend: {
-          data: Array.from(NTEE_codes),
-        },
+        // legend: {
+        //   //data: Array.from(NTEE_codes),
+        // },
         series: [
           {
+            name: 'COLAB Graph',
             type: 'graph',
             layout: 'force',
             symbolSize: 50,
@@ -147,11 +222,12 @@ const COLAB_graph = ({data, filters}) => {
               show: true,
             },
             force: {
-              repulsion: 100,
+              repulsion: 300,
+              gravity: 0.1,
             },
             data: nodes,
-            links: edges,
-            categories: categories,
+            links: edges
+            //categories: categories,
           },
         ],
       };

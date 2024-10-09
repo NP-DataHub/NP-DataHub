@@ -16,6 +16,11 @@ import ReactECharts from 'echarts-for-react';
 */
 const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters, minYear}) => {
 
+    // Check for invalid inputs
+    if (!Array.isArray(data) || !X_axis_var || !Y_axis_var) {
+        return <div>ERROR: Invalid Scatterplot parameters</div>;
+    }
+
     // placeholder for filters var for now
     const filters_placeholder = ["A", "B", "C"];
 
@@ -64,9 +69,6 @@ const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters, minYear}) => {
       // Get the labels for the X and Y axis variables
       const X_axis_label = labels[X_axis_var];
       const Y_axis_label = labels[Y_axis_var];
-
-      console.log("X Axis Label:", X_axis_label);
-      console.log(X_axis_var);
 
       // Extract the data for the scatter plot
       const scatter_data = [];
