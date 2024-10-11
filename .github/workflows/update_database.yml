@@ -6,13 +6,13 @@ on:
     - cron: "0 0 1 * *"
   workflow_dispatch: # Manual trigger
 
+permissions:
+  contents: write  # Allows the workflow to commit and push changes to the repository
+
 jobs:
   update:
     runs-on: ubuntu-latest
-  
-  permissions:
-    actions: write
-  
+    
     steps:
     # Step 1: Checkout the repository
     - name: Checkout repository
@@ -38,7 +38,7 @@ jobs:
         MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
     # Step 5: Commit and push changes to zip_files_processed.txt
-    - name: Commit changes to zip_files_processed.txt
+    - name: Commit and push changes
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
