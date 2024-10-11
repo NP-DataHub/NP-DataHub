@@ -9,7 +9,10 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
-    
+  
+  permissions:
+    actions: write
+  
     steps:
     # Step 1: Checkout the repository
     - name: Checkout repository
