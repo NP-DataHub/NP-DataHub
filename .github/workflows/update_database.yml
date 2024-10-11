@@ -34,6 +34,18 @@ jobs:
       env:
         MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
+    # Step 5: Commit and push changes to zip_files_processed.txt
+    - name: Commit changes to zip_files_processed.txt
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add Data-management/zip_files_processed.txt
+        git commit -m "Update zip_files_processed.txt after running db_update_runner.py"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # Step 6: Upload log artifact
     - name: Upload log artifact
       uses: actions/upload-artifact@v3
       with:
