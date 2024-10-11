@@ -416,7 +416,7 @@ class Database:
         missing_subsection_code = {"SubCode": {"$exists": False}}
         self.database["NonProfitData"].update_many(missing_ntee, {"$set": {"NTEE": "Z"}})
         self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"SubCode": "Z"}})
-        print("Data has been successfully inserted into MongoDB.")
+        print(f"Data of {directory} has been successfully inserted into MongoDB.")
 
     def output_duplicates(self, name):
         if self.output:
