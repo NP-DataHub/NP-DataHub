@@ -28,6 +28,7 @@ class DatabaseStarter:
         self.initial_data.append({
             "EIN": ein,
             "NTEE": ntee_cd,
+            "MajGrp": ntee_cd[0],
             "SubCode": subsection_code
         })
 

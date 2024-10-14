@@ -25,8 +25,7 @@ class NationalAndStateStatistics:
     def get_data(self, row):
         if len(row) == 4:
             return
-        ntee_code = row["NTEE"]
-        major_group = ntee_code[0]
+        major_group = row["MajGrp"]
         if major_group not in self.table:
             self.table[major_group] = {}
         for field, data in row.items():

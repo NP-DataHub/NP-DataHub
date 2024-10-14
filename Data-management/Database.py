@@ -412,10 +412,17 @@ class Database:
             for future in as_completed(futures):
                 future.result()
 
-        missing_ntee = {"NTEE": {"$exists": False}}
-        missing_subsection_code = {"SubCode": {"$exists": False}}
-        self.database["NonProfitData"].update_many(missing_ntee, {"$set": {"NTEE": "Z"}})
-        self.database["NonProfitData"].update_many(missing_subsection_code, {"$set": {"SubCode": "Z"}})
+        missing_sector = {"MajGrp": {"$exists": False}}
+        self.database["NonProfitData"].update_many(
+            missing_sector, 
+            {
+                "$set": {
+                    "MajGrp": "Z",
+                    "NTEE": "Z",
+                    "SubCode": "Z"
+                }
+            }
+        )
         print(f"Data of {directory} has been successfully inserted into MongoDB.")
 
     def output_duplicates(self, name):
