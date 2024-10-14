@@ -11,14 +11,14 @@ if __name__ == "__main__":
     webscraper.download_missing_zip_folders()
     if webscraper.unprocessed_folders:
         # if there is new data to get, add it to our database
-        # db = Database()
-        # for folder in webscraper.created_folders:
-        #     db.process_all_xml_files(folder)
-        #     db.output_duplicates(folder[5:]) # basically remove /tmp
+        db = Database()
+        for folder in webscraper.created_folders:
+            db.process_all_xml_files(folder)
+            db.output_duplicates(folder[5:]) # basically remove /tmp
         # Deleted download zip files and reset ntee table
         cleanup = Cleanup()
         cleanup.delete_created_files_and_folders(webscraper.created_files, webscraper.created_folders)
-        # cleanup.reset_ntee_table()
+        cleanup.reset_ntee_table()
         # Rebuild ntee table
-        # ntee_table = NationalAndStateStatistics()
-        # ntee_table.build_collection()
+        ntee_table = NationalAndStateStatistics()
+        ntee_table.build_collection()
