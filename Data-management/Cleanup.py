@@ -21,7 +21,7 @@ class Cleanup:
     def reset_ntee_table(self):
         # need to do this everytime the NonProfitData table is updated
         # in order for the NationalAndStateStatistics to be rebuilt
-        self.ntee_table.deleteMany({})
+        self.ntee_table.delete_many({})
         print("Deleted all rows in NationalAndStateStatistics table")
 
     def delete_created_files_and_folders(self, created_files, created_folders ):

@@ -18,7 +18,7 @@ class WebScraper:
             for line in file:
                 self.processed_folders.add(line.strip())
 
-    def check_missing_zip_folders(self):
+    def check_missing_zip_folders(self, flag):
         url = "https://www.irs.gov/charities-non-profits/form-990-series-downloads"
         response = requests.get(url)
         html_content = response.content
@@ -28,6 +28,8 @@ class WebScraper:
             folder_link = folder['href']
             if not folder_link in self.processed_folders:
                 self.unprocessed_folders.append(folder_link)
+                if flag:
+                    break
 
     def download_missing_zip_folders(self):
         # Iterate through each unprocessed folder link

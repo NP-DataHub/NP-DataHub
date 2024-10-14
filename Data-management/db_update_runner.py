@@ -4,10 +4,11 @@ from Cleanup import Cleanup
 from NationalAndStateStatistics import NationalAndStateStatistics
 
 if __name__ == "__main__":
-    #First Call webscraper to check for any recent data available from the IRS 
+    #First Call webscraper to check for any recent data available from the IRS
+    flag = True # only process one new release.
     webscraper = WebScraper()
     webscraper.check_already_parsed_folders()
-    webscraper.check_missing_zip_folders()
+    webscraper.check_missing_zip_folders(flag)
     webscraper.download_missing_zip_folders()
     if webscraper.unprocessed_folders:
         # if there is new data to get, add it to our database
