@@ -5,7 +5,7 @@ import Register from './register';
 import { useRouter } from 'next/navigation';
 import { RxHamburgerMenu } from "react-icons/rx";
 
-const Navbar = () => {
+const Navbar_inner = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,14 +32,14 @@ const Navbar = () => {
   };
 
   const handleLoginSuccess = () => {
-    setShowLogin(false);
-    setShowRegister(false);
+    setShowLogin(false);  
+    setShowRegister(false);  
     router.push('/dashboard');
   };
 
   const handleRegisterSuccess = () => {
-    setShowLogin(false);
-    setShowRegister(false);
+    setShowLogin(false);  
+    setShowRegister(false);  
     router.push('/dashboard');
   };
 
@@ -66,26 +66,44 @@ const Navbar = () => {
           <source media="(max-width: 767px)" srcSet="/img/nonprofitly_primary_no_back.png" />
           {/* Logo for medium screens and larger */}
           <img
-            className="h-10 md:h-10 max-h-full"  
+            className="h-10 md:h-12 max-h-full"  
             src="/img/nonprofitly_primary_no_back.png"
             alt="Logo"
           />
         </picture>
 
-        {/* Hamburger Menu for Both Desktop and Mobile */}
-        <button
-          onClick={toggleMenu}
-          className="ml-auto px-4 py-2 transition text-black"
-        >
-          <RxHamburgerMenu className="text-2xl" />
-        </button>
+        {/* Desktop Buttons */}
+        <div className="ml-auto hidden md:flex space-x-2">
+          <button
+            onClick={handleLoginClick}
+            className="px-4 py-2 rounded-md transition text-black border-2 border-gray-200  hover:bg-gray-300"
+          >
+            Login
+          </button>
+          <button
+            onClick={handleRegisterClick}
+            className="px-4 py-2 rounded-md transition text-black border-2 border-gray-200 hover:bg-gray-300"
+          >
+            Register
+          </button>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="ml-auto md:hidden">
+          <button
+            onClick={toggleMenu}
+            className="px-4 py-2 transition text-black "
+          >
+            <RxHamburgerMenu />
+          </button>
+        </div>
       </div>
 
-      {/* Dropdown Menu for both Desktop and Mobile with Smooth Roll Down Effect */}
+      {/* Mobile Dropdown Menu with Smooth Roll Down Effect */}
       <div
         className={`${
           isMenuOpen ? 'max-h-[500px]' : 'max-h-0'
-        } overflow-hidden transition-max-height duration-700 ease-in-out bg-white shadow-lg mt-2`}
+        } overflow-hidden transition-max-height duration-700 ease-in-out md:hidden bg-white shadow-lg mt-2`}
       >
         <button
           onClick={handleLoginClick}
@@ -120,4 +138,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar_inner;
