@@ -13,7 +13,8 @@ export default async function handler(req, res) {
 
         const filters = {};
         if (Name) {
-          filters.Nm = { $regex: new RegExp(Name, 'i') };
+          const lowername = Name.trim().toLowerCase()
+          filters.Nm = { $regex: new RegExp(`^${lowername}$`, 'i') }; 
         }
         if (city) {
           // Extract city name if it includes state

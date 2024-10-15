@@ -6,6 +6,48 @@ import { FaTwitter } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
 import { useRouter } from 'next/navigation'; // Use next/navigation instead of next/router
 
+const features = [
+  {
+    title: "FOUNDATIONS",
+    imgSrc: "/img/icons/philanthropies.png",
+    description: "Assess the financial health of nonprofits to maximize ROI while directing funds and grants to those that need the infusion the most to make a difference."
+  },
+  {
+    title: "NONPROFITS",
+    imgSrc: "/img/icons/nonprofits.png",
+    description: "Gain valuable insights to strengthen financial standing and find collaborators within and across different sectors."
+  },
+  {
+    title: "DONORS",
+    imgSrc: "/img/icons/donors.png",
+    description: "Find pathways for strategic investments and return on investment strategies for you, your company, or your client."
+  },
+  {
+    title: "GOVERNMENT",
+    imgSrc: "/img/icons/government.png",
+    description: "Foster relationships with mission-drive foundations and nonprofits looking to partner with local, state, and federal agencies."
+  },
+  {
+    title: "FISCAL HEALTH",
+    imgSrc: "/img/icons/fiscal_health.png",
+    description: "Assess a nonprofit’s fiscal health based on a weighted score of various data variables. Compare the scores side-by-side with other nonprofits."
+  },
+  {
+    title: "REGIONAL HEALTH",
+    imgSrc: "/img/icons/regional_health.png",
+    description: "Compare NTEE code sectors against public data that align with various regional non-profit’s missions."
+  },
+  {
+    title: "CO:LAB",
+    imgSrc: "/img/icons/collaborate.png",
+    description: "Search and compare nonprofits from other sectors in your backyard that may be strong partners."
+  },
+  {
+    title: "NEWSFEED",
+    imgSrc: "/img/icons/newsfeed.png",
+    description: "A tool to understanding larger scale problems and connecting to regional nonprofits via social media and search engines."
+  }
+];
 export default function Home() {
   const router = useRouter();
   return (
@@ -32,8 +74,8 @@ export default function Home() {
           <img draggable = {false} src="/img/node_edge_final.png" alt="Network Visualization" className="w-5/6 h-5/6 max-w-full max-h-full" />
         </div>
       </section>
-      <section className="min-h-screen bg-gray-900 text-white px-6 md:px-12 font-serif sm:py-40">
-        <div className="flex flex-col justify-start items-center text-center py-20 ">
+      <section className=" bg-gray-900 text-white px-6 md:px-12 font-serif py-12">
+        <div className="flex flex-col justify-start items-center text-center py-10 ">
           <h2 className="text-2xl md:text-5xl mb-4 md:mb-6">Insights for Impact</h2>
           <div className="flex justify-center mb-4 md:mb-6">
             <div className="w-24 md:w-72 rounded-full h-1 bg-white"></div>
@@ -41,7 +83,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
           <div className="flex flex-col items-center text-center">
-            <img draggable = {false} src="/img/four_bar_final.png" alt="Graph and Magnifying Glass" className="w-1/2 sm:w-1/2 max-w-full" />
+            <img draggable = {false} src="/img/four_bar_final.png" alt="Graph and Magnifying Glass" className="w-96" />
           </div>
           <div className="flex flex-col justify-center text-left text-lg md:text-2xl mt-6 font-serif">
             <div className="mb-6 md:mb-10">
@@ -55,14 +97,14 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="min-h-screen bg-gray-900 text-white px-6 md:px-12 font-serif  sm:py-40">
+      <section className=" bg-gray-900 text-white px-6 md:px-12 font-serif py-10">
         <div className="flex flex-col justify-start text-center">
           <h2 className="text-2xl md:text-5xl mb-4 md:mb-6">Connecting billions of data points</h2>
           <div className="flex justify-center mb-4 md:mb-6">
             <div className="w-24 md:w-4/12 rounded-full h-1 bg-white"></div>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mx-auto mt-12">
+        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mx-auto mt-12">
           <div className="flex flex-col items-center text-center">
             <img draggable = {false} src="/img/graph_final.png" alt="Image 1" className="w-1/3 max-w-full mx-auto" />
             <h3 className="text-2xl md:text-4xl mt-4">1.7 million</h3>
@@ -78,7 +120,7 @@ export default function Home() {
             <h3 className="text-2xl md:text-4xl mt-4">100+</h3>
             <p className="text-lg md:text-xl mt-2 font-sans">Algorithmic insights for key financial nonprofits variables</p>
           </div>
-        </div>
+        </div> */}
       </section>
       {/* <section className="min-h-screen bg-white text-gray-900 px-6 md:px-12 py-20 lg:py-40 font-serif sm:py-40">
         <div className="flex flex-col justify-start text-center">
@@ -138,25 +180,44 @@ export default function Home() {
           </div>
         </div>
       </section>    */}
+
+
+                <div className="flex justify-center bg-gray-900 text-white px-6 md:px-12 font-serif pb-20 ">
+                  <div className="max-w-10xl px-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-36">
+                      {/* Dynamically generate flip cards for each feature */}
+                      {features.map((feature, index) => (
+                        <div key={index} className="flip-card"  style={{ userSelect: 'none' }}>
+                          <div className="flip-card-inner rounded-lg">
+                            <div className="flip-card-front rounded-lg flex items-center justify-center flex-col primary-color p-4">
+                              <img src={feature.imgSrc} alt={feature.title} className="w-20 md:w-20 lg:w-14 mb-4" draggable = "false" />
+                              <h3 className="text-lg font-medium">{feature.title}</h3>
+                            </div>
+                            <div className="flip-card-back rounded-lg flex items-center justify-center text-lg primary-color font-medium">
+                              <p>{feature.description}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
       <section className="flex flex-col lg:flex-row justify-between items-center min-h-screen bg-cover bg-center bg-[url('/img/gradient_two.png')] px-6 lg:px-12  py-40">
         <div className="flex-grow text-center lg:text-left">
           <h1 className="text-3xl lg:text-6xl font-bold text-gray-900 font-serif">
             Ready to collaborate?
           </h1>
           <p className="text-lg md:text-2xl mt-2 font-sans">Try any of our three platforms today.</p>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto lg:mx-0">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-1 gap-4 max-w-md mx-auto lg:mx-0">
             <button className="text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
-              Data
+              Explore Data
             </button>
-            <button className="text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
-              Visualize
-            </button>
-            <button className="col-span-1 sm:col-span-2 text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
-              Ecosystem Insights
+            <button className="col-span-1  text-lg px-6 py-2 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
+              Explore Premium Tools
             </button>
           </div>
           <div className="flex justify-center md:justify-start items-center mt-8 lg:mt-0 pt-12 md:px-10">
-          <img draggable = {false} src="/img/node_edge_final.png" alt="Network Visualization" className="w-1/3 max-w-full max-h-full" />
+          <img draggable = {false} src="/img/node_edge_final.png" alt="Network Visualization" className="w-80 " />
         </div>
         </div>
         <div className="flex-grow mt-8 lg:mt-0 text-center lg:text-left lg:px-40">
