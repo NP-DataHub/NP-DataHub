@@ -345,16 +345,16 @@ class Database:
             root = ET.parse(file_path).getroot()
         except ET.ParseError:
             print(f"Skipping invalid XML file: {file_path}")
-            return None
+            return
         return_type_element = root.find('.//irs:ReturnTypeCd', self.namespace)
         return_type = return_type_element.text if return_type_element is not None else None
         
         if return_type not in ["990", "990EZ", "990PF"]:
-            return None
+            return
 
         ein, tax_period = self.get_ein_and_tax_period(root)
         if not ein or not tax_period:
-            return None
+            return
 
         timestamp_element = root.find('.//irs:ReturnTs', self.namespace)
         current_timestamp = timestamp_element.text if timestamp_element is not None else "None"
@@ -390,13 +390,14 @@ class Database:
                     self.handle_duplicate_files_helper(root, file_path, return_type, ein, tax_period, previous_dt, current_dt)
 
         if update_fields is None:
-            return None
+            return
 
-        return UpdateOne(
+        self.database["NonProfitData"].update_one(
             {"EIN": ein},
             {"$set": update_fields},
             upsert=True
         )
+        return
 
     def process_all_xml_files(self, directory):
         num_cores = os.cpu_count()
@@ -409,11 +410,7 @@ class Database:
                     future = executor.submit(self.build_database, file_path)
                     futures.append(future)
             for future in as_completed(futures):
-                result = future.result()
-                if result:
-                    insertions.append(result)
-        if insertions:
-            result = self.database["NonProfitData"].bulk_write(insertions)
+                future.result()
 
         missing_sector = {"MajGrp": {"$exists": False}}
         self.database["NonProfitData"].update_many(
