@@ -6,12 +6,13 @@ export default function SocialMediaMentions({ query, limit = 50, period = 'last7
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const allowedNetworks = ['instagram', 'twitter', 'reddit', 'facebook']; // Only allow these networks
 
   const fetchMentions = async () => {
     try {
       const res = await fetch(`/api/social-searcher?limit=${limit}&period=${period}&q=${encodeURIComponent(query)}`);
       const data = await res.json();
-      const filteredPosts = (data.posts || []).filter(post => post.image); // Only display posts with media (image/video)
+      const filteredPosts = (data.posts || []).filter(post => post.image).filter(post => allowedNetworks.includes(post.network.toLowerCase()));; // Only display posts with media (image/video)
       setPosts(filteredPosts);
       setLoading(false);
     } catch (error) {
