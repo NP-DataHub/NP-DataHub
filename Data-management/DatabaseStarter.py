@@ -9,7 +9,7 @@ class DatabaseStarter:
         # Only load .env if MONGODB_URI is not already in the environment, because
         # it's already stored in the repository's settings as a secret
         if not os.getenv('MONGODB_URI'):
-            load_dotenv('../frontend/.env')
+            load_dotenv('frontend/.env')
         self.mongo_client = MongoClient(os.getenv('MONGODB_URI'))
         self.database = self.mongo_client["Nonprofitly"]
         self.initial_data = []

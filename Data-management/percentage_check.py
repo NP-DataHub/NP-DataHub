@@ -38,7 +38,7 @@ def count_incomplete_rows_and_ntee():
     # Only load .env if MONGODB_URI is not already in the environment, because
     # it's already stored in the repository's settings as a secret
     if not os.getenv('MONGODB_URI'):
-        load_dotenv('../frontend/.env')
+        load_dotenv('frontend/.env')
     mongo_client = MongoClient(os.getenv('MONGODB_URI'))
     database = mongo_client["Nonprofitly"]
     collection = database["NonProfitData"]
@@ -74,7 +74,7 @@ def count_years_per_row(complete_rows):
     # Only load .env if MONGODB_URI is not already in the environment, because
     # it's already stored in the repository's settings as a secret
     if not os.getenv('MONGODB_URI'):
-        load_dotenv('../frontend/.env')
+        load_dotenv('frontend/.env')
     mongo_client = MongoClient(os.getenv('MONGODB_URI'))
     database = mongo_client["Nonprofitly"]
     collection = database["NonProfitData"]

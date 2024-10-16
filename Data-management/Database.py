@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 import sys
 from lxml import etree as ET
-from pymongo import MongoClient, UpdateOne
+from pymongo import MongoClient
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 
@@ -12,7 +12,7 @@ class Database:
         # Only load .env if MONGODB_URI is not already in the environment, because
         # it's already stored in the repository's settings as a secret
         if not os.getenv('MONGODB_URI'):
-            load_dotenv('../frontend/.env')
+            load_dotenv('frontend/.env')
         self.mongo_client = MongoClient(os.getenv('MONGODB_URI'))
         self.database = self.mongo_client["Nonprofitly"]
         self.cache = {}
