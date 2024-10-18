@@ -42,18 +42,34 @@ export default async function handler(req, res) {
         switch(method){
             case 'GET':
                 const filters = {};
+                const nteeCodes = [];
+
                 console.log("Query:", query);
+
                 // From the passed in query, extract all the filters
-                for(const [key, value] of Object.entries(query)){
-                    if(value != 'null'){
-                        filters[key] = value;
+                for (const [key, value] of Object.entries(query)) {
+                    if (value != 'null' && value != '') {
+                        // If the value is an NTEE code, we need to handle it with an $or query
+                        if (key.includes('NTEE')) {
+                            // add the NTEE code to the list
+                            nteeCodes.push(key);
+                        } else {
+                            filters[key] = value;
+                        }
                     }
                 }
-                
+
                 // Build the query object
                 const queryObject = {
                     ...filters
                 };
+
+                // If there are NTEE codes, add them to the query using $or
+                if (nteeCodes.length > 0) {
+                    queryObject.$or = nteeCodes.map(code => ({
+                        ["NTEE"]: query[code]
+                    }));
+                }
 
                 console.log("Query Object:", queryObject);
                 const data = await database.collection("NonProfitData").find(queryObject).toArray();

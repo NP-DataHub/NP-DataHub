@@ -39,6 +39,8 @@ const Sector = () => {
   const [selectedYAxis, setSelectedYAxis] = useState({ value: "TotExp", label: "Total Expenses" });
 
 
+
+
   // ---Create the dropdown options for the sector selection dropdowns---
   const stateOptions = [
     { value: "", label: "Select State" },
@@ -156,108 +158,133 @@ useEffect(() => {
 
 
 return (
-  <div className="flex dashboard-color text-white font-sans h-screen w-screen overflow-auto">
-    <Sidebar />
-    <div className="flex-col w-10/12 mx-auto dashboard-color">
-      <DashboardNavbar />
-      <div className="flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
-        <h1 className="text-2xl font-semibold">Sector View</h1>
-        <span className="text-sm text-[#A0A0A0]">Super epic tools to visualize anything you could possibly want to see.</span>
+<div className="flex dashboard-color text-white font-sans h-screen w-screen overflow-auto">
+  <Sidebar />
+  <div className="flex-col w-10/12 mx-auto dashboard-color">
+    <DashboardNavbar />
+    <div className="flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
+      <h1 className="text-4xl font-semibold">Sector View</h1>
+      <span className="text-xl text-[#A0A0A0]">Visualize sector ecosystems to gain financial insight.</span>
+    </div>
+    <div className="flex-col mx-10 font-sans">
+      <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10">
+        <h1 className="mb-8" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>ScatterPlot</h1>
+        <div className="mb-4 p-4 bg-[#171821] text-white rounded">
+          <h2 className="text-lg font-semibold mb-2">How to Use the Filters</h2>
+          <p className="text-sm text-[#A0A0A0]">
+            BLANK DESCRIPTION
+          </p>
+        </div>
+        <div className="grid grid-cols-3 gap-4 mb-6">
+          <div className="bg-[#6d618c] p-4 rounded-lg">
+            <h2 className="text-lg font-semibold mb-4">State Selection</h2>
+            <div className="flex items-center">
+              <Select
+                options={stateOptions}
+                value={selectedState}
+                onChange={(option) => setSelectedState(option)}
+                className="text-black"
+              />
+              <a data-tooltip-id="my-tooltip" className="ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="Tooltip content here.">ℹ️</a>
+              <ReactTooltip place="top" effect="solid" id="my-tooltip" />
+            </div>
+          </div>
+          <div className="bg-[#255972] p-4 rounded-lg">
+            <h2 className="text-lg font-semibold mb-4">City Selection</h2>
+            <div className="flex items-center">
+              <Select
+                options={cityOptions}
+                value={selectedCity}
+                onChange={(option) => setSelectedCity(option)}
+                className="text-black"
+              />
+              <a data-tooltip-id="option1-tooltip" className="ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="Tooltip content for option 1 here.">ℹ️</a>
+              <ReactTooltip place="top" effect="solid" id="option1-tooltip" />
+            </div>
+          </div>
+          <div className="bg-[#2c7787] p-4 rounded-lg">
+            <h2 className="text-lg font-semibold mb-4">NTEE Sector Selection</h2>
+            <div className="flex items-center">
+              <Select
+                options={sectorOptions}
+                value={selectedSector}
+                onChange={(option) => setSelectedSector(option)}
+                className="text-black"
+              />
+              <a data-tooltip-id="option2-tooltip" className="ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="Tooltip content for option 2 here.">ℹ️</a>
+              <ReactTooltip place="top" effect="solid" id="option2-tooltip" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-[#21222D] p-6 rounded-lg" style={{ height: '800px' }}>
+          <div className="flex flex-col h-full">
+            {sectorData ? (
+              <div className="flex-grow">
+                <ScatterPlot data={sectorData.data} X_axis_var={selectedXAxis.value} Y_axis_var={selectedYAxis.value} filters={sectorData.filters} />
+              </div>
+            ) : (
+              <div>Loading ScatterPlot...</div>
+            )}
+            <div className="flex justify-between items-center bg-[#171821] p-2 rounded-lg mt-4">
+              <span>Select Financial Variables to compare:</span>
+              <div className="flex space-x-4">
+                <Select
+                  options={varOptions}
+                  value={selectedXAxis}
+                  onChange={(option) => setSelectedXAxis(option)}
+                  className="text-black"
+                />
+                <Select
+                  options={varOptions}
+                  value={selectedYAxis}
+                  onChange={(option) => setSelectedYAxis(option)}
+                  className="text-black"
+                />
+              </div>
+            </div>
+            <div className="mt-4 p-3 w-full bg-[#171821] text-white rounded">
+              Filter by NTEE code, city, state, or ZIP code to see how nonprofits in different sectors compare across different financial metrics.
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="flex-col mx-10 font-sans">
-        <div className="grid grid-cols-4 gap-4 mt-10 h-400px">
-          <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-            <div className="flex justify-between items-center">
-              <h1 className="mb-8" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>State Selection</h1>
-              <div className="flex items-center">
-                <Select
-                  options={stateOptions}
-                  value={selectedState}
-                  onChange={(option) => setSelectedState(option)}
-                  className="text-black"
-                />
-                <a data-tooltip-id="my-tooltip" className="ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="Tooltip content here.">ℹ️</a>
-                <ReactTooltip place="top" effect="solid" id="my-tooltip" />
+      <div className="mt-10">
+        <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+          <h1 className="mb-4" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>COLAB Tool</h1>
+          <div className="mb-4 p-4 bg-[#171821] text-white rounded">
+            <h2 className="text-lg font-semibold mb-2">Description</h2>
+            <p className="text-sm text-[#A0A0A0]">
+              BLANK DESCRIPTION
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-auto" style={{ height: '600px' }}>
+              <h1 className="mb-4" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>COLAB Graph</h1>
+              <div className="flex flex-col h-full">
+                {sectorData ? (
+                  <COLAB_graph data={sectorData.data} filters={[]} className="flex-grow" />
+                ) : (
+                  <div>Loading COLAB Graph...</div>
+                )}
+                <div className="mt-4 p-2 w-full bg-[#171821] text-white rounded">
+                  BLANK DESCRIPTION
+                </div>
               </div>
             </div>
-          </div>
-          <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-            <div className="flex justify-between items-center">
-              <h1 className="mb-8" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>City Selection</h1>
-              <div className="flex items-center">
-                <Select
-                  options={cityOptions}
-                  value={selectedCity}
-                  onChange={(option) => setSelectedCity(option)}
-                  className="text-black"
-                />
-                <a data-tooltip-id="option1-tooltip" className="ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="Tooltip content for option 1 here.">ℹ️</a>
-                <ReactTooltip place="top" effect="solid" id="option1-tooltip" />
-              </div>
-            </div>
-          </div>
-          <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-            <div className="flex justify-between items-center">
-              <h1 className="mb-8" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>NTEE Sector Selection</h1>
-              <div className="flex items-center">
-                <Select
-                  options={sectorOptions}
-                  value={selectedSector}
-                  onChange={(option) => setSelectedSector(option)}
-                  className="text-black"
-                />
-                <a data-tooltip-id="option2-tooltip" className="ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="Tooltip content for option 2 here.">ℹ️</a>
-                <ReactTooltip place="top" effect="solid" id="option2-tooltip" />
-              </div>
-            </div>
-          </div>
-          <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-            <div className="flex justify-between items-center">
-              <h1 className="mb-8" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>NTEE Code</h1>
-              <div className="flex items-center">
-                <Select
-                  options={[]}
-                  value={[]}
-                  onChange={(option) => setSelectedNew(option)}
-                  className="text-black"
-                />
-                <a data-tooltip-id="option3-tooltip" className="ml-2 cursor-pointer text-gray-400 hover:text-gray-200" data-tooltip-content="Tooltip content for option 3 here.">ℹ️</a>
-                <ReactTooltip place="top" effect="solid" id="option3-tooltip" />
+            <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+              <h1 className="mb-4" style={{ textAlign: 'center', fontSize: '2em', fontWeight: 'bold' }}>COLAB Table</h1>
+              <div className="flex flex-col h-full">
+                <div className="flex-grow bg-[#171821] text-white rounded">
+                  {/* Add in table component once developed */}
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-col mt-10" >
-            {sectorData ? (
-              <ScatterPlot data={sectorData.data} X_axis_var={selectedXAxis.value} Y_axis_var={selectedYAxis.value} filters={sectorData.filters} />
-            ) : (
-              <div>Loading ScatterPlot...</div>
-            )}
-          </div>
-          <div className="flex flex-col mt-10" style={{ height: '600px'}}>
-            {sectorData ? (
-              <COLAB_graph data={sectorData.data} filters={[]}/>
-            ) : (
-              <div>Loading COLAB Graph...</div>
-            )}
-          </div>
-      </div>
-      <div className="flex justify-center mt-10">
-        <Select
-          options={varOptions}
-          value={selectedXAxis}
-          onChange={(option) => setSelectedXAxis(option)}
-          className="text-black"
-        />
-        <Select
-          options={varOptions}
-          value={selectedYAxis}
-          onChange={(option) => setSelectedYAxis(option)}
-          className="text-black"
-        />
       </div>
     </div>
   </div>
+</div>
 );
 };
 
