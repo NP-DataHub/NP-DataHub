@@ -155,7 +155,7 @@ export default function FiscalHealthSection() {
       </p>
 
       <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl">
-        <h1 className="text-3xl font-bold text-center mb-6 text-yellow-300">Fiscal Health Tool</h1>
+        <h1 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Fiscal Health Tool</h1>
 
         <div className="flex flex-col gap-6">
           <div className="flex flex-row justify-between gap-4">
