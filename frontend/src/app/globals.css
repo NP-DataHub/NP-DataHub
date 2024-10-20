@@ -144,12 +144,12 @@ body {
 }
 
 .flip-card-front {
-  background-color: #2d3748; /* Tailwind gray-700 */
+  background-color: #21222D; /* Tailwind gray-700 */
 
 }
 
 .flip-card-back {
-  background-color: #2d3748;
+  background-color: #21222D;
   color: white;
   transform: rotateY(180deg);
   padding: 1rem;

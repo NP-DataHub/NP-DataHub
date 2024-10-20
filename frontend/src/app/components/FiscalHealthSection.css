@@ -29,15 +29,3 @@
   margin: 0;
 }
 
-.autosuggest-suggestion {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.autosuggest-suggestion--highlighted {
-  background-color: #feb95a;
-}
-
-.suggestion-item {
-  color: white;
-}

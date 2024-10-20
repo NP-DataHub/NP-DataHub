@@ -80,7 +80,7 @@ export default function FiscalHealthSection() {
   const getSuggestionValue = (suggestion) => suggestion.Nm || suggestion.Addr || '';
   
   const renderSuggestion = (suggestion) => (
-    <div className="suggestion-item">
+    <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
       {suggestion.Nm || suggestion.Addr}
     </div>
   );
@@ -272,14 +272,14 @@ export default function FiscalHealthSection() {
           <div className="flex flex-row justify-between">
             <button
               onClick={toggleNpVSnp}
-              className="py-4 px-6 bg-gray-200 text-black rounded-lg font-bold w-1/2 mr-4 hover:bg-gray-400"
+              className="py-4 px-6 bg-gray-200 text-black rounded-lg font-bold w-1/2 mr-4 hover:bg-gray-400 transition duration-300"
             >
               {npVSnp ? 'Single Nonprofit' : 'Compare Two Nonprofits'}
             </button>
 
             <button
               onClick={fetchFiscalHealthData}
-              className={`py-4 px-6 rounded-lg font-bold w-1/2 ${isFetchDisabled() ? 'bg-gray-700 text-black cursor-not-allowed' : 'bg-[#A9DFD8] text-black hover:bg-[#88B3AE] '}`}
+              className={`py-4 px-6 rounded-lg font-bold w-1/2 ${isFetchDisabled() ? 'bg-gray-700 text-black cursor-not-allowed' : 'bg-[#A9DFD8] text-black hover:bg-[#88B3AE] transition duration-300 '}`}
               disabled={isFetchDisabled()} // Disable the fetch button based on input validation
             >
               Calculate

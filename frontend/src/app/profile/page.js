@@ -355,7 +355,7 @@ export default function Profile() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full px-4 py-2 text-white font-medium bg-gray-800 rounded-md hover:bg-indigo-700 transition duration-300"
+                  className="w-full px-4 py-2 bg-[#A9DFD8] text-black font-semibold py-2 px-4 rounded hover:bg-[#88B3AE] rounded-md  transition duration-300"
                 >
                   {uploadingImage ? 'Uploading and Saving...' : 'Save'}
                 </button>
