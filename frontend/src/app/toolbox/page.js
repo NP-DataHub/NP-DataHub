@@ -10,6 +10,7 @@ import ntee_codes from "../components/ntee";
 import { useRouter } from 'next/navigation';
 import NewsFeedSection from "../components/newsfeed";
 import FiscalHealthSection from "../components/FiscalHealthComponent";
+import Footer from "../components/dashboard_footer";
 
 import dynamic from 'next/dynamic';
 const ChoroplethMap = dynamic(() => import('../components/map'), { ssr: false });
@@ -28,7 +29,6 @@ export default function Toolbox() {
         );
     };
     //console.log(nonProfitNames)
-    
 
     const data2 = [
         {
@@ -168,9 +168,9 @@ export default function Toolbox() {
     return(
         
         <div>
-            <div className="dashboard-color text-white font-sans">
+            <div className="dashboard-color text-white font-sans pb-12">
                 <Sidebar currentPage='/toolbox' className="hidden" />
-                <div className = "flex-col">
+                <div className = "min-h-screen flex flex-col ">
                     {/* <DashboardNavbar/> */}
                     <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans" >
                         <h1 className = "text-2xl font-semibold">NON PROFIT TOOLBOX LIBRARY</h1>
@@ -321,6 +321,10 @@ export default function Toolbox() {
                                 <p className = "text-sm text-[#20AEF3]">Search from a host of other variables and compare where others stand regionally in the same or different sectors.</p>
                             </div>
                         </div>
+
+                        { selectedSection === "" && (
+                            <div className="flex-grow"></div>
+                        )}
                         <div className="mt-12">
                             {selectedSection === "Fiscal Health" && (
                                 // <div className="p-6 bg-[#171821] rounded-lg">
@@ -763,7 +767,9 @@ export default function Toolbox() {
                         </div>
                     </div>
                 </div>
+                
             </div>
+            <Footer/>
         </div>
     );
 }

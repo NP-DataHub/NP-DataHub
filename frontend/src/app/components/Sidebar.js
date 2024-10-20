@@ -49,15 +49,15 @@ const Sidebar = ({ currentPage }) => {
     { href: '/dashboard', label: 'Dashboard', icon: <MdDashboard /> },
     { href: '/toolbox', label: 'Toolbox Library', icon: <FaToolbox />, pro: true },
     { href: '/networking-paths', label: 'Networking + Paths', icon: <PiGraph />, pro: true },
-    { href: '/ntee-code-check', label: 'NTEE CODE CHECK', icon: <GoCodescanCheckmark /> },
+    // { href: '/ntee-code-check', label: 'NTEE CODE CHECK', icon: <GoCodescanCheckmark /> },
   ];
 
   return (
     <div className="relative">
       {/* Main container */}
-      <div className="dashboard-color border-r-2 px-8 border-[#2C2D33] flex flex-row justify-center items-center space-x-10 py-6 font-sans mb-4">
+      <div className="dashboard-color border-[#2C2D33] px-10 flex flex-row w-full items-center space-x-10 py-6 font-sans mb-12 border-b-2 ">
         {/* Logo Section */}
-        <picture>
+        <picture className = "flex-grow">
           <source media="(max-width: 767px)" srcSet="/img/inverted.png" />
           <img className="h-10 md:h-10 max-h-full" src="/img/inverted.png" alt="Logo" />
         </picture>
@@ -127,7 +127,7 @@ const Sidebar = ({ currentPage }) => {
 
       {/* Sidebar for User Profile */}
       <div className={`fixed top-0 right-0 h-full bg-[#21222D] z-40 text-white shadow-lg transition-transform transform ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'}`} style={{ width: '300px', borderRadius: '10px 0 0 10px' }}>
-        <div className="flex items-center justify-between p-4">
+        <div className="flex items-center  p-4">
           <div className="flex items-center space-x-3">
             <img src={userData.image || 'https://via.placeholder.com/150'} alt="User" className="w-12 h-12 rounded-full object-cover" />
             <span className="font-semibold">{userData.firstName + " " + userData.lastName || 'User Name'}</span>

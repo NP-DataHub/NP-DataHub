@@ -4,6 +4,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
+import Footer from './components/footer'
 import { useRouter } from 'next/navigation'; // Use next/navigation instead of next/router
 
 const features = [
@@ -240,6 +241,7 @@ export default function Home() {
           </div> */}
         </div>
       </section>
+      <Footer/>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import Autosuggest from 'react-autosuggest';
 import cities from "../components/cities";
 import ntee_codes from "../components/ntee";
 import { useRouter } from 'next/navigation';
+import Footer from '../components/dashboard_footer'
 
 export default function Dashboard() {
     const [isLoading, setIsLoading] = useState(true); // State to control the loading state
@@ -617,6 +618,7 @@ export default function Dashboard() {
                     </div>
                     )}
                     {isLoading && <LoadingComponent />}
+                    <Footer/>
                 </div>
         </div>
     );

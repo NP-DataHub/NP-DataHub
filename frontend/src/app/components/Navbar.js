@@ -58,34 +58,31 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md w-full sticky top-0 z-50 font-sans">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+    <>
+      {/* Main Navbar */}
+      <nav className="dashboard-color px-10 flex flex-row w-full items-center space-x-10 py-6 font-sans top-0 z-50 sticky">
         {/* Responsive Logo */}
-        <picture>
+        <picture className="flex-grow">
           {/* Logo for small screens */}
-          <source media="(max-width: 767px)" srcSet="/img/nonprofitly_primary_no_back.png" />
+          <source media="(max-width: 767px)" srcSet="/img/inverted.png" />
           {/* Logo for medium screens and larger */}
-          <img
-            className="h-10 md:h-10 max-h-full"  
-            src="/img/nonprofitly_primary_no_back.png"
-            alt="Logo"
-          />
+          <img className="h-10 md:h-10 max-h-full" src="/img/inverted.png" alt="Logo" />
         </picture>
 
         {/* Hamburger Menu for Both Desktop and Mobile */}
         <button
           onClick={toggleMenu}
-          className="ml-auto px-4 py-2 transition text-black"
+          className="ml-auto px-4 py-2 transition text-white hover:text-[#A9DFD8]"
         >
           <RxHamburgerMenu className="text-2xl" />
         </button>
-      </div>
+      </nav>
 
-      {/* Dropdown Menu for both Desktop and Mobile with Smooth Roll Down Effect */}
+      {/* Dropdown Menu Below Navbar */}
       <div
         className={`${
           isMenuOpen ? 'max-h-[500px]' : 'max-h-0'
-        } overflow-hidden transition-max-height duration-700 ease-in-out bg-white shadow-lg mt-2`}
+        } overflow-hidden transition-max-height duration-700 ease-in-out bg-white shadow-lg`}
       >
         <button
           onClick={handleLoginClick}
@@ -116,7 +113,7 @@ const Navbar = () => {
           onSwitchToLogin={handleSwitchToLogin}
         />
       )}
-    </nav>
+    </>
   );
 };
 
