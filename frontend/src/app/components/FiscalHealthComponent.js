@@ -1,216 +1,350 @@
 import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
+import './FiscalHealthSection.css'; // Import custom CSS
 
-const FiscalHealthComponent = () => {
-  const [selectedNp1, setSelectedNp1] = useState('');
-  const [selectedNp2, setSelectedNp2] = useState('');
-  const [fiscalScoreNp1, setFiscalScoreNp1] = useState(null);
-  const [fiscalScoreNp2, setFiscalScoreNp2] = useState(null);
-  const [analysis, setAnalysis] = useState('');
+export default function FiscalHealthSection() {
+  const [firstNp, setFirstNp] = useState('');
+  const [firstAddr, setFirstAddr] = useState('');
+  const [secondNp, setSecondNp] = useState('');
+  const [secondAddr, setSecondAddr] = useState('');
+  const [npVSnp, setNpVSnp] = useState(false); // Toggle between comparing two nonprofits or a single nonprofit
+  const [specificSector, setSpecificSector] = useState(''); // Sector selected from dropdown
+  const [selectedSectorForResults, setSelectedSectorForResults] = useState(''); // Sector used to display results
+  const [nonprofitData, setNonprofitData] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [suggestions, setSuggestions] = useState([]);
+  const [nameSuggestions, setNameSuggestions] = useState([]); // Suggestions for name autocomplete
+  const [addressSuggestions, setAddressSuggestions] = useState([]); // Suggestions for address autocomplete
+  const [lastFetchedNameInput, setLastFetchedNameInput] = useState('');
+  const [lastFetchedAddressInput, setLastFetchedAddressInput] = useState('');
 
-  // Input props for nonprofit 1 and nonprofit 2
-  const inputProps = {
-    placeholder: 'Nonprofit 1',
-    value: selectedNp1,
-    onChange: (event, { newValue }) => setSelectedNp1(newValue),
+
+  const majorGroups = [
+    { value: '', label: 'Select a Sector (Optional)' },
+    { value: 'A', label: 'A - Arts, Culture, and Humanities' },
+    { value: 'B', label: 'B - Educational Institutions and Related Activities' },
+    { value: 'C', label: 'C - Environmental Quality, Protection and Beautification' },
+    { value: 'D', label: 'D - Animal-Related' },
+    { value: 'E', label: 'E - Health – General and Rehabilitative' },
+    { value: 'F', label: 'F - Mental Health, Crisis Intervention' },
+    { value: 'G', label: 'G - Diseases, Disorders, Medical Disciplines' },
+    { value: 'H', label: 'H - Medical Research' },
+    { value: 'I', label: 'I - Crime and Legal-Related' },
+    { value: 'J', label: 'J - Employment, Job-Related' },
+    { value: 'K', label: 'K - Food, Agriculture, and Nutrition' },
+    { value: 'L', label: 'L - Housing, Shelter' },
+    { value: 'M', label: 'M - Public Safety, Disaster Preparedness, and Relief' },
+    { value: 'N', label: 'N - Recreation, Sports, Leisure, Athletics' },
+    { value: 'O', label: 'O - Youth Development' },
+    { value: 'P', label: 'P - Human Services - Multipurpose and Other' },
+    { value: 'Q', label: 'Q - International, Foreign Affairs, and National Security' },
+    { value: 'R', label: 'R - Civil Rights, Social Action, Advocacy' },
+    { value: 'S', label: 'S - Community Improvement, Capacity Building' },
+    { value: 'T', label: 'T - Philanthropy, Voluntarism, and Grantmaking Foundations' },
+    { value: 'U', label: 'U - Science and Technology Research Institutes, Services' },
+    { value: 'V', label: 'V - Social Science Research Institutes, Services' },
+    { value: 'W', label: 'W - Public, Societal Benefit - Multipurpose and Other' },
+    { value: 'X', label: 'X - Religion-Related, Spiritual Development' },
+    { value: 'Y', label: 'Y - Mutual/Membership Benefit Organizations, Other' },
+    { value: 'Z', label: 'Z - Unknown' },
+  ];
+  
+  // Fetch suggestions for nonprofit names or addresses
+  const fetchSuggestions = async (value, type) => {
+    if (type === 'name' && value === lastFetchedNameInput) return;
+    if (type === 'address' && value === lastFetchedAddressInput) return;
+  
+    try {
+      const response = await fetch(`/api/suggestions?input=${value}&type=${type}`);
+      const data = await response.json();
+  
+      if (data.success) {
+        if (type === 'name') {
+          setNameSuggestions(data.data);
+          setLastFetchedNameInput(value); // Update last fetched value for names
+        } else if (type === 'address') {
+          setAddressSuggestions(data.data);
+          setLastFetchedAddressInput(value); // Update last fetched value for addresses
+        }
+      } else {
+        if (type === 'name') setNameSuggestions([]);
+        if (type === 'address') setAddressSuggestions([]);
+      }
+    } catch (error) {
+      console.error("Error fetching suggestions:", error);
+    }
+  };
+  
+
+  // Autosuggest configuration
+  const getSuggestionValue = (suggestion) => suggestion.Nm || suggestion.Addr || '';
+  
+  const renderSuggestion = (suggestion) => (
+    <div className="suggestion-item">
+      {suggestion.Nm || suggestion.Addr}
+    </div>
+  );
+
+  const onNameSuggestionsFetchRequested = ({ value }) => {
+    fetchSuggestions(value, 'name');
   };
 
-  const inputProps2 = {
-    placeholder: 'Nonprofit 2',
-    value: selectedNp2,
-    onChange: (event, { newValue }) => setSelectedNp2(newValue),
-  };
-
-  // Example function to fetch suggestions for Autosuggest
-  const onSuggestionsFetchRequested = ({ value }) => {
-    // Example suggestions based on user input (you can replace this with an actual API call)
-    setSuggestions([
-      { name: 'Society of Cosmetic Chemists' },
-      { name: 'Beta Theta Pi Fraternity' },
-      { name: 'Red Cross' },
-      { name: 'Green Peace' },
-    ]);
+  const onAddressSuggestionsFetchRequested = ({ value }) => {
+    fetchSuggestions(value, 'address');
   };
 
   const onSuggestionsClearRequested = () => {
-    setSuggestions([]);
+    setNameSuggestions([]);
+    setAddressSuggestions([]);
   };
 
-  const getSuggestionValue = suggestion => suggestion.name;
-
-  const renderSuggestion = suggestion => <div>{suggestion.name}</div>;
-
-  // Fetch the fiscal health data from the API
-  const handleCalculate = async () => {
-    const firstNp = selectedNp1;
-    const firstAddr = 'First address'; // Replace with actual address or fetch dynamically
-    const secondNp = selectedNp2 || '';
-    const secondAddr = 'Second address'; // Replace with actual address or fetch dynamically
-    const npVSnp = !!secondNp;
+  // Fetch fiscal health data
+  const fetchFiscalHealthData = async () => {
+    setLoading(true);
+    setError(null);
+    setNonprofitData(null); // Clear results when fetching new data
 
     try {
       const response = await fetch('/api/fiscalHealth', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstNp,
-          firstAddr,
-          secondNp,
-          secondAddr,
-          npVSnp,
-          specific_sector: null, // or provide a specific sector if needed
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ firstNp, firstAddr, secondNp, secondAddr, npVSnp, specific_sector: specificSector }),
       });
 
-      const result = await response.json();
+      const data = await response.json();
 
-      if (response.ok) {
-        if (npVSnp) {
-          setFiscalScoreNp1(result[0][0]);
-          setFiscalScoreNp2(result[1][0]);
-          setAnalysis(`Nonprofit 1 score: ${result[0][0]}, Nonprofit 2 score: ${result[1][0]}`);
-        } else {
-          setFiscalScoreNp1(result[0][0]);
-          setAnalysis(`Nonprofit 1 score: ${result[0][0]}, Sector comparison: ${result[1][0]}`);
-        }
-      } else {
-        setError(result.message);
+      if (!response.ok) {
+        throw new Error(data.message || 'Error fetching fiscal health data');
       }
-    } catch (error) {
-      setError('An error occurred while calculating fiscal health.');
+
+      // Set results only after fetching data
+      setNonprofitData(data);
+      setSelectedSectorForResults(specificSector); // Update the sector used for results display
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Toggle between single and two nonprofit comparisons, clearing data
+  const toggleNpVSnp = () => {
+    setNpVSnp(!npVSnp);
+    setSpecificSector(''); // Clear the sector input when switching
+    setNonprofitData(null); // Clear results when toggling between single and two
+    setSelectedSectorForResults(''); // Clear sector for results when switching
+  };
+
+  // Determine if the fetch button should be disabled
+  const isFetchDisabled = () => {
+    if (npVSnp) {
+      return !(firstNp || firstAddr) || !(secondNp || secondAddr); // Disable if neither name nor address is provided for both nonprofits
+    } else {
+      return !(firstNp || firstAddr); // Disable if neither name nor address is provided for the first nonprofit
     }
   };
 
   return (
     <div className="p-6 bg-[#171821] rounded-lg">
-      {/* Section for Single Nonprofit Fiscal Health */}
-      <h3 className="text-xl font-semibold text-[#FEB95A]">
-        FISCAL HEALTH: SINGLE NONPROFIT
-      </h3>
-      <p className="text-white mt-2">
-        Assess a nonprofit’s fiscal health based on a weighted score of various data variables. Compare the scores side-by-side with other nonprofits.
+      <h3 className="text-xl font-semibold text-[#FEB95A]">Fiscal Health</h3>
+      <p className="text-white pb-12">
+        Assess a nonprofit’s fiscal health by calculating a weighted score based on various financial data variables, 
+        including increases or decreases in revenues, expenses, assets, and liabilities. 
+        This score can be compared side-by-side with other nonprofits or evaluated against organizations within the same or different sectors, 
+        offering a comprehensive analysis of fiscal health across key financial metrics.
       </p>
-      <div className="mt-12 text-sm">
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-            SEARCH FOR A NONPROFIT
-          </button>
-          <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-            COMPARE AGAINST ANOTHER NONPROFIT
-          </button>
-        </div>
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <Autosuggest
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={inputProps}
-          />
-          <Autosuggest
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={inputProps2}
-          />
-        </div>
-        <div className="flex justify-center mb-6">
-          <button
-            className="px-8 py-4 bg-green-500 rounded-full text-white font-bold hover:bg-green-400 transition-colors mt-8 mb-4"
-            onClick={handleCalculate}
-          >
-            CALCULATE
-          </button>
-        </div>
-        {error && <div className="text-red-500">{error}</div>}
-        <div className="flex justify-around">
-          <div className="flex flex-col items-center">
-            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-green-500">
-              {fiscalScoreNp1 !== null ? fiscalScoreNp1 : 'N/A'}
-            </div>
-            <span className="mt-2 text-gray-300">Nonprofit 1</span>
+
+      <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl">
+        <h1 className="text-3xl font-bold text-center mb-6 text-yellow-300">Fiscal Health Tool</h1>
+
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-row justify-between gap-4">
+              {/* Autosuggest for Nonprofit Name */}
+              <Autosuggest
+                suggestions={nameSuggestions}
+                onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                getSuggestionValue={getSuggestionValue}
+                renderSuggestion={renderSuggestion}
+                inputProps={{
+                  placeholder: 'Search for Nonprofit',
+                  value: firstNp,
+                  onChange: (_, { newValue }) => setFirstNp(newValue),
+                  className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+                }}
+                theme={{
+                  container: 'autosuggest-container',
+                  input: 'autosuggest-input',
+                  suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
+                  suggestionsList: 'autosuggest-suggestions-list',
+                  suggestion: 'autosuggest-suggestion',
+                  suggestionHighlighted: 'autosuggest-suggestion--highlighted',
+                }}
+              />
+
+            {/* Autosuggest for Address */}
+            <Autosuggest
+              suggestions={addressSuggestions}
+              onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
+              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              getSuggestionValue={getSuggestionValue}
+              renderSuggestion={renderSuggestion}
+              inputProps={{
+                placeholder: 'Search or Auto-fill Address',
+                value: firstAddr,
+                onChange: (_, { newValue }) => setFirstAddr(newValue),
+                className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+              }}
+              theme={{
+                container: 'autosuggest-container',
+                input: 'autosuggest-input',
+                suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
+                suggestionsList: 'autosuggest-suggestions-list',
+                suggestion: 'autosuggest-suggestion',
+                suggestionHighlighted: 'autosuggest-suggestion--highlighted',
+              }}
+            />
           </div>
-          {fiscalScoreNp2 !== null && (
-            <div className="flex flex-col items-center">
-              <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-orange-500">
-                {fiscalScoreNp2 !== null ? fiscalScoreNp2 : 'N/A'}
-              </div>
-              <span className="mt-2 text-gray-300">Nonprofit 2</span>
+
+          {/* Compare Two Nonprofits */}
+          {npVSnp && (
+            <div className="flex flex-row justify-between gap-4">
+              <Autosuggest
+                suggestions={nameSuggestions}
+                onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                getSuggestionValue={getSuggestionValue}
+                renderSuggestion={renderSuggestion}
+                inputProps={{
+                  placeholder: 'Compare Against Another Nonprofit',
+                  value: secondNp,
+                  onChange: (_, { newValue }) => setSecondNp(newValue),
+                  className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+                }}
+                theme={{
+                  container: 'autosuggest-container',
+                  input: 'autosuggest-input',
+                  suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
+                  suggestionsList: 'autosuggest-suggestions-list',
+                  suggestion: 'autosuggest-suggestion',
+                  suggestionHighlighted: 'autosuggest-suggestion--highlighted',
+                }}
+              />
+
+              <Autosuggest
+                suggestions={addressSuggestions}
+                onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
+                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                getSuggestionValue={getSuggestionValue}
+                renderSuggestion={renderSuggestion}
+                inputProps={{
+                  placeholder: 'Search or Auto-fill Address',
+                  value: secondAddr,
+                  onChange: (_, { newValue }) => setSecondAddr(newValue),
+                  className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+                }}
+                theme={{
+                  container: 'autosuggest-container',
+                  input: 'autosuggest-input',
+                  suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
+                  suggestionsList: 'autosuggest-suggestions-list',
+                  suggestion: 'autosuggest-suggestion',
+                  suggestionHighlighted: 'autosuggest-suggestion--highlighted',
+                }}
+              />
             </div>
           )}
-        </div>
-      </div>
 
-      <h3 className="text-xl font-semibold mt-12">ANALYSIS</h3>
-      <p className="text-white mt-2">
-        {analysis}
-      </p>
+          {/* Sector dropdown menu */}
+          <select
+            value={specificSector}
+            onChange={(e) => setSpecificSector(e.target.value)}
+            disabled={npVSnp} // Disable when npVSnp is true
+            className={`p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white ${npVSnp ? 'opacity-50' : ''}`}
+          >
+            {majorGroups.map((group) => (
+              <option key={group.value} value={group.value} className="text-black">
+                {group.label}
+              </option>
+            ))}
+          </select>
 
-      {/* Section for Fiscal Health Against Local + National Sectors */}
-      <h3 className="text-xl font-semibold text-[#FEB95A] mt-12">
-        FISCAL HEALTH: AGAINST LOCAL + NATIONAL SECTORS
-      </h3>
-      <p className="text-white mt-2">
-        Assess a nonprofit’s fiscal health based on a weighted score of various data variables. Compare the scores side-by-side with the same or other sectors.
-      </p>
-      <div className="mt-12 text-sm">
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <Autosuggest
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={inputProps}
-          />
-          <Autosuggest
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={inputProps2}
-          />
-        </div>
-        <div className="flex justify-center mb-6">
-          <button className="px-8 py-4 bg-green-500 rounded-full text-white font-bold hover:bg-green-400 transition-colors mt-8 mb-4">
-            CALCULATE
-          </button>
-        </div>
-        <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="flex flex-col items-center">
-            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-green-500">
-              {fiscalScoreNp1 !== null ? fiscalScoreNp1 : 'N/A'}
-            </div>
-            <span className="mt-2 text-gray-300">PRIMARY NONPROFIT</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-green-500">
-              4.9 {/* This could be dynamic based on regional score */}
-            </div>
-            <span className="mt-2 text-gray-300">REGIONAL</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-orange-500">
-              5.7 {/* This could be dynamic based on national score */}
-            </div>
-            <span className="mt-2 text-gray-300">NATIONAL</span>
+          <div className="flex flex-row justify-between">
+            <button
+              onClick={toggleNpVSnp}
+              className="py-4 px-6 bg-gray-200 text-black rounded-lg font-bold w-1/2 mr-4 hover:bg-gray-400"
+            >
+              {npVSnp ? 'Single Nonprofit' : 'Compare Two Nonprofits'}
+            </button>
+
+            <button
+              onClick={fetchFiscalHealthData}
+              className={`py-4 px-6 rounded-lg font-bold w-1/2 ${isFetchDisabled() ? 'bg-gray-700 text-black cursor-not-allowed' : 'bg-[#A9DFD8] text-black hover:bg-[#88B3AE] '}`}
+              disabled={isFetchDisabled()} // Disable the fetch button based on input validation
+            >
+              Calculate
+            </button>
           </div>
         </div>
+
+        {loading && <div className="text-center text-lg text-gray-400 mt-6">Loading...</div>}
+        {error && <div className="text-center text-lg text-red-400 mt-6">Error: {error}</div>}
+
+        {nonprofitData && !loading && !error && (
+          <div className="mt-8 text-white">
+            {!selectedSectorForResults && !npVSnp && (
+              <div className="flex justify-center">
+                <div className="flex flex-col items-center">
+                  <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                    {nonprofitData[0][0].toFixed(1)}
+                  </div>
+                  <p className="mt-4">Fiscal Health Score </p>
+                </div>
+              </div>
+            )}
+
+            {npVSnp && (
+              <div className="flex flex-row justify-between">
+                <div className="flex flex-col items-center w-1/2">
+                  <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                    {nonprofitData[0][0].toFixed(1)}
+                  </div>
+                  <p className="mt-4">Fiscal Health Score </p>
+                </div>
+                <div className="flex flex-col items-center w-1/2">
+                  <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                    {nonprofitData[1][0].toFixed(1)}
+                  </div>
+                  <p className="mt-4">Fiscal Health Score </p>
+                </div>
+              </div>
+            )}
+
+            {selectedSectorForResults && !npVSnp && (
+              <div className="flex flex-row justify-between mb-6">
+                <div className="flex flex-col items-center w-1/3">
+                  <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                    {nonprofitData[0][0].toFixed(1)}
+                  </div>
+                  <p className="mt-4">Fiscal Health Score </p>
+                </div>
+                <div className="flex flex-col items-center w-1/3">
+                  <div className="bg-blue-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                    {nonprofitData[1][0].toFixed(1)}
+                  </div>
+                  <p className="mt-4">Regional Score</p>
+                </div>
+                <div className="flex flex-col items-center w-1/3">
+                  <div className="bg-orange-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                    {nonprofitData[1][1].toFixed(1)}
+                  </div>
+                  <p className="mt-4">National Score</p>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
-      <h3 className="text-xl font-semibold mt-12">ANALYSIS</h3>
-      <p className="text-white mt-2">
-        Compared over an aggregate weighted score from three years, the nonprofit is healthier than the regional sector but not as healthy as the national sector.
-      </p>
     </div>
   );
-};
-
-export default FiscalHealthComponent;
+}

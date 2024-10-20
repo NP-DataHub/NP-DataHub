@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import {MdDashboard, MdHistory } from "react-icons/md";
+import { MdDashboard } from "react-icons/md";
 import { FaToolbox } from "react-icons/fa";
 import { PiGraph } from "react-icons/pi";
 import { GoCodescanCheckmark } from "react-icons/go";
-import { IoIosNotificationsOutline } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
+import { RxHamburgerMenu } from "react-icons/rx"; // Hamburger icon
 import { db } from '../firebase/firebase';
 import { doSignOut } from '../firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import { IoClose } from "react-icons/io5"
-
 import { useAuth } from './context';
 
 const Sidebar = ({ currentPage }) => {
   const { currentUser } = useAuth();
   const [userData, setUserData] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Hamburger menu state
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -37,100 +37,108 @@ const Sidebar = ({ currentPage }) => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const handleSignOut = () => {
     doSignOut();
   };
+
   const links = [
-    { href: '/dashboard', label: 'Dashboard', icon: <MdDashboard></MdDashboard>},
-    // { href: '/ntee-mapping', label: 'NTEE Mapping', icon: (
-    //   <svg width="21" height="21" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //     <path d="M11.5265 9.00725H3.56081L3.96076 8.10134L10.6062 8.08795C10.8309 8.08795 11.0235 7.90945 11.0637 7.66251L11.9839 1.93399C12.008 1.78375 11.9719 1.62904 11.8836 1.51153C11.84 1.45369 11.7856 1.40711 11.7241 1.375C11.6627 1.34289 11.5957 1.32603 11.5278 1.32559L3.07391 1.29435L3.00167 0.916512C2.95619 0.67553 2.7609 0.5 2.53885 0.5H0.472188C0.346956 0.5 0.226853 0.555323 0.138301 0.653799C0.0497483 0.752275 0 0.885837 0 1.0251C0 1.16437 0.0497483 1.29793 0.138301 1.39641C0.226853 1.49488 0.346956 1.5502 0.472188 1.5502H2.15628L2.47197 3.21923L3.24914 7.40368L2.24858 9.21997C2.19662 9.29796 2.16532 9.39056 2.15823 9.48731C2.15114 9.58405 2.16853 9.68107 2.20845 9.76739C2.28871 9.9444 2.45056 10.056 2.62981 10.056H3.46985C3.29076 10.3205 3.19403 10.6427 3.19429 10.9738C3.19429 11.8157 3.80961 12.5 4.56672 12.5C5.32382 12.5 5.93914 11.8157 5.93914 10.9738C5.93914 10.6421 5.84015 10.3193 5.66358 10.056H7.81853C7.63944 10.3205 7.54271 10.6427 7.54297 10.9738C7.54297 11.8157 8.15829 12.5 8.91539 12.5C9.6725 12.5 10.2878 11.8157 10.2878 10.9738C10.2878 10.6421 10.1888 10.3193 10.0123 10.056H11.5278C11.7873 10.056 12 9.82094 12 9.53087C11.9992 9.39175 11.949 9.25861 11.8603 9.16052C11.7716 9.06242 11.6516 9.00733 11.5265 9.00725ZM3.27054 2.32968L10.9727 2.35794L10.2183 7.0556L4.1681 7.0675L3.27054 2.32968ZM4.56672 11.4438C4.33397 11.4438 4.14402 11.2326 4.14402 10.9738C4.14402 10.7149 4.33397 10.5037 4.56672 10.5037C4.79947 10.5037 4.98941 10.7149 4.98941 10.9738C4.98941 11.0984 4.94488 11.218 4.86561 11.3062C4.78633 11.3943 4.67882 11.4438 4.56672 11.4438ZM8.91539 11.4438C8.68264 11.4438 8.4927 11.2326 8.4927 10.9738C8.4927 10.7149 8.68264 10.5037 8.91539 10.5037C9.14814 10.5037 9.33809 10.7149 9.33809 10.9738C9.33809 11.0984 9.29356 11.218 9.21428 11.3062C9.13501 11.3943 9.0275 11.4438 8.91539 11.4438Z" />
-    //   </svg>
-    // )},
-    // { href: '/variables', label: 'Variables', icon: (
-    //   <svg width="21" height="21" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //     <path d="M1.54985 5.2041C1.57717 4.90338 1.73174 4.62279 1.98276 4.4182C2.23378 4.21361 2.56284 4.10004 2.9044 4.1001H11.0956C11.4372 4.10004 11.7662 4.21361 12.0172 4.4182C12.2683 4.62279 12.4228 4.90338 12.4502 5.2041L12.9956 11.2041C13.0106 11.3692 12.9868 11.5353 12.9256 11.6919C12.8643 11.8484 12.7671 11.9921 12.6399 12.1138C12.5127 12.2356 12.3584 12.3328 12.1866 12.3992C12.0148 12.4657 11.8293 12.5 11.6418 12.5001H2.35823C2.17069 12.5 1.98519 12.4657 1.81341 12.3992C1.64163 12.3328 1.48729 12.2356 1.36011 12.1138C1.23293 11.9921 1.13567 11.8484 1.07444 11.6919C1.01321 11.5353 0.989351 11.3692 1.00435 11.2041L1.54985 5.2041V5.2041Z" stroke-linecap="round" stroke-linejoin="round"/>
-    //     <path d="M9.7167 5.9V2.9C9.7167 2.26348 9.43041 1.65303 8.92083 1.20294C8.41124 0.752857 7.72009 0.5 6.99943 0.5C6.27877 0.5 5.58762 0.752857 5.07803 1.20294C4.56845 1.65303 4.28217 2.26348 4.28217 2.9V5.9" stroke-linecap="round" stroke-linejoin="round"/>
-    //   </svg>
-    // )},
-    // { href: '/predictive', label: 'Predictive', icon: (
-    //   <svg width="21" height="21" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //     <path fill-rule="evenodd" clip-rule="evenodd" d="M1 0.5H1.75V11.75H13V12.5H1V0.5ZM12.1128 2.83475C12.1509 2.86596 12.1825 2.90437 12.2058 2.94781C12.2291 2.99124 12.2436 3.03883 12.2484 3.08787C12.2533 3.13691 12.2485 3.18642 12.2342 3.23359C12.2199 3.28075 12.1965 3.32464 12.1652 3.36275L8.79025 7.48775C8.75708 7.52824 8.7158 7.56134 8.66906 7.58491C8.62233 7.60848 8.57118 7.62201 8.5189 7.62463C8.46662 7.62724 8.41438 7.61888 8.36552 7.60009C8.31667 7.58129 8.2723 7.55248 8.23525 7.5155L6.295 5.57525L3.553 9.3455C3.49302 9.42177 3.4058 9.47183 3.30969 9.48514C3.21357 9.49846 3.11604 9.47399 3.03758 9.4169C2.95912 9.3598 2.90585 9.27452 2.88896 9.17897C2.87207 9.08341 2.89287 8.98503 2.947 8.9045L5.947 4.7795C5.97884 4.73564 6.01982 4.6992 6.0671 4.67269C6.11438 4.64619 6.16684 4.63025 6.22088 4.62597C6.27491 4.62169 6.32923 4.62918 6.38009 4.64791C6.43096 4.66665 6.47715 4.69619 6.5155 4.7345L8.47225 6.692L11.5848 2.88725C11.616 2.84911 11.6544 2.8175 11.6978 2.79422C11.7412 2.77094 11.7888 2.75644 11.8379 2.75157C11.8869 2.74669 11.9364 2.75153 11.9836 2.7658C12.0308 2.78007 12.0746 2.8035 12.1128 2.83475Z" fill="#87888C" stroke="#87888C" stroke-width="0.5"/>
-    //   </svg>
-    // )},
-    // { href: '/message', label: 'Message', icon: (
-    //   <svg width="21" height="21" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //     <path d="M3.36842 10.3841L3.80437 10.6174C4.47943 10.9783 5.23329 11.1665 5.99876 11.1653H6.00076C6.92362 11.1653 7.82576 10.8917 8.59309 10.3789C9.36042 9.86623 9.95849 9.13749 10.3117 8.28488C10.6648 7.43226 10.7572 6.49407 10.5772 5.58894C10.3971 4.68381 9.95273 3.85239 9.30017 3.19983C8.64761 2.54727 7.81619 2.10286 6.91106 1.92282C6.00593 1.74278 5.06774 1.83519 4.21512 2.18835C3.36251 2.54151 2.63377 3.13958 2.12105 3.90691C1.60834 4.67424 1.33468 5.57638 1.33468 6.49924V6.50124C1.3335 7.26671 1.52173 8.02057 1.88261 8.69563L2.11591 9.13158L1.75729 10.7427L3.36842 10.3841ZM0.00151179 12.4985L0.706756 9.32422C0.218782 8.41002 -0.0240634 7.38501 0.00188082 6.34905C0.027825 5.31309 0.321674 4.30152 0.854798 3.41289C1.38792 2.52426 2.14214 1.78888 3.04397 1.2784C3.94579 0.767914 4.96447 0.499739 6.00076 0.5C7.59185 0.5 9.11779 1.13206 10.2429 2.25714C11.3679 3.38221 12 4.90815 12 6.49924C12.0003 7.53553 11.7321 8.55421 11.2216 9.45603C10.7111 10.3579 9.97574 11.1121 9.08711 11.6452C8.19848 12.1783 7.18691 12.4722 6.15095 12.4981C5.11499 12.5241 4.08998 12.2812 3.17578 11.7932L0.00151179 12.4985Z"/>
-    //   </svg>
-    // )},
-    // { href: '/np-favorites', label: 'NP Favorites', icon: (
-    //   <svg width="21" height="21" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //     <path d="M6.4445 1.88403C6.63649 1.37199 7.36306 1.37199 7.55565 1.88403L8.79759 5.36279C8.84092 5.47611 8.91721 5.57348 9.01641 5.64205C9.1156 5.71061 9.23302 5.74715 9.35317 5.74683H12.4052C12.9692 5.74683 13.2152 6.45665 12.7718 6.80429L10.5999 8.78027C10.5026 8.8559 10.4315 8.96075 10.3968 9.07977C10.3621 9.19879 10.3656 9.32587 10.4067 9.44278L11.1999 12.8421C11.3931 13.3881 10.7679 13.8571 10.2951 13.5209L7.34506 11.6281C7.24403 11.5563 7.12355 11.5178 7.00007 11.5178C6.87659 11.5178 6.75612 11.5563 6.65509 11.6281L3.70502 13.5209C3.23284 13.8571 2.60707 13.3875 2.80026 12.8421L3.59342 9.44278C3.63457 9.32587 3.63804 9.19879 3.60333 9.07977C3.56862 8.96075 3.49752 8.8559 3.40023 8.78027L1.22833 6.80429C0.784349 6.45665 1.03154 5.74683 1.59431 5.74683H4.64638C4.76655 5.74723 4.88401 5.71073 4.98321 5.64216C5.08242 5.57358 5.1587 5.47616 5.20195 5.36279L6.4439 1.88403Z" stroke-width="1.19995" stroke-linecap="round" stroke-linejoin="round"/>
-    //   </svg>
-    // )},
-    // { href: '/history', label: 'History', icon: <MdHistory /> },
+    { href: '/dashboard', label: 'Dashboard', icon: <MdDashboard /> },
     { href: '/toolbox', label: 'Toolbox Library', icon: <FaToolbox />, pro: true },
     { href: '/networking-paths', label: 'Networking + Paths', icon: <PiGraph />, pro: true },
-    { href: '/ntee-code-check', label: 'NTEE CODE CHECK', icon: <GoCodescanCheckmark/>},
+    { href: '/ntee-code-check', label: 'NTEE CODE CHECK', icon: <GoCodescanCheckmark /> },
   ];
 
   return (
-    <div className="dashboard-color border-r-2 px-8 border-[#2C2D33] flex flex-row justify-center items-center space-x-10 py-6 font-sans mb-4">
-      {/* Logo Section */}
-      <picture>
-          {/* Logo for small screens */}
-          <source media="(max-width: 767px)" srcSet="/img/nonprofitly_primary_no_back.png" />
-          {/* Logo for medium screens and larger */}
-          <img
-            className="h-10 md:h-10 max-h-full"  
-            src="/img/inverted.png"
-            alt="Logo"
-          />
+    <div className="relative">
+      {/* Main container */}
+      <div className="dashboard-color border-r-2 px-8 border-[#2C2D33] flex flex-row justify-center items-center space-x-10 py-6 font-sans mb-4">
+        {/* Logo Section */}
+        <picture>
+          <source media="(max-width: 767px)" srcSet="/img/inverted.png" />
+          <img className="h-10 md:h-10 max-h-full" src="/img/inverted.png" alt="Logo" />
         </picture>
 
-      {/* Links Section */}
-      {links.map(link => (
-        <a
-          key={link.href}
-          href={link.href}
-          className={`text-md font-semibold flex items-center space-x-3 px-6 py-2 rounded-md ${
-            currentPage === link.href
-              ? 'border-b-4 border-white hover:bg-[#21222D] hover:text-white hover:border-b-4 hover:border-white pb-1 text-lg'
-              : ' hover:bg-[#21222D] hover:text-white hover:border-b-4 hover:border-white pb-1 text-lg'
-          }`}
+        {/* Hamburger Menu for Small Screens */}
+        <button
+          onClick={toggleMenu}
+          className="lg:hidden text-black"
+          aria-label="Toggle Menu"
         >
-          <div className="text-2xl">{link.icon}</div>
-          <span className="mt-0.5">{link.label}</span>
-          {link.pro && (
-            <span className="bg-slate-700 text-white rounded-md text-xs px-2 py-0.5 ml-2">Pro</span>
-          )}
-        </a>
-      ))}
+          <RxHamburgerMenu className="text-2xl text-white" />
+        </button>
+
+        {/* Links Section for larger screens */}
+        <div className="hidden lg:flex space-x-10">
+          {links.map(link => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`text-md font-semibold flex items-center space-x-3 px-6 py-2 rounded-md ${
+                currentPage === link.href
+                  ? 'border-b-4 border-white hover:bg-[#21222D] hover:text-white pb-1 text-lg'
+                  : 'hover:bg-[#21222D] hover:text-white pb-1 text-lg'
+              }`}
+            >
+              <div className="text-2xl">{link.icon}</div>
+              <span className="mt-0.5">{link.label}</span>
+              {link.pro && (
+                <span className="bg-slate-700 text-white rounded-md text-xs px-2 py-0.5 ml-2">Pro</span>
+              )}
+            </a>
+          ))}
+        </div>
+
+        {/* User Profile Section */}
         <div className="flex items-center space-x-4">
-              {/* <button className="relative">
-                <div className='text-2xl'><IoIosNotificationsOutline /></div> 
-                <span className="absolute top-0 right-0 block h-2 w-2 transform translate-x-1 -translate-y-1 rounded-full bg-red-600"></span>
-              </button> */}
-              <div className="flex items-center space-x-2">
-                <img 
-                  src={userData.image || 'https://via.placeholder.com/150'} 
-                  alt="User" 
-                  className="w-10 h-10 rounded-full object-cover cursor-pointer" 
-                  onClick={toggleSidebar} 
-                />
-              </div>
-            </div>
-            <div className={`fixed top-0 right-0 h-full bg-[#21222D] z-40 text-white shadow-lg transition-transform transform ${sidebarOpen ? 'translate-x-0' : 'translate-x-full '}`} style={{ width: '300px', borderRadius: '10px 0 0 10px' }}>
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center space-x-3">
-                <img src={userData.image || 'https://via.placeholder.com/150'} alt="User" className="w-12 h-12 rounded-full object-cover" />
-                <span className="font-semibold">{userData.firstName + " " + userData.lastName|| 'User Name'}</span>
-              </div>
-              <button onClick={toggleSidebar} className="text-2xl"><IoClose /></button>
-            </div>
-            <div className="border-b border-gray-500 mx-4"></div>
-            <div className="p-4">
-              <a href="profile" className="text-[#e7e7ea] text-md font-semibold flex items-center space-x-3 px-1 py-2 hover:bg-[#353637] rounded-md">
+          <div className="flex items-center space-x-2">
+            <img
+              src={userData.image || 'https://via.placeholder.com/150'}
+              alt="User"
+              className="w-10 h-10 rounded-full object-cover cursor-pointer"
+              onClick={toggleSidebar}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Hamburger Dropdown Menu for Small Screens */}
+      <div
+        className={`lg:hidden ${isMenuOpen ? 'max-h-[500px]' : 'max-h-0'} overflow-hidden transition-max-height duration-700 ease-in-out bg-white shadow-lg mt-2 mb-12`}
+      >
+        {links.map(link => (
+          <a
+            key={link.href}
+            href={link.href}
+            className={`block px-4 py-2 text-left text-black hover:bg-gray-200 transition ${
+              currentPage === link.href ? 'font-bold' : ''
+            }`}
+          >
+            <span className="ml-2">{link.label}</span>
+            {link.pro && (
+              <span className="ml-2 bg-slate-700 text-white rounded-md text-xs px-2 py-0.5">Pro</span>
+            )}
+          </a>
+        ))}
+      </div>
+
+      {/* Sidebar for User Profile */}
+      <div className={`fixed top-0 right-0 h-full bg-[#21222D] z-40 text-white shadow-lg transition-transform transform ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'}`} style={{ width: '300px', borderRadius: '10px 0 0 10px' }}>
+        <div className="flex items-center justify-between p-4">
+          <div className="flex items-center space-x-3">
+            <img src={userData.image || 'https://via.placeholder.com/150'} alt="User" className="w-12 h-12 rounded-full object-cover" />
+            <span className="font-semibold">{userData.firstName + " " + userData.lastName || 'User Name'}</span>
+          </div>
+          <button onClick={toggleSidebar} className="text-2xl">
+            <IoClose />
+          </button>
+        </div>
+        <div className="border-b border-gray-500 mx-4"></div>
+        <div className="p-4">
+        <a href="profile" className="text-[#e7e7ea] text-md font-semibold flex items-center space-x-3 px-1 py-2 hover:bg-[#353637] rounded-md">
                 <svg className = "text-black" width="21" height="21" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6 6.48268C6.79565 6.48268 7.55871 6.15947 8.12132 5.58415C8.68393 5.00884 9 4.22854 9 3.41492C9 2.6013 8.68393 1.82101 8.12132 1.24569C7.55871 0.670377 6.79565 0.347168 6 0.347168C5.20435 0.347168 4.44129 0.670377 3.87868 1.24569C3.31607 1.82101 3 2.6013 3 3.41492C3 4.22854 3.31607 5.00884 3.87868 5.58415C4.44129 6.15947 5.20435 6.48268 6 6.48268ZM8 3.41492C8 3.95733 7.78929 4.47753 7.41421 4.86108C7.03914 5.24462 6.53043 5.46009 6 5.46009C5.46957 5.46009 4.96086 5.24462 4.58579 4.86108C4.21071 4.47753 4 3.95733 4 3.41492C4 2.87251 4.21071 2.35231 4.58579 1.96877C4.96086 1.58523 5.46957 1.36975 6 1.36975C6.53043 1.36975 7.03914 1.58523 7.41421 1.96877C7.78929 2.35231 8 2.87251 8 3.41492ZM12 11.5956C12 12.6182 11 12.6182 11 12.6182H1C1 12.6182 0 12.6182 0 11.5956C0 10.573 1 7.50526 6 7.50526C11 7.50526 12 10.573 12 11.5956ZM11 11.5915C10.999 11.34 10.846 10.5832 10.168 9.88993C9.516 9.2232 8.289 8.52785 6 8.52785C3.71 8.52785 2.484 9.2232 1.832 9.88993C1.154 10.5832 1.002 11.34 1 11.5915H11Z" className = "fill-[#87888C] hover:fill-[black]"/>
                 </svg>
@@ -154,13 +162,10 @@ const Sidebar = ({ currentPage }) => {
 
                 <span className = "mt-0">Logout</span>
               </a>
-
-            </div>
-          </div>
         </div>
-
+      </div>
+    </div>
   );
-  
 };
 
 export default Sidebar;

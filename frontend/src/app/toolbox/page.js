@@ -2,13 +2,14 @@
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import DashboardNavbar from "../components/dashboardNav";
-import FiscalHealthComponent from "../components/FiscalHealthComponent";
+// import FiscalHealthComponent from "../components/FiscalHealthComponent";
 import React, { useState, useEffect, useRef } from 'react';
 import Autosuggest from 'react-autosuggest';
 import cities from "../components/cities";
 import ntee_codes from "../components/ntee";
 import { useRouter } from 'next/navigation';
 import NewsFeedSection from "../components/newsfeed";
+import FiscalHealthSection from "../components/FiscalHealthComponent";
 
 import dynamic from 'next/dynamic';
 const ChoroplethMap = dynamic(() => import('../components/map'), { ssr: false });
@@ -18,7 +19,7 @@ export default function Toolbox() {
     const [suggestions, setSuggestions] = useState([]);
     const [city, setCity] = useState('');
     const [nonProfit2, setNonProfit2] = useState('');
-    const nonProfitNames = NonProfitList()
+    //const nonProfitNames = NonProfitList()
     const getSuggestions = value => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
@@ -26,7 +27,7 @@ export default function Toolbox() {
             city => city.toLowerCase().slice(0, inputLength) === inputValue
         );
     };
-    console.log(nonProfitNames)
+    //console.log(nonProfitNames)
     
 
     const data2 = [
@@ -169,12 +170,12 @@ export default function Toolbox() {
         <div>
             <div className="dashboard-color text-white font-sans">
                 <Sidebar currentPage='/toolbox' className="hidden" />
-                <div className = "flex-col w-screen">
+                <div className = "flex-col">
                     {/* <DashboardNavbar/> */}
                     <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans" >
                         <h1 className = "text-2xl font-semibold">NON PROFIT TOOLBOX LIBRARY</h1>
                         <span className = "text-sm text-[#A0A0A0]">Choose from one of eight analytical tools for stronger insights.</span>
-                        <div className="grid grid-cols-4 gap-4 mt-12">
+                        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
                             <div className={`p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
                                     selectedSection === "Fiscal Health" ? "bg-[#34344c]" : "bg-[#171821]"
                                     }`}
@@ -322,23 +323,6 @@ export default function Toolbox() {
                         </div>
                         <div className="mt-12">
                             {selectedSection === "Fiscal Health" && (
-                            
-                                <div>
-                                    <h1>Nonprofit List</h1>
-                                    <div>
-                                    
-                                        {nonProfitNames.length > 0 ? (
-                                            <ul>
-                                                
-                                                {nonProfitNames.map((name, index) => (
-                                                    <li key={index}>{name}</li>
-                                                ))}
-                                            </ul>
-                                        ) : (
-                                            <p>Loading...</p>
-                                        )}
-                                    </div>
-                                </div>
                                 // <div className="p-6 bg-[#171821] rounded-lg">
                                 // <h3 className="text-xl font-semibold text-[#FEB95A]">
                                 //     FISCAL HEALTH: SINGLE NONPROFIT
@@ -483,6 +467,7 @@ export default function Toolbox() {
 
                                 //         However, when exploring  grant or funding opportunities with a national or global philanthropy, the nonprofit may be at a disadvantage against a more competitive pool of nonprofits that may be fiscally healthier.                                        </p>
                                 // </div>
+                                <FiscalHealthSection/>
                                 
                             )}
                             {selectedSection === "Region Health" && (
@@ -782,37 +767,3 @@ export default function Toolbox() {
         </div>
     );
 }
-
-function NonProfitList() {
-    const [nonProfitNames, setNonProfitNames] = useState([]);
-  
-    useEffect(() => {
-      async function fetchNonProfitNames() {
-        try {
-          const response = await fetch('/api/nonprofit-names');
-          const data = await response.json();
-          setNonProfitNames(data);
-        } catch (error) {
-          console.error('Error fetching nonprofit names:', error);
-        }
-      }
-      fetchNonProfitNames();
-    }, []);
-  
-    return (
-      <div>
-        <h1>Nonprofit List</h1>
-        <div>
-          {nonProfitNames.length > 0 ? (
-            <ul>
-              {nonProfitNames.map((name, index) => (
-                <li key={index}>{name}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>Loading...</p>
-          )}
-        </div>
-      </div>
-    );
-  }

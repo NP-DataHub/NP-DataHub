@@ -6,16 +6,24 @@ export default async function handler(req, res) {
   const { firstNp, firstAddr, secondNp, secondAddr, npVSnp, specific_sector } = req.body;
 
   try {
+    const client = new MongoClient(process.env.MONGODB_URI);
+    await client.connect();
+    const db = client.db('Nonprofitly');
+
     if (npVSnp) {
-      const firstFiscalHealthScore = await getNpFiscalHealthScore(firstNp, firstAddr);
-      const secondFiscalHealthScore = await getNpFiscalHealthScore(secondNp, secondAddr);
+      // If comparing two nonprofits
+      const firstFiscalHealthScore = await getNpFiscalHealthScore(db, firstNp, firstAddr);
+      const secondFiscalHealthScore = await getNpFiscalHealthScore(db, secondNp, secondAddr);
       return res.status(200).json([firstFiscalHealthScore, secondFiscalHealthScore]);
     } else {
-      const fiscalHealthScore = await getNpFiscalHealthScore(firstNp, firstAddr);
+      // If fetching a single nonprofit
+      const fiscalHealthScore = await getNpFiscalHealthScore(db, firstNp, firstAddr);
       if (fiscalHealthScore === -1) {
         return res.status(404).json({ message: "Nonprofit not found" });
       }
-      const scores = await getSectorsFiscalHealthScore(firstNp, firstAddr, specific_sector);
+
+      // Fetch sector scores for national and state comparison
+      const scores = await getSectorsFiscalHealthScore(db, firstNp, firstAddr, specific_sector);
       return res.status(200).json([fiscalHealthScore, scores]);
     }
   } catch (error) {
@@ -24,41 +32,39 @@ export default async function handler(req, res) {
   }
 }
 
-async function fetchData(Np, Addr, npVSnp, specific_sector = null) {
-  const Uri = process.env.MONGODB_URI;
-  const client = new MongoClient(Uri);
+async function fetchData(db, Np, Addr, npVSnp, specific_sector = null) {
+  const filters = {};
 
-  try {
-    await client.connect();
-    const database = client.db('Nonprofitly');
-    const NpData = await database.collection('NonProfitData').findOne({ Nm: Np, Addr: Addr });
+  if (Np) {
+    filters.Nm = { $regex: new RegExp(`^${Np.trim()}$`, 'i') };
+  }
+  if (Addr) {
+    filters.Addr = { $regex: new RegExp(`^${Addr.trim()}$`, 'i') };
+  }
 
-    if (!NpData) {
-      console.error(`${Np} not found.`);
+  const NpData = await db.collection('NonProfitData').findOne(filters);
+
+  if (!NpData) {
+    return -1;
+  }
+
+  const consecutiveYears = getConsecutiveYears(NpData);
+  if (npVSnp) {
+    return [consecutiveYears, NpData];
+  } else {
+    const majorGroup = !specific_sector ? NpData.NTEE[0] : specific_sector;
+    const state = NpData.St;
+
+    const regionalAndNational = await db.collection('NationalAndStateStatistics').findOne({ MajGrp: majorGroup });
+    if (!regionalAndNational) {
       return -1;
     }
-
-    const consecutiveYears = getConsecutiveYears(NpData);
-    if (npVSnp) {
-      return [consecutiveYears, NpData];
-    } else {
-      const majorGroup = !specific_sector ? NpData.NTEE[0] : specific_sector;
-      const state = NpData.St;
-      const regionalAndNational = await database.collection('NationalAndStateStatistics').findOne({ MajGrp: majorGroup });
-
-      if (!regionalAndNational) {
-        console.error('Error while fetching from NationalAndStateStatistics collection');
-        return -1;
-      }
-      return [state, consecutiveYears, regionalAndNational];
-    }
-  } finally {
-    await client.close();
+    return [state, consecutiveYears, regionalAndNational];
   }
 }
 
-async function getNpFiscalHealthScore(Np, Addr) {
-  const values = await fetchData(Np, Addr, true);
+async function getNpFiscalHealthScore(db, Np, Addr) {
+  const values = await fetchData(db, Np, Addr, true);
   if (values === -1) return -1;
 
   const consecutiveYears = values[0];
@@ -66,51 +72,26 @@ async function getNpFiscalHealthScore(Np, Addr) {
 
   if (consecutiveYears.length >= 2) {
     const score = calculateNonProfitFiscalHealthScore(NpData, consecutiveYears);
-    console.log(`Fiscal Health Score of ${Np} is : ${score}`);
     return [score, consecutiveYears];
   } else {
-    console.error(`Error: No consecutive years found for ${Np}. Available years: ${consecutiveYears.join(' - ')}`);
     return [NaN, consecutiveYears];
   }
 }
 
-async function getSectorsFiscalHealthScore(Np, Addr, specific_sector) {
-  const values = await fetchData(Np, Addr, false, specific_sector);
+async function getSectorsFiscalHealthScore(db, Np, Addr, specific_sector) {
+  const values = await fetchData(db, Np, Addr, false, specific_sector);
   if (values === -1) return -1;
 
   const state = values[0];
   const consecutiveYears = values[1];
   const data = values[2];
 
-  if (specific_sector) {
-    let sectorDataExists = checkSectorDataExistence(data, consecutiveYears, state);
-    if (sectorDataExists && consecutiveYears.length >= 2) {
-      const nationalScore = calculateNationalFiscalHealthScore(data, consecutiveYears);
-      const stateScore = calculateStateFiscalHealthScore(data, consecutiveYears, state);
-      return [nationalScore, stateScore];
-    }
-
-    if (!sectorDataExists) {
-      const sectorConsecutiveYears = getConsecutiveYears(data);
-      if (sectorConsecutiveYears.length >= 2) {
-        sectorDataExists = checkSectorDataExistence(data, sectorConsecutiveYears, state);
-        if (sectorDataExists) {
-          const nationalScore = calculateNationalFiscalHealthScore(data, sectorConsecutiveYears);
-          const stateScore = calculateStateFiscalHealthScore(data, sectorConsecutiveYears, state);
-          return [nationalScore, stateScore, sectorConsecutiveYears];
-        } else {
-          return [NaN, sectorConsecutiveYears];
-        }
-      } else {
-        return [NaN, sectorConsecutiveYears];
-      }
-    }
-  }
-
   if (consecutiveYears.length >= 2) {
+    const nonprofitScore = calculateNonProfitFiscalHealthScore(data, consecutiveYears);
     const nationalScore = calculateNationalFiscalHealthScore(data, consecutiveYears);
     const stateScore = calculateStateFiscalHealthScore(data, consecutiveYears, state);
-    return [nationalScore, stateScore];
+
+    return [nationalScore, stateScore];  // Return national and state score separately
   } else {
     return [NaN, consecutiveYears];
   }
@@ -131,7 +112,7 @@ function getConsecutiveYears(data) {
       tempYears = [years[i]];
     }
   }
-  
+
   if (tempYears.length > consecutiveYears.length) {
     consecutiveYears = tempYears;
   }
@@ -141,7 +122,7 @@ function getConsecutiveYears(data) {
 
 function calculatePercentDifference(oldValue, newValue) {
   if (oldValue === 0) {
-    return newValue === 0 ? 0 : (console.error('Red Flag'), newValue);
+    return newValue === 0 ? 0 : newValue;
   }
   return ((newValue - oldValue) / oldValue) * 100;
 }
@@ -217,15 +198,4 @@ function calculateStateFiscalHealthScore(data, years, state) {
   }
 
   return intervals > 0 ? totalScore / intervals : 0;
-}
-
-function checkSectorDataExistence(data, years, state) {
-  for (let i = 0; i < years.length - 1; i++) {
-    const year1 = years[i];
-    const year2 = years[i + 1];
-    if (!data[year2] || !data[year2][state] || !data[year1] || !data[year1][state]) {
-      return false;
-    }
-  }
-  return true;
 }
