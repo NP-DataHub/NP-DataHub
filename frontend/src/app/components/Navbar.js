@@ -69,7 +69,7 @@ const Navbar = () => {
           <img className="h-10 md:h-10 max-h-full" src="/img/inverted.png" alt="Logo" />
         </picture>
 
-        {/* Hamburger Menu for Both Desktop and Mobile */}
+        {/* Hamburger Menu */}
         <button
           onClick={toggleMenu}
           className="ml-auto px-4 py-2 transition text-white hover:text-[#A9DFD8]"
@@ -78,24 +78,26 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* Dropdown Menu Below Navbar */}
+      {/* Dropdown Menu */}
       <div
         className={`${
-          isMenuOpen ? 'max-h-[500px]' : 'max-h-0'
-        } overflow-hidden transition-max-height duration-700 ease-in-out bg-white shadow-lg`}
+          isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        } overflow-hidden transition-all duration-500 ease-in-out bg-white shadow-xl dashboard-color`}
       >
-        <button
-          onClick={handleLoginClick}
-          className="block w-full px-4 py-2 text-left bg-gray-200 text-gray-900 hover:bg-gray-300 transition"
-        >
-          Login
-        </button>
-        <button
-          onClick={handleRegisterClick}
-          className="block w-full px-4 py-2 text-left bg-gray-200 text-gray-900 hover:bg-gray-300 transition"
-        >
-          Register
-        </button>
+        <div className="flex flex-col space-y-2 py-4 px-6">
+          <button
+            onClick={handleLoginClick}
+            className="block w-full px-4 py-3 text-left bg-gray-100 text-gray-900 rounded-lg hover:bg-gray-200 transition"
+          >
+            Login
+          </button>
+          <button
+            onClick={handleRegisterClick}
+            className="block w-full px-4 py-3 text-left bg-gray-100 text-gray-900 rounded-lg hover:bg-gray-200 transition"
+          >
+            Register
+          </button>
+        </div>
       </div>
 
       {/* Modals for Login and Register */}

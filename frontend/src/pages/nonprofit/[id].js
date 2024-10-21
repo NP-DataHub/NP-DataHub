@@ -274,7 +274,7 @@ const Nonprofit = () => {
     <div>
       <div className="dashboard-color text-white font-sans">
         <Sidebar className="hidden" />
-        <div className="flex-col dashboard-color pb-12">
+        <div className="flex-col dashboard-color pb-12 mt-12">
           <div className="flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
             <h1 className="text-2xl font-semibold">{capitalizeFirstLetter(nonprofitData.Nm)}</h1>
             <span className="text-sm text-[#A0A0A0]">{nonprofitData.Addr}</span>

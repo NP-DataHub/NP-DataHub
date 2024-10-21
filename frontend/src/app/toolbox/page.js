@@ -172,7 +172,7 @@ export default function Toolbox() {
                 <Sidebar currentPage='/toolbox' className="hidden" />
                 <div className = "min-h-screen flex flex-col ">
                     {/* <DashboardNavbar/> */}
-                    <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans" >
+                    <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans mt-12" >
                         <h1 className = "text-2xl font-semibold">NON PROFIT TOOLBOX LIBRARY</h1>
                         <span className = "text-sm text-[#A0A0A0]">Choose from one of eight analytical tools for stronger insights.</span>
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">

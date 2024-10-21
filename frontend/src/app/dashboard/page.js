@@ -419,7 +419,7 @@ export default function Dashboard() {
                     {!isLoading && (<div className = "flex-col ">
                         <Sidebar ref={sidebarRef} currentPage='/dashboard' />
                         {/* <DashboardNavbar/> */}
-                        <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans" >
+                        <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans mt-12" >
                             <h1 className = "text-2xl font-semibold">CREATING NONPROFIT ECOSYSTEMS THROUGH DATA</h1>
                             <span className = "text-sm text-[#A0A0A0]">Explore historical data and gain insight through prescriptive and predictive analytics.</span>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 mx-auto">
