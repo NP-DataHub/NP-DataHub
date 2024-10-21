@@ -10,7 +10,7 @@ if __name__ == "__main__":
     webscraper.check_already_parsed_folders()
     webscraper.check_missing_zip_folders(flag)
     webscraper.download_missing_zip_folders()
-    if webscraper.unprocessed_folders:
+    if webscraper.created_folders:
         # if there is new data to get, add it to our database
         db = Database()
         cleanup = Cleanup()

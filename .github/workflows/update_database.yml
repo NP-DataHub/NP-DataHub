@@ -2,8 +2,8 @@ name: Update Database
 
 on:
   schedule:
-    # Run on the 1st and 13th of every month at midnight
-    - cron: "0 0 1,13 * *"
+    # Run on the 1st, 10th, and 20th of every month at midnight
+    - cron: "0 0 1,10,20 * *"
   workflow_dispatch: # Manual trigger
 
 permissions:
