@@ -208,7 +208,7 @@ export default function Home() {
           <h1 className="text-3xl lg:text-6xl font-bold text-gray-900 font-serif">
             Ready to collaborate?
           </h1>
-          <p className="text-lg md:text-2xl mt-2 font-sans">Try our platform today.</p>
+          <p className="text-lg md:text-2xl mt-2 font-sans text-black ">Try our platform today.</p>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-1 gap-4 max-w-md mx-auto lg:mx-0">
             <button className="text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
               Explore Data
@@ -226,10 +226,10 @@ export default function Home() {
             Contact Us
           </h3>
           <div className="flex flex-col items-center lg:flex-row lg:items-start lg:space-x-2 mt-2">
-            <div className="text-2xl md:text-4xl mt-2">
+            <div className="text-2xl text-black md:text-4xl mt-2">
               <HiOutlineMail />
             </div>
-            <p className="text-sm md:text-2xl mt-2 font-sans">recs@nonprofitly.co</p>
+            <p className="text-sm md:text-2xl mt-2 font-sans text-black">recs@nonprofitly.co</p>
           </div>
           {/* <h3 className="text-2xl lg:text-4xl font-bold text-gray-900 font-serif mt-10">
             Social
