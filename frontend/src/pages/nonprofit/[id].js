@@ -372,7 +372,7 @@ const Nonprofit = () => {
               </div>
 
               <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <h1 className="text-center text-1.5em font-bold">Overall Growth</h1>
+                <h1 className="text-center text-xl font-bold">Overall Growth</h1>
                 <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
                   <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities} minYear={minYear} />
                 </div>
@@ -381,14 +381,14 @@ const Nonprofit = () => {
 
             <div className="grid grid-cols-3 gap-4 mt-10 mb-10">
               <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 col-span-2">
-                <h1 className="text-center text-2em font-bold">Revenue By State</h1>
+                <h1 className="text-center text-xl font-bold">Revenue By State</h1>
                 <div className="flex items-center justify-center mb-24 mt-12" style={{ width: '100%', height: '100%' }}>
                   <TimeSeries values={revenues} minYear={minYear} />
                 </div>
               </div>
 
               <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <h1 className="text-center text-2em font-bold">Org Compared</h1>
+                <h1 className="text-center text-xl font-bold">Org Compared</h1>
                 <div className="flex items-center justify-center mb-24 mt-12">
                   <Gauge
                     orgName={capitalizeFirstLetter(nonprofitData.Nm)}
