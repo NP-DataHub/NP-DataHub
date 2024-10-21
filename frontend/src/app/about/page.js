@@ -17,7 +17,7 @@ const teamMembers = [
   {
     name: "Youssef Hassan",
     imgSrc: "/img/youssef.png",
-    linkedIn: "https://en.wikipedia.org/wiki/John_Smith_(explorer)"
+    linkedIn: "https://www.linkedin.com/in/youssef-hassan-79ba36236/"
   },
   {
     name: "Emmet Whitehead",
