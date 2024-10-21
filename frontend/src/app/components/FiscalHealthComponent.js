@@ -77,13 +77,27 @@ export default function FiscalHealthSection() {
   
 
   // Autosuggest configuration
-  const getSuggestionValue = (suggestion) => suggestion.Nm || suggestion.Addr || '';
+  // Get suggestion value for name
+  const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
+
+  // Get suggestion value for address
+  const getAddressSuggestionValue = (suggestion) => suggestion.Addr || '';
+
   
-  const renderSuggestion = (suggestion) => (
+  // Render function for names
+  const renderNameSuggestion = (suggestion) => (
     <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
-      {suggestion.Nm || suggestion.Addr}
+      {suggestion.Nm}
     </div>
   );
+
+  // Render function for addresses
+  const renderAddressSuggestion = (suggestion) => (
+    <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+      {suggestion.Addr}
+    </div>
+  );
+
 
   const onNameSuggestionsFetchRequested = ({ value }) => {
     fetchSuggestions(value, 'name');
@@ -161,34 +175,35 @@ export default function FiscalHealthSection() {
           <div className="flex flex-row justify-between gap-4">
               {/* Autosuggest for Nonprofit Name */}
               <Autosuggest
-                suggestions={nameSuggestions}
-                onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
-                onSuggestionsClearRequested={onSuggestionsClearRequested}
-                getSuggestionValue={getSuggestionValue}
-                renderSuggestion={renderSuggestion}
-                inputProps={{
-                  placeholder: 'Search for Nonprofit',
-                  value: firstNp,
-                  onChange: (_, { newValue }) => setFirstNp(newValue),
-                  className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
-                }}
-                theme={{
-                  container: 'autosuggest-container',
-                  input: 'autosuggest-input',
-                  suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
-                  suggestionsList: 'autosuggest-suggestions-list',
-                  suggestion: 'autosuggest-suggestion',
-                  suggestionHighlighted: 'autosuggest-suggestion--highlighted',
-                }}
-              />
+                  suggestions={nameSuggestions}
+                  onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+                  onSuggestionsClearRequested={onSuggestionsClearRequested}
+                  getSuggestionValue={getNameSuggestionValue}
+                  renderSuggestion={renderNameSuggestion} // Use name render function here
+                  inputProps={{
+                    placeholder: 'Search for Nonprofit',
+                    value: firstNp,
+                    onChange: (_, { newValue }) => setFirstNp(newValue),
+                    className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+                  }}
+                  theme={{
+                    container: 'autosuggest-container',
+                    input: 'autosuggest-input',
+                    suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
+                    suggestionsList: 'autosuggest-suggestions-list',
+                    suggestion: 'autosuggest-suggestion',
+                    suggestionHighlighted: 'autosuggest-suggestion--highlighted',
+                  }}
+                />
+
 
             {/* Autosuggest for Address */}
             <Autosuggest
               suggestions={addressSuggestions}
               onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
               onSuggestionsClearRequested={onSuggestionsClearRequested}
-              getSuggestionValue={getSuggestionValue}
-              renderSuggestion={renderSuggestion}
+              getSuggestionValue={getAddressSuggestionValue}
+              renderSuggestion={renderAddressSuggestion} // Use address render function here
               inputProps={{
                 placeholder: 'Search or Auto-fill Address',
                 value: firstAddr,
@@ -204,6 +219,7 @@ export default function FiscalHealthSection() {
                 suggestionHighlighted: 'autosuggest-suggestion--highlighted',
               }}
             />
+
           </div>
 
           {/* Compare Two Nonprofits */}
@@ -213,8 +229,8 @@ export default function FiscalHealthSection() {
                 suggestions={nameSuggestions}
                 onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
                 onSuggestionsClearRequested={onSuggestionsClearRequested}
-                getSuggestionValue={getSuggestionValue}
-                renderSuggestion={renderSuggestion}
+                getSuggestionValue={getNameSuggestionValue}
+                renderSuggestion={renderNameSuggestion} // Use name render function here
                 inputProps={{
                   placeholder: 'Compare Against Another Nonprofit',
                   value: secondNp,
@@ -231,12 +247,13 @@ export default function FiscalHealthSection() {
                 }}
               />
 
+
               <Autosuggest
                 suggestions={addressSuggestions}
                 onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
                 onSuggestionsClearRequested={onSuggestionsClearRequested}
-                getSuggestionValue={getSuggestionValue}
-                renderSuggestion={renderSuggestion}
+                getSuggestionValue={getAddressSuggestionValue}
+                renderSuggestion={renderAddressSuggestion} // Use address render function here
                 inputProps={{
                   placeholder: 'Search or Auto-fill Address',
                   value: secondAddr,
@@ -252,6 +269,7 @@ export default function FiscalHealthSection() {
                   suggestionHighlighted: 'autosuggest-suggestion--highlighted',
                 }}
               />
+
             </div>
           )}
 
