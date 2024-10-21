@@ -3,6 +3,17 @@
 
 | Description                                      | Variable Name  |
 |--------------------------------------------------|----------------|
+| Name                                             | Nm             |
+| State                                            | St             |
+| City                                             | Cty            |
+| Zipcode                                          | Zip            |
+| Address                                          | Addr           |
+| Return Type                                      | RetTyp         |
+| Employer Identification Number                   | EIN            |
+| NTEE Code                                        | NTEE           |
+| Major Group of NTEE Code (First Character)       | MajGrp         |
+| Subsection Code                                  | SubCode        |
+| Filepath                                         | File           |
 | Total Revenue                                    | TotRev         |
 | Total Assets                                     | TotAst         |
 | Total Liabilities                                | TotLia         |
@@ -35,6 +46,7 @@
 
 | Description                      | Variable Name  |
 |----------------------------------|----------------|
+| Major Group                      | MajGrp         |
 | National Average Revenue         | NatAvgRev      |
 | National Average Expenses        | NatAvgExp      |
 | National Average Liabilities     | NatAvgLia      |
