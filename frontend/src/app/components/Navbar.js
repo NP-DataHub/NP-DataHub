@@ -60,7 +60,7 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar */}
-      <nav className="dashboard-color px-10 flex flex-row w-full items-center space-x-10 py-6 font-sans top-0 z-50 sticky">
+      <nav className="dashboard-color px-10 flex flex-row w-full items-center space-x-10 py-6 font-sans top-0 z-50 sticky border-b-2 border-[#2C2D33]">
         {/* Responsive Logo */}
         <picture className="flex-grow">
           {/* Logo for small screens */}

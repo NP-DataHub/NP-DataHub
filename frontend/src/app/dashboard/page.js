@@ -411,7 +411,7 @@ export default function Dashboard() {
         
         <div>
                 
-                <div className="dashboard-color text-white font-sans">
+                <div className="dashboard-color text-white ">
 
                 {/* Sidebar will be hidden if isLoading is true */}
                         
