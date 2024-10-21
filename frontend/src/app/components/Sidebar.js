@@ -51,11 +51,10 @@ const Sidebar = ({ currentPage }) => {
     { href: '/networking-paths', label: 'Networking + Paths', icon: <PiGraph />, pro: true },
     // { href: '/ntee-code-check', label: 'NTEE CODE CHECK', icon: <GoCodescanCheckmark /> },
   ];
-
   return (
     <div className="relative">
       {/* Main container */}
-      <div className="dashboard-color border-[#2C2D33] px-10 flex flex-row w-full items-center space-x-10 py-6 font-sans mb-12 border-b-2 ">
+      <div className="dashboard-color px-10 flex flex-row w-full items-center space-x-10 py-6 font-sans top-0 z-50 sticky border-b-2 border-[#2C2D33] mb-12">
         {/* Logo Section */}
         <picture className = "flex-grow">
           <source media="(max-width: 767px)" srcSet="/img/inverted.png" />
@@ -77,7 +76,7 @@ const Sidebar = ({ currentPage }) => {
             <a
               key={link.href}
               href={link.href}
-              className={`text-md font-semibold flex items-center space-x-3 px-6 py-2 rounded-md ${
+              className={`text-md font-semibold flex items-center space-x-3 px-6 rounded-md ${
                 currentPage === link.href
                   ? 'border-b-4 border-white hover:bg-[#21222D] hover:text-white pb-1 text-lg'
                   : 'hover:bg-[#21222D] hover:text-white pb-1 text-lg'

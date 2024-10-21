@@ -10,6 +10,7 @@ import cities from "../components/cities";
 import ntee_codes from "../components/ntee";
 import { v4 } from 'uuid';
 import { deleteObject } from 'firebase/storage';
+import Footer from '../components/dashboard_footer'
 
 export default function Profile() {
   const { currentUser } = useAuth();
@@ -364,6 +365,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
