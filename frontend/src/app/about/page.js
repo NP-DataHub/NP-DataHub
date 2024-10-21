@@ -5,28 +5,28 @@ import Footer from '../components/footer';
 const teamMembers = [
   {
     name: "Brett Orzechowski",
-    imgSrc: "/img/profo.png",
+    imgSrc: "/img/prof.png",
     linkedIn: "https://www.linkedin.com/in/brettorzechowski/"
   },
 
   {
     name: "Macallan Ringstad",
-    imgSrc: "/img/macallan.jpeg",
+    imgSrc: "/img/macallan.png",
     linkedIn: "https://www.linkedin.com/in/macallan-ringstad-404298251/"
   },
   {
     name: "Youssef Hassan",
-    imgSrc: "/img/youssef.JPG",
+    imgSrc: "/img/youssef.png",
     linkedIn: "https://en.wikipedia.org/wiki/John_Smith_(explorer)"
   },
   {
     name: "Emmet Whitehead",
-    imgSrc: "/img/emmet.jpg",
+    imgSrc: "/img/emmet.png",
     linkedIn: "https://en.wikipedia.org/wiki/John_Smith_(explorer)"
   },
   {
     name: "Kai Chen",
-    imgSrc: "/img/john_smith.jpg",
+    imgSrc: "/img/kai.png",
     linkedIn: "https://www.linkedin.com/in/kaichen543/"
   },
   {
@@ -55,13 +55,13 @@ export default function About() {
         {/* Team Members Section */}
         <div className="max-w-8xl grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 gap-y-8 md:gap-0 md:gap-y-10 mt-12 bg-[#21222D] p-20 rounded-lg even-shadow" >
           {teamMembers.map((member, index) => (
-            <div key={index} className="flex flex-col items-center text-center">
+            <div key={index} className="flex flex-col text-center">
               <a href={member.linkedIn} target="_blank" rel="noopener noreferrer">
                 <img 
                   draggable={false}
                   src={member.imgSrc} 
                   alt={`Image of ${member.name}`} 
-                  className="w-80 h-80 mx-auto border border-gray-900 rounded-xl even-shadow profile"
+                  className="w-80 h-80 mx-auto  border-gray-900 rounded-lg even-shadow profile"
                 />
               </a>
               <h3 className="text-xl md:text-2xl mt-4">{member.name}</h3>
