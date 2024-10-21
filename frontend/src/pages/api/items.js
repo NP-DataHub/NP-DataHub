@@ -26,7 +26,7 @@ export default async function handler(req, res) {
           filters.St = state;
         }
         if (nteeCode) {
-          filters.NTEE = { $regex: new RegExp(nteeCode, 'i') };
+          filters.MajGrp = { $regex: new RegExp(nteeCode, 'i') };
         }
         if (_id) {
           try {

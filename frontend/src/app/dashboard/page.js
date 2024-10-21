@@ -10,6 +10,8 @@ import { useRouter } from 'next/navigation';
 import Footer from '../components/dashboard_footer'
 
 export default function Dashboard() {
+    const [firstNp, setFirstNp] = useState('');
+    const [lastFetchedNameInput, setLastFetchedNameInput] = useState('');
     const [isLoading, setIsLoading] = useState(true); // State to control the loading state
     const [state, setState] = useState('');
     const [nteeCode, setNteeCode] = useState('');
@@ -23,12 +25,144 @@ export default function Dashboard() {
     const [hasSearched, setHasSearched] = useState(false);
     const [nonprofitName, setNonprofitName] = useState('');
     const sidebarRef = useRef(null); // Ref to check when Sidebar is rendered
+    const [stateSuggestions, setStateSuggestions] = useState([]);  // New state for state suggestions
+    const [nameSuggestions, setNameSuggestions] = useState([]); // Suggestions for name autocomplete
+    const [isSearching, setIsSearching] = useState(false); // State to track searching status
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentResults = allResults.slice(indexOfFirstItem, indexOfLastItem);
     const router = useRouter();
     let mostRecentYear = 0
+
+    const states = [
+        { name: 'Alabama', code: 'AL' },
+        { name: 'Alaska', code: 'AK' },
+        { name: 'Arizona', code: 'AZ' },
+        { name: 'Arkansas', code: 'AR' },
+        { name: 'California', code: 'CA' },
+        { name: 'Colorado', code: 'CO' },
+        { name: 'Connecticut', code: 'CT' },
+        { name: 'Delaware', code: 'DE' },
+        { name: 'Florida', code: 'FL' },
+        { name: 'Georgia', code: 'GA' },
+        { name: 'Hawaii', code: 'HI' },
+        { name: 'Idaho', code: 'ID' },
+        { name: 'Illinois', code: 'IL' },
+        { name: 'Indiana', code: 'IN' },
+        { name: 'Iowa', code: 'IA' },
+        { name: 'Kansas', code: 'KS' },
+        { name: 'Kentucky', code: 'KY' },
+        { name: 'Louisiana', code: 'LA' },
+        { name: 'Maine', code: 'ME' },
+        { name: 'Maryland', code: 'MD' },
+        { name: 'Massachusetts', code: 'MA' },
+        { name: 'Michigan', code: 'MI' },
+        { name: 'Minnesota', code: 'MN' },
+        { name: 'Mississippi', code: 'MS' },
+        { name: 'Missouri', code: 'MO' },
+        { name: 'Montana', code: 'MT' },
+        { name: 'Nebraska', code: 'NE' },
+        { name: 'Nevada', code: 'NV' },
+        { name: 'New Hampshire', code: 'NH' },
+        { name: 'New Jersey', code: 'NJ' },
+        { name: 'New Mexico', code: 'NM' },
+        { name: 'New York', code: 'NY' },
+        { name: 'North Carolina', code: 'NC' },
+        { name: 'North Dakota', code: 'ND' },
+        { name: 'Ohio', code: 'OH' },
+        { name: 'Oklahoma', code: 'OK' },
+        { name: 'Oregon', code: 'OR' },
+        { name: 'Pennsylvania', code: 'PA' },
+        { name: 'Rhode Island', code: 'RI' },
+        { name: 'South Carolina', code: 'SC' },
+        { name: 'South Dakota', code: 'SD' },
+        { name: 'Tennessee', code: 'TN' },
+        { name: 'Texas', code: 'TX' },
+        { name: 'Utah', code: 'UT' },
+        { name: 'Vermont', code: 'VT' },
+        { name: 'Virginia', code: 'VA' },
+        { name: 'Washington', code: 'WA' },
+        { name: 'West Virginia', code: 'WV' },
+        { name: 'Wisconsin', code: 'WI' },
+        { name: 'Wyoming', code: 'WY' }
+    ];
+    
+    const fetchSuggestions = async (value, type) => {
+        if (type === 'name' && value === lastFetchedNameInput) return;
+        if (type === 'address' && value === lastFetchedAddressInput) return;
+      
+        try {
+          const response = await fetch(`/api/suggestions?input=${value}&type=${type}`);
+          const data = await response.json();
+      
+          if (data.success) {
+            if (type === 'name') {
+              setNameSuggestions(data.data);
+              setLastFetchedNameInput(value); // Update last fetched value for names
+            } else if (type === 'address') {
+              setAddressSuggestions(data.data);
+              setLastFetchedAddressInput(value); // Update last fetched value for addresses
+            }
+          } else {
+            if (type === 'name') setNameSuggestions([]);
+            if (type === 'address') setAddressSuggestions([]);
+          }
+        } catch (error) {
+          console.error("Error fetching suggestions:", error);
+        }
+      };
+
+    const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
+    const renderNameSuggestion = (suggestion) => (
+    <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+        {suggestion.Nm}
+    </div>
+    );
+
+    const onNameSuggestionsFetchRequested = ({ value }) => {
+        fetchSuggestions(value, 'name');
+      };
+    
+    
+    // Function to get the value when a suggestion is selected
+    const getStateSuggestions = value => {
+        const inputValue = value.trim().toLowerCase();
+        const inputLength = inputValue.length;
+        return inputLength === 0
+            ? []
+            : states.filter(
+                state =>
+                    state.name.toLowerCase().slice(0, inputLength) === inputValue
+            );
+    };
+    
+    // Function to get the value when a suggestion is selected
+    const getStateSuggestionValue = suggestion => suggestion.name;
+
+    // Render each state suggestion
+    const renderStateSuggestion = suggestion => (
+        <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+            {suggestion.name}
+        </div>
+    );
+
+    // Autosuggest input props for states
+    const StateInputProps = {
+        placeholder: 'Enter State',
+        value: state,
+        onChange: (event, { newValue }) => setState(newValue),
+        className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]",
+    };
+
+    // Fetch and clear state suggestions
+    const onStateSuggestionsFetchRequested = ({ value }) => {
+        setStateSuggestions(getStateSuggestions(value));
+    };
+    const onStateSuggestionsClearRequested = () => {
+        setStateSuggestions([]);
+    };
+    
 
     const formatNumber = (num) => {
         if (num >= 1000000000) {
@@ -65,7 +199,9 @@ export default function Dashboard() {
 
     const handleSearch = async () => {
         try {
-          const response = await fetch(`/api/items?state=${state}&city=${city}&nteeCode=${nteeCode}&Name=${encodeURIComponent(nonprofitName)}`);
+          setIsSearching(true);  // Set to true when search begins
+          const selectedStateCode = states.find(s => s.name === state)?.code || '';
+          const response = await fetch(`/api/items?state=${selectedStateCode}&city=${city}&nteeCode=${nteeCode}&Name=${encodeURIComponent(firstNp)}`);
           const data = await response.json();
           if (data.success) {
             // Process data to include most recent year's revenue and expenses
@@ -96,8 +232,10 @@ export default function Dashboard() {
         } catch (error) {
           console.error('Failed to fetch items:', error);
         }
+        setIsSearching(false); // Stop showing the loading spinner when search is done
       };
 
+      
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -183,7 +321,7 @@ export default function Dashboard() {
     
 
     const NteeInputProps = {
-        placeholder: 'Enter NTEE Code or Description',
+        placeholder: 'Enter Major Group',
         value: nteeCode,
         onChange: onNteeChange,
         className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
@@ -259,6 +397,16 @@ export default function Dashboard() {
           </svg>
         </div>
       );
+      const SearchLoadingComponent = () => (
+        <div className="flex items-center justify-center h-full w-full">
+            <svg className="animate-spin h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+        </div>
+    );
+    
+      
     return(
         
         <div>
@@ -446,63 +594,22 @@ export default function Dashboard() {
                         <div className="flex-col mx-10 font-sans mb-10">
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-6">
                                 <div className="bg-[#21222D] p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ">
-                                <select 
-                                    className="mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]" 
-                                    value={state} 
-                                    onChange={(e) => setState(e.target.value)}
-                                >
-                                    <option value="">Select State</option>
-                                    <option value="AL">Alabama</option>
-                                    <option value="AK">Alaska</option>
-                                    <option value="AZ">Arizona</option>
-                                    <option value="AR">Arkansas</option>
-                                    <option value="CA">California</option>
-                                    <option value="CO">Colorado</option>
-                                    <option value="CT">Connecticut</option>
-                                    <option value="DE">Delaware</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="GA">Georgia</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="ID">Idaho</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="IN">Indiana</option>
-                                    <option value="IA">Iowa</option>
-                                    <option value="KS">Kansas</option>
-                                    <option value="KY">Kentucky</option>
-                                    <option value="LA">Louisiana</option>
-                                    <option value="ME">Maine</option>
-                                    <option value="MD">Maryland</option>
-                                    <option value="MA">Massachusetts</option>
-                                    <option value="MI">Michigan</option>
-                                    <option value="MN">Minnesota</option>
-                                    <option value="MS">Mississippi</option>
-                                    <option value="MO">Missouri</option>
-                                    <option value="MT">Montana</option>
-                                    <option value="NE">Nebraska</option>
-                                    <option value="NV">Nevada</option>
-                                    <option value="NH">New Hampshire</option>
-                                    <option value="NJ">New Jersey</option>
-                                    <option value="NM">New Mexico</option>
-                                    <option value="NY">New York</option>
-                                    <option value="NC">North Carolina</option>
-                                    <option value="ND">North Dakota</option>
-                                    <option value="OH">Ohio</option>
-                                    <option value="OK">Oklahoma</option>
-                                    <option value="OR">Oregon</option>
-                                    <option value="PA">Pennsylvania</option>
-                                    <option value="RI">Rhode Island</option>
-                                    <option value="SC">South Carolina</option>
-                                    <option value="SD">South Dakota</option>
-                                    <option value="TN">Tennessee</option>
-                                    <option value="TX">Texas</option>
-                                    <option value="UT">Utah</option>
-                                    <option value="VT">Vermont</option>
-                                    <option value="VA">Virginia</option>
-                                    <option value="WA">Washington</option>
-                                    <option value="WV">West Virginia</option>
-                                    <option value="WI">Wisconsin</option>
-                                    <option value="WY">Wyoming</option>
-                                </select>
+                                    <div className="relative">
+                                        <Autosuggest
+                                            suggestions={stateSuggestions}
+                                            onSuggestionsFetchRequested={onStateSuggestionsFetchRequested}
+                                            onSuggestionsClearRequested={onStateSuggestionsClearRequested}
+                                            getSuggestionValue={getStateSuggestionValue}
+                                            renderSuggestion={renderStateSuggestion}
+                                            inputProps={StateInputProps}
+                                            renderSuggestionsContainer={({ containerProps, children }) => (
+                                                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${stateSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                                                    {children}
+                                                </div>
+                                            )}
+                                        />
+                                    </div>
+
                                 </div>
                                 <div className="bg-[#21222D] p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                                     <div className="relative">
@@ -531,14 +638,28 @@ export default function Dashboard() {
                                         </div>
                                 </div>
                                 <div className="bg-[#21222D] p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                                    <input
-                                        type="text"
-                                        placeholder="Enter Nonprofit Name"
-                                        value={nonprofitName}
-                                        onChange={(e) => setNonprofitName(e.target.value)}
-                                        className="mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
-                                    />
+                                    <div className="relative">
+                                        <Autosuggest
+                                            suggestions={nameSuggestions}
+                                            onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+                                            onSuggestionsClearRequested={onSuggestionsClearRequested}
+                                            getSuggestionValue={getNameSuggestionValue}
+                                            renderSuggestion={renderNameSuggestion}
+                                            inputProps={{
+                                                placeholder: 'Search for Nonprofit',
+                                                value: firstNp,
+                                                onChange: (_, { newValue }) => setFirstNp(newValue),
+                                                className: 'mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]',
+                                            }}
+                                            renderSuggestionsContainer={({ containerProps, children }) => (
+                                                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                                                    {children}
+                                                </div>
+                                            )}
+                                        />
+                                    </div>
                                 </div>
+
 
                                 <div className="bg-[#21222D] p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center justify-center sm:col-span-2 lg:col-span-1">
                                 <button 
@@ -550,67 +671,74 @@ export default function Dashboard() {
                                 </div>
                                 </div>
                                 <div>
-                                {hasSearched && (
+                                
+                                {(hasSearched && !isSearching) && (
                                     <div
                                         ref={searchResultsRef}
                                         className="flex flex-col justify-center items-center mt-10 bg-[#21222D] p-4 rounded-lg shadow-md mx-auto max-w-screen-lg w-full max-h-[80vh] overflow-y-auto"
                                     >
                                         {currentResults.length > 0 ? (
-                                        <>
-                                            <div className="flex flex-col justify-between w-full overflow-x-auto">
-                                            <div>
-                                                {currentResults.map((result, index) => (
-                                                <div key={index} className="mb-4 p-4 border-b border-[#A9DFD8]">
-                                                    <div className="flex justify-between mb-2">
-                                                    <span className="font-semibold">Nonprofit Name:</span>
-                                                    <a
-                                                        href="#"
-                                                        onClick={() => handleNonprofitClick(result._id)}
-                                                        className="text-[#A9DFD8] hover:underline font-semibold"
-                                                    >
-                                                        {capitalizeFirstLetter(result.Nm)}
-                                                    </a>
-                                                    </div>
-                                                    <div className="flex justify-between mb-2">
-                                                    <span className="font-semibold">Address:</span>
-                                                    <span>{capitalizeFirstLetter(result.Addr)}</span>
-                                                    </div>
-                                                    <div className="flex justify-between mb-2">
-                                                    <span className="font-semibold">City:</span>
-                                                    <span>{capitalizeFirstLetter(result.Cty)}</span>
-                                                    </div>
-                                                    <div className="flex justify-between mb-2">
-                                                    <span className="font-semibold">State:</span>
-                                                    <span>{result.St}</span>
-                                                    </div>
-                                                    <div className="flex justify-between mb-2">
-                                                    <span className="font-semibold">ZIP:</span>
-                                                    <span>{result.Zip}</span>
-                                                    </div>
-                                                    <div className="flex justify-between mb-2">
-                                                    <span className="font-semibold">Last Recorded Revenue:</span>
-                                                    <span>{formatNumber(result.annualRevenue)}</span>
-                                                    </div>
-                                                    <div className="flex justify-between">
-                                                    <span className="font-semibold">Last Recorded Expenses:</span>
-                                                    <span>{formatNumber(result.annualExpenses)}</span>
+                                            <>
+                                                <div className="flex flex-col justify-between w-full overflow-x-auto">
+                                                    <div>
+                                                        {currentResults.map((result, index) => (
+                                                            <div key={index} className="mb-4 p-4 border-b border-[#A9DFD8]">
+                                                                <div className="flex justify-between mb-2">
+                                                                    <span className="font-semibold">Nonprofit Name:</span>
+                                                                    <a
+                                                                        href="#"
+                                                                        onClick={() => handleNonprofitClick(result._id)}
+                                                                        className="text-[#A9DFD8] hover:underline font-semibold"
+                                                                    >
+                                                                        {capitalizeFirstLetter(result.Nm)}
+                                                                    </a>
+                                                                </div>
+                                                                <div className="flex justify-between mb-2">
+                                                                    <span className="font-semibold">Address:</span>
+                                                                    <span>{capitalizeFirstLetter(result.Addr)}</span>
+                                                                </div>
+                                                                <div className="flex justify-between mb-2">
+                                                                    <span className="font-semibold">City:</span>
+                                                                    <span>{capitalizeFirstLetter(result.Cty)}</span>
+                                                                </div>
+                                                                <div className="flex justify-between mb-2">
+                                                                    <span className="font-semibold">State:</span>
+                                                                    <span>{result.St}</span>
+                                                                </div>
+                                                                <div className="flex justify-between mb-2">
+                                                                    <span className="font-semibold">ZIP:</span>
+                                                                    <span>{result.Zip}</span>
+                                                                </div>
+                                                                <div className="flex justify-between mb-2">
+                                                                    <span className="font-semibold">Last Recorded Revenue:</span>
+                                                                    <span>{formatNumber(result.annualRevenue)}</span>
+                                                                </div>
+                                                                <div className="flex justify-between">
+                                                                    <span className="font-semibold">Last Recorded Expenses:</span>
+                                                                    <span>{formatNumber(result.annualExpenses)}</span>
+                                                                </div>
+                                                            </div>
+                                                        ))}
                                                     </div>
                                                 </div>
-                                                ))}
-                                            </div>
-                                            </div>
-                                        </>
+                                            </>
                                         ) : (
-                                        <div className="text-center text-white text-lg flex items-center justify-center">
-                                            No search results found.
-                                        </div>
+                                            <div className="text-center text-white text-lg flex items-center justify-center">
+                                                No search results found.
+                                            </div>
                                         )}
                                         <div className="flex justify-center mt-4">
                                             {renderPaginationControls()}
                                         </div>
                                     </div>
-                                    
                                 )}
+
+                                {isSearching && (
+                                    <div className="flex flex-col justify-center items-center mt-10 bg-[#21222D] p-4 rounded-lg shadow-md mx-auto max-w-screen-lg w-full max-h-[80vh] overflow-y-auto">
+                                        <SearchLoadingComponent />
+                                    </div>
+                                )}
+
 
                             </div>
                             </div>
