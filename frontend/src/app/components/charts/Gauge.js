@@ -27,12 +27,12 @@ const Gauge = ({ orgName, orgVal, stateName, stateVal, nationalVal }) => {
       value: (orgVal / maxVal) * 100,
       name: orgName,
       title: {
-        offsetCenter: ['0%', '-30%'],
-        color: '#666666',
+        offsetCenter: ['0%', '-35%'], // Adjusted to fit better
+        color: '#A9DFD8',
       },
       detail: {
         valueAnimation: true,
-        offsetCenter: ['0%', '-18%'],
+        offsetCenter: ['0%', '-22%'], // Adjusted to fit better
         formatter: () => `$${formatNumber(orgVal)}`,
       },
     },
@@ -40,12 +40,12 @@ const Gauge = ({ orgName, orgVal, stateName, stateVal, nationalVal }) => {
       value: (stateVal / maxVal) * 100,
       name: `${stateName} Median`,
       title: {
-        offsetCenter: ['0%', '0%'],
-        color: '#666666',
+        offsetCenter: ['0%', '5%'], // Slight adjustment
+        color: '#A9DFD8',
       },
       detail: {
         valueAnimation: true,
-        offsetCenter: ['0%', '12%'],
+        offsetCenter: ['0%', '18%'], // Adjusted for better spacing
         formatter: () => `$${formatNumber(stateVal)}`,
       },
     },
@@ -53,12 +53,12 @@ const Gauge = ({ orgName, orgVal, stateName, stateVal, nationalVal }) => {
       value: (nationalVal / maxVal) * 100,
       name: 'National Median',
       title: {
-        offsetCenter: ['0%', '30%'],
-        color: '#666666',
+        offsetCenter: ['0%', '45%'], // Slightly higher to avoid cutting off
+        color: '#A9DFD8',
       },
       detail: {
         valueAnimation: true,
-        offsetCenter: ['0%', '42%'],
+        offsetCenter: ['0%', '58%'], // Adjusted for better fit
         formatter: () => `$${formatNumber(nationalVal)}`,
       },
     },
@@ -110,7 +110,7 @@ const Gauge = ({ orgName, orgVal, stateName, stateVal, nationalVal }) => {
         },
         axisLine: {
           lineStyle: {
-            width: 40,
+            width: 30, // Slightly reduced for better fit
             color: [[1, '#464646']],
           },
         },
@@ -128,12 +128,12 @@ const Gauge = ({ orgName, orgVal, stateName, stateVal, nationalVal }) => {
         },
         data: gaugeData,
         title: {
-          fontSize: 0.036 * dimensions.width,
+          fontSize: Math.max(0.025 * dimensions.width, 12), // Minimum font size added for better small screens
         },
         detail: {
           width: dimensions.width,
           height: dimensions.height,
-          fontSize: 0.036 * dimensions.width,
+          fontSize: Math.max(0.025 * dimensions.width, 12), // Minimum font size added for better small screens
           color: 'inherit',
         },
       },
