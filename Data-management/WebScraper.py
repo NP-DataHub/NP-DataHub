@@ -9,7 +9,7 @@ class WebScraper:
 
     def __init__(self):
         self.processed_folders = set()
-        self.unprocessed_folders = list()
+        self.unprocessed_folders = []
         self.created_files = []
         self.created_folders = []
 

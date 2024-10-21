@@ -7,8 +7,8 @@ The following irregularities have been identified in our database:
 - **Resolution:** We will allow the user to correct this error.
 
 ### 2. Incomplete Rows in the Database
-- **Issue:** Several rows in the nonprofit table are incomplete.
-- **Explanation:** These rows only contain the NTEE code, EIN, and subsection code, with no other data. They have no current use, but we retain them in case new IRS data completes them.
+- **Issue:** The table called "MissingNonProfits" represents incomplete rows and won't be displayed to users.
+- **Explanation:** These rows only contain the NTEE code, Major Group, EIN, and Subsection code, with no other data. They have no current use, but we retain them in case new IRS data completes them.
 
 ### 3. Nonprofits with Restricted Contribution Data
 - **Issue:** Some nonprofits do not disclose the amounts of contributions they receive.
@@ -20,4 +20,4 @@ The following irregularities have been identified in our database:
 - **Resolution:** 
    - For financial variables, the default value will be 0.
    - For general information fields, the default value will be "None".
-   - For the NTEE code and Subsection code, the default value will be "Z".
+   - For the NTEE code, Major Group and Subsection code, the default value will be "Z".

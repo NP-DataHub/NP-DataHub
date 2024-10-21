@@ -41,26 +41,13 @@ def count_incomplete_rows_and_ntee():
         load_dotenv('frontend/.env')
     mongo_client = MongoClient(os.getenv('MONGODB_URI'))
     database = mongo_client["Nonprofitly"]
-    collection = database["NonProfitData"]
-    imcomplete_rows = collection.count_documents({"Nm": {"$exists": False}})
-    complete_rows = collection.count_documents({"Nm": {"$exists": True}})
+    all_non_profits = database["NonProfitData"]
+    missing_non_profits = database["MissingNonProfits"]
+    imcomplete_rows = missing_non_profits.count_documents({})
+    complete_rows = all_non_profits.count_documents({})
     total_rows = imcomplete_rows+complete_rows
-    actual_missing_ntee = collection.count_documents({
-        "Nm": {
-            "$exists": True
-        },
-        "NTEE": {
-            "$regex": "^Z"
-        }
-    })
-    incomplete_missing_ntee = collection.count_documents({
-        "Nm": {
-            "$exists": False
-        },
-        "NTEE": {
-            "$regex": "^Z"
-        }
-    })
+    actual_missing_ntee = all_non_profits.count_documents({ "MajGrp": "Z" })
+    incomplete_missing_ntee = missing_non_profits.count_documents({ "MajGrp": "Z" })
     print(f"{imcomplete_rows} incomplete rows.")
     print(f"{complete_rows} complete rows.")
     print(f"Total {total_rows} rows.")
@@ -78,8 +65,8 @@ def count_years_per_row(complete_rows):
     mongo_client = MongoClient(os.getenv('MONGODB_URI'))
     database = mongo_client["Nonprofitly"]
     collection = database["NonProfitData"]
-    total = 0 #seems to start with 2022
-    for x in range(19, 10, -1):
+    total = 0
+    for x in range(21, 10, -1):
         result = collection.count_documents({
             "$expr": {
                 "$eq": [{ "$size": { "$objectToArray": "$$ROOT" } }, x]
@@ -92,7 +79,8 @@ def count_years_per_row(complete_rows):
                 "$eq": [{ "$size": { "$objectToArray": "$$ROOT" } }, x]
             }
         })
-        print(f"Name of one of them: {document.get('Nm')} \n")
+        if document:
+            print(f"Name of one of them: {document.get('Nm')} \n")
     assert (total == complete_rows)
 
 
