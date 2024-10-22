@@ -9,12 +9,14 @@ import { db } from '../firebase/firebase';
 import { doSignOut } from '../firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { useAuth } from './context';
+import { useRouter } from 'next/navigation';
 
 const Sidebar = ({ currentPage }) => {
   const { currentUser } = useAuth();
   const [userData, setUserData] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Hamburger menu state
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -44,6 +46,10 @@ const Sidebar = ({ currentPage }) => {
   const handleSignOut = () => {
     doSignOut();
   };
+  const handleLogoClick = () => {
+    router.push('/'); // Redirect to homepage
+  };
+
 
   const links = [
     { href: '/dashboard', label: 'Dashboard', icon: <MdDashboard /> },
@@ -58,8 +64,10 @@ const Sidebar = ({ currentPage }) => {
         {/* Logo Section */}
         <picture className="flex-grow">
           <source media="(max-width: 767px)" srcSet="/img/inverted.png" />
-          <img className="h-10 md:h-10 max-h-full" src="/img/inverted.png" alt="Logo" />
+          <img className="h-10 md:h-10 max-h-full cursor-pointer" src="/img/inverted.png" alt="Logo"  onClick={handleLogoClick}  />
+          
         </picture>
+        
 
         {/* Hamburger Menu for Small Screens */}
         <button
