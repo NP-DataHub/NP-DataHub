@@ -41,7 +41,6 @@ export default function Profile() {
           setUserData(userDoc.data());
         }
       }
-      setLoading(false);
     };
 
     fetchUserData();
@@ -181,22 +180,28 @@ export default function Profile() {
     className: "w-full px-3 py-2 text-white-900 bg-[#171821] border-b-4 rounded-md"
   };
 
-  if (loading) {
-    return (
+  const handleUserDataLoaded = () => {
+      setLoading(false);
+  };
+  const LoadingComponent = () => (
       <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <svg className="animate-spin -ml-1 mr-3 h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg>
-    </div>
+        <svg className="animate-spin -ml-1 mr-3 h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+      </div>
     );
-  }
 
   return (
-    <div className="flex flex-col h-screen dashboard-color text-white font-sans">
-      <Sidebar />
+    <div className="flex flex-col dashboard-color text-white font-sans">
+        <Sidebar onUserDataLoaded={handleUserDataLoaded}  />
+        {loading ? (
+            <LoadingComponent/>
+        ) : (
       
-      <div className="flex flex-col flex-grow items-center justify-center p-8">
+      <div >
+      <div className="flex flex-col flex-grow items-center justify-center mt-12 mb-12">
+        <div className = "flex-grow">
         <div className="flex flex-col items-center justify-center w-full max-w-5xl flex-col bg-[#21222D] rounded-md mx-10 p-10 pb-14 font-sans rounded-lg shadow-lg">
           <h1 className="text-3xl font-bold mb-4">Profile</h1>
           <div className="flex space-x-8 w-full">
@@ -364,8 +369,11 @@ export default function Profile() {
             </div>
           </div>
         </div>
+        </div>
       </div>
       <Footer/>
+      </div>
+      )}
     </div>
   );
 }

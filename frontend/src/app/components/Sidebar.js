@@ -11,7 +11,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useAuth } from './context';
 import { useRouter } from 'next/navigation';
 
-const Sidebar = ({ currentPage }) => {
+const Sidebar = ({ currentPage, onUserDataLoaded }) => {
   const { currentUser } = useAuth();
   const [userData, setUserData] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -24,12 +24,14 @@ const Sidebar = ({ currentPage }) => {
         const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
         if (userDoc.exists()) {
           setUserData(userDoc.data());
+          if (onUserDataLoaded) onUserDataLoaded(); // Notify Dashboard that user data is loaded
         }
       }
     };
-
+  
     fetchUserData();
   }, [currentUser]);
+  
 
   if (!userData) {
     return null;

@@ -373,22 +373,11 @@ export default function Dashboard() {
             {children}
         </div>
     );
-    console.log("isLoading:", isLoading);
-    console.log(sidebarRef.current)
-    useEffect(() => {
-        // Set a timer to stop loading after 2 seconds
-        const timer = setTimeout(() => {
-            setIsLoading(false); // Stop loading
-            console.log("isLoading after timeout:", isLoading); // Debug after timeout
-        }, 1000); // 2 seconds delay
 
-        // Clear the timer when the component unmounts
-        return () => clearTimeout(timer);
-    }, []); // Empty dependency array to run only once
-    console.log("isLoading:", isLoading);
-    console.log(sidebarRef.current)
-
-
+        // If the sidebar's user data is loaded, stop the loading screen
+    const handleUserDataLoaded = () => {
+        setIsLoading(false);
+    };
     const LoadingComponent = () => (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <svg className="animate-spin -ml-1 mr-3 h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -414,10 +403,12 @@ export default function Dashboard() {
                 <div className="dashboard-color text-white ">
 
                 {/* Sidebar will be hidden if isLoading is true */}
-                        
+                    <Sidebar onUserDataLoaded={handleUserDataLoaded} currentPage="/dashboard" />
 
-                    {!isLoading && (<div className = "flex-col ">
-                        <Sidebar ref={sidebarRef} currentPage='/dashboard' />
+                        {/* Show a loading spinner for the main content until user data is loaded */}
+                        {isLoading ? (
+                            <LoadingComponent/>
+                        ) : ( <div className = "flex-col ">
                         {/* <DashboardNavbar/> */}
                         <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans mt-12" >
                             <h1 className = "text-2xl font-semibold">CREATING NONPROFIT ECOSYSTEMS THROUGH DATA</h1>
@@ -742,11 +733,9 @@ export default function Dashboard() {
 
                             </div>
                             </div>
-                    
+                            <Footer/>
                     </div>
                     )}
-                    {isLoading && <LoadingComponent />}
-                    <Footer/>
                 </div>
         </div>
     );

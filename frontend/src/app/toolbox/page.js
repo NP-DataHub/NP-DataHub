@@ -18,6 +18,7 @@ const ChoroplethMap = dynamic(() => import('../components/map'), { ssr: false })
 export default function Toolbox() {
     const [selectedSection, setSelectedSection] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // State to control the loading state
     const [city, setCity] = useState('');
     const [nonProfit2, setNonProfit2] = useState('');
     //const nonProfitNames = NonProfitList()
@@ -165,21 +166,44 @@ export default function Toolbox() {
             {children}
         </div>
     );
+
+    const handleUserDataLoaded = () => {
+        setIsLoading(false);
+    };
+    const LoadingComponent = () => (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <svg className="animate-spin -ml-1 mr-3 h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        </div>
+      );
+
     return(
         
         <div>
-            <div className="dashboard-color text-white font-sans pb-12">
-                <Sidebar currentPage='/toolbox' className="hidden" />
-                <div className = "min-h-screen flex flex-col ">
-                    {/* <DashboardNavbar/> */}
-                    <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans mt-12" >
+            <div className="dashboard-color text-white font-sans">
+
+                <Sidebar onUserDataLoaded={handleUserDataLoaded} currentPage="/toolbox" />
+                {isLoading ? (
+                    <LoadingComponent/>
+                ) : (
+                <div className = "min-h-screen flex flex-col">
+                <div className = "flex-grow">
+                    <div className = "flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans mt-12 flex-grow mb-12 " >
                         <h1 className = "text-2xl font-semibold">NON PROFIT TOOLBOX LIBRARY</h1>
                         <span className = "text-sm text-[#A0A0A0]">Choose from one of eight analytical tools for stronger insights.</span>
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
                             <div className={`p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
                                     selectedSection === "Fiscal Health" ? "bg-[#34344c]" : "bg-[#171821]"
                                     }`}
-                                    onClick={() => setSelectedSection("Fiscal Health")}>
+                                    onClick={() =>
+                                        setSelectedSection(
+                                          selectedSection === "Fiscal Health" ? null : "Fiscal Health"
+                                        )
+                                      }
+                                    >
+
                                 <svg className = "mb-4" width="36" height="39" viewBox="0 0 23 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 6.02589L11.452 6.53789C11.5222 6.61298 11.607 6.67285 11.7013 6.71378C11.7956 6.75471 11.8972 6.77584 12 6.77584C12.1028 6.77584 12.2044 6.75471 12.2987 6.71378C12.393 6.67285 12.4778 6.61298 12.548 6.53789L12 6.02589ZM9.434 19.2479C7.984 18.0719 6.292 16.5289 4.968 14.8399C3.629 13.1329 2.75 11.3799 2.75 9.76989H1.25C1.25 11.8869 2.38 13.9719 3.787 15.7659C5.209 17.5789 6.997 19.2019 8.489 20.4129L9.434 19.2479ZM2.75 9.76989C2.75 6.86489 4.018 5.06989 5.586 4.45489C7.151 3.84189 9.34 4.27989 11.452 6.53789L12.548 5.51389C10.16 2.95989 7.349 2.15389 5.039 3.05789C2.732 3.96189 1.25 6.44389 1.25 9.76989H2.75ZM15.51 20.4119C17.003 19.2009 18.791 17.5779 20.213 15.7649C21.62 13.9709 22.75 11.8859 22.75 9.76789H21.25C21.25 11.3799 20.37 13.1319 19.032 14.8389C17.708 16.5279 16.016 18.0709 14.566 19.2469L15.51 20.4119ZM22.75 9.76789C22.75 6.44289 21.268 3.96089 18.96 3.05789C16.65 2.15289 13.84 2.95789 11.452 5.51289L12.548 6.53789C14.66 4.27989 16.849 3.84089 18.414 4.45389C19.982 5.06789 21.25 6.86389 21.25 9.76789H22.75ZM8.489 20.4129C9.759 21.4449 10.642 22.2019 12 22.2019V20.7019C11.277 20.7019 10.827 20.3779 9.434 19.2479L8.489 20.4129ZM14.566 19.2469C13.173 20.3769 12.723 20.7019 12 20.7019V22.2019C13.358 22.2019 14.241 21.4449 15.511 20.4129L14.566 19.2469Z" fill="#FEB95A"/>
                                     <path d="M18.5 9.45189H16.5M16.5 9.45189H14.5M16.5 9.45189V7.45189M16.5 9.45189V11.4519" stroke="#FEB95A" stroke-width="1.5" stroke-linecap="round"/>
@@ -193,7 +217,11 @@ export default function Toolbox() {
                                 className={`p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
                                     selectedSection === "Region Health" ? "bg-[#34344c]" : "bg-[#171821]"
                                 }`}
-                                onClick={() => setSelectedSection("Region Health")}
+                                onClick={() =>
+                                    setSelectedSection(
+                                      selectedSection === "Region Health" ? null : "Region Health"
+                                    )
+                                  }
                                 >
 
                                     <svg className = "mb-4" width="36" height="39" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -264,7 +292,11 @@ export default function Toolbox() {
                                 className={`p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
                                     selectedSection === "News Feed" ? "bg-[#34344c]" : "bg-[#171821]"
                                 }`}
-                                onClick={() => setSelectedSection("News Feed")}
+                                onClick={() =>
+                                    setSelectedSection(
+                                      selectedSection === "News Feed" ? null : "News Feed"
+                                    )
+                                  }
                                 >
 
                                 <svg className = "mb-4" width="36" height="39" viewBox="0 0 23 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -302,7 +334,11 @@ export default function Toolbox() {
                                 className={`p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
                                     selectedSection === "Co:Lab" ? "bg-[#34344c]" : "bg-[#171821]"
                                 }`}
-                                onClick={() => setSelectedSection("Co:Lab")}
+                                onClick={() =>
+                                    setSelectedSection(
+                                      selectedSection === "Co:Lab" ? null : "Co:Lab"
+                                    )
+                                  }
                                 >
 
                                 <svg className = "mb-4" width="36" height="39" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -327,150 +363,6 @@ export default function Toolbox() {
                         )}
                         <div className="mt-12">
                             {selectedSection === "Fiscal Health" && (
-                                // <div className="p-6 bg-[#171821] rounded-lg">
-                                // <h3 className="text-xl font-semibold text-[#FEB95A]">
-                                //     FISCAL HEALTH: SINGLE NONPROFIT
-                                // </h3>
-                                // <p className="text-white mt-2">
-                                //     Assess a nonprofit’s fiscal health based on a weighted score of various data variables. 
-                                //     Compare the scores side-by-side with other nonprofits.
-                                // </p>
-                                // <div className="mt-12 text-sm">
-                                //     <div className="grid grid-cols-2 gap-4 mb-6">
-                                //         <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                //             SEARCH FOR A NONPROFIT
-                                //         </button>
-                                //         <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                //             COMPARE AGAINST ANOTHER NONPROFIT
-                                //         </button>
-                                //         </div>
-                                //         <div className="grid grid-cols-2 gap-4 mb-6">
-                                //         <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                //             <Autosuggest
-                                //                 suggestions={suggestions}
-                                //                 onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                                //                 onSuggestionsClearRequested={onSuggestionsClearRequested}
-                                //                 getSuggestionValue={getSuggestionValue}
-                                //                 renderSuggestion={renderSuggestion}
-                                //                 inputProps={inputProps}
-                                //                 renderSuggestionsContainer={renderSuggestionsContainer}
-                                //             />
-                                //         </button>
-                                //         <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                //             <Autosuggest
-                                //             suggestions={suggestions}
-                                //             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                                //             onSuggestionsClearRequested={onSuggestionsClearRequested}
-                                //             getSuggestionValue={getSuggestionValue}
-                                //             renderSuggestion={renderSuggestion}
-                                //             inputProps={inputProps2}
-                                //             renderSuggestionsContainer={renderSuggestionsContainer}
-                                //         />
-                                //         </button>
-                                //         </div>
-                                //         <div className="flex justify-center mb-6">
-                                //         <button className="px-8 py-4 bg-green-500 rounded-full text-white font-bold hover:bg-green-400 transition-colors mt-8 mb-4">
-                                //             CALCULATE
-                                //         </button>
-                                //         </div>
-                                //         <div className="flex justify-around">
-                                //         <div className="flex flex-col items-center">
-                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-green-500">
-                                //             4.1
-                                //             </div>
-                                //             <span className="mt-2 text-gray-300">Nonprofit 1</span>
-                                //         </div>
-                                //         <div className="flex flex-col items-center">
-                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-orange-500">
-                                //             5.7
-                                //             </div>
-                                //             <span className="mt-2 text-gray-300">Nonprofit 2</span>
-                                //         </div>
-                                //         </div>
-                                //     </div>
-                                //     <h3 className="text-xl font-semibold mt-12">
-                                //     ANALYSIS
-                                //     </h3>
-                                //     <p className="text-white mt-2">
-                                //         Compared over an aggregate weighted score from three years, which included increases or decreases revenues, expenses, assets, and liabilities, the nonprofit on the right is healthier fiscally. This may be for a host of variables, so the recommendation is to explore each nonprofit’s financial data. 
-                                //     </p>
-                                //     <h3 className="text-xl font-semibold text-[#FEB95A] mt-12">
-                                //     FISCAL HEALTH: AGAINST LOCAL + NATIONAL SECTORS
-                                //     </h3>
-                                //     <p className="text-white mt-2">
-                                //     Assess a nonprofit’s fiscal health based on a weighted score of various data variables. 
-                                //     Compare the scores side-by-side with the same or other sectors.
-                                //     </p>
-                                //     <div className="mt-12 text-sm">
-                                //     <div className="grid grid-cols-2 gap-4 mb-6">
-                                //         <div className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors"> 
-                                //             SEARCH FOR A NONPROFIT
-                                //         </div>
-                                //         <div className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                //             COMPARE AGAINST ANOTHER NONPROFIT
-                                //         </div>
-                                //         </div>
-                                //         <div className="grid grid-cols-2 gap-4 mb-6">
-                                //         <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                //             <Autosuggest
-                                //                 suggestions={suggestions}
-                                //                 onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                                //                 onSuggestionsClearRequested={onSuggestionsClearRequested}
-                                //                 getSuggestionValue={getSuggestionValue}
-                                //                 renderSuggestion={renderSuggestion}
-                                //                 inputProps={inputProps}
-                                //                 renderSuggestionsContainer={renderSuggestionsContainer}
-                                //             />
-                                //         </button>
-                                //         <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                //             <Autosuggest
-                                //             suggestions={suggestions}
-                                //             onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                                //             onSuggestionsClearRequested={onSuggestionsClearRequested}
-                                //             getSuggestionValue={getSuggestionValue}
-                                //             renderSuggestion={renderSuggestion}
-                                //             inputProps={inputProps2}
-                                //             renderSuggestionsContainer={renderSuggestionsContainer}
-                                //         />
-                                //         </button>
-                                //         </div>
-                                //         <div className="flex justify-center mb-6 items-center">
-                                //         <button className="px-8 py-4 bg-green-500 rounded-full text-white font-bold hover:bg-green-400 transition-colors mt-8 mb-4  ">
-                                //             CALCULATE
-                                //         </button>
-                                //         </div>
-                                //         <div className="grid grid-cols-3 gap-4 mb-6">
-                                //         <div className="flex flex-col items-center">
-                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-green-500">
-                                //             4.1
-                                //             </div>
-                                //             <span className="mt-2 text-gray-300">PRIMARY NONPROFIT</span>
-                                //         </div>
-                                //         <div className="flex flex-col items-center">
-                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-green-500">
-                                //             4.9
-                                //             </div>
-                                //             <span className="mt-2 text-gray-300">REGIONAL</span>
-                                //         </div>
-                                //         <div className="flex flex-col items-center">
-                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center text-2xl font-bold text-orange-500">
-                                //             5.7
-                                //             </div>
-                                //             <span className="mt-2 text-gray-300">NATIONAL</span>
-                                //         </div>
-                                //         </div>
-                                //     </div>
-                                //     <h3 className="text-xl font-semibold mt-12">
-                                //         ANALYSIS
-                                //         </h3>
-                                //         <p className="text-white mt-2">
-
-                                //         Compared over an aggregate weighted score from three years, which included increases or decreases revenues, expenses, assets, and liabilities, the nonprofit is healthier than the regional sector ecosystem but not as healthy as the national sector ecosystem. 
-
-                                //         This may be favorable when positioning your nonprofit against other nonprofits within your region when exploring grant or funding opportunities on a state level or with a local philanthropy.
-
-                                //         However, when exploring  grant or funding opportunities with a national or global philanthropy, the nonprofit may be at a disadvantage against a more competitive pool of nonprofits that may be fiscally healthier.                                        </p>
-                                // </div>
                                 <FiscalHealthSection/>
                                 
                             )}
@@ -738,38 +630,16 @@ export default function Toolbox() {
                             )}
                             {selectedSection === "News Feed" && (
                                 <NewsFeedSection></NewsFeedSection>
-                                // <div className="p-6 bg-[#171821] rounded-lg">
-                                // <h3 className="text-xl font-semibold text-[#FEB95A]">
-                                //     News Feeds
-                                // </h3>
-                                // <p className="text-white">
-                                //     A tool to understanding larger scale problems and connecting to regional nonprofits via social media and search engines.
-                                // </p>
-                                // <div className="grid grid-cols-2 gap-4 p-4 mt-12">
-                                //     <button className="flex items-center justify-center bg-[#34344c] text-white py-2 px-4 rounded-full">
-                                //         <span className="mr-2">🔍</span>
-                                //         SEARCH
-                                //     </button>
-                                //     <button className="flex items-center justify-center bg-[#34344c] text-white py-2 px-4 rounded-full">
-                                //         <span className="mr-2">🔎</span>
-                                //         ADVANCED SEARCH
-                                //     </button>
-                                //     </div>
-                                //     <div className="mt-12">
-                                //     <SocialMediaMentions
-                                //         query="#nonprofits OR #Notforprofit OR #NonprofitsofInstagram OR #Supportnonprofits OR #Nonprofitorganizations"
-                                //         limit={25} // You can adjust the limit
-                                //         period="last7days" // You can adjust the period as needed
-                                //     />
-                                //     </div>
-                                // </div>
+
                             )}
                         </div>
                     </div>
                 </div>
-                
+                <Footer/>
+                </div>
+            )}
             </div>
-            <Footer/>
         </div>
+        
     );
 }
