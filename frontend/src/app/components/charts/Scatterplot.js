@@ -80,8 +80,6 @@ const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters}) => {
 
       // Extract all non null NTEE codes from filters
         const filterKeys = Object.keys(filters).filter(key => filters[key] !== null);
-        console.log("Filters:", filters);
-        console.log("Non-null Filters:", filterKeys);
 
       // Initialize scatter_data with filters
       const scatter_data = {};
@@ -147,7 +145,6 @@ const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters}) => {
             },
             formatter: function (params) {
               const tooltipContent = params.map(item => {     
-                console.log("Item:", item);  
                 return `<strong>${item.name}</strong><br/> 
                         ${item.data.city}, ${item.data.state} ${item.data.zip}<br/>
                         ${X_axis_label}: ${formatNumber(item.value[0])}<br/>

@@ -43,8 +43,9 @@
                     case 'GET':
                         const filters = {};
                         const nteeCodes = [];
-        
-                        console.log("Query:", query);
+
+                        // Debug
+                        //console.log("Query:", query);
         
                         // From the passed in query, extract all the filters
                         for (const [key, value] of Object.entries(query)) {
