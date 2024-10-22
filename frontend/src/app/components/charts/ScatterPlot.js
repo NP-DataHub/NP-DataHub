@@ -107,6 +107,7 @@ const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters}) => {
 
         const name = nonprofit["Nm"];
         const id = nonprofit["_id"];
+
         // Get the NTEE code for the nonprofit
         const nteeCode = nonprofit["NTEE"];
         // If the NTEE code is in the filters, add the data to the scatter plot
@@ -145,7 +146,8 @@ const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters}) => {
               type: 'none'
             },
             formatter: function (params) {
-              const tooltipContent = params.map(item => {       
+              const tooltipContent = params.map(item => {     
+                console.log("Item:", item);  
                 return `<strong>${item.name}</strong><br/> 
                         ${item.data.city}, ${item.data.state} ${item.data.zip}<br/>
                         ${X_axis_label}: ${formatNumber(item.value[0])}<br/>
@@ -228,20 +230,22 @@ const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters}) => {
               show: false
           }
       },
-        series: Object.keys(scatter_data).map((key, index) => ({
-          name: key,
-          type: 'scatter',
-          data: scatter_data[key].map(item => ({
-            value: item.value, // Use the value array directly
-            city: item.city,
-            state: item.state,
-            zip: item.zip
-        })),
-          itemStyle: {
-              color: colors[index % colors.length], // Assign a color from the palette
-              opacity: 0.7
-          }
-      }))
+      series: Object.keys(scatter_data).map((key, index) => ({
+        name: key,
+        type: 'scatter',
+        data: scatter_data[key].map(item => ({
+          value: item.value, // Use the value array directly
+          name: item.name,
+          id: item.id,
+          city: item.city,
+          state: item.state,
+          zip: item.zip
+      })),
+        itemStyle: {
+            color: colors[index % colors.length], // Assign a color from the palette
+            opacity: 0.7
+        }
+    }))
     };
 
     return (

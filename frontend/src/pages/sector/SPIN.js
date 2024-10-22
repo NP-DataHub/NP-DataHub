@@ -14,6 +14,7 @@ import cities from "@/app/components/cities";
 import ntee_codes from "@/app/components/ntee";
 
 
+
 const SPIN = () => {
 
     // State variable for data
@@ -87,12 +88,14 @@ const SPIN = () => {
         { value: "WY", label: "Wyoming" }
     ];
 
+    // Currently not used as I felt it made the page a bit more clutered. Can easily be added if we feel its useful.
     const zipOptions = [
         // Add zip options here
     ];
 
     // This is all for the city autosuggest. Dont ask me to explain it I barely understand it :)
     const [citySuggestions, setCitySuggestions] = useState([]);
+    const [inputCityValue, setInputCityValue] = useState(null);
 
     const getCitySuggestions = value => {
         const inputValue = value.trim().toLowerCase();
@@ -125,12 +128,21 @@ const SPIN = () => {
     };
 
     const onCityChange = (event, { newValue }) => {
-        setSelectedCity({ value: newValue, label: newValue });
+        //setSelectedCity({ value: newValue, label: newValue });
+        setInputCityValue(newValue);
+        if (newValue === '') {
+            setSelectedCity(null); // Reset selected city when input is cleared
+        }
+    };
+
+    const onCitySuggestionSelected = (event, { suggestion }) => {
+        setSelectedCity({ value: suggestion, label: suggestion });
+        setInputCityValue(suggestion);
     };
 
     const CityInputProps = {
         placeholder: 'Enter City',
-        value: selectedCity ? selectedCity.label : '',
+        value: inputCityValue ? inputCityValue : '',
         onChange: onCityChange,
         className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
     };
@@ -138,9 +150,11 @@ const SPIN = () => {
 
     // NTEE autosuggest functions
     const [suggestions, setSuggestions] = useState({ NTEE1: [], NTEE2: [], NTEE3: [] });
+    const [inputNTEEValue, setInputNTEEValue] = useState({ NTEE1: '', NTEE2: '', NTEE3: '' });
+
 
     const getSuggestions = (value, type) => {
-        const inputValue = value.trim().toLowerCase();
+        const inputValue = (value || '').trim().toLowerCase();
         const inputLength = inputValue.length;
         const nteeArray = Object.keys(ntee_codes).map(key => ({
             code: key,
@@ -153,7 +167,7 @@ const SPIN = () => {
         );
     };
 
-    const getSuggestionValue = suggestion => {suggestion.code} ;
+    const getSuggestionValue = suggestion => suggestion.code;
 
     const renderSuggestion = suggestion => (
         <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
@@ -175,21 +189,32 @@ const SPIN = () => {
         setSuggestions(prev => ({ ...prev, [type]: [] }));
     };
 
-    const onChange = (event, { newValue }, type) => {
-        if (type === 'NTEE1') setSelectedNTEE1({ value: newValue, label: newValue });
-        if (type === 'NTEE2') setSelectedNTEE2({ value: newValue, label: newValue });
-        if (type === 'NTEE3') setSelectedNTEE3({ value: newValue, label: newValue });
+    const onNTEEChange = (event, { newValue }, type) => {
+        setInputNTEEValue(prev => ({ ...prev, [type]: newValue }));
+        if (newValue === '') {
+            if (type === 'NTEE1') setSelectedNTEE1(null); // Reset selected NTEE1 when input is cleared
+            if (type === 'NTEE2') setSelectedNTEE2(null); // Reset selected NTEE2 when input is cleared
+            if (type === 'NTEE3') setSelectedNTEE3(null); // Reset selected NTEE3 when input is cleared
+        }
+    };
+
+    const onSuggestionSelected = (event, { suggestion }, type) => {
+        if (type === 'NTEE1') setSelectedNTEE1({ value: suggestion.code, label: suggestion.description });
+        if (type === 'NTEE2') setSelectedNTEE2({ value: suggestion.code, label: suggestion.description });
+        if (type === 'NTEE3') setSelectedNTEE3({ value: suggestion.code, label: suggestion.description });
+        setInputNTEEValue(prev => ({ ...prev, [type]: suggestion.code }));
     };
 
     const createInputProps = (type, selectedValue) => ({
         placeholder: `Enter ${type} Code or Description`,
-        value: selectedValue ? selectedValue.label : '',
-        onChange: (event, { newValue }) => onChange(event, { newValue }, type),
+        value: inputNTEEValue[type] ? inputNTEEValue[type] : selectedValue ? selectedValue.label : '',
+        onChange: (event, { newValue }) => onNTEEChange(event, { newValue }, type),
         className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
     });
 
     // State autosuggest functions
     const [stateSuggestions, setStateSuggestions] = useState([]);
+    const [inputStateValue, setInputStateValue] = useState(null);
 
     const getStateSuggestions = value => {
         const inputValue = value.trim().toLowerCase();
@@ -222,12 +247,21 @@ const SPIN = () => {
     };
 
     const onStateChange = (event, { newValue }) => {
-        setSelectedState({ value: newValue, label: newValue });
+        //setSelectedState({ value: newValue, label: newValue });
+        setInputStateValue(newValue);
+        if (newValue === '') {
+            setSelectedState(null); // Reset selected state when input is cleared
+        }
+    };
+
+    const onStateSuggestionSelected = (event, { suggestion }) => {
+        setSelectedState({ value: suggestion.value, label: suggestion.label });
+        setInputStateValue(suggestion.label)
     };
 
     const StateInputProps = {
         placeholder: 'Enter State',
-        value: selectedState ? selectedState.label : '',
+        value: inputStateValue ? inputStateValue : '',
         onChange: onStateChange,
         className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
     };
@@ -258,12 +292,17 @@ const SPIN = () => {
     useEffect(() => {
         const fetchSectorData = async () => {
             // Set a default state so that we arent fetching everything  
-        const STATE = selectedState ? selectedState.value : "NY";
-        const CITY = selectedCity ? selectedCity.value : "Troy";
+        const STATE = selectedState ? selectedState.value : null;
+        const CITY = selectedCity ? selectedCity.value : null;
         const ZIP = selectedZIP ? selectedZIP.value : null;
         const NTEE1 = selectedNTEE1 ? selectedNTEE1.value : null;
         const NTEE2 = selectedNTEE2 ? selectedNTEE2.value : null;
         const NTEE3 = selectedNTEE3 ? selectedNTEE3.value : null;
+
+        // Make sure the search is not too broad. Require at least a state 
+        if (!STATE) {
+            return;
+        }
 
         let response = await fetch(`/api/sector?Cty=${CITY}&St=${STATE}&ZIP=${ZIP}&NTEE1=${NTEE1}&NTEE2=${NTEE2}&NTEE3=${NTEE3}`);
         let filtered_sector_data = await response.json();
@@ -278,7 +317,7 @@ const SPIN = () => {
     }, 
     // Only re-fetch data when the selected filters change, not when single chars are changed
     [selectedState, selectedCity, selectedZIP, selectedNTEE1, selectedNTEE2, selectedNTEE3]
-);
+    );
 
     useEffect(() => {
         // Re-render the scatter plot when the X or Y axis is changed
@@ -318,7 +357,7 @@ const SPIN = () => {
                             renderSuggestion={renderStateSuggestion}
                             renderSuggestionsContainer={renderStateSuggestionContainer}
                             inputProps={StateInputProps}
-                            onSuggestionSelected={(event, { suggestion }) => setSelectedState({ value: suggestion.value, label: suggestion.label })}
+                            onSuggestionSelected={onStateSuggestionSelected}
                         />
                     </div>
                     <a data-tooltip-id="city-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Search for states to examine on the plot.">ℹ️</a>
@@ -333,11 +372,12 @@ const SPIN = () => {
                     suggestions={citySuggestions}
                     onSuggestionsFetchRequested={onCitySuggestionsFetchRequested}
                     onSuggestionsClearRequested={onCitySuggestionsClearRequested}
+                    onSuggestionSelected={onCitySuggestionSelected}
                     getSuggestionValue={getCitySuggestionValue}
                     renderSuggestion={renderCitySuggestion}
                     renderSuggestionsContainer={renderCitySuggestionContainer}
                     inputProps={CityInputProps}
-                    onSuggestionSelected={(event, { suggestion }) => setSelectedCity({ value: suggestion, label: suggestion })}
+                    //onSuggestionSelected={(event, { suggestion }) => setSelectedCity({ value: suggestion, label: suggestion })}
                 />
             </div>
             <a data-tooltip-id="city-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Search for cities to examine on the plot.">ℹ️</a>
@@ -411,7 +451,7 @@ const SPIN = () => {
         </div>
     </div>
             </div>
-            <div className="flex justify-between items-center bg-[#171821] p-2 rounded-lg mt-4">
+            <div className="flex justify-between items-center bg-[#171821] p-4 rounded-lg mt-4">
                 <h2 className="text-xl font-semibold mb-2">Select Variables to Compare:</h2>
                 <div className="flex space-x-4">
                     <Select
