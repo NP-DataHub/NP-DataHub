@@ -45,7 +45,7 @@ class Database:
     def get_general_information(self, root):
         name = self.get_information_from_multiple_lines(root, "BusinessName", "BusinessNameLine")
         state_element = root.find('.//irs:Filer/irs:USAddress/irs:StateAbbreviationCd', self.namespace)
-        if (state_element is not None):
+        if state_element is not None:
             state = state_element.text
             city_element = root.find('.//irs:Filer/irs:USAddress/irs:CityNm', self.namespace)
             city = city_element.text if city_element is not None else "None"
@@ -60,6 +60,15 @@ class Database:
             zip_code_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:ForeignPostalCd', self.namespace)
             zip_code = zip_code_element.text if zip_code_element is not None else "None"
             address = self.get_information_from_multiple_lines(root, "ForeignAddress", "AddressLine")
+        if zip_code != "None":
+            if len(zip_code) < 5:
+                zip_code = zip_code.zfill(5) # add leading 0 till length becomes 5
+            elif len(zip_code) > 5:
+                parts = []            
+                for i in range(0, len(zip_code), 5):
+                    part = zip_code[i:i+5]
+                    parts.append(part)            
+                zip_code = '-'.join(parts)
         return [name, state, city, zip_code, address]
 
     def get_990_financial_information(self, root):
