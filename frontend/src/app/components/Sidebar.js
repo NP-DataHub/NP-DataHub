@@ -166,7 +166,7 @@ const Sidebar = ({ currentPage, onUserDataLoaded }) => {
         <div className="border-b border-gray-500 mx-4"></div>
         <div className="p-4">
           <a
-            href="profile"
+            href="/profile"
             className="text-[#e7e7ea] text-md font-semibold flex items-center space-x-3 px-1 py-2 hover:bg-[#353637] rounded-md"
           >
             <svg
