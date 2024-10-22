@@ -330,7 +330,7 @@ const SPIN = () => {
             <div className="mb-4 p-4 bg-[#171821] text-white rounded-lg">
                 <h2 className="text-xl font-semibold mb-2">Overview</h2>
                 <p className="text-base text-[#A0A0A0] mb-6">
-                    A scatter plot's purpose is to visually display and statistically test the relationship between two variables, identify relationships, test theories, analyze data, 
+                    A scatter plot&#39;s purpose is to visually display and statistically test the relationship between two variables, identify relationships, test theories, analyze data, 
                     and find natural fiscal collaborators across a single or multiple NTEE codes within a certain geographical area. 
                     Given that more grantmakers -- private and government -- are requiring multiple nonprofits to partner to find solutions 
                     to more interwoven and complex societal problems, the tool helps identify which nonprofits in a select region are more fiscally 
