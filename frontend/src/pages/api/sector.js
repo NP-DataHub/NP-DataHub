@@ -54,7 +54,12 @@
                                     // add the NTEE code to the list
                                     nteeCodes.push(key);
                                 } else {
-                                    filters[key] = value;
+                                    // If the key is CITY, use a regex for case-insensitive matching
+                                    if (key === 'Cty') {
+                                        filters[key] = { $regex: new RegExp(value, 'i') };
+                                    } else {
+                                        filters[key] = value;
+                                    }
                                 }
                             }
                         }
@@ -67,7 +72,7 @@
                         // If there are NTEE codes, add them to the query using $or
                         if (nteeCodes.length > 0) {
                             queryObject.$or = nteeCodes.map(code => ({
-                                ["NTEE"]: query[code]
+                                ["MajGrp"]: query[code]
                             }));
                         }
         

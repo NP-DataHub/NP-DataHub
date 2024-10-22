@@ -202,7 +202,7 @@ const SPIN = () => {
         if (type === 'NTEE1') setSelectedNTEE1({ value: suggestion.code, label: suggestion.description });
         if (type === 'NTEE2') setSelectedNTEE2({ value: suggestion.code, label: suggestion.description });
         if (type === 'NTEE3') setSelectedNTEE3({ value: suggestion.code, label: suggestion.description });
-        setInputNTEEValue(prev => ({ ...prev, [type]: suggestion.code }));
+        setInputNTEEValue(prev => ({ ...prev, [type]: `${suggestion.code} - ${suggestion.description}` }));
     };
 
     const createInputProps = (type, selectedValue) => ({
@@ -410,7 +410,7 @@ const SPIN = () => {
                         renderSuggestion={renderSuggestion}
                         renderSuggestionsContainer={(props) => renderSuggestionsContainer({ ...props, type: 'NTEE1' })}
                         inputProps={createInputProps('NTEE1', selectedNTEE1)}
-                        onSuggestionSelected={(event, { suggestion }) => setSelectedNTEE1({ value: suggestion.code, label: suggestion.code })}
+                        onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(event, {suggestion}, 'NTEE1')}
                     />
                 </div>
                 <a data-tooltip-id="option1-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Select the first NTEE code.">ℹ️</a>
@@ -426,7 +426,7 @@ const SPIN = () => {
                         renderSuggestion={renderSuggestion}
                         renderSuggestionsContainer={(props) => renderSuggestionsContainer({ ...props, type: 'NTEE2' })}
                         inputProps={createInputProps('NTEE2', selectedNTEE2)}
-                        onSuggestionSelected={(event, { suggestion }) => setSelectedNTEE2({ value: suggestion.code, label: suggestion.code })}
+                        onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(event, {suggestion}, 'NTEE2')}
                     />
                 </div>
                 <a data-tooltip-id="option2-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Select the second NTEE code.">ℹ️</a>
@@ -442,7 +442,7 @@ const SPIN = () => {
                         renderSuggestion={renderSuggestion}
                         renderSuggestionsContainer={(props) => renderSuggestionsContainer({ ...props, type: 'NTEE3' })}
                         inputProps={createInputProps('NTEE3', selectedNTEE3)}
-                        onSuggestionSelected={(event, { suggestion }) => setSelectedNTEE3({ value: suggestion.code, label: suggestion.code })}
+                        onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(event, {suggestion}, 'NTEE3')}
                     />
                 </div>
                 <a data-tooltip-id="option3-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Select the third NTEE code.">ℹ️</a>

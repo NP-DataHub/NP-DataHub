@@ -109,7 +109,7 @@ const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters}) => {
         const id = nonprofit["_id"];
 
         // Get the NTEE code for the nonprofit
-        const nteeCode = nonprofit["NTEE"];
+        const nteeCode = nonprofit["MajGrp"];
         // If the NTEE code is in the filters, add the data to the scatter plot
         if (scatter_data[nteeCode]) {
           scatter_data[nteeCode].push({
