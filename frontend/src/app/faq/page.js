@@ -25,7 +25,7 @@
     },
     {
         question: "ORGANIZATIONS IN DATABASE",
-        answer: "The data used in the Nonprofitly platform is extracted directly from the IRS portal, and includes tax-exempt organizations in each of the 27 subsections of the 501(c) section of the tax code, and which have filed a Form 990, Form 990EZ or Form 990PF. The NTEE codes used are self-reporting and are categorized in each of these 27 subsections. Private foundations that are required to file a form 990PF are also included. Nonprofitly uses data from 2017 to the current day."
+        answer: "The data used in the Nonprofitly platform is extracted directly from the IRS portal, and includes tax-exempt organizations in each of the 26 subsections of the 501(c) section of the tax code, and which have filed a Form 990, Form 990EZ or Form 990PF. The NTEE codes used are self-reporting and are categorized in each of these 26 subsections. Private foundations that are required to file a form 990PF are also included. Nonprofitly uses data from 2017 to the current day."
     }
     ];
 
