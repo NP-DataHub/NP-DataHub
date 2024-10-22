@@ -4,7 +4,7 @@
 
 "use client";
 
-import ScatterPlot from "@/app/components/charts/ScatterPlot";
+import ScatterPlot from "@/app/components/charts/Scatterplot";
 import Select from 'react-select';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import { useState, useEffect } from 'react';
