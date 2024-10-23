@@ -79,7 +79,7 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters }) => {
     const y = nonprofit[mostRecentYear][Y_axis_var];
     const name = nonprofit["Nm"];
     const id = nonprofit["_id"];
-    const nteeCode = nonprofit["NTEE"];
+    const nteeCode = nonprofit["MajGrp"];
 
     if (scatter_data[nteeCode]) {
       scatter_data[nteeCode].push({
