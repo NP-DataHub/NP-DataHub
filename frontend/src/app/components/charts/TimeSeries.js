@@ -87,7 +87,7 @@ const TimeSeries = ({values, minYear}) => {
                 <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:${item.color};margin-right:5px;"></span>
                 ${item.seriesName}: 
               </span>
-              <span style="text-align: right;">&nbsp;$${formatNumber(item.value)}</span>
+              <span style="text-align: right;">&nbsp;$${formatNumber(item.data[1])}</span>
             </div>`;
         });
         tooltipContent += `</div>`;
@@ -161,7 +161,7 @@ const TimeSeries = ({values, minYear}) => {
         name: 'Predicted Values',
         type: 'line',
         datasetIndex: 1,
-        color: 'red', // Set the color of the regression line here
+        color: 'red', // regression line color
         lineStyle: {
           type: 'dashed'
         },

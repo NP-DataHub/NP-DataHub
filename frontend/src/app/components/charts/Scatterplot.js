@@ -3,13 +3,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { useRouter } from 'next/navigation';
+import { color } from 'd3';
 
 /** 
  * @param data - a list of nonprofits that have been filtered by the user. This data is used to create the scatter plot
  * @param filters - the filters that are used to filter the data. These are used to label the data on the graph
  * @param X_axis_var - the variable that is used for the x-axis of the scatter plot
  * @param Y_axis_var - the variable that is used for the y-axis of the scatter plot
- * @param minYear - the minimum year for the data that we are graphing. This is used to determine the x-axis
  * 
  * @Overview Creates a scatter plot using the given variables, where they function as filters for the total data that we have
  *           Each NTEE code is a different color on the scatter plot
@@ -175,7 +175,12 @@ const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters}) => {
                 brush: {
                     type: ['rect', 'polygon', 'clear']
                 }
-            }
+            },
+            // itemSize: 30,
+            // itemGap: 10,
+            // iconStyle: {
+            //   color: '#FFFFFF' //Set the color the be white
+            // }
         },
         brush: {},
         legend: {
@@ -192,16 +197,13 @@ const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters}) => {
           scale: true,
           name: X_axis_label,
           nameTextStyle: {
-              color: '#FFFFFF' // Set x-axis name text color to white
+              color: '#FFFFFF', // Set x-axis name text color to white
+              fontSize: 20
           },
           axisLabel: {
               formatter: '{value}',
-              color: '#FFFFFF' // Set x-axis label text color to white
-          },
-          axisLine: {
-              lineStyle: {
-                  color: '#FFFFFF' // Set x-axis line color to white
-              }
+              color: '#FFFFFF', // Set x-axis label text color to white
+              backgroundColor: 'transparent'
           },
           splitLine: {
               show: false
@@ -212,16 +214,13 @@ const ScatterPlot = ({data, X_axis_var,  Y_axis_var, filters}) => {
           scale: true,
           name: Y_axis_label,
           nameTextStyle: {
-              color: '#FFFFFF' // Set y-axis name text color to white
+              color: '#FFFFFF', // Set y-axis name text color to white
+              fontSize: 20,
           },
           axisLabel: {
               formatter: '{value}',
-              color: '#FFFFFF' // Set y-axis label text color to white
-          },
-          axisLine: {
-              lineStyle: {
-                  color: '#FFFFFF' // Set y-axis line color to white
-              }
+              color: '#FFFFFF', // Set y-axis label text color to white
+
           },
           splitLine: {
               show: false
