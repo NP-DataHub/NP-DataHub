@@ -23,7 +23,7 @@ import Footer from "@/app/components/dashboard_footer";
 const Nonprofit = () => {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id)
+  console.log("ID: ",id)
   const [nonprofitData, setNonprofitData] = useState(null);
   const [sectorData, setSectorData] = useState(null);
 
@@ -36,7 +36,7 @@ const Nonprofit = () => {
     { value: 'TotLia', label: 'Liabilities' },
   ];
   const getValuesForMetric = (metric) => {
-    console.log(metric)
+    console.log("Metric: ", metric)
     if (metric == 'Total Revenue') {
       metric = 'TotRev'
     }
@@ -66,7 +66,7 @@ const Nonprofit = () => {
         sectorResponse = await sectorResponse.json();
         let sectorData = sectorResponse.data[0]
         setSectorData(sectorData);
-        console.log(sectorData);
+        console.log("Sector Data: ", sectorData);
       };
 
       fetchNonprofitData();
@@ -319,7 +319,7 @@ const Nonprofit = () => {
                     options={metricOptions}
                     value={metricOptions.find(option => option.value === selectedMetric)}
                     onChange={(option) => setSelectedMetric(option.value)}
-                    className="text-black text-sm"
+                    className="text-black text-md"
                     styles={customStyles}
                   />
                 </div>
@@ -348,14 +348,14 @@ const Nonprofit = () => {
                       options={metricOptions}
                       value={metricOptions.find(option => option.value === selectedComparison.variable1)}
                       onChange={(option) => setSelectedComparison(prev => ({ ...prev, variable1: option.value }))}
-                      className="text-black text-sm"
+                      className="text-black text-md"
                       styles={customStyles}
                     />
                     <Select
                       options={metricOptions}
                       value={metricOptions.find(option => option.value === selectedComparison.variable2)}
                       onChange={(option) => setSelectedComparison(prev => ({ ...prev, variable2: option.value }))}
-                      className="text-black text-sm"
+                      className="text-black text-md"
                       styles={customStyles}
                     />
                   </div>
