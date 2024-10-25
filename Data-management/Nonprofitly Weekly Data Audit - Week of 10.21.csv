@@ -1,0 +1,39 @@
+"Brett (liabilities for the years 2018, 2019, 2021 for the following nonprofits)",,,,,Data Checks Out (Y/N),Report Issue
+University Of Vermont Medical Center Inc,,,,,,
+The University Of Vermont Health Network Medical Group Inc,,,,,,
+Central Vermont Medical Center Inc Hcsr,,,,,,
+Southern Vermont Medical Center Inc,,,,,,
+Northeastern Vermont Regional Hospital Inc,,,,,,
+,,,,,,
+,,,,,,
+"Emmet (revenues for the years 2019, 2020, 2022 for the following nonprofits)",,,,,Data Checks Out (Y/N),Report Issue
+Rhode Island Hospital,,,,,Y,year shift
+Neighborhood Health Plan Of Rhode Island,,,,,Y,year shift
+Women & Infants Hospital Of Rhode Island,,,,,Y,"Name is shortened to ""WOMEN & INFANTS HOSPITAL OF RI"" in out database"
+Rhode Island School Of Design,,,,,Y,year shift
+The Rhode Island Community Foundation,,,,,Y,year shift
+,,,,,,
+,,,,,,
+"Cal (assets for the years 2018, 2020, 2022 for the following nonprofits)",,,,,Data Checks Out (Y/N),Report Issue
+Massachusetts Institute Of Technology,,,,,Y,shifted down by 1
+Dental Service Of Massachusetts Inc,,,,,Y,
+Massachusetts Laborers Health And Welfare Fund,,,,,Y,
+Massachusetts Medical Society,,,,,Y,shifted down by 1
+Massachusetts Society For The Prevention Of Cruelty To Animals,,,,,Y,
+,,,,,,
+,,,,,,
+"Youssef (revenues for the years 2019, 2020, 2021 for the following nonprofits)",,,,,Data Checks Out (Y/N),Report Issue
+Hospital Of Central Connecticut At New Britain General,,,,,y,shifted down by 1. name in DB is The Hospital of Central Connecticut
+Connecticut Childrens Medical Center,,,,,y,shifted down by 1
+Connecticut College,,,,,y,shifted down by 1
+Connecticut Childrens Specialty Group Inc,,,,,y,shifted down by 1
+Connecticut Foodshare Inc,,,,,y,"shifted down by 1 and name in db is CONNECTICUT FOOD BANK INC
+"
+,,,,,,
+,,,,,,
+"Kai (expenses for the years 2019, 2020, 2021 for the following nonprofits)",,,,,Data Checks Out (Y/N),Report Issue
+Eastern Maine Healthcare Systems — Eastern Maine Medical Center,,,,,,
+Maine Education Association Benefits Trust — Geraway J Mccormack Ttee,,,,,,
+Central Maine Medical Center,,,,,,
+Eastern Maine Healthcare Systems — Northern Light Health,,,,,,
+Maine Community Health Options,,,,,,
