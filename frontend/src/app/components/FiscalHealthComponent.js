@@ -158,6 +158,7 @@ export default function FiscalHealthSection() {
     }
   };
 
+  console.log(nonprofitData)
   const SearchLoadingComponent = () => (
     <div className="flex items-center justify-center h-full w-full">
         <svg className="animate-spin h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -170,12 +171,27 @@ export default function FiscalHealthSection() {
   return (
     <div className="p-6 bg-[#171821] rounded-lg">
       <h3 className="text-xl font-semibold text-[#FEB95A]">Fiscal Health</h3>
-      <p className="text-white pb-12">
+      <p className="text-white ">
         Assess a nonprofit’s fiscal health by calculating a weighted score based on various financial data variables, 
         including increases or decreases in revenues, expenses, assets, and liabilities. 
         This score can be compared side-by-side with other nonprofits or evaluated against organizations within the same or different sectors, 
         offering a comprehensive analysis of fiscal health across key financial metrics.
       </p>
+    {/* How-To-Use Section */}
+    <div className="mt-6 pb-12">
+      <h4 className="text-xl font-semibold text-white">How to Use</h4>
+      <ul className="list-disc ml-6 text-white mt-2">
+        <li>
+          For a single nonprofit, this score can be compared side-by-side with another nonprofit.
+        </li>
+        <li className="mt-2">
+          Alternatively, the score can be evaluated against organizations within the same or different sectors (using the
+          median for the entire NTEE state- and national-based sectors), offering a comprehensive analysis of fiscal health
+          across key financial metrics.
+        </li>
+      </ul>
+    </div>
+
 
       <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2  border-[#2C2D33]">
         <h1 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Fiscal Health Tool</h1>
@@ -316,59 +332,98 @@ export default function FiscalHealthSection() {
 
         {loading && <div className="text-center text-lg text-gray-400 mt-6"><SearchLoadingComponent/></div>}
         {error && <div className="text-center text-lg text-red-400 mt-6">Error: {error}</div>}
-
+        
         {nonprofitData && !loading && !error && (
           <div className="mt-8 text-white">
-            {!selectedSectorForResults && !npVSnp && (
-              <div className="flex justify-center">
-                <div className="flex flex-col items-center">
-                  <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
-                    {nonprofitData[0][0].toFixed(1)}
-                  </div>
-                  <p className="mt-4">Fiscal Health Score </p>
+          {!selectedSectorForResults && !npVSnp && (
+            <div className="flex justify-center">
+              <div className="flex flex-col items-center">
+                <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                  {nonprofitData[0][0].toFixed(1)}
+                </div>
+                <p className="mt-4">Fiscal Health Score</p>
+                <div className="mt-2 text-sm text-gray-400 text-center">
+                  Years:
+                  <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
+                    {nonprofitData[0][1].sort((a, b) => a - b).map((year, index) => (
+                      <li key={index}>{year}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            {npVSnp && (
-              <div className="flex flex-row justify-between">
-                <div className="flex flex-col items-center w-1/2">
-                  <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
-                    {nonprofitData[0][0].toFixed(1)}
-                  </div>
-                  <p className="mt-4">Fiscal Health Score </p>
-                </div>
-                <div className="flex flex-col items-center w-1/2">
-                  <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
-                    {nonprofitData[1][0].toFixed(1)}
-                  </div>
-                  <p className="mt-4">Fiscal Health Score </p>
-                </div>
-              </div>
-            )}
 
-            {selectedSectorForResults && !npVSnp && (
-              <div className="flex flex-row justify-between mb-6">
-                <div className="flex flex-col items-center w-1/3">
-                  <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
-                    {nonprofitData[0][0].toFixed(1)}
-                  </div>
-                  <p className="mt-4">Fiscal Health Score </p>
+          {npVSnp && (
+            <div className="flex flex-row justify-between">
+              {/* First Nonprofit */}
+              <div className="flex flex-col items-center w-1/2">
+                <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                  {nonprofitData[0][0].toFixed(1)}
                 </div>
-                <div className="flex flex-col items-center w-1/3">
-                  <div className="bg-blue-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
-                    {nonprofitData[1][0].toFixed(1)}
-                  </div>
-                  <p className="mt-4">Regional Score</p>
-                </div>
-                <div className="flex flex-col items-center w-1/3">
-                  <div className="bg-orange-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
-                    {nonprofitData[1][1].toFixed(1)}
-                  </div>
-                  <p className="mt-4">National Score</p>
+                <p className="mt-4">Nonprofit No. 1 Score</p>
+                <div className="mt-2 text-sm text-gray-400 text-center">
+                  Years:
+                  <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
+                      {nonprofitData[0][1].sort((a, b) => a - b).map((year, index) => (
+                        <li key={index}>{year}</li>
+                      ))}
+                    </ul>
                 </div>
               </div>
-            )}
+
+              {/* Second Nonprofit */}
+              <div className="flex flex-col items-center w-1/2">
+                <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                  {nonprofitData[1][0].toFixed(1)}
+                </div>
+                <p className="mt-4">Nonprofit No. 2 Score</p>
+                <div className="mt-2 text-sm text-gray-400 text-center">
+                  Years:
+                  <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
+                    {nonprofitData[1][1].sort((a, b) => a - b).map((year, index) => (
+                      <li key={index}>{year}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
+
+          {selectedSectorForResults && !npVSnp && (
+            <div className="flex flex-row justify-between mb-6">
+              <div className="flex flex-col items-center w-1/3">
+                <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                  {nonprofitData[0][0].toFixed(1)}
+                </div>
+                <p className="mt-4">Fiscal Health Score</p>
+              </div>
+
+              <div className="flex flex-col items-center w-1/3">
+                <div className="bg-blue-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                  {nonprofitData[1][0].toFixed(1)}
+                </div>
+                <p className="mt-4">Regional Score</p>
+                <div className="mt-2 text-sm text-gray-400 text-center">
+                  Years:
+                  <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
+                    {nonprofitData[0][1].sort((a, b) => a - b).map((year, index) => (
+                      <li key={index}>{year}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center w-1/3">
+                <div className="bg-orange-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                  {nonprofitData[1][1].toFixed(1)}
+                </div>
+                <p className="mt-4">National Score</p>
+              </div>
+            </div>
+          )}
           </div>
         )}
       </div>

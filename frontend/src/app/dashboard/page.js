@@ -299,7 +299,7 @@ export default function Dashboard() {
         );
     };
 
-    const getNteeSuggestionValue = suggestion => suggestion.code;
+    const getNteeSuggestionValue = suggestion => `${suggestion.code} - ${suggestion.description}`;
 
     const renderNteeSuggestion = suggestion => (
         <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
@@ -316,13 +316,13 @@ export default function Dashboard() {
     };
     
     const onNteeChange = (event, { newValue }) => {
-        setNteeCode(newValue);
+        const code = newValue.split(' - ')[0]; // Get the NTEE code part
+        setNteeCode(code);
     };
-    
 
     const NteeInputProps = {
         placeholder: 'Enter Major Group',
-        value: nteeCode,
+        value:  nteeCode ? `${nteeCode} - ${ntee_codes[nteeCode] || ''}` : '',
         onChange: onNteeChange,
         className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
     };
@@ -637,7 +637,7 @@ export default function Dashboard() {
                                             getSuggestionValue={getNameSuggestionValue}
                                             renderSuggestion={renderNameSuggestion}
                                             inputProps={{
-                                                placeholder: 'Search for Nonprofit',
+                                                placeholder: 'Search for Nonprofit (Optional)',
                                                 value: firstNp,
                                                 onChange: (_, { newValue }) => setFirstNp(newValue),
                                                 className: 'mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]',
