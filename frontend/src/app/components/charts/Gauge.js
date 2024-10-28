@@ -46,7 +46,7 @@ const Gauge = ({ orgName, selectedMetric, nonprofitData, sectorData, mostRecentY
     return lines.join('\n')+'\n';
   };
 
-  const formattedOrgName = splitText(orgName, 30);
+  const formattedOrgName = splitText(orgName, 20);
   const formattedStateName = splitText(`${stateName} Median`, 30);
 
   // Get the maximum value to normalize the gauge
