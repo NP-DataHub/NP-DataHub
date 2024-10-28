@@ -174,8 +174,6 @@ export default function FiscalHealthSection() {
       <p className="text-white ">
         Assess a nonprofit’s fiscal health by calculating a weighted score based on various financial data variables, 
         including increases or decreases in revenues, expenses, assets, and liabilities. 
-        This score can be compared side-by-side with other nonprofits or evaluated against organizations within the same or different sectors, 
-        offering a comprehensive analysis of fiscal health across key financial metrics.
       </p>
     {/* How-To-Use Section */}
     <div className="mt-6 pb-12">
