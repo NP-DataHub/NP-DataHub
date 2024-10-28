@@ -324,13 +324,12 @@ const SPIN = () => {
     }, [selectedXAxis, selectedYAxis]);
 
     return (
-    <div className="flex flex-col dashboard-color text-white font-sans h-screen w-screen overflow-auto">
-        <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10 mx-10">
+        <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10 mx-10 mb-12">
 
             <div className="mb-4 p-4 bg-[#171821] text-white rounded-lg">
                 <h2 className="text-xl font-semibold mb-2">Overview</h2>
                 <p className="text-base text-[#A0A0A0] mb-6">
-                    A scatter plot's purpose is to visually display and statistically test the relationship between two variables, identify relationships, test theories, analyze data, 
+                    A scatter plot&apos;s purpose is to visually display and statistically test the relationship between two variables, identify relationships, test theories, analyze data, 
                     and find natural fiscal collaborators across a single or multiple NTEE codes within a certain geographical area. 
                     Given that more grantmakers -- private and government -- are requiring multiple nonprofits to partner to find solutions 
                     to more interwoven and complex societal problems, the tool helps identify which nonprofits in a select region are more fiscally 
@@ -474,11 +473,10 @@ const SPIN = () => {
                         <ScatterPlot data={sectorData.data} X_axis_var={selectedXAxis.value} Y_axis_var={selectedYAxis.value} filters={sectorFilters} />
                     </div>
                 ) : (
-                    <div>Loading ScatterPlot...</div>
+                    <div className = "text-center mt-4 "> Enter Selection To Load</div>
                 )}
             </div>
         </div>
-    </div>
     );
 };
 

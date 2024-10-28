@@ -138,7 +138,7 @@ export default function NewsFeedSection() {
                 </div>
               ))
             ) : (
-              <p className="text-gray-500 text-center">No news articles found for "{searchQuery}".</p>
+              <p className="text-gray-500 text-center">No news articles found for &quot;{searchQuery}&quot;.</p>
             )}
           </div>
         )}
