@@ -395,7 +395,7 @@ const Nonprofit = () => {
 
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10 mb-10">
               <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 col-span-3">
-                <h1 className="text-center text-xl font-bold">Revenue By State</h1>
+                <h1 className="text-center text-xl font-bold">Year-Over-Year Revenues & Predictive Analysis</h1>
                 <div className="flex items-center justify-center mb-24 mt-12" style={{ width: '100%', height: '100%' }}>
                   <TimeSeries values={revenues} minYear={minYear} />
                 </div>

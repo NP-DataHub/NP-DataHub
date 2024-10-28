@@ -362,7 +362,7 @@ export default function FiscalHealthSection() {
                 <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
                   {nonprofitData[0][0].toFixed(1)}
                 </div>
-                <p className="mt-4">Nonprofit No. 1 Score</p>
+                <p className="mt-4 text-center">{firstNp}<br></br>Fiscal Health Score</p>
                 <div className="mt-2 text-sm text-gray-400 text-center">
                   Years:
                   <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
@@ -378,7 +378,7 @@ export default function FiscalHealthSection() {
                 <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
                   {nonprofitData[1][0].toFixed(1)}
                 </div>
-                <p className="mt-4">Nonprofit No. 2 Score</p>
+                  <p className="mt-4 text-center">{secondNp}<br></br>Fiscal Health Score</p>
                 <div className="mt-2 text-sm text-gray-400 text-center">
                   Years:
                   <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
