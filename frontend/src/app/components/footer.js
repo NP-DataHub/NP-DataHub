@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaInfoCircle, FaQuestionCircle, FaTags, FaWrench } from 'react-icons/fa';
+import { FaInfoCircle, FaQuestionCircle, FaTags, FaWrench, FaCheckCircle } from 'react-icons/fa';
+import emailjs from 'emailjs-com';
 
 const Footer = () => {
   const router = useRouter();
   const [isModalOpen, setModalOpen] = useState(false);
   const [isToolModalOpen, setToolModalOpen] = useState(false);
+  const [isSuccess, setSuccess] = useState(false);
 
   const navigateTo = (path) => {
     router.push(path);
@@ -28,16 +30,32 @@ const Footer = () => {
     setToolModalOpen(false);
   };
 
+  const sendEmail = (e, templateId) => {
+    e.preventDefault();
+    emailjs
+      .sendForm('service_mkrobk5', templateId, e.target, 'm66VYLm_g93hibrW8')
+      .then((result) => {
+        console.log('Email sent successfully:', result.text);
+        setSuccess(true);
+        e.target.reset(); // Reset the form after submission
+        setTimeout(() => {
+          setSuccess(false);
+          isModalOpen ? closeModal() : closeToolModal();
+        }, 2000); // Show success message for 2 seconds, then close modal
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error.text);
+      });
+  };
+
   return (
     <>
       <footer className="dashboard-color text-white w-full py-6 border-t-2 border-[#2C2D33] px-10 ">
         <div className="w-full flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          {/* Footer Text */}
           <span className="text-white text-sm md:text-base">
             &copy; 2024 Seven Point Labs
           </span>
 
-          {/* Footer Links */}
           <div className="flex space-x-8">
             <button
               onClick={() => navigateTo('/about')}
@@ -67,18 +85,28 @@ const Footer = () => {
         </div>
       </footer>
 
+      {/* Success Notification */}
+      {isSuccess && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-[#21222D] p-6 rounded-md shadow-lg text-white text-center">
+            <FaCheckCircle className="text-green-500 text-4xl mb-4" />
+            <p className="text-lg font-semibold">Email sent successfully!</p>
+          </div>
+        </div>
+      )}
+
       {/* Modal for NTEE Code Suggestion */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-[#21222D] w-full max-w-lg p-8 rounded-md shadow-lg relative text-white">
             <h2 className="text-2xl font-bold mb-4">NTEE Code Suggestion</h2>
 
-            <form action="mailto:recs@nonprofitly.co" method="post" encType="text/plain" className="space-y-4">
+            <form onSubmit={(e) => sendEmail(e, 'template_r6c8hvi')} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium">Your Name</label>
                 <input
                   type="text"
-                  name="name"
+                  name="from_name" // Updated to match EmailJS template
                   className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
                   required
                 />
@@ -88,7 +116,7 @@ const Footer = () => {
                 <label className="block text-sm font-medium">Organization</label>
                 <input
                   type="text"
-                  name="organization"
+                  name="organization" // Updated to match EmailJS template
                   className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
                   required
                 />
@@ -98,7 +126,7 @@ const Footer = () => {
                 <label className="block text-sm font-medium">Email Address</label>
                 <input
                   type="email"
-                  name="email"
+                  name="email" // Updated to match EmailJS template
                   className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
                   required
                 />
@@ -107,7 +135,7 @@ const Footer = () => {
               <div>
                 <label className="block text-sm font-medium">Brief Description of the Correct or New NTEE Code</label>
                 <textarea
-                  name="description"
+                  name="message" // Updated to match EmailJS template
                   rows="4"
                   className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
                   required
@@ -140,12 +168,12 @@ const Footer = () => {
           <div className="bg-[#21222D] w-full max-w-lg p-8 rounded-md shadow-lg relative text-white">
             <h2 className="text-2xl font-bold mb-4">Tool Suggestion</h2>
 
-            <form action="mailto:recs@nonprofitly.co" method="post" encType="text/plain" className="space-y-4">
+            <form onSubmit={(e) => sendEmail(e, 'template_r6c8hvi')} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium">Your Name</label>
                 <input
                   type="text"
-                  name="name"
+                  name="from_name" // Updated to match EmailJS template
                   className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
                   required
                 />
@@ -155,7 +183,7 @@ const Footer = () => {
                 <label className="block text-sm font-medium">Organization</label>
                 <input
                   type="text"
-                  name="organization"
+                  name="organization" // Updated to match EmailJS template
                   className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
                   required
                 />
@@ -165,7 +193,7 @@ const Footer = () => {
                 <label className="block text-sm font-medium">Email Address</label>
                 <input
                   type="email"
-                  name="email"
+                  name="email" // Updated to match EmailJS template
                   className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
                   required
                 />
@@ -174,7 +202,7 @@ const Footer = () => {
               <div>
                 <label className="block text-sm font-medium">Brief Description of the Digital Tool, Purpose, and Problem It Solves</label>
                 <textarea
-                  name="description"
+                  name="message" // Updated to match EmailJS template
                   rows="4"
                   className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
                   required
