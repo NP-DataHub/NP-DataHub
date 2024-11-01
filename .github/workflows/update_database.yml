@@ -44,8 +44,13 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git add Data-management/zip_files_processed.txt
         git add Data-management/errorOutputs/*
-        git commit -m "Update zip_files_processed.txt and error outputs after running db_update_runner.py"
-        git push
+        # Check if there are changes to commit
+        if git diff-index --quiet HEAD; then
+          echo "No changes to commit."
+        else
+          git commit -m "Update zip_files_processed.txt and error outputs after running db_update_runner.py"
+          git push
+        fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
