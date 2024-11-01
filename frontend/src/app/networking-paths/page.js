@@ -25,7 +25,7 @@ export default function NetworksPaths() {  // Component name updated to start wi
         <div>
             <div className="dashboard-color text-white">
                 {/* Sidebar will be hidden if isLoading is true */}
-                <Sidebar onUserDataLoaded={handleUserDataLoaded} currentPage="/dashboard" />
+                <Sidebar onUserDataLoaded={handleUserDataLoaded} currentPage="/networking-paths" />
 
                 {/* Show a loading spinner for the main content until user data is loaded */}
                 {isLoading ? (

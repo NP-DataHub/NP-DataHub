@@ -185,7 +185,7 @@ const Sidebar = ({ currentPage, onUserDataLoaded }) => {
 
             <span className="mt-0">Profile</span>
           </a>
-
+{/* 
           <a
             href="#"
             className="text-[#e7e7ea] text-md font-semibold flex items-center space-x-3 px-1 py-2 hover:bg-[#353637] rounded-md"
@@ -209,10 +209,10 @@ const Sidebar = ({ currentPage, onUserDataLoaded }) => {
                 stroke-width="1.2"
                 stroke-linejoin="round"
               />
-            </svg>
+            </svg> */}
 
-            <span className="mt-0">Settings</span>
-          </a>
+            {/* <span className="mt-0">Settings</span> */}
+          {/* </a> */}
 
           <a
             href="#"

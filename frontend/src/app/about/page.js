@@ -2,80 +2,50 @@
 import Navbar from "../components/Navbar";
 import Footer from '../components/footer';
 
-const teamMembers = [
+const aboutContent = [
   {
-    name: "Brett Orzechowski",
-    imgSrc: "/img/prof.png",
-    linkedIn: "https://www.linkedin.com/in/brettorzechowski/"
-  },
-
-  {
-    name: "Macallan Ringstad",
-    imgSrc: "/img/macallan.png",
-    linkedIn: "https://www.linkedin.com/in/macallan-ringstad-404298251/"
+    title: "ABOUT",
+    content: "More than a decade ago, Nonprofitly co-founder Brett Orzechowski entered the world of mission-driven organizations and philanthropies and although he saw the best and worst of humanity trying to solve societal issues, he recognized that a silo effect had formed geographically and systemically. \n\nIn short, there was no connective tissue that allowed nonprofits to work collaboratively both in terms of mission and most of all, in terms of resources.\n\nEnter data.\n\nRecognizing the power of data and now the reliance on 0s and 1s in decision making, the idea of one centralized digital platform that allows nonprofits, philanthropies, and government to analyze and follow the same path, seemed more relevant than ever. There are other meaningful resources that share nonprofit public data and documents, however, deeper and more valuable insights beyond static information now seem essential rather than supplementary to help resource-dependent organizations and grantmakers alike make stronger data-driven decisions to serve the people that matter the most -- their constituencies."
   },
   {
-    name: "Youssef Hassan",
-    imgSrc: "/img/youssef.png",
-    linkedIn: "https://www.linkedin.com/in/youssef-hassan-79ba36236/"
+    title: "OUR MISSION",
+    content: "Our mission at Nonprofitly is to empower nonprofits, philanthropies, governments, and donors by providing data-driven insights and tools for better decision-making. We believe in leveraging technology to foster transparency, accountability, and innovation in the nonprofit sector, ultimately creating stronger ecosystems that benefit communities worldwide."
   },
   {
-    name: "Emmet Whitehead",
-    imgSrc: "/img/emmet.png",
-    linkedIn: "https://en.wikipedia.org/wiki/John_Smith_(explorer)"
+    title: "THE TEAM",
+    content: "The team – composed of Rensselaer Polytechnic Institute graduates and undergraduates – has now evolved into what you see with Nonprofitly.\n\nAnd they're open to ideas."
   },
   {
-    name: "Kai Chen",
-    imgSrc: "/img/kai.png",
-    linkedIn: "https://www.linkedin.com/in/kaichen543/"
+    title: "SUBSCRIPTION",
+    content: "The nominal annual subscription fee is set at a level that allows all nonprofits -- big and small -- to explore public datasets, but also allows all mission-driven individuals to find those meaningful insights mostly in their backyard. Place-based problems still exist and the work carried out by these organizations can be more nuanced and efficient across a number of sectors. The tools created by the team allow these groups to dig deeper across historical data, which also is the engine that drives machine-learning algorithms which you'll find within the platform."
   },
   {
-    name: "Yotham Sage",
-    imgSrc: "/img/yotham.jpg",
-    linkedIn: "https://www.linkedin.com/in/yothamsage"
+    title: "OUR VISION",
+    content: "Behind the subscription and the foundational tools developed for the platform's launch, users can make recommendations on tool development, followed by an assessment by the developer team. The guiding philosophy is that if data and increasingly more sophisticated technology can solve a problem for one nonprofit or philanthropy, it will have the potential to help others across the country. The emphasis is on geography and sector, and combined, data can create more in-roads into helping others.\n\nThis drives mission-driven work, and in turn, Nonprofitly."
   }
 ];
-
-const missionStatement = "Our mission at Nonprofitly is to empower nonprofits, philanthropies, governments, and donors by providing data-driven insights and tools for better decision-making. We believe in leveraging technology to foster transparency, accountability, and innovation in the nonprofit sector, ultimately creating stronger ecosystems that benefit communities worldwide.";
 
 export default function About() {
   return (
     <div className="overflow-auto h-screen">
       <Navbar />
-      
       <section className="bg-[#171821] text-white px-6 md:px-12 font-serif py-12">
-        {/* Who Are We? Section */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-5xl font-bold">Who Are We?</h1>
+          <h1 className="text-3xl md:text-5xl font-bold">About Us</h1>
           <div className="flex justify-center mt-4">
             <div className="w-24 md:w-96 rounded-full h-1 bg-white"></div>
           </div>
         </div>
-
-        {/* Team Members Section */}
-        <div className="max-w-8xl grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 gap-y-8 md:gap-0 md:gap-y-10 mt-12 bg-[#21222D] p-20 rounded-lg even-shadow" >
-          {teamMembers.map((member, index) => (
-            <div key={index} className="flex flex-col text-center">
-              <a href={member.linkedIn} target="_blank" rel="noopener noreferrer">
-                <img 
-                  draggable={false}
-                  src={member.imgSrc} 
-                  alt={`Image of ${member.name}`} 
-                  className="w-80 h-80 mx-auto  border-gray-900 rounded-lg even-shadow profile"
-                />
-              </a>
-              <h3 className="text-xl md:text-2xl mt-4">{member.name}</h3>
+        
+        <div className="max-w-6xl mx-auto">
+          {aboutContent.map((section, index) => (
+            <div key={index} className="mb-8">
+              <h2 className="text-xl md:text-3xl font-bold mb-4">{section.title}</h2>
+              <p className="text-md md:text-lg">{section.content}</p>
             </div>
           ))}
         </div>
-
-        {/* Mission Statement Section */}
-        <div className="mt-12 text-center max-w-4xl mx-auto px-4 py-8 ">
-          <h2 className="text-2xl md:text-4xl font-bold mb-4">Our Mission</h2>
-          <p className="text-lg md:text-xl">{missionStatement}</p>
-        </div>
       </section>
-
       <Footer />
     </div>
   );
