@@ -7,7 +7,7 @@ import Autosuggest from 'react-autosuggest';
 import cities from "../components/cities";
 import ntee_codes from "../components/ntee";
 import { useRouter } from 'next/navigation';
-import Footer from '../components/dashboard_footer'
+import Footer from '../components/dashboard_footer';
 
 export default function Dashboard() {
     const [firstNp, setFirstNp] = useState('');
@@ -111,7 +111,7 @@ export default function Dashboard() {
         } catch (error) {
           console.error("Error fetching suggestions:", error);
         }
-      };
+    };
 
     const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
     const renderNameSuggestion = (suggestion) => (
