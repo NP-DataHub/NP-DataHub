@@ -47,55 +47,116 @@ async function getNonProfitData(nameofnonprofit, Addr) {
   }
 }
 
-async function getEntireSectorData(major_group, national, state, year) {
+async function getEntireSectorData(majorGroup, national, state) {
   const uri = process.env.MONGODB_URI;
   const client = new MongoClient(uri);
-
+  
   try {
     await client.connect();
     const database = client.db('Nonprofitly');
-    const collection = database.collection('NonProfitData');
+    const data = await database
+      .collection('NationalAndStateStatistics')
+      .findOne({ MajGrp: majorGroup });
+    
+    if (!data) {
+      console.error('Error: No data found in NationalAndStateStatistics collection.');
+      return -1;
+    }
+
+    const years = []
+    for (let key of Object.keys(data)) {
+      if (!isNaN(key)) {
+        years.push(Number(key))
+      }
+    }
+    years.sort((a, b) => b - a)
+    let chosen_year = NaN;
 
     if (national) {
-      const pipeline = [
-        {
-          $match: {
-            MajGrp: major_group,
-            RetTyp: "990"
+      for (let i = 0; i < years.length; i += 2) {
+        if (i + 1 < years.length) {
+          const year1 = years[i];
+          const year2 = years[i + 1];
+
+          if (data[year1].NatCount990Np && !data[year2].NatCount990Np) {
+            chosen_year = year1;
+            break;
+          } else if (!data[year1].NatCount990Np && data[year2].NatCount990Np) {
+            chosen_year = year2;
+            break;
+          } else if (data[year1].NatCount990Np && data[year2].NatCount990Np) {
+            chosen_year = (data[year2].NatCount990Np - data[year1].NatCount990Np > 5000) ? year2 : year1;
+            break;
           }
-        },
-        {
-          $group: {
-            _id: null,
-            TotalRevenue: { $sum: `$${year}.TotRev` },
-            TotalExpenses: { $sum: `$${year}.TotExp` },
-            TotalAssets: { $sum: `$${year}.TotAst` },
-            TotalLiabilities: { $sum: `$${year}.TotLia` },
-            NumEmployees: { $sum: `$${year}.NumEmp` },
-            OtherSalaries: { $sum: `$${year}.OthSal` },
-            OfficerCompensation: { $sum: `$${year}.OffComp` }
+        } else {
+          const last_year = years[i];
+          if (data[last_year].NatCount990Np) {
+            chosen_year = last_year
           }
         }
-      ];
+      }
+    } else {
+        for (let i = 0; i < years.length; i += 2) {
+          const year1 = years[i];
+          const year2 = years[i + 1];
+          
+          if (i + 1 < years.length) {
+            const hasYear1State = data[year1][state];
+            const hasYear2State = data[year2][state];
+            
+            if (hasYear1State && data[year1][state].Count990Np && (!hasYear2State || !data[year2][state].Count990Np)) {
+              chosen_year = year1;
+              break;
+            } else if ( (!hasYear1State || !data[year1][state].Count990Np) && hasYear2State && data[year2][state].Count990Np) {
+              chosen_year = year2;
+              break;
+            } else if (hasYear1State && data[year1][state].Count990Np && hasYear2State && data[year2][state].Count990Np) {
+              chosen_year = (data[year2][state].Count990Np - data[year1][state].Count990Np > 500) ? year2 : year1;
+              break;
+            }
+          } else {
+            const last_year = years[i];
+            const hasLastYearState = data[last_year][state];
+            
+            if (hasLastYearState && data[last_year][state].Count990Np) {
+              chosen_year = last_year;
+            }
+          }
+        }
 
-      const result = await collection.aggregate(pipeline).toArray();
-      const data = result[0]; // Assuming there's only one result
-
-      // Access the calculated values from the data object
-      const TotalRevenue = data.TotalRevenue;
-      const TotalExpenses = data.TotalExpenses;
-      const TotalAssets = data.TotalAssets;
-      const TotalLiabilities = data.TotalLiabilities;
-      const NumEmployees = data.NumEmployees;
-      const OtherSalaries = data.OtherSalaries;
-      const OfficerCompensation = data.OfficerCompensation;
-
-      // Use the calculated values as needed
-      console.log("Total Revenue:", TotalRevenue);
-      // ... and so on for other variables
     }
+
+    if (isNaN(chosen_year)) {
+      console.error('Error: No data found.');
+      return -1;
+    }
+
+    const selectedData = national ? data[chosen_year] : data[chosen_year][state];
+
+    const TotalRevenue = selectedData?.NatSumRev || selectedData?.SumRev;
+    const TotalExpenses = selectedData?.NatSumExp || selectedData?.SumExp;
+    const TotalAssets = selectedData?.NatSumAst || selectedData?.SumAst;
+    const TotalLiabilities = selectedData?.NatSumLia || selectedData?.SumLia;
+    const NumEmployees = selectedData?.NatSumEmp || selectedData?.SumEmp;
+    const OtherSalaries = selectedData?.NatSumOthSal || selectedData?.SumOthSal;
+    const OfficerCompensation = selectedData?.NatSumOffComp || selectedData?.SumOffComp;
+    const result = 100 * (TotalExpenses / (OfficerCompensation + OtherSalaries));
+    console.log(`Sector National Result: ${result}`);
+    return [
+      chosen_year,
+      TotalRevenue,
+      TotalExpenses,
+      TotalAssets,
+      TotalLiabilities,
+      NumEmployees,
+      OtherSalaries,
+      OfficerCompensation,
+      result
+    ];
+
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error connecting to database or fetching data:', error);
+    return -1;
   } finally {
     await client.close();
   }
@@ -117,7 +178,7 @@ async function getEntireSectorData(major_group, national, state, year) {
     console.log('No data available for this nonprofit.');
   }
 
-  const ntee = getEntireSectorData("Z", true, "", "2022")
+  const ntee = await getEntireSectorData("Z", true, "")
 }
 
 main().then(console.log).catch(console.error);
