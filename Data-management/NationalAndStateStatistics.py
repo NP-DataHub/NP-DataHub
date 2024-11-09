@@ -31,6 +31,26 @@ class NationalAndStateStatistics:
         for field, data in row.items():
             if field.isdigit():
                 tax_year = field
+
+                tot_rev = data.get("TotRev")
+                tot_exp = data.get("TotExp")
+                tot_ast = data.get("TotAst")
+                tot_lia = data.get("TotLia")
+                num_emp = data.get("NumEmp")
+                oth_sal = data.get("OthSal")
+                off_comp = data.get("OffComp")
+
+                master_complete_financials = (
+                    row['RetTyp'] == "990" and
+                    tot_rev != 0 and
+                    tot_exp != 0 and
+                    tot_ast != 0 and
+                    tot_lia != 0 and
+                    num_emp != 0 and
+                    oth_sal != 0 and
+                    off_comp != 0
+                )
+
                 if tax_year not in self.table[major_group]:
                     self.table[major_group][tax_year] = {
                         "NatAvgRev": [],
@@ -42,6 +62,17 @@ class NationalAndStateStatistics:
                         "NatMedLia": [],
                         "NatMedAst": []
                     }
+
+                    if master_complete_financials:
+                        self.table[major_group][tax_year].update({
+                            "NatSumRev": 0,
+                            "NatSumExp": 0,
+                            "NatSumLia": 0,
+                            "NatSumAst": 0,
+                            "NatSumEmp": 0,
+                            "NatSumOthSal": 0,
+                            "NatSumOffComp": 0
+                        })
 
                 state = row["St"]
                 if state not in self.table[major_group][tax_year]:
@@ -55,16 +86,54 @@ class NationalAndStateStatistics:
                         "LiaMed": [],
                         "AstMed": []
                     }
-                self.table[major_group][tax_year]["NatAvgRev"].append(data.get("TotRev"))
-                self.table[major_group][tax_year]["NatAvgExp"].append(data.get("TotExp"))
-                self.table[major_group][tax_year]["NatAvgLia"].append(data.get("TotLia"))
-                self.table[major_group][tax_year]["NatAvgAst"].append(data.get("TotAst"))
-                self.table[major_group][tax_year][state]["RevAvg"].append(data.get("TotRev"))
-                self.table[major_group][tax_year][state]["ExpAvg"].append(data.get("TotExp"))
-                self.table[major_group][tax_year][state]["LiaAvg"].append(data.get("TotLia"))
-                self.table[major_group][tax_year][state]["AstAvg"].append(data.get("TotAst"))
 
-    def get_averages_and_medians(self, major_group, year, data):
+                    if master_complete_financials:
+                        self.table[major_group][tax_year][state].update({
+                            "SumRev": 0,
+                            "SumExp": 0,
+                            "SumLia": 0,
+                            "SumAst": 0,
+                            "SumEmp": 0,
+                            "SumOthSal": 0,
+                            "SumOffComp": 0
+                        })
+
+                self.table[major_group][tax_year]["NatAvgRev"].append(tot_rev)
+                self.table[major_group][tax_year]["NatAvgExp"].append(tot_exp)
+                self.table[major_group][tax_year]["NatAvgLia"].append(tot_lia)
+                self.table[major_group][tax_year]["NatAvgAst"].append(tot_ast)
+                self.table[major_group][tax_year][state]["RevAvg"].append(tot_rev)
+                self.table[major_group][tax_year][state]["ExpAvg"].append(tot_exp)
+                self.table[major_group][tax_year][state]["LiaAvg"].append(tot_lia)
+                self.table[major_group][tax_year][state]["AstAvg"].append(tot_ast)
+
+                if master_complete_financials:
+                    self.table[major_group][tax_year]["NatSumRev"] += tot_rev
+                    self.table[major_group][tax_year]["NatSumExp"] += tot_exp
+                    self.table[major_group][tax_year]["NatSumLia"] += tot_lia
+                    self.table[major_group][tax_year]["NatSumAst"] += tot_ast
+                    self.table[major_group][tax_year]["NatSumEmp"] += num_emp
+                    self.table[major_group][tax_year]["NatSumOthSal"] += oth_sal
+                    self.table[major_group][tax_year]["NatSumOffComp"] += off_comp
+                    
+                    self.table[major_group][tax_year][state]["SumRev"] += tot_rev
+                    self.table[major_group][tax_year][state]["SumExp"] += tot_exp
+                    self.table[major_group][tax_year][state]["SumLia"] += tot_lia
+                    self.table[major_group][tax_year][state]["SumAst"] += tot_ast
+                    self.table[major_group][tax_year][state]["SumEmp"] += num_emp
+                    self.table[major_group][tax_year][state]["SumOthSal"] += oth_sal
+                    self.table[major_group][tax_year][state]["SumOffComp"] += off_comp
+
+                    with self.lock: # append is thread safe, updating a value is not
+                        if "NatCount990Np" not in self.table[major_group][tax_year]:
+                            self.table[major_group][tax_year]["NatCount990Np"] = 0
+                        self.table[major_group][tax_year]["NatCount990Np"] += 1
+
+                        if "StCount990Np" not in self.table[major_group][tax_year][state]:
+                            self.table[major_group][tax_year][state]["StCount990Np"] = 0
+                        self.table[major_group][tax_year][state]["StCount990Np"] += 1
+
+    def get_averages_and_medians(self, major_group, data):
         national_revenue_data = data["NatAvgRev"]
         national_expenses_data = data["NatAvgExp"]
         national_liabilities_data = data["NatAvgLia"]
@@ -102,7 +171,7 @@ class NationalAndStateStatistics:
             futures = []
             for major_group, _ in self.table.items():
                 for year, data in _.items():
-                    futures.append(executor.submit(self.get_averages_and_medians, major_group, year, data))
+                    futures.append(executor.submit(self.get_averages_and_medians, major_group, data))
             
             for future in futures:
                 future.result()
