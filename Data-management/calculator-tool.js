@@ -47,6 +47,60 @@ async function getNonProfitData(nameofnonprofit, Addr) {
   }
 }
 
+async function getEntireSectorData(major_group, national, state, year) {
+  const uri = process.env.MONGODB_URI;
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+    const database = client.db('Nonprofitly');
+    const collection = database.collection('NonProfitData');
+
+    if (national) {
+      const pipeline = [
+        {
+          $match: {
+            MajGrp: major_group,
+            RetTyp: "990"
+          }
+        },
+        {
+          $group: {
+            _id: null,
+            TotalRevenue: { $sum: `$${year}.TotRev` },
+            TotalExpenses: { $sum: `$${year}.TotExp` },
+            TotalAssets: { $sum: `$${year}.TotAst` },
+            TotalLiabilities: { $sum: `$${year}.TotLia` },
+            NumEmployees: { $sum: `$${year}.NumEmp` },
+            OtherSalaries: { $sum: `$${year}.OthSal` },
+            OfficerCompensation: { $sum: `$${year}.OffComp` }
+          }
+        }
+      ];
+
+      const result = await collection.aggregate(pipeline).toArray();
+      const data = result[0]; // Assuming there's only one result
+
+      // Access the calculated values from the data object
+      const TotalRevenue = data.TotalRevenue;
+      const TotalExpenses = data.TotalExpenses;
+      const TotalAssets = data.TotalAssets;
+      const TotalLiabilities = data.TotalLiabilities;
+      const NumEmployees = data.NumEmployees;
+      const OtherSalaries = data.OtherSalaries;
+      const OfficerCompensation = data.OfficerCompensation;
+
+      // Use the calculated values as needed
+      console.log("Total Revenue:", TotalRevenue);
+      // ... and so on for other variables
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    await client.close();
+  }
+}
+
  async function main() {
   const nameofnonprofit = "AMERICAN LEGION POST 5 BOURQUE-LANIGAN";
   const Addr = "120 DRUMMOND AVENUE SUITE 3";
@@ -62,6 +116,8 @@ async function getNonProfitData(nameofnonprofit, Addr) {
   } else {
     console.log('No data available for this nonprofit.');
   }
+
+  const ntee = getEntireSectorData("Z", true, "", "2022")
 }
 
 main().then(console.log).catch(console.error);
