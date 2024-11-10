@@ -29,7 +29,7 @@ async function getNonProfitData(nameofnonprofit, Addr) {
     }
     years.sort((a, b) => b - a); // first index == most recent
 
-    const chosenYear = years[5]; // Replace with actual user choice if needed
+    const chosenYear = years[0]; // Replace with actual user choice if needed
 
     const yearData = npData[chosenYear];
     if (!yearData || yearData.OthSal === 0 || yearData.OffComp === 0 || yearData.TotExp === 0) {
@@ -37,8 +37,8 @@ async function getNonProfitData(nameofnonprofit, Addr) {
       return -1;
     }
 
-    const result = 100 * (yearData.TotExp / (yearData.OffComp + yearData.OthSal));
-    return [chosenYear, yearData.OthSal, yearData.OffComp, yearData.TotExp, result];
+    const salariesToExpensesPct = 100 * (yearData.TotExp / (yearData.OffComp + yearData.OthSal));
+    return [chosenYear, yearData.OthSal, yearData.OffComp, yearData.TotExp, salariesToExpensesPct];
 
   } catch (error) {
     console.error('Error:', error);
@@ -145,8 +145,8 @@ async function getEntireSectorData(majorGroup, national, state) {
     const NumEmployees = national ? selectedData.NatSumEmp : selectedData.SumEmp;
     const OtherSalaries = national ? selectedData.NatSumOthSal : selectedData.SumOthSal;
     const OfficerCompensation = national ? selectedData.NatSumOffComp : selectedData.SumOffComp;
-    const result = 100 * (TotalExpenses / (OfficerCompensation + OtherSalaries));
-    console.log(`Sector National Result: ${result}`);
+    const salariesToExpensesPct = 100 * (TotalExpenses / (OfficerCompensation + OtherSalaries));
+    console.log(`Sector Result: ${salariesToExpensesPct}`);
     return [
       chosen_year,
       TotalRevenue,
@@ -156,7 +156,7 @@ async function getEntireSectorData(majorGroup, national, state) {
       NumEmployees,
       OtherSalaries,
       OfficerCompensation,
-      result
+      salariesToExpensesPct
     ];
 
   } catch (error) {
@@ -173,17 +173,17 @@ async function getEntireSectorData(majorGroup, national, state) {
   const ret = await getNonProfitData(nameofnonprofit, Addr);
 
   if (ret !== -1) {
-    const [year, othSal, offComp, totExp, result] = ret;
+    const [year, othSal, offComp, totExp, salariesToExpensesPct] = ret;
     console.log(`Year: ${year}`);
     console.log(`Other Salary: ${othSal}`);
     console.log(`Officer Compensation: ${offComp}`);
     console.log(`Total Expenses: ${totExp}`);
-    console.log(`Result: ${result}`);
+    console.log(`Result: ${salariesToExpensesPct}`);
   } else {
     console.log('No data available for this nonprofit.');
   }
 
-  const ntee = await getEntireSectorData("Z", true, "")
+  const ntee = await getEntireSectorData("E", false, "NY")
 }
 
 main().then(console.log).catch(console.error);
