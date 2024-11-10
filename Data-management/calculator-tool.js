@@ -132,14 +132,19 @@ async function getEntireSectorData(majorGroup, national, state) {
     }
 
     const selectedData = national ? data[chosen_year] : data[chosen_year][state];
+    // Another check for safety
+    if (!selectedData) {
+      console.error('Error: No data found.');
+      return -1;
+    }
 
-    const TotalRevenue = selectedData?.NatSumRev || selectedData?.SumRev;
-    const TotalExpenses = selectedData?.NatSumExp || selectedData?.SumExp;
-    const TotalAssets = selectedData?.NatSumAst || selectedData?.SumAst;
-    const TotalLiabilities = selectedData?.NatSumLia || selectedData?.SumLia;
-    const NumEmployees = selectedData?.NatSumEmp || selectedData?.SumEmp;
-    const OtherSalaries = selectedData?.NatSumOthSal || selectedData?.SumOthSal;
-    const OfficerCompensation = selectedData?.NatSumOffComp || selectedData?.SumOffComp;
+    const TotalRevenue = national ? selectedData.NatSumRev : selectedData.SumRev;
+    const TotalExpenses = national ? selectedData.NatSumExp : selectedData.SumExp;
+    const TotalAssets = national ? selectedData.NatSumAst : selectedData.SumAst;
+    const TotalLiabilities = national ? selectedData.NatSumLia : selectedData.SumLia;
+    const NumEmployees = national ? selectedData.NatSumEmp : selectedData.SumEmp;
+    const OtherSalaries = national ? selectedData.NatSumOthSal : selectedData.SumOthSal;
+    const OfficerCompensation = national ? selectedData.NatSumOffComp : selectedData.SumOffComp;
     const result = 100 * (TotalExpenses / (OfficerCompensation + OtherSalaries));
     console.log(`Sector National Result: ${result}`);
     return [
