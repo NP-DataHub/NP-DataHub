@@ -52,7 +52,6 @@ const BudgetForm = () => {
             onChange={handleChange}
             className="w-1/4 border-b-2 border-[#A9DFD8] bg-transparent text-[#A9DFD8] focus:outline-none"
             aria-label="What is the grant or project budget?"
-            style={{ MozAppearance: 'textfield' }}
           />
         </div>
         <div className="flex items-center justify-between">
@@ -79,7 +78,6 @@ const BudgetForm = () => {
             onChange={handleChange}
             className="w-1/4 border-b-2 border-[#A9DFD8] bg-transparent text-[#A9DFD8] focus:outline-none"
             aria-label="How many clients/constituents will benefit from the grant or project total?"
-            style={{ MozAppearance: 'textfield' }}
           />
         </div>
         <div className="flex items-center justify-between">
