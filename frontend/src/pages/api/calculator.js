@@ -3,22 +3,22 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default async function handler(req, res) {
-  const { mode, nameofnonprofit, Addr, majorGroup, national, state } = req.body;
-
+  const { mode, nonprofit, address, sector, state } = req.body;
+  console.log(req.body)
+  const client = new MongoClient(process.env.MONGODB_URI);
   try {
-    const client = new MongoClient(process.env.MONGODB_URI);
     await client.connect();
     const db = client.db('Nonprofitly');
 
     if (mode === "Micro") {
-      const npData = await getNonProfitData(db, nameofnonprofit, Addr);
+      const npData = await getNonProfitData(db, nonprofit, address);
       if (npData === -1) {
         return res.status(404).json({ message: "No data is provided for selected non profit" });
       }
       return res.status(200).json(npData);
     }
     else {
-      const sectorData = await getEntireSectorData(db, majorGroup, national, state);
+      const sectorData = await getEntireSectorData(db, sector, state);
       if (sectorData === -1) {
         return res.status(404).json({ message: "Sector data not found" });
       }
@@ -32,13 +32,13 @@ export default async function handler(req, res) {
   }
 }
 
-async function getNonProfitData(db, nameofnonprofit, Addr) {
+async function getNonProfitData(db, nonprofit, address) {
   const filters = {};
-  if (nameofnonprofit) {
+  if (nonprofit) {
     filters.Nm = { $regex: new RegExp(`^${Np.trim()}$`, 'i') };
   }
-  if (Addr) {
-    filters.Addr = { $regex: new RegExp(`^${Addr.trim()}$`, 'i') };
+  if (address) {
+    filters.address = { $regex: new RegExp(`^${address.trim()}$`, 'i') };
   }
 
   const npData = await db.collection('NonProfitData').findOne(filters);
@@ -68,8 +68,8 @@ async function getNonProfitData(db, nameofnonprofit, Addr) {
   return [chosenYear, yearData.OthSal, yearData.OffComp, yearData.TotExp, salariesToExpensesPct];
 } 
 
-async function getEntireSectorData(db, majorGroup, national, state) {
-  const data = await db.collection('NationalAndStateStatistics').findOne({ MajGrp: majorGroup });
+async function getEntireSectorData(db, sector, state) {
+  const data = await db.collection('NationalAndStateStatistics').findOne({ MajGrp: sector });
   if (!data) {
     return -1;
   }
@@ -81,6 +81,30 @@ async function getEntireSectorData(db, majorGroup, national, state) {
   }
   years.sort((a, b) => b - a)
   let chosen_year = NaN;
+
+  const national = state === '' ? true : false;
+
+  const stateToCode = {
+    'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR',
+    'California': 'CA', 'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE',
+    'Florida': 'FL', 'Georgia': 'GA', 'Hawaii': 'HI', 'Idaho': 'ID',
+    'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA', 'Kansas': 'KS',
+    'Kentucky': 'KY', 'Louisiana': 'LA', 'Maine': 'ME', 'Maryland': 'MD',
+    'Massachusetts': 'MA', 'Michigan': 'MI', 'Minnesota': 'MN', 'Mississippi': 'MS',
+    'Missouri': 'MO', 'Montana': 'MT', 'Nebraska': 'NE', 'Nevada': 'NV',
+    'New Hampshire': 'NH', 'New Jersey': 'NJ', 'New Mexico': 'NM', 'New York': 'NY',
+    'North Carolina': 'NC', 'North Dakota': 'ND', 'Ohio': 'OH', 'Oklahoma': 'OK',
+    'Oregon': 'OR', 'Pennsylvania': 'PA', 'Rhode Island': 'RI', 'South Carolina': 'SC',
+    'South Dakota': 'SD', 'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT',
+    'Vermont': 'VT', 'Virginia': 'VA', 'Washington': 'WA', 'West Virginia': 'WV',
+    'Wisconsin': 'WI', 'Wyoming': 'WY'
+  };
+
+  const stateCode = stateToCode[state];
+  if (!stateCode && !national) {
+    return -1
+  }
+
   if (national) {
     for (let i = 0; i < years.length; i += 2) {
       if (i + 1 < years.length) {
@@ -110,24 +134,24 @@ async function getEntireSectorData(db, majorGroup, national, state) {
         const year2 = years[i + 1];
         
         if (i + 1 < years.length) {
-          const hasYear1State = data[year1][state];
-          const hasYear2State = data[year2][state];
+          const hasYear1State = data[year1][stateCode];
+          const hasYear2State = data[year2][stateCode];
           
-          if (hasYear1State && data[year1][state].Count990Np && (!hasYear2State || !data[year2][state].Count990Np)) {
+          if (hasYear1State && data[year1][stateCode].Count990Np && (!hasYear2State || !data[year2][stateCode].Count990Np)) {
             chosen_year = year1;
             break;
-          } else if ( (!hasYear1State || !data[year1][state].Count990Np) && hasYear2State && data[year2][state].Count990Np) {
+          } else if ( (!hasYear1State || !data[year1][stateCode].Count990Np) && hasYear2State && data[year2][stateCode].Count990Np) {
             chosen_year = year2;
             break;
-          } else if (hasYear1State && data[year1][state].Count990Np && hasYear2State && data[year2][state].Count990Np) {
-            chosen_year = (data[year2][state].Count990Np - data[year1][state].Count990Np > 500) ? year2 : year1;
+          } else if (hasYear1State && data[year1][stateCode].Count990Np && hasYear2State && data[year2][stateCode].Count990Np) {
+            chosen_year = (data[year2][stateCode].Count990Np - data[year1][stateCode].Count990Np > 500) ? year2 : year1;
             break;
           }
         } else {
           const last_year = years[i];
-          const hasLastYearState = data[last_year][state];
+          const hasLastYearState = data[last_year][stateCode];
           
-          if (hasLastYearState && data[last_year][state].Count990Np) {
+          if (hasLastYearState && data[last_year][stateCode].Count990Np) {
             chosen_year = last_year;
           }
         }
@@ -137,7 +161,7 @@ async function getEntireSectorData(db, majorGroup, national, state) {
   if (isNaN(chosen_year)) {
     return -1;
   }
-  const selectedData = national ? data[chosen_year] : data[chosen_year][state];
+  const selectedData = national ? data[chosen_year] : data[chosen_year][stateCode];
   // Another check for safety
   if (!selectedData) {
     return -1;

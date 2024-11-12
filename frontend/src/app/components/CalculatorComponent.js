@@ -12,9 +12,9 @@ export default function CalculatorSection() {
   const [nonprofit, setNonprofit] = useState('');
   const [address, setAddress] = useState('');
   const [sector, setSector] = useState('');
-  const [national, setNational] = useState('');
   const [state, setState] = useState('');
   const [macroData, setMacroData] = useState(null);
+
   const [errorMacro, setErrorMacro] = useState(null);
   const [loadingMacro, setLoadingMacro] = useState(false);
 
@@ -52,83 +52,17 @@ export default function CalculatorSection() {
     { value: 'Y', label: 'Y - Mutual/Membership Benefit Organizations, Other' },
     { value: 'Z', label: 'Z - Unknown' },
   ];
-  const states = [
-      { name: 'Alabama', code: 'AL' },
-      { name: 'Alaska', code: 'AK' },
-      { name: 'Arizona', code: 'AZ' },
-      { name: 'Arkansas', code: 'AR' },
-      { name: 'California', code: 'CA' },
-      { name: 'Colorado', code: 'CO' },
-      { name: 'Connecticut', code: 'CT' },
-      { name: 'Delaware', code: 'DE' },
-      { name: 'Florida', code: 'FL' },
-      { name: 'Georgia', code: 'GA' },
-      { name: 'Hawaii', code: 'HI' },
-      { name: 'Idaho', code: 'ID' },
-      { name: 'Illinois', code: 'IL' },
-      { name: 'Indiana', code: 'IN' },
-      { name: 'Iowa', code: 'IA' },
-      { name: 'Kansas', code: 'KS' },
-      { name: 'Kentucky', code: 'KY' },
-      { name: 'Louisiana', code: 'LA' },
-      { name: 'Maine', code: 'ME' },
-      { name: 'Maryland', code: 'MD' },
-      { name: 'Massachusetts', code: 'MA' },
-      { name: 'Michigan', code: 'MI' },
-      { name: 'Minnesota', code: 'MN' },
-      { name: 'Mississippi', code: 'MS' },
-      { name: 'Missouri', code: 'MO' },
-      { name: 'Montana', code: 'MT' },
-      { name: 'Nebraska', code: 'NE' },
-      { name: 'Nevada', code: 'NV' },
-      { name: 'New Hampshire', code: 'NH' },
-      { name: 'New Jersey', code: 'NJ' },
-      { name: 'New Mexico', code: 'NM' },
-      { name: 'New York', code: 'NY' },
-      { name: 'North Carolina', code: 'NC' },
-      { name: 'North Dakota', code: 'ND' },
-      { name: 'Ohio', code: 'OH' },
-      { name: 'Oklahoma', code: 'OK' },
-      { name: 'Oregon', code: 'OR' },
-      { name: 'Pennsylvania', code: 'PA' },
-      { name: 'Rhode Island', code: 'RI' },
-      { name: 'South Carolina', code: 'SC' },
-      { name: 'South Dakota', code: 'SD' },
-      { name: 'Tennessee', code: 'TN' },
-      { name: 'Texas', code: 'TX' },
-      { name: 'Utah', code: 'UT' },
-      { name: 'Vermont', code: 'VT' },
-      { name: 'Virginia', code: 'VA' },
-      { name: 'Washington', code: 'WA' },
-      { name: 'West Virginia', code: 'WV' },
-      { name: 'Wisconsin', code: 'WI' },
-      { name: 'Wyoming', code: 'WY' }
-  ];
-
-  // Fetch function for Macro mode
-  const fetchMacroData = async () => {
-    setLoadingMacro(true);
-    setErrorMacro(null);
-    setMacroData(null);
-
-    try {
-      const response = await fetch('/api/calculator', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mode, nonprofit, address, sector, national, state }),
-      });
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Error fetching data');
-      }
-      setMacroData(data);
-    } catch (err) {
-      setErrorMacro(err.message);
-    } finally {
-      setLoadingMacro(false);
-    }
-  };
+const states = [
+    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+    'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
+    'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
+    'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
+    'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio',
+    'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',
+    'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia',
+    'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+];
 
 
   const handleChange = (e) => {
@@ -157,16 +91,15 @@ export default function CalculatorSection() {
 
   // Helper functions for State field
   const getStateSuggestions = value => {
-        const inputValue = value.trim().toLowerCase();
-        const inputLength = inputValue.length;
-        return inputLength === 0
-            ? []
-            : states.filter(
-                state =>
-                    state.name.toLowerCase().slice(0, inputLength) === inputValue
-            );
-    };
-  const getStateSuggestionValue = suggestion => suggestion.name;
+      const inputValue = value.trim().toLowerCase();
+      const inputLength = inputValue.length;
+      return inputLength === 0
+          ? []
+          : states.filter(state =>
+              state.toLowerCase().slice(0, inputLength) === inputValue
+          );
+  };
+  const getStateSuggestionValue = suggestion => suggestion;
   const onStateSuggestionsFetchRequested = ({ value }) => {
         setStateSuggestions(getStateSuggestions(value));
   };
@@ -174,6 +107,41 @@ export default function CalculatorSection() {
       setStateSuggestions([]);
   };
 
+  // Fetch function for Macro mode
+  const fetchMacroData = async () => {
+    setLoadingMacro(true);
+    setErrorMacro(null);
+    setMacroData(null);
+
+    try {
+      const response = await fetch('/api/calculator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mode, nonprofit, address, sector, state }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Error fetching data');
+      }
+      setMacroData(data);
+    } catch (err) {
+      setErrorMacro(err.message);
+    } finally {
+      setLoadingMacro(false);
+    }
+  };
+  const isFetchDisabled = () => {
+    return !sector; // Disable if sector is not provided
+  };
+  const SearchLoadingComponent = () => (
+    <div className="flex items-center justify-center h-full w-full">
+        <svg className="animate-spin h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+    </div>
+);
 
   return (
     <div className="p-6 bg-[#171821] rounded-lg">
@@ -195,7 +163,10 @@ export default function CalculatorSection() {
         <div className="flex flex-col gap-6">
           <select
             value={sector}
-            onChange={(e) => setSector(e.target.value)}
+            onChange={(e) => {
+                setSector(e.target.value);
+                setMode("Macro");
+            }}
             className="p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white"
           >
             {majorGroups.map((group) => (
@@ -211,7 +182,7 @@ export default function CalculatorSection() {
             getSuggestionValue={getStateSuggestionValue}
             renderSuggestion={(suggestion) => (
                 <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
-                    {suggestion.name}
+                    {suggestion}
                 </div>
             )}
             inputProps={{
@@ -230,7 +201,80 @@ export default function CalculatorSection() {
               suggestionHighlighted: 'autosuggest-suggestion--highlighted',
             }}
         />
+        <button
+          onClick={fetchMacroData}
+          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchDisabled() ? 'bg-gray-700 text-black cursor-not-allowed' : 'bg-[#A9DFD8] text-black hover:bg-[#88B3AE] transition duration-300'}`}
+          disabled={isFetchDisabled()}
+        >
+          Calculate
+        </button>
         </div>
+
+        {loadingMacro && <div className="text-center text-lg text-gray-400 mt-6"><SearchLoadingComponent/></div>}
+        {errorMacro && <div className="text-center text-lg text-red-400 mt-6">Error: {errorMacro}</div>}
+        
+      {macroData && !loadingMacro && !errorMacro && (
+        <div className="mt-8 text-white">
+          <div className="flex justify-center flex-wrap gap-8 align-items-start">
+            {/* First Row */}
+            <div className="flex justify-center gap-8 w-full">
+              {[macroData[1], macroData[2], macroData[3], macroData[4]].map((value, index) => {
+                // Format large values with abbreviations
+                const formattedValue = value >= 1e9 ? `${(value / 1e9).toFixed(1)}B` :
+                                      value >= 1e6 ? `${(value / 1e6).toFixed(1)}M` :
+                                      value >= 1e3 ? `${(value / 1e3).toFixed(1)}K` :
+                                      Math.round(value).toLocaleString();
+                const fontSizeClass = formattedValue.length > 6 ? 'text-sm' : 'text-xl';
+                return (
+                  <div key={index} className="flex flex-col items-center">
+                    <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
+                      <span className={fontSizeClass}>
+                        ${formattedValue}
+                      </span>
+                    </div>
+                    <p className="mt-4 text-sm">
+                      {["REVENUES", "EXPENSES", "ASSETS", "LIABILITIES"][index]}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+            {/* Second Row */}
+            <div className="flex justify-center gap-8 w-full mt-8">
+              {[macroData[5], macroData[6], macroData[7], macroData[8]].map((value, index) => {
+                // Format large values with abbreviations and ensure percentages are displayed with one decimal place
+                const formattedValue = index === 3 ? `${value.toFixed(1)}%` : 
+                                      value >= 1e9 ? `${(value / 1e9).toFixed(1)}B` :
+                                      value >= 1e6 ? `${(value / 1e6).toFixed(1)}M` :
+                                      value >= 1e3 ? `${(value / 1e3).toFixed(1)}K` :
+                                      Math.round(value).toLocaleString();
+
+                // Determine font size based on the formatted value length
+                const fontSizeClass = formattedValue.length > 6 ? 'text-sm' : 'text-xl';
+
+                return (
+                  <div key={index + 4} className="flex flex-col items-center">
+                    <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
+                      <span className={fontSizeClass}>
+                        {index === 0 ? formattedValue : `$${formattedValue}`}
+                      </span>
+                    </div>
+                    <p className="mt-4 text-sm text-center">
+                      {index === 1 ? <>SALARIES<br />AND<br />WAGES</> : 
+                        index === 2 ? <>OFFICERS<br />COMPENSATION</> : 
+                        index === 3 ? <>PCT. OF SALARIES<br />v.<br />EXPENSES</> : 
+                        "EMPLOYEES"}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="mt-6 text-center text-gray-400">
+            Data calculated from following year: {macroData[0]}
+          </div>
+        </div>
+      )}
       </div>
 
       <h6 className="text font-semibold text-white mt-4">COST PER CLIENT/CONSTITUENT FOR GRANT OR PROJECT</h6>
