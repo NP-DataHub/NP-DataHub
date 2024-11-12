@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { useRouter } from 'next/navigation';
-import { color } from 'd3';
+
 
 /** 
  * @param data - a list of nonprofits that have been filtered by the user. This data is used to create the scatter plot
@@ -45,9 +45,9 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters }) => {
   };
 
   const formatNumber = (num) => {
-    if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
-    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    if (Math.abs(num) >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
+    if (Math.abs(num) >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (Math.abs(num) >= 1000) return (num / 1000).toFixed(1) + 'K';
     return num;
   };
 
@@ -121,10 +121,10 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters }) => {
       },
     },
     grid: {
-      left: 0,
-      bottom: 0.036 * dimensions.width,
-      right: 0,
-      top: 0.01 * dimensions.width,
+      left: '2%',
+      bottom: '2%',
+      right: '10%',
+      top: '8%',
       containLabel: true,
     },
     toolbox: {
@@ -144,19 +144,29 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters }) => {
       type: 'value',
       scale: true,
       name: X_axis_label,
-      nameTextStyle: { color: '#FFFFFF' },
-      axisLabel: { formatter: '{value}', color: '#FFFFFF' },
+      nameTextStyle: { color: '#FFFFFF', fontSize: 20 },
+
       axisLine: { lineStyle: { color: '#FFFFFF' } },
       splitLine: { show: false },
+      axisLabel: { 
+        formatter: (value) => formatNumber(value), // Format axis values
+        color: '#FFFFFF',
+        fontSize: 16 // Increased font size
+      }
     },
     yAxis: {
       type: 'value',
       scale: true,
       name: Y_axis_label,
-      nameTextStyle: { color: '#FFFFFF' },
-      axisLabel: { formatter: '{value}', color: '#FFFFFF' },
+      nameTextStyle: { color: '#FFFFFF', fontSize: 20 },
+
       axisLine: { lineStyle: { color: '#FFFFFF' } },
       splitLine: { show: false },
+      axisLabel: { 
+        formatter: (value) => formatNumber(value), // Format axis values
+        color: '#FFFFFF',
+        fontSize: 16 // Increased font size
+      }
     },
     series: Object.keys(scatter_data).map((key, index) => ({
       name: key,
