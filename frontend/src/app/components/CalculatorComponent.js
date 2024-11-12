@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
+import { FaInfoCircle } from "react-icons/fa";
+import { Tooltip as ReactTooltip } from 'react-tooltip'
 
 export default function CalculatorSection() {
-  const [formData, setFormData] = useState({
-    budget: '',
-    remaining: '',
-    beneficiaries: '',
-    costPerClient: ''
-  });
+
   const [mode, setMode] = useState('');
   const [nonprofit, setNonprofit] = useState('');
   const [address, setAddress] = useState('');
@@ -29,6 +26,13 @@ export default function CalculatorSection() {
   const [lastFetchedNameInput, setLastFetchedNameInput] = useState('');
   const [lastFetchedAddressInput, setLastFetchedAddressInput] = useState('');
 
+  // BudgetForm
+  const [formData, setFormData] = useState({
+    budget: '',
+    remaining: '',
+    beneficiaries: '',
+    costPerClient: ''
+  });
 
   const majorGroups = [
     { value: '', label: 'Select a Sector' },
@@ -70,31 +74,6 @@ const states = [
     'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia',
     'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
 ];
-
-
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-
-    // Allow only numbers
-    if (/^\d*$/.test(value)) {
-      setFormData((prevData) => {
-        let updatedData = { ...prevData, [id]: value };
-
-        // Calculate "remaining" when budget is updated
-        if (id === 'budget') {
-          updatedData.remaining = value ? String(Number(value) * 2) : '';
-        }
-
-        // Calculate "costPerClient" when beneficiaries is updated
-        if (id === 'beneficiaries') {
-          updatedData.costPerClient = value ? String(Number(value) * 2) : '';
-        }
-
-        return updatedData;
-      });
-    }
-  };
-
 
   // Fetch function for Macro mode
   const fetchMacroData = async () => {
@@ -205,7 +184,7 @@ const states = [
       console.error("Error fetching suggestions:", error);
     }
   };
-  // Autosuggest configuration
+
   const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
   const getAddressSuggestionValue = (suggestion) => suggestion.Addr || '';
 
@@ -220,6 +199,42 @@ const states = [
     setAddressSuggestions([]);
   };
 
+  // helper function for budget form
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    // Allow only numbers
+    if (/^\d*$/.test(value)) {
+      setFormData((prevData) => {
+        let updatedData = { ...prevData, [id]: value };
+        const formatNumber = (num) => {
+          return new Intl.NumberFormat().format(num);
+        };
+        // Calculate "remaining" when budget is updated
+        if (id === 'budget' && !isFetchMicroDisabled()) {
+          updatedData.remaining = value
+            ? `$${formatNumber((Number(microData[3]) * Number(value)).toFixed(1))}`
+            : '';
+        }
+        // Calculate "costPerClient" when budget or remaining is updated
+        if ((id === 'budget' || id === 'remaining') && !isFetchMicroDisabled()) {
+          const remainingAmount = parseFloat(updatedData.remaining.replace('$', '').replace(/,/g, '')) || 0;
+          if (remainingAmount && formData.beneficiaries) {
+            updatedData.costPerClient = `$${formatNumber((remainingAmount / Number(formData.beneficiaries)).toFixed(1))}`;
+          } else {
+            updatedData.costPerClient = ''; // Reset if no beneficiaries
+          }
+        }
+        // Calculate "costPerClient" when beneficiaries is updated
+        if (id === 'beneficiaries' && !isFetchMicroDisabled() && formData.remaining) {
+          const remainingAmount = parseFloat(formData.remaining.replace('$', '').replace(/,/g, '')) || 0;
+          updatedData.costPerClient = value
+            ? `$${formatNumber((remainingAmount / Number(value)).toFixed(1))}`
+            : '';
+        }
+        return updatedData;
+      });
+    }
+  };
 
   return (
     <div className="p-6 bg-[#171821] rounded-lg">
@@ -470,7 +485,18 @@ const states = [
             </div>
           </div>
         )}
-      <h6 className="text font-semibold text-white mt-4">COST PER CLIENT/CONSTITUENT FOR GRANT OR PROJECT</h6>
+
+      <h6 className="text font-semibold text-white mt-4 inline-flex items-center">
+        COST PER CLIENT/CONSTITUENT FOR GRANT OR PROJECT
+        <a
+          data-tooltip-id="comparison-tooltip"
+          className="ml-2 cursor-pointer text-gray-400 hover:text-gray-200"
+          data-tooltip-content="Please select a non-profit organization above first."
+        >
+          <FaInfoCircle />
+        </a>
+        <ReactTooltip place="right" effect="solid" id="comparison-tooltip" />
+      </h6>
       <form className="w-full max-md:max-w-full mt-4 space-y-4">
         <div className="flex items-center justify-between">
           <label htmlFor="budget" className="text-[#A9DFD8] mr-4 w-3/4">What is the grant or project budget? (ex. $50,000)</label>
@@ -482,8 +508,10 @@ const states = [
             name="budget"
             value={formData.budget}
             onChange={handleChange}
-            className="w-1/4 border-b-2 border-[#A9DFD8] bg-transparent text-[#A9DFD8] focus:outline-none"
+            className={`w-1/4 border-b-2 border-[#A9DFD8] bg-transparent text-[#A9DFD8] focus:outline-none ${isFetchMicroDisabled() ? 'cursor-not-allowed bg-gray-700 text-black' : 'hover:bg transition duration-300'}`}
             aria-label="What is the grant or project budget?"
+            autoComplete="off"
+            disabled={isFetchMicroDisabled()}
           />
         </div>
         <div className="flex items-center justify-between">
@@ -508,8 +536,10 @@ const states = [
             name="beneficiaries"
             value={formData.beneficiaries}
             onChange={handleChange}
-            className="w-1/4 border-b-2 border-[#A9DFD8] bg-transparent text-[#A9DFD8] focus:outline-none"
+            className={`w-1/4 border-b-2 border-[#A9DFD8] bg-transparent text-[#A9DFD8] focus:outline-none ${isFetchMicroDisabled() ? 'cursor-not-allowed bg-gray-700 text-black' : 'hover:bg transition duration-300'}`}
             aria-label="How many clients/constituents will benefit from the grant or project total?"
+            autoComplete="off"
+            disabled={isFetchMicroDisabled()}
           />
         </div>
         <div className="flex items-center justify-between">
