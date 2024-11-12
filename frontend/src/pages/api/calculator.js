@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 async function getNonProfitData(db, nonprofit, address) {
   const filters = {};
   if (nonprofit) {
-    filters.Nm = { $regex: new RegExp(`^${Np.trim()}$`, 'i') };
+    filters.Nm = { $regex: new RegExp(`^${nonprofit.trim()}$`, 'i') };
   }
   if (address) {
     filters.Addr = { $regex: new RegExp(`^${address.trim()}$`, 'i') };
@@ -63,7 +63,7 @@ async function getNonProfitData(db, nonprofit, address) {
     return -1;
   }
   const salariesToExpensesPct = 100 * (yearData.TotExp / (yearData.OffComp + yearData.OthSal));
-  return [chosenYear, yearData.OthSal, yearData.OffComp, yearData.TotExp, salariesToExpensesPct];
+  return [chosenYear, yearData.OthSal, yearData.OffComp, salariesToExpensesPct];
 } 
 
 async function getEntireSectorData(db, sector, state) {
