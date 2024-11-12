@@ -10,6 +10,7 @@ import ntee_codes from "../components/ntee";
 import { useRouter } from 'next/navigation';
 import NewsFeedSection from "../components/newsfeed";
 import FiscalHealthSection from "../components/FiscalHealthComponent";
+import COLAB from "../components/COLAB";
 import Footer from "../components/dashboard_footer";
 
 import dynamic from 'next/dynamic';
@@ -519,114 +520,7 @@ export default function Toolbox() {
                                 </div>
                             )}
                             {selectedSection === "Co:Lab" && (
-                                <div className="p-6 bg-[#171821] rounded-lg">
-                                <h3 className="text-xl font-semibold text-[#F2C8ED]">
-                                    CO : LAB TOOL
-                                </h3>
-                                <p className="text-white">
-                                    Search and compare nonprofits from other sectors in your backyard that may be strong partners.
-                                </p>
-                                <div className="grid grid-cols-2 gap-4 mb-6 mt-4">
-                                    <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                    SEARCH FOR A NONPROFIT
-                                                </button>
-                                                <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                    SEARCH BY ZIPCODE
-                                    </button>
-                                </div>
-
-                                
-                                <div className="overflow-x-auto overflow-auto mt-12">
-                                    <table className="min-w-full bg-[#21222D] rounded-lg text-white">
-                                        <thead>
-                                        <tr>
-                                            <th className="py-3 px-6 text-left">NONPROFIT</th>
-                                            <th className="py-3 px-6 text-left">ADDRESS</th>
-                                            <th className="py-3 px-6 text-left">ZIP CODE</th>
-                                            <th className="py-3 px-6 text-left">NTEE CODE</th>
-                                            <th className="py-3 px-6 text-left">REVS</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {data2.map((row, index) => (
-                                            <tr key={index} className="border-t border-gray-700">
-                                            <td className="py-3 px-6">{row.nonprofit}</td>
-                                            <td className="py-3 px-6">{row.address}</td>
-                                            <td className="py-3 px-6">{row.zip}</td>
-                                            <td className="py-3 px-6">{row.nteeCode}</td>
-                                            <td className="py-3 px-6">{row.revs}</td>
-                                            </tr>
-                                        ))}
-                                        </tbody>
-                                    </table>
-                                </div>   
-
-                                <div className="grid grid-cols-2 gap-4 mb-6 mt-12">
-                                    <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                    SEARCH FOR A NONPROFIT
-                                                </button>
-                                                <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                    SEARCH BY ZIPCODE
-                                    </button>
-                                </div>
-
-                                <div className="overflow-x-auto overflow-auto mt-4">
-                                    <table className="min-w-full bg-[#21222D] rounded-lg text-white">
-                                        <thead>
-                                        <tr>
-                                            <th className="py-3 px-6 text-left">NONPROFIT</th>
-                                            <th className="py-3 px-6 text-left">ADDRESS</th>
-                                            <th className="py-3 px-6 text-left">ZIP CODE</th>
-                                            <th className="py-3 px-6 text-left">NTEE CODE</th>
-                                            <th className="py-3 px-6 text-left">COMPARE</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {data.map((row, index) => (
-                                            <tr key={index} className="border-t border-gray-700 rounded-lg">
-                                            <td className="py-3 px-6">{row.nonprofit}</td>
-                                            <td className="py-3 px-6">{row.address}</td>
-                                            <td className="py-3 px-6">{row.zip}</td>
-                                            <td className="py-3 px-6">{row.nteeCode}</td>
-                                            <td className="py-3 px-6 bg-green-500">COMPARE</td>
-                                            </tr>
-                                        ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div className="p-4 mt-12">
-                                    <div className="grid grid-cols-4 gap-4 items-center text-white font-semibold mb-4">
-                                        <div className="text-center bg-green-500 py-2 px-4 rounded-lg">VARIABLE</div>
-                                        <div className="text-center bg-blue-500 py-2 px-4 rounded-lg">SHELTER, INC.</div>
-                                        <div className="text-center bg-orange-500 py-2 px-4 rounded-lg">FOOD, INC.</div>
-                                        <div className="text-center bg-green-500 py-2 px-4 rounded-lg">SCORE</div>
-                                    </div>
-                                    {data3.map((item, index) => (
-                                        <div key={index} className="grid grid-cols-4 gap-4 items-center text-white mb-4 ">
-                                            <div className="text-center bg-green-500 py-2 px-4 rounded-lg">{item.variable}</div>
-                                            <div className={`text-center bg-blue-500 py-2 px-4 rounded-lg ${item.score === '' ? 'col-span-2' : ''}`}>{item.shelter}</div>
-                                            {item.score === '' ? null : (
-                                            <div className="text-center bg-orange-500 py-2 px-4 rounded-lg">{item.food}</div>
-                                            )}
-                                            {item.score === null ? null : (
-                                            <div className={`flex items-center justify-center py-2 px-4 rounded-full ${item.scoreColor} text-2xl`}>
-                                                {item.score}
-                                            </div>
-                                            )}
-                                        </div>
-                                        ))}
-                                        <div className="grid grid-cols-4 gap-4 items-center text-white mb-4 ">
-                                            <div className = "text-center bg-green-500 py-2 px-4 rounded-lg col-span-3">
-                                                POTENTIAL FISCAL COLLABORATOR SCORE
-                                            </div>
-                                            <div className = 'flex items-center justify-center py-2 px-4 rounded-full text-2xl bg-red-500'>
-                                                49%
-                                            </div>
-                                        </div>
-                                        
-
-                                    </div>
-                                </div>
+                                <COLAB/>
                             )}
                             {selectedSection === "News Feed" && (
                                 <NewsFeedSection></NewsFeedSection>
