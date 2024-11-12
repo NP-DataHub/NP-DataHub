@@ -44,25 +44,44 @@
 
 ### Table 2, NationalAndStateStatistics : Variable Names and Descriptions
 
+
+**Note:** For the **Sum** variables, only non-profits that filed a **990 (Master)** and have valid values for the 7 variables (valid meaning not 0) are considered. The 7 variables include: Revenue, Expenses, Liabilities, Assets, Employees, Other Salaries, and Officer Compensation.
+
 | Description                      | Variable Name  |
-|----------------------------------|----------------|
-| Major Group                      | MajGrp         |
-| National Average Revenue         | NatAvgRev      |
-| National Average Expenses        | NatAvgExp      |
-| National Average Liabilities     | NatAvgLia      |
-| National Average Assets          | NatAvgAst      |
-| National Median Revenue          | NatMedRev      |
-| National Median Expenses         | NatMedExp      |
-| National Median Liabilities      | NatMedLia      |
-| National Median Assets           | NatMedAst      |
-| Revenue Average                  | RevAvg         |
-| Expenses Average                 | ExpAvg         |
-| Liabilities Average              | LiaAvg         |
-| Assets Average                   | AstAvg         |
-| Revenue Median                   | RevMed         |
-| Expenses Median                  | ExpMed         |
-| Liabilities Median               | LiaMed         |
-| Assets Median                    | AstMed         |
+|-----------------------------------|----------------|
+| Major Group                       | MajGrp         |
+| National Average Revenue          | NatAvgRev      |
+| National Average Expenses         | NatAvgExp      |
+| National Average Liabilities      | NatAvgLia      |
+| National Average Assets           | NatAvgAst      |
+| National Median Revenue           | NatMedRev      |
+| National Median Expenses          | NatMedExp      |
+| National Median Liabilities       | NatMedLia      |
+| National Median Assets            | NatMedAst      |
+| Revenue Average                   | RevAvg         |
+| Expenses Average                  | ExpAvg         |
+| Liabilities Average               | LiaAvg         |
+| Assets Average                    | AstAvg         |
+| Revenue Median                    | RevMed         |
+| Expenses Median                   | ExpMed         |
+| Liabilities Median                | LiaMed         |
+| Assets Median                     | AstMed         |
+| National Sum Revenue              | NatSumRev      |
+| National Sum Expenses             | NatSumExp      |
+| National Sum Liabilities          | NatSumLia      |
+| National Sum Assets               | NatSumAst      |
+| National Sum Employees            | NatSumEmp      |
+| National Sum Other Salaries       | NatSumOthSal   |
+| National Sum Officer Compensation | NatSumOffComp  |
+| National Count of 990 Nonprofits  | NatCount990Np  |
+| State Sum Revenue                 | SumRev         |
+| State Sum Expenses                | SumExp         |
+| State Sum Liabilities             | SumLia         |
+| State Sum Assets                  | SumAst         |
+| State Sum Employees               | SumEmp         |
+| State Sum Other Salaries          | SumOthSal      |
+| State Sum Officer Compensation    | SumOffComp     |
+| State Count of 990 Nonprofits     | Count990Np     |
 
 Below is the equivalent XML fields found in the IRS database as well as the ProPublica fields equivalent to the variable. This is separated by 3 tables because the variables change based on the return type.
 
