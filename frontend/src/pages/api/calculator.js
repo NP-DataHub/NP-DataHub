@@ -173,6 +173,7 @@ async function getEntireSectorData(db, sector, state) {
   const OtherSalaries = national ? selectedData.NatSumOthSal : selectedData.SumOthSal;
   const OfficerCompensation = national ? selectedData.NatSumOffComp : selectedData.SumOffComp;
   const salariesToExpensesPct = 100 * (TotalExpenses / (OfficerCompensation + OtherSalaries));
+  const totalNonProfits = national ? selectedData.NatCount990Np : selectedData.Count990Np;
   return [
     chosen_year,
     TotalRevenue,
@@ -182,6 +183,7 @@ async function getEntireSectorData(db, sector, state) {
     NumEmployees,
     OtherSalaries,
     OfficerCompensation,
-    salariesToExpensesPct
+    salariesToExpensesPct,
+    totalNonProfits
     ];
   }

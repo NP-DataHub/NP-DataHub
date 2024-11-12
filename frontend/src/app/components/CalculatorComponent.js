@@ -249,7 +249,7 @@ const states = [
       <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MACRO: SECTOR FINANCIAL PERFORMANCE</h2>
       <p className="text-white text-center pb-8">
-        Based on the financial performance of nonprofits with filings from the most recent year containing the most data points, 
+        Based on the financial performance of non-profits with filings from the most recent year containing the most data points, 
         the following calculations will generate results for either a statewide or 
         national NTEE sector performance, depending on your selection.
         </p>
@@ -364,7 +364,7 @@ const states = [
             </div>
           </div>
           <div className="mt-6 text-center text-gray-400">
-            Data calculated from following year: {macroData[0]}
+            Data calculated from the following year: {macroData[0]}, based on a total of {macroData[9]} non-profits.
           </div>
         </div>
       )}
@@ -372,9 +372,9 @@ const states = [
 
       {/* Micro mode */}
       <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12">
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MICRO: SINGLE NONPROFIT FINANCIAL PERFORMANCE</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MICRO: SINGLE NON-PROFIT FINANCIAL PERFORMANCE</h2>
       <p className="text-white text-center pb-8">
-        This tool will allow the end user to compare a single nonprofit's expenditures v. salaries 
+        This tool will allow the end user to compare a single non-profit's expenditures v. salaries 
         and then allow the end user to calculate the cost per constituent served after salaries and wages for any grant level.</p>
         
         <div className="flex flex-col gap-6">
