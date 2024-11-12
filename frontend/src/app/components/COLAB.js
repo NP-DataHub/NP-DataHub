@@ -16,6 +16,7 @@ import Autosuggest from "react-autosuggest/dist/Autosuggest";
 import cities from "@/app/components/cities";
 import ntee_codes from "@/app/components/ntee";
 import COLABGraph from '@/app/components/charts/COLABGraph';
+import COLABTable from './charts/COLABTable';
 
 
 
@@ -29,10 +30,12 @@ const COLAB = () => {
     // Or, search for a nonprofit and display similar nonprofits in the area (city and zip code)
 
     // Data, selection state vars
-    const [nonprofitData, setNonprofitData] = useState([]);
+    const [areaData, setareaData] = useState(null);
     const [selectedCity, setSelectedCity] = useState(null);
     const [zipCode, setZipCode] = useState('');
     const [nonprofit, setNonprofit] = useState('');
+    const [nonprofitData, setNonprofitData] = useState([0]);
+
 
     // WIP FIX THIS CRAP
     const onZipCodeChange = (event) => {
@@ -113,24 +116,43 @@ const COLAB = () => {
                 }
 
                 // Fetch the data
-                let response = await fetch(`/api/sector?Cty=${CITY}&ZIP=${ZIP}`);
+                let response = await fetch(`/api/sector?Cty=${CITY}&Zip=${ZIP}`);
                 let data = await response.json();
-                setNonprofitData(data);
+                setareaData(data);
 
         } else if (nonprofit) {
             // If the user has entered a nonprofit name, fetch nonprofits in the same area (city or zip code)
 
             // Get the city and zip code of the nonprofit
 
+            const NAME = nonprofit;
+
+            // Fetch the data
+            let response = await fetch(`/api/sector?Nm=${NAME}`);
+            let nonprofitData = await response.json();
+            setNonprofitData(nonprofitData);
+
+            // Get the area data for the selected nonprofit
+            if (nonprofitData !== null) {
+                // Extract the city and zip code of the selected nonprofit
+                const CITY = nonprofitData.data[0].Cty;
+                const ZIP = nonprofitData.data[0].Zip;
+
+                // Set the area data with the city and zip code of the selected nonprofit
+                let response = await fetch(`/api/sector?Cty=${CITY}&Zip=${ZIP}`);
+                let data = await response.json();
+                setareaData(data);
+            } else { // L bozo
+                console.error("No data found for the given nonprofit name");
+            }
+
         }
 
      }
-
         fetchData();
 
-        console.log("nonprofitData", nonprofitData);
-
-
+        console.log("Area data:", areaData);
+        console.log("Nonprofit data:", nonprofitData);
 
     };
     
@@ -138,11 +160,13 @@ const COLAB = () => {
 
     return (
 
-        <div className="p-6 bg-[#171821] rounded-lg">
-            <h3 className="text-xl font-semibold text-[#F2C8ED]">CO:LAB</h3>
-            <p className="text-white">Placeholder for description</p>
-            <div className="grid grid-cols-3 gap-4 mb-6 mt-4">
-                <div className="relative bg-[#ada5c0] p-2 rounded">
+    <div className="p-6 bg-[#171821] rounded-lg">
+        <h3 className="text-xl font-semibold text-[#F2C8ED]">CO:LAB</h3>
+        <p className="text-white">Placeholder for description and how to use, as well as what it means. Additionally, need to describe how similarity is determined</p>
+        <p className="text-white">CURRENT IMPLEMENTATION: user selects city or zip, graph populates with area data and similarity between them. Additionally, the user selects a nonprofit via name that will then be used to populate the table with similarities to the selected nonprofit.</p>
+        <div className="flex gap-4 mb-6 mt-4">
+            <div className="relative bg-[#ada5c0] p-2 rounded flex items-center" style={{ flex: '0 0 30%' }}>
+                <div className='w-full items-center'>
                     <Autosuggest
                         suggestions={citySuggestions}
                         onSuggestionsFetchRequested={onCitySuggestionsFetchRequested}
@@ -154,42 +178,53 @@ const COLAB = () => {
                         inputProps={CityInputProps}
                     />
                 </div>
-                <div className="bg-[#78b6d3] p-2 rounded">
-                    <input
-                        type="text"
-                        placeholder="Enter ZIP Code"
-                        value={zipCode}
-                        onChange={onZipCodeChange}
-                        className="w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
-                    />
-                </div>
-                <div className="bg-[#85bce0] p-2 rounded">
-                    <input
-                        type="text"
-                        placeholder="Search for Nonprofit"
-                        value={nonprofit}
-                        onChange={onNonprofitChange}
-                        className="w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
-                    />
-                </div>
             </div>
-            <div className="flex justify-end mb-6">
+            <div className="bg-[#78b6d3] p-2 rounded flex items-center" style={{ flex: '0 0 30%' }}>
+                <input
+                    type="text"
+                    placeholder="Enter ZIP Code"
+                    value={zipCode}
+                    onChange={onZipCodeChange}
+                    className="w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
+                />
+            </div>
+            <div className="bg-[#85bce0] p-2 rounded flex items-center" style={{ flex: '0 0 30%' }}>
+                <input
+                    type="text"
+                    placeholder="Search for Nonprofit"
+                    value={nonprofit}
+                    onChange={onNonprofitChange}
+                    className="w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
+                />
+            </div>
+            <div className="flex-grow flex items-center">
                 <button
                     onClick={handleSearch}
-                    className="bg-[#A9DFD8] text-black p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#F2C8ED]"
+                    className="w-full h-full bg-[#A9DFD8] text-black p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#F2C8ED]"
                 >
                     Search
                 </button>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-                <div>
-                    <COLABGraph data={nonprofitData.data} filters={ [] }/>
-                </div>
-                <div className="bg-[#21222D] p-4 rounded-lg">
-                    <p className="text-white">Placeholder for additional content</p>
-                </div>
-            </div>
         </div>
+        <div className="grid grid-cols-2 gap-4" style={{ height: '700px' }}>
+            {areaData ? (
+                <>
+                    <div className='h-full bg-[#21222D] p-4 rounded-lg'>
+                        <h2 className="text-center text-3xl">Nonprofit Network</h2>
+                        <COLABGraph data={areaData.data} filters={[]} />
+                    </div>
+                    <div className="h-full bg-[#21222D] p-4 rounded-lg">
+                        <h2 className="text-center text-3xl">Similarity Table</h2>
+                        <COLABTable nonprofits={areaData.data} selectedNonprofit={nonprofitData.data} />
+                    </div>
+                </>
+            ) : (
+                <div className="col-span-2 h-full bg-[#21222D] p-4 rounded-lg flex items-center justify-center">
+                    <span className="text-center text-3xl text-white">Select a City, Zip Code, or search for a Nonprofit to get started.</span>
+                </div>
+            )}
+        </div>
+    </div>
 
     );
 
