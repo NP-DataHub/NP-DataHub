@@ -4,7 +4,6 @@ dotenv.config();
 
 export default async function handler(req, res) {
   const { mode, nonprofit, address, sector, state } = req.body;
-  console.log(req.body)
   const client = new MongoClient(process.env.MONGODB_URI);
   try {
     await client.connect();
@@ -25,7 +24,6 @@ export default async function handler(req, res) {
       return res.status(200).json(sectorData);
     }
   } catch (error) {
-    console.error("Error:", error);
     res.status(500).json({ message: "Server error fetching data" });
   } finally {
     await client.close();
@@ -38,7 +36,7 @@ async function getNonProfitData(db, nonprofit, address) {
     filters.Nm = { $regex: new RegExp(`^${Np.trim()}$`, 'i') };
   }
   if (address) {
-    filters.address = { $regex: new RegExp(`^${address.trim()}$`, 'i') };
+    filters.Addr = { $regex: new RegExp(`^${address.trim()}$`, 'i') };
   }
 
   const npData = await db.collection('NonProfitData').findOne(filters);

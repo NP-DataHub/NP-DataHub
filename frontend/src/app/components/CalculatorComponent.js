@@ -277,6 +277,13 @@ const states = [
       )}
       </div>
 
+      {/* Micro mode */}
+      <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12">
+        <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MICRO: SINGLE NONPROFIT FINANCIAL PERFORMANCE</h2>
+      <p className="text-white text-center pb-8">
+        This tool will allow the end user to compare a single nonprofit's expenditures v. salaries 
+        and then allow the end user to calculate the cost per constituent served after salaries and wages for any grant level.</p>
+
       <h6 className="text font-semibold text-white mt-4">COST PER CLIENT/CONSTITUENT FOR GRANT OR PROJECT</h6>
       <form className="w-full max-md:max-w-full mt-4 space-y-4">
         <div className="flex items-center justify-between">
@@ -332,6 +339,7 @@ const states = [
           />
         </div>
       </form>
+      </div>
     </div>
   );
 }
