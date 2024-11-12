@@ -116,7 +116,7 @@ async function getEntireSectorData(db, sector, state) {
           chosen_year = year2;
           break;
         } else if (data[year1].NatCount990Np && data[year2].NatCount990Np) {
-          chosen_year = (data[year2].NatCount990Np - data[year1].NatCount990Np > 5000) ? year2 : year1;
+          chosen_year = ((data[year2].NatCount990Np - data[year1].NatCount990Np) / data[year1].NatCount990Np > 0.2) ? year2 : year1;
           break;
         }
       } else {
@@ -142,7 +142,7 @@ async function getEntireSectorData(db, sector, state) {
             chosen_year = year2;
             break;
           } else if (hasYear1State && data[year1][stateCode].Count990Np && hasYear2State && data[year2][stateCode].Count990Np) {
-            chosen_year = (data[year2][stateCode].Count990Np - data[year1][stateCode].Count990Np > 500) ? year2 : year1;
+            chosen_year = ((data[year2][stateCode].Count990Np - data[year1][stateCode].Count990Np) / data[year1][stateCode].Count990Np > 0.2) ? year2 : year1;
             break;
           }
         } else {
