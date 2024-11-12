@@ -2,38 +2,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Autosuggest from 'react-autosuggest';
 import zipData from './zipcode_data';
-
-const CENSUS_KEY = process.env.CENSUS_KEY;
-
-//request new key tommorow becuase some thing is wrong with api right now
-async function getMedianAgeByZip(zipCode) {
-    const url = `https://api.census.gov/data/2023/acs/acs5?get=B01002_001E&for=zip%20code%20tabulation%20area:${zipCode}&key=${CENSUS_KEY}`;
-
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`Error: ${response.statusText}`);
-        
-        const data = await response.json();
-
-        console.log(data);
-
-        // Check if there's valid data for the median age
-        if (data[1] && data[1][0] !== null) {
-            const medianAge = data[1][0]; // The median age is in the first position of the second array
-            console.log(`The median age for ZIP code ${zipCode} is ${medianAge}.`);
-        } else {
-            console.log(`No median age data available for ZIP code ${zipCode}.`);
-        }
-    } catch (error) {
-        console.error("Failed to fetch median age:", error);
-    }
-}
-
-getMedianAgeByZip("11702");
-
-
 import dynamic from 'next/dynamic';
+import { get, set } from 'mongoose';
 const ChoroplethMap = dynamic(() => import('../components/map'), { ssr: false });
+
+const CENSUS_KEY = process.env.NEXT_PUBLIC_CENSUS_API_KEY;
 
 
 //Do name and zipcode search
@@ -44,80 +17,86 @@ export default function RegionalHealthSection() {
     const [zipSuggestions, setZipSuggestions] = useState([]); //Zip code
     const [zipcode, setZipcode] = useState("");
     const [searchResults, setSearchResults] = useState([]); //Search results
-    const [lastYear, setLastYear] = useState("");
+    const [medAge, setmedAge]= useState("AGE"); //Median Age
+    const [majRace, setmajRace] = useState("RACE");
+    const [majGender, setmajGender] = useState("GENDER");
+    const [avgEdu, setavgEdu] = useState("EDUCATION");
+    const [medIncome, setmedIncome] = useState("INCOME");
+    const [percHousing, setpercHousing] = useState("HOUSING");
+    const [percHealth, setpercHealth] = useState("HEALTH");
+    const [sizeFamily, setsizeFamily] = useState("FAMILY");
 
-    const data = [
-        {
-          nonprofit: 'Food, Inc.',
-          address: '123 Main Street, NY',
-          zip: '12866',
-          nteeCode: 'K: Food, Ag, Nutrition',
-          revs: '$456,675',
-        },
-        {
-          nonprofit: 'HealthAid, Inc.',
-          address: '456 Elm Street, NY',
-          zip: '12867',
-          nteeCode: 'E: Health Care',
-          revs: '$375,890',
-        },
-        {
-          nonprofit: 'EduCare, Inc.',
-          address: '789 Oak Avenue, NY',
-          zip: '12868',
-          nteeCode: 'B: Education',
-          revs: '$520,000',
-        },
-        {
-          nonprofit: 'GreenWorld, Inc.',
-          address: '321 Pine Road, NY',
-          zip: '12869',
-          nteeCode: 'C: Environment',
-          revs: '$600,250',
-        },
-        {
-          nonprofit: 'AnimalAid, Inc.',
-          address: '654 Maple Lane, NY',
-          zip: '12870',
-          nteeCode: 'D: Animal Welfare',
-          revs: '$320,150',
-        },
-        {
-          nonprofit: 'ArtCulture, Inc.',
-          address: '987 Cedar Blvd, NY',
-          zip: '12871',
-          nteeCode: 'A: Arts, Culture',
-          revs: '$410,675',
-        },
-        {
-          nonprofit: 'ShelterHelp, Inc.',
-          address: '123 Birch Street, NY',
-          zip: '12872',
-          nteeCode: 'L: Housing & Shelter',
-          revs: '$290,980',
-        },
-        {
-          nonprofit: 'LegalAid, Inc.',
-          address: '456 Spruce Way, NY',
-          zip: '12873',
-          nteeCode: 'I: Crime & Legal',
-          revs: '$350,450',
-        },
-        {
-          nonprofit: 'YouthEmpower, Inc.',
-          address: '789 Willow Dr, NY',
-          zip: '12874',
-          nteeCode: 'O: Youth Development',
-          revs: '$430,560',
-        },
-        {
-          nonprofit: 'TechForGood, Inc.',
-          address: '321 Cypress Street, NY',
-          zip: '12875',
-          nteeCode: 'T: Technology',
-          revs: '$480,720',
-        },
-      ];
+
+
+    //order of groups goes Median Age, Median Income, Percent housing units occumpied, Percent with health insurance covereage,
+    // Average household size, Percent EDU < 9th grade, Percent EDU 9-12 no diploma, Percent EDU HS grad, Percent EDU some college, 
+    //Percent EDU Associates, Percent EDU Bachelors, Percent Graduate/Professional, Percent Male pop, Percent female pop,
+    //Percent White, Percent Black/African American, Percent Native American/Alaskan Native, Percent Asian, Percent Pacific Islander, 
+    // Percent some other race, Percent two or more races
+    const getZipInfo = async (zip) => {
+        const url = `https://api.census.gov/data/2022/acs/acs5/profile?get=DP05_0018E,DP03_0062E,DP04_0002PE,DP03_0096PE,DP02_0016E,DP02_0060PE,DP02_0061PE,DP02_0062PE,DP02_0063PE,DP02_0064PE,DP02_0065PE,DP02_0066PE,DP05_0002PE,DP05_0003PE,DP05_0037PE,DP05_0038PE,DP05_0039PE,DP05_0044PE,DP05_0052PE,DP05_0057PE,DP05_0058PE&for=zip%20code%20tabulation%20area:${zip}&key=${CENSUS_KEY}`;
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+            
+            const data = await response.json();
+
+            setmedAge("Median Age:\n"+data[1][0]);
+            setmedIncome("Median Income: "+data[1][1]);
+            setpercHousing("Housing Occupied:\n"+data[1][2]+"%");
+            setpercHealth("Percent with Health Insurance:\n"+data[1][3]+"%");
+            setsizeFamily("Average Household Size:\n"+data[1][4]);
+
+            const lessThan9 = parseFloat(data[1][5]);
+            const nineTo12 = parseFloat(data[1][6]);
+            const hsGrad = parseFloat(data[1][7]);
+            const someCollege = parseFloat(data[1][8]);
+            const associates = parseFloat(data[1][9]);
+            const bachelors = parseFloat(data[1][10]);
+            const gradProf = parseFloat(data[1][11]);
+
+            const edu = Math.max(lessThan9, nineTo12, hsGrad, someCollege, associates, bachelors, gradProf);
+
+            if (edu === lessThan9) setavgEdu("Avg. Education:\nPercent with Less than 9th Grade:\n"+data[1][5]+"%");
+            else if (edu === nineTo12) setavgEdu("Avg. Eduction:\nPercent with 9-12th Grade:\n"+data[1][6]+"%");
+            else if (edu === hsGrad) setavgEdu("Avg. Education:\nPercent with HS Grad:\n"+data[1][7]+"%");
+            else if (edu === someCollege) setavgEdu("Avg. Education:\nPercent with Some College:\n"+data[1][8]+"%");
+            else if (edu === associates) setavgEdu("Avg. Education:\nPercent with Associates:\n"+data[1][9]+"%");
+            else if (edu === bachelors) setavgEdu("Avg. Education:\nPercent with Bachelors:\n"+data[1][10]+"%");
+            else setavgEdu("Avg. Education:\nPercent with Graduate/Professional:\n"+data[1][11]+"%");
+
+            const male = parseFloat(data[1][12]);
+            const female = parseFloat(data[1][13]);
+
+            const gender = Math.max(male, female);
+
+            if (gender === male) setmajGender("Majority Male:\n"+data[1][12]+"%");
+            else setmajGender("Majority Female:\n"+data[1][13]+"%");
+
+            const white = parseFloat(data[1][14]);
+            const black = parseFloat(data[1][15]);
+            const native = parseFloat(data[1][16]);
+            const asian = parseFloat(data[1][17]);
+            const pacific = parseFloat(data[1][18]);
+            const other = parseFloat(data[1][19]);
+            const twoOrMore = parseFloat(data[1][20]);
+
+            const race = Math.max(white, black, native, asian, pacific, other, twoOrMore);
+
+            if (race === white) setmajRace("Majority White:\n"+data[1][14]+"%");
+            else if (race === black) setmajRace("Majority Black/African American:\n"+data[1][15]+"%");
+            else if (race === native) setmajRace("Majority Native American/Alaskan Native:\n"+data[1][16]+"%");
+            else if (race === asian) setmajRace("Majority Asian:\n"+data[1][17]+"%");
+            else if (race === pacific) setmajRace("Majority Pacific Islander:\n"+data[1][18]+"%"); 
+            else if (race === other) setmajRace("Majority Some Other Race:\n"+data[1][19]+"%");
+            else setmajRace("Majority Two or More:\n"+data[1][20]+"%");
+
+        } catch (error) {
+            console.error("Failed to fetch Zip Code Data:", error);
+        }
+    }
+
       
 
     const fetchSuggestions = async (value, type) => {
@@ -181,6 +160,7 @@ export default function RegionalHealthSection() {
             const data = await response.json();
           if (data.success) {
             setSearchResults(data.data);
+            getZipInfo(data.data[0].Zip);
           } else {
             setSearchResults([]);
           }
@@ -195,6 +175,7 @@ export default function RegionalHealthSection() {
             const data = await response.json();
           if (data.success) {
             setSearchResults(data.data);
+            getZipInfo(value);
           } else {
             setSearchResults([]);
           }
@@ -205,11 +186,8 @@ export default function RegionalHealthSection() {
 
     const getLatestYear = (row) => {
         const yearKeys = Object.keys(row).filter(key => !isNaN(key));
-
-
-       const lastYear = Math.max(...yearKeys.map(year => parseInt(year))).toString()
-
-        return lastYear;
+        const latestYear = Math.max(...yearKeys.map(year => parseInt(year))).toString();
+        return latestYear;
     };
 
 
@@ -313,42 +291,42 @@ export default function RegionalHealthSection() {
         <div className="grid grid-cols-4 gap-4 mb-6 mt-12 text-md">
                 <div className="flex flex-col items-center">
                     <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center font-bold text-green-500">
-                    AGE
+                    {medAge}
                     </div>
                 </div>
                 <div className="flex flex-col items-center">
                     <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-blue-300">
-                    RACE
+                    {majRace}
                     </div>
                 </div>
                 <div className="flex flex-col items-center">
                     <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-blue-500">
-                    GENDER
+                    {majGender}
                     </div>
                 </div>
                 <div className="flex flex-col items-center">
                     <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-red-500">
-                    EDUCATION
+                    {avgEdu}
                     </div>
                 </div>
                 <div className="flex flex-col items-center mt-2">
                     <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-orange-500">
-                    INCOME
+                    {medIncome}
                     </div>
                 </div>
                 <div className="flex flex-col items-center mt-2">
                     <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-purple-500">
-                    HOUSING
+                    {percHousing}
                     </div>
                 </div>
                 <div className="flex flex-col items-center mt-2">
                     <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-gray-500">
-                    HEALTH
+                    {percHealth}
                     </div>
                 </div>
                 <div className="flex flex-col items-center mt-2">
                     <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-pink-500">
-                    FAMILY
+                    {sizeFamily}
                     </div>
                 </div>
                 </div>
