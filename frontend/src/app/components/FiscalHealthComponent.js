@@ -8,7 +8,7 @@ export default function FiscalHealthSection() {
   const [secondNp, setSecondNp] = useState('');
   const [secondAddr, setSecondAddr] = useState('');
   const [npVSnp, setNpVSnp] = useState(false); // Toggle between comparing two nonprofits or a single nonprofit
-  const [specificSector, setSpecificSector] = useState(''); // Sector selected from dropdown
+  const [specificSector, setSpecificSector] = useState(null); // Sector selected from dropdown
   const [selectedSectorForResults, setSelectedSectorForResults] = useState(''); // Sector used to display results
   const [nonprofitData, setNonprofitData] = useState(null);
   const [loading, setLoading] = useState(false);

@@ -3,36 +3,33 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default async function handler(req, res) {
-  const { firstNp, firstAddr, secondNp, secondAddr, npVSnp, specific_sector } = req.body;
-
+  const { mode, nonprofit, address, sector } = req.body;
+  const client = new MongoClient(process.env.MONGODB_URI);
   try {
-    const client = new MongoClient(process.env.MONGODB_URI);
     await client.connect();
     const db = client.db('Nonprofitly');
-
-    if (npVSnp) {
-      // If comparing two nonprofits
-      const firstFiscalHealthScore = await getNpFiscalHealthScore(db, firstNp, firstAddr);
-      const secondFiscalHealthScore = await getNpFiscalHealthScore(db, secondNp, secondAddr);
-      return res.status(200).json([firstFiscalHealthScore, secondFiscalHealthScore]);
-    } else {
-      // If fetching a single nonprofit
-      const fiscalHealthScore = await getNpFiscalHealthScore(db, firstNp, firstAddr);
+    if (mode === "NonProfit") {
+      const score_and_years = await getNpFiscalHealthScore(db, nonprofit, address);
       if (fiscalHealthScore === -1) {
-        return res.status(404).json({ message: "Nonprofit not found" });
+        return res.status(404).json({ message: "No data is provided for selected non profit" });
       }
-
-      // Fetch sector scores for national and state comparison
-      const scores = await getSectorsFiscalHealthScore(db, firstNp, firstAddr, specific_sector);
-      return res.status(200).json([fiscalHealthScore, scores]);
+      return res.status(200).json(score_and_years); //score might be NaN
+    } else {
+      const score = await getSectorsFiscalHealthScore(db, nonprofit, address, specific_sector, mode);
+      if (score === -1){ //shouldn't happen because we only call this if the nonProfit has consecutive years
+        return res.status(404).json({ message: "Non-profit doesn't have enough data" });
+      }
+      return res.status(200).json(score);
     }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error fetching fiscal health data" });
+  } finally {
+    await client.close();
   }
 }
 
-async function fetchData(db, Np, Addr, npVSnp, specific_sector = null) {
+async function fetchData(db, Np, Addr, mode, specific_sector = null) {
   const filters = {};
 
   if (Np) {
@@ -47,14 +44,12 @@ async function fetchData(db, Np, Addr, npVSnp, specific_sector = null) {
   if (!NpData) {
     return -1;
   }
-
   const consecutiveYears = getConsecutiveYears(NpData);
-  if (npVSnp) {
+  if (mode === "NonProfit") {
     return [consecutiveYears, NpData];
   } else {
-    const majorGroup = !specific_sector ? NpData.NTEE[0] : specific_sector;
+    const majorGroup = !specific_sector ? NpData.MajGrp : specific_sector;
     const state = NpData.St;
-
     const regionalAndNational = await db.collection('NationalAndStateStatistics').findOne({ MajGrp: majorGroup });
     if (!regionalAndNational) {
       return -1;
@@ -64,7 +59,7 @@ async function fetchData(db, Np, Addr, npVSnp, specific_sector = null) {
 }
 
 async function getNpFiscalHealthScore(db, Np, Addr) {
-  const values = await fetchData(db, Np, Addr, true);
+  const values = await fetchData(db, Np, Addr, "Nonprofit");
   if (values === -1) return -1;
 
   const consecutiveYears = values[0];
@@ -78,8 +73,8 @@ async function getNpFiscalHealthScore(db, Np, Addr) {
   }
 }
 
-async function getSectorsFiscalHealthScore(db, Np, Addr, specific_sector) {
-  const values = await fetchData(db, Np, Addr, false, specific_sector);
+async function getSectorsFiscalHealthScore(db, Np, Addr, specific_sector, mode) {
+  const values = await fetchData(db, Np, Addr, mode, specific_sector);
   if (values === -1) return -1;
 
   const state = values[0];
@@ -87,15 +82,16 @@ async function getSectorsFiscalHealthScore(db, Np, Addr, specific_sector) {
   const data = values[2];
 
   if (consecutiveYears.length >= 2) {
-    const nonprofitScore = calculateNonProfitFiscalHealthScore(data, consecutiveYears);
-    const nationalScore = calculateNationalFiscalHealthScore(data, consecutiveYears);
-    const stateScore = calculateStateFiscalHealthScore(data, consecutiveYears, state);
-
-    return [nationalScore, stateScore];  // Return national and state score separately
+    if ( mode === "National") {
+      return calculateNationalFiscalHealthScore(data, consecutiveYears);
+    } else {
+      return calculateStateFiscalHealthScore(data, consecutiveYears, state);
+    }
   } else {
-    return [NaN, consecutiveYears];
+    return -1;
   }
 }
+
 
 function getConsecutiveYears(data) {
   const years = Object.keys(data).filter(key => !isNaN(key)).map(Number).sort((a, b) => b - a);
