@@ -22,8 +22,8 @@ export default function FiscalHealthSection() {
   const [nationalSectorScore, setNationalSectorScore] = useState(null);
   const [regionalSectorScore, setRegionalSectorScore] = useState(null);
   // Helper states
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null); 
+  const [loadingComparison, setLoadingComparison] = useState(false);
+  const [errorComparison, setErrorComparison] = useState(null); 
   const [nameSuggestions, setNameSuggestions] = useState([]); // Suggestions for name autocomplete
   const [addressSuggestions, setAddressSuggestions] = useState([]); // Suggestions for address autocomplete
   const [lastFetchedNameInput, setLastFetchedNameInput] = useState('');
@@ -97,14 +97,14 @@ export default function FiscalHealthSection() {
   
   // Render function for names
   const renderNameSuggestion = (suggestion) => (
-    <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+    <div className="px-4 py-2 cursor-pointer hover:bg-[#FEB95A] hover:text-black">
       {suggestion.Nm}
     </div>
   );
 
   // Render function for addresses
   const renderAddressSuggestion = (suggestion) => (
-    <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+    <div className="px-4 py-2 cursor-pointer hover:bg-[#FEB95A] hover:text-black">
       {suggestion.Addr}
     </div>
   );
@@ -125,9 +125,9 @@ export default function FiscalHealthSection() {
 
   // Fetch fiscal health data
 const fetchFiscalHealthData = async (option) => {
-  // Clear results and set loading state
-  setLoading(true);
-  setError(null);
+  // Clear results and set loadingComparison state
+  setLoadingComparison(true);
+  setErrorComparison(null);
 
   if (option === "compare") {
     setFirstNpScore(null);
@@ -151,11 +151,9 @@ const fetchFiscalHealthData = async (option) => {
       });
       const dataFirst = await responseFirst.json();
       if (!responseFirst.ok) throw new Error(dataFirst.message || 'Error fetching fiscal health data for first nonprofit');
-
-      const scoreFirst = isNaN(dataFirst[0]) ? null : dataFirst[0];
-      const yearsFirst = dataFirst[1].length === 0 ? null : dataFirst[1];
+      const scoreFirst = dataFirst[0] ? dataFirst[0].toFixed(1) : "NaN" ;
       setFirstNpScore(scoreFirst);
-      setFirstNpYears(yearsFirst);
+      setFirstNpYears(dataFirst[1]);
 
       // Fetch data for the second nonprofit
       const responseSecond = await fetch('/api/fiscalHealth', {
@@ -171,10 +169,11 @@ const fetchFiscalHealthData = async (option) => {
       const dataSecond = await responseSecond.json();
       if (!responseSecond.ok) throw new Error(dataSecond.message || 'Error fetching fiscal health data for second nonprofit');
 
-      const scoreSecond = isNaN(dataSecond[0]) ? null : dataSecond[0];
-      const yearsSecond = dataSecond[1].length === 0 ? null : dataSecond[1];
+      const scoreSecond = dataSecond[0] ? dataSecond[0].toFixed(1) : "NaN";
       setSecondNpScore(scoreSecond);
-      setSecondNpYears(yearsSecond);
+      setSecondNpYears(dataSecond[1]);
+
+      console.log(firstNpScore, secondNpScore)
 
     } else {
       // Fetch data for a single nonprofit
@@ -191,19 +190,18 @@ const fetchFiscalHealthData = async (option) => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || 'Error fetching fiscal health data');
 
-      const score = isNaN(data[0]) ? null : data[0];
-      const years = data[1].length === 0 ? null : data[1];
+      const score = data[0] ? data[0].toFixed(1) : "NaN";
       setSingleNpScore(score);
-      setSingleNpYears(years);
+      setSingleNpYears(data[1]);
     }
 
     // Optionally set the selected sector for display
     // setSelectedSectorForResults(specificSector);
 
   } catch (err) {
-    setError(err.message);
+    setErrorComparison(err.message);
   } finally {
-    setLoading(false);
+    setLoadingComparison(false);
   }
 };
 
@@ -230,10 +228,9 @@ const fetchFiscalHealthData = async (option) => {
       </p>
       {/* Compare Two Nonprofits */}
       <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33]">
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare Two Nonprofits</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare two non-profits</h2>
         <p className="text-white text-center pb-8">
-          Assess a nonprofit’s fiscal health based on a weighted score of various data variables. 
-          Compare the scores side-by-side with other nonprofits.
+          Compare the scores side-by-side with other non-profits.
         </p>
         <div className="flex flex-col gap-6">
           <Autosuggest
@@ -254,7 +251,7 @@ const fetchFiscalHealthData = async (option) => {
             theme={{
               container: 'autosuggest-container',
               input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
+              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
               suggestionsList: 'autosuggest-suggestions-list',
               suggestion: 'autosuggest-suggestion',
               suggestionHighlighted: 'autosuggest-suggestion--highlighted',
@@ -278,7 +275,7 @@ const fetchFiscalHealthData = async (option) => {
             theme={{
               container: 'autosuggest-container',
               input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
+              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
               suggestionsList: 'autosuggest-suggestions-list',
               suggestion: 'autosuggest-suggestion',
               suggestionHighlighted: 'autosuggest-suggestion--highlighted',
@@ -302,7 +299,7 @@ const fetchFiscalHealthData = async (option) => {
             theme={{
               container: 'autosuggest-container',
               input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
+              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
               suggestionsList: 'autosuggest-suggestions-list',
               suggestion: 'autosuggest-suggestion',
               suggestionHighlighted: 'autosuggest-suggestion--highlighted',
@@ -326,7 +323,7 @@ const fetchFiscalHealthData = async (option) => {
             theme={{
               container: 'autosuggest-container',
               input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
+              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
               suggestionsList: 'autosuggest-suggestions-list',
               suggestion: 'autosuggest-suggestion',
               suggestionHighlighted: 'autosuggest-suggestion--highlighted',
@@ -335,17 +332,76 @@ const fetchFiscalHealthData = async (option) => {
 
           <button
             onClick={() => fetchFiscalHealthData("compare")}
-            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonFetchDisabled() ? 'bg-gray-700 text-black cursor-not-allowed' : 'bg-[#A9DFD8] text-black hover:bg-[#88B3AE] transition duration-300'}`}
+            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonFetchDisabled() ? 'bg-gray-700 text-black cursor-not-allowed' : 'bg-[#FEB95A] text-black hover:bg-[#D49B4A] transition duration-300'}`}
             disabled={isComparisonFetchDisabled()}
           >
-            Compare Nonprofits
+            Compare
           </button>
         </div>
 
-        {loading && <div className="text-center text-lg text-gray-400 mt-6"><SearchLoadingComponent/></div>}
-        {error && <div className="text-center text-lg text-red-400 mt-6">Error: {error}</div>}
+        {loadingComparison && <div className="text-center text-lg text-gray-400 mt-6"><SearchLoadingComponent/></div>}
+        {errorComparison && <div className="text-center text-lg text-red-400 mt-6">Error: {errorComparison}</div>}
         
+        {firstNpScore && secondNpScore && !loadingComparison && !errorComparison && (
+          <div>
+            <div className="flex flex-row justify-between mt-8">
+              
+              {/* First Nonprofit Score Display */}
+              <div className="flex flex-col items-center w-1/2">
+                <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                  {firstNpScore}
+                </div>
+
+                {/* First Nonprofit Years Message */}
+                <div className="mt-2 text-sm text-gray-400 text-center">
+                  {firstNpYears.length >= 4 ? (
+                    <p>Fiscal health score calculated from the following years:</p>
+                  ) : (
+                    <p>Minimum 4 consecutive years required for a fiscal health score.</p>
+                  )}
+                  <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
+                    {firstNpYears.length >= 4
+                      ? firstNpYears.sort((a, b) => a - b).map((year, index) => (
+                          <li key={`firstNpYear-${index}`}>{year}</li>
+                        ))
+                      : firstNpYears.length > 0 && (
+                          <li>Only available years: {firstNpYears.join(", ")}</li>
+                        )}
+                  </ul>
+                </div>
+              </div>
+              
+              {/* Second Nonprofit Score Display */}
+              <div className="flex flex-col items-center w-1/2">
+                <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                  {secondNpScore}
+                </div>
+
+                {/* Second Nonprofit Years Message */}
+                <div className="mt-2 text-sm text-gray-400 text-center">
+                  {secondNpYears.length >= 4 ? (
+                    <p>Fiscal health score calculated from the following years:</p>
+                  ) : (
+                    <p>Minimum 4 consecutive years required for a fiscal health score.</p>
+                  )}
+                  <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
+                    {secondNpYears.length >= 4
+                      ? secondNpYears.sort((a, b) => a - b).map((year, index) => (
+                          <li key={`secondNpYear-${index}`}>{year}</li>
+                        ))
+                      : secondNpYears.length > 0 && (
+                          <li>Only available years: {secondNpYears.join(", ")}</li>
+                        )}
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        )}
       </div>
+      {/* Compare NonProfit Against Sector */}
+
     </div>
   );
 }

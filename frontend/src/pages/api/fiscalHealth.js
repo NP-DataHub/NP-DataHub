@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     if (mode === "NonProfit") {
       const score_and_years = await getNpFiscalHealthScore(db, nonprofit, address);
       if (score_and_years === -1) {
-        return res.status(404).json({ message: "No data is provided for selected non profit" });
+        return res.status(404).json({ message: `No data is provided for selected non-profit: ${nonprofit}` });
       }
       return res.status(200).json(score_and_years); //score might be NaN
     } else {
