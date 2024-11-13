@@ -374,7 +374,7 @@ const states = [
       <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MICRO: SINGLE NON-PROFIT FINANCIAL PERFORMANCE</h2>
       <p className="text-white text-center pb-8">
-        This tool will allow the end user to compare a single non-profit's expenditures v. salaries 
+        This tool will allow the end user to compare a single non-profit&apos;s expenditures v. salaries 
         and then allow the end user to calculate the cost per constituent served after salaries and wages for any grant level.</p>
         
         <div className="flex flex-col gap-6">

@@ -612,7 +612,7 @@ const fetchFiscalHealthData = async (option) => {
                   </p>
                   <p className="mt-1 text-center">
                     The sector chosen doesn’t have data for the same state as the non-profit. <br />
-                    The national score was calculated using the following years, as no data matched the non-profit's years:
+                    The national score was calculated using the following years, as no data matched the non-profit&apos;s years:
                     {sectorYears && sectorYears.length > 0 && (
                       <> {[...sectorYears].sort((a, b) => a - b).join(", ")}</>
                     )}
@@ -628,7 +628,7 @@ const fetchFiscalHealthData = async (option) => {
                     )}
                   </p>
                   <p className="mt-1 text-center">
-                    Both sector scores were calculated using the following years, as no data matched the non-profit's years:            
+                    Both sector scores were calculated using the following years, as no data matched the non-profit&apos;s years:            
                   {sectorYears && sectorYears.length > 0 && (
                       <> {[...sectorYears].sort((a, b) => a - b).join(", ")}</>
                     )}
