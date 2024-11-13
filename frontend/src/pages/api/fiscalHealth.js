@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     const db = client.db('Nonprofitly');
     if (mode === "NonProfit") {
       const score_and_years = await getNpFiscalHealthScore(db, nonprofit, address);
-      if (fiscalHealthScore === -1) {
+      if (score_and_years === -1) {
         return res.status(404).json({ message: "No data is provided for selected non profit" });
       }
       return res.status(200).json(score_and_years); //score might be NaN
@@ -59,7 +59,7 @@ async function fetchData(db, Np, Addr, mode, specific_sector = null) {
 }
 
 async function getNpFiscalHealthScore(db, Np, Addr) {
-  const values = await fetchData(db, Np, Addr, "Nonprofit");
+  const values = await fetchData(db, Np, Addr, "NonProfit");
   if (values === -1) return -1;
 
   const consecutiveYears = values[0];
@@ -126,7 +126,6 @@ function calculatePercentDifference(oldValue, newValue) {
 function calculateNonProfitFiscalHealthScore(data, years) {
   let totalScore = 0;
   let intervals = 0;
-
   for (let i = 0; i < years.length - 1; i++) {
     const year1 = years[i];
     const year2 = years[i + 1];
