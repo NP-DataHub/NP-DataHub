@@ -10,6 +10,7 @@ import ntee_codes from "../components/ntee";
 import { useRouter } from 'next/navigation';
 import NewsFeedSection from "../components/newsfeed";
 import FiscalHealthSection from "../components/FiscalHealthComponent";
+import CalculatorSection from "../components/CalculatorComponent";
 import Footer from "../components/dashboard_footer";
 
 import dynamic from 'next/dynamic';
@@ -307,7 +308,17 @@ export default function Toolbox() {
                                 <h2 className="text-xl font-semibold mb-2">NEWS FEEDS</h2>
                                 <p className="text-sm text-[#FEB95A]">A tool to understanding larger scale problems and connecting to regional nonprofits via social media and search engines.</p>
                             </div>
-                            <div className="bg-[#171821] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <div
+                                className={`p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
+                                    selectedSection === "Calculator" ? "bg-[#34344c]" : "bg-[#171821]"
+                                }`}
+                                onClick={() =>
+                                    setSelectedSection(
+                                      selectedSection === "Calculator" ? null : "Calculator"
+                                    )
+                                  }
+                                >
+
                                 <svg className = "mb-4" width="36" height="39" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_1349_1562)">
                                     <path d="M5.1202 25.17C6.95076 27 9.89798 27 15.7896 27C21.6827 27 24.6285 27 26.4591 25.1687C28.2896 23.34 28.2896 20.3925 28.2896 14.5C28.2896 8.6075 28.2896 5.66125 26.4591 3.83C24.6285 2 21.6813 2 15.7896 2C9.89659 2 6.95076 2 5.1202 3.83C3.28965 5.6625 3.28965 8.6075 3.28965 14.5C3.28965 20.3925 3.28965 23.34 5.1202 25.17Z" stroke="#A9DFD8" stroke-width="1.5"/>
@@ -630,7 +641,9 @@ export default function Toolbox() {
                             )}
                             {selectedSection === "News Feed" && (
                                 <NewsFeedSection></NewsFeedSection>
-
+                            )}
+                            {selectedSection === "Calculator" && (
+                                <CalculatorSection></CalculatorSection>
                             )}
                         </div>
                     </div>
