@@ -212,7 +212,7 @@ const states = [
         // Calculate "remaining" when budget is updated
         if (id === 'budget' && !isFetchMicroDisabled()) {
           updatedData.remaining = value
-            ? `$${formatNumber((Number(microData[3]) * Number(value)).toFixed(1))}`
+            ? `$${formatNumber((Number(microData[3]) * (Number(value)/100)).toFixed(1))}`
             : '';
         }
         // Calculate "costPerClient" when budget or remaining is updated
