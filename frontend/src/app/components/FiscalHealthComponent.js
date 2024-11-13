@@ -3,16 +3,27 @@ import Autosuggest from 'react-autosuggest';
 import './FiscalHealthSection.css'; // Import custom CSS
 
 export default function FiscalHealthSection() {
+  // All arguments
+  const [singleNp, setSingleNp] = useState('');
+  const [singleAddr, setSingleAddr] = useState('');
   const [firstNp, setFirstNp] = useState('');
   const [firstAddr, setFirstAddr] = useState('');
   const [secondNp, setSecondNp] = useState('');
   const [secondAddr, setSecondAddr] = useState('');
-  const [npVSnp, setNpVSnp] = useState(false); // Toggle between comparing two nonprofits or a single nonprofit
-  const [specificSector, setSpecificSector] = useState(null); // Sector selected from dropdown
-  const [selectedSectorForResults, setSelectedSectorForResults] = useState(''); // Sector used to display results
-  const [nonprofitData, setNonprofitData] = useState(null);
+  const [mode, setMode] = useState('');
+  const [specificSector, setSpecificSector] = useState(null); // Sector selected from dropdown  
+  // Results from api call
+  const [singleNpScore, setSingleNpScore] = useState(null);
+  const [singleNpYears, setSingleNpYears] = useState(null);
+  const [firstNpScore, setFirstNpScore] = useState(null);
+  const [firstNpYears, setFirstNpYears] = useState(null);
+  const [secondNpScore, setSecondNpScore] = useState(null);
+  const [secondNpYears, setSecondNpYears] = useState(null);
+  const [nationalSectorScore, setNationalSectorScore] = useState(null);
+  const [regionalSectorScore, setRegionalSectorScore = useState(null);
+  // Helper states
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); 
   const [nameSuggestions, setNameSuggestions] = useState([]); // Suggestions for name autocomplete
   const [addressSuggestions, setAddressSuggestions] = useState([]); // Suggestions for address autocomplete
   const [lastFetchedNameInput, setLastFetchedNameInput] = useState('');
@@ -113,27 +124,53 @@ export default function FiscalHealthSection() {
   };
 
   // Fetch fiscal health data
-  const fetchFiscalHealthData = async () => {
+  const fetchFiscalHealthData = async (whichNonProfit) => {
+    // Clear results when fetching new data
     setLoading(true);
     setError(null);
-    setNonprofitData(null); // Clear results when fetching new data
-
+    if (whichNonProfit === "first"){
+      setFirstNpScore(null); 
+    } else if (whichNonProfit === "second"){
+      setSecondNpScore(null);
+    } else {
+      setSingleNpScore(null);
+    }
     try {
       const response = await fetch('/api/fiscalHealth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstNp, firstAddr, secondNp, secondAddr, npVSnp, specific_sector: specificSector }),
+        body: JSON.stringify({
+          mode: mode,
+          nonprofit: 
+            whichNonProfit === "first" ? firstNp : 
+            whichNonProfit === "second" ? secondNp : 
+            singleNp,
+          address: 
+            whichNonProfit === "first" ? firstAddr : 
+            whichNonProfit === "second" ? secondAddr : 
+            singleAddr,
+          sector: specificSector
+        }),
       });
-
       const data = await response.json();
 
       if (!response.ok) {
         throw new Error(data.message || 'Error fetching fiscal health data');
       }
 
-      // Set results only after fetching data
-      setNonprofitData(data);
-      setSelectedSectorForResults(specificSector); // Update the sector used for results display
+      score = data[0].isNaN() ? null : data[0]
+      years = data[1].length == 0 ? null : data[1]
+      if (whichNonProfit === "first"){
+        setFirstNpScore(result); 
+        setFirstNpYears(years)
+      } else if (whichNonProfit === "second"){
+        setSecondNpScore(score);
+        setSecondNpYears(years)
+      } else {
+        setSingleNpScore(score);
+        setSingleNpYears(years)
+      }
+      // setSelectedSectorForResults(specificSector); // Update the sector used for results display
     } catch (err) {
       setError(err.message);
     } finally {
@@ -141,24 +178,11 @@ export default function FiscalHealthSection() {
     }
   };
 
-  // Toggle between single and two nonprofit comparisons, clearing data
-  const toggleNpVSnp = () => {
-    setNpVSnp(!npVSnp);
-    setSpecificSector(''); // Clear the sector input when switching
-    setNonprofitData(null); // Clear results when toggling between single and two
-    setSelectedSectorForResults(''); // Clear sector for results when switching
+  // Disable only if both are not given
+  const isComparisonFetchDisabled = () => {
+    return !(firstNp || firstAddr) || !(secondNp || secondAddr); 
   };
 
-  // Determine if the fetch button should be disabled
-  const isFetchDisabled = () => {
-    if (npVSnp) {
-      return !(firstNp || firstAddr) || !(secondNp || secondAddr); // Disable if neither name nor address is provided for both nonprofits
-    } else {
-      return !(firstNp || firstAddr); // Disable if neither name nor address is provided for the first nonprofit
-    }
-  };
-
-  console.log(nonprofitData)
   const SearchLoadingComponent = () => (
     <div className="flex items-center justify-center h-full w-full">
         <svg className="animate-spin h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -189,7 +213,6 @@ export default function FiscalHealthSection() {
         </li>
       </ul>
     </div>
-
 
       <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2  border-[#2C2D33]">
         <h1 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Fiscal Health Tool</h1>
