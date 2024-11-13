@@ -10,7 +10,6 @@ export default function FiscalHealthSection() {
   const [firstAddr, setFirstAddr] = useState('');
   const [secondNp, setSecondNp] = useState('');
   const [secondAddr, setSecondAddr] = useState('');
-  const [mode, setMode] = useState('');
   const [specificSector, setSpecificSector] = useState(null); // Sector selected from dropdown  
   // Results from api call
   const [singleNpScore, setSingleNpScore] = useState(null);
@@ -21,9 +20,13 @@ export default function FiscalHealthSection() {
   const [secondNpYears, setSecondNpYears] = useState(null);
   const [nationalSectorScore, setNationalSectorScore] = useState(null);
   const [regionalSectorScore, setRegionalSectorScore] = useState(null);
+  const [sectorYears, setSectorYears] = useState(null);
+  const [edgeCase, setEdgeCase] = useState(null);
   // Helper states
   const [loadingComparison, setLoadingComparison] = useState(false);
   const [errorComparison, setErrorComparison] = useState(null); 
+  const [loadingSectorComparison, setLoadingSectorComparison] = useState(false);
+  const [errorSectorComparison, setErrorSectorComparison] = useState(null); 
   const [nameSuggestions, setNameSuggestions] = useState([]); // Suggestions for name autocomplete
   const [addressSuggestions, setAddressSuggestions] = useState([]); // Suggestions for address autocomplete
   const [lastFetchedNameInput, setLastFetchedNameInput] = useState('');
@@ -31,7 +34,7 @@ export default function FiscalHealthSection() {
 
 
   const majorGroups = [
-    { value: '', label: 'Select a Sector (Optional)' },
+    { value: '', label: 'Select a sector (the default is the non-profit sector)' },
     { value: 'A', label: 'A - Arts, Culture, and Humanities' },
     { value: 'B', label: 'B - Educational Institutions and Related Activities' },
     { value: 'C', label: 'C - Environmental Quality, Protection and Beautification' },
@@ -123,19 +126,28 @@ export default function FiscalHealthSection() {
     setAddressSuggestions([]);
   };
 
-  // Fetch fiscal health data
+/// Fetch fiscal health data
 const fetchFiscalHealthData = async (option) => {
   // Clear results and set loadingComparison state
-  setLoadingComparison(true);
-  setErrorComparison(null);
 
   if (option === "compare") {
+    setLoadingComparison(true);
+    setErrorComparison(null);
     setFirstNpScore(null);
     setSecondNpScore(null);
+    setFirstNpYears(null);
+    setSecondNpYears(null);
   } else {
+    setLoadingSectorComparison(true);
+    setErrorSectorComparison(null);
     setSingleNpScore(null);
+    setSingleNpYears(null);
+    setSpecificSector(null);
+    setNationalSectorScore(null);
+    setRegionalSectorScore(null);
+    setSectorYears(null);
+    setEdgeCase(null);
   }
-
   try {
     if (option === "compare") {
       // Fetch data for the first nonprofit
@@ -143,7 +155,7 @@ const fetchFiscalHealthData = async (option) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          mode: mode,
+          mode: "NonProfit",
           nonprofit: firstNp,
           address: firstAddr,
           sector: specificSector,
@@ -160,7 +172,7 @@ const fetchFiscalHealthData = async (option) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          mode: mode,
+          mode: "NonProfit",
           nonprofit: secondNp,
           address: secondAddr,
           sector: specificSector,
@@ -168,20 +180,16 @@ const fetchFiscalHealthData = async (option) => {
       });
       const dataSecond = await responseSecond.json();
       if (!responseSecond.ok) throw new Error(dataSecond.message || 'Error fetching fiscal health data for second nonprofit');
-
       const scoreSecond = dataSecond[0] ? dataSecond[0].toFixed(1) : "NaN";
       setSecondNpScore(scoreSecond);
       setSecondNpYears(dataSecond[1]);
-
-      console.log(firstNpScore, secondNpScore)
-
     } else {
-      // Fetch data for a single nonprofit
+      // Fetch data for sector comparison
       const response = await fetch('/api/fiscalHealth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          mode: mode,
+          mode: "SectorComparison",
           nonprofit: singleNp,
           address: singleAddr,
           sector: specificSector,
@@ -189,25 +197,72 @@ const fetchFiscalHealthData = async (option) => {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || 'Error fetching fiscal health data');
-
-      const score = data[0] ? data[0].toFixed(1) : "NaN";
-      setSingleNpScore(score);
-      setSingleNpYears(data[1]);
+      // 1st case, nonProfit doesn't have enough years
+      if (data.length === 2) {
+        const score = data[0] ? data[0].toFixed(1) : "NaN" ;
+        setSingleNpScore(score);
+        setSingleNpYears(data[1]);
+        setEdgeCase(1);
+      }
+      // 2nd case, no sector defined and valid data
+      // or specific sector defined which has same consecutive years and state as nonprofit
+      else if (data.length === 4){
+        setSingleNpScore(data[0].toFixed(1));
+        setNationalSectorScore(data[1].toFixed(1));
+        setRegionalSectorScore(data[2].toFixed(1));
+        setSingleNpYears(data[3]);
+        setEdgeCase(2);
+      }
+      //3rd case, specific sector doesn't have enough consecutive years
+      else if (data.length === 3){
+        setSingleNpScore(data[0].toFixed(1));
+        setSingleNpYears(data[1]);
+        setSectorYears(data[2]);
+        setEdgeCase(3);
+      }
+      //4th case, specific sector doesn't have data for the same state as non-profit
+      else if (data.length === 1){
+        setSingleNpScore(data[0][0].toFixed(1));
+        setSingleNpYears(data[0][1]);
+        setNationalSectorScore(data[0][2].toFixed(1));
+        setSectorYears(data[0][3]);
+        setEdgeCase(4);
+      }
+      // 5th case, specific sector has data for the same as non-profit, but different years
+      else if (data.length === 5) {
+        setSingleNpScore(data[0].toFixed(1));
+        setNationalSectorScore(data[1].toFixed(1));
+        setRegionalSectorScore(data[2].toFixed(1));
+        setSingleNpYears(data[3]);
+        setSectorYears(data[4]);
+        setEdgeCase(5);
+      }
+      else {
+        setErrorSectorComparison("Unexpected error happened. Please contact administrator");
+      }
     }
-
-    // Optionally set the selected sector for display
-    // setSelectedSectorForResults(specificSector);
-
   } catch (err) {
-    setErrorComparison(err.message);
+    if (option === "compare") {
+      setErrorComparison(err.message);
+    } else{
+      setErrorSectorComparison(err.message);
+    }
   } finally {
-    setLoadingComparison(false);
+    if (option === "compare") {
+      setLoadingComparison(false);
+    } else {
+      setLoadingSectorComparison(false);
+    }
   }
 };
 
   // Disable only if both are not given
   const isComparisonFetchDisabled = () => {
     return !(firstNp || firstAddr) || !(secondNp || secondAddr); 
+  };
+  // Disable only if both are not given
+  const isComparisonSectorFetchDisabled = () => {
+    return !(singleNp || singleAddr);
   };
 
   const SearchLoadingComponent = () => (
@@ -244,7 +299,6 @@ const fetchFiscalHealthData = async (option) => {
               value: firstNp,
               onChange: (_, { newValue }) => {
                 setFirstNp(newValue);
-                setMode("NonProfit");
               },
               className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
             }}
@@ -268,7 +322,6 @@ const fetchFiscalHealthData = async (option) => {
               value: firstAddr,
               onChange: (_, { newValue }) => {
                 setFirstAddr(newValue);
-                setMode("NonProfit");
               },
               className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
             }}
@@ -292,7 +345,6 @@ const fetchFiscalHealthData = async (option) => {
               value: secondNp,
               onChange: (_, { newValue }) => {
                 setSecondNp(newValue);
-                setMode("NonProfit");
               },
               className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
             }}
@@ -316,7 +368,6 @@ const fetchFiscalHealthData = async (option) => {
               value: secondAddr,
               onChange: (_, { newValue }) => {
                 setSecondAddr(newValue);
-                setMode("NonProfit");
               },
               className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
             }}
@@ -357,7 +408,7 @@ const fetchFiscalHealthData = async (option) => {
                   {firstNpYears.length >= 4 ? (
                     <p>Fiscal health score calculated from the following years:</p>
                   ) : (
-                    <p>Minimum 4 consecutive years required for a fiscal health score.</p>
+                    <p>Minimum 2 consecutive years required for a fiscal health score.</p>
                   )}
                   <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
                     {firstNpYears.length >= 4
@@ -365,12 +416,13 @@ const fetchFiscalHealthData = async (option) => {
                           <li key={`firstNpYear-${index}`}>{year}</li>
                         ))
                       : firstNpYears.length > 0 && (
-                          <li>Only available years: {firstNpYears.join(", ")}</li>
+                          <li>
+                            Only available years: {[...firstNpYears].sort((a, b) => a - b).join(", ")}
+                          </li>
                         )}
                   </ul>
                 </div>
               </div>
-              
               {/* Second Nonprofit Score Display */}
               <div className="flex flex-col items-center w-1/2">
                 <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
@@ -382,7 +434,7 @@ const fetchFiscalHealthData = async (option) => {
                   {secondNpYears.length >= 4 ? (
                     <p>Fiscal health score calculated from the following years:</p>
                   ) : (
-                    <p>Minimum 4 consecutive years required for a fiscal health score.</p>
+                    <p>Minimum 2 consecutive years are required for a fiscal health score.</p>
                   )}
                   <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
                     {secondNpYears.length >= 4
@@ -390,8 +442,10 @@ const fetchFiscalHealthData = async (option) => {
                           <li key={`secondNpYear-${index}`}>{year}</li>
                         ))
                       : secondNpYears.length > 0 && (
-                          <li>Only available years: {secondNpYears.join(", ")}</li>
-                        )}
+                        <li>
+                          Only available years: {[...secondNpYears].sort((a, b) => a - b).join(", ")}
+                        </li>
+                      )}
                   </ul>
                 </div>
               </div>
@@ -401,7 +455,191 @@ const fetchFiscalHealthData = async (option) => {
         )}
       </div>
       {/* Compare NonProfit Against Sector */}
+      <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12">
+        <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare non-profit against a sector</h2>
+        <p className="text-white text-center pb-8">
+        Compare the scores side-by-side with the same or other sectors, either at the national or regional level.</p>
+        <div className="flex flex-col gap-6">
+          <Autosuggest
+            suggestions={nameSuggestions}
+            onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+            onSuggestionsClearRequested={onSuggestionsClearRequested}
+            getSuggestionValue={getNameSuggestionValue}
+            renderSuggestion={renderNameSuggestion}
+            inputProps={{
+              placeholder: 'Single Nonprofit Name',
+              value: singleNp,
+              onChange: (_, { newValue }) => {
+                setSingleNp(newValue);
+              },
+              className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+            }}
+            theme={{
+              container: 'autosuggest-container',
+              input: 'autosuggest-input',
+              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
+              suggestionsList: 'autosuggest-suggestions-list',
+              suggestion: 'autosuggest-suggestion',
+              suggestionHighlighted: 'autosuggest-suggestion--highlighted',
+            }}
+          />
+          <Autosuggest
+            suggestions={addressSuggestions}
+            onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
+            onSuggestionsClearRequested={onSuggestionsClearRequested}
+            getSuggestionValue={getAddressSuggestionValue}
+            renderSuggestion={renderAddressSuggestion}
+            inputProps={{
+              placeholder: 'Single Nonprofit Address',
+              value: singleAddr,
+              onChange: (_, { newValue }) => {
+                setSingleAddr(newValue);
+              },
+              className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+            }}
+            theme={{
+              container: 'autosuggest-container',
+              input: 'autosuggest-input',
+              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
+              suggestionsList: 'autosuggest-suggestions-list',
+              suggestion: 'autosuggest-suggestion',
+              suggestionHighlighted: 'autosuggest-suggestion--highlighted',
+            }}
+          />
+          <select
+            value={specificSector}
+            onChange={(e) => setSpecificSector(e.target.value)}
+            className="p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white"
+          >
+            {majorGroups.map((group) => (
+              <option key={group.value} value={group.value} className="text-black">
+                {group.label}
+              </option>
+            ))}
+          </select>
 
+          <button
+            onClick={() => fetchFiscalHealthData("compareSector")}
+            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonSectorFetchDisabled() ? 'bg-gray-700 text-black cursor-not-allowed' : 'bg-[#FEB95A] text-black hover:bg-[#D49B4A] transition duration-300'}`}
+            disabled={isComparisonSectorFetchDisabled()}
+          >
+            Compare
+          </button>
+        </div>
+        {loadingSectorComparison && <div className="text-center text-lg text-gray-400 mt-6"><SearchLoadingComponent/></div>}
+        {errorSectorComparison && <div className="text-center text-lg text-red-400 mt-6">Error: {errorSectorComparison}</div>}
+
+        {singleNpScore && !loadingSectorComparison && !errorSectorComparison && (
+          <div className="mt-8">
+            {/* Container for the three score circles */}
+            <div className="flex flex-row justify-center items-center space-x-4 w-full">
+              {/* Edge Case 1: Not Enough Consecutive Years */}
+              {edgeCase === 1 ? (
+                <div className="flex flex-col items-center w-1/3">
+                  <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                    NaN
+                  </div>
+                  <p className="mt-4 text-center text-sm text-gray-400 whitespace-nowrap">
+                    Minimum 2 consecutive years required for a fiscal health score.
+                  </p>
+                  {singleNpYears && singleNpYears.length > 0 && (
+                    <p className="text-sm text-gray-400 text-center mt-2">
+                      Only available years:{" "}
+                      <span className="inline-block">{[...singleNpYears].sort((a, b) => a - b).join(", ")}</span>
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <>
+                  {/* Display the three score circles */}
+                  <div className="flex flex-col items-center w-1/3">
+                    <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                      {singleNpScore}
+                    </div>
+                    <p className="mt-4">Non-Profit Score</p>
+                  </div>
+                  <div className="flex flex-col items-center w-1/3">
+                    <div className="bg-teal-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                      {regionalSectorScore == null ? "NaN" : regionalSectorScore}
+                    </div>
+                    <p className="mt-4">Regional Score</p>
+                  </div>
+                  <div className="flex flex-col items-center w-1/3">
+                    <div className="bg-orange-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                      {nationalSectorScore == null ? "NaN" : nationalSectorScore}
+                    </div>
+                    <p className="mt-4">National Score</p>
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* Edge Case 2: Show message with years below the circles */}
+            <div className="mt-6 text-sm text-gray-500">      
+              
+              {edgeCase === 2 && (
+                <p className="mt-2 text-center">
+                  Fiscal health scores were calculated using the following years: 
+                  {singleNpYears && singleNpYears.length > 0 && (
+                    <> {[...singleNpYears].sort((a, b) => a - b).join(", ")}</>
+                  )}
+                </p>
+              )}
+
+              {edgeCase === 3 && (
+                <div className="mt-2 text-center">
+                  <p>
+                    The fiscal health score of the non-profit was calculated using the following years: 
+                    {singleNpYears && singleNpYears.length > 0 && (
+                      <> {[...singleNpYears].sort((a, b) => a - b).join(", ")}</>
+                    )}
+                  </p>
+                  <p className="mt-1 text-center">
+                    The sector chosen doesn’t have enough data for any consecutive years. Only available years: 
+                    {sectorYears && sectorYears.length > 0 && (
+                      <> {[...sectorYears].sort((a, b) => a - b).join(", ")}</>
+                    )}
+                  </p>
+                </div>
+              )}
+              {edgeCase === 4 && (
+                <div className="mt-2 text-center">
+                  <p>
+                    The fiscal health score of the non-profit was calculated using the following years: 
+                    {singleNpYears && singleNpYears.length > 0 && (
+                      <> {[...singleNpYears].sort((a, b) => a - b).join(", ")}</>
+                    )}
+                  </p>
+                  <p className="mt-1 text-center">
+                    The sector chosen doesn’t have data for the same state as the non-profit. <br />
+                    The national score was calculated using the following years, as no data matched the non-profit's years:
+                    {sectorYears && sectorYears.length > 0 && (
+                      <> {[...sectorYears].sort((a, b) => a - b).join(", ")}</>
+                    )}
+                  </p>
+                </div>
+              )}
+              {edgeCase === 5 && (
+                <div className="mt-2 text-center">
+                  <p>
+                    The fiscal health score of the non-profit was calculated using the following years: 
+                    {singleNpYears && singleNpYears.length > 0 && (
+                      <> {[...singleNpYears].sort((a, b) => a - b).join(", ")}</>
+                    )}
+                  </p>
+                  <p className="mt-1 text-center">
+                    Both sector scores were calculated using the following years, as no data matched the non-profit's years:            
+                  {sectorYears && sectorYears.length > 0 && (
+                      <> {[...sectorYears].sort((a, b) => a - b).join(", ")}</>
+                    )}
+                  </p>
+                </div>
+              )}
+            </div>
+
+          </div>
+        )}
+      </div>
     </div>
   );
 }
