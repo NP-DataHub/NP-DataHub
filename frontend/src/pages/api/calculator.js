@@ -62,7 +62,7 @@ async function getNonProfitData(db, nonprofit, address) {
   if (!yearData || yearData.OthSal === 0 || yearData.OffComp === 0 || yearData.TotExp === 0) {
     return -1;
   }
-  const salariesToExpensesPct = 100 * (yearData.TotExp / (yearData.OffComp + yearData.OthSal));
+  const salariesToExpensesPct = 100 * ((yearData.OffComp + yearData.OthSal) / yearData.TotExp);
   return [chosenYear, yearData.OthSal, yearData.OffComp, salariesToExpensesPct];
 } 
 
@@ -172,7 +172,7 @@ async function getEntireSectorData(db, sector, state) {
   const NumEmployees = national ? selectedData.NatSumEmp : selectedData.SumEmp;
   const OtherSalaries = national ? selectedData.NatSumOthSal : selectedData.SumOthSal;
   const OfficerCompensation = national ? selectedData.NatSumOffComp : selectedData.SumOffComp;
-  const salariesToExpensesPct = 100 * (TotalExpenses / (OfficerCompensation + OtherSalaries));
+  const salariesToExpensesPct = 100 *  ((OfficerCompensation + OtherSalaries) / TotalExpenses);
   const totalNonProfits = national ? selectedData.NatCount990Np : selectedData.Count990Np;
   return [
     chosen_year,

@@ -349,13 +349,13 @@ const states = [
                   <div key={index + 4} className="flex flex-col items-center">
                     <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
                       <span className={fontSizeClass}>
-                        {index === 0 ? formattedValue : `$${formattedValue}`}
+                        { (index === 0 || index === 3) ? formattedValue : `$${formattedValue}`}
                       </span>
                     </div>
                     <p className="mt-4 text-sm text-center">
-                      {index === 1 ? <>SALARIES<br />AND<br />WAGES</> : 
+                      {index === 1 ? <>SALARIES<br />AND WAGES</> : 
                         index === 2 ? <>OFFICERS<br />COMPENSATION</> : 
-                        index === 3 ? <>PCT. OF SALARIES<br />v.<br />EXPENSES</> : 
+                        index === 3 ? <> SALARIES<br />TO EXPENSES<br />PERCENTAGE</> : 
                         "EMPLOYEES"}
                     </p>
                   </div>
@@ -471,9 +471,9 @@ const states = [
                         </span>
                       </div>
                       <p className="mt-4 text-sm text-center">
-                        {index === 0 ? <>SALARIES<br />AND<br />WAGES</> : 
+                        {index === 0 ? <>SALARIES<br />AND WAGES</> : 
                           index === 1 ? <>OFFICERS<br />COMPENSATION</> : 
-                          <>PCT. OF SALARIES<br />v.<br />EXPENSES</>}
+                          <>SALARIES<br />TO EXPENSES<br />PERCENTAGE</> }
                       </p>
                     </div>
                   );
