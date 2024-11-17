@@ -3,7 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import { FaInfoCircle } from "react-icons/fa";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 
-export default function CalculatorSection() {
+export default function CalculatorSection({isDarkMode}) {
 
   const [mode, setMode] = useState('');
   const [nonprofit, setNonprofit] = useState('');
@@ -240,18 +240,18 @@ const states = [
   };
 
   return (
-    <div className="p-6 bg-[#171821] rounded-lg">
+    <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
       <h3 className="text-xl font-semibold text-[#A9DFD8]">Calculator</h3>
-      <p className="text-white">
+      <p className="">
         Compare NTEE code sectors against public data that align with various regional nonprofit’s missions.
         The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
       </p>
       
 
       {/* Macro mode */}
-      <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12">
+      <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
         <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MACRO: SECTOR FINANCIAL PERFORMANCE</h2>
-        <p className="text-white text-center pb-8">
+        <p className="text-center pb-8">
             Based on the financial performance of nonprofits - with filings from the most recent year containing the most data points - 
             the following calculations will generate results for either a statewide or national NTEE sector performance, depending on your selection.
             For grantmakers and lawmakers, the results across eight key fiscal variables offer a holistic snapshot of the NTEE sector based on the last reported fiscal year.<br /> <br />
@@ -266,7 +266,7 @@ const states = [
                 setSector(e.target.value);
                 setMode("Macro");
             }}
-            className="p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white"
+            className={`p-4 border  ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full`}
           >
             {majorGroups.map((group) => (
               <option key={group.value} value={group.value} className="text-black">
@@ -284,11 +284,12 @@ const states = [
                     {suggestion}
                 </div>
             )}
+            
             inputProps={{
               placeholder: 'Enter State. If left blank, national performance will be calculated',
               value: state,
               onChange: (event, { newValue }) => setState(newValue),
-              className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
             }}
 
             theme={{
@@ -302,7 +303,7 @@ const states = [
         />
         <button
           onClick={fetchMacroData}
-          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMacroDisabled() ? 'bg-gray-700 text-black cursor-not-allowed' : 'bg-[#A9DFD8] text-black hover:bg-[#88B3AE] transition duration-300'}`}
+          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMacroDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#FEB95A] hover:bg-[#D49B4A] transition duration-300'}`}
           disabled={isFetchMacroDisabled()}
         >
           Calculate
@@ -377,9 +378,9 @@ const states = [
       </div>
 
       {/* Micro mode */}
-      <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12">
+      <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
         <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MICRO: SINGLE NON-PROFIT FINANCIAL PERFORMANCE</h2>
-        <p className="text-white text-center pb-8">
+        <p className="text-center pb-8">
         This tool will allow the end user to compare a single nonprofit&apos;s expenditures v. salaries from its last reported fiscal year 
         and then allow the end user to calculate the cost per constituent served after salaries and wages for any grant level.
         This is important for budgeting purposes as nonprofits can budget down to the number of individuals in which they&apos;re serving 
@@ -404,7 +405,7 @@ const states = [
                 setNonprofit(newValue);
                 setMode("Micro");
               },
-              className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
             }}
             theme={{
               container: 'autosuggest-container',
@@ -426,6 +427,7 @@ const states = [
                 {suggestion.Addr}
               </div>
             )}
+            
             inputProps={{
               placeholder: 'Search or Auto-fill Address (Optional: This can be used if the nonprofit has multiple addresses)',
               value: address,
@@ -433,7 +435,7 @@ const states = [
                 setAddress(newValue);
                 setMode("Micro");
               },
-              className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
             }}
             theme={{
               container: 'autosuggest-container',
@@ -444,11 +446,11 @@ const states = [
               suggestionHighlighted: 'autosuggest-suggestion--highlighted',
             }}
           />
-          <button
-            onClick={fetchMicroData}
-            className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMicroDisabled() ? 'bg-gray-700 text-black cursor-not-allowed' : 'bg-[#A9DFD8] text-black hover:bg-[#88B3AE] transition duration-300'}`}
-            disabled={isFetchMicroDisabled()}
-          >
+        <button
+          onClick={fetchMacroData}
+          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMacroDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#FEB95A] hover:bg-[#D49B4A] transition duration-300'}`}
+          disabled={isFetchMacroDisabled()}
+        >
             Calculate
           </button>
         </div>
@@ -495,7 +497,7 @@ const states = [
           </div>
         )}
 
-      <h6 className="text font-semibold text-white mt-4 inline-flex items-center">
+      <h6 className="text font-semibold mt-4 inline-flex items-center">
         COST PER CLIENT/CONSTITUENT FOR GRANT OR PROJECT
         <a
           data-tooltip-id="comparison-tooltip"

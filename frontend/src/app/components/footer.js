@@ -22,7 +22,7 @@ const Footer = () => {
   const sendEmail = (e, templateId) => {
     e.preventDefault();
     emailjs
-      .sendForm('service_mkrobk5', templateId, e.target, 'm66VYLm_g93hibrW8')
+      .sendForm('service_9buauy9', templateId, e.target, 'm66VYLm_g93hibrW8')
       .then((result) => {
         setSuccess(true);
         e.target.reset(); // Reset form after submission

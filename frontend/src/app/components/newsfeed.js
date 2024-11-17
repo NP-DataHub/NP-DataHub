@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SocialMediaMentions from './media_mentions';
 
-export default function NewsFeedSection() {
+export default function NewsFeedSection({isDarkMode}) {
   const [articles, setArticles] = useState([]); // State to hold news articles
   const [query, setQuery] = useState("nonprofit OR \"non-profit\" OR \"non profit\""); // Initial query
   const [searchQuery, setSearchQuery] = useState(""); // State for user's search input, starts empty
@@ -52,9 +52,9 @@ export default function NewsFeedSection() {
   );
 
   return (
-    <div className="p-6 bg-[#171821] rounded-lg">
+    <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
       <h3 className="text-xl font-semibold text-[#FEB95A]">News Feeds</h3>
-      <p className="text-white">
+      <p className="">
         A tool for understanding larger-scale problems and connecting to regional nonprofits via social media and search engines.
       </p>
 
@@ -65,7 +65,7 @@ export default function NewsFeedSection() {
           placeholder="Search for news..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full p-2 rounded-l-lg bg-[#34344c] text-white outline-none"
+          className={`w-full p-2 rounded-l-lg ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#c9c9c9] text-black" } outline-none`}
         />
         <button
           type="submit"
@@ -86,15 +86,6 @@ export default function NewsFeedSection() {
           </button>
 
           {/* Social Media Button with Disabled Style and Tooltip */}
-          <div className="relative group">
-            <button className="px-4 py-2 rounded-full bg-gray-500 text-white cursor-not-allowed">
-              Social Media
-            </button>
-            {/* Tooltip */}
-            <span className="absolute left-1/2 transform -translate-x-1/2 -translate-y-full mt-1 w-max bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              Feature currently under construction
-            </span>
-          </div>
         </div>
       </div>
 
@@ -112,7 +103,7 @@ export default function NewsFeedSection() {
               articles.map((article) => (
                 <div
                   key={article.uuid}
-                  className="border border-gray-700 rounded-lg overflow-hidden shadow-md bg-[#1E1F29] hover:bg-[#2A2B3C] transition-colors duration-300"
+                  className={`border rounded-lg overflow-hidden shadow-md ${ isDarkMode ? "bg-[#1E1F29] hover:bg-[#2A2B3C] border-gray-700 ": "bg-white border-gray-200"} transition-colors duration-300`}
                 >
                   {article.image_url && (
                     <img

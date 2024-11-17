@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
-import './FiscalHealthSection.css'; // Import custom CSS
 
-export default function FiscalHealthSection() {
+
+export default function FiscalHealthSection({isDarkMode}) {
   // All arguments
   const [singleNp, setSingleNp] = useState('');
   const [singleAddr, setSingleAddr] = useState('');
@@ -275,16 +275,16 @@ const fetchFiscalHealthData = async (option) => {
 );
 
   return (
-    <div className="p-6 bg-[#171821] rounded-lg">
+    <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
       <h3 className="text-xl font-semibold text-[#FEB95A]">Fiscal Health</h3>
-      <p className="text-white ">
+      <p className=" mb-12">
         Assess a nonprofit’s fiscal health by calculating a weighted score based on various financial data variables, 
         including increases or decreases in revenues, expenses, assets, and liabilities. 
       </p>
       {/* Compare Two Nonprofits */}
-      <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33]">
+      <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2`}>
         <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare two non-profits</h2>
-        <p className="text-white text-center pb-8">
+        <p className="text-center pb-8">
           Compare the scores side-by-side with other non-profits.
         </p>
         <div className="flex flex-col gap-6">
@@ -300,7 +300,7 @@ const fetchFiscalHealthData = async (option) => {
               onChange: (_, { newValue }) => {
                 setFirstNp(newValue);
               },
-              className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
             }}
             theme={{
               container: 'autosuggest-container',
@@ -323,7 +323,7 @@ const fetchFiscalHealthData = async (option) => {
               onChange: (_, { newValue }) => {
                 setFirstAddr(newValue);
               },
-              className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
             }}
             theme={{
               container: 'autosuggest-container',
@@ -346,7 +346,7 @@ const fetchFiscalHealthData = async (option) => {
               onChange: (_, { newValue }) => {
                 setSecondNp(newValue);
               },
-              className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
             }}
             theme={{
               container: 'autosuggest-container',
@@ -369,7 +369,7 @@ const fetchFiscalHealthData = async (option) => {
               onChange: (_, { newValue }) => {
                 setSecondAddr(newValue);
               },
-              className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
             }}
             theme={{
               container: 'autosuggest-container',
@@ -383,7 +383,7 @@ const fetchFiscalHealthData = async (option) => {
 
           <button
             onClick={() => fetchFiscalHealthData("compare")}
-            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonFetchDisabled() ? 'bg-gray-700 text-black cursor-not-allowed' : 'bg-[#FEB95A] text-black hover:bg-[#D49B4A] transition duration-300'}`}
+            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonFetchDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#FEB95A] hover:bg-[#D49B4A] transition duration-300'}`}
             disabled={isComparisonFetchDisabled()}
           >
             Compare
@@ -455,9 +455,9 @@ const fetchFiscalHealthData = async (option) => {
         )}
       </div>
       {/* Compare NonProfit Against Sector */}
-      <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12">
+      <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12`}>
         <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare non-profit against a sector</h2>
-        <p className="text-white text-center pb-8">
+        <p className="text-center pb-8">
         Compare the scores side-by-side with the same or other sectors, either at the national or regional level.</p>
         <div className="flex flex-col gap-6">
           <Autosuggest
@@ -472,7 +472,7 @@ const fetchFiscalHealthData = async (option) => {
               onChange: (_, { newValue }) => {
                 setSingleNp(newValue);
               },
-              className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
             }}
             theme={{
               container: 'autosuggest-container',
@@ -495,7 +495,7 @@ const fetchFiscalHealthData = async (option) => {
               onChange: (_, { newValue }) => {
                 setSingleAddr(newValue);
               },
-              className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
+              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
             }}
             theme={{
               container: 'autosuggest-container',
@@ -509,7 +509,7 @@ const fetchFiscalHealthData = async (option) => {
           <select
             value={specificSector}
             onChange={(e) => setSpecificSector(e.target.value)}
-            className="p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white"
+            className={`p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full`}
           >
             {majorGroups.map((group) => (
               <option key={group.value} value={group.value} className="text-black">
@@ -520,7 +520,7 @@ const fetchFiscalHealthData = async (option) => {
 
           <button
             onClick={() => fetchFiscalHealthData("compareSector")}
-            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonSectorFetchDisabled() ? 'bg-gray-700 text-black cursor-not-allowed' : 'bg-[#FEB95A] text-black hover:bg-[#D49B4A] transition duration-300'}`}
+            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonSectorFetchDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed"  : 'bg-[#FEB95A] text-black hover:bg-[#D49B4A] transition duration-300'}`}
             disabled={isComparisonSectorFetchDisabled()}
           >
             Compare
