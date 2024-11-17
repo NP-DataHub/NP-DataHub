@@ -203,23 +203,26 @@ const states = [
   const handleChange = (e) => {
     const { id, value } = e.target;
     // Allow only numbers
-    if (/^\d*$/.test(value)) {
+    if (/^\d*\.?\d*$/.test(value)) {
       setFormData((prevData) => {
         let updatedData = { ...prevData, [id]: value };
         const formatNumber = (num) => {
-          return new Intl.NumberFormat().format(num);
+          return new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }).format(num);
         };
         // Calculate "remaining" when budget is updated
         if (id === 'budget' && !isFetchMicroDisabled()) {
           updatedData.remaining = value
-            ? `$${formatNumber((Number(microData[3]) * (Number(value)/100)).toFixed(1))}`
+            ? `$${formatNumber((Number(microData[3]) * (Number(value)/100)).toFixed(2))}`
             : '';
         }
         // Calculate "costPerClient" when budget or remaining is updated
         if ((id === 'budget' || id === 'remaining') && !isFetchMicroDisabled()) {
           const remainingAmount = parseFloat(updatedData.remaining.replace('$', '').replace(/,/g, '')) || 0;
           if (remainingAmount && formData.beneficiaries) {
-            updatedData.costPerClient = `$${formatNumber((remainingAmount / Number(formData.beneficiaries)).toFixed(1))}`;
+            updatedData.costPerClient = `$${formatNumber((remainingAmount / Number(formData.beneficiaries)).toFixed(2))}`;
           } else {
             updatedData.costPerClient = ''; // Reset if no beneficiaries
           }
@@ -228,7 +231,7 @@ const states = [
         if (id === 'beneficiaries' && !isFetchMicroDisabled() && formData.remaining) {
           const remainingAmount = parseFloat(formData.remaining.replace('$', '').replace(/,/g, '')) || 0;
           updatedData.costPerClient = value
-            ? `$${formatNumber((remainingAmount / Number(value)).toFixed(1))}`
+            ? `$${formatNumber((remainingAmount / Number(value)).toFixed(2))}`
             : '';
         }
         return updatedData;
@@ -240,7 +243,7 @@ const states = [
     <div className="p-6 bg-[#171821] rounded-lg">
       <h3 className="text-xl font-semibold text-[#A9DFD8]">Calculator</h3>
       <p className="text-white">
-        Compare NTEE code sectors against public data that align with various regional non-profit’s missions.
+        Compare NTEE code sectors against public data that align with various regional nonprofit’s missions.
         The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
       </p>
       
@@ -248,10 +251,13 @@ const states = [
       {/* Macro mode */}
       <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MACRO: SECTOR FINANCIAL PERFORMANCE</h2>
-      <p className="text-white text-center pb-8">
-        Based on the financial performance of non-profits with filings from the most recent year containing the most data points, 
-        the following calculations will generate results for either a statewide or 
-        national NTEE sector performance, depending on your selection.
+        <p className="text-white text-center pb-8">
+            Based on the financial performance of nonprofits - with filings from the most recent year containing the most data points - 
+            the following calculations will generate results for either a statewide or national NTEE sector performance, depending on your selection.
+            For grantmakers and lawmakers, the results across eight key fiscal variables offer a holistic snapshot of the NTEE sector based on the last reported fiscal year.<br /> <br />
+            Please note that in order for a nonprofit to be included in these calculations, they would have had to reported seven of the eight variables in the last complete year.
+            The only variable that is calculated is the salaries to expenses percentage. The other seven are reported and appear on IRS documents.
+            If a nonprofit within that state or national sector does not report in the last full fiscal year, they are not included in the calculations.
         </p>
         <div className="flex flex-col gap-6">
           <select
@@ -279,7 +285,7 @@ const states = [
                 </div>
             )}
             inputProps={{
-              placeholder: 'Enter state. If left blank, national performance will be calculated',
+              placeholder: 'Enter State. If left blank, national performance will be calculated',
               value: state,
               onChange: (event, { newValue }) => setState(newValue),
               className: 'p-4 border border-gray-600 bg-[#34344c] rounded-lg w-full text-white',
@@ -320,7 +326,7 @@ const states = [
                 const fontSizeClass = formattedValue.length > 6 ? 'text-sm' : 'text-xl';
                 return (
                   <div key={index} className="flex flex-col items-center">
-                    <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
+                    <div className="bg-teal-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
                       <span className={fontSizeClass}>
                         ${formattedValue}
                       </span>
@@ -347,7 +353,7 @@ const states = [
 
                 return (
                   <div key={index + 4} className="flex flex-col items-center">
-                    <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
+                    <div className="bg-teal-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
                       <span className={fontSizeClass}>
                         { (index === 0 || index === 3) ? formattedValue : `$${formattedValue}`}
                       </span>
@@ -364,7 +370,7 @@ const states = [
             </div>
           </div>
           <div className="mt-6 text-center text-gray-400">
-            Data calculated from the following year: {macroData[0]}, based on a total of {macroData[9]} non-profits.
+            Data calculated from the following year: {macroData[0]}, based on a total of {macroData[9]} nonprofits.
           </div>
         </div>
       )}
@@ -373,10 +379,13 @@ const states = [
       {/* Micro mode */}
       <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MICRO: SINGLE NON-PROFIT FINANCIAL PERFORMANCE</h2>
-      <p className="text-white text-center pb-8">
-        This tool will allow the end user to compare a single non-profit&apos;s expenditures v. salaries 
-        and then allow the end user to calculate the cost per constituent served after salaries and wages for any grant level.</p>
-        
+        <p className="text-white text-center pb-8">
+        This tool will allow the end user to compare a single nonprofit's expenditures v. salaries from its last reported fiscal year 
+        and then allow the end user to calculate the cost per constituent served after salaries and wages for any grant level.
+        This is important for budgeting purposes as nonprofits can budget down to the number of individuals in which they're serving 
+        and create a more accurate budget with overhead considerations. 
+        Conversely, this allows grantmakers to gauge whether the nonprofit submitting a proposal is accurately budgeting beyond overhead.
+        </p>
         <div className="flex flex-col gap-6">
           <Autosuggest
             suggestions={nameSuggestions}
@@ -418,7 +427,7 @@ const states = [
               </div>
             )}
             inputProps={{
-              placeholder: 'Search or Auto-fill Address',
+              placeholder: 'Search or Auto-fill Address (Optional: This can be used if the nonprofit has multiple addresses)',
               value: address,
               onChange: (_, { newValue }) => {
                 setAddress(newValue);
@@ -465,7 +474,7 @@ const states = [
 
                   return (
                     <div key={index} className="flex flex-col items-center">
-                      <div className="bg-green-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
+                      <div className="bg-teal-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
                         <span className={fontSizeClass}>
                           {index === 2 ? formattedValue : `$${formattedValue}`}
                         </span>
@@ -481,7 +490,7 @@ const states = [
               </div>
             </div>
             <div className="mt-6 text-center text-gray-400">
-              Data calculated from following year: {microData[0]}
+              Data calculated from following year: {microData[0]}.
             </div>
           </div>
         )}
@@ -491,7 +500,7 @@ const states = [
         <a
           data-tooltip-id="comparison-tooltip"
           className="ml-2 cursor-pointer text-gray-400 hover:text-gray-200"
-          data-tooltip-content="Please select a non-profit organization above first."
+          data-tooltip-content="Please select a nonprofit organization above first."
         >
           <FaInfoCircle />
         </a>
