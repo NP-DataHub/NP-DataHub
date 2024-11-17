@@ -380,9 +380,9 @@ const states = [
       <div className="max-w-4xl mx-auto p-8 mb-12 bg-[#171821] text-white rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MICRO: SINGLE NON-PROFIT FINANCIAL PERFORMANCE</h2>
         <p className="text-white text-center pb-8">
-        This tool will allow the end user to compare a single nonprofit's expenditures v. salaries from its last reported fiscal year 
+        This tool will allow the end user to compare a single nonprofit&apos;s expenditures v. salaries from its last reported fiscal year 
         and then allow the end user to calculate the cost per constituent served after salaries and wages for any grant level.
-        This is important for budgeting purposes as nonprofits can budget down to the number of individuals in which they're serving 
+        This is important for budgeting purposes as nonprofits can budget down to the number of individuals in which they&apos;re serving 
         and create a more accurate budget with overhead considerations. 
         Conversely, this allows grantmakers to gauge whether the nonprofit submitting a proposal is accurately budgeting beyond overhead.
         </p>
