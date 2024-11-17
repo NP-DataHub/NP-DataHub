@@ -651,7 +651,7 @@ export default function Toolbox() {
                         </div>
                     </div>
                 </div>
-                <Footer/>
+                <Footer isDarkMode={isDarkMode}/>
                 </div>
             )}
             </div>
