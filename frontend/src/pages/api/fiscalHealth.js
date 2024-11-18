@@ -11,13 +11,13 @@ export default async function handler(req, res) {
     if (mode === "NonProfit") {
       const score_and_years = await getSingleNpFiscalHealthScore(db, nonprofit, address);
       if (score_and_years === -1) {
-        return res.status(404).json({ message: `No data is provided for selected non-profit: ${nonprofit}` });
+        return res.status(404).json({ message: `No data is provided for selected nonprofit: ${nonprofit}` });
       }
       return res.status(200).json(score_and_years); //score might be NaN
     } else {
       const result = await getSectorComparisonFiscalHealthScore(db, nonprofit, address, sector);
       if (result === -1){
-        return res.status(404).json({ message: `No data is provided for selected non-profit: ${nonprofit}` });
+        return res.status(404).json({ message: `No data is provided for selected nonprofit: ${nonprofit}` });
       }
       else if (result === -2) {
         return res.status(404).json({ message: `Error fetching sector data` });
@@ -167,8 +167,8 @@ function calculateNonProfitFiscalHealthScore(data, years) {
     totalScore += fiscalHealthScore;
     intervals++;
   }
-
-  return intervals > 0 ? totalScore / intervals : 0;
+  let score = intervals > 0 ? totalScore / intervals : 0;
+  return roundToDecimal(score, 1);
 }
 
 function calculateNationalFiscalHealthScore(data, years) {
@@ -189,7 +189,8 @@ function calculateNationalFiscalHealthScore(data, years) {
     intervals++;
   }
 
-  return intervals > 0 ? totalScore / intervals : 0;
+  let score = intervals > 0 ? totalScore / intervals : 0;
+  return roundToDecimal(score, 1);
 }
 
 function calculateStateFiscalHealthScore(data, years, state) {
@@ -220,7 +221,8 @@ function calculateStateFiscalHealthScore(data, years, state) {
     intervals++;
   }
 
-  return intervals > 0 ? totalScore / intervals : 0;
+  let score = intervals > 0 ? totalScore / intervals : 0;
+  return roundToDecimal(score, 1);
 }
 
 function checkSectorDataExistence (data, years, state) {
@@ -238,3 +240,9 @@ function checkSectorDataExistence (data, years, state) {
   }
   return true
 }
+
+function roundToDecimal(num, decimals){
+  const factor = Math.pow(10, decimals);
+  return Math.round(num * factor) / factor;
+}
+

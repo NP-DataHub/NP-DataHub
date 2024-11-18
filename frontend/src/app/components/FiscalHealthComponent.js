@@ -34,7 +34,7 @@ export default function FiscalHealthSection({isDarkMode}) {
 
 
   const majorGroups = [
-    { value: '', label: 'Select a sector (the default is the non-profit sector)' },
+    { value: '', label: "Select a sector (the default is the nonprofit sector)" },
     { value: 'A', label: 'A - Arts, Culture, and Humanities' },
     { value: 'B', label: 'B - Educational Institutions and Related Activities' },
     { value: 'C', label: 'C - Environmental Quality, Protection and Beautification' },
@@ -220,7 +220,7 @@ const fetchFiscalHealthData = async (option) => {
         setSectorYears(data[2]);
         setEdgeCase(3);
       }
-      //4th case, specific sector doesn't have data for the same state as non-profit
+      //4th case, specific sector doesn't have data for the same state as nonprofit
       else if (data.length === 1){
         setSingleNpScore(data[0][0].toFixed(1));
         setSingleNpYears(data[0][1]);
@@ -228,7 +228,7 @@ const fetchFiscalHealthData = async (option) => {
         setSectorYears(data[0][3]);
         setEdgeCase(4);
       }
-      // 5th case, specific sector has data for the same as non-profit, but different years
+      // 5th case, specific sector has data for the same as nonprofit, but different years
       else if (data.length === 5) {
         setSingleNpScore(data[0].toFixed(1));
         setNationalSectorScore(data[1].toFixed(1));
@@ -274,18 +274,38 @@ const fetchFiscalHealthData = async (option) => {
     </div>
 );
 
+  const getBackgroundColor = (score) => {
+    if (score === "NaN" || score == 0 || score == null) {
+      return "bg-yellow-600";
+    } else if (score > 0) {
+      return "bg-blue-900";
+    } else {
+      return "bg-red-900";
+    }
+  }
+
+
   return (
     <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
       <h3 className="text-xl font-semibold text-[#FEB95A]">Fiscal Health</h3>
       <p className=" mb-12">
-        Assess a nonprofit’s fiscal health by calculating a weighted score based on various financial data variables, 
-        including increases or decreases in revenues, expenses, assets, and liabilities. 
+       <br />
+        Comparing two nonprofits in the same sector and region allows a grantmaker to gain valuable insights into their relative performance, impact, and operational strategies. 
+        This comparison provides a clearer picture of how each organization uses resources to achieve its mission, as well as the effectiveness of their programs. 
+        It helps identify leaders in the field, highlighting organizations that may serve as models for best practices or potential partners in collaborative initiatives. 
+        Additionally, by examining the strengths and weaknesses of both nonprofits in similar contexts, grantmakers can make more informed decisions about how their funding can drive meaningful outcomes and address specific community needs.
+         <br /> <br />
+        Evaluating a nonprofit against sector performance offers a broader perspective on its financial health and sustainability. A weighted scoring system, based on variables such as changes in revenues, expenses, assets, and liabilities, 
+        can provide a nuanced understanding of the organization&apos;s capacity for growth and resilience. 
+        These metrics reveal trends in financial stability and operational efficiency, helping grantmakers assess how their funding might contribute to long-term impacts and organizational goals.
+         <br /> <br />
+        By comparing these financial indicators, grantmakers can identify potential risks, opportunities for partnership, and the true budgetary impact of their investment, ensuring their contributions are both effective and strategically aligned with sector-wide goals.
       </p>
       {/* Compare Two Nonprofits */}
       <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2`}>
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare two non-profits</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare Two Nonprofits</h2>
         <p className="text-center pb-8">
-          Compare the scores side-by-side with other non-profits.
+          Compare the scores side-by-side with other nonprofits.
         </p>
         <div className="flex flex-col gap-6">
           <Autosuggest
@@ -318,7 +338,7 @@ const fetchFiscalHealthData = async (option) => {
             getSuggestionValue={getAddressSuggestionValue}
             renderSuggestion={renderAddressSuggestion}
             inputProps={{
-              placeholder: 'First Nonprofit Address',
+              placeholder: 'First Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
               value: firstAddr,
               onChange: (_, { newValue }) => {
                 setFirstAddr(newValue);
@@ -364,7 +384,7 @@ const fetchFiscalHealthData = async (option) => {
             getSuggestionValue={getAddressSuggestionValue}
             renderSuggestion={renderAddressSuggestion}
             inputProps={{
-              placeholder: 'Second Nonprofit Address',
+              placeholder: 'Second Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
               value: secondAddr,
               onChange: (_, { newValue }) => {
                 setSecondAddr(newValue);
@@ -399,10 +419,9 @@ const fetchFiscalHealthData = async (option) => {
               
               {/* First Nonprofit Score Display */}
               <div className="flex flex-col items-center w-1/2">
-                <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                <div className={`border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(firstNpScore)}`}>
                   {firstNpScore}
                 </div>
-
                 {/* First Nonprofit Years Message */}
                 <div className="mt-2 text-sm text-gray-400 text-center">
                   {firstNpYears.length >= 4 ? (
@@ -425,7 +444,7 @@ const fetchFiscalHealthData = async (option) => {
               </div>
               {/* Second Nonprofit Score Display */}
               <div className="flex flex-col items-center w-1/2">
-                <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                <div className={`border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(secondNpScore)}`}>
                   {secondNpScore}
                 </div>
 
@@ -456,9 +475,9 @@ const fetchFiscalHealthData = async (option) => {
       </div>
       {/* Compare NonProfit Against Sector */}
       <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12`}>
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare non-profit against a sector</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare Nonprofit Against a Sector</h2>
         <p className="text-center pb-8">
-        Compare the scores side-by-side with the same or other sectors, either at the national or regional level.</p>
+        Compare the scores side-by-side with the same or other sectors, either at the state or national levels.</p>
         <div className="flex flex-col gap-6">
           <Autosuggest
             suggestions={nameSuggestions}
@@ -490,7 +509,7 @@ const fetchFiscalHealthData = async (option) => {
             getSuggestionValue={getAddressSuggestionValue}
             renderSuggestion={renderAddressSuggestion}
             inputProps={{
-              placeholder: 'Single Nonprofit Address',
+              placeholder: 'Single Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
               value: singleAddr,
               onChange: (_, { newValue }) => {
                 setSingleAddr(newValue);
@@ -536,7 +555,7 @@ const fetchFiscalHealthData = async (option) => {
               {/* Edge Case 1: Not Enough Consecutive Years */}
               {edgeCase === 1 ? (
                 <div className="flex flex-col items-center w-1/3">
-                  <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                  <div className="bg-yellow-600 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
                     NaN
                   </div>
                   <p className="mt-4 text-center text-sm text-gray-400 whitespace-nowrap">
@@ -553,19 +572,19 @@ const fetchFiscalHealthData = async (option) => {
                 <>
                   {/* Display the three score circles */}
                   <div className="flex flex-col items-center w-1/3">
-                    <div className="bg-yellow-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                    <div className={`border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(singleNpScore)}`}>
                       {singleNpScore}
                     </div>
-                    <p className="mt-4">Non-Profit Score</p>
+                    <p className="mt-4">NonProfit Score</p>
                   </div>
                   <div className="flex flex-col items-center w-1/3">
-                    <div className="bg-teal-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                    <div className={`border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(regionalSectorScore)}`}>
                       {regionalSectorScore == null ? "NaN" : regionalSectorScore}
                     </div>
                     <p className="mt-4">Regional Score</p>
                   </div>
                   <div className="flex flex-col items-center w-1/3">
-                    <div className="bg-orange-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                    <div className={`border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(nationalSectorScore)}`}>
                       {nationalSectorScore == null ? "NaN" : nationalSectorScore}
                     </div>
                     <p className="mt-4">National Score</p>
@@ -589,7 +608,7 @@ const fetchFiscalHealthData = async (option) => {
               {edgeCase === 3 && (
                 <div className="mt-2 text-center">
                   <p>
-                    The fiscal health score of the non-profit was calculated using the following years: 
+                    The fiscal health score of the nonprofit was calculated using the following years: 
                     {singleNpYears && singleNpYears.length > 0 && (
                       <> {[...singleNpYears].sort((a, b) => a - b).join(", ")}</>
                     )}
@@ -605,14 +624,14 @@ const fetchFiscalHealthData = async (option) => {
               {edgeCase === 4 && (
                 <div className="mt-2 text-center">
                   <p>
-                    The fiscal health score of the non-profit was calculated using the following years: 
+                    The fiscal health score of the nonprofit was calculated using the following years: 
                     {singleNpYears && singleNpYears.length > 0 && (
                       <> {[...singleNpYears].sort((a, b) => a - b).join(", ")}</>
                     )}
                   </p>
                   <p className="mt-1 text-center">
-                    The sector chosen doesn’t have data for the same state as the non-profit. <br />
-                    The national score was calculated using the following years, as no data matched the non-profit&apos;s years:
+                    The sector chosen doesn&apos;t have data for the same state as the nonprofit. <br />
+                    The national score was calculated using the following years, as no data matched the nonprofit&apos;s years:
                     {sectorYears && sectorYears.length > 0 && (
                       <> {[...sectorYears].sort((a, b) => a - b).join(", ")}</>
                     )}
@@ -622,13 +641,13 @@ const fetchFiscalHealthData = async (option) => {
               {edgeCase === 5 && (
                 <div className="mt-2 text-center">
                   <p>
-                    The fiscal health score of the non-profit was calculated using the following years: 
+                    The fiscal health score of the nonprofit was calculated using the following years: 
                     {singleNpYears && singleNpYears.length > 0 && (
                       <> {[...singleNpYears].sort((a, b) => a - b).join(", ")}</>
                     )}
                   </p>
                   <p className="mt-1 text-center">
-                    Both sector scores were calculated using the following years, as no data matched the non-profit&apos;s years:            
+                    Both sector scores were calculated using the following years, as no data matched the nonprofit&apos;s years:            
                   {sectorYears && sectorYears.length > 0 && (
                       <> {[...sectorYears].sort((a, b) => a - b).join(", ")}</>
                     )}

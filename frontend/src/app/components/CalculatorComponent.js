@@ -242,7 +242,8 @@ const states = [
   return (
     <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
       <h3 className="text-xl font-semibold text-[#A9DFD8]">Calculator</h3>
-      <p className="">
+      <p className=""> 
+      <br />
         Compare NTEE code sectors against public data that align with various regional nonprofit’s missions.
         The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
       </p>
@@ -303,7 +304,7 @@ const states = [
         />
         <button
           onClick={fetchMacroData}
-          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMacroDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#FEB95A] hover:bg-[#D49B4A] transition duration-300'}`}
+          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMacroDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'}`}
           disabled={isFetchMacroDisabled()}
         >
           Calculate
@@ -362,7 +363,7 @@ const states = [
                     <p className="mt-4 text-sm text-center">
                       {index === 1 ? <>SALARIES<br />AND WAGES</> : 
                         index === 2 ? <>OFFICERS<br />COMPENSATION</> : 
-                        index === 3 ? <> SALARIES<br />TO EXPENSES<br />PERCENTAGE</> : 
+                        index === 3 ? <>SALARIES<br />TO EXPENSES<br />PERCENTAGE</> : 
                         "EMPLOYEES"}
                     </p>
                   </div>
@@ -447,9 +448,9 @@ const states = [
             }}
           />
         <button
-          onClick={fetchMacroData}
-          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMacroDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#FEB95A] hover:bg-[#D49B4A] transition duration-300'}`}
-          disabled={isFetchMacroDisabled()}
+          onClick={fetchMicroData}
+          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMicroDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'}`}
+          disabled={isFetchMicroDisabled()}
         >
             Calculate
           </button>

@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     if (mode === "Micro") {
       const npData = await getNonProfitData(db, nonprofit, address);
       if (npData === -1) {
-        return res.status(404).json({ message: "No data is provided for selected non profit" });
+        return res.status(404).json({ message: "No data is provided for selected nonprofit" });
       }
       return res.status(200).json(npData);
     }
