@@ -8,6 +8,9 @@ import cities from "../components/cities";
 import ntee_codes from "../components/ntee";
 import { useRouter } from 'next/navigation';
 import Footer from '../components/dashboard_footer'
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase"; // Your Firestore instance
+import { useAuth } from "../components/context"; // Assuming you have a user auth context
 
 export default function Dashboard() {
     const [firstNp, setFirstNp] = useState('');
@@ -29,12 +32,55 @@ export default function Dashboard() {
     const [nameSuggestions, setNameSuggestions] = useState([]); // Suggestions for name autocomplete
     const [isSearching, setIsSearching] = useState(false); // State to track searching status
     const [isDarkMode, setIsDarkMode] = useState(false); 
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const slides = [0, 1, 2, 3, 4];
+
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentResults = allResults.slice(indexOfFirstItem, indexOfLastItem);
     const router = useRouter();
     let mostRecentYear = 0
+
+    const [showTutorial, setShowTutorial] = useState(false);
+    const { currentUser } = useAuth(); // Get the currently logged-in user
+  
+    useEffect(() => {
+      const checkTutorialStatus = async () => {
+        if (currentUser) {
+          try {
+            const userDocRef = doc(db, "users", currentUser.uid); // Replace with your Firestore collection path
+            const userDoc = await getDoc(userDocRef);
+  
+            if (userDoc.exists()) {
+              const userData = userDoc.data();
+              if (!userData.viewed_tutorial) {
+                setShowTutorial(true); // Show the tutorial if not viewed
+              }
+            } else {
+              console.error("User document does not exist.");
+            }
+          } catch (error) {
+            console.error("Error fetching user data:", error);
+          }
+        }
+      };
+  
+      checkTutorialStatus();
+    }, [currentUser]);
+  
+    const handleTutorialClose = async () => {
+      setShowTutorial(false); // Hide the modal
+  
+      if (currentUser) {
+        try {
+          const userDocRef = doc(db, "users", currentUser.uid);
+          await updateDoc(userDocRef, { viewed_tutorial: true }); // Update Firestore
+        } catch (error) {
+          console.error("Error updating tutorial status:", error);
+        }
+      }
+    };
 
     
     const handleNteeChange = (event) => {
@@ -441,11 +487,209 @@ export default function Dashboard() {
                             onThemeToggle={handleThemeToggle}
                             currentPage="/dashboard"
                         />
+                        
 
                         {/* Show a loading spinner for the main content until user data is loaded */}
                         {isLoading ? (
                             <LoadingComponent/>
-                        ) : ( <div className = "flex-col ">
+                    
+                        ) : ( 
+
+                        
+                        <div className = "flex-col ">
+                        {showTutorial && (
+                        <div
+                            className={`fixed inset-0 flex items-center justify-center z-50 ${
+                            isDarkMode ? "bg-black bg-opacity-80" : "bg-gray-800 bg-opacity-50"
+                            }`}
+                        >
+                            <div
+                            className={`p-6 rounded-lg shadow-lg max-w-4xl w-full ${
+                                isDarkMode ? "bg-[#21222D] text-white" : "bg-white text-black"
+                            }`}
+                            >
+                            <h2 className="text-2xl font-semibold mb-6 text-center">
+                                Welcome To NonProfitly!
+                            </h2>
+
+                            {/* Carousel Container */}
+                            <div className="relative">
+                                <div className="overflow-hidden">
+                                <div
+                                    className={`flex transition-transform duration-500 ease-in-out transform ${
+                                    currentSlide === 0
+                                        ? "translate-x-0"
+                                        : currentSlide === 1
+                                        ? "-translate-x-full"
+                                        : currentSlide === 2
+                                        ? "-translate-x-[200%]"
+                                        : currentSlide === 3
+                                        ? "-translate-x-[300%]"
+                                        : "-translate-x-[400%]"
+                                    }`}
+                                >
+                                    {/* Slide 1 */}
+                                    <div className="w-full flex-shrink-0 flex flex-col md:flex-row items-center md:items-start gap-6 mx-auto p-4">
+                                        <img
+                                            src="/img/data/data_driven_insights.png"
+                                            alt="Data Driven Insights"
+                                            className="w-40 h-40 object-contain bg-white p-4 rounded-lg"
+                                        />
+                                        <div className="flex flex-col justify-center">
+                                            <h3 className="text-xl font-semibold mb-2">DATA-DRIVEN INSIGHTS</h3>
+                                            <p className="mb-4">
+                                            Our mission at Nonprofitly is to empower nonprofits, philanthropies,
+                                            governments, and donors by providing data-driven insights and tools for
+                                            better decision-making. We believe in leveraging technology to foster
+                                            transparency, accountability, and innovation in the nonprofit sector,
+                                            ultimately creating stronger ecosystems that benefit communities worldwide.
+                                            </p>
+                                        </div>
+                                        </div>
+
+                                    {/* Slide 2 */}
+                                    <div className="w-full flex-shrink-0 flex flex-col md:flex-row items-center md:items-start gap-6 mx-auto p-4">
+                                    <img
+                                        src="/img/data/regional_impact.png"
+                                        alt="Regional Impact"
+                                        className="w-40 height-40  object-contain bg-white p-4 rounded-lg"
+                                    />
+                                    <div className="flex flex-col justify-center">
+                                        <h3 className="text-xl font-semibold mb-2">REGIONAL IMPACT</h3>
+                                        <p className="mb-4">
+                                        From a geographical and policy perspective, Nonprofitly
+                                        relies on NTEE Codes, which are essential for mapping the
+                                        distribution of nonprofit activities across regions. They
+                                        enable researchers and policymakers to identify service gaps,
+                                        allocate resources efficiently, and develop strategies to
+                                        address community needs.{" "}
+                                        <a
+                                            href="/ntee"
+                                            className="text-blue-500 hover:underline"
+                                            target="_blank"
+                                        >
+                                            Find out more here.
+                                        </a>
+                                        </p>
+                                    </div>
+                                    </div>
+
+                                    {/* Slide 3 */}
+                                    <div className="w-full flex-shrink-0 flex flex-col md:flex-row items-center md:items-start gap-6 mx-auto p-4">
+                                    <img
+                                        src="/img/data/performance_based.png"
+                                        alt="Performance Based Profiles"
+                                        className="w-40 height-40  object-contain bg-white p-4 rounded-lg"
+                                    />
+                                    <div className="flex flex-col justify-center">
+                                        <h3 className="text-xl font-semibold mb-2">
+                                        PERFORMANCE-BASED PROFILES
+                                        </h3>
+                                        <p className="mb-4">
+                                        Nonprofitly’s single nonprofit pages provide in-depth insights
+                                        for over 1 million U.S.-based nonprofits, leveraging
+                                        longitudinal and predictive data to showcase trends in
+                                        financial health, program effectiveness, and growth potential.{" "}
+                                        {/* <a href="/search" className="text-blue-500 hover:underline" target="_blank">
+                                            Find out more here.
+                                        </a> */}
+                                        </p>
+                                    </div>
+                                    </div>
+
+                                    {/* Slide 4 */}
+                                    <div className="w-full flex-shrink-0 flex flex-col md:flex-row items-center md:items-start gap-6 mx-auto p-4">
+                                    <img
+                                        src="/img/data/unlocking.png"
+                                        alt="Tools to Unlock Trends"
+                                        className="w-40 height-40  object-contain bg-white p-4 rounded-lg"
+                                    />
+                                    <div className="flex flex-col justify-center">
+                                        <h3 className="text-xl font-semibold mb-2">TOOLS TO UNLOCK TRENDS</h3>
+                                        <p className="mb-4">
+                                        Nonprofitly’s Pro subscription tools combine public data with
+                                        nonprofit and NTEE performance metrics to deliver unmatched
+                                        insights into the sector.{" "}
+                                        <a href="/toolbox" className="text-blue-500 hover:underline" target="_blank">
+                                            Find out more here.
+                                        </a>
+                                        </p>
+                                    </div>
+                                    </div>
+
+                                    {/* Slide 5 */}
+                                    <div className="w-full flex-shrink-0 flex flex-col md:flex-row items-center md:items-start gap-6 mx-auto p-4">
+                                    <img
+                                        src="/img/data/network_ecosystems.png"
+                                        alt="Visualize Networks and Ecosystems"
+                                        className="w-40 height-40  object-contain bg-white p-4 rounded-lg"
+                                    />
+                                    <div className="flex flex-col justify-center">
+                                        <h3 className="text-xl font-semibold mb-2">
+                                        VISUALIZE NETWORKS + ECOSYSTEMS
+                                        </h3>
+                                        <p className="mb-4">
+                                        Nonprofitly’s networking and path tool enables users to
+                                        analyze clusters of nonprofits using key fiscal indicators,
+                                        facilitating smarter, more impactful collaborations.{" "}
+                                        <a href="/networking-paths" className="text-blue-500 hover:underline" target="_blank">
+                                            Find out more here.
+                                        </a>
+                                        </p>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                                {/* Controls */}
+                                <div className="flex justify-between mt-4">
+                                <button
+                                    className={`px-4 py-2 rounded-lg font-semibold ${
+                                    isDarkMode
+                                        ? "bg-[#A9DFD8] text-black hover:bg-[#88B3AE]"
+                                        : "bg-blue-500 text-white hover:bg-blue-600"
+                                    }`}
+                                    onClick={() =>
+                                    setCurrentSlide((prev) => (prev > 0 ? prev - 1 : slides.length - 1))
+                                    }
+                                >
+                                    Previous
+                                </button>
+                                {currentSlide < slides.length - 1 ? (
+                                    <button
+                                    className={`px-4 py-2 rounded-lg font-semibold ${
+                                        isDarkMode
+                                        ? "bg-[#A9DFD8] text-black hover:bg-[#88B3AE]"
+                                        : "bg-blue-500 text-white hover:bg-blue-600"
+                                    }`}
+                                    onClick={() =>
+                                        setCurrentSlide((prev) =>
+                                        prev < slides.length - 1 ? prev + 1 : 0
+                                        )
+                                    }
+                                    >
+                                    Next
+                                    </button>
+                                ) : (
+                                    <button
+                                    className={`px-4 py-2 rounded-lg font-semibold ${
+                                        isDarkMode
+                                        ? "bg-[#A9DFD8] text-black hover:bg-[#88B3AE]"
+                                        : "bg-blue-500 text-white hover:bg-blue-600"
+                                    }`}
+                                    onClick={handleTutorialClose}
+                                    >
+                                    Got It
+                                    </button>
+                                )}
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        )}
+
+
+
                         {/* <DashboardNavbar/> */}
                         <div   className={`flex-col px-10 ${
                             isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"

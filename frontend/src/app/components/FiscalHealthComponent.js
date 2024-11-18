@@ -314,6 +314,7 @@ const fetchFiscalHealthData = async (option) => {
             onSuggestionsClearRequested={onSuggestionsClearRequested}
             getSuggestionValue={getNameSuggestionValue}
             renderSuggestion={renderNameSuggestion}
+            
             inputProps={{
               placeholder: 'First Nonprofit Name',
               value: firstNp,
@@ -322,6 +323,7 @@ const fetchFiscalHealthData = async (option) => {
               },
               className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
             }}
+            
             theme={{
               container: 'autosuggest-container',
               input: 'autosuggest-input',
@@ -330,6 +332,7 @@ const fetchFiscalHealthData = async (option) => {
               suggestion: 'autosuggest-suggestion',
               suggestionHighlighted: 'autosuggest-suggestion--highlighted',
             }}
+            
           />
           <Autosuggest
             suggestions={addressSuggestions}
