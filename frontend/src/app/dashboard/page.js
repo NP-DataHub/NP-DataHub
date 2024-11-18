@@ -176,20 +176,20 @@ export default function Dashboard() {
         fetchSuggestions(value, 'name');
       };
     
-  // Load the theme from local storage
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const darkModeEnabled = savedTheme === "dark";
-    setIsDarkMode(darkModeEnabled);
-    document.documentElement.classList.toggle("dark", darkModeEnabled);
-  }, []);
+    // Load the theme from local storage
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme");
+        const darkModeEnabled = savedTheme === "dark";
+        setIsDarkMode(darkModeEnabled);
+        document.documentElement.classList.toggle("dark", darkModeEnabled);
+    }, []);
 
-  // Handle theme toggle
-  const handleThemeToggle = (newTheme) => {
-    setIsDarkMode(newTheme === "dark");
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
-  };
+    // Handle theme toggle
+    const handleThemeToggle = (newTheme) => {
+        setIsDarkMode(newTheme === "dark");
+        localStorage.setItem("theme", newTheme);
+        document.documentElement.classList.toggle("dark", newTheme === "dark");
+    };
 
 
     

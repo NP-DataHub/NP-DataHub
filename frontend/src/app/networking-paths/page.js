@@ -6,6 +6,7 @@ import SPIN from "../components/SPIN";
 
 export default function NetworksPaths() {  // Component name updated to start with an uppercase letter
     const [isLoading, setIsLoading] = useState(true); // State to control the loading state
+    const [isDarkMode, setIsDarkMode] = useState(false); 
 
     // If the sidebar's user data is loaded, stop the loading screen
     const handleUserDataLoaded = () => {
@@ -20,12 +21,26 @@ export default function NetworksPaths() {  // Component name updated to start wi
             </svg>
         </div>
     );
+    // Load the theme from local storage
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme");
+        const darkModeEnabled = savedTheme === "dark";
+        setIsDarkMode(darkModeEnabled);
+        document.documentElement.classList.toggle("dark", darkModeEnabled);
+    }, []);
+
+    // Handle theme toggle
+    const handleThemeToggle = (newTheme) => {
+        setIsDarkMode(newTheme === "dark");
+        localStorage.setItem("theme", newTheme);
+        document.documentElement.classList.toggle("dark", newTheme === "dark");
+    };
 
     return (
         <div>
-            <div className="dashboard-color text-white">
+            <div className={isDarkMode ? "dashboard-color text-white transition-colors duration-300" : "bg-[#c9c9c9] text-black transition-colors duration-300"}>
                 {/* Sidebar will be hidden if isLoading is true */}
-                <Sidebar onUserDataLoaded={handleUserDataLoaded} currentPage="/networking-paths" />
+                <Sidebar onUserDataLoaded={handleUserDataLoaded} currentPage="/networking-paths" onThemeToggle = {handleThemeToggle} isDarkMode={isDarkMode}/>
 
                 {/* Show a loading spinner for the main content until user data is loaded */}
                 {isLoading ? (
@@ -33,9 +48,9 @@ export default function NetworksPaths() {  // Component name updated to start wi
                 ) : (
                     <div>
                         <div className="flex-col">
-                            <SPIN />
+                            <SPIN isDarkMode={isDarkMode} />
                         </div>
-                        <Footer />
+                        <Footer isDarkMode={isDarkMode} />
                     </div>
                 )}
             </div>
