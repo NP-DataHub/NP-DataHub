@@ -29,12 +29,11 @@ export default function RegionalHealthSection() {
 
 
     //order of groups goes Median Age, Median Income, Percent housing units occumpied, Percent with health insurance covereage,
-    // Average household size, Percent EDU < 9th grade, Percent EDU 9-12 no diploma, Percent EDU HS grad, Percent EDU some college, 
-    //Percent EDU Associates, Percent EDU Bachelors, Percent Graduate/Professional, Percent Male pop, Percent female pop,
+    // Average household size, Percent EDU Bachelors or higher, Percent Male pop, Percent female pop,
     //Percent White, Percent Black/African American, Percent Native American/Alaskan Native, Percent Asian, Percent Pacific Islander, 
     // Percent some other race, Percent two or more races
     const getZipInfo = async (zip) => {
-        const url = `https://api.census.gov/data/2022/acs/acs5/profile?get=DP05_0018E,DP03_0062E,DP04_0002PE,DP03_0096PE,DP02_0016E,DP02_0060PE,DP02_0061PE,DP02_0062PE,DP02_0063PE,DP02_0064PE,DP02_0065PE,DP02_0066PE,DP05_0002PE,DP05_0003PE,DP05_0037PE,DP05_0038PE,DP05_0039PE,DP05_0044PE,DP05_0052PE,DP05_0057PE,DP05_0058PE&for=zip%20code%20tabulation%20area:${zip}&key=${CENSUS_KEY}`;
+        const url = `https://api.census.gov/data/2022/acs/acs5/profile?get=DP05_0018E,DP03_0062E,DP04_0002PE,DP03_0096PE,DP02_0016E,DP02_0068PE,DP05_0002PE,DP05_0003PE,DP05_0037PE,DP05_0038PE,DP05_0039PE,DP05_0044PE,DP05_0052PE,DP05_0057PE,DP05_0058PE&for=zip%20code%20tabulation%20area:${zip}&key=${CENSUS_KEY}`;
 
         try {
             const response = await fetch(url);
@@ -45,52 +44,38 @@ export default function RegionalHealthSection() {
             setmedAge("Median Age:\n"+data[1][0]);
             setmedIncome("Median Income: "+data[1][1]);
             setpercHousing("Housing Occupied:\n"+data[1][2]+"%");
-            setpercHealth("Percent with Health Insurance:\n"+data[1][3]+"%");
+            setpercHealth("Health Coverage:\n"+data[1][3]+"%");
             setsizeFamily("Average Household Size:\n"+data[1][4]);
 
-            const lessThan9 = parseFloat(data[1][5]);
-            const nineTo12 = parseFloat(data[1][6]);
-            const hsGrad = parseFloat(data[1][7]);
-            const someCollege = parseFloat(data[1][8]);
-            const associates = parseFloat(data[1][9]);
-            const bachelors = parseFloat(data[1][10]);
-            const gradProf = parseFloat(data[1][11]);
+            const bachelors = parseFloat(data[1][5]);
 
-            const edu = Math.max(lessThan9, nineTo12, hsGrad, someCollege, associates, bachelors, gradProf);
+            setavgEdu("Bachelors or Higher:\n"+data[1][5]+"%");
 
-            if (edu === lessThan9) setavgEdu("Avg. Education:\nPercent with Less than 9th Grade:\n"+data[1][5]+"%");
-            else if (edu === nineTo12) setavgEdu("Avg. Eduction:\nPercent with 9-12th Grade:\n"+data[1][6]+"%");
-            else if (edu === hsGrad) setavgEdu("Avg. Education:\nPercent with HS Grad:\n"+data[1][7]+"%");
-            else if (edu === someCollege) setavgEdu("Avg. Education:\nPercent with Some College:\n"+data[1][8]+"%");
-            else if (edu === associates) setavgEdu("Avg. Education:\nPercent with Associates:\n"+data[1][9]+"%");
-            else if (edu === bachelors) setavgEdu("Avg. Education:\nPercent with Bachelors:\n"+data[1][10]+"%");
-            else setavgEdu("Avg. Education:\nPercent with Graduate/Professional:\n"+data[1][11]+"%");
-
-            const male = parseFloat(data[1][12]);
-            const female = parseFloat(data[1][13]);
+            const male = parseFloat(data[1][6]);
+            const female = parseFloat(data[1][7]);
 
             const gender = Math.max(male, female);
 
-            if (gender === male) setmajGender("Majority Male:\n"+data[1][12]+"%");
-            else setmajGender("Majority Female:\n"+data[1][13]+"%");
+            if (gender === male) setmajGender("Majority Male:\n"+data[1][6]+"%");
+            else setmajGender("Majority Female:\n"+data[1][7]+"%");
 
-            const white = parseFloat(data[1][14]);
-            const black = parseFloat(data[1][15]);
-            const native = parseFloat(data[1][16]);
-            const asian = parseFloat(data[1][17]);
-            const pacific = parseFloat(data[1][18]);
-            const other = parseFloat(data[1][19]);
-            const twoOrMore = parseFloat(data[1][20]);
+            const white = parseFloat(data[1][8]);
+            const black = parseFloat(data[1][9]);
+            const native = parseFloat(data[1][10]);
+            const asian = parseFloat(data[1][11]);
+            const pacific = parseFloat(data[1][12]);
+            const other = parseFloat(data[1][13]);
+            const twoOrMore = parseFloat(data[1][14]);
 
             const race = Math.max(white, black, native, asian, pacific, other, twoOrMore);
 
-            if (race === white) setmajRace("Majority White:\n"+data[1][14]+"%");
-            else if (race === black) setmajRace("Majority Black/African American:\n"+data[1][15]+"%");
-            else if (race === native) setmajRace("Majority Native American/Alaskan Native:\n"+data[1][16]+"%");
-            else if (race === asian) setmajRace("Majority Asian:\n"+data[1][17]+"%");
-            else if (race === pacific) setmajRace("Majority Pacific Islander:\n"+data[1][18]+"%"); 
-            else if (race === other) setmajRace("Majority Some Other Race:\n"+data[1][19]+"%");
-            else setmajRace("Majority Two or More:\n"+data[1][20]+"%");
+            if (race === white) setmajRace("Majority White:\n"+data[1][8]+"%");
+            else if (race === black) setmajRace("Majority Black/African American:\n"+data[1][9]+"%");
+            else if (race === native) setmajRace("Majority Native American/Alaskan Native:\n"+data[1][10]+"%");
+            else if (race === asian) setmajRace("Majority Asian:\n"+data[1][11]+"%");
+            else if (race === pacific) setmajRace("Majority Pacific Islander:\n"+data[1][12]+"%"); 
+            else if (race === other) setmajRace("Majority Some Other Race:\n"+data[1][13]+"%");
+            else setmajRace("Majority Two or More:\n"+data[1][14]+"%");
 
         } catch (error) {
             console.error("Failed to fetch Zip Code Data:", error);
