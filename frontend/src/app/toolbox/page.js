@@ -221,7 +221,7 @@ export default function Toolbox() {
                                     isDarkMode ? "text-white" : "text-black"
                                 }   transition-shadow duration-300 mt-6 `}
                                 >
-                                {/* Tint overlay */}
+                                {/* Tint overlay */}                            
                                 <div
                                     className={`absolute inset-0 ${
                                     isDarkMode ? "bg-black bg-opacity-0" : "bg-white bg-opacity-40"

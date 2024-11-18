@@ -21,8 +21,9 @@ export default async function handler(req, res) {
     if (!input || !type) {
       return res.status(400).json({ success: false, error: 'Input and type query are required' });
     }
+    
 
-    const searchRegex = new RegExp(input.trim(), 'i');
+    const searchRegex = new RegExp(`^${input.trim()}`, 'i');
 
     const db = await connectToDatabase();
 

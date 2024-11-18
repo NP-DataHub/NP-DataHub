@@ -8,7 +8,7 @@ import regression from 'regression';
  * @param values - an array of values measured each year
  */
 
-const TimeSeries = ({ values, minYear }) => {
+const TimeSeries = ({ values, minYear, isDarkMode }) => {
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -67,7 +67,7 @@ const TimeSeries = ({ values, minYear }) => {
     legend: {
       data: ['Data', 'Predicted Values'],
       textStyle: {
-        color: 'white',
+        color: `${isDarkMode ? "text-white" : "text-black"}`,
       },
     },
     dataset: [
