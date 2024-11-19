@@ -1,8 +1,8 @@
-// This is the self contained SPIN (Scatter Plot for Identifying Nonprofits) page code. It wants to be large, so don't try to put it in a small space.
+// This is the self contained SPIN (Scatter Plot for Identifying Nonprofits) page code. Its wants to be large, so don't try to put it in a small space.
 // - Emmet Whitehead the Actual GOAT
 
 
-'use client';
+"use client";
 
 import ScatterPlot from "@/app/components/charts/Scatterplot";
 import Select from 'react-select';
@@ -324,11 +324,9 @@ const SPIN = ({isDarkMode}) => {
     }, [selectedXAxis, selectedYAxis]);
 
     return (
-        <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10 mx-10 mb-12">
-            <div className="flex justify-center items-center">
-                <h1 className="text-3xl font-semibold mb-4">Scatter Plot for Identifying Nonprofits (S.P.I.N.)</h1>
-            </div>
-            <div className="mb-4 p-4 bg-[#171821] text-white rounded-lg">
+        <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-white text-black"}  p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10 mx-10 mb-12`}>
+
+            <div className={`mb-4 p-4 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
                 <h2 className="text-xl font-semibold mb-2">Overview</h2>
                 <p className="text-base  mb-6">
                     A scatter plot&apos;s purpose is to visually display and statistically test the relationship between two variables, identify relationships, test theories, analyze data, 
@@ -346,145 +344,137 @@ const SPIN = ({isDarkMode}) => {
                 </p>
             </div>
             <div className="grid grid-cols-5 gap-4 mb-4">
-                <div className="col-span-1 bg-[#6d618c] p-3 rounded-lg">
-                    <h2 className="text-lg font-semibold mb-4">State Selection</h2>
-                    <div className="flex items-center bg-[#ada5c0] p-2 rounded-lg">
-                        <div className="relative w-full">
-                            <Autosuggest
-                                suggestions={stateSuggestions}
-                                onSuggestionsFetchRequested={onStateSuggestionsFetchRequested}
-                                onSuggestionsClearRequested={onStateSuggestionsClearRequested}
-                                getSuggestionValue={getStateSuggestionValue}
-                                renderSuggestion={renderStateSuggestion}
-                                renderSuggestionsContainer={renderStateSuggestionContainer}
-                                inputProps={StateInputProps}
-                                onSuggestionSelected={onStateSuggestionSelected}
-                            />
-                        </div>
-                        <a data-tooltip-id="city-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Search for states to examine on the plot.">ℹ️</a>
-                        <ReactTooltip place="top" effect="solid" id="city-tooltip" />
-                    </div>
-                </div>
-                <div className="col-span-1 bg-[#255972] p-3 rounded-lg">
-                    <h2 className="text-lg font-semibold mb-4">City Selection</h2>
-                    <div className="flex items-center bg-[#78b6d3] p-2 rounded-lg">
-                        <div className="relative w-full">
-                            <Autosuggest
-                                suggestions={citySuggestions}
-                                onSuggestionsFetchRequested={onCitySuggestionsFetchRequested}
-                                onSuggestionsClearRequested={onCitySuggestionsClearRequested}
-                                onSuggestionSelected={onCitySuggestionSelected}
-                                getSuggestionValue={getCitySuggestionValue}
-                                renderSuggestion={renderCitySuggestion}
-                                renderSuggestionsContainer={renderCitySuggestionContainer}
-                                inputProps={CityInputProps}
-                                //onSuggestionSelected={(event, { suggestion }) => setSelectedCity({ value: suggestion, label: suggestion })}
-                            />
-                        </div>
-                        <a data-tooltip-id="city-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Search for cities to examine on the plot.">ℹ️</a>
-                        <ReactTooltip place="top" effect="solid" id="city-tooltip" />
-                    </div>
-                </div>
-                {/* <div className="col-span-1 bg-[#2c7787] p-3 rounded-lg">
-                    <h2 className="text-lg font-semibold mb-4">ZIP Code Selection</h2>
-                    <div className="flex items-center bg-[#65bacd] p-2 rounded-lg">
-                        <Select
-                            options={zipOptions}
-                            value={selectedZIP}
-                            onChange={(option) => setSelectedZIP(option)}
-                            className="text-black w-full"
+            <div className="col-span-1 bg-[#6d618c] p-3 rounded-lg">
+            <h2 className="text-lg font-semibold mb-4">State Selection</h2>
+            <div className="flex items-center bg-[#ada5c0] p-2 rounded-lg">
+                    <div className="relative w-full">
+                        <Autosuggest
+                            suggestions={stateSuggestions}
+                            onSuggestionsFetchRequested={onStateSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={onStateSuggestionsClearRequested}
+                            getSuggestionValue={getStateSuggestionValue}
+                            renderSuggestion={renderStateSuggestion}
+                            renderSuggestionsContainer={renderStateSuggestionContainer}
+                            inputProps={StateInputProps}
+                            onSuggestionSelected={onStateSuggestionSelected}
                         />
-                        <a data-tooltip-id="zip-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Tooltip content here.">ℹ️</a>
-                        <ReactTooltip place="top" effect="solid" id="zip-tooltip" />
                     </div>
-                </div> */}
-                <div className="col-span-3 bg-[#3184bc] p-3 rounded-lg">
-                    <h2 className="text-lg font-semibold mb-4">NTEE Code Selection</h2>
-                    <div className="grid grid-cols-3 gap-4">
-                        <div className="flex items-center bg-[#85bce0] p-2 rounded-lg">
-                            <div className="relative w-full">
-                                <Autosuggest
-                                    suggestions={suggestions.NTEE1}
-                                    onSuggestionsFetchRequested={({ value }) => onSuggestionsFetchRequested({ value }, 'NTEE1')}
-                                    onSuggestionsClearRequested={() => onSuggestionsClearRequested('NTEE1')}
-                                    getSuggestionValue={getSuggestionValue}
-                                    renderSuggestion={renderSuggestion}
-                                    renderSuggestionsContainer={(props) => renderSuggestionsContainer({ ...props, type: 'NTEE1' })}
-                                    inputProps={createInputProps('NTEE1', selectedNTEE1)}
-                                    onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(event, {suggestion}, 'NTEE1')}
-                                />
-                            </div>
-                            <a data-tooltip-id="option1-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Select the first NTEE code.">ℹ️</a>
-                            <ReactTooltip place="top" effect="solid" id="option1-tooltip" />
-                        </div>
-                        <div className="flex items-center bg-[#85bce0] p-2 rounded-lg">
-                        <div className="relative w-full">
-                                <Autosuggest
-                                    suggestions={suggestions.NTEE2}
-                                    onSuggestionsFetchRequested={({ value }) => onSuggestionsFetchRequested({ value }, 'NTEE2')}
-                                    onSuggestionsClearRequested={() => onSuggestionsClearRequested('NTEE2')}
-                                    getSuggestionValue={getSuggestionValue}
-                                    renderSuggestion={renderSuggestion}
-                                    renderSuggestionsContainer={(props) => renderSuggestionsContainer({ ...props, type: 'NTEE2' })}
-                                    inputProps={createInputProps('NTEE2', selectedNTEE2)}
-                                    onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(event, {suggestion}, 'NTEE2')}
-                                />
-                            </div>
-                            <a data-tooltip-id="option2-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Select the second NTEE code.">ℹ️</a>
-                            <ReactTooltip place="top" effect="solid" id="option2-tooltip" />
-                        </div>
-                        <div className="flex items-center bg-[#85bce0] p-2 rounded-lg">
-                        <div className="relative w-full">
-                                <Autosuggest
-                                    suggestions={suggestions.NTEE3}
-                                    onSuggestionsFetchRequested={({ value }) => onSuggestionsFetchRequested({ value }, 'NTEE3')}
-                                    onSuggestionsClearRequested={() => onSuggestionsClearRequested('NTEE3')}
-                                    getSuggestionValue={getSuggestionValue}
-                                    renderSuggestion={renderSuggestion}
-                                    renderSuggestionsContainer={(props) => renderSuggestionsContainer({ ...props, type: 'NTEE3' })}
-                                    inputProps={createInputProps('NTEE3', selectedNTEE3)}
-                                    onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(event, {suggestion}, 'NTEE3')}
-                                />
-                            </div>
-                            <a data-tooltip-id="option3-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Select the third NTEE code.">ℹ️</a>
-                            <ReactTooltip place="top" effect="solid" id="option3-tooltip" />
-                        </div>
-                    </div>
+                    <a data-tooltip-id="city-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Search for states to examine on the plot.">ℹ️</a>
+                    <ReactTooltip place="top" effect="solid" id="city-tooltip" />
                 </div>
             </div>
-
-
-            <div className="justify-center">
-                <div className="flex justify-between items-center bg-[#171821] p-4 rounded-lg mt-4">
-                    <h2 className="text-xl font-semibold mb-2">Select Variables to Compare:</h2>
-                    <div className="flex space-x-4">
-                        <Select
-                            options={varOptions}
-                            value={selectedXAxis}
-                            onChange={(option) => setSelectedXAxis(option)}
-                            className="text-black"
-                        />
-                        <Select
-                            options={varOptions}
-                            value={selectedYAxis}
-                            onChange={(option) => setSelectedYAxis(option)}
-                            className="text-black"
-                        />
+    <div className="col-span-1 bg-[#255972] p-3 rounded-lg">
+        <h2 className="text-lg font-semibold mb-4">City Selection</h2>
+        <div className="flex items-center bg-[#78b6d3] p-2 rounded-lg">
+            <div className="relative w-full">
+                <Autosuggest
+                    suggestions={citySuggestions}
+                    onSuggestionsFetchRequested={onCitySuggestionsFetchRequested}
+                    onSuggestionsClearRequested={onCitySuggestionsClearRequested}
+                    onSuggestionSelected={onCitySuggestionSelected}
+                    getSuggestionValue={getCitySuggestionValue}
+                    renderSuggestion={renderCitySuggestion}
+                    renderSuggestionsContainer={renderCitySuggestionContainer}
+                    inputProps={CityInputProps}
+                    //onSuggestionSelected={(event, { suggestion }) => setSelectedCity({ value: suggestion, label: suggestion })}
+                />
+            </div>
+            <a data-tooltip-id="city-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Search for cities to examine on the plot.">ℹ️</a>
+            <ReactTooltip place="top" effect="solid" id="city-tooltip" />
+        </div>
+    </div>
+    {/* <div className="col-span-1 bg-[#2c7787] p-3 rounded-lg">
+        <h2 className="text-lg font-semibold mb-4">ZIP Code Selection</h2>
+        <div className="flex items-center bg-[#65bacd] p-2 rounded-lg">
+            <Select
+                options={zipOptions}
+                value={selectedZIP}
+                onChange={(option) => setSelectedZIP(option)}
+                className="text-black w-full"
+            />
+            <a data-tooltip-id="zip-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Tooltip content here.">ℹ️</a>
+            <ReactTooltip place="top" effect="solid" id="zip-tooltip" />
+        </div>
+    </div> */}
+    <div className="col-span-3 bg-[#3184bc] p-3 rounded-lg">
+        <h2 className="text-lg font-semibold mb-4">NTEE Code Selection</h2>
+        <div className="grid grid-cols-3 gap-4">
+            <div className="flex items-center bg-[#85bce0] p-2 rounded-lg">
+                <div className="relative w-full">
+                    <Autosuggest
+                        suggestions={suggestions.NTEE1}
+                        onSuggestionsFetchRequested={({ value }) => onSuggestionsFetchRequested({ value }, 'NTEE1')}
+                        onSuggestionsClearRequested={() => onSuggestionsClearRequested('NTEE1')}
+                        getSuggestionValue={getSuggestionValue}
+                        renderSuggestion={renderSuggestion}
+                        renderSuggestionsContainer={(props) => renderSuggestionsContainer({ ...props, type: 'NTEE1' })}
+                        inputProps={createInputProps('NTEE1', selectedNTEE1)}
+                        onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(event, {suggestion}, 'NTEE1')}
+                    />
+                </div>
+                <a data-tooltip-id="option1-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Select the first NTEE code.">ℹ️</a>
+                <ReactTooltip place="top" effect="solid" id="option1-tooltip" />
+            </div>
+            <div className="flex items-center bg-[#85bce0] p-2 rounded-lg">
+            <div className="relative w-full">
+                    <Autosuggest
+                        suggestions={suggestions.NTEE2}
+                        onSuggestionsFetchRequested={({ value }) => onSuggestionsFetchRequested({ value }, 'NTEE2')}
+                        onSuggestionsClearRequested={() => onSuggestionsClearRequested('NTEE2')}
+                        getSuggestionValue={getSuggestionValue}
+                        renderSuggestion={renderSuggestion}
+                        renderSuggestionsContainer={(props) => renderSuggestionsContainer({ ...props, type: 'NTEE2' })}
+                        inputProps={createInputProps('NTEE2', selectedNTEE2)}
+                        onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(event, {suggestion}, 'NTEE2')}
+                    />
+                </div>
+                <a data-tooltip-id="option2-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Select the second NTEE code.">ℹ️</a>
+                <ReactTooltip place="top" effect="solid" id="option2-tooltip" />
+            </div>
+            <div className="flex items-center bg-[#85bce0] p-2 rounded-lg">
+            <div className="relative w-full">
+                    <Autosuggest
+                        suggestions={suggestions.NTEE3}
+                        onSuggestionsFetchRequested={({ value }) => onSuggestionsFetchRequested({ value }, 'NTEE3')}
+                        onSuggestionsClearRequested={() => onSuggestionsClearRequested('NTEE3')}
+                        getSuggestionValue={getSuggestionValue}
+                        renderSuggestion={renderSuggestion}
+                        renderSuggestionsContainer={(props) => renderSuggestionsContainer({ ...props, type: 'NTEE3' })}
+                        inputProps={createInputProps('NTEE3', selectedNTEE3)}
+                        onSuggestionSelected={(event, {suggestion}) => onSuggestionSelected(event, {suggestion}, 'NTEE3')}
+                    />
+                </div>
+                <a data-tooltip-id="option3-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Select the third NTEE code.">ℹ️</a>
+                <ReactTooltip place="top" effect="solid" id="option3-tooltip" />
+            </div>
+        </div>
+    </div>
+            </div>
+            <div className={`flex justify-between items-center ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-4 rounded-lg mt-4`}>
+                <h2 className="text-xl font-semibold mb-2">Select Variables to Compare:</h2>
+                <div className="flex space-x-4">
+                    <Select
+                        options={varOptions}
+                        value={selectedXAxis}
+                        onChange={(option) => setSelectedXAxis(option)}
+                        className="text-black"
+                    />
+                    <Select
+                        options={varOptions}
+                        value={selectedYAxis}
+                        onChange={(option) => setSelectedYAxis(option)}
+                        className="text-black"
+                    />
+                </div>
+            </div>
+            <div className="flex flex-col ">
+                {sectorData ? (
+                    <div className="h-full h-screen">
+                        <ScatterPlot data={sectorData.data} X_axis_var={selectedXAxis.value} Y_axis_var={selectedYAxis.value} filters={sectorFilters} isDarkMode={isDarkMode} />
                     </div>
-                </div>
-                <div className="h-full relative mt-4" style={{ height: '1000px'}}>
-                    {sectorData ? (
-                        <div className="h-full flex justify-center items-center" style={{ height: '100%', width: '100%'}}>
-                            <ScatterPlot data={sectorData.data} X_axis_var={selectedXAxis.value} Y_axis_var={selectedYAxis.value} filters={sectorFilters} />
-                        </div>
-                    ) : (
-                        <div className="flex justify-center items-center h-full">
-                            <div className="bubble text-center p-4 shadow-sm rounded bg-[#171821]" style={{ width: '20%' }}>
-                                <h2 className="text-xl  mb-2"> Select filters to populate the scatter plot. </h2>
-                            </div>
-                        </div>
-                    )}
-                </div>
+                ) : (
+                    <div className = "text-center mt-4 h-screen  "> Enter Selection To Load</div>
+                )}
             </div>
         </div>
     );
