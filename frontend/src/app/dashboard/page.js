@@ -531,9 +531,9 @@ export default function Dashboard() {
                                     {/* Slide 1 */}
                                     <div className="w-full flex-shrink-0 flex flex-col md:flex-row items-center md:items-start gap-6 mx-auto p-4">
                                         <img
-                                            src="/img/data/data_driven_insights.png"
+                                            src={`${isDarkMode ? "/img/data/data_driven_insights_light.png" : "/img/data/data_driven_insights.png"}`}
                                             alt="Data Driven Insights"
-                                            className="w-40 h-40 object-contain bg-white p-4 rounded-lg"
+                                            className="w-40 h-40 object-contain p-4 rounded-lg"
                                         />
                                         <div className="flex flex-col justify-center">
                                             <h3 className="text-xl font-semibold mb-2">DATA-DRIVEN INSIGHTS</h3>
@@ -550,9 +550,9 @@ export default function Dashboard() {
                                     {/* Slide 2 */}
                                     <div className="w-full flex-shrink-0 flex flex-col md:flex-row items-center md:items-start gap-6 mx-auto p-4">
                                     <img
-                                        src="/img/data/regional_impact.png"
+                                        src={`${isDarkMode ? "/img/data/regional_impact_light.png" : "/img/data/regional_impact.png"}`}
                                         alt="Regional Impact"
-                                        className="w-40 height-40  object-contain bg-white p-4 rounded-lg"
+                                        className="w-40 height-40  object-contain p-4 rounded-lg"
                                     />
                                     <div className="flex flex-col justify-center">
                                         <h3 className="text-xl font-semibold mb-2">REGIONAL IMPACT</h3>
@@ -577,9 +577,9 @@ export default function Dashboard() {
                                     {/* Slide 3 */}
                                     <div className="w-full flex-shrink-0 flex flex-col md:flex-row items-center md:items-start gap-6 mx-auto p-4">
                                     <img
-                                        src="/img/data/performance_based.png"
+                                        src={`${isDarkMode ? "/img/data/performance_based_light.png" : "/img/data/performance_based.png"}`}
                                         alt="Performance Based Profiles"
-                                        className="w-40 height-40  object-contain bg-white p-4 rounded-lg"
+                                        className="w-40 height-40  object-contain p-4 rounded-lg"
                                     />
                                     <div className="flex flex-col justify-center">
                                         <h3 className="text-xl font-semibold mb-2">
@@ -600,9 +600,9 @@ export default function Dashboard() {
                                     {/* Slide 4 */}
                                     <div className="w-full flex-shrink-0 flex flex-col md:flex-row items-center md:items-start gap-6 mx-auto p-4">
                                     <img
-                                        src="/img/data/unlocking.png"
+                                        src={`${isDarkMode ? "/img/data/unlocking_light.png" : "/img/data/unlocking.png"}`}
                                         alt="Tools to Unlock Trends"
-                                        className="w-40 height-40  object-contain bg-white p-4 rounded-lg"
+                                        className="w-40 height-40  object-contain p-4 rounded-lg"
                                     />
                                     <div className="flex flex-col justify-center">
                                         <h3 className="text-xl font-semibold mb-2">TOOLS TO UNLOCK TRENDS</h3>
@@ -620,9 +620,9 @@ export default function Dashboard() {
                                     {/* Slide 5 */}
                                     <div className="w-full flex-shrink-0 flex flex-col md:flex-row items-center md:items-start gap-6 mx-auto p-4">
                                     <img
-                                        src="/img/data/network_ecosystems.png"
+                                        src={`${isDarkMode ? "/img/data/network_ecosystems_light.png" : "/img/data/network_ecosystems.png"}`}
                                         alt="Visualize Networks and Ecosystems"
-                                        className="w-40 height-40  object-contain bg-white p-4 rounded-lg"
+                                        className="w-40 height-40  object-contain p-4 rounded-lg"
                                     />
                                     <div className="flex flex-col justify-center">
                                         <h3 className="text-xl font-semibold mb-2">
