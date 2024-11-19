@@ -324,7 +324,7 @@ const SPIN = ({isDarkMode}) => {
     }, [selectedXAxis, selectedYAxis]);
 
     return (
-        <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-white text-black"} p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10 mx-10 mb-12`}>
+        <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-white text-black"}  p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10 mx-10 mb-12`}>
 
             <div className={`mb-4 p-4 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
                 <h2 className="text-xl font-semibold mb-2">Overview</h2>
@@ -467,13 +467,13 @@ const SPIN = ({isDarkMode}) => {
                     />
                 </div>
             </div>
-            <div className="flex flex-col h-screen">
+            <div className="flex flex-col ">
                 {sectorData ? (
-                    <div className="h-full">
+                    <div className="h-full h-screen">
                         <ScatterPlot data={sectorData.data} X_axis_var={selectedXAxis.value} Y_axis_var={selectedYAxis.value} filters={sectorFilters} isDarkMode={isDarkMode} />
                     </div>
                 ) : (
-                    <div className = "text-center mt-4 "> Enter Selection To Load</div>
+                    <div className = "text-center mt-4 h-screen  "> Enter Selection To Load</div>
                 )}
             </div>
         </div>
