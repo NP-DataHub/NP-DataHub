@@ -43,6 +43,8 @@ export default function FiscalHealthSection({isDarkMode}) {
   const [lastSecondFetchedNameInput, setLastSecondFetchedNameInput] = useState('');
   const [lastSecondFetchedAddressInput, setLastSecondFetchedAddressInput] = useState('');
 
+  const isLoading = loadingComparison || loadingSectorComparison;
+
   const majorGroups = [
     { value: '', label: "Select a sector (the default is the nonprofit sector)" },
     { value: 'A', label: 'A - Arts, Culture, and Humanities' },
@@ -387,8 +389,8 @@ const fetchFiscalHealthData = async (option) => {
                 placeholder: 'First Nonprofit Name',
                 value: firstNp,
                 onChange: (_, { newValue }) => {
-                  setFirstNp(newValue);
                   setSingleNameSuggestions([]);
+                  setFirstNp(newValue);
                 },
                 className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
               }}
@@ -413,8 +415,8 @@ const fetchFiscalHealthData = async (option) => {
                 placeholder: 'First Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
                 value: firstAddr,
                 onChange: (_, { newValue }) => {
-                  setFirstAddr(newValue);
                   setSingleAddressSuggestions([]);
+                  setFirstAddr(newValue);
                 },
                 className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
               }}
@@ -463,8 +465,8 @@ const fetchFiscalHealthData = async (option) => {
                   placeholder: 'Second Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
                   value: secondAddr,
                   onChange: (_, { newValue }) => {
-                    setSecondAddr(newValue);
                     setSingleAddressSuggestions([]);
+                    setSecondAddr(newValue);
                   },
                   className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
                 }}
@@ -473,8 +475,8 @@ const fetchFiscalHealthData = async (option) => {
 
           <button
             onClick={() => fetchFiscalHealthData("compare")}
-            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonFetchDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#FEB95A] hover:bg-[#D49B4A] transition duration-300'}`}
-            disabled={isComparisonFetchDisabled()}
+            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonFetchDisabled() || isLoading ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#FEB95A] hover:bg-[#D49B4A] transition duration-300'}`}
+            disabled={isComparisonFetchDisabled() || isLoading}
           >
             Compare
           </button>
@@ -567,9 +569,9 @@ const fetchFiscalHealthData = async (option) => {
                 placeholder: 'Single Nonprofit Name',
                 value: singleNp,
                 onChange: (_, { newValue }) => {
-                  setSingleNp(newValue);
                   setFirstNameSuggestions([]);
                   setSecondNameSuggestions([]);
+                  setSingleNp(newValue);
                 },
                 className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
               }}
@@ -593,9 +595,9 @@ const fetchFiscalHealthData = async (option) => {
                 placeholder: 'Single Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
                 value: singleAddr,
                 onChange: (_, { newValue }) => {
-                  setSingleAddr(newValue);
                   setFirstAddressSuggestions([]);
                   setSecondAddressSuggestions([]);
+                  setSingleAddr(newValue);
                 },
                 className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
               }}
@@ -615,8 +617,8 @@ const fetchFiscalHealthData = async (option) => {
 
           <button
             onClick={() => fetchFiscalHealthData("compareSector")}
-            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonSectorFetchDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed"  : 'bg-[#FEB95A] text-black hover:bg-[#D49B4A] transition duration-300'}`}
-            disabled={isComparisonSectorFetchDisabled()}
+            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonSectorFetchDisabled() || isLoading ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed"  : 'bg-[#FEB95A] text-black hover:bg-[#D49B4A] transition duration-300'}`}
+            disabled={isComparisonSectorFetchDisabled() || isLoading}
           >
             Compare
           </button>

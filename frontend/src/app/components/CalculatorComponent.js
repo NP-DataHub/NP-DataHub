@@ -25,6 +25,8 @@ export default function CalculatorSection({isDarkMode}) {
   const [lastFetchedNameInput, setLastFetchedNameInput] = useState('');
   const [lastFetchedAddressInput, setLastFetchedAddressInput] = useState('');
 
+  const isLoading = loadingMacro || loadingMicro;
+
   // BudgetForm
   const [formData, setFormData] = useState({
     budget: '',
@@ -302,9 +304,14 @@ const states = [
           />
         </div>
         <button
-          onClick={fetchMacroData}
-          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMacroDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'}`}
-          disabled={isFetchMacroDisabled()}
+          onClick={() => {
+            setNameSuggestions([]);
+            setStateSuggestions([]);
+            setAddressSuggestions([]);
+            fetchMacroData();
+          }}
+          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMacroDisabled() || isLoading? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'}`}
+          disabled={isFetchMacroDisabled() || isLoading}
         >
           Calculate
         </button>
@@ -448,9 +455,14 @@ const states = [
             />
           </div>
         <button
-          onClick={fetchMicroData}
-          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMicroDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'}`}
-          disabled={isFetchMicroDisabled()}
+          onClick={() => {
+            setStateSuggestions([]);
+            setNameSuggestions([]);
+            setAddressSuggestions([]);
+            fetchMicroData();
+          }}
+          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMicroDisabled() || isLoading? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'}`}
+          disabled={isFetchMicroDisabled() || isLoading}
         >
             Calculate
           </button>
