@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, memo } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { Tooltip } from 'react-tooltip';
 
+// Import the SimilarityScore function from the similarityScore.js file - custom hueristic to calculate similarity between two nonprofits
 import SimilarityScore from '@/app/components/similarityScore';
 
 /**
@@ -12,7 +13,13 @@ import SimilarityScore from '@/app/components/similarityScore';
  * @param filters - the filters that are used to filter the data. These are used to label the data on the graph
  */
 
-const COLAB_graph = ({data, filters}) => {
+const COLABGraph = memo(({data, filters, onNonprofitClick}) => {
+
+    // Handle the click event on the graph
+    const handleGraphClick = (nonprofit) => {
+      onNonprofitClick(nonprofit);
+    };
+
 
     // Check for invalid inputs
     if (!Array.isArray(data)) {
@@ -197,10 +204,11 @@ const COLAB_graph = ({data, filters}) => {
         <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
           <ReactECharts option={option}
             style={{ width: '100%', height: '100%' }}
+            onEvents={ {click: (e) => handleGraphClick(data[e.dataIndex])} }
           />
         </div>
       );
 
-};
+});
 
-export default COLAB_graph;
+export default COLABGraph;

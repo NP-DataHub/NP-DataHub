@@ -11,9 +11,11 @@
        * @param B - the second nonprofit
        * 
        * Rules for scoring:
-       * - If the NTEE codes are the same, add 1 to the score
-       * - For each financial metric (Rev, Exp, Asts, Liabs) that is within 10% of the other, add 1 to the score
-       * - If the city or ZIP is the same, add 1 to the score
+       * 
+       * Score is in [0, 100]
+       * 
+       * 1. If the NTEE codes are the same, add 20 to the score
+       * 2. For each financial metric, calculate the difference between the two nonprofits, and scale it to be in the range [0, 20], adding that to the score 
        */
 const SimilarityScore = (A, B) => {
 
@@ -22,25 +24,42 @@ const SimilarityScore = (A, B) => {
     const B_years = Object.keys(B).filter((key) => key.includes('TotRev') || key.includes('TotExp') || key.includes('TotAst') || key.includes('TotLia'));
     
     const most_recent_year = Math.max(...A_years, ...B_years);
+
+    console.log("max year of A:", Math.max(...A_years));
+    console.log("max year of B:", Math.max(...B_years));
+
     let score = 0;
 
     // Check if the NTEE codes are the same
     if (A.NTEE === B.NTEE) {
-      score += 1;
+      score += 20;
     }
-    // Check if they are in the same city or ZIP
-    if (A.Cty === B.Cty || A.Zip === B.Zip) {
-      score += 1;
-    }
+
+    console.log("score after NTEE check:", score);
 
     // Check if the financial metrics are within 10% of each other
     const financial_metrics = ['TotRev', 'TotExp', 'TotAst', 'TotLia'];
     for (const metric of financial_metrics) {
       const A_value = A[`${metric}${most_recent_year}`];
       const B_value = B[`${metric}${most_recent_year}`];
-      if (Math.abs(A_value - B_value) / A_value < 0.1) {
-        score += 1;
+      
+      // Check if the values are null
+      if (A_value === null || B_value === null) {
+        continue;
       }
+
+      // Calculate the difference between the two values
+      const diff = Math.abs(A_value - B_value);
+
+      // Scale the difference to be in the range [0, 20]
+      let scaled_diff = 0;
+      if (A_value !== 0) {
+        scaled_diff = 20 * (diff / A_value);
+      }
+
+      // Add the scaled difference to the score
+      score += 20 - scaled_diff;
+
     }
     return score;
   }

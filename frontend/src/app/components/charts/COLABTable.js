@@ -17,39 +17,29 @@ import { Link } from 'react-router-dom';
  */
 const COLABTable = ({ nonprofits, selectedNonprofit }) => {
 
-    // Check for invalid/empty inputs
-    if (!Array.isArray(nonprofits)) {
-        return <div>ERROR: chart arg must be an array</div>;
-    }
-    if (nonprofits.length === 0) {
-        return <div>No data to display, womp womp.</div>;
-    }
-    if (selectedNonprofit === null) {
-        return <div>No nonprofit selected</div>;
-    }
-
-    selectedNonprofit = selectedNonprofit[0];
-
-
     console.log("COLAB Table inputs:", nonprofits, selectedNonprofit);
 
-
-
-
-    // Check for invalid inputs
+    // Check for invalid/empty inputs
     if (!Array.isArray(nonprofits)) {
-        return <div>ERROR: chart arg must be an array</div>;
+        return <div>ERROR: chart arg must be an array. This should never appear - please report to developers if you encounter this!</div>;
     }
-
-    // Check for empty data
     if (nonprofits.length === 0) {
         return <div>No data to display, womp womp.</div>;
     }
 
-    // Check if the selected nonprofit is null
-    if (selectedNonprofit === null) {
-        return <div>No nonprofit selected</div>;
+
+    // Check if there is a selected nonprofit. If there isn't, simply return a stylized div indicating that there is no nonprofit selected.
+    if (selectedNonprofit === null || selectedNonprofit === undefined || selectedNonprofit.length <= 1) {
+        return (
+            <div style={{ position: 'relative', height: '200px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div>
+                    <h2 className="text-center text-3xl">No Nonprofit Selected</h2>
+                    <p>Search for a nonprofit, or click on a nonprofit from the graph to find similar nonprofits!</p>
+                </div>
+            </div>
+        );
     }
+
 
     // Need to compute the similarity score between the selected nonprofit and the other nonprofits and store them in a list
     const similarityList = [];

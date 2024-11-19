@@ -10,7 +10,7 @@
 
 import Select from 'react-select';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import '@/app/globals.css';
 import Autosuggest from "react-autosuggest/dist/Autosuggest";
 import cities from "@/app/components/cities";
@@ -23,18 +23,23 @@ import COLABTable from './charts/COLABTable';
 const COLAB = () => {
 
 
-    // Need to decide how users will select data.
-    // Let user select a city/town, and then display the nonprofits in that area.
-    // Or zip code
-
-    // Or, search for a nonprofit and display similar nonprofits in the area (city and zip code)
-
     // Data, selection state vars
     const [areaData, setareaData] = useState(null);
     const [selectedCity, setSelectedCity] = useState(null);
     const [zipCode, setZipCode] = useState('');
     const [nonprofit, setNonprofit] = useState('');
     const [nonprofitData, setNonprofitData] = useState([0]);
+
+    const memoizedAreaData = useMemo(() => {
+        if (areaData && areaData.data && areaData.data.length > 0) {
+            return areaData.data;
+        }
+        return [];
+    }, [areaData]);
+    
+
+
+    
 
 
     // WIP FIX THIS CRAP
@@ -101,6 +106,24 @@ const COLAB = () => {
      };
 
 
+    //  // Handle a click on the graph to select the clicked nonprofit
+    //  const handleNonprofitClick = (clickedNonprofit) => {
+    //         console.log("clicked on nonprofit:", clickedNonprofit.Nm);
+    //         setNonprofit(clickedNonprofit.Nm);
+    //         setNonprofitData(clickedNonprofit);
+    //         // Also want the zip code to autopopulate
+    //         setZipCode(nonprofitData.Zip);
+    //     };
+    const handleNonprofitClick = useCallback((clickedNonprofit) => {
+        console.log("clicked on nonprofit:", clickedNonprofit.Nm);
+        setNonprofit(clickedNonprofit.Nm);
+        setNonprofitData(clickedNonprofit);
+        setZipCode(clickedNonprofit.Zip); // Use clickedNonprofit directly
+    }, []);
+
+
+
+
      const handleSearch = () => {
         const fetchData = async () => {
             // If the user has entered a city/zip code, search for nonprofits in that area
@@ -117,8 +140,8 @@ const COLAB = () => {
 
                 // Fetch the data
                 let response = await fetch(`/api/sector?Cty=${CITY}&Zip=${ZIP}`);
-                let data = await response.json();
-                setareaData(data);
+                let fetched_data = await response.json();
+                setareaData(fetched_data.data);
 
         } else if (nonprofit) {
             // If the user has entered a nonprofit name, fetch nonprofits in the same area (city or zip code)
@@ -140,8 +163,10 @@ const COLAB = () => {
 
                 // Set the area data with the city and zip code of the selected nonprofit
                 let response = await fetch(`/api/sector?Cty=${CITY}&Zip=${ZIP}`);
-                let data = await response.json();
-                setareaData(data);
+                let fetched_data = await response.json();
+
+                setareaData(fetched_data.data);
+
             } else { // L bozo
                 console.error("No data found for the given nonprofit name");
             }
@@ -150,13 +175,8 @@ const COLAB = () => {
 
      }
         fetchData();
-
-        console.log("Area data:", areaData);
-        console.log("Nonprofit data:", nonprofitData);
-
     };
     
-
 
     return (
 
@@ -211,11 +231,11 @@ const COLAB = () => {
                 <>
                     <div className='h-full bg-[#21222D] p-4 rounded-lg'>
                         <h2 className="text-center text-3xl">Nonprofit Network</h2>
-                        <COLABGraph data={areaData.data} filters={[]} />
+                        <COLABGraph data={areaData} filters={[]} onNonprofitClick={handleNonprofitClick}/>
                     </div>
                     <div className="h-full bg-[#21222D] p-4 rounded-lg">
                         <h2 className="text-center text-3xl">Similarity Table</h2>
-                        <COLABTable nonprofits={areaData.data} selectedNonprofit={nonprofitData.data} />
+                        <COLABTable nonprofits={areaData} selectedNonprofit={nonprofitData} />
                     </div>
                 </>
             ) : (
