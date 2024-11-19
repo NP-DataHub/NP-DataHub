@@ -4,7 +4,7 @@
 'use client';
 
 import React from 'react';
-import SimilarityScore from '@/app/components/similarityScore';
+import SimilarityScore from '@/app/components/SimilarityScore';
 import { Link } from 'react-router-dom';
 
 /**
@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
  */
 const COLABTable = ({ nonprofits, selectedNonprofit }) => {
 
-    //console.log("COLAB Table inputs:", nonprofits, selectedNonprofit);
+    console.log("COLAB Table inputs:", nonprofits, selectedNonprofit);
 
     // Check for invalid/empty inputs
     if (!Array.isArray(nonprofits)) {
@@ -39,6 +39,9 @@ const COLABTable = ({ nonprofits, selectedNonprofit }) => {
             </div>
         );
     }
+    else{
+        selectedNonprofit = selectedNonprofit.data[0];
+    }
 
 
     // Need to compute the similarity score between the selected nonprofit and the other nonprofits and store them in a list
@@ -47,7 +50,7 @@ const COLABTable = ({ nonprofits, selectedNonprofit }) => {
     // Loop through each nonprofit and compute the similarity score
     for (const nonprofit of nonprofits) {
         // Skip the selected nonprofit
-        if (nonprofit === selectedNonprofit) {
+        if (nonprofit.Nm === selectedNonprofit.Nm) {
             continue;
         }
 

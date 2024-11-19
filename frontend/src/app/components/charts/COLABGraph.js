@@ -5,7 +5,7 @@ import ReactECharts from 'echarts-for-react';
 import { Tooltip } from 'react-tooltip';
 
 // Import the SimilarityScore function from the similarityScore.js file - custom hueristic to calculate similarity between two nonprofits
-import SimilarityScore from '@/app/components/similarityScore';
+import SimilarityScore from '@/app/components/SimilarityScore';
 
 /**
  * 

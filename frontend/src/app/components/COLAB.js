@@ -30,7 +30,8 @@ export default function COLAB() {
     const [nonprofit, setNonprofit] = useState('');
     const [nonprofitData, setNonprofitData] = useState([0]);
 
-
+    // Is there data state var for loading div
+    const [dataIsLoading, setDataIsLoading] = useState(false);
     
 
 
@@ -113,6 +114,9 @@ export default function COLAB() {
 
      const handleSearch = () => {
         const fetchData = async () => {
+
+            setDataIsLoading(true);
+
             // If the user has entered a city/zip code, search for nonprofits in that area
             if (selectedCity || zipCode) {
 
@@ -130,36 +134,56 @@ export default function COLAB() {
                 let fetched_data = await response.json();
                 setareaData(fetched_data.data);
 
-        } else if (nonprofit) {
-            // If the user has entered a nonprofit name, fetch nonprofits in the same area (city or zip code)
-            const NAME = nonprofit;
+            } else if (nonprofit) {
+                // If the user has entered a nonprofit name, fetch nonprofits in the same area (city or zip code)
+                const NAME = nonprofit;
 
-            // Fetch the data
-            let response = await fetch(`/api/sector?Nm=${NAME}`);
-            let nonprofitData = await response.json();
-            setNonprofitData(nonprofitData);
+                // Fetch the data
+                let response = await fetch(`/api/sector?Nm=${NAME}`);
+                let nonprofitData = await response.json();
+                setNonprofitData(nonprofitData);
 
-            // Get the area data for the selected nonprofit
-            if (nonprofitData !== null) {
-                // Extract the city and zip code of the selected nonprofit
-                const CITY = nonprofitData.data[0].Cty;
-                const ZIP = nonprofitData.data[0].Zip;
+                // Get the area data for the selected nonprofit
+                if (nonprofitData !== null) {
+                    // Extract the city and zip code of the selected nonprofit
+                    const CITY = nonprofitData.data[0].Cty;
+                    const ZIP = nonprofitData.data[0].Zip;
 
-                // Set the area data with the city and zip code of the selected nonprofit
-                let response = await fetch(`/api/sector?Cty=${CITY}&Zip=${ZIP}`);
-                let fetched_data = await response.json();
+                    // Set the area data with the city and zip code of the selected nonprofit
+                    let response = await fetch(`/api/sector?Cty=${CITY}&Zip=${ZIP}`);
+                    let fetched_data = await response.json();
 
-                setareaData(fetched_data.data);
+                    setareaData(fetched_data.data);
 
-            } else { // L bozo
-                console.error("No data found for the given nonprofit name");
+                } else { // L bozo
+                    console.error("No data found for the given nonprofit name");
+                }
+
             }
 
-        }
+            setDataIsLoading(false);
 
-     }
+        };
         fetchData();
     };
+
+
+
+
+    // Loading component to show while data is being fetched
+    const SearchLoadingComponent = () => (
+        <div className="flex items-center justify-center h-full w-full">
+            <svg className="animate-spin h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+        </div>
+    );
+
+
+
+
+
 
     return (
 
@@ -209,16 +233,20 @@ export default function COLAB() {
                 </button>
             </div>
         </div>
-        <div className="grid grid-cols-2 gap-4 h-full">
-            {areaData ? (
+        <div className="h-full">
+            {dataIsLoading ? (
+                <SearchLoadingComponent />
+            ) : areaData ? (
                 <>
-                    <div className='h-full bg-[#21222D] p-4 rounded-lg'>
-                        <h2 className="text-center text-3xl">Nonprofit Network</h2>
-                        <COLABGraph data={areaData} filters={[]} onNonprofitClick={handleNonprofitClick}/>
-                    </div>
-                    <div className="h-full bg-[#21222D] p-4 rounded-lg">
-                        <h2 className="text-center text-3xl">Similarity Table</h2>
-                        <COLABTable nonprofits={areaData} selectedNonprofit={nonprofitData} />
+                    <div className="grid grid-cols-2 gap-4 h-full">
+                        <div className='h-full bg-[#21222D] p-4 rounded-lg'>
+                            <h2 className="text-center text-3xl">Nonprofit Network</h2>
+                            <COLABGraph data={areaData} filters={[]} onNonprofitClick={handleNonprofitClick}/>
+                        </div>
+                        <div className="h-full bg-[#21222D] p-4 rounded-lg">
+                            <h2 className="text-center text-3xl">Similarity Table</h2>
+                            <COLABTable nonprofits={areaData} selectedNonprofit={nonprofitData} />
+                        </div>
                     </div>
                 </>
             ) : (
