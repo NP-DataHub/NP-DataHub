@@ -587,7 +587,7 @@ const fetchFiscalHealthData = async (option) => {
                     <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(singleNpScore)}`}>
                       {singleNpScore}
                     </div>
-                    <p className="mt-4">NonProfit Score</p>
+                    <p className="mt-4">Nonprofit Score</p>
                   </div>
                   <div className="flex flex-col items-center w-1/3">
                     <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(regionalSectorScore)}`}>
