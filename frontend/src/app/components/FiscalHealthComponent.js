@@ -27,11 +27,21 @@ export default function FiscalHealthSection({isDarkMode}) {
   const [errorComparison, setErrorComparison] = useState(null); 
   const [loadingSectorComparison, setLoadingSectorComparison] = useState(false);
   const [errorSectorComparison, setErrorSectorComparison] = useState(null); 
-  const [nameSuggestions, setNameSuggestions] = useState([]); // Suggestions for name autocomplete
-  const [addressSuggestions, setAddressSuggestions] = useState([]); // Suggestions for address autocomplete
-  const [lastFetchedNameInput, setLastFetchedNameInput] = useState('');
-  const [lastFetchedAddressInput, setLastFetchedAddressInput] = useState('');
+  
+  const [singleNameSuggestions, setSingleNameSuggestions] = useState([]);
+  const [singleAddressSuggestions, setSingleAddressSuggestions] = useState([]);
+  const [lastSingleFetchedNameInput, setLastSingleFetchedNameInput] = useState('');
+  const [lastSingleFetchedAddressInput, setLastSingleFetchedAddressInput] = useState('');
 
+  const [firstNameSuggestions, setFirstNameSuggestions] = useState([]);
+  const [firstAddressSuggestions, setFirstAddressSuggestions] = useState([]);
+  const [lastFirstFetchedNameInput, setLastFirstFetchedNameInput] = useState('');
+  const [lastFirstFetchedAddressInput, setLastFirstFetchedAddressInput] = useState('');
+
+  const [secondNameSuggestions, setSecondNameSuggestions] = useState([]);
+  const [secondAddressSuggestions, setSecondAddressSuggestions] = useState([]);
+  const [lastSecondFetchedNameInput, setLastSecondFetchedNameInput] = useState('');
+  const [lastSecondFetchedAddressInput, setLastSecondFetchedAddressInput] = useState('');
 
   const majorGroups = [
     { value: '', label: "Select a sector (the default is the nonprofit sector)" },
@@ -64,35 +74,74 @@ export default function FiscalHealthSection({isDarkMode}) {
   ];
   
   // Fetch suggestions for nonprofit names or addresses
-  const fetchSuggestions = async (value, type) => {
-    if (type === 'name' && value === lastFetchedNameInput) return;
-    if (type === 'address' && value === lastFetchedAddressInput) return;
-  
+  const fetchSuggestions = async (value, type, mode) => {
+
+    if (type === 'name') {
+      if (
+        (mode === 'Single' && value === lastSingleFetchedNameInput) ||
+        (mode === 'First' && value === lastFirstFetchedNameInput) ||
+        (mode === 'Second' && value === lastSecondFetchedNameInput)
+      ) {
+        return;
+      }
+    } else if (type === 'address') {
+      if (
+        (mode === 'Single' && value === lastSingleFetchedAddressInput) ||
+        (mode === 'First' && value === lastFirstFetchedAddressInput) ||
+        (mode === 'Second' && value === lastSecondFetchedAddressInput)
+      ) {
+        return;
+      }
+    }
     try {
       const response = await fetch(`/api/suggestions?input=${value}&type=${type}`);
       const data = await response.json();
-  
+
       if (data.success) {
         if (type === 'name') {
-          setNameSuggestions(data.data);
-          setLastFetchedNameInput(value); // Update last fetched value for names
+          if (mode === 'Single') {
+            setSingleNameSuggestions(data.data);
+            setLastSingleFetchedNameInput(value);
+          } else if (mode === 'First') {
+            setFirstNameSuggestions(data.data);
+            setLastFirstFetchedNameInput(value);
+          } else if (mode === 'Second') {
+            setSecondNameSuggestions(data.data);
+            setLastSecondFetchedNameInput(value);
+          }
         } else if (type === 'address') {
-          setAddressSuggestions(data.data);
-          setLastFetchedAddressInput(value); // Update last fetched value for addresses
+          if (mode === 'Single') {
+            setSingleAddressSuggestions(data.data);
+            setLastSingleFetchedAddressInput(value);
+          } else if (mode === 'First') {
+            setFirstAddressSuggestions(data.data);
+            setLastFirstFetchedAddressInput(value);
+          } else if (mode === 'Second') {
+            setSecondAddressSuggestions(data.data);
+            setLastSecondFetchedAddressInput(value);
+          }
         }
       } else {
-        if (type === 'name') setNameSuggestions([]);
-        if (type === 'address') setAddressSuggestions([]);
+        if (type === 'name') {
+          if (mode === 'Single') setSingleNameSuggestions([]);
+          else if (mode === 'First') setFirstNameSuggestions([]);
+          else if (mode === 'Second') setSecondNameSuggestions([]);
+        } else if (type === 'address') {
+          if (mode === 'Single') setSingleAddressSuggestions([]);
+          else if (mode === 'First') setFirstAddressSuggestions([]);
+          else if (mode === 'Second') setSecondAddressSuggestions([]);
+        }
       }
     } catch (error) {
       console.error("Error fetching suggestions:", error);
     }
   };
-  
 
   // Autosuggest configuration
   // Get suggestion value for name
-  const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
+const getNameSuggestionValue = (suggestion) => {
+  return suggestion.Nm || '';
+};
 
   // Get suggestion value for address
   const getAddressSuggestionValue = (suggestion) => suggestion.Addr || '';
@@ -100,7 +149,6 @@ export default function FiscalHealthSection({isDarkMode}) {
   
   // Render function for names
   const renderNameSuggestion = (suggestion) => {
-    console.log("Rendering suggestion:", suggestion); // Add this
     return (
       <div className="px-4 py-2  cursor-pointer hover:bg-[#FEB95A] hover:text-black">
         {suggestion.Nm}
@@ -117,17 +165,25 @@ export default function FiscalHealthSection({isDarkMode}) {
   );
 
 
-  const onNameSuggestionsFetchRequested = ({ value }) => {
-    fetchSuggestions(value, 'name');
+  const onNameSuggestionsFetchRequested = ({ value }, mode) => {
+    fetchSuggestions(value, 'name', mode);
   };
 
-  const onAddressSuggestionsFetchRequested = ({ value }) => {
-    fetchSuggestions(value, 'address');
+  const onAddressSuggestionsFetchRequested = ({ value }, mode) => {
+    fetchSuggestions(value, 'address', mode);
   };
 
-  const onSuggestionsClearRequested = () => {
-    setNameSuggestions([]);
-    setAddressSuggestions([]);
+  const onSuggestionsClearRequested = (mode) => {
+    if (mode === 'Single') {
+      setSingleNameSuggestions([]);
+      setSingleAddressSuggestions([]);
+    } else if (mode === 'First') {
+      setFirstNameSuggestions([]);
+      setFirstAddressSuggestions([]);
+    } else if (mode === 'Second') {
+      setSecondNameSuggestions([]);
+      setSecondAddressSuggestions([]);
+    }
   };
 
 /// Fetch fiscal health data
@@ -314,14 +370,14 @@ const fetchFiscalHealthData = async (option) => {
         <div className="flex flex-col gap-6">
           <div className = 'relative'>
             <Autosuggest
-              suggestions={nameSuggestions}
-              onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
-              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              suggestions={firstNameSuggestions}
+              onSuggestionsFetchRequested={({ value }) => onNameSuggestionsFetchRequested({ value }, 'First')}
+              onSuggestionsClearRequested={() => onSuggestionsClearRequested('First')}
               getSuggestionValue={getNameSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
                 <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
                     isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                } overflow-y-auto rounded z-10 ${firstNameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
                     {children}
                 </div>
             )}
@@ -332,6 +388,7 @@ const fetchFiscalHealthData = async (option) => {
                 value: firstNp,
                 onChange: (_, { newValue }) => {
                   setFirstNp(newValue);
+                  setSingleNameSuggestions([]);
                 },
                 className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
               }}
@@ -340,15 +397,15 @@ const fetchFiscalHealthData = async (option) => {
           </div>
           <div className = 'relative'>
             <Autosuggest
-              suggestions={addressSuggestions}
-              onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
-              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              suggestions={firstAddressSuggestions}
+              onSuggestionsFetchRequested={({ value }) => onAddressSuggestionsFetchRequested({ value }, 'First')}
+              onSuggestionsClearRequested={() => onSuggestionsClearRequested('First')}
               getSuggestionValue={getAddressSuggestionValue}
               renderSuggestion={renderAddressSuggestion}
               renderSuggestionsContainer={({ containerProps, children }) => (
                 <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
                     isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                } overflow-y-auto rounded z-10 ${firstAddressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
                     {children}
                 </div>
             )}
@@ -357,6 +414,7 @@ const fetchFiscalHealthData = async (option) => {
                 value: firstAddr,
                 onChange: (_, { newValue }) => {
                   setFirstAddr(newValue);
+                  setSingleAddressSuggestions([]);
                 },
                 className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
               }}
@@ -364,14 +422,14 @@ const fetchFiscalHealthData = async (option) => {
             </div>
             <div className = 'relative'>
               <Autosuggest
-                suggestions={nameSuggestions}
-                onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
-                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                suggestions={secondNameSuggestions}
+                onSuggestionsFetchRequested={({ value }) => onNameSuggestionsFetchRequested({ value }, 'Second')}
+                onSuggestionsClearRequested={() => onSuggestionsClearRequested('Second')}
                 getSuggestionValue={getNameSuggestionValue}
                 renderSuggestionsContainer={({ containerProps, children }) => (
                   <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
                       isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                  } overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                  } overflow-y-auto rounded z-10 ${secondNameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
                       {children}
                   </div>
               )}
@@ -380,6 +438,7 @@ const fetchFiscalHealthData = async (option) => {
                   placeholder: 'Second Nonprofit Name',
                   value: secondNp,
                   onChange: (_, { newValue }) => {
+                    setSingleNameSuggestions([]);
                     setSecondNp(newValue);
                   },
                   className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
@@ -388,14 +447,14 @@ const fetchFiscalHealthData = async (option) => {
             </div>
             <div className = 'relative'>
               <Autosuggest
-                suggestions={addressSuggestions}
-                onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
-                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                suggestions={secondAddressSuggestions}
+                onSuggestionsFetchRequested={({ value }) => onAddressSuggestionsFetchRequested({ value }, 'Second')}
+                onSuggestionsClearRequested={() => onSuggestionsClearRequested('Second')}
                 getSuggestionValue={getAddressSuggestionValue}
                 renderSuggestionsContainer={({ containerProps, children }) => (
                   <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
                       isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                  } overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                  } overflow-y-auto rounded z-10 ${secondAddressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
                       {children}
                   </div>
               )}
@@ -405,6 +464,7 @@ const fetchFiscalHealthData = async (option) => {
                   value: secondAddr,
                   onChange: (_, { newValue }) => {
                     setSecondAddr(newValue);
+                    setSingleAddressSuggestions([]);
                   },
                   className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
                 }}
@@ -491,14 +551,14 @@ const fetchFiscalHealthData = async (option) => {
         <div className="flex flex-col gap-6">
           <div className = 'relative'>
             <Autosuggest
-              suggestions={nameSuggestions}
-              onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
-              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              suggestions={singleNameSuggestions}
+              onSuggestionsFetchRequested={({ value }) => onNameSuggestionsFetchRequested({ value }, 'Single')}
+              onSuggestionsClearRequested={() => onSuggestionsClearRequested('Single')}
               getSuggestionValue={getNameSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
                 <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
                     isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                } overflow-y-auto rounded z-10 ${singleNameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
                     {children}
                 </div>
             )}
@@ -508,6 +568,8 @@ const fetchFiscalHealthData = async (option) => {
                 value: singleNp,
                 onChange: (_, { newValue }) => {
                   setSingleNp(newValue);
+                  setFirstNameSuggestions([]);
+                  setSecondNameSuggestions([]);
                 },
                 className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
               }}
@@ -515,14 +577,14 @@ const fetchFiscalHealthData = async (option) => {
           </div>
           <div className = 'relative'>
             <Autosuggest
-              suggestions={addressSuggestions}
-              onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
-              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              suggestions={singleAddressSuggestions}
+              onSuggestionsFetchRequested={({ value }) => onAddressSuggestionsFetchRequested({ value }, 'Single')}
+              onSuggestionsClearRequested={() => onSuggestionsClearRequested('Single')}
               getSuggestionValue={getAddressSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
                 <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
                     isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                } overflow-y-auto rounded z-10 ${singleAddressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
                     {children}
                 </div>
             )}
@@ -532,6 +594,8 @@ const fetchFiscalHealthData = async (option) => {
                 value: singleAddr,
                 onChange: (_, { newValue }) => {
                   setSingleAddr(newValue);
+                  setFirstAddressSuggestions([]);
+                  setSecondAddressSuggestions([]);
                 },
                 className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
               }}

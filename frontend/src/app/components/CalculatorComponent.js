@@ -5,7 +5,6 @@ import { Tooltip as ReactTooltip } from 'react-tooltip'
 
 export default function CalculatorSection({isDarkMode}) {
 
-  const [mode, setMode] = useState('');
   const [nonprofit, setNonprofit] = useState('');
   const [address, setAddress] = useState('');
   const [sector, setSector] = useState('');
@@ -85,7 +84,7 @@ const states = [
       const response = await fetch('/api/calculator', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mode, nonprofit, address, sector, state }),
+        body: JSON.stringify({ mode: "Macro", nonprofit, address, sector, state }),
       });
       const data = await response.json();
 
@@ -113,7 +112,7 @@ const states = [
       const response = await fetch('/api/calculator', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mode, nonprofit, address, sector, state }),
+        body: JSON.stringify({ mode: "Micro", nonprofit, address, sector, state }),
       });
       const data = await response.json();
 
@@ -265,7 +264,6 @@ const states = [
             value={sector}
             onChange={(e) => {
                 setSector(e.target.value);
-                setMode("Macro");
             }}
             className={`p-4 border  ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full`}
           >
@@ -399,7 +397,7 @@ const states = [
               renderSuggestionsContainer={({ containerProps, children }) => (
                 <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
                     isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${stateSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                } overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
                     {children}
                 </div>
             )}
@@ -413,7 +411,6 @@ const states = [
                 value: nonprofit,
                 onChange: (_, { newValue }) => {
                   setNonprofit(newValue);
-                  setMode("Micro");
                 },
                 className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
               }}
