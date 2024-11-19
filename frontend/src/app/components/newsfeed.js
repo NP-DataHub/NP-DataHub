@@ -5,7 +5,7 @@ import SocialMediaMentions from './media_mentions';
 
 export default function NewsFeedSection({isDarkMode}) {
   const [articles, setArticles] = useState([]); // State to hold news articles
-  const [query, setQuery] = useState("nonprofit OR \"non-profit\" OR \"non profit\""); // Initial query
+  const [query, setQuery] = useState("`charitable organization` `non-profit` -politics"); // Initial query
   const [searchQuery, setSearchQuery] = useState(""); // State for user's search input, starts empty
   const [limit, setLimit] = useState(25);
   const [period, setPeriod] = useState("last7days");
@@ -13,14 +13,29 @@ export default function NewsFeedSection({isDarkMode}) {
   const [selectedContent, setSelectedContent] = useState("news"); // Track selected content: 'news' or 'socialMedia'
 
   // Function to fetch news articles
-  const fetchNewsArticles = async (searchText = query) => {
+  const fetchAllPages = async (searchText = query, pages = 5, sortBy = 'relevance_score') => {
     const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
-    const apiUrl = `https://api.thenewsapi.com/v1/news/top?api_token=${apiKey}&locale=us&search=${encodeURIComponent(searchText)}&limit=${limit}`;
+    let allArticles = []; // Consolidated articles from all pages
 
     setIsLoading(true);
     try {
-      const response = await axios.get(apiUrl);
-      setArticles(response.data.data || []);
+      for (let page = 1; page <= pages; page++) {
+        const apiUrl = `https://api.thenewsapi.com/v1/news/top?api_token=${apiKey}&locale=us&search=${encodeURIComponent(
+          searchText
+        )}&limit=${limit}&sort=${sortBy}&page=${page}`;
+
+        const response = await axios.get(apiUrl);
+        const pageArticles = response.data.data || [];
+        allArticles = [...allArticles, ...pageArticles];
+
+        // Stop fetching if fewer articles returned than requested
+        if (pageArticles.length < limit) break;
+      }
+
+      // Optionally sort articles by relevance or other metric
+      allArticles = allArticles.sort((a, b) => b.relevance_score - a.relevance_score || 0);
+
+      setArticles(allArticles);
     } catch (error) {
       console.error("Error fetching news:", error);
       setArticles([]);
@@ -32,16 +47,15 @@ export default function NewsFeedSection({isDarkMode}) {
   // Fetch articles on component mount with the initial query
   useEffect(() => {
     if (selectedContent === "news") {
-      fetchNewsArticles();
+      fetchAllPages();
     }
   }, [selectedContent]);
 
-  // Search submit handler
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    fetchNewsArticles(searchQuery); // Search with the user's input
+    fetchAllPages(searchQuery); // Fetch articles with user's search input
   };
-
+  
   const LoadingComponent = () => (
     <div className="flex items-center justify-center h-full w-full">
       <svg className="animate-spin h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
