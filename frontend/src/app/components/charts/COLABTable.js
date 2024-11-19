@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
  */
 const COLABTable = ({ nonprofits, selectedNonprofit }) => {
 
-    console.log("COLAB Table inputs:", nonprofits, selectedNonprofit);
+    //console.log("COLAB Table inputs:", nonprofits, selectedNonprofit);
 
     // Check for invalid/empty inputs
     if (!Array.isArray(nonprofits)) {
@@ -59,7 +59,7 @@ const COLABTable = ({ nonprofits, selectedNonprofit }) => {
     similarityList.sort((a, b) => b.score - a.score);
 
 
-    console.log("Similarity List:", similarityList);
+    //console.log("Similarity List:", similarityList);
 
 
 

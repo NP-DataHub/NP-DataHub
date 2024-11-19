@@ -352,14 +352,14 @@ export default function Toolbox() {
                                 className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ${
                                     selectedSection === "Co:Lab" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#c9c9c9] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
                                 }`}
-                                data-tooltip-id="comparison-tooltip4"
-                                data-tooltip-content="Currently Under Development"
+                                // data-tooltip-id="comparison-tooltip4"
+                                // data-tooltip-content="Currently Under Development"
                                 
-                                // onClick={() =>
-                                //     setSelectedSection(
-                                //       selectedSection === "Co:Lab" ? null : "Co:Lab"
-                                //     )
-                                //   }
+                                onClick={() =>
+                                    setSelectedSection(
+                                      selectedSection === "Co:Lab" ? null : "Co:Lab"
+                                    )
+                                  }
                                 >
                                 <ReactTooltip place="top" effect="solid" id="comparison-tooltip4" />
 

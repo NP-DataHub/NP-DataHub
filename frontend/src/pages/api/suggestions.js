@@ -3,7 +3,8 @@ import { MongoClient } from "mongodb";
 const uri = process.env.MONGODB_URI;
 
 async function connectToDatabase() {
-  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  //const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true }); - deprecated
+  const client = new MongoClient(uri);
   await client.connect();
   return client.db('Nonprofitly');
 }
