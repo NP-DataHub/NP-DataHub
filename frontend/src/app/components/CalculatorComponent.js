@@ -275,33 +275,34 @@ const states = [
               </option>
             ))}
           </select>
-        <Autosuggest
-            suggestions={stateSuggestions}
-            onSuggestionsFetchRequested={onStateSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onStateSuggestionsClearRequested}
-            getSuggestionValue={getStateSuggestionValue}
-            renderSuggestion={(suggestion) => (
-                <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
-                    {suggestion}
+        <div className = 'relative'>
+          <Autosuggest
+              suggestions={stateSuggestions}
+              onSuggestionsFetchRequested={onStateSuggestionsFetchRequested}
+              onSuggestionsClearRequested={onStateSuggestionsClearRequested}
+              getSuggestionValue={getStateSuggestionValue}
+              renderSuggestionsContainer={({ containerProps, children }) => (
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
+                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                } overflow-y-auto rounded z-10 ${stateSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                    {children}
                 </div>
             )}
-            
-            inputProps={{
-              placeholder: 'Enter State. If left blank, national performance will be calculated',
-              value: state,
-              onChange: (event, { newValue }) => setState(newValue),
-              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
-            }}
+              renderSuggestion={(suggestion) => (
+                  <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+                      {suggestion}
+                  </div>
+              )}
+              
+              inputProps={{
+                placeholder: 'Enter State. If left blank, national performance will be calculated',
+                value: state,
+                onChange: (event, { newValue }) => setState(newValue),
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+              }}
 
-            theme={{
-              container: 'autosuggest-container',
-              input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${stateSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
-              suggestionsList: 'autosuggest-suggestions-list',
-              suggestion: 'autosuggest-suggestion',
-              suggestionHighlighted: 'autosuggest-suggestion--highlighted',
-            }}
-        />
+          />
+        </div>
         <button
           onClick={fetchMacroData}
           className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMacroDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'}`}
@@ -389,64 +390,66 @@ const states = [
         Conversely, this allows grantmakers to gauge whether the nonprofit submitting a proposal is accurately budgeting beyond overhead.
         </p>
         <div className="flex flex-col gap-6">
-          <Autosuggest
-            suggestions={nameSuggestions}
-            onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getNameSuggestionValue}
-            renderSuggestion={(suggestion) => (
-              <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
-                {suggestion.Nm} 
-              </div>
+          <div className = 'relative'>
+            <Autosuggest
+              suggestions={nameSuggestions}
+              onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              getSuggestionValue={getNameSuggestionValue}
+              renderSuggestionsContainer={({ containerProps, children }) => (
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
+                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                } overflow-y-auto rounded z-10 ${stateSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                    {children}
+                </div>
             )}
-            inputProps={{
-              placeholder: 'Search for Nonprofit',
-              value: nonprofit,
-              onChange: (_, { newValue }) => {
-                setNonprofit(newValue);
-                setMode("Micro");
-              },
-              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
-            }}
-            theme={{
-              container: 'autosuggest-container',
-              input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
-              suggestionsList: 'autosuggest-suggestions-list',
-              suggestion: 'autosuggest-suggestion',
-              suggestionHighlighted: 'autosuggest-suggestion--highlighted',
-            }}
-          />
+              renderSuggestion={(suggestion) => (
+                <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+                  {suggestion.Nm} 
+                </div>
+              )}
+              inputProps={{
+                placeholder: 'Search for Nonprofit',
+                value: nonprofit,
+                onChange: (_, { newValue }) => {
+                  setNonprofit(newValue);
+                  setMode("Micro");
+                },
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+              }}
 
-          <Autosuggest
-            suggestions={addressSuggestions}
-            onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getAddressSuggestionValue}
-            renderSuggestion={(suggestion) => (
-              <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
-                {suggestion.Addr}
-              </div>
+            />
+          </div>
+          <div className = 'relative'>
+            <Autosuggest
+              suggestions={addressSuggestions}
+              onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
+              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              getSuggestionValue={getAddressSuggestionValue}
+              renderSuggestionsContainer={({ containerProps, children }) => (
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
+                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                } overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                    {children}
+                </div>
             )}
-            
-            inputProps={{
-              placeholder: 'Search or Auto-fill Address (Optional: This can be used if the nonprofit has multiple addresses)',
-              value: address,
-              onChange: (_, { newValue }) => {
-                setAddress(newValue);
-                setMode("Micro");
-              },
-              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
-            }}
-            theme={{
-              container: 'autosuggest-container',
-              input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`,
-              suggestionsList: 'autosuggest-suggestions-list',
-              suggestion: 'autosuggest-suggestion',
-              suggestionHighlighted: 'autosuggest-suggestion--highlighted',
-            }}
-          />
+              renderSuggestion={(suggestion) => (
+                <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+                  {suggestion.Addr}
+                </div>
+              )}
+              
+              inputProps={{
+                placeholder: 'Search or Auto-fill Address (Optional: This can be used if the nonprofit has multiple addresses)',
+                value: address,
+                onChange: (_, { newValue }) => {
+                  setAddress(newValue);
+                  setMode("Micro");
+                },
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+              }}
+            />
+          </div>
         <button
           onClick={fetchMicroData}
           className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMicroDisabled() ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'}`}

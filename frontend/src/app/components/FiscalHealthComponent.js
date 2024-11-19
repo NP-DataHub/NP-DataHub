@@ -99,11 +99,15 @@ export default function FiscalHealthSection({isDarkMode}) {
 
   
   // Render function for names
-  const renderNameSuggestion = (suggestion) => (
-    <div className="px-4 py-2 cursor-pointer hover:bg-[#FEB95A] hover:text-black">
-      {suggestion.Nm}
-    </div>
-  );
+  const renderNameSuggestion = (suggestion) => {
+    console.log("Rendering suggestion:", suggestion); // Add this
+    return (
+      <div className="px-4 py-2  cursor-pointer hover:bg-[#FEB95A] hover:text-black">
+        {suggestion.Nm}
+      </div>
+    );
+  };
+  
 
   // Render function for addresses
   const renderAddressSuggestion = (suggestion) => (
@@ -308,101 +312,104 @@ const fetchFiscalHealthData = async (option) => {
           Compare the scores side-by-side with other nonprofits.
         </p>
         <div className="flex flex-col gap-6">
-          <Autosuggest
-            suggestions={nameSuggestions}
-            onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getNameSuggestionValue}
-            renderSuggestion={renderNameSuggestion}
-            
-            inputProps={{
-              placeholder: 'First Nonprofit Name',
-              value: firstNp,
-              onChange: (_, { newValue }) => {
-                setFirstNp(newValue);
-              },
-              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
-            }}
-            
-            theme={{
-              container: 'autosuggest-container',
-              input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
-              suggestionsList: 'autosuggest-suggestions-list',
-              suggestion: 'autosuggest-suggestion',
-              suggestionHighlighted: 'autosuggest-suggestion--highlighted',
-            }}
-            
-          />
-          <Autosuggest
-            suggestions={addressSuggestions}
-            onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getAddressSuggestionValue}
-            renderSuggestion={renderAddressSuggestion}
-            inputProps={{
-              placeholder: 'First Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
-              value: firstAddr,
-              onChange: (_, { newValue }) => {
-                setFirstAddr(newValue);
-              },
-              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
-            }}
-            theme={{
-              container: 'autosuggest-container',
-              input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
-              suggestionsList: 'autosuggest-suggestions-list',
-              suggestion: 'autosuggest-suggestion',
-              suggestionHighlighted: 'autosuggest-suggestion--highlighted',
-            }}
-          />
-          <Autosuggest
-            suggestions={nameSuggestions}
-            onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getNameSuggestionValue}
-            renderSuggestion={renderNameSuggestion}
-            inputProps={{
-              placeholder: 'Second Nonprofit Name',
-              value: secondNp,
-              onChange: (_, { newValue }) => {
-                setSecondNp(newValue);
-              },
-              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
-            }}
-            theme={{
-              container: 'autosuggest-container',
-              input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
-              suggestionsList: 'autosuggest-suggestions-list',
-              suggestion: 'autosuggest-suggestion',
-              suggestionHighlighted: 'autosuggest-suggestion--highlighted',
-            }}
-          />
-          <Autosuggest
-            suggestions={addressSuggestions}
-            onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getAddressSuggestionValue}
-            renderSuggestion={renderAddressSuggestion}
-            inputProps={{
-              placeholder: 'Second Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
-              value: secondAddr,
-              onChange: (_, { newValue }) => {
-                setSecondAddr(newValue);
-              },
-              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
-            }}
-            theme={{
-              container: 'autosuggest-container',
-              input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
-              suggestionsList: 'autosuggest-suggestions-list',
-              suggestion: 'autosuggest-suggestion',
-              suggestionHighlighted: 'autosuggest-suggestion--highlighted',
-            }}
-          />
+          <div className = 'relative'>
+            <Autosuggest
+              suggestions={nameSuggestions}
+              onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              getSuggestionValue={getNameSuggestionValue}
+              renderSuggestionsContainer={({ containerProps, children }) => (
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
+                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                } overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                    {children}
+                </div>
+            )}
+              renderSuggestion={renderNameSuggestion}
+              
+              inputProps={{
+                placeholder: 'First Nonprofit Name',
+                value: firstNp,
+                onChange: (_, { newValue }) => {
+                  setFirstNp(newValue);
+                },
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+              }}
+          
+            />
+          </div>
+          <div className = 'relative'>
+            <Autosuggest
+              suggestions={addressSuggestions}
+              onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
+              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              getSuggestionValue={getAddressSuggestionValue}
+              renderSuggestion={renderAddressSuggestion}
+              renderSuggestionsContainer={({ containerProps, children }) => (
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
+                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                } overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                    {children}
+                </div>
+            )}
+              inputProps={{
+                placeholder: 'First Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
+                value: firstAddr,
+                onChange: (_, { newValue }) => {
+                  setFirstAddr(newValue);
+                },
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+              }}
+            />
+            </div>
+            <div className = 'relative'>
+              <Autosuggest
+                suggestions={nameSuggestions}
+                onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                getSuggestionValue={getNameSuggestionValue}
+                renderSuggestionsContainer={({ containerProps, children }) => (
+                  <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
+                      isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                  } overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                      {children}
+                  </div>
+              )}
+                renderSuggestion={renderNameSuggestion}
+                inputProps={{
+                  placeholder: 'Second Nonprofit Name',
+                  value: secondNp,
+                  onChange: (_, { newValue }) => {
+                    setSecondNp(newValue);
+                  },
+                  className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+                }}
+              />
+            </div>
+            <div className = 'relative'>
+              <Autosuggest
+                suggestions={addressSuggestions}
+                onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
+                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                getSuggestionValue={getAddressSuggestionValue}
+                renderSuggestionsContainer={({ containerProps, children }) => (
+                  <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
+                      isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                  } overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                      {children}
+                  </div>
+              )}
+                renderSuggestion={renderAddressSuggestion}
+                inputProps={{
+                  placeholder: 'Second Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
+                  value: secondAddr,
+                  onChange: (_, { newValue }) => {
+                    setSecondAddr(newValue);
+                  },
+                  className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+                }}
+              />
+            </div>
 
           <button
             onClick={() => fetchFiscalHealthData("compare")}
@@ -422,7 +429,7 @@ const fetchFiscalHealthData = async (option) => {
               
               {/* First Nonprofit Score Display */}
               <div className="flex flex-col items-center w-1/2">
-                <div className={`border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(firstNpScore)}`}>
+                <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(firstNpScore)}`}>
                   {firstNpScore}
                 </div>
                 {/* First Nonprofit Years Message */}
@@ -447,7 +454,7 @@ const fetchFiscalHealthData = async (option) => {
               </div>
               {/* Second Nonprofit Score Display */}
               <div className="flex flex-col items-center w-1/2">
-                <div className={`border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(secondNpScore)}`}>
+                <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(secondNpScore)}`}>
                   {secondNpScore}
                 </div>
 
@@ -482,52 +489,54 @@ const fetchFiscalHealthData = async (option) => {
         <p className="text-center pb-8">
         Compare the scores side-by-side with the same or other sectors, either at the state or national levels.</p>
         <div className="flex flex-col gap-6">
-          <Autosuggest
-            suggestions={nameSuggestions}
-            onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getNameSuggestionValue}
-            renderSuggestion={renderNameSuggestion}
-            inputProps={{
-              placeholder: 'Single Nonprofit Name',
-              value: singleNp,
-              onChange: (_, { newValue }) => {
-                setSingleNp(newValue);
-              },
-              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
-            }}
-            theme={{
-              container: 'autosuggest-container',
-              input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
-              suggestionsList: 'autosuggest-suggestions-list',
-              suggestion: 'autosuggest-suggestion',
-              suggestionHighlighted: 'autosuggest-suggestion--highlighted',
-            }}
-          />
-          <Autosuggest
-            suggestions={addressSuggestions}
-            onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getAddressSuggestionValue}
-            renderSuggestion={renderAddressSuggestion}
-            inputProps={{
-              placeholder: 'Single Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
-              value: singleAddr,
-              onChange: (_, { newValue }) => {
-                setSingleAddr(newValue);
-              },
-              className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
-            }}
-            theme={{
-              container: 'autosuggest-container',
-              input: 'autosuggest-input',
-              suggestionsContainer: `absolute top-0 transform -translate-y-full w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`,
-              suggestionsList: 'autosuggest-suggestions-list',
-              suggestion: 'autosuggest-suggestion',
-              suggestionHighlighted: 'autosuggest-suggestion--highlighted',
-            }}
-          />
+          <div className = 'relative'>
+            <Autosuggest
+              suggestions={nameSuggestions}
+              onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              getSuggestionValue={getNameSuggestionValue}
+              renderSuggestionsContainer={({ containerProps, children }) => (
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
+                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                } overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                    {children}
+                </div>
+            )}
+              renderSuggestion={renderNameSuggestion}
+              inputProps={{
+                placeholder: 'Single Nonprofit Name',
+                value: singleNp,
+                onChange: (_, { newValue }) => {
+                  setSingleNp(newValue);
+                },
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+              }}
+            />
+          </div>
+          <div className = 'relative'>
+            <Autosuggest
+              suggestions={addressSuggestions}
+              onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
+              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              getSuggestionValue={getAddressSuggestionValue}
+              renderSuggestionsContainer={({ containerProps, children }) => (
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
+                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                } overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                    {children}
+                </div>
+            )}
+              renderSuggestion={renderAddressSuggestion}
+              inputProps={{
+                placeholder: 'Single Nonprofit Address (Optional: This can be used if the nonprofit has multiple addresses)',
+                value: singleAddr,
+                onChange: (_, { newValue }) => {
+                  setSingleAddr(newValue);
+                },
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+              }}
+            />
+          </div>
           <select
             value={specificSector}
             onChange={(e) => setSpecificSector(e.target.value)}
@@ -575,19 +584,19 @@ const fetchFiscalHealthData = async (option) => {
                 <>
                   {/* Display the three score circles */}
                   <div className="flex flex-col items-center w-1/3">
-                    <div className={`border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(singleNpScore)}`}>
+                    <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(singleNpScore)}`}>
                       {singleNpScore}
                     </div>
                     <p className="mt-4">NonProfit Score</p>
                   </div>
                   <div className="flex flex-col items-center w-1/3">
-                    <div className={`border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(regionalSectorScore)}`}>
+                    <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(regionalSectorScore)}`}>
                       {regionalSectorScore == null ? "NaN" : regionalSectorScore}
                     </div>
                     <p className="mt-4">Regional Score</p>
                   </div>
                   <div className="flex flex-col items-center w-1/3">
-                    <div className={`border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(nationalSectorScore)}`}>
+                    <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(nationalSectorScore)}`}>
                       {nationalSectorScore == null ? "NaN" : nationalSectorScore}
                     </div>
                     <p className="mt-4">National Score</p>
