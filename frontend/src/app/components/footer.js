@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaInfoCircle, FaQuestionCircle, FaTags, FaWrench, FaCheckCircle } from 'react-icons/fa';
+import { IoMdGrid } from "react-icons/io";
 import emailjs from 'emailjs-com';
 
 const Footer = () => {
@@ -22,7 +23,7 @@ const Footer = () => {
   const sendEmail = (e, templateId) => {
     e.preventDefault();
     emailjs
-      .sendForm('service_mkrobk5', templateId, e.target, 'm66VYLm_g93hibrW8')
+      .sendForm('service_9buauy9', templateId, e.target, 'm66VYLm_g93hibrW8')
       .then((result) => {
         setSuccess(true);
         e.target.reset(); // Reset form after submission
@@ -54,6 +55,12 @@ const Footer = () => {
               className="flex items-center text-white text-xs md:text-sm lg:text-base hover:text-[#A9DFD8] transition duration-300 focus:outline-none"
             >
               <FaQuestionCircle className="mr-1 md:mr-2" /> FAQ
+            </button>
+            <button
+              onClick={() => navigateTo('/ntee')}
+              className="flex items-center text-white text-xs md:text-sm lg:text-base hover:text-[#A9DFD8] transition duration-300 focus:outline-none"
+            >
+              <IoMdGrid className="mr-1 md:mr-2" /> NTEE 
             </button>
             <button
               onClick={openModal}

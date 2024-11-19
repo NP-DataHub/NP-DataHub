@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SocialMediaMentions from './media_mentions';
 
-export default function NewsFeedSection() {
+export default function NewsFeedSection({isDarkMode}) {
   const [articles, setArticles] = useState([]); // State to hold news articles
-  const [query, setQuery] = useState("nonprofit OR \"non-profit\" OR \"non profit\""); // Initial query
+  const [query, setQuery] = useState("`charitable organization` `non-profit` -politics"); // Initial query
   const [searchQuery, setSearchQuery] = useState(""); // State for user's search input, starts empty
   const [limit, setLimit] = useState(25);
   const [period, setPeriod] = useState("last7days");
@@ -13,14 +13,29 @@ export default function NewsFeedSection() {
   const [selectedContent, setSelectedContent] = useState("news"); // Track selected content: 'news' or 'socialMedia'
 
   // Function to fetch news articles
-  const fetchNewsArticles = async (searchText = query) => {
+  const fetchAllPages = async (searchText = query, pages = 5, sortBy = 'relevance_score') => {
     const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY;
-    const apiUrl = `https://api.thenewsapi.com/v1/news/top?api_token=${apiKey}&locale=us&search=${encodeURIComponent(searchText)}&limit=${limit}`;
+    let allArticles = []; // Consolidated articles from all pages
 
     setIsLoading(true);
     try {
-      const response = await axios.get(apiUrl);
-      setArticles(response.data.data || []);
+      for (let page = 1; page <= pages; page++) {
+        const apiUrl = `https://api.thenewsapi.com/v1/news/top?api_token=${apiKey}&locale=us&search=${encodeURIComponent(
+          searchText
+        )}&limit=${limit}&sort=${sortBy}&page=${page}`;
+
+        const response = await axios.get(apiUrl);
+        const pageArticles = response.data.data || [];
+        allArticles = [...allArticles, ...pageArticles];
+
+        // Stop fetching if fewer articles returned than requested
+        if (pageArticles.length < limit) break;
+      }
+
+      // Optionally sort articles by relevance or other metric
+      allArticles = allArticles.sort((a, b) => b.relevance_score - a.relevance_score || 0);
+
+      setArticles(allArticles);
     } catch (error) {
       console.error("Error fetching news:", error);
       setArticles([]);
@@ -32,16 +47,15 @@ export default function NewsFeedSection() {
   // Fetch articles on component mount with the initial query
   useEffect(() => {
     if (selectedContent === "news") {
-      fetchNewsArticles();
+      fetchAllPages();
     }
   }, [selectedContent]);
 
-  // Search submit handler
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    fetchNewsArticles(searchQuery); // Search with the user's input
+    fetchAllPages(searchQuery); // Fetch articles with user's search input
   };
-
+  
   const LoadingComponent = () => (
     <div className="flex items-center justify-center h-full w-full">
       <svg className="animate-spin h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -52,9 +66,9 @@ export default function NewsFeedSection() {
   );
 
   return (
-    <div className="p-6 bg-[#171821] rounded-lg">
+    <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
       <h3 className="text-xl font-semibold text-[#FEB95A]">News Feeds</h3>
-      <p className="text-white">
+      <p className="">
         A tool for understanding larger-scale problems and connecting to regional nonprofits via social media and search engines.
       </p>
 
@@ -65,7 +79,7 @@ export default function NewsFeedSection() {
           placeholder="Search for news..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full p-2 rounded-l-lg bg-[#34344c] text-white outline-none"
+          className={`w-full p-2 rounded-l-lg ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#c9c9c9] text-black" } outline-none`}
         />
         <button
           type="submit"
@@ -86,15 +100,6 @@ export default function NewsFeedSection() {
           </button>
 
           {/* Social Media Button with Disabled Style and Tooltip */}
-          <div className="relative group">
-            <button className="px-4 py-2 rounded-full bg-gray-500 text-white cursor-not-allowed">
-              Social Media
-            </button>
-            {/* Tooltip */}
-            <span className="absolute left-1/2 transform -translate-x-1/2 -translate-y-full mt-1 w-max bg-gray-700 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              Feature currently under construction
-            </span>
-          </div>
         </div>
       </div>
 
@@ -112,7 +117,7 @@ export default function NewsFeedSection() {
               articles.map((article) => (
                 <div
                   key={article.uuid}
-                  className="border border-gray-700 rounded-lg overflow-hidden shadow-md bg-[#1E1F29] hover:bg-[#2A2B3C] transition-colors duration-300"
+                  className={`border rounded-lg overflow-hidden shadow-md ${ isDarkMode ? "bg-[#1E1F29] hover:bg-[#2A2B3C] border-gray-700 ": "bg-white border-gray-200"} transition-colors duration-300`}
                 >
                   {article.image_url && (
                     <img

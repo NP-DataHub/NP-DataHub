@@ -30,6 +30,7 @@ export default function Profile() {
   const [NteeSuggestions, setNteeSuggestions] = useState([]);
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(false); 
 
   const imagesListRef = ref(storage, "images/");
 
@@ -170,14 +171,14 @@ export default function Profile() {
     placeholder: 'Enter City',
     value: userData.city,
     onChange: onChange,
-    className: "w-full mt-1 px-3 py-2 text-white-900 bg-[#171821] border-b-4 rounded-md "
+    className: `w-full mt-1 px-3 py-2 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black border-black"} border-b-4 rounded-md`
   };
 
   const NteeInputProps = {
     placeholder: 'Enter NTEE Code or Description',
     value: userData.nteeCode,
     onChange: onNteeChange,
-    className: "w-full px-3 py-2 text-white-900 bg-[#171821] border-b-4 rounded-md"
+    className: `w-full mt-1 px-3 py-2 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black border-black"} border-b-4 rounded-md`
   };
 
   const handleUserDataLoaded = () => {
@@ -192,9 +193,22 @@ export default function Profile() {
       </div>
     );
 
+    useEffect(() => {
+      const savedTheme = localStorage.getItem("theme");
+      const darkModeEnabled = savedTheme === "dark";
+      setIsDarkMode(darkModeEnabled);
+      document.documentElement.classList.toggle("dark", darkModeEnabled);
+    }, []);
+  
+    // Handle theme toggle
+    const handleThemeToggle = (newTheme) => {
+      setIsDarkMode(newTheme === "dark");
+      localStorage.setItem("theme", newTheme);
+      document.documentElement.classList.toggle("dark", newTheme === "dark");
+    };
   return (
-    <div className="flex flex-col dashboard-color text-white font-sans">
-        <Sidebar onUserDataLoaded={handleUserDataLoaded}  />
+    <div className={`flex flex-col ${isDarkMode ? "dashboard-color text-white transition-colors duration-300" : "bg-[#c9c9c9] text-black transition-colors duration-300"} font-sans`}>
+        <Sidebar onUserDataLoaded={handleUserDataLoaded} isDarkMode={isDarkMode} onThemeToggle={handleThemeToggle}  />
         {loading ? (
             <LoadingComponent/>
         ) : (
@@ -202,10 +216,10 @@ export default function Profile() {
       <div >
       <div className="flex flex-col flex-grow items-center justify-center mt-12 mb-12">
         <div className = "flex-grow">
-        <div className="flex flex-col items-center justify-center w-full max-w-5xl flex-col bg-[#21222D] rounded-md mx-10 p-10 pb-14 font-sans rounded-lg shadow-lg">
+        <div className={`flex flex-col items-center justify-center w-full max-w-5xl ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} rounded-md mx-10 p-10 pb-14 font-sans rounded-lg shadow-lg`}>
           <h1 className="text-3xl font-bold mb-4">Profile</h1>
           <div className="flex space-x-8 w-full">
-            <div className="w-1/3 bg-[#171821] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 rounded-md">
+            <div className={`w-1/3 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 rounded-md`}>
               <h2 className="text-xl font-semibold mb-2">User Information</h2>
               <div className="border-b border-gray-500 mb-5"></div>
               <img
@@ -222,7 +236,7 @@ export default function Profile() {
               <p><strong>ZIP Code:</strong> {userData.zip}</p>
               <p><strong>NTEE Code:</strong> {userData.nteeCode}</p>
             </div>
-            <div className="w-2/3 bg-[#171821] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 rounded-md">
+            <div className={`w-2/3 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 rounded-md`}>
               <h2 className="text-xl font-semibold mb-2">Edit Profile</h2>
               <div className="border-b border-gray-500  mb-5"></div>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -233,7 +247,7 @@ export default function Profile() {
                     name="firstName"
                     value={userData.firstName}
                     onChange={handleChange}
-                    className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
+                    className={`w-full mt-1 px-3 py-2 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black border-black"} border-b-4 rounded-md`}
                   />
                 </div>
                 <div>
@@ -243,7 +257,7 @@ export default function Profile() {
                     name="lastName"
                     value={userData.lastName}
                     onChange={handleChange}
-                    className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
+                    className={`w-full mt-1 px-3 py-2 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black border-black"} border-b-4 rounded-md`}
                   />
                 </div>
                 <div>
@@ -253,7 +267,7 @@ export default function Profile() {
                     onChange={(event) => {
                       setImageUpload(event.target.files[0]);
                     }}
-                    className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
+                    className={`w-full mt-1 px-3 py-2 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black border-black"} border-b-4 rounded-md`}
                   />
                 </div>
                 <div>
@@ -263,7 +277,7 @@ export default function Profile() {
                     name="organization"
                     value={userData.organization}
                     onChange={handleChange}
-                    className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
+                    className={`w-full mt-1 px-3 py-2 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black border-black"} border-b-4 rounded-md`}
                   />
                 </div>
                 <div>
@@ -272,7 +286,7 @@ export default function Profile() {
                     name="state"
                     value={userData.state}
                     onChange={handleChange}
-                    className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
+                    className={`w-full mt-1 px-3 py-2 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black border-black"} border-b-4 rounded-md`}
                   >
                     <option value="">Select State</option>
                       <option value="AL">Alabama</option>
@@ -345,7 +359,7 @@ export default function Profile() {
                     name="zip"
                     value={userData.zip}
                     onChange={handleChange}
-                    className="w-full mt-1 px-3 py-2 bg-[#171821] border-b-4 text-white rounded-md"
+                    className={`w-full mt-1 px-3 py-2 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black border-black"} border-b-4 rounded-md`}
                   />
                 </div>
                 <div>
@@ -371,7 +385,7 @@ export default function Profile() {
         </div>
         </div>
       </div>
-      <Footer/>
+      <Footer isDarkMode={isDarkMode}/>
       </div>
       )}
     </div>

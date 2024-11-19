@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
  * @Overview Creates a scatter plot using the given variables, where they function as filters for the total data that we have
  *           Each NTEE code is a different color on the scatter plot
  */
-const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters }) => {
+const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const router = useRouter();
@@ -35,7 +35,6 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters }) => {
   }, []);
 
   const handleChartClick = (params) => {
-    console.log(params);
     if (params.componentType === 'series') {
       const nonprofit = data.find((nonprofit) => nonprofit["Nm"] === params.data.name);
       if (nonprofit) {
@@ -104,6 +103,8 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters }) => {
 
   const colors = ['#5470C6', '#91CC75', '#EE6666', '#73C0DE', '#3BA272', '#FC8452', '#9A60B4', '#EA7CCC'];
 
+  const axisColor = isDarkMode ? '#FFFFFF' : '#000000'; // Adjust color dynamically
+
   const option = {
     tooltip: {
       trigger: 'axis',
@@ -137,8 +138,8 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters }) => {
     legend: {
       data: Object.keys(scatter_data),
       left: 'center',
-      top: 30,
-      textStyle: { color: '#FFFFFF', fontSize: 20 },
+      top: 10, // Ensure legend fits within the grid
+      textStyle: { color: axisColor, fontSize: 14 },
     },
     xAxis: {
       type: 'value',
@@ -185,7 +186,11 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters }) => {
 
   return (
     <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
-      <ReactECharts option={option} style={{ width: '100%', height: '100%' }} onEvents={{ click: handleChartClick }} />
+      <ReactECharts
+        option={option}
+        style={{ width: '100%', height: '100%' }}
+        onEvents={{ click: handleChartClick }}
+      />
     </div>
   );
 };

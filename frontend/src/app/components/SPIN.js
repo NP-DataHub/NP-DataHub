@@ -15,7 +15,7 @@ import ntee_codes from "@/app/components/ntee";
 
 
 
-const SPIN = () => {
+const SPIN = ({isDarkMode}) => {
 
     // State variable for data
     const [sectorData, setSectorData] = useState(null);
@@ -114,7 +114,7 @@ const SPIN = () => {
     );
 
     const renderCitySuggestionContainer = ({ containerProps, children }) => (
-        <div {...containerProps} className={`absolute top-full left-0 w-full max-h-96 bg-[#171821] overflow-x-auto rounded z-10 mt-3 ${citySuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+        <div {...containerProps} className={`absolute top-full left-0 w-full max-h-96 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} overflow-x-auto rounded z-10 mt-3 ${citySuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
             {children}
         </div>
     );
@@ -144,7 +144,7 @@ const SPIN = () => {
         placeholder: 'Enter City',
         value: inputCityValue ? inputCityValue : '',
         onChange: onCityChange,
-        className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
+        className: `mt-2 w-full ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]`
     };
 
 
@@ -176,7 +176,7 @@ const SPIN = () => {
     );
 
     const renderSuggestionsContainer = ({ containerProps, children, type }) => (
-        <div {...containerProps} className={`absolute top-full left-0 w-full max-h-96 bg-[#171821] overflow-x-auto rounded z-10 mt-3 ${suggestions[type].length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+        <div {...containerProps} className={`absolute top-full left-0 w-full max-h-96  ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} overflow-x-auto rounded z-10 mt-3 ${suggestions[type].length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
             {children}
         </div>
     );
@@ -209,7 +209,7 @@ const SPIN = () => {
         placeholder: `Enter ${type} Code or Description`,
         value: inputNTEEValue[type] ? inputNTEEValue[type] : selectedValue ? selectedValue.label : '',
         onChange: (event, { newValue }) => onNTEEChange(event, { newValue }, type),
-        className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
+        className: `mt-2 w-full ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]`
     });
 
     // State autosuggest functions
@@ -233,7 +233,7 @@ const SPIN = () => {
     );
 
     const renderStateSuggestionContainer = ({ containerProps, children }) => (
-        <div {...containerProps} className={`absolute top-full left-0 w-full max-h-96 bg-[#171821] overflow-x-auto rounded z-10 mt-3 ${stateSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+        <div {...containerProps} className={`absolute top-full left-0 w-full max-h-96 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} overflow-x-auto rounded z-10 mt-3 ${stateSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
             {children}
         </div>
     );
@@ -263,7 +263,7 @@ const SPIN = () => {
         placeholder: 'Enter State',
         value: inputStateValue ? inputStateValue : '',
         onChange: onStateChange,
-        className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
+        className: `mt-2 w-full ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]`
     };
 
 
@@ -330,7 +330,7 @@ const SPIN = () => {
             </div>
             <div className="mb-4 p-4 bg-[#171821] text-white rounded-lg">
                 <h2 className="text-xl font-semibold mb-2">Overview</h2>
-                <p className="text-base text-[#A0A0A0] mb-6">
+                <p className="text-base  mb-6">
                     A scatter plot&apos;s purpose is to visually display and statistically test the relationship between two variables, identify relationships, test theories, analyze data, 
                     and find natural fiscal collaborators across a single or multiple NTEE codes within a certain geographical area. 
                     Given that more grantmakers -- private and government -- are requiring multiple nonprofits to partner to find solutions 
@@ -338,7 +338,7 @@ const SPIN = () => {
                     similar.
                 </p>
                 <h2 className="text-xl font-semibold mb-2">How to Use the Filters</h2>
-                <p className="text-base text-[#A0A0A0]">
+                <p className="text-base ">
                     First select the state, city, and one NTEE code. Then, choose two variables (revenue, expenses, assets, or liabilities) to compare in the drop down. 
                     For multi-NTEE sectors across a given region, add another NTEE code to your first query with one NTEE code, allowing you to find similar nonprofits in an additional sector. 
                     For more than two, feel free to add one more. However, the inclusion of four NTEE codes drops the significance of like relationships, therefore, we just include three for now. 
