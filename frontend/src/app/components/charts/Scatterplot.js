@@ -145,29 +145,19 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
       type: 'value',
       scale: true,
       name: X_axis_label,
-      nameTextStyle: { color: '#FFFFFF', fontSize: 20 },
-
-      axisLine: { lineStyle: { color: '#FFFFFF' } },
+      nameTextStyle: { color: axisColor, fontSize: 14 },
+      axisLabel: { formatter: '{value}', color: axisColor, fontSize: 12 },
+      axisLine: { lineStyle: { color: axisColor } },
       splitLine: { show: false },
-      axisLabel: { 
-        formatter: (value) => formatNumber(value), // Format axis values
-        color: '#FFFFFF',
-        fontSize: 16 // Increased font size
-      }
     },
     yAxis: {
       type: 'value',
       scale: true,
       name: Y_axis_label,
-      nameTextStyle: { color: '#FFFFFF', fontSize: 20 },
-
-      axisLine: { lineStyle: { color: '#FFFFFF' } },
+      nameTextStyle: { color: axisColor, fontSize: 14 },
+      axisLabel: { formatter: '{value}', color: axisColor, fontSize: 12 },
+      axisLine: { lineStyle: { color: axisColor } },
       splitLine: { show: false },
-      axisLabel: { 
-        formatter: (value) => formatNumber(value), // Format axis values
-        color: '#FFFFFF',
-        fontSize: 16 // Increased font size
-      }
     },
     series: Object.keys(scatter_data).map((key, index) => ({
       name: key,
