@@ -67,7 +67,7 @@ const Sidebar = ({ isDarkMode, onThemeToggle, onUserDataLoaded, currentPage }) =
   ];
 
   return (
-    <div className="relative">
+    <div className="relative font-sans">
       {/* Main container */}
       <div
         className={`${
@@ -102,7 +102,7 @@ const Sidebar = ({ isDarkMode, onThemeToggle, onUserDataLoaded, currentPage }) =
 
 
         {/* Links Section for larger screens */}
-        <div className="hidden lg:flex space-x-10">
+        <div className="hidden lg:flex space-x-10 font-sans">
           {links.map((link) => (
             <a
               key={link.href}
