@@ -35,7 +35,7 @@ const SimilarityScore = (A, B) => {
     let score = 0;
 
     // Check if the NTEE codes are the same
-    if (A.NTEE === B.NTEE) {
+    if (A.MajGrp === B.MajGrp) {
       score += 20;
     }
 

@@ -191,7 +191,7 @@ const COLABGraph = memo(({data, filters, onNonprofitClick}) => {
       };
 
     return (
-        <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
+        <div ref={chartContainerRef} style={{ width: '100%', height: '700px' }}>
           <ReactECharts option={option}
             style={{ width: '100%', height: '100%' }}
             onEvents={ {click: (e) => handleGraphClick(data[e.dataIndex])} }

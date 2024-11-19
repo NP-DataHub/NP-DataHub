@@ -132,9 +132,6 @@ export default function COLAB() {
 
         } else if (nonprofit) {
             // If the user has entered a nonprofit name, fetch nonprofits in the same area (city or zip code)
-
-            // Get the city and zip code of the nonprofit
-
             const NAME = nonprofit;
 
             // Fetch the data
