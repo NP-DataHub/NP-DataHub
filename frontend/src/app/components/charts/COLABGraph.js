@@ -134,10 +134,9 @@ const COLABGraph = memo(({data, filters, onNonprofitClick}) => {
           // Calculate the similarity score between the two nonprofits
           const score = SimilarityScore(data[i], data[j]);
           
-          //console.log("Computed similarity score between", data[i].Nm, "and", data[j].Nm);
-          //console.log("Score:", score);
-
-          if (score > 1) {
+          // If the similarity score is above a certain threshold, create an edge between the two nodes
+          // For now, the threshold is 80 / 100
+          if (score > 80) {
             edges.push({
               source: nodes[i].id,
               target: nodes[j].id,
@@ -147,15 +146,6 @@ const COLABGraph = memo(({data, filters, onNonprofitClick}) => {
         }
       }
 
-      //console.log("Edges:", edges);
-
-      // const categories = [];
-      // const NTEE_codes = new Set(data.map((nonprofit) => nonprofit.NTEE));
-      // for (const code of NTEE_codes) {
-      //   categories.push({
-      //     name: code,
-      //   });
-      // }
 
       // Get categories (NTEE codes) from the filters param
       const categories = [];

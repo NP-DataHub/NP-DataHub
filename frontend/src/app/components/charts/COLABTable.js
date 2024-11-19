@@ -46,9 +46,18 @@ const COLABTable = ({ nonprofits, selectedNonprofit }) => {
 
     // Loop through each nonprofit and compute the similarity score
     for (const nonprofit of nonprofits) {
+        // Skip the selected nonprofit
+        if (nonprofit === selectedNonprofit) {
+            continue;
+        }
+
         const score = SimilarityScore(selectedNonprofit, nonprofit);
         similarityList.push({ nonprofit: nonprofit, score: score });
     }
+
+    // Sort the list by the similarity score, highest to lowest
+    similarityList.sort((a, b) => b.score - a.score);
+
 
     console.log("Similarity List:", similarityList);
 

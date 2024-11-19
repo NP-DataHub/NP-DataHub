@@ -20,13 +20,17 @@
 const SimilarityScore = (A, B) => {
 
     // Need to get the revenue, expenses, assets, and liabilities for the most recent year
-    const A_years = Object.keys(A).filter((key) => key.includes('TotRev') || key.includes('TotExp') || key.includes('TotAst') || key.includes('TotLia'));
-    const B_years = Object.keys(B).filter((key) => key.includes('TotRev') || key.includes('TotExp') || key.includes('TotAst') || key.includes('TotLia'));
+    const A_years = Object.keys(A).filter(year => {
+      return Object.keys(A[year]).some(key => key.includes('TotRev') || key.includes('TotExp') || key.includes('TotAst') || key.includes('TotLia'));
+    });
+  
+    const B_years = Object.keys(B).filter(year => {
+      return Object.keys(B[year]).some(key => key.includes('TotRev') || key.includes('TotExp') || key.includes('TotAst') || key.includes('TotLia'));
+    });
     
-    const most_recent_year = Math.max(...A_years, ...B_years);
-
-    console.log("max year of A:", Math.max(...A_years));
-    console.log("max year of B:", Math.max(...B_years));
+    // Get the most recent year of financial data for each nonprofit
+    const A_most_recent_year = Math.max(...A_years);
+    const B_most_recent_year = Math.max(...B_years);
 
     let score = 0;
 
@@ -35,13 +39,12 @@ const SimilarityScore = (A, B) => {
       score += 20;
     }
 
-    console.log("score after NTEE check:", score);
-
-    // Check if the financial metrics are within 10% of each other
+    // Calculate the similarity score for each financial metric
     const financial_metrics = ['TotRev', 'TotExp', 'TotAst', 'TotLia'];
     for (const metric of financial_metrics) {
-      const A_value = A[`${metric}${most_recent_year}`];
-      const B_value = B[`${metric}${most_recent_year}`];
+      const A_value = A[A_most_recent_year][metric];
+      const B_value = B[B_most_recent_year][metric];
+
       
       // Check if the values are null
       if (A_value === null || B_value === null) {
@@ -54,11 +57,11 @@ const SimilarityScore = (A, B) => {
       // Scale the difference to be in the range [0, 20]
       let scaled_diff = 0;
       if (A_value !== 0) {
-        scaled_diff = 20 * (diff / A_value);
+        scaled_diff = (diff / Math.max(A_value, B_value)) * 20;
       }
 
-      // Add the scaled difference to the score
-      score += 20 - scaled_diff;
+      // Add the scaled difference to the score, rounded to the nearest integer
+      score += 20 - Math.round(scaled_diff);
 
     }
     return score;

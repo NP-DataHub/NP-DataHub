@@ -20,7 +20,7 @@ import COLABTable from './charts/COLABTable';
 
 
 
-const COLAB = () => {
+export default function COLAB() {
 
 
     // Data, selection state vars
@@ -30,12 +30,7 @@ const COLAB = () => {
     const [nonprofit, setNonprofit] = useState('');
     const [nonprofitData, setNonprofitData] = useState([0]);
 
-    const memoizedAreaData = useMemo(() => {
-        if (areaData && areaData.data && areaData.data.length > 0) {
-            return areaData.data;
-        }
-        return [];
-    }, [areaData]);
+
     
 
 
@@ -86,7 +81,6 @@ const COLAB = () => {
      };
  
      const onCityChange = (event, { newValue }) => {
-         //setSelectedCity({ value: newValue, label: newValue });
          setInputCityValue(newValue);
          if (newValue === '') {
              setSelectedCity(null); // Reset selected city when input is cleared
@@ -105,15 +99,8 @@ const COLAB = () => {
          className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
      };
 
-
-    //  // Handle a click on the graph to select the clicked nonprofit
-    //  const handleNonprofitClick = (clickedNonprofit) => {
-    //         console.log("clicked on nonprofit:", clickedNonprofit.Nm);
-    //         setNonprofit(clickedNonprofit.Nm);
-    //         setNonprofitData(clickedNonprofit);
-    //         // Also want the zip code to autopopulate
-    //         setZipCode(nonprofitData.Zip);
-    //     };
+    
+    // Handle the click event on a nonprofit from the colab graph component
     const handleNonprofitClick = useCallback((clickedNonprofit) => {
         console.log("clicked on nonprofit:", clickedNonprofit.Nm);
         setNonprofit(clickedNonprofit.Nm);
@@ -176,11 +163,10 @@ const COLAB = () => {
      }
         fetchData();
     };
-    
 
     return (
 
-    <div className="p-6 bg-[#171821] rounded-lg">
+    <div className="flex flex-col h-full p-6 bg-[#171821] rounded-lg">
         <h3 className="text-xl font-semibold text-[#F2C8ED]">CO:LAB</h3>
         <p className="text-white">Placeholder for description and how to use, as well as what it means. Additionally, need to describe how similarity is determined</p>
         <p className="text-white">CURRENT IMPLEMENTATION: user selects city or zip, graph populates with area data and similarity between them. Additionally, the user selects a nonprofit via name that will then be used to populate the table with similarities to the selected nonprofit.</p>
@@ -226,7 +212,7 @@ const COLAB = () => {
                 </button>
             </div>
         </div>
-        <div className="grid grid-cols-2 gap-4" style={{ height: '700px' }}>
+        <div className="grid grid-cols-2 gap-4 h-full">
             {areaData ? (
                 <>
                     <div className='h-full bg-[#21222D] p-4 rounded-lg'>
@@ -249,5 +235,3 @@ const COLAB = () => {
     );
 
 };
-
-export default COLAB;

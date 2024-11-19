@@ -520,7 +520,7 @@ export default function Toolbox() {
                                 </div>
                             )}
                             {selectedSection === "Co:Lab" && (
-                                <COLAB></COLAB>
+                                <COLAB/>
                             )}
                             {selectedSection === "News Feed" && (
                                 <NewsFeedSection></NewsFeedSection>
