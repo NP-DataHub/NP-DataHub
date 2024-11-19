@@ -467,10 +467,10 @@ const SPIN = ({isDarkMode}) => {
                     />
                 </div>
             </div>
-            <div className="flex flex-col h-full" style={{ height: '1000px'}}>
+            <div className="flex flex-col h-screen">
                 {sectorData ? (
                     <div className="h-full">
-                        <ScatterPlot data={sectorData.data} X_axis_var={selectedXAxis.value} Y_axis_var={selectedYAxis.value} filters={sectorFilters} />
+                        <ScatterPlot data={sectorData.data} X_axis_var={selectedXAxis.value} Y_axis_var={selectedYAxis.value} filters={sectorFilters} isDarkMode={isDarkMode} />
                     </div>
                 ) : (
                     <div className = "text-center mt-4 "> Enter Selection To Load</div>
