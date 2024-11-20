@@ -239,7 +239,7 @@ const states = [
         // Calculate "remaining" when budget is updated
         if (id === 'budget' && !isFetchMicroDisabled()) {
           updatedData.remaining = value
-            ? `$${formatNumber((Number(microData[3]) * (Number(value)/100)).toFixed(2))}`
+            ? `$${formatNumber(( ( 1 - (Number(microData[3])/100) ) * Number(value) ).toFixed(2))}`
             : '';
         }
         // Calculate "costPerClient" when budget or remaining is updated
@@ -409,7 +409,7 @@ const states = [
 
       {/* Micro mode */}
       <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MICRO: SINGLE NON-PROFIT FINANCIAL PERFORMANCE</h2>
+        <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MICRO: SINGLE NONPROFIT FINANCIAL PERFORMANCE</h2>
         <p className="text-center pb-8">
         This tool will allow the end user to compare a single nonprofit&apos;s expenditures v. salaries from its last reported fiscal year 
         and then allow the end user to calculate the cost per constituent served after salaries and wages for any grant level.
