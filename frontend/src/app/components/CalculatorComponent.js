@@ -168,10 +168,11 @@ const states = [
 
   // Helper functions for name and address field
   const fetchSuggestions = async (value, type) => {
+    if (disableSuggestions[type]) return; // Check if suggestions are disabled for this type
+
     if (type === 'name' && value === lastFetchedNameInput) return;
     if (type === 'address' && value === lastFetchedAddressInput) return;
 
-    if (disableSuggestions[type]) return; // Check if suggestions are disabled for this type
 
     // Abort previous request for this type
     if (abortControllersRef.current[type]) {
@@ -208,16 +209,6 @@ const states = [
   const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
   const getAddressSuggestionValue = (suggestion) => suggestion.Addr || '';
 
-  const onNameSuggestionsFetchRequested = ({ value }) => {
-    if (!disableSuggestions['name']) {
-      fetchSuggestions(value, 'name');
-    }
-  };
-  const onAddressSuggestionsFetchRequested = ({ value }) => {
-    if (!disableSuggestions['address']) {
-      fetchSuggestions(value, 'address');
-    }
-  };
   const onSuggestionsClearRequested = () => {
     setNameSuggestions([]);
     setAddressSuggestions([]);
@@ -421,7 +412,7 @@ const states = [
           <div className = 'relative'>
             <Autosuggest
               suggestions={nameSuggestions}
-              onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+              onSuggestionsFetchRequested={({ value }) => fetchSuggestions(value, 'name')}
               onSuggestionsClearRequested={onSuggestionsClearRequested}
               getSuggestionValue={getNameSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
@@ -450,7 +441,7 @@ const states = [
           <div className = 'relative'>
             <Autosuggest
               suggestions={addressSuggestions}
-              onSuggestionsFetchRequested={onAddressSuggestionsFetchRequested}
+              onSuggestionsFetchRequested={({ value }) => fetchSuggestions(value, 'address')}
               onSuggestionsClearRequested={onSuggestionsClearRequested}
               getSuggestionValue={getAddressSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
@@ -479,12 +470,13 @@ const states = [
           </div>
         <button
           onClick={() => {
+            setDisableSuggestions({ name: true, address: true });
             Object.keys(abortControllersRef.current).forEach((type) => {
               if (abortControllersRef.current[type]) {
                 abortControllersRef.current[type].abort();
+                abortControllersRef.current[type] = null;
               }
             });
-            setDisableSuggestions({ name: true, address: true });
             setNameSuggestions([]);
             setAddressSuggestions([]);
             fetchMicroData();
