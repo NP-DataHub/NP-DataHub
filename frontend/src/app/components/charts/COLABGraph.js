@@ -13,11 +13,14 @@ import SimilarityScore from '@/app/components/SimilarityScore';
  * @param filters - the filters that are used to filter the data. These are used to label the data on the graph
  */
 
-const COLABGraph = memo(({data, filters, onNonprofitClick}) => {
+const COLABGraph = memo(({data, filters, onNonprofitClick, isDarkMode, threshold}) => {
+
+    //console.log("colab data:", data);
 
     // Handle the click event on the graph
-    const handleGraphClick = (nonprofit) => {
-      onNonprofitClick(nonprofit);
+    const handleGraphClick = (node) => {
+      
+      onNonprofitClick(node.nonprofit);
     };
 
 
@@ -26,8 +29,7 @@ const COLABGraph = memo(({data, filters, onNonprofitClick}) => {
         return <div>ERROR: chart arg must be an array</div>;
     }
 
-    //console.log("COLAB Data:", data);
-    //console.log("COLAB Filters:", filters);
+
 
     // Handles resizing of the chart
     const chartContainerRef = useRef(null);
@@ -47,29 +49,32 @@ const COLABGraph = memo(({data, filters, onNonprofitClick}) => {
         return () => window.removeEventListener('resize', handleResize);
       }, []);
 
-      // Find the min and max revenue for scaling the nodes
-      let min_revenue = 0;
-      let max_revenue = 0;
+      // // Find the min and max revenue for scaling the nodes
+      // let min_revenue = 0;
+      // let max_revenue = 0;
 
-      // loop through each nonprofit, find the most recent year, and get the revenue
-      data.forEach((nonprofit) => {
-        // Get the year most recent year with financial data
-        const years = Object.keys(nonprofit).filter(year => !isNaN(year)).sort();
-        let mostRecentYear = years[years.length - 1];
-        const revenue = nonprofit[mostRecentYear]['TotRev'];
+      // // loop through each nonprofit, find the most recent year, and get the revenue
+      // data.forEach((entry) => {
+      //   console.log("Entry:", entry);
+      //   const nonprofit = entry.nonprofit;
+      //   console.log("Nonprofit:", nonprofit);
+      //   // Get the year most recent year with financial data
+      //   const years = Object.keys(nonprofit).filter(year => !isNaN(year)).sort();
+      //   let mostRecentYear = years[years.length - 1];
+      //   const revenue = nonprofit[mostRecentYear]['TotRev'];
 
 
-        // Update the min and max revenue
-        if(min_revenue === 0){
-          min_revenue = revenue;
-        }
-        if (revenue < min_revenue && revenue > 0) {
-          min_revenue = revenue;
-        }
-        if (revenue > max_revenue) {
-          max_revenue = revenue;
-        }
-      });
+      //   // Update the min and max revenue
+      //   if(min_revenue === 0){
+      //     min_revenue = revenue;
+      //   }
+      //   if (revenue < min_revenue && revenue > 0) {
+      //     min_revenue = revenue;
+      //   }
+      //   if (revenue > max_revenue) {
+      //     max_revenue = revenue;
+      //   }
+      // });
 
 
       /**
@@ -82,20 +87,22 @@ const COLABGraph = memo(({data, filters, onNonprofitClick}) => {
 
       // Create the nodes
       let i = 0;
-      const nodes = data.map((nonprofit) => {
+      const nodes = data.map(( entry ) => {
+        const nonprofit = entry.nonprofit;
+        // // --- Dynamic Size Calculation ---
+        // // Get the most recent year with financial data
+        // const years = Object.keys(nonprofit).filter(year => !isNaN(year)).sort();
+        // let mostRecentYear = years[years.length - 1];
+        // const revenue = nonprofit[mostRecentYear]['TotRev'];
 
-        // --- Dynamic Size Calculation ---
-        // Get the most recent year with financial data
-        const years = Object.keys(nonprofit).filter(year => !isNaN(year)).sort();
-        let mostRecentYear = years[years.length - 1];
-        const revenue = nonprofit[mostRecentYear]['TotRev'];
+        // // Scale the size of the node based on the revenue.
+        // // Scale should be in the range [6, 20], scaled exponentially based on the revenue
+        // let node_size = 6;
+        // if(revenue > 0){
+        //   node_size = 6 + 12 * Math.log(revenue / min_revenue) / Math.log(max_revenue / min_revenue);
+        // }
 
-        // Scale the size of the node based on the revenue.
-        // Scale should be in the range [6, 20], scaled exponentially based on the revenue
-        let node_size = 6;
-        if(revenue > 0){
-          node_size = 6 + 12 * Math.log(revenue / min_revenue) / Math.log(max_revenue / min_revenue);
-        }
+        let node_size = 20;
 
         return {
           id: i++,
@@ -131,19 +138,11 @@ const COLABGraph = memo(({data, filters, onNonprofitClick}) => {
       const edges = [];
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
-          // Calculate the similarity score between the two nonprofits
-          const score = SimilarityScore(data[i], data[j]);
-          
-          // If the similarity score is above a certain threshold, create an edge between the two nodes
-          // For now, the threshold is 80 / 100
-          if (score > 80) {
             edges.push({
               source: nodes[i].id,
               target: nodes[j].id,
-              value: score
             });
           }
-        }
       }
 
 
@@ -191,7 +190,7 @@ const COLABGraph = memo(({data, filters, onNonprofitClick}) => {
       };
 
     return (
-        <div ref={chartContainerRef} style={{ width: '100%', height: '700px' }}>
+        <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
           <ReactECharts option={option}
             style={{ width: '100%', height: '100%' }}
             onEvents={ {click: (e) => handleGraphClick(data[e.dataIndex])} }

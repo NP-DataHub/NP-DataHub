@@ -534,7 +534,7 @@ export default function Toolbox() {
                                 </div>
                             )}
                             {selectedSection === "Co:Lab" && (
-                                <COLAB/>
+                                <COLAB isDarkMode={isDarkMode}/>
                             )}
                             {selectedSection === "News Feed" && (
                                 <NewsFeedSection isDarkMode={isDarkMode}></NewsFeedSection>

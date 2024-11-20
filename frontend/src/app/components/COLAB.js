@@ -8,165 +8,262 @@
 
 'use client';
 
-import Select from 'react-select';
-import { Tooltip as ReactTooltip } from 'react-tooltip';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+
+import { useState, useEffect, useCallback, useMemo, use } from 'react';
 import '@/app/globals.css';
 import Autosuggest from "react-autosuggest/dist/Autosuggest";
-import cities from "@/app/components/cities";
+
 import ntee_codes from "@/app/components/ntee";
 import COLABGraph from '@/app/components/charts/COLABGraph';
 import COLABTable from './charts/COLABTable';
 
 
+import SimilarityScore from '@/app/components/SimilarityScore';
 
-export default function COLAB() {
+
+
+export default function COLAB({isDarkMode}) {
 
 
     // Data, selection state vars
     const [areaData, setareaData] = useState(null);
-    const [selectedCity, setSelectedCity] = useState(null);
-    const [zipCode, setZipCode] = useState('');
     const [nonprofit, setNonprofit] = useState('');
     const [nonprofitData, setNonprofitData] = useState([0]);
 
     // Is there data state var for loading div
     const [dataIsLoading, setDataIsLoading] = useState(false);
+
+    // State var for threshold set in slider by user
+    const [threshold, setThreshold] = useState(60);
+    
+    // Fetch suggestions for nonprofit names 
+
+    const [nameSuggestions, setNameSuggestions] = useState([]); // Suggestions for name autocomplete
+    const [lastFetchedNameInput, setLastFetchedNameInput] = useState('');
+
+    const [firstNp, setFirstNp] = useState('');
+
+
+    const fetchSuggestions = async (value, type) => {
+        if (type === 'name' && value === lastFetchedNameInput) return;
+    
+        try {
+        const response = await fetch(`/api/suggestions?input=${value}&type=${type}`);
+        const data = await response.json();
+    
+        if (data.success) {
+            if (type === 'name') {
+            setNameSuggestions(data.data);
+            setLastFetchedNameInput(value); // Update last fetched value for names
+            }
+        } else {
+            if (type === 'name') setNameSuggestions([]);
+        }
+        } catch (error) {
+        console.error("Error fetching suggestions:", error);
+        }
+    };
     
 
+    // Autosuggest configuration
+    // Get suggestion value for name
+    const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
+
+
 
     
-
-
-    // WIP FIX THIS CRAP
-    const onZipCodeChange = (event) => {
-        setZipCode(event.target.value);
+    // Render function for names
+    const renderNameSuggestion = (suggestion) => {
+        return (
+        <div className="px-4 py-2  cursor-pointer hover:bg-[#FEB95A] hover:text-black">
+            {suggestion.Nm}
+        </div>
+        );
     };
 
-    const onNonprofitChange = (event) => {
-        setNonprofit(event.target.value);
+    const onNameSuggestionsFetchRequested = ({ value }) => {
+        fetchSuggestions(value, 'name');
     };
 
-     // This is all for the city autosuggest. Dont ask me to explain it I barely understand it :)
-     const [citySuggestions, setCitySuggestions] = useState([]);
-     const [inputCityValue, setInputCityValue] = useState(null);
- 
-     const getCitySuggestions = value => {
-         const inputValue = value.trim().toLowerCase();
-         const inputLength = inputValue.length;
-         return inputLength === 0 ? [] : cities.filter(
-             city => city.toLowerCase().slice(0, inputLength) === inputValue
-         );
-     };
- 
-     const getCitySuggestionValue = suggestion => suggestion.label;
- 
-     const renderCitySuggestion = suggestion => (
-         <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
-             {suggestion}
-         </div>
-     );
- 
-     const renderCitySuggestionContainer = ({ containerProps, children }) => (
-         <div {...containerProps} className={`absolute top-full left-0 w-full max-h-96 bg-[#171821] overflow-x-auto rounded z-10 mt-3 ${citySuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
-             {children}
-         </div>
-     );
- 
-     const onCitySuggestionsFetchRequested = ({ value }) => {
-         setCitySuggestions(getCitySuggestions(value));
-     };
- 
-     const onCitySuggestionsClearRequested = () => {
-         setCitySuggestions([]);
-     };
- 
-     const onCityChange = (event, { newValue }) => {
-         setInputCityValue(newValue);
-         if (newValue === '') {
-             setSelectedCity(null); // Reset selected city when input is cleared
-         }
-     };
- 
-     const onCitySuggestionSelected = (event, { suggestion }) => {
-         setSelectedCity({ value: suggestion, label: suggestion });
-         setInputCityValue(suggestion);
-     };
- 
-     const CityInputProps = {
-         placeholder: 'Enter City',
-         value: inputCityValue ? inputCityValue : '',
-         onChange: onCityChange,
-         className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
-     };
+    const onSuggestionsClearRequested = () => {
+        setNameSuggestions([]);
+    };
 
-    
+    const onNameSuggestionSelected = (event, { suggestion }) => {
+        console.log("Selected suggestion:", suggestion);
+
+
+        // clear all current filters and data
+        setareaData(null);
+        setNonprofitData(null);
+
+        // Set the selected nonprofit name
+        setNonprofit(suggestion.Nm);
+        
+    };
+
+
+
+        
+
+        
     // Handle the click event on a nonprofit from the colab graph component
     const handleNonprofitClick = useCallback((clickedNonprofit) => {
         console.log("clicked on nonprofit:", clickedNonprofit.Nm);
         setNonprofit(clickedNonprofit.Nm);
-        setNonprofitData(clickedNonprofit);
-        setZipCode(clickedNonprofit.Zip); // Use clickedNonprofit directly
+        setNonprofitData(clickedNonprofit); 
+        setFirstNp(clickedNonprofit.Nm);
     }, []);
 
 
+    const fetchData = async () => {
 
+        setDataIsLoading(true);
 
-     const handleSearch = () => {
-        const fetchData = async () => {
+        if (nonprofit) {
+            // If the user has entered a nonprofit name, fetch nonprofits in the same area (city or zip code)
+            const NAME = nonprofit;
 
-            setDataIsLoading(true);
+            // Fetch the data
+            let response = await fetch(`/api/sector?Nm=${NAME}`);
+            let nonprofitData = await response.json();
 
-            // If the user has entered a city/zip code, search for nonprofits in that area
-            if (selectedCity || zipCode) {
-
-                // Set defaults so that we don't blow up the API
-                const CITY = selectedCity ? selectedCity.value : null;
-                const ZIP = zipCode ? zipCode : null;
-
-                // Make sure the search is not too broad. Require at least a city or zip code
-                if (!CITY && !ZIP) {
-                    return;
-                }
-
-                // Fetch the data
-                let response = await fetch(`/api/sector?Cty=${CITY}&Zip=${ZIP}`);
-                let fetched_data = await response.json();
-                setareaData(fetched_data.data);
-
-            } else if (nonprofit) {
-                // If the user has entered a nonprofit name, fetch nonprofits in the same area (city or zip code)
-                const NAME = nonprofit;
-
-                // Fetch the data
-                let response = await fetch(`/api/sector?Nm=${NAME}`);
-                let nonprofitData = await response.json();
-                setNonprofitData(nonprofitData);
-
-                // Get the area data for the selected nonprofit
-                if (nonprofitData !== null) {
-                    // Extract the city and zip code of the selected nonprofit
-                    const CITY = nonprofitData.data[0].Cty;
-                    const ZIP = nonprofitData.data[0].Zip;
-
-                    // Set the area data with the city and zip code of the selected nonprofit
-                    let response = await fetch(`/api/sector?Cty=${CITY}&Zip=${ZIP}`);
-                    let fetched_data = await response.json();
-
-                    setareaData(fetched_data.data);
-
-                } else { // L bozo
-                    console.error("No data found for the given nonprofit name");
-                }
-
+            if(nonprofitData !== null){
+                setNonprofitData(nonprofitData.data[0]);
+            }
+            else{
+                console.error("No data found for the selected nonprofit");
+                setNonprofitData(null);
             }
 
-            setDataIsLoading(false);
+            // Get the area data for the selected nonprofit
+            if (nonprofitData !== null || nonprofitData.data !== undefined) {
+                // Extract the city and zip code of the selected nonprofit
+                let CITY = null;
+                let ZIP = null;
+                if(nonprofitData.data[0].Cty !== null){
+                    CITY = nonprofitData.data[0].Cty;
+                }
+                if(nonprofitData.data[0].Zip !== null){
+                    ZIP = nonprofitData.data[0].Zip;
+                }
 
-        };
-        fetchData();
+                // Set the area data with the city and zip code of the selected nonprofit
+                let response = await fetch(`/api/sector?Cty=${CITY}&Zip=${ZIP}`);
+                let fetched_data = await response.json();
+
+                setareaData(fetched_data.data);
+
+            } else {
+                console.error("False data fetch - all inputs are null, check where you are calling fetchData()");
+            }
+        }
+
+        setDataIsLoading(false);
+
     };
 
+     const handleSearch = () => {
+        fetchData();
+        computeSimilarityNetwork();
+    };
+
+
+
+    // Implement the similarity score functionality to be passed into componenets. By computing once here, we can avoid recomputing it in each component
+    /**
+     *  The idea is as follows:
+     *  1. User selects a nonprofit -> data for the whole area (same city and or zip code) is fetched
+     *  2. The similarity score is computed between the selected nonprofit and all other nonprofits in the area. This is saved as the similarity list to be passed into the COLABTable component
+     *  3. A second list is created of only the nonprofits that have a similarity score above the threshold. This is passed into the COLABGraph component
+     *  
+     *  TODO: Implement a recursive graph search that will return a list of the nonprofits that are connected to the selected nonprofit.
+     *        Currently, only nonprofits that are directly connected to the selected nonprofit are shown. I want to add functionality to show nonprofits that are connected to the connected nonprofits, with turtles all the way down.
+     * 
+     * 
+     *  @returns - nothing, state vars are set within the function
+     */
+
+    const [similarityList, setSimilarityList] = useState([]); // List of all nonprofits in the area and their similarity scores
+    const [thresholdedList, setThresholdedList] = useState([]); // List of nonprofits that have a similarity score above the threshold
+
+    const computeSimilarityNetwork = () => {
+        // Could take a while to compute, so show loading spinner
+        //setDataIsLoading(true);
+
+
+        // Check that we have the necessary data
+        if (areaData === null || nonprofitData === null) {
+            console.error("Cannot compute similarity network - missing data");
+            return;
+        }
+
+        // Clear the lists
+        setSimilarityList([]);
+        setThresholdedList([]);
+
+        // Loop through each nonprofit and compute the similarity score, adding it to the similarity list
+        const newSimilarityList = [];
+        for (const nonprofit of areaData) {
+            // Skip the selected nonprofit
+            if (nonprofit.Nm === nonprofitData.Nm) {
+                continue;
+            }
+
+            const score = SimilarityScore(nonprofitData, nonprofit);
+            newSimilarityList.push({ nonprofit: nonprofit, score: score });
+        }
+
+        // Sort the list by the similarity score, highest to lowest
+        newSimilarityList.sort((a, b) => b.score - a.score);
+
+        // Set the similarity list
+        setSimilarityList(newSimilarityList)
+
+        // Set the thresholded list
+        updateThresholdedList();
+
+        // Done computing, hide loading spinner
+        //setDataIsLoading(false);
+    }
+
+    const updateThresholdedList = () => {
+        if(similarityList.length === 0){
+            console.error("Cannot update thresholded list - similarity list is empty");
+            return;
+        }
+        
+        // Clear the thresholded list
+        setThresholdedList([]);
+
+        // Filter the similarity list to only include nonprofits that have a similarity score above the threshold
+        const thresholded = similarityList.filter((item) => item.score >= threshold);
+
+        // Add the selected nonprofit to the list
+        thresholded.unshift({ nonprofit: nonprofitData, score: 100 });
+
+        // Set the thresholded list
+        setThresholdedList(thresholded);
+    }
+
+    // ----- Data updaters -----
+
+    // Update the thresholded list when the threshold changes
+    useEffect(() => {
+        updateThresholdedList();
+    }, [threshold]);
+
+    // Compute the similarity network when the area data or selected nonprofit changes
+    useEffect(() => {
+        computeSimilarityNetwork();
+    }, [areaData, nonprofitData]);
+
+    // Update data when the user selects a new nonprofit
+    // useEffect(() => {
+    //     if (nonprofit) {
+    //         fetchData();
+    //     }
+    // }, [nonprofit]);
 
 
 
@@ -181,79 +278,111 @@ export default function COLAB() {
     );
 
 
-
-
+    // Slider component to set the threshold for similarity score
+    const ThresholdSlider = ({ threshold, setThreshold, isDarkMode }) => (
+        <div className={`flex gap-4  p-2 rounded-lg w-full ${isDarkMode 
+            ? "bg-[#34344c]"   : "bg-[#c9c9c9]"} `} >
+            <label className={`text-${isDarkMode ? 'white' : 'black'} text-lg`}>Similarity Threshold:</label>
+            <input
+                type="range"
+                min="0"
+                max="100"
+                value={threshold}
+                onChange={(e) => setThreshold( parseInt(e.target.value, 10 ))}
+                className={`w-1/2 p-2 border ${isDarkMode ? 'bg-[#34344c] text-white border-gray-600' : 'bg-[#c9c9c9] text-black border-gray-200'} rounded-lg focus:outline-none`}
+            />
+            <span className={`text-${isDarkMode ? 'white' : 'black'}`}>{threshold}</span>
+        </div>
+    );
 
 
     return (
 
-    <div className="flex flex-col h-full p-6 bg-[#171821] rounded-lg">
-        <h3 className="text-xl font-semibold text-[#F2C8ED]">CO:LAB</h3>
-        <p className="text-white">Placeholder for description and how to use, as well as what it means. Additionally, need to describe how similarity is determined</p>
-        <p className="text-white">CURRENT IMPLEMENTATION: user selects city or zip, graph populates with area data and similarity between them. Additionally, the user selects a nonprofit via name that will then be used to populate the table with similarities to the selected nonprofit.</p>
-        <div className="flex gap-4 mb-6 mt-4">
-            <div className="relative bg-[#ada5c0] p-2 rounded flex items-center" style={{ flex: '0 0 30%' }}>
-                <div className='w-full items-center'>
-                    <Autosuggest
-                        suggestions={citySuggestions}
-                        onSuggestionsFetchRequested={onCitySuggestionsFetchRequested}
-                        onSuggestionsClearRequested={onCitySuggestionsClearRequested}
-                        onSuggestionSelected={onCitySuggestionSelected}
-                        getSuggestionValue={getCitySuggestionValue}
-                        renderSuggestion={renderCitySuggestion}
-                        renderSuggestionsContainer={renderCitySuggestionContainer}
-                        inputProps={CityInputProps}
+        <div className={`w-full h-full p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
+        {/* Title and description */}
+        <h3 className='text-xl font-semibold mb-4 text-[#F2C8ED]'>CO:LAB</h3>
+        <div className='mb-4'>
+            <p classname={`text-${isDarkMode ? 'white' : 'black'}`}>Placeholder for description and how to use, as well as what it means. Additionally, need to describe how similarity is determined</p>
+        </div>
+        {/* Name search, threshold slider */}
+        <div className="grid grid-cols-2 gap-4 mb-4 w-full">
+            {/* Name search autosuggest */}
+            <div className='relative w-full h-full'>
+                <Autosuggest
+                    suggestions={nameSuggestions}
+                    onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+                    onSuggestionSelected={onNameSuggestionSelected}
+                    onSuggestionsClearRequested={onSuggestionsClearRequested}
+                    getSuggestionValue={getNameSuggestionValue}
+                    renderSuggestionsContainer={({ containerProps, children }) => (
+                        <div {...containerProps} className={`absolute top-full transform w-full ${
+                            isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                        } overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                            {children}
+                        </div>
+                    )}
+                    renderSuggestion={renderNameSuggestion}
+                    inputProps={{
+                        placeholder: 'Search for a Nonprofit',
+                        value: firstNp,
+                        onChange: (_, { newValue }) => {
+                            setFirstNp(newValue);
+                            setNonprofit(newValue);
+                        },
+                        className: `p-4 border h-[52px] ${isDarkMode 
+                            ? "bg-[#34344c] text-white border-gray-600" 
+                            : "bg-[#c9c9c9] text-black border-gray-200"} 
+                            rounded-lg w-full focus:outline-none`,
+                    }}
+                />
+            </div>
+
+            {/* Search button and slider */}
+            <div className="flex items-center w-full gap-4 h-[52px]">
+                {/* Search button */}
+                <div className="flex items-center w-1/3 h-full">
+                    <button
+                        onClick={handleSearch}
+                        className="w-full h-full bg-[#A9DFD8] text-black p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#F2C8ED]"
+                    >
+                        Search
+                    </button>
+                </div>
+                {/* Threshold slider */}
+                <div className='flex items-center w-2/3 h-full'>
+                    <ThresholdSlider 
+                        threshold={threshold} 
+                        setThreshold={setThreshold} 
+                        isDarkMode={isDarkMode} 
+                        className="h-full"
                     />
                 </div>
             </div>
-            <div className="bg-[#78b6d3] p-2 rounded flex items-center" style={{ flex: '0 0 30%' }}>
-                <input
-                    type="text"
-                    placeholder="Enter ZIP Code"
-                    value={zipCode}
-                    onChange={onZipCodeChange}
-                    className="w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
-                />
-            </div>
-            <div className="bg-[#85bce0] p-2 rounded flex items-center" style={{ flex: '0 0 30%' }}>
-                <input
-                    type="text"
-                    placeholder="Search for Nonprofit"
-                    value={nonprofit}
-                    onChange={onNonprofitChange}
-                    className="w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
-                />
-            </div>
-            <div className="flex-grow flex items-center">
-                <button
-                    onClick={handleSearch}
-                    className="w-full h-full bg-[#A9DFD8] text-black p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#F2C8ED]"
-                >
-                    Search
-                </button>
-            </div>
         </div>
-        <div className="h-full">
+
+        {/* Graph and table */}
+        <div className="h-full w-full">
+            {/* Conditionally render in the components once data has loaded in */}
             {dataIsLoading ? (
                 <SearchLoadingComponent />
             ) : areaData ? (
-                <>
-                    <div className="grid grid-cols-2 gap-4 h-full">
-                        <div className='h-full bg-[#21222D] p-4 rounded-lg'>
-                            <h2 className="text-center text-3xl">Nonprofit Network</h2>
-                            <COLABGraph data={areaData} filters={[]} onNonprofitClick={handleNonprofitClick}/>
-                        </div>
-                        <div className="h-full bg-[#21222D] p-4 rounded-lg">
-                            <h2 className="text-center text-3xl">Similarity Table</h2>
-                            <COLABTable nonprofits={areaData} selectedNonprofit={nonprofitData} />
-                        </div>
+                <div className="grid grid-cols-2 gap-4 h-full">
+                    {/* Graph */}
+                    <div className={`flex flex-col p-4 rounded-lg ${isDarkMode ? "bg-[#34344c]" : "bg-[#c9c9c9]"}`}>
+                        <h2 className="text-center text-3xl">Nonprofit Network</h2>
+                        <COLABGraph data={thresholdedList} filters={[]} onNonprofitClick={handleNonprofitClick} isDarkMode={isDarkMode}  threshold={threshold}/>
                     </div>
-                </>
+                    {/* Table */}
+                    <div className={`flex flex-col justify-between h-full p-4 rounded-lg ${isDarkMode ? "bg-[#34344c]" : "bg-[#c9c9c9]"}`}>
+                            <COLABTable similarityList={similarityList} selectedNonprofit={nonprofitData} isDarkMode={isDarkMode} />
+                    </div>
+                </div>
             ) : (
-                <div className="col-span-2 h-full bg-[#21222D] p-4 rounded-lg flex items-center justify-center">
-                    <span className="text-center text-3xl text-white">Select a City, Zip Code, or search for a Nonprofit to get started.</span>
+                <div className={`col-span-2 h-full p-4 rounded-lg flex items-center justify-center ${isDarkMode ? 'bg-[#34344c] text-white' : 'bg-[#c9c9c9] text-black'}`}>
+                    <span className="text-center text-3xl">Select a Nonprofit to get started.</span>
                 </div>
             )}
+            
         </div>
     </div>
 
