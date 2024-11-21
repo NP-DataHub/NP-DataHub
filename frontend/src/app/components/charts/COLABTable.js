@@ -56,27 +56,34 @@ const COLABTable = ({ similarityList, selectedNonprofit, isDarkMode }) => {
                 </div>
             </div>
             <div className={`${isDarkMode ? 'bg-[#171821] text-white' : 'bg-white text-black'} rounded-lg p-6`} style={{ padding: '10px', borderRadius: '5px', height: '700px', overflowY: 'scroll' }}>
-                <div style={{ padding: '10px', borderBottom: '1px solid #ccc' }}>
-                    <table style={{ width: '100%' }}>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Similarity Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {similarityList.map((item, index) => (
-                                <tr key={index} style={{ borderBottom: '1px solid #eee' }}>
-                                    <td>{item.nonprofit.Nm }</td>
-                                    <td>{`${item.nonprofit.Addr}, ${item.nonprofit.Cty}, ${item.nonprofit.St} ${item.nonprofit.Zip}`}</td>
-                                    <td>{item.score}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+            <div style={{ height: '100%', overflowY: 'auto' }}>
+                <div style={ { textAlign: 'center'}}> 
+                    <h2 className='text-3xl'>Similarity Table</h2>
                 </div>
+                <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 10px' }}>
+                    <thead style={{ position: 'sticky', top: '0', left: '0', right: '0', backgroundColor: isDarkMode ? '#171821' : 'white', zIndex: 1 }}>
+                        <tr>
+                            <th style={{ padding: '10px', textAlign: 'left' }}>Nonprofit</th>
+                            <th style={{ padding: '10px', textAlign: 'right' }}>Similarity Score</th>
+                        </tr>
+                    </thead>
+                    <tbody style={{ marginTop: '50px' }}>
+                        {similarityList.map((item, index) => (
+                            <tr key={index} style={{ borderBottom: '1px solid #eee', backgroundColor: isDarkMode ? '#2a2b38' : '#c9c9c9', borderRadius: '10px' }}>
+                                <td colSpan="4" style={{ padding: '10px', borderRadius: '10px' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <span className='text-2xl'>{item.nonprofit.Nm}</span>
+                                        <span style={{ fontSize: '24px', verticalAlign: 'middle' }}>{item.score}</span>
+                                    </div>
+                                    <div>{`${item.nonprofit.Addr}, ${item.nonprofit.Cty}, ${item.nonprofit.St} ${item.nonprofit.Zip}`}</div>
+                                    <div>TBD</div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
+</div>
         </div>
     );
 

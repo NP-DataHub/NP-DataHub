@@ -120,7 +120,7 @@ export default function COLAB({isDarkMode}) {
 
         setDataIsLoading(true);
 
-        if (nonprofit) {
+        if (nonprofit && nonprofit.trim().length > 0) {
             // If the user has entered a nonprofit name, fetch nonprofits in the same area (city or zip code)
             const NAME = nonprofit;
 
@@ -128,7 +128,7 @@ export default function COLAB({isDarkMode}) {
             let response = await fetch(`/api/sector?Nm=${NAME}`);
             let nonprofitData = await response.json();
 
-            if(nonprofitData !== null){
+            if(nonprofitData !== null && nonprofitData.data !== undefined){
                 setNonprofitData(nonprofitData.data[0]);
             }
             else{
@@ -137,7 +137,8 @@ export default function COLAB({isDarkMode}) {
             }
 
             // Get the area data for the selected nonprofit
-            if (nonprofitData !== null || nonprofitData.data !== undefined) {
+            if (nonprofitData !== null && nonprofitData.data.length > 0) {
+                console.log("Nonprofit data:", nonprofitData.data);
                 // Extract the city and zip code of the selected nonprofit
                 let CITY = null;
                 let ZIP = null;
@@ -280,7 +281,7 @@ export default function COLAB({isDarkMode}) {
 
     // Slider component to set the threshold for similarity score
     const ThresholdSlider = ({ threshold, setThreshold, isDarkMode }) => (
-        <div className={`flex gap-4  p-2 rounded-lg w-full ${isDarkMode 
+        <div className={`flex h-full gap-4  p-2 rounded-lg w-full ${isDarkMode 
             ? "bg-[#34344c]"   : "bg-[#c9c9c9]"} `} >
             <label className={`text-${isDarkMode ? 'white' : 'black'} text-lg`}>Similarity Threshold:</label>
             <input
@@ -301,8 +302,19 @@ export default function COLAB({isDarkMode}) {
         <div className={`w-full h-full p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
         {/* Title and description */}
         <h3 className='text-xl font-semibold mb-4 text-[#F2C8ED]'>CO:LAB</h3>
-        <div className='mb-4'>
-            <p classname={`text-${isDarkMode ? 'white' : 'black'}`}>Placeholder for description and how to use, as well as what it means. Additionally, need to describe how similarity is determined</p>
+        <div className='grid grid-cols-3 gap-4 mb-4'>
+            <div className={`col-span-1 p-4 rounded-lg w-full ${isDarkMode ? "bg-[#34344c] text-white"   : "bg-[#c9c9c9] text-black"} `}>
+                <h2 className='text-2xl mb-1'>Similarity Score</h2>
+                <p>The similarity score is a measure of how similar a nonprofit is to other organizations within their zip code. By comparing the sectors in which the nonprofits operate, you can gauge how similar they are financially after the similarity score is computed. This includes a weighted score on revenues, expenses, assets, and liabilities.</p>
+            </div>
+            <div className={`col-span-1 p-4 rounded-lg w-full ${isDarkMode ? "bg-[#34344c] text-white"   : "bg-[#c9c9c9] text-black"} `}>
+                <h2 className='text-2xl mt-2 mb-1'>Nonprofit Network</h2>
+                <p>Visualize highly similar nonprofits through a network of nonprofits, connected by their score. Then, click on a nonprofit to see their similarity table. Choose the size of the network by adjusting the similarity threshold - how similar nonprofits must be to connect. Low thresholds are not recommended but adjust accordingly.</p>
+            </div>
+            <div className={`col-span-1 p-4 rounded-lg w-full ${isDarkMode ? "bg-[#34344c] text-white"   : "bg-[#c9c9c9] text-black"} `}>
+                <h2 className='text-2xl mt-2 mb-1'>Similarity Table</h2>
+                <p>Choose and compare a nonprofit against all other nonprofits in the same zip code. See what other nonprofits in the area are most similar, and use to analyze the potential of collaboration or strategically to ensure fiscal viability for a specific funding opportunity. Click learn more to visit the selected nonprofit's profile page.</p>
+            </div>
         </div>
         {/* Name search, threshold slider */}
         <div className="grid grid-cols-2 gap-4 mb-4 w-full">
@@ -343,7 +355,7 @@ export default function COLAB({isDarkMode}) {
                 <div className="flex items-center w-1/3 h-full">
                     <button
                         onClick={handleSearch}
-                        className="w-full h-full bg-[#A9DFD8] text-black p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#F2C8ED]"
+                        className="w-full h-full bg-[#A9DFD8] text-black p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#F2C8ED]"
                     >
                         Search
                     </button>
@@ -354,7 +366,6 @@ export default function COLAB({isDarkMode}) {
                         threshold={threshold} 
                         setThreshold={setThreshold} 
                         isDarkMode={isDarkMode} 
-                        className="h-full"
                     />
                 </div>
             </div>

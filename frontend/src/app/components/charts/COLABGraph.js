@@ -138,11 +138,12 @@ const COLABGraph = memo(({data, filters, onNonprofitClick, isDarkMode, threshold
       const edges = [];
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
-            edges.push({
-              source: nodes[i].id,
-              target: nodes[j].id,
-            });
+          let score = SimilarityScore(data[i].nonprofit, data[j].nonprofit);
+          //console.log("comparing", data[i].nonprofit.Nm, data[j].nonprofit.Nm, score);
+          if (score >= threshold){    
+            edges.push({ source: nodes[i].id, target: nodes[j].id});
           }
+        }
       }
 
 
