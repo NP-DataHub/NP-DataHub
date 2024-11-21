@@ -3,6 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import { FaInfoCircle } from "react-icons/fa";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { useRef } from 'react';
+import debounce from 'lodash.debounce';
 
 export default function CalculatorSection({isDarkMode}) {
 
@@ -167,7 +168,7 @@ const states = [
   );
 
   // Helper functions for name and address field
-  const fetchSuggestions = async (value, type) => {
+  const fetchSuggestions = debounce(async (value, type) => {
     if (disableSuggestions[type]) return; // Check if suggestions are disabled for this type
 
     if (type === 'name' && value === lastFetchedNameInput) return;
@@ -204,7 +205,7 @@ const states = [
     } catch (error) {
       console.error("Error fetching suggestions:", error);
     }
-  };
+  }, 500); // waits for 500ms after the last keystroke.
 
   const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
   const getAddressSuggestionValue = (suggestion) => suggestion.Addr || '';
@@ -218,7 +219,7 @@ const states = [
   const handleChange = (e) => {
     const { id, value } = e.target;
     // Allow only numbers
-    if (/^\d*\.?\d*$/.test(value)) {
+    if (/^\d*\.?\d*$/.test(value.replace('$', ''))) {
       setFormData((prevData) => {
         let updatedData = { ...prevData, [id]: value };
         const formatNumber = (num) => {
@@ -227,11 +228,15 @@ const states = [
             maximumFractionDigits: 2
           }).format(num);
         };
+
         // Calculate "remaining" when budget is updated
-        if (id === 'budget' && !isFetchMicroDisabled()) {
-          updatedData.remaining = value
-            ? `$${formatNumber(( ( 1 - (Number(microData[3])/100) ) * Number(value) ).toFixed(2))}`
-            : '';
+        if (id === 'budget') {
+          updatedData.budget = value ? `$${value.replace('$', '').replace(/,/g, '')}` : '';
+          if (!isFetchMicroDisabled()) {
+            updatedData.remaining = updatedData.budget
+              ? `$${formatNumber(( ( 1 - (Number(microData[3]) / 100) ) * Number(updatedData.budget.replace('$', '').replace(/,/g, ''))).toFixed(2))}`
+              : '';
+          }
         }
         // Calculate "costPerClient" when budget or remaining is updated
         if ((id === 'budget' || id === 'remaining') && !isFetchMicroDisabled()) {
@@ -497,13 +502,18 @@ const states = [
             <div className="flex justify-center flex-wrap gap-8 align-items-start">
               {/* Single Row */}
               <div className="flex justify-center gap-8 w-full">
-                {[microData[1], microData[2], microData[3]].map((value, index) => {
+                {[microData[1], microData[2], microData[3], 100 - microData[3]].map((value, index) => {
                   // Format large values with abbreviations and ensure percentages are displayed with one decimal place
-                  const formattedValue = index === 2 ? `${value.toFixed(1)}%` : 
-                                        value >= 1e9 ? `${(value / 1e9).toFixed(1)}B` :
-                                        value >= 1e6 ? `${(value / 1e6).toFixed(1)}M` :
-                                        value >= 1e3 ? `${(value / 1e3).toFixed(1)}K` :
-                                        Math.round(value).toLocaleString();
+                  const formattedValue =
+                    index === 2 || index === 3
+                      ? `${value.toFixed(1)}%`
+                      : value >= 1e9
+                      ? `${(value / 1e9).toFixed(1)}B`
+                      : value >= 1e6
+                      ? `${(value / 1e6).toFixed(1)}M`
+                      : value >= 1e3
+                      ? `${(value / 1e3).toFixed(1)}K`
+                      : Math.round(value).toLocaleString();
 
                   // Determine font size based on the formatted value length
                   const fontSizeClass = formattedValue.length > 6 ? 'text-sm' : 'text-xl';
@@ -512,13 +522,19 @@ const states = [
                     <div key={index} className="flex flex-col items-center">
                       <div className="bg-teal-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
                         <span className={fontSizeClass}>
-                          {index === 2 ? formattedValue : `$${formattedValue}`}
+                          {index === 2 || index === 3 ? formattedValue : `$${formattedValue}`}
                         </span>
                       </div>
                       <p className="mt-4 text-sm text-center">
-                        {index === 0 ? <>SALARIES<br />AND WAGES</> : 
-                          index === 1 ? <>OFFICERS<br />COMPENSATION</> : 
-                          <>SALARIES<br />TO EXPENSES<br />PERCENTAGE</> }
+                        {index === 0 ? (
+                          <>SALARIES<br />AND WAGES</>
+                        ) : index === 1 ? (
+                          <>OFFICERS<br />COMPENSATION</>
+                        ) : index === 2 ? (
+                          <>SALARIES<br />TO EXPENSES<br />PERCENTAGE</>
+                        ) : (
+                          <>PERCENTAGE<br />OF EXPENSES<br />AFTER SALARIES</>
+                        )}
                       </p>
                     </div>
                   );
@@ -526,7 +542,7 @@ const states = [
               </div>
             </div>
             <div className="mt-6 text-center text-gray-400">
-              Data calculated from following year: {microData[0]}.
+              Data calculated from following year: {microData[0]}
             </div>
           </div>
         )}
@@ -548,7 +564,6 @@ const states = [
           <input
             type="text"
             inputMode="numeric"
-            pattern="[0-9]*"
             id="budget"
             name="budget"
             value={formData.budget}
