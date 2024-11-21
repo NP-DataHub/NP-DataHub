@@ -12,6 +12,7 @@ import '@/app/globals.css';
 import Autosuggest from "react-autosuggest/dist/Autosuggest";
 import cities from "@/app/components/cities";
 import ntee_codes from "@/app/components/ntee";
+import { set } from "mongoose";
 
 
 
@@ -28,6 +29,9 @@ const SPIN = ({isDarkMode}) => {
     const [selectedNTEE1, setSelectedNTEE1] =   useState(null);
     const [selectedNTEE2, setSelectedNTEE2] =   useState(null);
     const [selectedNTEE3, setSelectedNTEE3] =   useState(null);
+
+    // State variable for loading state
+    const [dataIsLoading, setDataIsLoading] = useState(false);
 
     // State variables for selected variable options
     const [selectedXAxis, setSelectedXAxis] = useState({ value: "TotRev", label: "Total Revenue" });
@@ -290,29 +294,43 @@ const SPIN = ({isDarkMode}) => {
     // This fetches data from the backend using whatever filters are selected. This is called upon loading, and whenever a filter is changed.
     // After fetching the data, it sets the sectorData state variable to the fetched data.
     useEffect(() => {
+
         const fetchSectorData = async () => {
-            // Set a default state so that we arent fetching everything  
-        const STATE = selectedState ? selectedState.value : null;
-        const CITY = selectedCity ? selectedCity.value : null;
-        const ZIP = selectedZIP ? selectedZIP.value : null;
-        const NTEE1 = selectedNTEE1 ? selectedNTEE1.value : null;
-        const NTEE2 = selectedNTEE2 ? selectedNTEE2.value : null;
-        const NTEE3 = selectedNTEE3 ? selectedNTEE3.value : null;
+            // Set the data loading state to true - this will show the loading spinner
+            setDataIsLoading(true);
 
-        // Make sure the search is not too broad. Require at least a state 
-        if (!STATE) {
-            return;
-        }
+            try{
 
-        let response = await fetch(`/api/sector?Cty=${CITY}&St=${STATE}&ZIP=${ZIP}&NTEE1=${NTEE1}&NTEE2=${NTEE2}&NTEE3=${NTEE3}`);
-        let filtered_sector_data = await response.json();
+                // Set a default state so that we arent fetching everything  
+                const STATE = selectedState ? selectedState.value : null;
+                const CITY = selectedCity ? selectedCity.value : null;
+                const ZIP = selectedZIP ? selectedZIP.value : null;
+                const NTEE1 = selectedNTEE1 ? selectedNTEE1.value : null;
+                const NTEE2 = selectedNTEE2 ? selectedNTEE2.value : null;
+                const NTEE3 = selectedNTEE3 ? selectedNTEE3.value : null;
 
-        setSectorData(filtered_sector_data);
-        // Set the filters to be the selected NTEE filter values
-        let filters = { NTEE1, NTEE2, NTEE3 };
-        setSectorFilters(filters);
+                // Make sure the search is not too broad. Require at least a state 
+                if (!STATE) {
+                    return;
+                }
+
+                let response = await fetch(`/api/sector?Cty=${CITY}&St=${STATE}&ZIP=${ZIP}&NTEE1=${NTEE1}&NTEE2=${NTEE2}&NTEE3=${NTEE3}`);
+                let filtered_sector_data = await response.json();
+
+                setSectorData(filtered_sector_data);
+                // Set the filters to be the selected NTEE filter values
+                let filters = { NTEE1, NTEE2, NTEE3 };
+                setSectorFilters(filters);
+            }
+            catch (error) {
+                console.error("Error fetching sector data:", error);
+            } finally {
+                setDataIsLoading(false);
+            }
+
         };
 
+        // Load data if the selected state is not null
         fetchSectorData();
     }, 
     // Only re-fetch data when the selected filters change, not when single chars are changed
@@ -322,6 +340,24 @@ const SPIN = ({isDarkMode}) => {
     useEffect(() => {
         // Re-render the scatter plot when the X or Y axis is changed
     }, [selectedXAxis, selectedYAxis]);
+
+    // Loading component to show while data is being fetched
+    const SearchLoadingComponent = () => (
+        <div className="flex items-center justify-center h-full w-full">
+            <svg className="animate-spin h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+        </div>
+    );
+
+
+
+
+
+
+
+
 
     return (
         <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-white text-black"}  p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10 mx-10 mb-12`}>
@@ -383,19 +419,6 @@ const SPIN = ({isDarkMode}) => {
             <ReactTooltip place="top" effect="solid" id="city-tooltip" />
         </div>
     </div>
-    {/* <div className="col-span-1 bg-[#2c7787] p-3 rounded-lg">
-        <h2 className="text-lg font-semibold mb-4">ZIP Code Selection</h2>
-        <div className="flex items-center bg-[#65bacd] p-2 rounded-lg">
-            <Select
-                options={zipOptions}
-                value={selectedZIP}
-                onChange={(option) => setSelectedZIP(option)}
-                className="text-black w-full"
-            />
-            <a data-tooltip-id="zip-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Tooltip content here.">ℹ️</a>
-            <ReactTooltip place="top" effect="solid" id="zip-tooltip" />
-        </div>
-    </div> */}
     <div className="col-span-3 bg-[#3184bc] p-3 rounded-lg">
         <h2 className="text-lg font-semibold mb-4">NTEE Code Selection</h2>
         <div className="grid grid-cols-3 gap-4">
@@ -467,13 +490,20 @@ const SPIN = ({isDarkMode}) => {
                     />
                 </div>
             </div>
-            <div className="flex flex-col ">
-                {sectorData ? (
-                    <div className="h-full h-screen">
+            <div className="flex justify-center items-center">
+                {dataIsLoading ? (
+                    <div className="w-full" style={{ height: '60vh'}}>
+                        <SearchLoadingComponent />
+                    </div>
+                ) : sectorData ? (
+                    <div className="w-full" style={{ height: '60vh'}}>
                         <ScatterPlot data={sectorData.data} X_axis_var={selectedXAxis.value} Y_axis_var={selectedYAxis.value} filters={sectorFilters} isDarkMode={isDarkMode} />
                     </div>
                 ) : (
-                    <div className = "text-center mt-4 h-screen  "> Enter Selection To Load</div>
+                    <div className={`flex flex-col items-center ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-4 rounded-lg mt-4`}>
+                        <h2 className="text-2xl">No Data Loaded</h2>
+                        <p className="text-lg">Please select at minimum a state to view data.</p>
+                    </div>
                 )}
             </div>
         </div>

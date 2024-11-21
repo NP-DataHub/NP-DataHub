@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { useRouter } from 'next/navigation';
-import { color } from 'd3';
+
 
 /** 
  * @param data - a list of nonprofits that have been filtered by the user. This data is used to create the scatter plot
@@ -15,6 +15,23 @@ import { color } from 'd3';
  *           Each NTEE code is a different color on the scatter plot
  */
 const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
+
+
+  // Check for invalid inputs
+  if (!Array.isArray(data) || data === null || data === undefined) {
+    return <div>ERROR: chart arg must be an array, or chart arg is undefined</div>;
+  }
+
+  if(!X_axis_var || !Y_axis_var){
+    return <div>ERROR: X and Y axis variables must be defined</div>;
+  }
+
+  if(!filters){
+    return <div>ERROR: filters must be defined</div>;
+  }
+
+
+  // Handles resizing of the chart
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const router = useRouter();
@@ -44,9 +61,9 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
   };
 
   const formatNumber = (num) => {
-    if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
-    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    if (Math.abs(num) >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
+    if (Math.abs(num) >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (Math.abs(num) >= 1000) return (num / 1000).toFixed(1) + 'K';
     return num;
   };
 
@@ -122,10 +139,10 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
       },
     },
     grid: {
-      left: 20,
-      bottom: 50,
-      right: 20,
-      top: 80, // Increase top padding for labels and legend
+      left: '2%',
+      bottom: '2%',
+      right: '10%',
+      top: '8%',
       containLabel: true,
     },
     toolbox: {
