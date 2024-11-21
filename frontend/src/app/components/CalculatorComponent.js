@@ -4,6 +4,7 @@ import { FaInfoCircle } from "react-icons/fa";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { useRef } from 'react';
 import debounce from 'lodash.debounce';
+import { useCallback } from "react";
 
 export default function CalculatorSection({isDarkMode}) {
 
@@ -168,7 +169,7 @@ const states = [
   );
 
   // Helper functions for name and address field
-  const fetchSuggestions = debounce(async (value, type) => {
+  const fetchSuggestions = useCallback( debounce(async (value, type) => {
     if (disableSuggestions[type]) return; // Check if suggestions are disabled for this type
 
     if (type === 'name' && value === lastFetchedNameInput) return;
@@ -205,7 +206,9 @@ const states = [
     } catch (error) {
       console.error("Error fetching suggestions:", error);
     }
-  }, 500); // waits for 500ms after the last keystroke.
+  }, 500), // 500 delay
+  [disableSuggestions, lastFetchedNameInput, lastFetchedAddressInput]);
+
 
   const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
   const getAddressSuggestionValue = (suggestion) => suggestion.Addr || '';
