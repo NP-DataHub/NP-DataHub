@@ -270,8 +270,6 @@ const states = [
         Compare NTEE code sectors against public data that align with various regional nonprofit’s missions.
         The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
       </p>
-      
-
       {/* Macro mode */}
       <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
         <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MACRO: SECTOR FINANCIAL PERFORMANCE</h2>
@@ -279,7 +277,7 @@ const states = [
             Based on the financial performance of nonprofits - with filings from the most recent year containing the most data points - 
             the following calculations will generate results for either a statewide or national NTEE sector performance, depending on your selection.
             For grantmakers and lawmakers, the results across eight key fiscal variables offer a holistic snapshot of the NTEE sector based on the last reported fiscal year.<br /> <br />
-            Please note that in order for a nonprofit to be included in these calculations, they would have had to reported seven of the eight variables in the last complete year.
+            Please note that in order for a nonprofit to be included in these calculations, they would have had to report seven of the eight variables in the last complete year.
             The only variable that is calculated is the salaries to expenses percentage. The other seven are reported and appear on IRS documents.
             If a nonprofit within that state or national sector does not report in the last full fiscal year, they are not included in the calculations.
         </p>
@@ -391,7 +389,7 @@ const states = [
                     <p className="mt-4 text-sm text-center">
                       {index === 1 ? <>SALARIES<br />AND WAGES</> : 
                         index === 2 ? <>OFFICERS<br />COMPENSATION</> : 
-                        index === 3 ? <>SALARIES<br />TO EXPENSES<br />PERCENTAGE</> : 
+                        index === 3 ? <>PERCENTAGE<br />OF SALARIES<br />TO EXPENSES</> :
                         "EMPLOYEES"}
                     </p>
                   </div>
@@ -470,7 +468,6 @@ const states = [
                 value: address,
                 onChange: (_, { newValue }) => {
                   setAddress(newValue);
-                  setMode("Micro");
                 },
                 className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
               }}
@@ -534,7 +531,7 @@ const states = [
                         ) : index === 1 ? (
                           <>OFFICERS<br />COMPENSATION</>
                         ) : index === 2 ? (
-                          <>SALARIES<br />TO EXPENSES<br />PERCENTAGE</>
+                          <>PERCENTAGE<br />OF SALARIES<br />TO EXPENSES</>
                         ) : (
                           <>PERCENTAGE<br />OF EXPENSES<br />AFTER SALARIES</>
                         )}

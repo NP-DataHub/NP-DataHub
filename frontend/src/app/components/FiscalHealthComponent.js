@@ -597,7 +597,11 @@ const fetchFiscalHealthData = async (option) => {
       <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12`}>
         <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare Nonprofit Against a Sector</h2>
         <p className="text-center pb-8">
-        Compare the scores side-by-side with the same or other sectors, either at the state or national levels.</p>
+        Compare the scores side-by-side with the same or other sectors, either at the state or national levels. 
+        If the nonprofit&apos;s score is higher than the state and national score, it signals that fiscally, 
+        the nonprofit is outperforming the other nonprofits in the chosen NTEE sector. 
+        If the nonprofit&apos;s score is lower than the state and national score, they are not performing as well. 
+        The state and national scores in all results are based on the chosen NTEE sector median.</p>
         <div className="flex flex-col gap-6">
           <div className = 'relative'>
             <Autosuggest
@@ -729,7 +733,7 @@ const fetchFiscalHealthData = async (option) => {
                     <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(regionalSectorScore)}`}>
                       {regionalSectorScore == null ? "NaN" : regionalSectorScore}
                     </div>
-                    <p className="mt-4">Regional Score</p>
+                    <p className="mt-4">State Score</p>
                   </div>
                   <div className="flex flex-col items-center w-1/3">
                     <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(nationalSectorScore)}`}>
