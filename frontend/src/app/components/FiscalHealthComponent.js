@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
+import { useRef } from 'react';
+import debounce from 'lodash.debounce';
+import { useCallback } from "react";
 
 
 export default function FiscalHealthSection({isDarkMode}) {
@@ -43,6 +46,19 @@ export default function FiscalHealthSection({isDarkMode}) {
   const [lastSecondFetchedNameInput, setLastSecondFetchedNameInput] = useState('');
   const [lastSecondFetchedAddressInput, setLastSecondFetchedAddressInput] = useState('');
 
+  // disable autosuggester when Compare button is pressed
+  const [disableSuggestions, setDisableSuggestions] = useState({
+    Single: { name: false, address: false },
+    First: { name: false, address: false },
+    Second: { name: false, address: false },
+  });
+
+  const abortControllersRef = useRef({
+    Single: { name: null, address: null },
+    First: { name: null, address: null },
+    Second: { name: null, address: null },
+  });
+
   const isLoading = loadingComparison || loadingSectorComparison;
 
   const majorGroups = [
@@ -76,7 +92,16 @@ export default function FiscalHealthSection({isDarkMode}) {
   ];
   
   // Fetch suggestions for nonprofit names or addresses
-  const fetchSuggestions = async (value, type, mode) => {
+  const fetchSuggestions = useCallback( debounce(async (value, type, mode) => {
+
+    if (disableSuggestions[mode][type]) return;
+
+    if (abortControllersRef.current[mode][type]) {
+      abortControllersRef.current[mode][type].abort();
+    }
+
+    const abortController = new AbortController();
+    abortControllersRef.current[mode][type] = abortController;
 
     if (type === 'name') {
       if (
@@ -137,7 +162,15 @@ export default function FiscalHealthSection({isDarkMode}) {
     } catch (error) {
       console.error("Error fetching suggestions:", error);
     }
-  };
+  }, 500), // 500 delay
+  [disableSuggestions,  
+  lastSingleFetchedNameInput,
+  lastFirstFetchedNameInput,
+  lastSecondFetchedNameInput,
+  lastSingleFetchedAddressInput,
+  lastFirstFetchedAddressInput,
+  lastSecondFetchedAddressInput ]);
+
 
   // Autosuggest configuration
   // Get suggestion value for name
@@ -159,21 +192,12 @@ const getNameSuggestionValue = (suggestion) => {
   };
   
 
-  // Render function for addresses
   const renderAddressSuggestion = (suggestion) => (
     <div className="px-4 py-2 cursor-pointer hover:bg-[#FEB95A] hover:text-black">
       {suggestion.Addr}
     </div>
   );
 
-
-  const onNameSuggestionsFetchRequested = ({ value }, mode) => {
-    fetchSuggestions(value, 'name', mode);
-  };
-
-  const onAddressSuggestionsFetchRequested = ({ value }, mode) => {
-    fetchSuggestions(value, 'address', mode);
-  };
 
   const onSuggestionsClearRequested = (mode) => {
     if (mode === 'Single') {
@@ -373,7 +397,7 @@ const fetchFiscalHealthData = async (option) => {
           <div className = 'relative'>
             <Autosuggest
               suggestions={firstNameSuggestions}
-              onSuggestionsFetchRequested={({ value }) => onNameSuggestionsFetchRequested({ value }, 'First')}
+              onSuggestionsFetchRequested={({ value }) => fetchSuggestions(value, 'name', 'First')}
               onSuggestionsClearRequested={() => onSuggestionsClearRequested('First')}
               getSuggestionValue={getNameSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
@@ -400,7 +424,7 @@ const fetchFiscalHealthData = async (option) => {
           <div className = 'relative'>
             <Autosuggest
               suggestions={firstAddressSuggestions}
-              onSuggestionsFetchRequested={({ value }) => onAddressSuggestionsFetchRequested({ value }, 'First')}
+              onSuggestionsFetchRequested={({ value }) => fetchSuggestions(value, 'address', 'First')}
               onSuggestionsClearRequested={() => onSuggestionsClearRequested('First')}
               getSuggestionValue={getAddressSuggestionValue}
               renderSuggestion={renderAddressSuggestion}
@@ -425,7 +449,7 @@ const fetchFiscalHealthData = async (option) => {
             <div className = 'relative'>
               <Autosuggest
                 suggestions={secondNameSuggestions}
-                onSuggestionsFetchRequested={({ value }) => onNameSuggestionsFetchRequested({ value }, 'Second')}
+                onSuggestionsFetchRequested={({ value }) => fetchSuggestions(value, 'name', 'Second')}
                 onSuggestionsClearRequested={() => onSuggestionsClearRequested('Second')}
                 getSuggestionValue={getNameSuggestionValue}
                 renderSuggestionsContainer={({ containerProps, children }) => (
@@ -450,7 +474,7 @@ const fetchFiscalHealthData = async (option) => {
             <div className = 'relative'>
               <Autosuggest
                 suggestions={secondAddressSuggestions}
-                onSuggestionsFetchRequested={({ value }) => onAddressSuggestionsFetchRequested({ value }, 'Second')}
+                onSuggestionsFetchRequested={({ value }) => fetchSuggestions(value, 'address', 'Second')}
                 onSuggestionsClearRequested={() => onSuggestionsClearRequested('Second')}
                 getSuggestionValue={getAddressSuggestionValue}
                 renderSuggestionsContainer={({ containerProps, children }) => (
@@ -474,7 +498,31 @@ const fetchFiscalHealthData = async (option) => {
             </div>
 
           <button
-            onClick={() => fetchFiscalHealthData("compare")}
+            onClick={() => {
+              setDisableSuggestions((prev) => ({
+                ...prev,
+                First: { name: true, address: true },
+                Second: { name: true, address: true },
+              }));
+              ['First', 'Second'].forEach((mode) => {
+                Object.keys(abortControllersRef.current[mode]).forEach((type) => {
+                  if (abortControllersRef.current[mode][type]) {
+                    abortControllersRef.current[mode][type].abort();
+                    abortControllersRef.current[mode][type] = null;
+                  }
+                });
+              });
+              setFirstNameSuggestions([]);
+              setFirstAddressSuggestions([]);
+              setSecondNameSuggestions([]);
+              setSecondAddressSuggestions([]);
+              fetchFiscalHealthData("compare")
+              setDisableSuggestions((prev) => ({
+                ...prev,
+                First: { name: false, address: false },
+                Second: { name: false, address: false },
+              }));
+            }}
             className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonFetchDisabled() || isLoading ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#FEB95A] hover:bg-[#D49B4A] transition duration-300'}`}
             disabled={isComparisonFetchDisabled() || isLoading}
           >
@@ -554,7 +602,7 @@ const fetchFiscalHealthData = async (option) => {
           <div className = 'relative'>
             <Autosuggest
               suggestions={singleNameSuggestions}
-              onSuggestionsFetchRequested={({ value }) => onNameSuggestionsFetchRequested({ value }, 'Single')}
+              onSuggestionsFetchRequested={({ value }) => fetchSuggestions(value, 'name', 'Single')}
               onSuggestionsClearRequested={() => onSuggestionsClearRequested('Single')}
               getSuggestionValue={getNameSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
@@ -580,7 +628,7 @@ const fetchFiscalHealthData = async (option) => {
           <div className = 'relative'>
             <Autosuggest
               suggestions={singleAddressSuggestions}
-              onSuggestionsFetchRequested={({ value }) => onAddressSuggestionsFetchRequested({ value }, 'Single')}
+              onSuggestionsFetchRequested={({ value }) => fetchSuggestions(value, 'address', 'Single')}
               onSuggestionsClearRequested={() => onSuggestionsClearRequested('Single')}
               getSuggestionValue={getAddressSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
@@ -616,7 +664,29 @@ const fetchFiscalHealthData = async (option) => {
           </select>
 
           <button
-            onClick={() => fetchFiscalHealthData("compareSector")}
+            onClick={() => {
+              setDisableSuggestions((prev) => ({
+                ...prev,
+                Single: { name: true, address: true },
+              }));
+
+              Object.keys(abortControllersRef.current.Single).forEach((type) => {
+                if (abortControllersRef.current.Single[type]) {
+                  abortControllersRef.current.Single[type].abort();
+                  abortControllersRef.current.Single[type] = null;
+                }
+              });
+
+              setSingleNameSuggestions([]);
+              setSingleAddressSuggestions([]);
+
+              fetchFiscalHealthData("compareSector");
+
+              setDisableSuggestions((prev) => ({
+                ...prev,
+                Single: { name: false, address: false },
+              }));
+            }}
             className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonSectorFetchDisabled() || isLoading ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed"  : 'bg-[#FEB95A] text-black hover:bg-[#D49B4A] transition duration-300'}`}
             disabled={isComparisonSectorFetchDisabled() || isLoading}
           >
