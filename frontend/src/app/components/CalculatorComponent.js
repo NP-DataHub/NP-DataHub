@@ -263,8 +263,8 @@ const states = [
   };
 
   return (
-    <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
-      <h3 className="text-xl font-semibold text-[#A9DFD8]">Calculator</h3>
+    <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"} rounded-lg`}>
+      <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`}>Calculator</h3>
       <p className=""> 
       <br />
         Compare NTEE code sectors against public data that align with various regional nonprofit’s missions.
@@ -272,7 +272,7 @@ const states = [
       </p>
       {/* Macro mode */}
       <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MACRO: SECTOR FINANCIAL PERFORMANCE</h2>
+        <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`}>MACRO: SECTOR FINANCIAL PERFORMANCE</h2>
         <p className="text-center pb-8">
             Based on the financial performance of nonprofits - with filings from the most recent year containing the most data points - 
             the following calculations will generate results for either a statewide or national NTEE sector performance, depending on your selection.
@@ -406,7 +406,7 @@ const states = [
 
       {/* Micro mode */}
       <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#A9DFD8]">MICRO: SINGLE NONPROFIT FINANCIAL PERFORMANCE</h2>
+        <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`}>MICRO: SINGLE NONPROFIT FINANCIAL PERFORMANCE</h2>
         <p className="text-center pb-8">
         This tool will allow the end user to compare a single nonprofit&apos;s expenditures v. salaries from its last reported fiscal year 
         and then allow the end user to calculate the cost per constituent served after salaries and wages for any grant level.
@@ -560,7 +560,9 @@ const states = [
       </h6>
       <form className="w-full max-md:max-w-full mt-4 space-y-4">
         <div className="flex items-center justify-between">
-          <label htmlFor="budget" className="text-[#A9DFD8] mr-4 w-3/4">What is the grant or project budget? (ex. $50,000)</label>
+          <label htmlFor="budget" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`} > 
+            What is the grant or project budget? (ex. $50,000)
+          </label>
           <input
             type="text"
             inputMode="numeric"
@@ -575,7 +577,9 @@ const states = [
           />
         </div>
         <div className="flex items-center justify-between">
-          <label htmlFor="remaining" className="text-[#A9DFD8] mr-4 w-3/4">New total remaining after percentage of salaries applied</label>
+          <label htmlFor="remaining" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`} >
+            New total remaining after percentage of salaries applied 
+          </label>
           <input
             type="text"
             id="remaining"
@@ -587,7 +591,9 @@ const states = [
           />
         </div>
         <div className="flex items-center justify-between">
-          <label htmlFor="beneficiaries" className="text-[#A9DFD8] mr-4 w-3/4">How many clients/constituents will benefit from the grant or project total?</label>
+          <label htmlFor="beneficiaries" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`} >
+            How many clients/constituents will benefit from the grant or project total?
+          </label>
           <input
             type="text"
             inputMode="numeric"
@@ -603,7 +609,9 @@ const states = [
           />
         </div>
         <div className="flex items-center justify-between">
-          <label htmlFor="costPerClient" className="text-[#A9DFD8] mr-4 w-3/4">New cost of services provided to one client/constituent based on budget</label>
+          <label htmlFor="costPerClient" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`}>
+            New cost of services provided to one client/constituent based on budget
+          </label>
           <input
             type="text"
             id="costPerClient"
