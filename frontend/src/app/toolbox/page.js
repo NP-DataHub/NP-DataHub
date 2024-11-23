@@ -357,11 +357,11 @@ export default function Toolbox() {
                                 data-tooltip-id="comparison-tooltip4"
                                 data-tooltip-content="Currently Under Development"
                                 
-                                onClick={() =>
-                                    setSelectedSection(
-                                      selectedSection === "Co:Lab" ? null : "Co:Lab"
-                                    )
-                                  }
+                                // onClick={() =>
+                                //     setSelectedSection(
+                                //       selectedSection === "Co:Lab" ? null : "Co:Lab"
+                                //     )
+                                //   }
                                 >
                                 <ReactTooltip place="top" effect="solid" id="comparison-tooltip4" />
 
