@@ -185,7 +185,13 @@ const getNameSuggestionValue = (suggestion) => {
   // Render function for names
   const renderNameSuggestion = (suggestion) => {
     return (
-      <div className="px-4 py-2  cursor-pointer hover:bg-[#FEB95A] hover:text-black">
+      <div
+        className={`px-4 py-2 cursor-pointer ${
+          isDarkMode
+            ? "hover:bg-[#FEB95A] hover:text-black"
+            : "hover:bg-[#FFAA00] hover:text-black"
+        }`}
+      >
         {suggestion.Nm}
       </div>
     );
@@ -193,9 +199,15 @@ const getNameSuggestionValue = (suggestion) => {
   
 
   const renderAddressSuggestion = (suggestion) => (
-    <div className="px-4 py-2 cursor-pointer hover:bg-[#FEB95A] hover:text-black">
-      {suggestion.Addr}
-    </div>
+      <div
+        className={`px-4 py-2 cursor-pointer ${
+          isDarkMode
+            ? "hover:bg-[#FEB95A] hover:text-black"
+            : "hover:bg-[#FFAA00] hover:text-black"
+        }`}
+      >
+        {suggestion.Addr}
+      </div>
   );
 
 
@@ -362,18 +374,18 @@ const fetchFiscalHealthData = async (option) => {
 
   const getBackgroundColor = (score) => {
     if (score === "NaN" || score == 0 || score == null) {
-      return "bg-yellow-600";
+      return isDarkMode ? "bg-yellow-600" : "bg-[#D8A031]";
     } else if (score > 0) {
-      return "bg-blue-900";
+      return isDarkMode ? "bg-blue-900" : "bg-[#316498]";
     } else {
-      return "bg-red-900";
+      return isDarkMode ? "bg-red-900" : "bg-[#A64242]";
     }
   }
 
 
   return (
-    <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
-      <h3 className="text-xl font-semibold text-[#FEB95A]">Fiscal Health</h3>
+    <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"} rounded-lg`}>
+      <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#FEB95A]' : 'text-[#FFAA00]'}`}>Fiscal Health</h3>
       <p className=" mb-12">
        <br />
         Comparing two nonprofits in the same sector and region allows a grantmaker to gain valuable insights into their relative performance, impact, and operational strategies. 
@@ -389,7 +401,7 @@ const fetchFiscalHealthData = async (option) => {
       </p>
       {/* Compare Two Nonprofits */}
       <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2`}>
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare Two Nonprofits</h2>
+        <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#FEB95A]' : 'text-[#FFAA00]'}`}>Compare Two Nonprofits</h2>
         <p className="text-center pb-8">
           Compare the scores side-by-side with other nonprofits.
         </p>
@@ -401,10 +413,15 @@ const fetchFiscalHealthData = async (option) => {
               onSuggestionsClearRequested={() => onSuggestionsClearRequested('First')}
               getSuggestionValue={getNameSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
-                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
-                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${firstNameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
-                    {children}
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                    firstNameSuggestions.length > 0
+                      ? isDarkMode
+                        ? 'bg-[#171821] text-white border border-[#FEB95A]'
+                        : 'bg-white text-black border border-[#FFAA00]'
+                      : ''
+                  }`}
+                >
+                  {children}
                 </div>
             )}
               renderSuggestion={renderNameSuggestion}
@@ -416,9 +433,8 @@ const fetchFiscalHealthData = async (option) => {
                   setSingleNameSuggestions([]);
                   setFirstNp(newValue);
                 },
-                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
               }}
-          
             />
           </div>
           <div className = 'relative'>
@@ -429,10 +445,15 @@ const fetchFiscalHealthData = async (option) => {
               getSuggestionValue={getAddressSuggestionValue}
               renderSuggestion={renderAddressSuggestion}
               renderSuggestionsContainer={({ containerProps, children }) => (
-                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
-                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${firstAddressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
-                    {children}
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                    firstAddressSuggestions.length > 0
+                      ? isDarkMode
+                        ? 'bg-[#171821] text-white border border-[#FEB95A]'
+                        : 'bg-white text-black border border-[#FFAA00]'
+                      : ''
+                  }`}
+                >
+                  {children}
                 </div>
             )}
               inputProps={{
@@ -442,7 +463,7 @@ const fetchFiscalHealthData = async (option) => {
                   setSingleAddressSuggestions([]);
                   setFirstAddr(newValue);
                 },
-                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
               }}
             />
             </div>
@@ -453,11 +474,16 @@ const fetchFiscalHealthData = async (option) => {
                 onSuggestionsClearRequested={() => onSuggestionsClearRequested('Second')}
                 getSuggestionValue={getNameSuggestionValue}
                 renderSuggestionsContainer={({ containerProps, children }) => (
-                  <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
-                      isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                  } overflow-y-auto rounded z-10 ${secondNameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
-                      {children}
-                  </div>
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                    secondNameSuggestions.length > 0
+                      ? isDarkMode
+                        ? 'bg-[#171821] text-white border border-[#FEB95A]'
+                        : 'bg-white text-black border border-[#FFAA00]'
+                      : ''
+                  }`}
+                >
+                  {children}
+                </div>
               )}
                 renderSuggestion={renderNameSuggestion}
                 inputProps={{
@@ -467,7 +493,7 @@ const fetchFiscalHealthData = async (option) => {
                     setSingleNameSuggestions([]);
                     setSecondNp(newValue);
                   },
-                  className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+                  className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
                 }}
               />
             </div>
@@ -478,10 +504,15 @@ const fetchFiscalHealthData = async (option) => {
                 onSuggestionsClearRequested={() => onSuggestionsClearRequested('Second')}
                 getSuggestionValue={getAddressSuggestionValue}
                 renderSuggestionsContainer={({ containerProps, children }) => (
-                  <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
-                      isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                  } overflow-y-auto rounded z-10 ${secondAddressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
-                      {children}
+                  <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                      secondAddressSuggestions.length > 0
+                        ? isDarkMode
+                          ? 'bg-[#171821] text-white border border-[#FEB95A]'
+                          : 'bg-white text-black border border-[#FFAA00]'
+                        : ''
+                    }`}
+                  >
+                    {children}
                   </div>
               )}
                 renderSuggestion={renderAddressSuggestion}
@@ -492,7 +523,7 @@ const fetchFiscalHealthData = async (option) => {
                     setSingleAddressSuggestions([]);
                     setSecondAddr(newValue);
                   },
-                  className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+                  className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
                 }}
               />
             </div>
@@ -523,7 +554,15 @@ const fetchFiscalHealthData = async (option) => {
                 Second: { name: false, address: false },
               }));
             }}
-            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonFetchDisabled() || isLoading ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#FEB95A] hover:bg-[#D49B4A] transition duration-300'}`}
+            className={`py-4 px-6 rounded-lg font-bold w-full ${
+              isComparisonFetchDisabled() || isLoading
+                ? isDarkMode
+                  ? "bg-gray-700 cursor-not-allowed"
+                  : "bg-[#D8D8D8] cursor-not-allowed"
+                : isDarkMode
+                ? 'bg-[#FEB95A] hover:bg-[#D49B4A] transition duration-300'
+                : 'bg-[#FFAA00] hover:bg-[#D49B4A] transition duration-300'
+            }`}
             disabled={isComparisonFetchDisabled() || isLoading}
           >
             Compare
@@ -539,18 +578,18 @@ const fetchFiscalHealthData = async (option) => {
               
               {/* First Nonprofit Score Display */}
               <div className="flex flex-col items-center w-1/2">
-                <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(firstNpScore)}`}>
+                <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-black"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(firstNpScore)}`}>
                   {firstNpScore}
                 </div>
                 {/* First Nonprofit Years Message */}
-                <div className="mt-2 text-sm text-gray-400 text-center">
-                  {firstNpYears.length >= 4 ? (
+                <div className={`mt-2 text-sm text-center text-gray-${isDarkMode ? "400" : "600"}`}>
+                  {firstNpYears.length >= 2 ? (
                     <p>Fiscal health score calculated from the following years:</p>
                   ) : (
                     <p>Minimum 2 consecutive years required for a fiscal health score.</p>
                   )}
                   <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
-                    {firstNpYears.length >= 4
+                    {firstNpYears.length >= 2
                       ? firstNpYears.sort((a, b) => a - b).map((year, index) => (
                           <li key={`firstNpYear-${index}`}>{year}</li>
                         ))
@@ -564,19 +603,19 @@ const fetchFiscalHealthData = async (option) => {
               </div>
               {/* Second Nonprofit Score Display */}
               <div className="flex flex-col items-center w-1/2">
-                <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(secondNpScore)}`}>
+                <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-black"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(secondNpScore)}`}>
                   {secondNpScore}
                 </div>
 
                 {/* Second Nonprofit Years Message */}
-                <div className="mt-2 text-sm text-gray-400 text-center">
-                  {secondNpYears.length >= 4 ? (
+                <div className={`mt-2 text-sm text-center text-gray-${isDarkMode ? "400" : "600"}`}>
+                  {secondNpYears.length >= 2 ? (
                     <p>Fiscal health score calculated from the following years:</p>
                   ) : (
                     <p>Minimum 2 consecutive years are required for a fiscal health score.</p>
                   )}
                   <ul style={{ display: 'flex', justifyContent: 'center', gap: '8px' }}>
-                    {secondNpYears.length >= 4
+                    {secondNpYears.length >= 2
                       ? secondNpYears.sort((a, b) => a - b).map((year, index) => (
                           <li key={`secondNpYear-${index}`}>{year}</li>
                         ))
@@ -595,7 +634,7 @@ const fetchFiscalHealthData = async (option) => {
       </div>
       {/* Compare NonProfit Against Sector */}
       <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 border-[#2C2D33] mt-12`}>
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#FEB95A]">Compare Nonprofit Against a Sector</h2>
+        <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#FEB95A]' : 'text-[#FFAA00]'}`}>Compare Nonprofit Against a Sector</h2>
         <p className="text-center pb-8">
         Compare the scores side-by-side with the same or other sectors, either at the state or national levels. 
         If the nonprofit&apos;s score is higher than the state and national score, it signals that fiscally, 
@@ -610,10 +649,15 @@ const fetchFiscalHealthData = async (option) => {
               onSuggestionsClearRequested={() => onSuggestionsClearRequested('Single')}
               getSuggestionValue={getNameSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
-                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
-                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${singleNameSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
-                    {children}
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                    singleNameSuggestions.length > 0
+                      ? isDarkMode
+                        ? 'bg-[#171821] text-white border border-[#FEB95A]'
+                        : 'bg-white text-black border border-[#FFAA00]'
+                      : ''
+                  }`}
+                >
+                  {children}
                 </div>
             )}
               renderSuggestion={renderNameSuggestion}
@@ -625,7 +669,7 @@ const fetchFiscalHealthData = async (option) => {
                   setSecondNameSuggestions([]);
                   setSingleNp(newValue);
                 },
-                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
               }}
             />
           </div>
@@ -636,10 +680,15 @@ const fetchFiscalHealthData = async (option) => {
               onSuggestionsClearRequested={() => onSuggestionsClearRequested('Single')}
               getSuggestionValue={getAddressSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
-                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
-                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${singleAddressSuggestions.length > 0 ? 'border border-[#FEB95A]' : ''}`}>
-                    {children}
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                    singleAddressSuggestions.length > 0
+                      ? isDarkMode
+                        ? 'bg-[#171821] text-white border border-[#FEB95A]'
+                        : 'bg-white text-black border border-[#FFAA00]'
+                      : ''
+                  }`}
+                >
+                  {children}
                 </div>
             )}
               renderSuggestion={renderAddressSuggestion}
@@ -651,14 +700,14 @@ const fetchFiscalHealthData = async (option) => {
                   setSecondAddressSuggestions([]);
                   setSingleAddr(newValue);
                 },
-                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
               }}
             />
           </div>
           <select
             value={specificSector}
             onChange={(e) => setSpecificSector(e.target.value)}
-            className={`p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full`}
+            className={`p-4 border  ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#F1F1F1] text-black border-gray-200"} rounded-lg w-full`}
           >
             {majorGroups.map((group) => (
               <option key={group.value} value={group.value} className="text-black">
@@ -691,7 +740,15 @@ const fetchFiscalHealthData = async (option) => {
                 Single: { name: false, address: false },
               }));
             }}
-            className={`py-4 px-6 rounded-lg font-bold w-full ${isComparisonSectorFetchDisabled() || isLoading ? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed"  : 'bg-[#FEB95A] text-black hover:bg-[#D49B4A] transition duration-300'}`}
+            className={`py-4 px-6 rounded-lg font-bold w-full ${
+              isComparisonSectorFetchDisabled() || isLoading
+                ? isDarkMode
+                  ? "bg-gray-700 cursor-not-allowed"
+                  : "bg-[#D8D8D8] cursor-not-allowed"
+                : isDarkMode
+                ? 'bg-[#FEB95A] hover:bg-[#D49B4A] transition duration-300'
+                : 'bg-[#FFAA00] hover:bg-[#D49B4A] transition duration-300'
+            }`}
             disabled={isComparisonSectorFetchDisabled() || isLoading}
           >
             Compare
@@ -707,14 +764,15 @@ const fetchFiscalHealthData = async (option) => {
               {/* Edge Case 1: Not Enough Consecutive Years */}
               {edgeCase === 1 ? (
                 <div className="flex flex-col items-center w-1/3">
-                  <div className="bg-yellow-600 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold">
+                  <div className={`border-4 w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden text-3xl font-bold
+                    ${isDarkMode ? "bg-yellow-600 border-white" : "bg-[#D8A031] border-black"}`}>
                     NaN
                   </div>
-                  <p className="mt-4 text-center text-sm text-gray-400 whitespace-nowrap">
+                  <p className={`mt-4 text-sm whitespace-nowrap text-center text-gray-${isDarkMode ? "400" : "600"}`}>
                     Minimum 2 consecutive years required for a fiscal health score.
                   </p>
                   {singleNpYears && singleNpYears.length > 0 && (
-                    <p className="text-sm text-gray-400 text-center mt-2">
+                    <p className={`mt-2 text-sm text-center text-gray-${isDarkMode ? "400" : "600"}`}>
                       Only available years:{" "}
                       <span className="inline-block">{[...singleNpYears].sort((a, b) => a - b).join(", ")}</span>
                     </p>
@@ -724,19 +782,19 @@ const fetchFiscalHealthData = async (option) => {
                 <>
                   {/* Display the three score circles */}
                   <div className="flex flex-col items-center w-1/3">
-                    <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(singleNpScore)}`}>
+                    <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-black"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(singleNpScore)}`}>
                       {singleNpScore}
                     </div>
                     <p className="mt-4">Nonprofit Score</p>
                   </div>
                   <div className="flex flex-col items-center w-1/3">
-                    <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(regionalSectorScore)}`}>
+                    <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-black"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(regionalSectorScore)}`}>
                       {regionalSectorScore == null ? "NaN" : regionalSectorScore}
                     </div>
                     <p className="mt-4">State Score</p>
                   </div>
                   <div className="flex flex-col items-center w-1/3">
-                    <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-white"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(nationalSectorScore)}`}>
+                    <div className={`border-4 ${isDarkMode ? "border-white text-white" : "border-black text-black"} w-28 h-28 rounded-full flex items-center justify-center text-3xl font-bold ${getBackgroundColor(nationalSectorScore)}`}>
                       {nationalSectorScore == null ? "NaN" : nationalSectorScore}
                     </div>
                     <p className="mt-4">National Score</p>
@@ -746,7 +804,7 @@ const fetchFiscalHealthData = async (option) => {
             </div>
 
             {/* Edge Case 2: Show message with years below the circles */}
-            <div className="mt-6 text-sm text-gray-500">      
+            <div className={`mt-6 text-sm text-gray-${isDarkMode ? "400" : "600"}`}>      
               
               {edgeCase === 2 && (
                 <p className="mt-2 text-center">

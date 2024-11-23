@@ -328,7 +328,7 @@ const states = [
                 placeholder: 'Enter State. If left blank, national performance will be calculated',
                 value: state,
                 onChange: (event, { newValue }) => setState(newValue),
-                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-black"} rounded-lg w-full focus:outline-none`,
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
               }}
 
           />
@@ -365,7 +365,8 @@ const states = [
             <div className="flex justify-center gap-8 w-full">
               {[macroData[1], macroData[2], macroData[3], macroData[4]].map((value, index) => {
                 // Format large values with abbreviations
-                const formattedValue = value >= 1e9 ? `${(value / 1e9).toFixed(1)}B` :
+                const formattedValue = value >= 1e12 ? `${(value / 1e12).toFixed(1)}T` :
+                                      value >= 1e9 ? `${(value / 1e9).toFixed(1)}B` :
                                       value >= 1e6 ? `${(value / 1e6).toFixed(1)}M` :
                                       value >= 1e3 ? `${(value / 1e3).toFixed(1)}K` :
                                       Math.round(value).toLocaleString();
@@ -390,6 +391,7 @@ const states = [
               {[macroData[5], macroData[6], macroData[7], macroData[8]].map((value, index) => {
                 // Format large values with abbreviations and ensure percentages are displayed with one decimal place
                 const formattedValue = index === 3 ? `${value.toFixed(1)}%` : 
+                                      value >= 1e12 ? `${(value / 1e12).toFixed(1)}T` :
                                       value >= 1e9 ? `${(value / 1e9).toFixed(1)}B` :
                                       value >= 1e6 ? `${(value / 1e6).toFixed(1)}M` :
                                       value >= 1e3 ? `${(value / 1e3).toFixed(1)}K` :
@@ -471,7 +473,7 @@ const states = [
                 onChange: (_, { newValue }) => {
                   setNonprofit(newValue);
                 },
-                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-black"} rounded-lg w-full focus:outline-none`,
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
               }}
 
             />
@@ -511,7 +513,7 @@ const states = [
                 onChange: (_, { newValue }) => {
                   setAddress(newValue);
                 },
-                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-black"} rounded-lg w-full focus:outline-none`,
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
               }}
             />
           </div>
@@ -557,6 +559,8 @@ const states = [
                   const formattedValue =
                     index === 2 || index === 3
                       ? `${value.toFixed(1)}%`
+                      : value >= 1e12
+                      ? `${(value / 1e12).toFixed(1)}T`
                       : value >= 1e9
                       ? `${(value / 1e9).toFixed(1)}B`
                       : value >= 1e6

@@ -230,7 +230,7 @@ export default function Toolbox() {
                                 ></div>
                         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
                             <div className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
-                                    selectedSection === "Fiscal Health" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#c9c9c9] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
+                                    selectedSection === "Fiscal Health" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
                                     }`}
                                     onClick={() =>
                                         setSelectedSection(
@@ -240,13 +240,13 @@ export default function Toolbox() {
                                     >
 
                                 <svg className = "mb-4" width="36" height="39" viewBox="0 0 23 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 6.02589L11.452 6.53789C11.5222 6.61298 11.607 6.67285 11.7013 6.71378C11.7956 6.75471 11.8972 6.77584 12 6.77584C12.1028 6.77584 12.2044 6.75471 12.2987 6.71378C12.393 6.67285 12.4778 6.61298 12.548 6.53789L12 6.02589ZM9.434 19.2479C7.984 18.0719 6.292 16.5289 4.968 14.8399C3.629 13.1329 2.75 11.3799 2.75 9.76989H1.25C1.25 11.8869 2.38 13.9719 3.787 15.7659C5.209 17.5789 6.997 19.2019 8.489 20.4129L9.434 19.2479ZM2.75 9.76989C2.75 6.86489 4.018 5.06989 5.586 4.45489C7.151 3.84189 9.34 4.27989 11.452 6.53789L12.548 5.51389C10.16 2.95989 7.349 2.15389 5.039 3.05789C2.732 3.96189 1.25 6.44389 1.25 9.76989H2.75ZM15.51 20.4119C17.003 19.2009 18.791 17.5779 20.213 15.7649C21.62 13.9709 22.75 11.8859 22.75 9.76789H21.25C21.25 11.3799 20.37 13.1319 19.032 14.8389C17.708 16.5279 16.016 18.0709 14.566 19.2469L15.51 20.4119ZM22.75 9.76789C22.75 6.44289 21.268 3.96089 18.96 3.05789C16.65 2.15289 13.84 2.95789 11.452 5.51289L12.548 6.53789C14.66 4.27989 16.849 3.84089 18.414 4.45389C19.982 5.06789 21.25 6.86389 21.25 9.76789H22.75ZM8.489 20.4129C9.759 21.4449 10.642 22.2019 12 22.2019V20.7019C11.277 20.7019 10.827 20.3779 9.434 19.2479L8.489 20.4129ZM14.566 19.2469C13.173 20.3769 12.723 20.7019 12 20.7019V22.2019C13.358 22.2019 14.241 21.4449 15.511 20.4129L14.566 19.2469Z" fill="#FEB95A"/>
-                                    <path d="M18.5 9.45189H16.5M16.5 9.45189H14.5M16.5 9.45189V7.45189M16.5 9.45189V11.4519" stroke="#FEB95A" stroke-width="1.5" stroke-linecap="round"/>
+                                    <path d="M12 6.02589L11.452 6.53789C11.5222 6.61298 11.607 6.67285 11.7013 6.71378C11.7956 6.75471 11.8972 6.77584 12 6.77584C12.1028 6.77584 12.2044 6.75471 12.2987 6.71378C12.393 6.67285 12.4778 6.61298 12.548 6.53789L12 6.02589ZM9.434 19.2479C7.984 18.0719 6.292 16.5289 4.968 14.8399C3.629 13.1329 2.75 11.3799 2.75 9.76989H1.25C1.25 11.8869 2.38 13.9719 3.787 15.7659C5.209 17.5789 6.997 19.2019 8.489 20.4129L9.434 19.2479ZM2.75 9.76989C2.75 6.86489 4.018 5.06989 5.586 4.45489C7.151 3.84189 9.34 4.27989 11.452 6.53789L12.548 5.51389C10.16 2.95989 7.349 2.15389 5.039 3.05789C2.732 3.96189 1.25 6.44389 1.25 9.76989H2.75ZM15.51 20.4119C17.003 19.2009 18.791 17.5779 20.213 15.7649C21.62 13.9709 22.75 11.8859 22.75 9.76789H21.25C21.25 11.3799 20.37 13.1319 19.032 14.8389C17.708 16.5279 16.016 18.0709 14.566 19.2469L15.51 20.4119ZM22.75 9.76789C22.75 6.44289 21.268 3.96089 18.96 3.05789C16.65 2.15289 13.84 2.95789 11.452 5.51289L12.548 6.53789C14.66 4.27989 16.849 3.84089 18.414 4.45389C19.982 5.06789 21.25 6.86389 21.25 9.76789H22.75ZM8.489 20.4129C9.759 21.4449 10.642 22.2019 12 22.2019V20.7019C11.277 20.7019 10.827 20.3779 9.434 19.2479L8.489 20.4129ZM14.566 19.2469C13.173 20.3769 12.723 20.7019 12 20.7019V22.2019C13.358 22.2019 14.241 21.4449 15.511 20.4129L14.566 19.2469Z" fill = {isDarkMode ? "#FEB95A" : "#FFAA00" }/>
+                                    <path d="M18.5 9.45189H16.5M16.5 9.45189H14.5M16.5 9.45189V7.45189M16.5 9.45189V11.4519" stroke = {isDarkMode ? "#FEB95A" : "#FFAA00" } stroke-width="1.5" stroke-linecap="round"/>
                                 </svg>
                                 
 
-                                <h2 className="text-xl text-[#FEB95A] font-semibold mb-2">FISCAL HEALTH</h2>
-                                <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Assess a nonprofit{"’"}s fiscal health based on a weighted score of various data variables. Compare the scores side-by-side with other nonproifts.</p>
+                                <h2 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-[#FEB95A]" : "text-[#FFAA00]"}`} >FISCAL HEALTH</h2>
+                                <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Assess a nonprofit{"’"}s fiscal health based on a weighted score of various data variables. Compare the scores side-by-side with other nonprofits.</p>
                             </div>
                             <div
                                 className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300  ${
