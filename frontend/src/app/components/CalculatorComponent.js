@@ -264,7 +264,7 @@ const states = [
 
   return (
     <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"} rounded-lg`}>
-      <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`}>Calculator</h3>
+      <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>Calculator</h3>
       <p className=""> 
       <br />
         Compare NTEE code sectors against public data that align with various regional nonprofit’s missions.
@@ -272,7 +272,7 @@ const states = [
       </p>
       {/* Macro mode */}
       <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
-        <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`}>MACRO: SECTOR FINANCIAL PERFORMANCE</h2>
+        <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>MACRO: SECTOR FINANCIAL PERFORMANCE</h2>
         <p className="text-center pb-8">
             Based on the financial performance of nonprofits - with filings from the most recent year containing the most data points - 
             the following calculations will generate results for either a statewide or national NTEE sector performance, depending on your selection.
@@ -287,7 +287,7 @@ const states = [
             onChange={(e) => {
                 setSector(e.target.value);
             }}
-            className={`p-4 border  ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full`}
+            className={`p-4 border  ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#F1F1F1] text-black border-gray-200"} rounded-lg w-full`}
           >
             {majorGroups.map((group) => (
               <option key={group.value} value={group.value} className="text-black">
@@ -302,23 +302,33 @@ const states = [
               onSuggestionsClearRequested={onStateSuggestionsClearRequested}
               getSuggestionValue={getStateSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
-                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
-                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${stateSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
-                    {children}
-                </div>
+              <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                  stateSuggestions.length > 0
+                    ? isDarkMode
+                      ? 'bg-[#171821] text-white border border-[#A9DFD8]'
+                      : 'bg-white text-black border border-[#316498]'
+                    : ''
+                }`}
+              >
+                {children}
+              </div>
             )}
               renderSuggestion={(suggestion) => (
-                  <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
-                      {suggestion}
-                  </div>
+                <div
+                  className={`px-4 py-2 cursor-pointer ${
+                    isDarkMode
+                      ? "hover:bg-[#A9DFD8] hover:text-black"
+                      : "hover:bg-[#316498] hover:text-black"
+                  }`}
+                >
+                  {suggestion}
+                </div>
               )}
-              
               inputProps={{
                 placeholder: 'Enter State. If left blank, national performance will be calculated',
                 value: state,
                 onChange: (event, { newValue }) => setState(newValue),
-                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-black"} rounded-lg w-full focus:outline-none`,
               }}
 
           />
@@ -330,7 +340,15 @@ const states = [
             setAddressSuggestions([]);
             fetchMacroData();
           }}
-          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMacroDisabled() || isLoading? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'}`}
+          className={`py-4 px-6 rounded-lg font-bold w-full ${
+            isFetchMacroDisabled() || isLoading
+              ? isDarkMode
+                ? "bg-gray-700 cursor-not-allowed"
+                : "bg-[#D8D8D8] cursor-not-allowed"
+              : isDarkMode
+              ? 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'
+              : 'bg-[#316498] hover:bg-[#2e6da4] transition duration-300'
+          }`}
           disabled={isFetchMacroDisabled() || isLoading}
         >
           Calculate
@@ -341,7 +359,7 @@ const states = [
         {errorMacro && <div className="text-center text-lg text-red-400 mt-6">Error: {errorMacro}</div>}
         
       {macroData && !loadingMacro && !errorMacro && (
-        <div className="mt-8 text-white">
+        <div className={`mt-8 ${isDarkMode ? "text-white" : "text-black font-bold"}`} >
           <div className="flex justify-center flex-wrap gap-8 align-items-start">
             {/* First Row */}
             <div className="flex justify-center gap-8 w-full">
@@ -354,7 +372,8 @@ const states = [
                 const fontSizeClass = formattedValue.length > 6 ? 'text-sm' : 'text-xl';
                 return (
                   <div key={index} className="flex flex-col items-center">
-                    <div className="bg-teal-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
+                    <div className={`border-4 w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden 
+                      ${isDarkMode ? "bg-teal-500 border-white" : "bg-[#316498] border-black"}`}>
                       <span className={fontSizeClass}>
                         ${formattedValue}
                       </span>
@@ -381,7 +400,8 @@ const states = [
 
                 return (
                   <div key={index + 4} className="flex flex-col items-center">
-                    <div className="bg-teal-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
+                    <div className={`border-4 w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden 
+                      ${isDarkMode ? "bg-teal-500 border-white" : "bg-[#316498] border-black"}`}>
                       <span className={fontSizeClass}>
                         { (index === 0 || index === 3) ? formattedValue : `$${formattedValue}`}
                       </span>
@@ -397,7 +417,8 @@ const states = [
               })}
             </div>
           </div>
-          <div className="mt-6 text-center text-gray-400">
+
+          <div className={`mt-6 text-center text-gray-${isDarkMode ? "400" : "600"}`}>
             Data calculated from the following year: {macroData[0]}, based on a total of {macroData[9]} nonprofits.
           </div>
         </div>
@@ -406,7 +427,7 @@ const states = [
 
       {/* Micro mode */}
       <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
-        <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`}>MICRO: SINGLE NONPROFIT FINANCIAL PERFORMANCE</h2>
+        <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>MICRO: SINGLE NONPROFIT FINANCIAL PERFORMANCE</h2>
         <p className="text-center pb-8">
         This tool will allow the end user to compare a single nonprofit&apos;s expenditures v. salaries from its last reported fiscal year 
         and then allow the end user to calculate the cost per constituent served after salaries and wages for any grant level.
@@ -422,15 +443,26 @@ const states = [
               onSuggestionsClearRequested={onSuggestionsClearRequested}
               getSuggestionValue={getNameSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
-                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
-                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
-                    {children}
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                    nameSuggestions.length > 0
+                      ? isDarkMode
+                        ? 'bg-[#171821] text-white border border-[#A9DFD8]'
+                        : 'bg-white text-black border border-[#316498]'
+                      : ''
+                  }`}
+                >
+                  {children}
                 </div>
             )}
               renderSuggestion={(suggestion) => (
-                <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
-                  {suggestion.Nm} 
+                <div
+                  className={`px-4 py-2 cursor-pointer ${
+                    isDarkMode
+                      ? "hover:bg-[#A9DFD8] hover:text-black"
+                      : "hover:bg-[#316498] hover:text-black"
+                  }`}
+                >
+                  {suggestion.Nm}
                 </div>
               )}
               inputProps={{
@@ -439,7 +471,7 @@ const states = [
                 onChange: (_, { newValue }) => {
                   setNonprofit(newValue);
                 },
-                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-black"} rounded-lg w-full focus:outline-none`,
               }}
 
             />
@@ -451,25 +483,35 @@ const states = [
               onSuggestionsClearRequested={onSuggestionsClearRequested}
               getSuggestionValue={getAddressSuggestionValue}
               renderSuggestionsContainer={({ containerProps, children }) => (
-                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
-                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                } overflow-y-auto rounded z-10 ${addressSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
-                    {children}
+                <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                    addressSuggestions.length > 0
+                      ? isDarkMode
+                        ? 'bg-[#171821] text-white border border-[#A9DFD8]'
+                        : 'bg-white text-black border border-[#316498]'
+                      : ''
+                  }`}
+                >
+                  {children}
                 </div>
-            )}
+              )}
               renderSuggestion={(suggestion) => (
-                <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+                <div
+                  className={`px-4 py-2 cursor-pointer ${
+                    isDarkMode
+                      ? "hover:bg-[#A9DFD8] hover:text-black"
+                      : "hover:bg-[#316498] hover:text-black"
+                  }`}
+                >
                   {suggestion.Addr}
                 </div>
               )}
-              
               inputProps={{
                 placeholder: 'Search or Auto-fill Address (Optional: This can be used if the nonprofit has multiple addresses)',
                 value: address,
                 onChange: (_, { newValue }) => {
                   setAddress(newValue);
                 },
-                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#c9c9c9] text-black border-gray-200"} rounded-lg w-full focus:outline-none`,
+                className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-black"} rounded-lg w-full focus:outline-none`,
               }}
             />
           </div>
@@ -487,7 +529,15 @@ const states = [
             fetchMicroData();
             setDisableSuggestions({ name: false, address: false });
           }}
-          className={`py-4 px-6 rounded-lg font-bold w-full ${isFetchMicroDisabled() || isLoading? isDarkMode ? "bg-gray-700 cursor-not-allowed" : "bg-[#b3b3b3] cursor-not-allowed" : 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'}`}
+          className={`py-4 px-6 rounded-lg font-bold w-full ${
+            isFetchMicroDisabled() || isLoading
+              ? isDarkMode
+                ? "bg-gray-700 cursor-not-allowed"
+                : "bg-[#D8D8D8] cursor-not-allowed"
+              : isDarkMode
+              ? 'bg-[#88B3AE] hover:bg-[#A9DFD8] transition duration-300'
+              : 'bg-[#316498] hover:bg-[#2e6da4] transition duration-300'
+          }`}
           disabled={isFetchMicroDisabled() || isLoading}
         >
             Calculate
@@ -498,7 +548,7 @@ const states = [
         {errorMicro && <div className="text-center text-lg text-red-400 mt-6">Error: {errorMicro}</div>}
         
         {microData && !loadingMicro && !errorMicro && (
-          <div className="mt-8 text-white">
+          <div className={`mt-8 ${isDarkMode ? "text-white" : "text-black font-bold"}`} >
             <div className="flex justify-center flex-wrap gap-8 align-items-start">
               {/* Single Row */}
               <div className="flex justify-center gap-8 w-full">
@@ -520,7 +570,8 @@ const states = [
 
                   return (
                     <div key={index} className="flex flex-col items-center">
-                      <div className="bg-teal-500 border-4 border-white w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden">
+                      <div className={`border-4 w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden 
+                        ${isDarkMode ? "bg-teal-500 border-white" : "bg-[#316498] border-black"}`}>
                         <span className={fontSizeClass}>
                           {index === 2 || index === 3 ? formattedValue : `$${formattedValue}`}
                         </span>
@@ -541,7 +592,7 @@ const states = [
                 })}
               </div>
             </div>
-            <div className="mt-6 text-center text-gray-400">
+            <div className={`mt-6 text-center text-gray-${isDarkMode ? "400" : "600"}`}>
               Data calculated from following year: {microData[0]}
             </div>
           </div>
@@ -560,7 +611,7 @@ const states = [
       </h6>
       <form className="w-full max-md:max-w-full mt-4 space-y-4">
         <div className="flex items-center justify-between">
-          <label htmlFor="budget" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`} > 
+          <label htmlFor="budget" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`} > 
             What is the grant or project budget? (ex. $50,000)
           </label>
           <input
@@ -570,14 +621,14 @@ const states = [
             name="budget"
             value={formData.budget}
             onChange={handleChange}
-            className={`w-1/4 border-b-2 border-[#A9DFD8] bg-transparent text-[#A9DFD8] focus:outline-none ${isFetchMicroDisabled() ? 'cursor-not-allowed bg-gray-700 text-black' : 'hover:bg transition duration-300'}`}
+            className={`w-1/4 border-b-2 ${isDarkMode ? 'border-[#A9DFD8] bg-transparent text-[#A9DFD8]' : 'border-[#316498] bg-transparent text-[#316498]'} focus:outline-none ${isFetchMicroDisabled() ? 'cursor-not-allowed bg-gray-700 text-black' : 'hover:bg transition duration-300'}`}
             aria-label="What is the grant or project budget?"
             autoComplete="off"
             disabled={isFetchMicroDisabled()}
           />
         </div>
         <div className="flex items-center justify-between">
-          <label htmlFor="remaining" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`} >
+          <label htmlFor="remaining" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`} >
             New total remaining after percentage of salaries applied 
           </label>
           <input
@@ -586,12 +637,12 @@ const states = [
             name="remaining"
             value={formData.remaining}
             readOnly
-            className="w-1/4 border-b-2 border-[#A9DFD8] bg-transparent text-[#A9DFD8] focus:outline-none"
+            className={`w-1/4 border-b-2 ${isDarkMode ? 'border-[#A9DFD8] bg-transparent text-[#A9DFD8]' : 'border-[#316498] bg-transparent text-[#316498]'} focus:outline-none`}
             aria-label="New total remaining after percentage of salaries applied"
           />
         </div>
         <div className="flex items-center justify-between">
-          <label htmlFor="beneficiaries" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`} >
+          <label htmlFor="beneficiaries" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`} >
             How many clients/constituents will benefit from the grant or project total?
           </label>
           <input
@@ -602,14 +653,14 @@ const states = [
             name="beneficiaries"
             value={formData.beneficiaries}
             onChange={handleChange}
-            className={`w-1/4 border-b-2 border-[#A9DFD8] bg-transparent text-[#A9DFD8] focus:outline-none ${isFetchMicroDisabled() ? 'cursor-not-allowed bg-gray-700 text-black' : 'hover:bg transition duration-300'}`}
+            className={`w-1/4 border-b-2 ${isDarkMode ? 'border-[#A9DFD8] bg-transparent text-[#A9DFD8]' : 'border-[#316498] bg-transparent text-[#316498]'} focus:outline-none ${isFetchMicroDisabled() ? 'cursor-not-allowed bg-gray-700 text-black' : 'hover:bg transition duration-300'}`}
             aria-label="How many clients/constituents will benefit from the grant or project total?"
             autoComplete="off"
             disabled={isFetchMicroDisabled()}
           />
         </div>
         <div className="flex items-center justify-between">
-          <label htmlFor="costPerClient" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#007AFF]'}`}>
+          <label htmlFor="costPerClient" className={`mr-4 w-3/4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>
             New cost of services provided to one client/constituent based on budget
           </label>
           <input
@@ -618,7 +669,7 @@ const states = [
             name="costPerClient"
             value={formData.costPerClient}
             readOnly
-            className="w-1/4 border-b-2 border-[#A9DFD8] bg-transparent text-[#A9DFD8] focus:outline-none"
+            className={`w-1/4 border-b-2 ${isDarkMode ? 'border-[#A9DFD8] bg-transparent text-[#A9DFD8]' : 'border-[#316498] bg-transparent text-[#316498]'} focus:outline-none`}
             aria-label="New cost of services provided to one client/constituent based on budget"
           />
         </div>
