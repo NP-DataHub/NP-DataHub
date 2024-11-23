@@ -15,6 +15,8 @@ import { color } from 'd3';
  *           Each NTEE code is a different color on the scatter plot
  */
 const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
+
+  // Handles resizing of the chart
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const router = useRouter();
@@ -42,6 +44,20 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
       }
     }
   };
+
+
+  // Check for invalid inputs
+  if (!Array.isArray(data) || data === null || data === undefined) {
+    return <div>ERROR: chart arg must be an array, or chart arg is undefined</div>;
+  }
+
+  if(!X_axis_var || !Y_axis_var){
+    return <div>ERROR: X and Y axis variables must be defined</div>;
+  }
+
+  if(!filters){
+    return <div>ERROR: filters must be defined</div>;
+  }
 
   const formatNumber = (num) => {
     if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
@@ -184,5 +200,7 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
     </div>
   );
 };
+
+ScatterPlot.displayname = 'ScatterPlot'
 
 export default ScatterPlot;
