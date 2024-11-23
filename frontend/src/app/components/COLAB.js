@@ -301,7 +301,7 @@ export default function COLAB({isDarkMode}) {
 
         <div className={`w-full h-full p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
         {/* Title and description */}
-        <h3 className='text-xl font-semibold mb-4 text-[#F2C8ED]'>CO:LAB</h3>
+        <h3 className='text-xl font-semibold mb-4 text-[#F2C8ED]'>COLLAB:LAB</h3>
         <div className='grid grid-cols-3 gap-4 mb-4'>
             <div className={`col-span-1 p-4 rounded-lg w-full ${isDarkMode ? "bg-[#34344c] text-white"   : "bg-[#c9c9c9] text-black"} `}>
                 <h2 className='text-2xl mb-1'>Similarity Score</h2>

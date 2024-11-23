@@ -14,6 +14,7 @@ import CalculatorSection from "../components/CalculatorComponent";
 import Footer from "../components/dashboard_footer";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { FaInfoCircle } from "react-icons/fa";
+import COLAB from "../components/COLAB";
 
 import dynamic from 'next/dynamic';
 const ChoroplethMap = dynamic(() => import('../components/map'), { ssr: false });
@@ -356,11 +357,11 @@ export default function Toolbox() {
                                 data-tooltip-id="comparison-tooltip4"
                                 data-tooltip-content="Currently Under Development"
                                 
-                                // onClick={() =>
-                                //     setSelectedSection(
-                                //       selectedSection === "Co:Lab" ? null : "Co:Lab"
-                                //     )
-                                //   }
+                                onClick={() =>
+                                    setSelectedSection(
+                                      selectedSection === "Co:Lab" ? null : "Co:Lab"
+                                    )
+                                  }
                                 >
                                 <ReactTooltip place="top" effect="solid" id="comparison-tooltip4" />
 
@@ -368,7 +369,7 @@ export default function Toolbox() {
                                     <path d="M3.6875 15.4063V14.625H2.125V15.4063C2.125 16.8567 2.70117 18.2477 3.72676 19.2732C4.75235 20.2988 6.14335 20.875 7.59375 20.875H9.9375V19.3125H7.59375C6.55775 19.3125 5.56418 18.901 4.83161 18.1684C4.09905 17.4358 3.6875 16.4423 3.6875 15.4063ZM17.75 7.59375V8.375H19.3125V7.59375C19.3125 6.14335 18.7363 4.75235 17.7107 3.72676C16.6852 2.70117 15.2942 2.125 13.8438 2.125H11.5V3.6875H13.8438C14.3567 3.6875 14.8647 3.78854 15.3386 3.98485C15.8125 4.18115 16.2432 4.46889 16.6059 4.83162C16.9686 5.19434 17.2563 5.62497 17.4527 6.09889C17.649 6.57282 17.75 7.08078 17.75 7.59375ZM7.59375 7.59375H2.90625C2.28465 7.59375 1.68851 7.84068 1.24897 8.28022C0.80943 8.71976 0.5625 9.3159 0.5625 9.9375V11.5H2.125V9.9375C2.125 9.7303 2.20731 9.53159 2.35382 9.38507C2.50034 9.23856 2.69905 9.15625 2.90625 9.15625H7.59375C7.80095 9.15625 7.99966 9.23856 8.14618 9.38507C8.29269 9.53159 8.375 9.7303 8.375 9.9375V11.5H9.9375V9.9375C9.9375 9.3159 9.69057 8.71976 9.25103 8.28022C8.81149 7.84068 8.21535 7.59375 7.59375 7.59375ZM5.25 6.8125C5.86807 6.8125 6.47225 6.62922 6.98616 6.28584C7.50006 5.94246 7.9006 5.45441 8.13712 4.88339C8.37365 4.31237 8.43553 3.68403 8.31495 3.07784C8.19438 2.47165 7.89675 1.91483 7.45971 1.47779C7.02267 1.04075 6.46585 0.743126 5.85966 0.622547C5.25347 0.501969 4.62513 0.563854 4.05411 0.800378C3.4831 1.0369 2.99504 1.43744 2.65166 1.95134C2.30828 2.46525 2.125 3.06943 2.125 3.6875C2.125 4.5163 2.45424 5.31116 3.04029 5.89721C3.62634 6.48326 4.4212 6.8125 5.25 6.8125ZM5.25 2.125C5.55903 2.125 5.86113 2.21664 6.11808 2.38833C6.37503 2.56002 6.5753 2.80405 6.69356 3.08956C6.81182 3.37507 6.84277 3.68923 6.78248 3.99233C6.72219 4.29543 6.57337 4.57384 6.35485 4.79236C6.13633 5.01088 5.85792 5.15969 5.55483 5.21998C5.25173 5.28027 4.93757 5.24933 4.65206 5.13106C4.36655 5.0128 4.12252 4.81253 3.95083 4.55558C3.77914 4.29863 3.6875 3.99653 3.6875 3.6875C3.6875 3.2731 3.85212 2.87567 4.14515 2.58265C4.43817 2.28962 4.8356 2.125 5.25 2.125ZM20.0938 18.5313H15.4062C14.7846 18.5313 14.1885 18.7782 13.749 19.2177C13.3094 19.6573 13.0625 20.2534 13.0625 20.875V22.4375H14.625V20.875C14.625 20.6678 14.7073 20.4691 14.8538 20.3226C15.0003 20.1761 15.199 20.0938 15.4062 20.0938H20.0938C20.301 20.0938 20.4997 20.1761 20.6462 20.3226C20.7927 20.4691 20.875 20.6678 20.875 20.875V22.4375H22.4375V20.875C22.4375 20.2534 22.1906 19.6573 21.751 19.2177C21.3115 18.7782 20.7154 18.5313 20.0938 18.5313ZM14.625 14.625C14.625 15.2431 14.8083 15.8473 15.1517 16.3612C15.495 16.8751 15.9831 17.2756 16.5541 17.5121C17.1251 17.7486 17.7535 17.8105 18.3597 17.69C18.9658 17.5694 19.5227 17.2717 19.9597 16.8347C20.3967 16.3977 20.6944 15.8408 20.815 15.2347C20.9355 14.6285 20.8736 14.0001 20.6371 13.4291C20.4006 12.8581 20.0001 12.37 19.4862 12.0267C18.9723 11.6833 18.3681 11.5 17.75 11.5C16.9212 11.5 16.1263 11.8292 15.5403 12.4153C14.9542 13.0013 14.625 13.7962 14.625 14.625ZM19.3125 14.625C19.3125 14.934 19.2209 15.2361 19.0492 15.4931C18.8775 15.75 18.6335 15.9503 18.3479 16.0686C18.0624 16.1868 17.7483 16.2178 17.4452 16.1575C17.1421 16.0972 16.8637 15.9484 16.6451 15.7299C16.4266 15.5113 16.2778 15.2329 16.2175 14.9298C16.1572 14.6267 16.1882 14.3126 16.3064 14.0271C16.4247 13.7415 16.625 13.4975 16.8819 13.3258C17.1389 13.1541 17.441 13.0625 17.75 13.0625C18.1644 13.0625 18.5618 13.2271 18.8549 13.5201C19.1479 13.8132 19.3125 14.2106 19.3125 14.625Z" fill="#F2C8ED"/>
                                 </svg>
 
-                                <h2 className="text-xl text-[#F2C8ED] font-semibold mb-2">CO:LAB</h2>
+                                <h2 className="text-xl text-[#F2C8ED] font-semibold mb-2">COLLAB:LAB</h2>
                                 <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Search and compare nonprofits from other sectors in your backyard that may be strong partners.</p>
                             </div>
                         </div>
@@ -535,114 +536,7 @@ export default function Toolbox() {
                                 </div>
                             )}
                             {selectedSection === "Co:Lab" && (
-                                <div className="p-6 bg-[#171821] rounded-lg">
-                                <h3 className="text-xl font-semibold text-[#F2C8ED]">
-                                    CO : LAB TOOL
-                                </h3>
-                                <p className="text-white">
-                                    Search and compare nonprofits from other sectors in your backyard that may be strong partners.
-                                </p>
-                                <div className="grid grid-cols-2 gap-4 mb-6 mt-4">
-                                    <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                    SEARCH FOR A NONPROFIT
-                                                </button>
-                                                <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                    SEARCH BY ZIPCODE
-                                    </button>
-                                </div>
-
-                                
-                                <div className="overflow-x-auto overflow-auto mt-12">
-                                    <table className="min-w-full bg-[#21222D] rounded-lg text-white">
-                                        <thead>
-                                        <tr>
-                                            <th className="py-3 px-6 text-left">NONPROFIT</th>
-                                            <th className="py-3 px-6 text-left">ADDRESS</th>
-                                            <th className="py-3 px-6 text-left">ZIP CODE</th>
-                                            <th className="py-3 px-6 text-left">NTEE CODE</th>
-                                            <th className="py-3 px-6 text-left">REVS</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {data2.map((row, index) => (
-                                            <tr key={index} className="border-t border-gray-700">
-                                            <td className="py-3 px-6">{row.nonprofit}</td>
-                                            <td className="py-3 px-6">{row.address}</td>
-                                            <td className="py-3 px-6">{row.zip}</td>
-                                            <td className="py-3 px-6">{row.nteeCode}</td>
-                                            <td className="py-3 px-6">{row.revs}</td>
-                                            </tr>
-                                        ))}
-                                        </tbody>
-                                    </table>
-                                </div>   
-
-                                <div className="grid grid-cols-2 gap-4 mb-6 mt-12">
-                                    <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                    SEARCH FOR A NONPROFIT
-                                                </button>
-                                                <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                    SEARCH BY ZIPCODE
-                                    </button>
-                                </div>
-
-                                <div className="overflow-x-auto overflow-auto mt-4">
-                                    <table className="min-w-full bg-[#21222D] rounded-lg text-white">
-                                        <thead>
-                                        <tr>
-                                            <th className="py-3 px-6 text-left">NONPROFIT</th>
-                                            <th className="py-3 px-6 text-left">ADDRESS</th>
-                                            <th className="py-3 px-6 text-left">ZIP CODE</th>
-                                            <th className="py-3 px-6 text-left">NTEE CODE</th>
-                                            <th className="py-3 px-6 text-left">COMPARE</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {data.map((row, index) => (
-                                            <tr key={index} className="border-t border-gray-700 rounded-lg">
-                                            <td className="py-3 px-6">{row.nonprofit}</td>
-                                            <td className="py-3 px-6">{row.address}</td>
-                                            <td className="py-3 px-6">{row.zip}</td>
-                                            <td className="py-3 px-6">{row.nteeCode}</td>
-                                            <td className="py-3 px-6 bg-green-500">COMPARE</td>
-                                            </tr>
-                                        ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div className="p-4 mt-12">
-                                    <div className="grid grid-cols-4 gap-4 items-center text-white font-semibold mb-4">
-                                        <div className="text-center bg-green-500 py-2 px-4 rounded-lg">VARIABLE</div>
-                                        <div className="text-center bg-blue-500 py-2 px-4 rounded-lg">SHELTER, INC.</div>
-                                        <div className="text-center bg-orange-500 py-2 px-4 rounded-lg">FOOD, INC.</div>
-                                        <div className="text-center bg-green-500 py-2 px-4 rounded-lg">SCORE</div>
-                                    </div>
-                                    {data3.map((item, index) => (
-                                        <div key={index} className="grid grid-cols-4 gap-4 items-center text-white mb-4 ">
-                                            <div className="text-center bg-green-500 py-2 px-4 rounded-lg">{item.variable}</div>
-                                            <div className={`text-center bg-blue-500 py-2 px-4 rounded-lg ${item.score === '' ? 'col-span-2' : ''}`}>{item.shelter}</div>
-                                            {item.score === '' ? null : (
-                                            <div className="text-center bg-orange-500 py-2 px-4 rounded-lg">{item.food}</div>
-                                            )}
-                                            {item.score === null ? null : (
-                                            <div className={`flex items-center justify-center py-2 px-4 rounded-full ${item.scoreColor} text-2xl`}>
-                                                {item.score}
-                                            </div>
-                                            )}
-                                        </div>
-                                        ))}
-                                        <div className="grid grid-cols-4 gap-4 items-center text-white mb-4 ">
-                                            <div className = "text-center bg-green-500 py-2 px-4 rounded-lg col-span-3">
-                                                POTENTIAL FISCAL COLLABORATOR SCORE
-                                            </div>
-                                            <div className = 'flex items-center justify-center py-2 px-4 rounded-full text-2xl bg-red-500'>
-                                                49%
-                                            </div>
-                                        </div>
-                                        
-
-                                    </div>
-                                </div>
+                                <COLAB isDarkMode={isDarkMode}></COLAB>
                             )}
                             {selectedSection === "News Feed" && (
                                 <NewsFeedSection isDarkMode={isDarkMode}></NewsFeedSection>
