@@ -252,12 +252,12 @@ export default function COLAB({isDarkMode}) {
     // Update the thresholded list when the threshold changes
     useEffect(() => {
         updateThresholdedList();
-    }, [threshold]);
+    }, [threshold, updateThresholdedList]);
 
     // Compute the similarity network when the area data or selected nonprofit changes
     useEffect(() => {
         computeSimilarityNetwork();
-    }, [areaData, nonprofitData]);
+    }, [areaData, nonprofitData, computeSimilarityNetwork]);
 
     // Update data when the user selects a new nonprofit
     // useEffect(() => {
@@ -313,7 +313,7 @@ export default function COLAB({isDarkMode}) {
             </div>
             <div className={`col-span-1 p-4 rounded-lg w-full ${isDarkMode ? "bg-[#34344c] text-white"   : "bg-[#c9c9c9] text-black"} `}>
                 <h2 className='text-2xl mt-2 mb-1'>Similarity Table</h2>
-                <p>Choose and compare a nonprofit against all other nonprofits in the same zip code. See what other nonprofits in the area are most similar, and use to analyze the potential of collaboration or strategically to ensure fiscal viability for a specific funding opportunity. Click learn more to visit the selected nonprofit's profile page.</p>
+                <p>Choose and compare a nonprofit against all other nonprofits in the same zip code. See what other nonprofits in the area are most similar, and use to analyze the potential of collaboration or strategically to ensure fiscal viability for a specific funding opportunity. Click learn more to visit the selected nonprofit&apos;s profile page.</p>
             </div>
         </div>
         {/* Name search, threshold slider */}

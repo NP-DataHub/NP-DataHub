@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect, useState, memo } from 'react';
+import React, { useRef, useEffect, useState, memo} from 'react';
 import ReactECharts from 'echarts-for-react';
 import { Tooltip } from 'react-tooltip';
 
@@ -14,40 +14,35 @@ import SimilarityScore from '@/app/components/SimilarityScore';
  */
 
 const COLABGraph = memo(({data, filters, onNonprofitClick, isDarkMode, threshold}) => {
+  
+  // Handles resizing of the chart - BEFORE THE CONDITIONAL RETURNS!!!!!!!!!
+  const chartContainerRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  useEffect(() => {
+      const handleResize = () => {
+        if (chartContainerRef.current) {
+          setDimensions({
+            width: chartContainerRef.current.offsetWidth,
+            height: chartContainerRef.current.offsetHeight,
+          });
+        }
+      };
+  
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
-    //console.log("colab data:", data);
-
-    // Handle the click event on the graph
-    const handleGraphClick = (node) => {
-      
-      onNonprofitClick(node.nonprofit);
-    };
+  // Handle the click event on the graph
+  const handleGraphClick = (node) => {
+    onNonprofitClick(node.nonprofit);
+  };
 
 
-    // Check for invalid inputs
-    if (!Array.isArray(data)) {
-        return <div>ERROR: chart arg must be an array</div>;
-    }
-
-
-
-    // Handles resizing of the chart
-    const chartContainerRef = useRef(null);
-    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-    useEffect(() => {
-        const handleResize = () => {
-          if (chartContainerRef.current) {
-            setDimensions({
-              width: chartContainerRef.current.offsetWidth,
-              height: chartContainerRef.current.offsetHeight,
-            });
-          }
-        };
-    
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-      }, []);
+  // Check for invalid inputs
+  if (!Array.isArray(data)) {
+    return <div>ERROR: chart arg must be an array</div>;
+  }
 
       // // Find the min and max revenue for scaling the nodes
       // let min_revenue = 0;
@@ -201,4 +196,6 @@ const COLABGraph = memo(({data, filters, onNonprofitClick, isDarkMode, threshold
 
 });
 
-export default COLABGraph;
+COLABGraph.displayName = 'COLABGraph'
+
+export default memo(COLABGraph);

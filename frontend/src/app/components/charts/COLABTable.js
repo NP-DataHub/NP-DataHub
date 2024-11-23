@@ -13,7 +13,12 @@ import ntee_codes from '../ntee';
  */
 const COLABTable = ({ similarityList, selectedNonprofit, isDarkMode }) => {
 
-    //console.log("COLAB Table inputs:", similarityList, selectedNonprofit);
+    // Function to handle the click event on the table - this will navigate to the selected nonprofit's page
+    const router = useRouter();
+    const handleSelectedNonprofitClick = (nonprofit) => {
+        router.push(`/nonprofit/${nonprofit._id}`);
+    };
+
 
     // Check for invalid/empty inputs
     if (!Array.isArray(similarityList)) {
@@ -28,13 +33,6 @@ const COLABTable = ({ similarityList, selectedNonprofit, isDarkMode }) => {
     if (selectedNonprofit === null || selectedNonprofit === undefined || selectedNonprofit.length <= 1) {
         return <div>ERROR: selectedNonprofit cannot be null. This should never appear - please report to developers if you encounter this!</div>;
     }
-
-
-    // Function to handle the click event on the table - this will navigate to the selected nonprofit's page
-    const router = useRouter();
-    const handleSelectedNonprofitClick = (nonprofit) => {
-        router.push(`/nonprofit/${nonprofit._id}`);
-    };
 
     // Get the NTEE code description for the selected nonprofit
 
@@ -76,7 +74,6 @@ const COLABTable = ({ similarityList, selectedNonprofit, isDarkMode }) => {
                                         <span style={{ fontSize: '24px', verticalAlign: 'middle' }}>{item.score}</span>
                                     </div>
                                     <div>{`${item.nonprofit.Addr}, ${item.nonprofit.Cty}, ${item.nonprofit.St} ${item.nonprofit.Zip}`}</div>
-                                    <div>TBD</div>
                                 </td>
                             </tr>
                         ))}
@@ -90,5 +87,7 @@ const COLABTable = ({ similarityList, selectedNonprofit, isDarkMode }) => {
 
 
 }
+
+COLABTable.displayname = 'COLABTable'
 
 export default COLABTable;
