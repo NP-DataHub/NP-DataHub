@@ -15,6 +15,7 @@ import Footer from "../components/dashboard_footer";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { FaInfoCircle } from "react-icons/fa";
 import COLAB from "../components/COLAB";
+import AnomalyDetection from "../components/AnomalyDetection";
 
 import dynamic from 'next/dynamic';
 const ChoroplethMap = dynamic(() => import('../components/map'), { ssr: false });
@@ -372,6 +373,29 @@ export default function Toolbox() {
                                 <h2 className="text-xl text-[#F2C8ED] font-semibold mb-2">COLLAB:LAB</h2>
                                 <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Search and compare nonprofits from other sectors in your backyard that may be strong partners.</p>
                             </div>
+
+                            <div className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
+                                selectedSection === "Anomaly Detection" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
+                                }`}
+                                onClick={() =>
+                                    setSelectedSection(
+                                        selectedSection === "Anomaly Detection" ? null : "Anomaly Detection"
+                                    )
+                                    }
+                                >
+
+                                <svg className="mb-4" width="36" height="39" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="6" width="6" height="6" fill={isDarkMode ? "#FEB95A" : "#FFAA00"} />
+                                    <rect x="18" y="6" width="6" height="6" fill={isDarkMode ? "#FEB95A" : "#FFAA00"} />
+                                    <rect x="6" y="18" width="6" height="6" fill={isDarkMode ? "#FEB95A" : "#FFAA00"} />
+                                    <rect x="18" y="18" width="6" height="6" fill={isDarkMode ? "#FF4500" : "#FF6347"} />
+                                    <circle cx="27" cy="27" r="5" stroke={isDarkMode ? "#FEB95A" : "#FFAA00"} strokeWidth="1.5" fill="none" />
+                                    <line x1="30" y1="30" x2="34" y2="34" stroke={isDarkMode ? "#FEB95A" : "#FFAA00"} strokeWidth="1.5" strokeLinecap="round" />
+                                </svg>
+
+                            <h2 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-[#FEB95A]" : "text-[#FFAA00]"}`} >ANOMALY DETECTION</h2>
+                            <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Use a Machine Learning Model to find pototential outliers for nonprofits.</p>
+                            </div>
                         </div>
                         </div>
 
@@ -543,6 +567,9 @@ export default function Toolbox() {
                             )}
                             {selectedSection === "Calculator" && (
                                 <CalculatorSection isDarkMode={isDarkMode}></CalculatorSection>
+                            )}
+                            {selectedSection === "Anomaly Detection" && (
+                                <AnomalyDetection isDarkMode={isDarkMode}></AnomalyDetection>
                             )}
                         </div>
                     </div>
