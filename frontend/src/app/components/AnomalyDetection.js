@@ -43,7 +43,7 @@ export default function AnomalyDetection({isDarkMode}) {
             <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#FEB95A]' : 'text-[#FFAA00]'}`}>Anomaly Detection</h3>
 
             <p className="mb-6">
-                This tool leverages the Isolation Forest machine learning algorithm to identify potential anomalies in nonprofits' financial data. 
+                This tool leverages the Isolation Forest machine learning algorithm to identify potential anomalies in nonprofits&apos; financial data. 
                 These predictions provide insight into irregularities but are not definitive assessments. Always conduct further research before making critical decisions based on these results.
             </p>
             
