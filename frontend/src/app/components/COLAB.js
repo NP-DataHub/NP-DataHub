@@ -12,12 +12,8 @@
 import { useState, useEffect, useCallback, useMemo, use } from 'react';
 import '@/app/globals.css';
 import Autosuggest from "react-autosuggest/dist/Autosuggest";
-
-import ntee_codes from "@/app/components/ntee";
 import COLABGraph from '@/app/components/charts/COLABGraph';
 import COLABTable from './charts/COLABTable';
-
-
 import SimilarityScore from '@/app/components/SimilarityScore';
 
 
@@ -166,6 +162,7 @@ export default function COLAB({isDarkMode}) {
 
      const handleSearch = () => {
         fetchData();
+        console.log("computing similarity network");
         computeSimilarityNetwork();
     };
 
@@ -188,7 +185,30 @@ export default function COLAB({isDarkMode}) {
     const [similarityList, setSimilarityList] = useState([]); // List of all nonprofits in the area and their similarity scores
     const [thresholdedList, setThresholdedList] = useState([]); // List of nonprofits that have a similarity score above the threshold
 
-    const computeSimilarityNetwork = () => {
+    const updateThresholdedList = useCallback(() => {
+        if(similarityList.length === 0){
+            console.error("Cannot update thresholded list - similarity list is empty");
+            return;
+        }
+        
+        // Clear the thresholded list
+        setThresholdedList([]);
+
+        // Filter the similarity list to only include nonprofits that have a similarity score above the threshold
+        const thresholded = similarityList.filter((item) => item.score >= threshold);
+
+        // Add the selected nonprofit to the list
+        thresholded.unshift({ nonprofit: nonprofitData, score: 100 });
+
+        // Set the thresholded list
+        setThresholdedList(thresholded);
+    }, [similarityList, threshold]);
+
+
+
+
+
+    const computeSimilarityNetwork = useCallback(() => {
         // Could take a while to compute, so show loading spinner
         //setDataIsLoading(true);
 
@@ -226,33 +246,15 @@ export default function COLAB({isDarkMode}) {
 
         // Done computing, hide loading spinner
         //setDataIsLoading(false);
-    }
+    }, [areaData, nonprofitData]);
 
-    const updateThresholdedList = () => {
-        if(similarityList.length === 0){
-            console.error("Cannot update thresholded list - similarity list is empty");
-            return;
-        }
-        
-        // Clear the thresholded list
-        setThresholdedList([]);
-
-        // Filter the similarity list to only include nonprofits that have a similarity score above the threshold
-        const thresholded = similarityList.filter((item) => item.score >= threshold);
-
-        // Add the selected nonprofit to the list
-        thresholded.unshift({ nonprofit: nonprofitData, score: 100 });
-
-        // Set the thresholded list
-        setThresholdedList(thresholded);
-    }
 
     // ----- Data updaters -----
 
     // Update the thresholded list when the threshold changes
     useEffect(() => {
         updateThresholdedList();
-    }, [threshold, updateThresholdedList]);
+    }, [threshold, similarityList, updateThresholdedList]);
 
     // Compute the similarity network when the area data or selected nonprofit changes
     useEffect(() => {
@@ -281,16 +283,17 @@ export default function COLAB({isDarkMode}) {
 
     // Slider component to set the threshold for similarity score
     const ThresholdSlider = ({ threshold, setThreshold, isDarkMode }) => (
-        <div className={`flex h-full gap-4  p-2 rounded-lg w-full ${isDarkMode 
-            ? "bg-[#34344c]"   : "bg-[#c9c9c9]"} `} >
-            <label className={`text-${isDarkMode ? 'white' : 'black'} text-lg`}>Similarity Threshold:</label>
+        <div className={`flex items-center h-full gap-4 p-2 rounded-lg w-full ${isDarkMode ? "bg-[#34344c]" : "bg-[#c9c9c9]"}`}>
+            <label className={`text-${isDarkMode ? 'white' : 'black'} flex flex-col w-1/3 whitespace-normal text-ellipsis`}>
+                Similarity Threshold:
+            </label>
             <input
                 type="range"
-                min="0"
+                min="1"
                 max="100"
                 value={threshold}
-                onChange={(e) => setThreshold( parseInt(e.target.value, 10 ))}
-                className={`w-1/2 p-2 border ${isDarkMode ? 'bg-[#34344c] text-white border-gray-600' : 'bg-[#c9c9c9] text-black border-gray-200'} rounded-lg focus:outline-none`}
+                onChange={(e) => setThreshold(parseInt(e.target.value, 10))}
+                className={`w-2/3 p-2 border ${isDarkMode ? 'bg-[#34344c] text-white border-gray-600' : 'bg-[#c9c9c9] text-black border-gray-200'} rounded-lg focus:outline-none`}
             />
             <span className={`text-${isDarkMode ? 'white' : 'black'}`}>{threshold}</span>
         </div>
