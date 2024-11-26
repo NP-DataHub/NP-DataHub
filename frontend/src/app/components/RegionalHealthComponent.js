@@ -281,7 +281,7 @@ export default function RegionalHealthSection() {
             setPoints([{label: 'Less than 9th', val: lessthan9}, {label: 'Some Highschool', val: nineto12}, {label: 'High School', val: highSchool}, {label: 'Some College', val: someCollege}, {label: 'Associates', val: associates}, {label: 'Bachelors', val: bachelors}, {label: 'Graduate', val: graduate}]);
 
         } catch (error) {
-            console.error("Failed to fetch Gender Data:", error);
+            console.error("Failed to fetch Education Data:", error);
         }
     };
 
@@ -309,7 +309,7 @@ export default function RegionalHealthSection() {
             setPoints([{label: '$0-$9,999', val: lessthan10}, {label: '$10,000-$14,999', val: tento15}, {label: '$15,000-$24,999', val: fifteento25}, {label: '$25,000-$34,999', val: twentyfiveto35}, {label: '$35,000-$49,999', val: thirtyfiveto50}, {label: '$50,000-$74,999', val: fiftyto75}, {label: '$75,000-$99,999', val: seventyfiveto100}, {label: '$100,000-$149,999', val: hundredto150}, {label: '$150,000-$199,999', val: hundredfiftyto200}, {label: '$200,000+', val: twohundredplus}]);
 
         } catch (error) {
-            console.error("Failed to fetch Gender Data:", error);
+            console.error("Failed to fetch Income Data:", error);
         }
     };
 
@@ -328,7 +328,7 @@ export default function RegionalHealthSection() {
 
             setPoints([{label: 'Occupied', val: occupied}, {label: 'Vacant', val: vacant}]);
         } catch (error) {
-            console.error("Failed to fetch Gender Data:", error);
+            console.error("Failed to fetch Housing Data:", error);
         }
     };
 
@@ -349,7 +349,28 @@ export default function RegionalHealthSection() {
             setPoints([{label: 'Private', val: Private}, {label: 'Public', val: Public}, {label: 'None', val: none}]);
 
         } catch (error) {
-            console.error("Failed to fetch Gender Data:", error);
+            console.error("Failed to fetch Health Data:", error);
+        }
+    };
+
+    //Married, Male no spouse, female no spouse 
+    const handleFamiliesButtonClick = async (zip) => {
+        const url = `https://api.census.gov/data/2022/acs/acs5/profile?get=DP02_0002E,DP02_0006E,DP02_0010E&for=zip%20code%20tabulation%20area:${zip}&key=${CENSUS_KEY}`;
+       
+        try{
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+            
+            const data = await response.json();
+
+            const Married = parseInt(data[1][0]);
+            const Male = parseInt(data[1][1]);
+            const Female = parseInt(data[1][2]);
+
+            setPoints([{label: 'Married', val: Married}, {label: "Male No Spouse", val: Male}, {label: "Female No Spouse", val: Female}]);
+
+        } catch (error) {
+            console.error("Failed to fetch Health Data:", error);
         }
     };
 
@@ -533,7 +554,8 @@ export default function RegionalHealthSection() {
                 onClick={() => handleHealthButtonClick(zipcode)}>
                     HEALTH
                 </button>
-                <button className="bg-pink-500 text-white py-2 px-4 rounded-full">
+                <button className="bg-pink-500 text-white py-2 px-4 rounded-full"
+                onClick={() => handleFamiliesButtonClick(zipcode)}>
                     FAMILY
                 </button>
                 </div>
