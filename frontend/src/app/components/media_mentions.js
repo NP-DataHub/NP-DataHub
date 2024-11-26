@@ -6,7 +6,7 @@ export default function SocialMediaMentions({ query, limit = 50, period = 'last7
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const allowedNetworks = ['instagram', 'twitter', 'reddit', 'facebook']; // Only allow these networks
+  const allowedNetworks = ['instagram', 'twitter', 'reddit', 'facebook', 'youtube']; // Only allow these networks
 
   const fetchMentions = async () => {
     try {

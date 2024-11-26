@@ -23,9 +23,10 @@ import Footer from "@/app/components/dashboard_footer";
 const Nonprofit = () => {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id)
+  console.log("ID: ",id)
   const [nonprofitData, setNonprofitData] = useState(null);
   const [sectorData, setSectorData] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(false); 
 
   const [selectedMetric, setSelectedMetric] = useState('TotRev');
   const [selectedComparison, setSelectedComparison] = useState({ variable1: 'TotRev', variable2: 'TotExp' });
@@ -36,7 +37,7 @@ const Nonprofit = () => {
     { value: 'TotLia', label: 'Liabilities' },
   ];
   const getValuesForMetric = (metric) => {
-    console.log(metric)
+    console.log("Metric: ", metric)
     if (metric == 'Total Revenue') {
       metric = 'TotRev'
     }
@@ -53,6 +54,21 @@ const Nonprofit = () => {
     return years.map(year => nonprofitData[year][metric]);
   };
   
+    // Load the theme from local storage
+    useEffect(() => {
+      const savedTheme = localStorage.getItem("theme");
+      const darkModeEnabled = savedTheme === "dark";
+      setIsDarkMode(darkModeEnabled);
+      document.documentElement.classList.toggle("dark", darkModeEnabled);
+    }, []);
+  
+    // Handle theme toggle
+    const handleThemeToggle = (newTheme) => {
+      setIsDarkMode(newTheme === "dark");
+      localStorage.setItem("theme", newTheme);
+      document.documentElement.classList.toggle("dark", newTheme === "dark");
+    };
+  
   
   useEffect(() => {
     if (id) {
@@ -66,7 +82,7 @@ const Nonprofit = () => {
         sectorResponse = await sectorResponse.json();
         let sectorData = sectorResponse.data[0]
         setSectorData(sectorData);
-        console.log(sectorData);
+        console.log("Sector Data: ", sectorData);
       };
 
       fetchNonprofitData();
@@ -198,6 +214,7 @@ const Nonprofit = () => {
       diffColor: 'border-2 border-[#6A1701] bg-[#171821]',
     },
   ];
+  
   const revenues = years.map(year => nonprofitData[year]['TotRev']);
   const expenses = years.map(year => nonprofitData[year]['TotExp']);
   const assets = years.map(year => nonprofitData[year]['TotAst']);
@@ -269,41 +286,43 @@ const Nonprofit = () => {
     }),
   };
 
-
   return (
     <div>
-      <div className="dashboard-color text-white font-sans">
-        <Sidebar className="hidden" />
-        <div className="flex-col dashboard-color pb-12 mt-12">
-          <div className="flex-col px-10 bg-[#21222D] rounded-md mx-10 p-10 font-sans">
-            <h1 className="text-2xl font-semibold">{capitalizeFirstLetter(nonprofitData.Nm)}</h1>
-            <span className="text-sm text-[#A0A0A0]">{nonprofitData.Addr}</span>
-            <div className="mt-6">
-            <Slider {...settings}>
-                              {indicators.map((indicator, index) => {
-                                  const isPositive = indicator.diff.includes('+');
-                                  const diffColor = isPositive ? 'text-[#6C8C3C]' : 'text-[#FF2F2F]';
-
-                                  return (
-                                      <div key={index} className="p-6 text-black">
-                                          <div className={`relative bg-[#171821] p-6 rounded-lg even-shadow hover:shadow-lg  transition-all duration-300 ease-in-out hover:-translate-y-2 border-1 border-black ${indicator.barColor}`}>
-                                              <p className={`absolute top-5 right-4 text-lg ${diffColor}`}>{indicator.diff}</p>
-                                              <p className="text-xl font-semibold mb-2">{indicator.label}</p>
-                                              <h2 className="text-lg font-semibold text-[#838383]">{mostRecentYear}</h2>
-                                              <h2 className="text-lg font-semibold">{indicator.value}</h2>
-                                          </div>
-                                      </div>
-                                  );
-                              })}
-                          </Slider>
+      <div className={isDarkMode ? "dashboard-color text-white transition-colors duration-300" : "bg-[#ffffff] text-black transition-colors duration-300"}>
+        <Sidebar className="hidden lg:block" isDarkMode={isDarkMode}
+                            onThemeToggle={handleThemeToggle} />
+        <div className="flex flex-col lg:flex-col pb-8 lg:pb-12 mt-6 lg:mt-12">
+          <div className={`flex flex-col px-4 md:px-8 lg:px-10 ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} rounded-md mx-4 md:mx-8 lg:mx-10 p-6 md:p-8 lg:p-10 font-sans`}>
+            <h1 className="text-lg md:text-2xl font-semibold">{capitalizeFirstLetter(nonprofitData.Nm)}</h1>
+            <span className="text-xs md:text-sm text-[#A0A0A0]">{nonprofitData.Addr}, {nonprofitData.Cty}, {nonprofitData.St}, {nonprofitData.Zip}</span>
+            <div className="mt-4 md:mt-6">
+              <Slider {...settings}>
+                {indicators.map((indicator, index) => {
+                  const isPositive = indicator.diff.includes('+');
+                  const diffColor = isPositive ? 'text-[#6C8C3C]' : 'text-[#FF2F2F]';
+  
+                  return (
+                    <div key={index} className="p-3 sm:p-4 md:p-6 text-black">
+                      <div className={`relative ${isDarkMode ? "bg-[#171821]  border-black" : "text-black  border-gray-200"} p-4 md:p-6 rounded-lg even-shadow hover:shadow-lg transition-all duration-300 ease-in-out hover:-translate-y-2 border ${indicator.barColor}`}>
+                        <p className={`absolute top-2 right-2 md:top-4 md:right-4 text-xs md:text-lg ${diffColor}`}>{indicator.diff}</p>
+                        <p className="text-base md:text-lg font-semibold mb-1 md:mb-2">{indicator.label}</p>
+                        <h2 className="text-sm md:text-base font-semibold text-[#838383]">{mostRecentYear}</h2>
+                        <h2 className="text-sm md:text-base font-semibold">{indicator.value}</h2>
+                      </div>
+                    </div>
+                  );
+                })}
+              </Slider>
             </div>
           </div>
-          <div className="flex-col mx-10 font-sans">
-            <div className="grid grid-cols-3 gap-4 mt-10 h-400px">
-              <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div className="flex justify-between items-center">
+          
+          <div className="flex flex-col mx-4 md:mx-8 lg:mx-10 mt-6 lg:mt-0 font-sans">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 lg:mt-10">
+              {/* Metric Comparison Section */}
+              <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} p-4 md:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300`}>
+                <div className="flex flex-col md:flex-row justify-between items-center">
                   <div className="flex items-center space-x-2">
-                    <h1 className="text-xl text-center" style={{ fontWeight: 'bold' }}>
+                    <h1 className="text-lg md:text-xl font-bold text-center">
                       {metricOptions.find(option => option.value === selectedMetric)?.label}
                     </h1>
                     <a
@@ -319,19 +338,30 @@ const Nonprofit = () => {
                     options={metricOptions}
                     value={metricOptions.find(option => option.value === selectedMetric)}
                     onChange={(option) => setSelectedMetric(option.value)}
-                    className="text-black text-sm"
+                    className="text-black text-sm md:text-md"
                     styles={customStyles}
                   />
                 </div>
-                <div className="flex items-center justify-center mb-8" style={{ width: '100%', height: '100%' }}>
-                  <BarChart values={getValuesForMetric(selectedMetric)} minYear={minYear} />
+                <div className="p-4 md:p-6 rounded-lg mt-4">
+                  <h1 className="text-center text-lg md:text-xl font-bold">Organization Comparison By NTEE Code</h1>
+                  <div className="flex items-center justify-center mt-4">
+                    <Gauge
+                      orgName={capitalizeFirstLetter(nonprofitData.Nm)}
+                      selectedMetric={selectedMetric}
+                      nonprofitData={nonprofitData}
+                      sectorData={sectorData}
+                      mostRecentYear={mostRecentYear}
+                      stateName={nonprofitData.St}
+                    />
+                  </div>
                 </div>
               </div>
-
-              <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div className="flex justify-between items-center">
+  
+              {/* Line Comparison Chart Section */}
+              <div className={` ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} p-4 md:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300`}>
+                <div className="flex flex-col md:flex-row justify-between items-center">
                   <div className="flex items-center space-x-2">
-                    <h1 className="text-xl" style={{ fontWeight: 'bold' }}>
+                    <h1 className="text-lg md:text-xl font-bold">
                       {`${metricOptions.find(option => option.value === selectedComparison.variable1)?.label} vs. ${metricOptions.find(option => option.value === selectedComparison.variable2)?.label}`}
                     </h1>
                     <a
@@ -343,24 +373,24 @@ const Nonprofit = () => {
                     </a>
                     <ReactTooltip place="top" effect="solid" id="comparison-tooltip" />
                   </div>
-                  <div className="flex space-x-2 items-center">
+                  <div className="flex space-x-2 mt-4 md:mt-0">
                     <Select
                       options={metricOptions}
                       value={metricOptions.find(option => option.value === selectedComparison.variable1)}
                       onChange={(option) => setSelectedComparison(prev => ({ ...prev, variable1: option.value }))}
-                      className="text-black text-sm"
+                      className="text-black text-sm md:text-md"
                       styles={customStyles}
                     />
                     <Select
                       options={metricOptions}
                       value={metricOptions.find(option => option.value === selectedComparison.variable2)}
                       onChange={(option) => setSelectedComparison(prev => ({ ...prev, variable2: option.value }))}
-                      className="text-black text-sm"
+                      className="text-black text-sm md:text-md"
                       styles={customStyles}
                     />
                   </div>
                 </div>
-                <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
+                <div className="flex items-center justify-center mt-6" style={{ width: '100%', height: '100%' }}>
                   <LineCompareChart
                     variable1={selectedComparison.variable1}
                     variable2={selectedComparison.variable2}
@@ -370,42 +400,38 @@ const Nonprofit = () => {
                   />
                 </div>
               </div>
-
-              <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <h1 className="text-center text-xl font-bold">Overall Growth</h1>
+  
+              {/* Overall Growth Section */}
+              <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} p-4 md:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300`}>
+                <h1 className="text-center text-lg md:text-xl font-bold mb-4 md:mb-8">Overall Growth</h1>
                 <div className="flex items-center justify-center" style={{ width: '100%', height: '100%' }}>
-                  <StackChart revenues={revenues} expenses={expenses} assets={assets} liabilities={liabilities} minYear={minYear} />
+                  <StackChart
+                    revenues={revenues}
+                    expenses={expenses}
+                    assets={assets}
+                    liabilities={liabilities}
+                    minYear={minYear}
+                  />
                 </div>
               </div>
             </div>
-
-            <div className="grid grid-cols-3 gap-4 mt-10 mb-10">
-              <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 col-span-2">
-                <h1 className="text-center text-xl font-bold">Revenue By State</h1>
-                <div className="flex items-center justify-center mb-24 mt-12" style={{ width: '100%', height: '100%' }}>
-                  <TimeSeries values={revenues} minYear={minYear} />
-                </div>
-              </div>
-
-              <div className="bg-[#21222D] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <h1 className="text-center text-xl font-bold">Org Compared</h1>
-                <div className="flex items-center justify-center mb-24 mt-12">
-                  <Gauge
-                    orgName={capitalizeFirstLetter(nonprofitData.Nm)}
-                    orgVal={cumulativeData.TotalRevenue}
-                    stateName={nonprofitData.St}
-                    stateVal={sectorData[mostRecentSectorYear][nonprofitData.St].RevMed}
-                    nationalVal={sectorData[mostRecentSectorYear].NatMedRev}
-                  />
+  
+            {/* Year-Over-Year Revenues & Predictive Analysis Section */}
+            <div className="grid sm:grid-cols-1 gap-4 mt-6 md:mt-10 mb-10">
+              <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} p-4 md:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300`}>
+                <h1 className="text-center text-lg md:text-xl font-bold">Year-Over-Year Revenues & Predictive Analysis</h1>
+                <div className="flex items-center justify-center mt-6 md:mt-12 mb-12" style={{ width: '100%', height: '100%' }}>
+                  <TimeSeries values={revenues} minYear={minYear} isDarkMode={isDarkMode} />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer isDarkMode={isDarkMode}/>
     </div>
   );
+  
 }
 
 export default Nonprofit;

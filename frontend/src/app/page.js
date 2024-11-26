@@ -66,7 +66,8 @@ export default function Home() {
               >
                 Explore Data
             </button>
-            <button className="text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition transition-duration-300">
+            <button className="text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition transition-duration-300"
+            onClick={() => router.push('/toolbox')}>
               Explore Premium Tools
             </button>
           </div>
@@ -210,10 +211,14 @@ export default function Home() {
           </h1>
           <p className="text-lg md:text-2xl mt-2 font-sans text-black ">Try our platform today.</p>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-1 gap-4 max-w-md mx-auto lg:mx-0">
-            <button className="text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
-              Explore Data
+            <button
+                className="text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transitionntransition-duration-300"
+                onClick={() => router.push('/dashboard')}
+              >
+                Explore Data
             </button>
-            <button className="col-span-1  text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition">
+            <button className="col-span-1  text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition"
+            onClick={() => router.push('/toolbox')}>
               Explore Premium Tools
             </button>
           </div>
