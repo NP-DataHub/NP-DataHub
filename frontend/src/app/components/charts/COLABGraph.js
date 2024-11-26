@@ -13,12 +13,13 @@ import SimilarityScore from '@/app/components/SimilarityScore';
  * @param filters - the filters that are used to filter the data. These are used to label the data on the graph
  */
 
-const COLABGraph = memo(({data, filters, onNonprofitClick, isDarkMode, threshold}) => {
+const COLABGraph = ({data, filters, onNonprofitClick, isDarkMode, threshold}) => {
   
   // Handles resizing of the chart - BEFORE THE CONDITIONAL RETURNS!!!!!!!!!
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   useEffect(() => {
+      console.log("I am resizing myself")
       const handleResize = () => {
         if (chartContainerRef.current) {
           setDimensions({
@@ -170,13 +171,15 @@ const COLABGraph = memo(({data, filters, onNonprofitClick, isDarkMode, threshold
             type: 'graph',
             layout: 'force',
             symbolSize: 50,
+
             roam: true,
             label: {
               show: true,
             },
             force: {
-              repulsion: 300,
-              gravity: 0.1,
+              repulsion: 500,
+              gravity: 0.005,
+              layoutAnimation: false,
             },
             data: nodes,
             links: edges
@@ -194,8 +197,8 @@ const COLABGraph = memo(({data, filters, onNonprofitClick, isDarkMode, threshold
         </div>
       );
 
-});
+};
 
 COLABGraph.displayName = 'COLABGraph'
 
-export default memo(COLABGraph);
+export default COLABGraph;
