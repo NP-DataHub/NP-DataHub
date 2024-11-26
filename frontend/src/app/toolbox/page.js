@@ -12,6 +12,7 @@ import NewsFeedSection from "../components/newsfeed";
 import FiscalHealthSection from "../components/FiscalHealthComponent";
 import CalculatorSection from "../components/CalculatorComponent";
 import Footer from "../components/dashboard_footer";
+import RegionalHealthSection from "../components/RegionalHealthComponent";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { FaInfoCircle } from "react-icons/fa";
 import COLAB from "../components/COLAB";
@@ -408,156 +409,157 @@ export default function Toolbox() {
                                 
                             )}
                             {selectedSection === "Region Health" && (
-                                <div className="p-6 bg-[#171821] rounded-lg">
-                                <h3 className="text-xl font-semibold text-[#A9DFD8]">
-                                    REGIONAL HEALTH BY SECTOR                                
-                                </h3>
-                                <p className="text-white">
-                                    Compare NTEE code sectors against public data that align with various regional non-profit’s missions. The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
-                                </p>
-                                <div className="mt-12 text-sm">
+                                // <div className="p-6 bg-[#171821] rounded-lg">
+                                // <h3 className="text-xl font-semibold text-[#A9DFD8]">
+                                //     REGIONAL HEALTH BY SECTOR                                
+                                // </h3>
+                                // <p className="text-white">
+                                //     Compare NTEE code sectors against public data that align with various regional non-profit’s missions. The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
+                                // </p>
+                                // <div className="mt-12 text-sm">
 
-                                <div className="grid grid-cols-2 gap-4 mb-6">
-                                    <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                SEARCH FOR A NONPROFIT
-                                            </button>
-                                            <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                SEARCH BY ZIPCODE
-                                            </button>
-                                            </div>
-                                            <div className="grid grid-cols-2 gap-4 mb-6">
-                                            <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                <Autosuggest
-                                                    suggestions={suggestions}
-                                                    onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                                                    onSuggestionsClearRequested={onSuggestionsClearRequested}
-                                                    getSuggestionValue={getSuggestionValue}
-                                                    renderSuggestion={renderSuggestion}
-                                                    inputProps={inputProps}
-                                                    renderSuggestionsContainer={renderSuggestionsContainer}
-                                                />
-                                            </button>
-                                            <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                                                <Autosuggest
-                                                suggestions={suggestions}
-                                                onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                                                onSuggestionsClearRequested={onSuggestionsClearRequested}
-                                                getSuggestionValue={getSuggestionValue}
-                                                renderSuggestion={renderSuggestion}
-                                                inputProps={inputProps2}
-                                                renderSuggestionsContainer={renderSuggestionsContainer}
-                                            />
-                                            </button>
-                                </div>
-                                <div className="overflow-x-auto overflow-auto">
-                                    <table className="min-w-full bg-[#21222D] rounded-lg text-white">
-                                        <thead>
-                                        <tr>
-                                            <th className="py-3 px-6 text-left">NONPROFIT</th>
-                                            <th className="py-3 px-6 text-left">ADDRESS</th>
-                                            <th className="py-3 px-6 text-left">ZIP CODE</th>
-                                            <th className="py-3 px-6 text-left">NTEE CODE</th>
-                                            <th className="py-3 px-6 text-left">REVS</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {data.map((row, index) => (
-                                            <tr key={index} className="border-t border-gray-700">
-                                            <td className="py-3 px-6">{row.nonprofit}</td>
-                                            <td className="py-3 px-6">{row.address}</td>
-                                            <td className="py-3 px-6">{row.zip}</td>
-                                            <td className="py-3 px-6">{row.nteeCode}</td>
-                                            <td className="py-3 px-6">{row.revs}</td>
-                                            </tr>
-                                        ))}
-                                        </tbody>
-                                    </table>
-                                    </div>
-                                </div>
-                                <h3 className="text-xl font-semibold mt-12">
-                                    KEY DEMOGRAPHIC DATA
-                                </h3>
-                                <p className="text-white mt-2">
-                                    With your choice of NTEE code K: Food, Agriculture, and Nutrition, the following demographic variables from the U.S. Census are included in the report below
-                                </p>
-                                <div className="grid grid-cols-4 gap-4 mb-6 mt-12 text-md">
-                                        <div className="flex flex-col items-center">
-                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center font-bold text-green-500">
-                                            AGE
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col items-center">
-                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-blue-300">
-                                            RACE
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col items-center">
-                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-blue-500">
-                                            GENDER
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col items-center">
-                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-red-500">
-                                            EDUCATION
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col items-center mt-2">
-                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-orange-500">
-                                            INCOME
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col items-center mt-2">
-                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-purple-500">
-                                            HOUSING
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col items-center mt-2">
-                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-gray-500">
-                                            HEALTH
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col items-center mt-2">
-                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-pink-500">
-                                            FAMILY
-                                            </div>
-                                        </div>
-                                        </div>
-                                    <h3 className="text-xl font-semibold mt-12">
-                                        INTERACTIVE MAP
-                                    </h3>
-                                    <p className="text-white mt-2">                
-                                        Choose which demographic variable to search below. Then hover over the map for detailed tool tip of the key demographic data from the zip code that aligns with your chosen nonprofit sector.
-                                    </p>
-                                    <div className="grid grid-cols-4 gap-4 p-4 mt-2 text-sm max-w-3xl mx-auto mb-4">
-                                        <button className="bg-green-500 text-white py-2 px-4 rounded-full">
-                                            AGE
-                                        </button>
-                                        <button className="bg-blue-400 text-white py-2 px-4 rounded-full">
-                                            RACE
-                                        </button>
-                                        <button className="bg-blue-800 text-white py-2 px-4 rounded-full">
-                                            GENDER
-                                        </button>
-                                        <button className="bg-red-700 text-white py-2 px-4 rounded-full">
-                                            EDUCATION
-                                        </button>
-                                        <button className="bg-yellow-500 text-white py-2 px-4 rounded-full">
-                                            INCOME
-                                        </button>
-                                        <button className="bg-purple-600 text-white py-2 px-4 rounded-full">
-                                            HOUSING
-                                        </button>
-                                        <button className="bg-gray-500 text-white py-2 px-4 rounded-full">
-                                            HEALTH
-                                        </button>
-                                        <button className="bg-pink-500 text-white py-2 px-4 rounded-full">
-                                            FAMILY
-                                        </button>
-                                        </div>
-                                    <div className = 'rounded-lg'>
-                                        <ChoroplethMap/>
-                                    </div>
-                                </div>
+                                // <div className="grid grid-cols-2 gap-4 mb-6">
+                                //     <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
+                                //                 SEARCH FOR A NONPROFIT
+                                //             </button>
+                                //             <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
+                                //                 SEARCH BY ZIPCODE
+                                //             </button>
+                                //             </div>
+                                //             <div className="grid grid-cols-2 gap-4 mb-6">
+                                //             <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
+                                //                 <Autosuggest
+                                //                     suggestions={suggestions}
+                                //                     onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                                //                     onSuggestionsClearRequested={onSuggestionsClearRequested}
+                                //                     getSuggestionValue={getSuggestionValue}
+                                //                     renderSuggestion={renderSuggestion}
+                                //                     inputProps={inputProps}
+                                //                     renderSuggestionsContainer={renderSuggestionsContainer}
+                                //                 />
+                                //             </button>
+                                //             <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
+                                //                 <Autosuggest
+                                //                 suggestions={suggestions}
+                                //                 onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                                //                 onSuggestionsClearRequested={onSuggestionsClearRequested}
+                                //                 getSuggestionValue={getSuggestionValue}
+                                //                 renderSuggestion={renderSuggestion}
+                                //                 inputProps={inputProps2}
+                                //                 renderSuggestionsContainer={renderSuggestionsContainer}
+                                //             />
+                                //             </button>
+                                // </div>
+                                // <div className="overflow-x-auto overflow-auto">
+                                //     <table className="min-w-full bg-[#21222D] rounded-lg text-white">
+                                //         <thead>
+                                //         <tr>
+                                //             <th className="py-3 px-6 text-left">NONPROFIT</th>
+                                //             <th className="py-3 px-6 text-left">ADDRESS</th>
+                                //             <th className="py-3 px-6 text-left">ZIP CODE</th>
+                                //             <th className="py-3 px-6 text-left">NTEE CODE</th>
+                                //             <th className="py-3 px-6 text-left">REVS</th>
+                                //         </tr>
+                                //         </thead>
+                                //         <tbody>
+                                //         {data.map((row, index) => (
+                                //             <tr key={index} className="border-t border-gray-700">
+                                //             <td className="py-3 px-6">{row.nonprofit}</td>
+                                //             <td className="py-3 px-6">{row.address}</td>
+                                //             <td className="py-3 px-6">{row.zip}</td>
+                                //             <td className="py-3 px-6">{row.nteeCode}</td>
+                                //             <td className="py-3 px-6">{row.revs}</td>
+                                //             </tr>
+                                //         ))}
+                                //         </tbody>
+                                //     </table>
+                                //     </div>
+                                // </div>
+                                // <h3 className="text-xl font-semibold mt-12">
+                                //     KEY DEMOGRAPHIC DATA
+                                // </h3>
+                                // <p className="text-white mt-2">
+                                //     With your choice of NTEE code K: Food, Agriculture, and Nutrition, the following demographic variables from the U.S. Census are included in the report below
+                                // </p>
+                                // <div className="grid grid-cols-4 gap-4 mb-6 mt-12 text-md">
+                                //         <div className="flex flex-col items-center">
+                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center font-bold text-green-500">
+                                //             AGE
+                                //             </div>
+                                //         </div>
+                                //         <div className="flex flex-col items-center">
+                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-blue-300">
+                                //             RACE
+                                //             </div>
+                                //         </div>
+                                //         <div className="flex flex-col items-center">
+                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-blue-500">
+                                //             GENDER
+                                //             </div>
+                                //         </div>
+                                //         <div className="flex flex-col items-center">
+                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-red-500">
+                                //             EDUCATION
+                                //             </div>
+                                //         </div>
+                                //         <div className="flex flex-col items-center mt-2">
+                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-orange-500">
+                                //             INCOME
+                                //             </div>
+                                //         </div>
+                                //         <div className="flex flex-col items-center mt-2">
+                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-purple-500">
+                                //             HOUSING
+                                //             </div>
+                                //         </div>
+                                //         <div className="flex flex-col items-center mt-2">
+                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-gray-500">
+                                //             HEALTH
+                                //             </div>
+                                //         </div>
+                                //         <div className="flex flex-col items-center mt-2">
+                                //             <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-pink-500">
+                                //             FAMILY
+                                //             </div>
+                                //         </div>
+                                //         </div>
+                                //     <h3 className="text-xl font-semibold mt-12">
+                                //         INTERACTIVE MAP
+                                //     </h3>
+                                //     <p className="text-white mt-2">                
+                                //         Choose which demographic variable to search below. Then hover over the map for detailed tool tip of the key demographic data from the zip code that aligns with your chosen nonprofit sector.
+                                //     </p>
+                                //     <div className="grid grid-cols-4 gap-4 p-4 mt-2 text-sm max-w-3xl mx-auto mb-4">
+                                //         <button className="bg-green-500 text-white py-2 px-4 rounded-full">
+                                //             AGE
+                                //         </button>
+                                //         <button className="bg-blue-400 text-white py-2 px-4 rounded-full">
+                                //             RACE
+                                //         </button>
+                                //         <button className="bg-blue-800 text-white py-2 px-4 rounded-full">
+                                //             GENDER
+                                //         </button>
+                                //         <button className="bg-red-700 text-white py-2 px-4 rounded-full">
+                                //             EDUCATION
+                                //         </button>
+                                //         <button className="bg-yellow-500 text-white py-2 px-4 rounded-full">
+                                //             INCOME
+                                //         </button>
+                                //         <button className="bg-purple-600 text-white py-2 px-4 rounded-full">
+                                //             HOUSING
+                                //         </button>
+                                //         <button className="bg-gray-500 text-white py-2 px-4 rounded-full">
+                                //             HEALTH
+                                //         </button>
+                                //         <button className="bg-pink-500 text-white py-2 px-4 rounded-full">
+                                //             FAMILY
+                                //         </button>
+                                //         </div>
+                                //     <div className = 'rounded-lg'>
+                                //         <ChoroplethMap/>
+                                //     </div>
+                                // </div>
+                                <RegionalHealthSection/>
                             )}
                             {selectedSection === "Co:Lab" && (
                                 <COLAB isDarkMode={isDarkMode}></COLAB>

@@ -1,6 +1,15 @@
 import { MongoClient } from "mongodb";
+
 import dotenv from 'dotenv';
 dotenv.config();
+const uri = process.env.MONGODB_URI;
+
+async function connectToDatabase() {
+  const client = new MongoClient(uri); // Says these will be depricated soon { useNewUrlParser: true, useUnifiedTopology: true }
+  await client.connect();
+  return client.db('Nonprofitly');
+}
+
 
 export default async function handler(req, res) {
   const { method, query } = req;
