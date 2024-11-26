@@ -7,7 +7,7 @@ const Map2 = dynamic(() => import('../components/map2'), { ssr: false});
 
 const CENSUS_KEY = process.env.NEXT_PUBLIC_CENSUS_API_KEY;
 
-export default function RegionalHealthSection() {
+export default function RegionalHealthSection({isDarkMode}) {
     const [nameSuggestions, setNameSuggestions] = useState([]); // Suggestions for name autocomplete
     const [nonprofitName, setNonprofitName] = useState(""); //The name of the Nonprofit input
     const [lastFetchedNameInput, setLastFetchedNameInput] = useState(''); //The lastFetshcedNameInput
@@ -115,11 +115,14 @@ export default function RegionalHealthSection() {
     };
 
     const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
-    const renderNameSuggestion = (suggestion) => (
-    <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
-        {suggestion.Nm}
-    </div>
-    );
+    const renderNameSuggestion = (suggestion) => {
+        return (
+          <div className="px-4 py-2 cursor-pointer hover:bg-[#A9DFD8] hover:text-black">
+          
+            {suggestion.Nm}
+          </div>
+        );
+      };
     const onNameSuggestionsFetchRequested = ({ value }) => {
         fetchSuggestions(value, 'name');
     };
@@ -354,72 +357,78 @@ export default function RegionalHealthSection() {
     };
 
 
-    return(<div className="p-6 bg-[#171821] rounded-lg">
+    return(<div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
         <h3 className="text-xl font-semibold text-[#A9DFD8]">
             REGIONAL HEALTH BY SECTOR                                
         </h3>
-        <p className="text-white">
+        <p>
             Compare NTEE code sectors against public data that align with various regional non-profit’s missions. The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
         </p>
         <div className="mt-12 text-sm">
 
         <div className="grid grid-cols-2 gap-4 mb-6">
-            <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors"
+            <button className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white hover:bg-gray-500" : "bg-[#F1F1F1] text-black hover:bg-gray-200"} rounded-md  transition-colors`}
             onClick={() => handleSearchforNonProfit(nonprofitName)}>
                         SEARCH FOR A NONPROFIT
                     </button>
-                    <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors"
+                    <button className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white hover:bg-gray-500" : "bg-[#F1F1F1] text-black hover:bg-gray-200"} rounded-md  transition-colors`}
                     onClick={() => handleSearchforZip(zipcode)}>
                         SEARCH BY ZIPCODE
                     </button>
                     </div>
                     <div className="grid grid-cols-2 gap-4 mb-6">
-                        <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
-                            <Autosuggest
-                                suggestions={nameSuggestions}
-                                onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
-                                onSuggestionsClearRequested={onSuggestionsClearRequested}
-                                getSuggestionValue={getNameSuggestionValue}
-                                renderSuggestion={renderNameSuggestion}
-                                inputProps={{
+                        <div className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black"} rounded-md  transition-colors`}>
+                            <div className = 'relative'>
+                                <Autosuggest
+                                    suggestions={nameSuggestions}
+                                    onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
+                                    onSuggestionsClearRequested={onSuggestionsClearRequested}
+                                    getSuggestionValue={getNameSuggestionValue}
+                                    renderSuggestionsContainer={({ containerProps, children }) => (
+                                        <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
+                                            isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                                        } overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                                            {children}
+                                        </div>
+                                    )}
+                                    renderSuggestion={renderNameSuggestion}
+                                    inputProps={{
                                     placeholder: 'Search for Nonprofit',
                                     value: nonprofitName,
                                     onChange: (_, { newValue }) => setNonprofitName(newValue),
-                                    className: 'mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]',
-                                }}
-                                renderSuggestionsContainer={({ containerProps, children }) => (
-                                    <div {...containerProps}  className={`top-0 left-0 right-0 bottom-full
-                                     w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-50 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
-                                        {children}
-                                    </div>
-                                )}
-                            />
-                        </button>
-                    <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors ">
-                        {<Autosuggest
-                                suggestions={zipSuggestions}
-                                onSuggestionsFetchRequested={onZipSuggestionsFetchRequested}
-                                onSuggestionsClearRequested={onSuggestionsClearRequested}
-                                getSuggestionValue={getZipSuggestionValue}
-                                renderSuggestion={renderZipSuggestion}
-                                inputProps = {{
-                                    placeholder: 'Enter Zipcode',
-                                    value: zipcode,
-                                    onChange: (_, { newValue }) => setZipcode(newValue),
-                                    className: "mt-2 w-full bg-[#171821] text-white p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]"
-                                }}
-                                renderSuggestionsContainer={({ containerProps, children }) => (
-                                    <div 
-                                        {...containerProps} 
-                                        className = {`top-0 left-0 right-0 w-full max-h-96 bg-[#171821] overflow-y-auto rounded z-10 ${zipSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
-                                        {children}
-                                    </div>
-                                )}
-                            />}
-                    </button>
+                                    className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
+                                    }}
+                                    
+                                />
+                                </div>
+                        </div>
+                    <div className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black"} rounded-md  transition-colors`}>
+                        <div className = 'relative'>
+                            {<Autosuggest
+                                        suggestions={zipSuggestions}
+                                        onSuggestionsFetchRequested={onZipSuggestionsFetchRequested}
+                                        onSuggestionsClearRequested={onSuggestionsClearRequested}
+                                        getSuggestionValue={getZipSuggestionValue}
+                                        renderSuggestionsContainer={({ containerProps, children }) => (
+                                            <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 ${
+                                                isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                                            } overflow-y-auto rounded z-10 ${zipSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
+                                                {children}
+                                            </div>
+                                        )}
+                                        renderSuggestion={renderZipSuggestion}
+                                        inputProps={{
+                                        placeholder: 'Enter Zipcode',
+                                        value: zipcode,
+                                        onChange: (_, { newValue }) => setZipcode(newValue),
+                                        className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
+                                        }}
+                                    />}
+                        </div>
+                    </div>
         </div>
         <div className="overflow-x-auto max-h-96 overflow-auto">
-            <table className="min-w-full bg-[#21222D] rounded-lg text-white">
+            <table className={'min-w-full ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"}  rounded-lg'}>
                 <thead>
                 <tr>
                     <th className="py-3 px-6 text-left">NONPROFIT</th>
@@ -453,87 +462,90 @@ export default function RegionalHealthSection() {
         <h3 className="text-xl font-semibold mt-12">
             KEY DEMOGRAPHIC DATA
         </h3>
-        <p className="text-white mt-2">
+        <p className="mt-2">
             With your choice of Zipcode, the following demographic variables from the U.S. Census are included in the report below. (However, Not all zipcodes line up with the census data, so if you are not getting a result try a zipcode near the one you are looking for.)
         </p>
-        <div className="grid grid-cols-4 gap-4 mb-6 mt-12 text-md">
-                <div className="flex flex-col items-center">
-                    <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center font-bold text-green-500">
+        <div className="flex justify-center items-center ">
+            <div className="grid grid-cols-4 gap-x-32 gap-y-8 mb-6 mt-12 text-md mx-auto">
+                <div className="flex flex-col items-center w-32 h-32 p-4 rounded-full bg-gray-300 border-white border-2 shadow-lg justify-center">
+                <div className="flex text-center font-bold text-green-500">
                     {medAge}
-                    </div>
                 </div>
-                <div className="flex flex-col items-center">
-                    <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-blue-300">
+                </div>
+                <div className="flex flex-col items-center w-32 h-32 p-4 rounded-full bg-gray-300 border-white border-2 shadow-lg justify-center">
+                <div className="flex text-center font-bold text-blue-300">
                     {majRace}
-                    </div>
                 </div>
-                <div className="flex flex-col items-center">
-                    <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-blue-500">
+                </div>
+                <div className="flex flex-col items-center w-32 h-32 p-4 rounded-full bg-gray-300 border-white border-2 shadow-lg justify-center">
+                <div className="flex text-center font-bold text-blue-500">
                     {majGender}
-                    </div>
                 </div>
-                <div className="flex flex-col items-center">
-                    <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-red-500">
+                </div>
+                <div className="flex flex-col items-center w-32 h-32 p-4 rounded-full bg-gray-300 border-white border-2 shadow-lg justify-center">
+                <div className="flex text-center font-bold text-red-500">
                     {avgEdu}
-                    </div>
                 </div>
-                <div className="flex flex-col items-center mt-2">
-                    <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-orange-500">
+                </div>
+                <div className="flex flex-col items-center w-32 h-32 p-4 rounded-full bg-gray-300 border-white border-2 shadow-lg justify-center">
+                <div className="flex text-center font-bold text-orange-500">
                     {medIncome}
-                    </div>
                 </div>
-                <div className="flex flex-col items-center mt-2">
-                    <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-purple-500">
+                </div>
+                <div className="flex flex-col items-center w-32 h-32 p-4 rounded-full bg-gray-300 border-white border-2 shadow-lg justify-center">
+                <div className="flex text-center font-bold text-purple-500">
                     {percHousing}
-                    </div>
                 </div>
-                <div className="flex flex-col items-center mt-2">
-                    <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-gray-500">
+                </div>
+                <div className="flex flex-col items-center w-32 h-32 p-4 rounded-full bg-gray-300 border-white border-2 shadow-lg justify-center">
+                <div className="flex text-center font-bold text-gray-500">
                     {percHealth}
-                    </div>
                 </div>
-                <div className="flex flex-col items-center mt-2">
-                    <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-pink-500">
+                </div>
+                <div className="flex flex-col items-center w-32 h-32 p-4 rounded-full bg-gray-300 border-white border-2 shadow-lg justify-center">
+                <div className="flex text-center font-bold text-pink-500">
                     {sizeFamily}
-                    </div>
                 </div>
                 </div>
+            </div>
+            </div>
+
             <h3 className="text-xl font-semibold mt-12">
                 INTERACTIVE MAP
             </h3>
-            <p className="text-white mt-2">                
+            <p className="mt-2">                
                 Choose which demographic variable to search below. Then hover over the map for detailed tool tip of the key demographic data from the zip code that aligns with your chosen nonprofit sector.
             </p>
             <div className="grid grid-cols-4 gap-4 p-4 mt-2 text-sm max-w-3xl mx-auto mb-4">
-                <button className="bg-green-500 text-white py-2 px-4 rounded-full"
+                <button className="bg-green-500 text-white py-8 px-16 text-center rounded-full"
                  onClick={() => handleAgeButtonClick(zipcode)}>
                     AGE
                 </button>
-                <button className="bg-blue-400 text-white py-2 px-4 rounded-full"
+                <button className="bg-blue-400 text-white py-8 px-16 text-center rounded-full"
                 onClick={() => handleRaceButtonClick(zipcode)}>
                     RACE
                 </button>
-                <button className="bg-blue-800 text-white py-2 px-4 rounded-full"
+                <button className="bg-blue-800 text-white text-center rounded-full"
                 onClick={() => handleGenderButtonClick(zipcode)}>
                     GENDER
                 </button>
-                <button className="bg-red-700 text-white py-2 px-4 rounded-full"
+                <button className="bg-red-700 text-white  text-center rounded-full"
                 onClick={() => handleEduButtonClick(zipcode)}>
                     EDUCATION
                 </button>
-                <button className="bg-yellow-500 text-white py-2 px-4 rounded-full"
+                <button className="bg-yellow-500 text-white rounded-full"
                 onClick={() => handleIncomeButtonClick(zipcode)}>
                     INCOME
                 </button>
-                <button className="bg-purple-600 text-white py-2 px-4 rounded-full"
+                <button className="bg-purple-600 text-white  rounded-full"
                 onClick={() => handleHousingButtonClick(zipcode)}>
                     HOUSING
                 </button>
-                <button className="bg-gray-500 text-white py-2 px-4 rounded-full"
+                <button className="bg-gray-500 text-white  text-center rounded-full"
                 onClick={() => handleHealthButtonClick(zipcode)}>
                     HEALTH
                 </button>
-                <button className="bg-pink-500 text-white py-2 px-4 rounded-full">
+                <button className="bg-pink-500 text-white py-8 px-16 text-center rounded-full">
                     FAMILY
                 </button>
                 </div>
