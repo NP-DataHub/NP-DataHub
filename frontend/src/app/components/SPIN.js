@@ -479,7 +479,7 @@ const SPIN = ({isDarkMode}) => {
                     />
                 </div>
             </div>
-            <div className="flex flex-col h-">
+            <div className="flex flex-col">
                 {loading ? (
                     <div className={`flex justify-center items-center h-screen p-6 rounded-lg ${isDarkMode ? 'bg-[#21222D]' : 'bg-[#f9f9f9]'}`}>
                         <SearchLoadingComponent />

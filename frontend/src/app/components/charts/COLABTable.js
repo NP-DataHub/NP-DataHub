@@ -74,6 +74,12 @@ const COLABTable = ({ similarityList, selectedNonprofit, isDarkMode }) => {
                                         <span style={{ fontSize: '24px', verticalAlign: 'middle' }}>{item.score}</span>
                                     </div>
                                     <div>{`${item.nonprofit.Addr}, ${item.nonprofit.Cty}, ${item.nonprofit.St} ${item.nonprofit.Zip}`}</div>
+                                    <div>{`NTEE Code: ${item.nonprofit.MajGrp} - ${ntee_codes[item.nonprofit.MajGrp] ? ntee_codes[item.nonprofit.MajGrp] : 'No description'}`}</div>
+                                    <div>
+                                        <a href="#" onClick={() => handleSelectedNonprofitClick(item.nonprofit)} style={{ color: '#0099ff' }}>
+                                            Learn more.
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
