@@ -32,10 +32,6 @@ export default function RegionalHealthSection() {
     // Average household size, Percent EDU Bachelors or higher, Percent Male pop, Percent female pop,
     //Percent White, Percent Black/African American, Percent Native American/Alaskan Native, Percent Asian, Percent Pacific Islander, 
     // Percent some other race, Percent two or more races
-
-
-
-
     //Check for hispanic and latino
     const getZipInfo = async (zip) => {
         const url = `https://api.census.gov/data/2022/acs/acs5/profile?get=DP05_0018E,DP03_0062E,DP04_0002PE,DP03_0096PE,DP02_0016E,DP02_0068PE,DP05_0002PE,DP05_0003PE,DP05_0037PE,DP05_0038PE,DP05_0039PE,DP05_0044PE,DP05_0052PE,DP05_0057PE,DP05_0058PE&for=zip%20code%20tabulation%20area:${zip}&key=${CENSUS_KEY}`;
@@ -435,9 +431,14 @@ export default function RegionalHealthSection() {
                 </thead>
                 <tbody>
                 {searchResults.map((row, index) => {
+                    const nonprofitUrl = `/nonprofit/${encodeURIComponent(row._id)}`;
                     return (
                         <tr key={index} className="border-t border-gray-700">
-                        <td className="py-3 px-6">{row.Nm}</td>
+                        <td className="py-3 px-6">
+                            <a href={nonprofitUrl} className="hover:underline">
+                                {row.Nm}
+                            </a>
+                        </td>
                         <td className="py-3 px-6">{row.Addr}</td>
                         <td className="py-3 px-6">{row.Zip}</td>
                         <td className="py-3 px-6">{row.MajGrp}</td>
