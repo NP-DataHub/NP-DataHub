@@ -366,18 +366,10 @@ export default function RegionalHealthSection({isDarkMode}) {
         </p>
         <div className="mt-12 text-sm">
 
-        <div className="grid grid-cols-2 gap-4 mb-6">
-            <button className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white hover:bg-gray-500" : "bg-[#F1F1F1] text-black hover:bg-gray-200"} rounded-md  transition-colors`}
-            onClick={() => handleSearchforNonProfit(nonprofitName)}>
-                        SEARCH FOR A NONPROFIT
-                    </button>
-                    <button className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white hover:bg-gray-500" : "bg-[#F1F1F1] text-black hover:bg-gray-200"} rounded-md  transition-colors`}
-                    onClick={() => handleSearchforZip(zipcode)}>
-                        SEARCH BY ZIPCODE
-                    </button>
+        <div className="grid grid-cols-3 gap-4 mb-6">
                     </div>
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black"} rounded-md  transition-colors`}>
+                    <div className="grid grid-cols-3 gap-4 mb-6">
+                        <div className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black"} rounded-md  transition-colors col-span-2`}>
                             <div className = 'relative'>
                                 <Autosuggest
                                     suggestions={nameSuggestions}
@@ -402,7 +394,13 @@ export default function RegionalHealthSection({isDarkMode}) {
                                 />
                                 </div>
                         </div>
-                    <div className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black"} rounded-md  transition-colors`}>
+                    <button className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white hover:bg-gray-500" : "bg-[#F1F1F1] text-black hover:bg-gray-200"} rounded-md  transition-colors`}
+                    onClick={() => handleSearchforNonProfit(nonprofitName)}>
+                        SEARCH FOR A NONPROFIT
+                    </button>
+                    </div>
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                    <div className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black"} rounded-md  transition-colors col-span-2`}>
                         <div className = 'relative'>
                             {<Autosuggest
                                         suggestions={zipSuggestions}
@@ -426,39 +424,49 @@ export default function RegionalHealthSection({isDarkMode}) {
                                     />}
                         </div>
                     </div>
+                    <button className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white hover:bg-gray-500" : "bg-[#F1F1F1] text-black hover:bg-gray-200"} rounded-md  transition-colors`}
+                    onClick={() => handleSearchforZip(zipcode)}>
+                        SEARCH BY ZIPCODE
+                    </button>
         </div>
-        <div className="overflow-x-auto max-h-96 overflow-auto">
-            <table className={'min-w-full ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"}  rounded-lg'}>
-                <thead>
-                <tr>
-                    <th className="py-3 px-6 text-left">NONPROFIT</th>
-                    <th className="py-3 px-6 text-left">ADDRESS</th>
-                    <th className="py-3 px-6 text-left">ZIP CODE</th>
-                    <th className="py-3 px-6 text-left">NTEE CODE</th>
-                    <th className="py-3 px-6 text-left">REVS</th>
-                </tr>
-                </thead>
-                <tbody>
-                {searchResults.map((row, index) => {
-                    const nonprofitUrl = `/nonprofit/${encodeURIComponent(row._id)}`;
-                    return (
-                        <tr key={index} className="border-t border-gray-700">
-                        <td className="py-3 px-6">
-                            <a href={nonprofitUrl} className="hover:underline">
-                                {row.Nm}
-                            </a>
-                        </td>
-                        <td className="py-3 px-6">{row.Addr}</td>
-                        <td className="py-3 px-6">{row.Zip}</td>
-                        <td className="py-3 px-6">{row.MajGrp}</td>
-                        <td className="py-3 px-6">{row[getLatestYear(row)].TotRev}</td>
-                        </tr>
-                    );
-                })}
-                </tbody>
-            </table>
-            </div>
-        </div>
+        
+        {searchResults.length > 0 && (
+
+                    <div className="overflow-x-auto max-h-96 overflow-auto">
+                        <table className={`min-w-full ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} rounded-lg`}>
+                            <thead>
+                                <tr>
+                                    <th className="py-3 px-6 text-left">NONPROFIT</th>
+                                    <th className="py-3 px-6 text-left">ADDRESS</th>
+                                    <th className="py-3 px-6 text-left">ZIP CODE</th>
+                                    <th className="py-3 px-6 text-left">NTEE CODE</th>
+                                    <th className="py-3 px-6 text-left">REVS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {searchResults.map((row, index) => {
+                                    const nonprofitUrl = `/nonprofit/${encodeURIComponent(row._id)}`;
+                                    return (
+                                        <tr key={index} className="border-t border-gray-700">
+                                            <td className="py-3 px-6">
+                                                <a href={nonprofitUrl} className="hover:underline">
+                                                    {row.Nm}
+                                                </a>
+                                            </td>
+                                            <td className="py-3 px-6">{row.Addr}</td>
+                                            <td className="py-3 px-6">{row.Zip}</td>
+                                            <td className="py-3 px-6">{row.MajGrp}</td>
+                                            <td className="py-3 px-6">{row[getLatestYear(row)].TotRev}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+                </div>
+        {/* Add in loading bar while searching have it display in this area*/}
+                
         <h3 className="text-xl font-semibold mt-12">
             KEY DEMOGRAPHIC DATA
         </h3>
