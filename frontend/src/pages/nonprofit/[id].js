@@ -288,7 +288,7 @@ const Nonprofit = () => {
 
   return (
     <div>
-      <div className={isDarkMode ? "dashboard-color text-white transition-colors duration-300" : "bg-[#c9c9c9] text-black transition-colors duration-300"}>
+      <div className={isDarkMode ? "dashboard-color text-white transition-colors duration-300" : "bg-[#ffffff] text-black transition-colors duration-300"}>
         <Sidebar className="hidden lg:block" isDarkMode={isDarkMode}
                             onThemeToggle={handleThemeToggle} />
         <div className="flex flex-col lg:flex-col pb-8 lg:pb-12 mt-6 lg:mt-12">

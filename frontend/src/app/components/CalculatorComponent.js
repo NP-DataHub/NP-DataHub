@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { FaInfoCircle } from "react-icons/fa";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
-import { useRef } from 'react';
 import debounce from 'lodash.debounce';
 import { useCallback } from "react";
 
@@ -27,10 +26,6 @@ export default function CalculatorSection({isDarkMode}) {
   const [addressSuggestions, setAddressSuggestions] = useState([]);
   const [lastFetchedNameInput, setLastFetchedNameInput] = useState('');
   const [lastFetchedAddressInput, setLastFetchedAddressInput] = useState('');
-
-  // disable autosuggester when calculate button is pressed
-  const [disableSuggestions, setDisableSuggestions] = useState({ name: false, address: false });
-  const abortControllersRef = useRef({ name: null, address: null });
 
   // ensure that not both calculate button are pressed at the same time
   const isLoading = loadingMacro || loadingMicro;
@@ -170,25 +165,14 @@ const states = [
 
   // Helper functions for name and address field
   const fetchSuggestions = useCallback( debounce(async (value, type) => {
-    if (disableSuggestions[type]) return; // Check if suggestions are disabled for this type
 
     if (type === 'name' && value === lastFetchedNameInput) return;
     if (type === 'address' && value === lastFetchedAddressInput) return;
 
 
-    // Abort previous request for this type
-    if (abortControllersRef.current[type]) {
-      abortControllersRef.current[type].abort();
-    }
-
-    // Create a new AbortController
-    const abortController = new AbortController();
-    abortControllersRef.current[type] = abortController;
 
     try {
-      const response = await fetch(`/api/suggestions?input=${value}&type=${type}`, {
-        signal: abortController.signal,
-      });
+      const response = await fetch(`/api/suggestions?input=${value}&type=${type}`);
       const data = await response.json();
 
       if (data.success) {
@@ -207,7 +191,7 @@ const states = [
       console.error("Error fetching suggestions:", error);
     }
   }, 500), // 500 delay
-  [disableSuggestions, lastFetchedNameInput, lastFetchedAddressInput]);
+  [lastFetchedNameInput, lastFetchedAddressInput]);
 
 
   const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
@@ -519,17 +503,9 @@ const states = [
           </div>
         <button
           onClick={() => {
-            setDisableSuggestions({ name: true, address: true });
-            Object.keys(abortControllersRef.current).forEach((type) => {
-              if (abortControllersRef.current[type]) {
-                abortControllersRef.current[type].abort();
-                abortControllersRef.current[type] = null;
-              }
-            });
             setNameSuggestions([]);
             setAddressSuggestions([]);
             fetchMicroData();
-            setDisableSuggestions({ name: false, address: false });
           }}
           className={`py-4 px-6 rounded-lg font-bold w-full ${
             isFetchMicroDisabled() || isLoading

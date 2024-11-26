@@ -324,9 +324,9 @@ const SPIN = ({isDarkMode}) => {
     }, [selectedXAxis, selectedYAxis]);
 
     return (
-        <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-white text-black"}  p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10 mx-10 mb-12`}>
+        <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"}  p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10 mx-10 mb-12`}>
 
-            <div className={`mb-4 p-4 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
+            <div className={`mb-4 p-4 ${isDarkMode ? "bg-[#171821] text-white" : "bg-white text-black"} rounded-lg`}>
                 <h2 className="text-xl font-semibold mb-2">Overview</h2>
                 <p className="text-base  mb-6">
                     A scatter plot&apos;s purpose is to visually display and statistically test the relationship between two variables, identify relationships, test theories, analyze data, 
@@ -450,7 +450,7 @@ const SPIN = ({isDarkMode}) => {
         </div>
     </div>
             </div>
-            <div className={`flex justify-between items-center ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-4 rounded-lg mt-4`}>
+            <div className={`flex justify-between items-center ${isDarkMode ? "bg-[#171821] text-white" : "bg-white text-black"} p-4 rounded-lg mt-4`}>
                 <h2 className="text-xl font-semibold mb-2">Select Variables to Compare:</h2>
                 <div className="flex space-x-4">
                     <Select

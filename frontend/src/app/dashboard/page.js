@@ -11,6 +11,8 @@ import Footer from '../components/dashboard_footer'
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase"; // Your Firestore instance
 import { useAuth } from "../components/context"; // Assuming you have a user auth context
+import debounce from 'lodash.debounce';
+import { useCallback } from "react";
 
 export default function Dashboard() {
     const [firstNp, setFirstNp] = useState('');
@@ -140,10 +142,8 @@ export default function Dashboard() {
         { name: 'Wyoming', code: 'WY' }
     ];
     
-    const fetchSuggestions = async (value, type) => {
-        if (type === 'name' && value === lastFetchedNameInput) return;
-        if (type === 'address' && value === lastFetchedAddressInput) return;
-      
+    const fetchSuggestions = useCallback( debounce(async (value, type) => {
+        if (type === 'name' && value === lastFetchedNameInput) return;      
         try {
           const response = await fetch(`/api/suggestions?input=${value}&type=${type}`);
           const data = await response.json();
@@ -152,18 +152,15 @@ export default function Dashboard() {
             if (type === 'name') {
               setNameSuggestions(data.data);
               setLastFetchedNameInput(value); // Update last fetched value for names
-            } else if (type === 'address') {
-              setAddressSuggestions(data.data);
-              setLastFetchedAddressInput(value); // Update last fetched value for addresses
             }
           } else {
             if (type === 'name') setNameSuggestions([]);
-            if (type === 'address') setAddressSuggestions([]);
           }
         } catch (error) {
           console.error("Error fetching suggestions:", error);
-        }
-      };
+        } 
+      }, 500), // 500 delay
+    [lastFetchedNameInput]);
 
     const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
     const renderNameSuggestion = (suggestion) => (

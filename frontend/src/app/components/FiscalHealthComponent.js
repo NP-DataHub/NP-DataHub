@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
-import { useRef } from 'react';
 import debounce from 'lodash.debounce';
 import { useCallback } from "react";
 
@@ -46,18 +45,6 @@ export default function FiscalHealthSection({isDarkMode}) {
   const [lastSecondFetchedNameInput, setLastSecondFetchedNameInput] = useState('');
   const [lastSecondFetchedAddressInput, setLastSecondFetchedAddressInput] = useState('');
 
-  // disable autosuggester when Compare button is pressed
-  const [disableSuggestions, setDisableSuggestions] = useState({
-    Single: { name: false, address: false },
-    First: { name: false, address: false },
-    Second: { name: false, address: false },
-  });
-
-  const abortControllersRef = useRef({
-    Single: { name: null, address: null },
-    First: { name: null, address: null },
-    Second: { name: null, address: null },
-  });
 
   const isLoading = loadingComparison || loadingSectorComparison;
 
@@ -93,15 +80,6 @@ export default function FiscalHealthSection({isDarkMode}) {
   
   // Fetch suggestions for nonprofit names or addresses
   const fetchSuggestions = useCallback( debounce(async (value, type, mode) => {
-
-    if (disableSuggestions[mode][type]) return;
-
-    if (abortControllersRef.current[mode][type]) {
-      abortControllersRef.current[mode][type].abort();
-    }
-
-    const abortController = new AbortController();
-    abortControllersRef.current[mode][type] = abortController;
 
     if (type === 'name') {
       if (
@@ -163,8 +141,7 @@ export default function FiscalHealthSection({isDarkMode}) {
       console.error("Error fetching suggestions:", error);
     }
   }, 500), // 500 delay
-  [disableSuggestions,  
-  lastSingleFetchedNameInput,
+  [lastSingleFetchedNameInput,
   lastFirstFetchedNameInput,
   lastSecondFetchedNameInput,
   lastSingleFetchedAddressInput,
@@ -530,29 +507,11 @@ const fetchFiscalHealthData = async (option) => {
 
           <button
             onClick={() => {
-              setDisableSuggestions((prev) => ({
-                ...prev,
-                First: { name: true, address: true },
-                Second: { name: true, address: true },
-              }));
-              ['First', 'Second'].forEach((mode) => {
-                Object.keys(abortControllersRef.current[mode]).forEach((type) => {
-                  if (abortControllersRef.current[mode][type]) {
-                    abortControllersRef.current[mode][type].abort();
-                    abortControllersRef.current[mode][type] = null;
-                  }
-                });
-              });
               setFirstNameSuggestions([]);
               setFirstAddressSuggestions([]);
               setSecondNameSuggestions([]);
               setSecondAddressSuggestions([]);
               fetchFiscalHealthData("compare")
-              setDisableSuggestions((prev) => ({
-                ...prev,
-                First: { name: false, address: false },
-                Second: { name: false, address: false },
-              }));
             }}
             className={`py-4 px-6 rounded-lg font-bold w-full ${
               isComparisonFetchDisabled() || isLoading
@@ -718,27 +677,9 @@ const fetchFiscalHealthData = async (option) => {
 
           <button
             onClick={() => {
-              setDisableSuggestions((prev) => ({
-                ...prev,
-                Single: { name: true, address: true },
-              }));
-
-              Object.keys(abortControllersRef.current.Single).forEach((type) => {
-                if (abortControllersRef.current.Single[type]) {
-                  abortControllersRef.current.Single[type].abort();
-                  abortControllersRef.current.Single[type] = null;
-                }
-              });
-
               setSingleNameSuggestions([]);
               setSingleAddressSuggestions([]);
-
               fetchFiscalHealthData("compareSector");
-
-              setDisableSuggestions((prev) => ({
-                ...prev,
-                Single: { name: false, address: false },
-              }));
             }}
             className={`py-4 px-6 rounded-lg font-bold w-full ${
               isComparisonSectorFetchDisabled() || isLoading

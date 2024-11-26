@@ -38,7 +38,7 @@ export default function NetworksPaths() {  // Component name updated to start wi
 
     return (
         <div>
-            <div className={isDarkMode ? "dashboard-color text-white transition-colors duration-300 font-sans" : "bg-[#c9c9c9] text-black transition-colors duration-300 font-sans"}>
+            <div className={isDarkMode ? "dashboard-color text-white transition-colors duration-300 font-sans" : "bg-[#ffffff] text-black transition-colors duration-300 font-sans"}>
                 {/* Sidebar will be hidden if isLoading is true */}
                 <Sidebar onUserDataLoaded={handleUserDataLoaded} currentPage="/networking-paths" onThemeToggle = {handleThemeToggle} isDarkMode={isDarkMode}/>
 
