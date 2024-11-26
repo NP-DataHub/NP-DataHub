@@ -35,7 +35,7 @@ const MapComponent = ({points, lat, lng, zoom }) => {
         <div style={{ position: 'relative', height: '100vh' }}>
             <div ref={mapRef} style={{ height: '100%' }}></div>
             {points.length > 0 && (
-            <div style={{ position: 'absolute', top: '10%', left: 0, backgroundColor: 'white', padding: '10px', color: 'black' }}>
+            <div className="shadow-lg font-bold"style={{ position: 'absolute', top: '10%', left: 10, backgroundColor: 'white', padding: '10px', color: 'black' }}>
                 <ul>
                     {points.map((point, index) => (
                         <li key={index}>{point.label}: {point.val}</li>
