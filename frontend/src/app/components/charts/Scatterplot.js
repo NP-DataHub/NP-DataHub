@@ -3,7 +3,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { useRouter } from 'next/navigation';
+import ntee_codes from '../ntee';
 import { color } from 'd3';
+import { get } from 'mongoose';
 
 /** 
  * @param data - a list of nonprofits that have been filtered by the user. This data is used to create the scatter plot
@@ -15,6 +17,8 @@ import { color } from 'd3';
  *           Each NTEE code is a different color on the scatter plot
  */
 const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
+
+  console.log("Filters:", filters);
 
   // Handles resizing of the chart
   const chartContainerRef = useRef(null);
@@ -43,6 +47,11 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
         router.push(`/nonprofit/${params.data.id}`);
       }
     }
+  };
+
+  // Get the NTEE code descriptions
+  const getNteeDescription = (nteeCode) => {
+    return ntee_codes[nteeCode] || 'N/A';
   };
 
 
@@ -121,6 +130,15 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
 
   const axisColor = isDarkMode ? '#FFFFFF' : '#000000'; // Adjust color dynamically
 
+  // Rename the keys in the scatter_data object to be the NTEE code descriptions
+  console.log("Scatter Data:", scatter_data);
+  Object.keys(scatter_data).forEach((key) => {
+    scatter_data[`${key} - ${getNteeDescription(key)}`] = scatter_data[key];
+    delete scatter_data[key];
+  });
+
+  console.log("Scatter Data:", scatter_data);
+  
   const option = {
     tooltip: {
       trigger: 'axis',

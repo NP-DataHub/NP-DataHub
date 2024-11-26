@@ -33,6 +33,9 @@ const SPIN = ({isDarkMode}) => {
     const [selectedXAxis, setSelectedXAxis] = useState({ value: "TotRev", label: "Total Revenue" });
     const [selectedYAxis, setSelectedYAxis] = useState({ value: "TotExp", label: "Total Expenses" });
 
+    // Keep track of loading state
+    const [loading, setLoading] = useState(false);
+
     // List of all states in the US and their abbreviations
     const stateOptions = [
         { value: "", label: "Select State" },
@@ -144,7 +147,7 @@ const SPIN = ({isDarkMode}) => {
         placeholder: 'Enter City',
         value: inputCityValue ? inputCityValue : '',
         onChange: onCityChange,
-        className: `mt-2 w-full ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]`
+        className: `w-full ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]`
     };
 
 
@@ -209,7 +212,7 @@ const SPIN = ({isDarkMode}) => {
         placeholder: `Enter ${type} Code or Description`,
         value: inputNTEEValue[type] ? inputNTEEValue[type] : selectedValue ? selectedValue.label : '',
         onChange: (event, { newValue }) => onNTEEChange(event, { newValue }, type),
-        className: `mt-2 w-full ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]`
+        className: `w-full ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]`
     });
 
     // State autosuggest functions
@@ -263,7 +266,7 @@ const SPIN = ({isDarkMode}) => {
         placeholder: 'Enter State',
         value: inputStateValue ? inputStateValue : '',
         onChange: onStateChange,
-        className: `mt-2 w-full ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]`
+        className: `w-full ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8]`
     };
 
 
@@ -291,6 +294,9 @@ const SPIN = ({isDarkMode}) => {
     // After fetching the data, it sets the sectorData state variable to the fetched data.
     useEffect(() => {
         const fetchSectorData = async () => {
+        // We are loading
+        setLoading(true);
+
             // Set a default state so that we arent fetching everything  
         const STATE = selectedState ? selectedState.value : null;
         const CITY = selectedCity ? selectedCity.value : null;
@@ -301,6 +307,7 @@ const SPIN = ({isDarkMode}) => {
 
         // Make sure the search is not too broad. Require at least a state 
         if (!STATE) {
+            setLoading(false);
             return;
         }
 
@@ -311,6 +318,9 @@ const SPIN = ({isDarkMode}) => {
         // Set the filters to be the selected NTEE filter values
         let filters = { NTEE1, NTEE2, NTEE3 };
         setSectorFilters(filters);
+
+        // We are done loading
+        setLoading(false);
         };
 
         fetchSectorData();
@@ -322,6 +332,21 @@ const SPIN = ({isDarkMode}) => {
     useEffect(() => {
         // Re-render the scatter plot when the X or Y axis is changed
     }, [selectedXAxis, selectedYAxis]);
+
+
+
+    // Loading component to show while data is being fetched
+    const SearchLoadingComponent = () => (
+        <div className="flex items-center justify-center h-full w-full">
+            <svg className="animate-spin h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+        </div>
+    );
+
+
+
 
     return (
         <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"}  p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10 mx-10 mb-12`}>
@@ -344,9 +369,9 @@ const SPIN = ({isDarkMode}) => {
                 </p>
             </div>
             <div className="grid grid-cols-5 gap-4 mb-4">
-            <div className="col-span-1 bg-[#6d618c] p-3 rounded-lg">
-            <h2 className="text-lg font-semibold mb-4">State Selection</h2>
-            <div className="flex items-center bg-[#ada5c0] p-2 rounded-lg">
+            <div className={`col-span-1 p-3 rounded-lg ${isDarkMode ? 'bg-[#6d618c]' : 'bg-[#ada5c0]'}`}>
+                <h2 className="text-lg font-semibold mb-4">State Selection</h2>
+                <div className={`flex items-center p-2 rounded-lg ${isDarkMode ? 'bg-[#ada5c0]' : 'bg-[#6d618c]'}`}>
                     <div className="relative w-full">
                         <Autosuggest
                             suggestions={stateSuggestions}
@@ -363,43 +388,30 @@ const SPIN = ({isDarkMode}) => {
                     <ReactTooltip place="top" effect="solid" id="city-tooltip" />
                 </div>
             </div>
-    <div className="col-span-1 bg-[#255972] p-3 rounded-lg">
-        <h2 className="text-lg font-semibold mb-4">City Selection</h2>
-        <div className="flex items-center bg-[#78b6d3] p-2 rounded-lg">
-            <div className="relative w-full">
-                <Autosuggest
-                    suggestions={citySuggestions}
-                    onSuggestionsFetchRequested={onCitySuggestionsFetchRequested}
-                    onSuggestionsClearRequested={onCitySuggestionsClearRequested}
-                    onSuggestionSelected={onCitySuggestionSelected}
-                    getSuggestionValue={getCitySuggestionValue}
-                    renderSuggestion={renderCitySuggestion}
-                    renderSuggestionsContainer={renderCitySuggestionContainer}
-                    inputProps={CityInputProps}
-                    //onSuggestionSelected={(event, { suggestion }) => setSelectedCity({ value: suggestion, label: suggestion })}
-                />
-            </div>
+        <div className={`col-span-1 p-3 rounded-lg ${isDarkMode ? 'bg-[#255972]' : 'bg-[#78b6d3]'}`}>
+            <h2 className="text-lg font-semibold mb-4">City Selection</h2>
+            <div className={`flex items-center p-2 rounded-lg ${isDarkMode ? 'bg-[#78b6d3]' : 'bg-[#255972]'}`}>
+                <div className="relative w-full">
+                    <Autosuggest
+                        suggestions={citySuggestions}
+                        onSuggestionsFetchRequested={onCitySuggestionsFetchRequested}
+                        onSuggestionsClearRequested={onCitySuggestionsClearRequested}
+                        onSuggestionSelected={onCitySuggestionSelected}
+                        getSuggestionValue={getCitySuggestionValue}
+                        renderSuggestion={renderCitySuggestion}
+                        renderSuggestionsContainer={renderCitySuggestionContainer}
+                        inputProps={CityInputProps}
+                        //onSuggestionSelected={(event, { suggestion }) => setSelectedCity({ value: suggestion, label: suggestion })}
+                    />
+                </div>
             <a data-tooltip-id="city-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Search for cities to examine on the plot.">ℹ️</a>
             <ReactTooltip place="top" effect="solid" id="city-tooltip" />
         </div>
     </div>
-    {/* <div className="col-span-1 bg-[#2c7787] p-3 rounded-lg">
-        <h2 className="text-lg font-semibold mb-4">ZIP Code Selection</h2>
-        <div className="flex items-center bg-[#65bacd] p-2 rounded-lg">
-            <Select
-                options={zipOptions}
-                value={selectedZIP}
-                onChange={(option) => setSelectedZIP(option)}
-                className="text-black w-full"
-            />
-            <a data-tooltip-id="zip-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Tooltip content here.">ℹ️</a>
-            <ReactTooltip place="top" effect="solid" id="zip-tooltip" />
-        </div>
-    </div> */}
-    <div className="col-span-3 bg-[#3184bc] p-3 rounded-lg">
-        <h2 className="text-lg font-semibold mb-4">NTEE Code Selection</h2>
-        <div className="grid grid-cols-3 gap-4">
-            <div className="flex items-center bg-[#85bce0] p-2 rounded-lg">
+    <div className={`col-span-3 p-3 rounded-lg ${isDarkMode ? 'bg-[#3184bc]' : 'bg-[#85bce0]'}`}>
+    <h2 className="text-lg font-semibold mb-4">NTEE Code Selection</h2>
+    <div className="grid grid-cols-3 gap-4">
+        <div className={`flex items-center p-2 rounded-lg ${isDarkMode ? 'bg-[#85bce0]' : 'bg-[#3184bc]'}`}>
                 <div className="relative w-full">
                     <Autosuggest
                         suggestions={suggestions.NTEE1}
@@ -415,7 +427,7 @@ const SPIN = ({isDarkMode}) => {
                 <a data-tooltip-id="option1-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Select the first NTEE code.">ℹ️</a>
                 <ReactTooltip place="top" effect="solid" id="option1-tooltip" />
             </div>
-            <div className="flex items-center bg-[#85bce0] p-2 rounded-lg">
+            <div className={`flex items-center p-2 rounded-lg ${isDarkMode ? 'bg-[#85bce0]' : 'bg-[#3184bc]'}`}>
             <div className="relative w-full">
                     <Autosuggest
                         suggestions={suggestions.NTEE2}
@@ -431,7 +443,7 @@ const SPIN = ({isDarkMode}) => {
                 <a data-tooltip-id="option2-tooltip" className="ml-2 cursor-pointer text-white-400 hover:text-gray-200" data-tooltip-content="Select the second NTEE code.">ℹ️</a>
                 <ReactTooltip place="top" effect="solid" id="option2-tooltip" />
             </div>
-            <div className="flex items-center bg-[#85bce0] p-2 rounded-lg">
+            <div className={`flex items-center p-2 rounded-lg ${isDarkMode ? 'bg-[#85bce0]' : 'bg-[#3184bc]'}`}>
             <div className="relative w-full">
                     <Autosuggest
                         suggestions={suggestions.NTEE3}
@@ -451,7 +463,7 @@ const SPIN = ({isDarkMode}) => {
     </div>
             </div>
             <div className={`flex justify-between items-center ${isDarkMode ? "bg-[#171821] text-white" : "bg-white text-black"} p-4 rounded-lg mt-4`}>
-                <h2 className="text-xl font-semibold mb-2">Select Variables to Compare:</h2>
+                <h2 className="text-xl font-semibold">Select Variables to Compare:</h2>
                 <div className="flex space-x-4">
                     <Select
                         options={varOptions}
@@ -467,17 +479,27 @@ const SPIN = ({isDarkMode}) => {
                     />
                 </div>
             </div>
-            <div className="flex flex-col ">
-                {sectorData ? (
+            <div className="flex flex-col h-">
+                {loading ? (
+                    <div className={`flex justify-center items-center h-screen p-6 rounded-lg ${isDarkMode ? 'bg-[#21222D]' : 'bg-[#f9f9f9]'}`}>
+                        <SearchLoadingComponent />
+                    </div>
+                ) : sectorData ? (
                     <div className="h-full h-screen">
                         <ScatterPlot data={sectorData.data} X_axis_var={selectedXAxis.value} Y_axis_var={selectedYAxis.value} filters={sectorFilters} isDarkMode={isDarkMode} />
                     </div>
                 ) : (
-                    <div className = "text-center mt-4 h-screen  "> Enter Selection To Load</div>
+                    <div className={`flex justify-center items-center h-screen p-6 rounded-lg ${isDarkMode ? 'bg-[#21222D]' : 'bg-[#f9f9f9]'}`}>
+                        <div className={`p-3 rounded-lg ${isDarkMode ? 'bg-[#171821]' : 'bg-white'}`}>
+                            <p>Enter a state and other selections to load data.</p>
+                        </div>
+                    </div>
                 )}
             </div>
         </div>
     );
 };
+
+SPIN.displayName = "SPIN";
 
 export default SPIN;
