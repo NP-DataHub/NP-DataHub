@@ -360,10 +360,8 @@ export default function RegionalHealthSection({isDarkMode}) {
     };
 
 
-    return(<div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
-        <h3 className="text-xl font-semibold text-[#A9DFD8]">
-            REGIONAL HEALTH BY SECTOR                                
-        </h3>
+    return(<div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"} rounded-lg`}>
+        <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>REGIONAL HEALTH BY SECTOR</h3>
         <p>
             Compare NTEE code sectors against public data that align with various regional non-profit’s missions. The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
         </p>
@@ -470,9 +468,7 @@ export default function RegionalHealthSection({isDarkMode}) {
                 </div>
         {/* Add in loading bar while searching have it display in this area*/}
                 
-        <h3 className="text-xl font-semibold mt-12">
-            KEY DEMOGRAPHIC DATA
-        </h3>
+        <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>KEY DEMOGRAPHIC DATA</h3>
         <p className="mt-2">
             With your choice of Zipcode, the following demographic variables from the U.S. Census are included in the report below. (However, Not all zipcodes line up with the census data, so if you are not getting a result try a zipcode near the one you are looking for.)
         </p>
@@ -521,9 +517,7 @@ export default function RegionalHealthSection({isDarkMode}) {
             </div>
             </div>
 
-            <h3 className="text-xl font-semibold mt-12">
-                INTERACTIVE MAP
-            </h3>
+            <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>INTERACTIVE MAP</h3>
             <p className="mt-2">                
                 Choose which demographic variable to search below. Then hover over the map for detailed tool tip of the key demographic data from the zip code that aligns with your chosen nonprofit sector.
             </p>
