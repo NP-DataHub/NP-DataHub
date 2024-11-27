@@ -86,7 +86,7 @@ export default function COLAB({isDarkMode}) {
     };
 
     const onNameSuggestionSelected = (event, { suggestion }) => {
-        console.log("Selected suggestion:", suggestion);
+        //console.log("Selected suggestion:", suggestion);
 
 
         // clear all current filters and data
@@ -105,7 +105,7 @@ export default function COLAB({isDarkMode}) {
         
     // Handle the click event on a nonprofit from the colab graph component
     const handleNonprofitClick = useCallback((clickedNonprofit) => {
-        console.log("clicked on nonprofit:", clickedNonprofit.Nm);
+        //console.log("clicked on nonprofit:", clickedNonprofit.Nm);
         setNonprofit(clickedNonprofit.Nm);
         setNonprofitData(clickedNonprofit); 
         setFirstNp(clickedNonprofit.Nm);
@@ -128,13 +128,13 @@ export default function COLAB({isDarkMode}) {
                 setNonprofitData(nonprofitData.data[0]);
             }
             else{
-                console.error("No data found for the selected nonprofit");
+                //console.error("No data found for the selected nonprofit");
                 setNonprofitData(null);
             }
 
             // Get the area data for the selected nonprofit
             if (nonprofitData !== null && nonprofitData.data.length > 0) {
-                console.log("Nonprofit data:", nonprofitData.data);
+                //console.log("Nonprofit data:", nonprofitData.data);
                 // Extract the city and zip code of the selected nonprofit
                 let CITY = null;
                 let ZIP = null;
@@ -162,7 +162,7 @@ export default function COLAB({isDarkMode}) {
 
      const handleSearch = () => {
         fetchData();
-        console.log("computing similarity network");
+        //console.log("computing similarity network");
         computeSimilarityNetwork();
     };
 
@@ -187,7 +187,7 @@ export default function COLAB({isDarkMode}) {
 
     const updateThresholdedList = useCallback(() => {
         if(similarityList.length === 0){
-            console.error("Cannot update thresholded list - similarity list is empty");
+            //console.error("Cannot update thresholded list - similarity list is empty");
             return;
         }
         
@@ -338,7 +338,7 @@ export default function COLAB({isDarkMode}) {
                     )}
                     renderSuggestion={renderNameSuggestion}
                     inputProps={{
-                        placeholder: 'Search for a Nonprofit',
+                        placeholder: 'Search for a nonprofit',
                         value: firstNp,
                         onChange: (_, { newValue }) => {
                             setFirstNp(newValue);

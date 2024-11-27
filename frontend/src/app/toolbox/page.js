@@ -353,10 +353,10 @@ export default function Toolbox() {
                                 <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Estimate and budget growth of sectors based on percentages and fiscal variables.</p>
                             </div>
                             <div
-                                className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ${
+                                className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
                                     selectedSection === "Co:Lab" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#c9c9c9] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
                                 }`}
-                                // data-tooltip-id="comparison-tooltip4"
+                                //data-tooltip-id="comparison-tooltip4"
                                 // data-tooltip-content="Currently Under Development"
                                 
                                 onClick={() =>
