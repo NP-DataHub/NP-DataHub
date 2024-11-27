@@ -72,9 +72,15 @@ export default function COLAB({isDarkMode}) {
     // Render function for names
     const renderNameSuggestion = (suggestion) => {
         return (
-        <div className="px-4 py-2  cursor-pointer hover:bg-[#FEB95A] hover:text-black">
-            {suggestion.Nm}
-        </div>
+            <div
+              className={`px-4 py-2 cursor-pointer ${
+                isDarkMode
+                  ? "hover:bg-[#F2C8ED] hover:text-black"
+                  : "hover:bg-[#DB7093] hover:text-black"
+              }`}
+            >
+              {suggestion.Nm}
+            </div>
         );
     };
 
@@ -284,8 +290,16 @@ export default function COLAB({isDarkMode}) {
 
     // Slider component to set the threshold for similarity score
     const ThresholdSlider = ({ threshold, setThreshold, isDarkMode }) => (
-        <div className={`flex items-center h-full gap-4 p-2 rounded-lg w-full ${isDarkMode ? "bg-[#34344c]" : "bg-[#c9c9c9]"}`}>
-            <label className={`text-${isDarkMode ? 'white' : 'black'} flex flex-col w-1/3 whitespace-normal text-ellipsis`}>
+        <div
+            className={`flex items-center h-full gap-4 p-2 rounded-lg w-full ${
+                isDarkMode ? "bg-[#34344c]" : "bg-[#F1F1F1]"
+            }`}
+        >
+            <label
+                className={`flex flex-col w-1/3 whitespace-normal text-ellipsis ${
+                    isDarkMode ? "text-white" : "text-black"
+                }`}
+            >
                 Similarity Threshold:
             </label>
             <input
@@ -294,32 +308,39 @@ export default function COLAB({isDarkMode}) {
                 max="100"
                 value={threshold}
                 onChange={(e) => setThreshold(parseInt(e.target.value, 10))}
-                className={`w-2/3 p-2 border ${isDarkMode ? 'bg-[#34344c] text-white border-gray-600' : 'bg-[#c9c9c9] text-black border-gray-200'} rounded-lg focus:outline-none`}
+                className={`w-2/3 border ${
+                    isDarkMode
+                        ? "bg-[#34344c] text-white border-gray-600"
+                        : "bg-[#F1F1F1] text-black border-gray-200"
+                } rounded-lg focus:outline-none`}
+                style={{ accentColor: isDarkMode ? "#F2C8ED" : "#DB7093" }}
             />
-            <span className={`text-${isDarkMode ? 'white' : 'black'}`}>{threshold}</span>
+            <span className={`${isDarkMode ? "text-white" : "text-black"}`}>
+                {threshold}
+            </span>
         </div>
     );
-
-
     return (
 
-        <div className={`w-full h-full p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
+        <div className={`w-full h-full p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"} rounded-lg`}>
         {/* Title and description */}
-        <h3 className='text-xl font-semibold mb-4 text-[#F2C8ED]'>COLLAB:LAB</h3>
-        <div className='grid grid-cols-3 gap-4 mb-4'>
-            <div className={`col-span-1 p-4 rounded-lg w-full ${isDarkMode ? "bg-[#34344c] text-white"   : "bg-[#c9c9c9] text-black"} `}>
-                <h2 className='text-2xl mb-1'>Similarity Score</h2>
-                <p>The similarity score is a measure of how similar a nonprofit is to other organizations within their zip code. By comparing the sectors in which the nonprofits operate, you can gauge how similar they are financially after the similarity score is computed. This includes a weighted score on revenues, expenses, assets, and liabilities.</p>
+            <h3 className={`text-xl font-semibold mb-4 ${isDarkMode ? "text-[#F2C8ED]" : "text-[#DB7093]"}`} >
+            COLLAB:LAB
+            </h3>
+            <div className='grid grid-cols-3 gap-4 mb-4'>
+                <div className={`col-span-1 p-4 rounded-lg w-full ${isDarkMode ? "bg-[#34344c] text-white"   : "bg-[#F1F1F1] text-black"} `}>
+                    <h2 className='text-2xl mb-1'>Similarity Score</h2>
+                    <p>The similarity score is a measure of how similar a nonprofit is to other organizations within their zip code. By comparing the sectors in which the nonprofits operate, you can gauge how similar they are financially after the similarity score is computed. This includes a weighted score on revenues, expenses, assets, and liabilities.</p>
+                </div>
+                <div className={`col-span-1 p-4 rounded-lg w-full ${isDarkMode ? "bg-[#34344c] text-white"   : "bg-[#F1F1F1] text-black"} `}>
+                    <h2 className='text-2xl mt-2 mb-1'>Nonprofit Network</h2>
+                    <p>Visualize highly similar nonprofits through a network of nonprofits, connected by their score. Then, click on a nonprofit to see their similarity table. Choose the size of the network by adjusting the similarity threshold - how similar nonprofits must be to connect. Low thresholds are not recommended but adjust accordingly.</p>
+                </div>
+                <div className={`col-span-1 p-4 rounded-lg w-full ${isDarkMode ? "bg-[#34344c] text-white"   : "bg-[#F1F1F1] text-black"} `}>
+                    <h2 className='text-2xl mt-2 mb-1'>Similarity Table</h2>
+                    <p>Choose and compare a nonprofit against all other nonprofits in the same zip code. See what other nonprofits in the area are most similar, and use to analyze the potential of collaboration or strategically to ensure fiscal viability for a specific funding opportunity. Click learn more to visit the selected nonprofit&apos;s profile page.</p>
+                </div>
             </div>
-            <div className={`col-span-1 p-4 rounded-lg w-full ${isDarkMode ? "bg-[#34344c] text-white"   : "bg-[#c9c9c9] text-black"} `}>
-                <h2 className='text-2xl mt-2 mb-1'>Nonprofit Network</h2>
-                <p>Visualize highly similar nonprofits through a network of nonprofits, connected by their score. Then, click on a nonprofit to see their similarity table. Choose the size of the network by adjusting the similarity threshold - how similar nonprofits must be to connect. Low thresholds are not recommended but adjust accordingly.</p>
-            </div>
-            <div className={`col-span-1 p-4 rounded-lg w-full ${isDarkMode ? "bg-[#34344c] text-white"   : "bg-[#c9c9c9] text-black"} `}>
-                <h2 className='text-2xl mt-2 mb-1'>Similarity Table</h2>
-                <p>Choose and compare a nonprofit against all other nonprofits in the same zip code. See what other nonprofits in the area are most similar, and use to analyze the potential of collaboration or strategically to ensure fiscal viability for a specific funding opportunity. Click learn more to visit the selected nonprofit&apos;s profile page.</p>
-            </div>
-        </div>
         {/* Name search, threshold slider */}
         <div className="grid grid-cols-2 gap-4 mb-4 w-full">
             {/* Name search autosuggest */}
@@ -331,10 +352,15 @@ export default function COLAB({isDarkMode}) {
                     onSuggestionsClearRequested={onSuggestionsClearRequested}
                     getSuggestionValue={getNameSuggestionValue}
                     renderSuggestionsContainer={({ containerProps, children }) => (
-                        <div {...containerProps} className={`absolute top-full transform w-full ${
-                            isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                        } overflow-y-auto rounded z-10 ${nameSuggestions.length > 0 ? 'border border-[#A9DFD8]' : ''}`}>
-                            {children}
+                        <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                            nameSuggestions.length > 0
+                              ? isDarkMode
+                                ? 'bg-[#171821] text-white border border-[#F2C8ED]'
+                                : 'bg-white text-black border border-[#DB7093]'
+                              : ''
+                          }`}
+                        >
+                          {children}
                         </div>
                     )}
                     renderSuggestion={renderNameSuggestion}
@@ -347,7 +373,7 @@ export default function COLAB({isDarkMode}) {
                         },
                         className: `p-4 border h-[52px] ${isDarkMode 
                             ? "bg-[#34344c] text-white border-gray-600" 
-                            : "bg-[#c9c9c9] text-black border-gray-200"} 
+                            : "bg-[#F1F1F1] text-black border-gray-200"} 
                             rounded-lg w-full focus:outline-none`,
                     }}
                 />
@@ -358,8 +384,17 @@ export default function COLAB({isDarkMode}) {
                 {/* Search button */}
                 <div className="flex items-center w-1/3 h-full">
                     <button
-                        onClick={handleSearch}
-                        className="w-full h-full bg-[#A9DFD8] text-black p-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#F2C8ED]"
+                        onClick={handleSearch}                      
+                        className={`w-full h-full text-black p-2 rounded-lg focus:outline-none focus:ring-1  ${
+                            !nonprofit || dataIsLoading
+                              ? isDarkMode
+                                ? "bg-gray-700 cursor-not-allowed"
+                                : "bg-[#D8D8D8] cursor-not-allowed"
+                              : isDarkMode
+                              ? 'bg-[#c1a0bd] hover:bg-[#F2C8ED] transition duration-300'
+                              : 'bg-[#f9e3ee] hover:bg-[#f4c7dd] transition duration-300'
+                            }
+                        `}
                     >
                         Search
                     </button>
@@ -383,17 +418,17 @@ export default function COLAB({isDarkMode}) {
             ) : areaData ? (
                 <div className="grid grid-cols-2 gap-4 h-full">
                     {/* Graph */}
-                    <div className={`flex flex-col p-4 rounded-lg ${isDarkMode ? "bg-[#34344c]" : "bg-[#c9c9c9]"}`}>
+                    <div className={`flex flex-col p-4 rounded-lg ${isDarkMode ? "bg-[#34344c]" : "bg-[#F1F1F1]"}`}>
                         <h2 className="text-center text-3xl">Nonprofit Network</h2>
                         <COLABGraph data={thresholdedList} filters={[]} onNonprofitClick={handleNonprofitClick} isDarkMode={isDarkMode}  threshold={threshold}/>
                     </div>
                     {/* Table */}
-                    <div className={`flex flex-col justify-between h-full p-4 rounded-lg ${isDarkMode ? "bg-[#34344c]" : "bg-[#c9c9c9]"}`}>
+                    <div className={`flex flex-col justify-between h-full p-4 rounded-lg ${isDarkMode ? "bg-[#34344c]" : "bg-[#F1F1F1]"}`}>
                             <COLABTable similarityList={similarityList} selectedNonprofit={nonprofitData} isDarkMode={isDarkMode} />
                     </div>
                 </div>
             ) : (
-                <div className={`col-span-2 h-full p-4 rounded-lg flex items-center justify-center ${isDarkMode ? 'bg-[#34344c] text-white' : 'bg-[#c9c9c9] text-black'}`}>
+                <div className={`col-span-2 h-full p-4 rounded-lg flex items-center justify-center ${isDarkMode ? 'bg-[#34344c] text-white' : 'bg-[#F1F1F1] text-black'}`}>
                     <span className="text-center text-3xl">Select a Nonprofit to get started.</span>
                 </div>
             )}

@@ -104,7 +104,9 @@ const COLABGraph = ({data, filters, onNonprofitClick, isDarkMode, threshold}) =>
           id: i++,
           name: nonprofit.Nm,
           category: nonprofit.NTEE,
-
+          itemStyle: {
+            color: isDarkMode ? "#F2C8ED" : "#DB7093",
+          },
           /**
            *  TODO: Add color coding based on the NTEE code
            */
@@ -122,6 +124,7 @@ const COLABGraph = ({data, filters, onNonprofitClick, isDarkMode, threshold}) =>
           //value: nonprofit.Rev,
           label: {
             show: true,
+            color: isDarkMode ? "white" : "black",
             position: 'inside',
             formatter: '{b}',
           },
