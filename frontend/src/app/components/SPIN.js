@@ -350,7 +350,12 @@ const SPIN = ({isDarkMode}) => {
 
     return (
         <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"}  p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-10 mx-10 mb-12`}>
-
+            <div className="flex items-center mb-4">
+                <h1 className="text-3xl font-semibold mr-4">S.P.I.N.</h1>
+                <p className="text-2xl">
+                     Scatter Plot for Identifying Nonprofits
+                </p>
+            </div>
             <div className={`mb-4 p-4 ${isDarkMode ? "bg-[#171821] text-white" : "bg-white text-black"} rounded-lg`}>
                 <h2 className="text-xl font-semibold mb-2">Overview</h2>
                 <p className="text-base  mb-6">
