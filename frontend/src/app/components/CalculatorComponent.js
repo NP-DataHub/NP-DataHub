@@ -190,7 +190,7 @@ const states = [
     } catch (error) {
       console.error("Error fetching suggestions:", error);
     }
-  }, 500), // 500 delay
+  }, 250), // 250 delay
   [lastFetchedNameInput, lastFetchedAddressInput]);
 
 

@@ -15,7 +15,7 @@ import Autosuggest from "react-autosuggest/dist/Autosuggest";
 import COLABGraph from '@/app/components/charts/COLABGraph';
 import COLABTable from './charts/COLABTable';
 import SimilarityScore from '@/app/components/SimilarityScore';
-
+import debounce from 'lodash.debounce';
 
 
 export default function COLAB({isDarkMode}) {
@@ -40,7 +40,7 @@ export default function COLAB({isDarkMode}) {
     const [firstNp, setFirstNp] = useState('');
 
 
-    const fetchSuggestions = async (value, type) => {
+    const fetchSuggestions = useCallback( debounce(async (value, type) => {
         if (type === 'name' && value === lastFetchedNameInput) return;
     
         try {
@@ -58,7 +58,8 @@ export default function COLAB({isDarkMode}) {
         } catch (error) {
         console.error("Error fetching suggestions:", error);
         }
-    };
+    }, 250), // 250 ms delay
+    [lastFetchedNameInput]);
     
 
     // Autosuggest configuration

@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Autosuggest from 'react-autosuggest';
 import zipData from './zipcode_data';
 import dynamic from 'next/dynamic';
+import debounce from 'lodash.debounce';
+import { useCallback } from "react";
 const Map2 = dynamic(() => import('../components/map2'), { ssr: false});
 
 const CENSUS_KEY = process.env.NEXT_PUBLIC_CENSUS_API_KEY;
@@ -97,7 +99,7 @@ export default function RegionalHealthSection({isDarkMode}) {
 
       
     //Name autosuggestions
-    const fetchSuggestions = async (value, type) => {
+    const fetchSuggestions = useCallback( debounce(async (value, type) => {
         if (value === lastFetchedNameInput) return;
         
         try {
@@ -112,7 +114,8 @@ export default function RegionalHealthSection({isDarkMode}) {
         } catch (error) {
           console.error("Error fetching suggestions:", error);
         }
-    };
+    }, 250), // 250 ms delay
+    [lastFetchedNameInput]);
 
     const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
     const renderNameSuggestion = (suggestion) => {

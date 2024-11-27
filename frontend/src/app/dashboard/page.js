@@ -159,7 +159,7 @@ export default function Dashboard() {
         } catch (error) {
           console.error("Error fetching suggestions:", error);
         } 
-      }, 500), // 500 delay
+      }, 250), // 250 ms delay
     [lastFetchedNameInput]);
 
     const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
