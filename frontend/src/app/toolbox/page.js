@@ -217,8 +217,8 @@ export default function Toolbox() {
                 <div className = "min-h-screen flex flex-col">
                 <div className = "flex-grow">
                     <div className = {`flex-col px-10 ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} rounded-md mx-10 p-10 font-sans mt-12 flex-grow mb-12`} >
-                        <h1 className = "text-2xl font-semibold">NON PROFIT TOOLBOX LIBRARY</h1>
-                        <span className = "text-sm text-[#A0A0A0]">Choose from one of eight analytical tools for stronger insights.</span>
+                        <h1 className = "text-2xl font-semibold">NONPROFIT TOOLBOX LIBRARY</h1>
+                        <span className = "text-sm text-[#A0A0A0]">Choose from one of six analytical tools for stronger insights.</span>
                         <div
                                 className={`relative ${
                                     isDarkMode ? "text-white" : "text-black"
@@ -301,7 +301,7 @@ export default function Toolbox() {
                                 <h2 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-[#F2C8ED]" : "text-[#DB7093]"}`} >
                                     ANOMALY DETECTION
                                 </h2>
-                                <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Use a Machine Learning Model to find pototential outliers for nonprofits.</p>
+                                <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Use machine learning modeling to find potential nonprofit outliers based on fiscal standing.</p>
                             </div>
                         
                             <div
