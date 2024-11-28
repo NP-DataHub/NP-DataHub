@@ -12,7 +12,6 @@ import NewsFeedSection from "../components/newsfeed";
 import FiscalHealthSection from "../components/FiscalHealthComponent";
 import CalculatorSection from "../components/CalculatorComponent";
 import Footer from "../components/dashboard_footer";
-import RegionalHealthSection from "../components/RegionalHealthComponent";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { FaInfoCircle } from "react-icons/fa";
 import COLAB from "../components/COLAB";
@@ -251,57 +250,59 @@ export default function Toolbox() {
                                 <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Assess a nonprofit{"’"}s fiscal health based on a weighted score of various data variables. Compare the scores side-by-side with other nonprofits.</p>
                             </div>
                             <div
-                                className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer  ${
-                                    selectedSection === "Region Health" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
+                                className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300  ${
+                                    selectedSection === "Region Health" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#c9c9c9] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
                                 }`}
-                                onClick={() =>
-                                    setSelectedSection(
-                                      selectedSection === "Region Health" ? null : "Region Health"
-                                    )
-                                  }
-                                // data-tooltip-id="comparison-tooltip1"
-                                // data-tooltip-content="Currently Under Development"
-                                
-                                >
-                                {/* <ReactTooltip place="top" effect="solid" id="comparison-tooltip1" /> */}
-
-                                    <svg className = "mb-4" width="36" height="39" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.6897 19.0367L7.93192 12.318C7.15315 11.3985 6.65164 10.2767 6.48579 9.08319C6.31994 7.8897 6.49657 6.67366 6.99513 5.57668C7.49368 4.4797 8.29363 3.54693 9.30181 2.88702C10.31 2.2271 11.4849 1.86719 12.6897 1.84921C14.3598 1.86572 15.9553 2.54343 17.1268 3.73391C18.2982 4.9244 18.9501 6.53061 18.9397 8.20078C18.9404 9.65776 18.4443 11.0714 17.5335 12.2086L12.6897 19.0367ZM12.6897 3.41171C11.4334 3.42614 10.2341 3.93857 9.35521 4.83648C8.47634 5.7344 7.98973 6.94439 8.00223 8.20078C8.00814 9.34739 8.42062 10.4547 9.16629 11.3258L12.6897 16.318L16.3069 11.2242C16.9945 10.366 17.3717 9.30046 17.3772 8.20078C17.3897 6.94439 16.9031 5.7344 16.0243 4.83648C15.1454 3.93857 13.9461 3.42614 12.6897 3.41171Z" fill={isDarkMode ? "#A9DFD8" : "#316498"}/>
-                                    <path d="M12.6897 8.88046C13.5527 8.88046 14.2522 8.18091 14.2522 7.31796C14.2522 6.45502 13.5527 5.75546 12.6897 5.75546C11.8268 5.75546 11.1272 6.45502 11.1272 7.31796C11.1272 8.18091 11.8268 8.88046 12.6897 8.88046Z" fill={isDarkMode ? "#A9DFD8" : "#316498"}/>
-                                    <path d="M22.0647 9.66171H20.5022V11.2242H22.0647V22.1617H3.31473V11.2242H4.87723V9.66171H3.31473C2.90033 9.66171 2.5029 9.82633 2.20988 10.1194C1.91685 10.4124 1.75223 10.8098 1.75223 11.2242V22.1617C1.75223 22.5761 1.91685 22.9735 2.20988 23.2666C2.5029 23.5596 2.90033 23.7242 3.31473 23.7242H22.0647C22.4791 23.7242 22.8766 23.5596 23.1696 23.2666C23.4626 22.9735 23.6272 22.5761 23.6272 22.1617V11.2242C23.6272 10.8098 23.4626 10.4124 23.1696 10.1194C22.8766 9.82633 22.4791 9.66171 22.0647 9.66171Z" fill={isDarkMode ? "#A9DFD8" : "#316498"}/>
-                                </svg>
-
-
-                                <h2 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-[#A9DFD8]" : "text-[#316498]"}`} >
-                                    REGION HEALTH
-                                </h2>
-                                <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Compare NTEE code sectors against public data that align with various regional non-profit{"'"}s missions.</p>
-                            </div>
-                            <div className={`${isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"} relative z-10 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300`}
-                                data-tooltip-id="comparison-tooltip2"
+                                // onClick={() =>
+                                //     setSelectedSection(
+                                //       selectedSection === "Region Health" ? null : "Region Health"
+                                //     )
+                                //   }
+                                data-tooltip-id="comparison-tooltip1"
                                 data-tooltip-content="Currently Under Development"
                                 
                                 >
-                                <ReactTooltip place="top" effect="solid" id="comparison-tooltip2" />
-                                <svg className = "mb-4" width="36" height="39" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_1349_1533)">
-                                    <path d="M22.6453 6.06772C21.3623 4.06772 19.5053 2.39772 17.3753 1.54772L16.7453 1.33472C16.0489 1.11907 15.3244 1.00753 14.5953 1.00372C12.2883 1.01372 10.4203 2.92372 10.4203 5.27872C10.4176 6.21743 10.7221 7.13127 11.2873 7.88072L11.0273 7.53872C11.1513 7.72472 11.2873 7.90872 11.4443 8.09472C12.1073 8.89672 13.0483 9.72972 14.2663 10.6747C17.2653 12.9947 19.2093 15.0527 19.3703 17.6047C19.4083 17.9487 19.4323 18.3007 19.4323 18.6557C19.4323 19.9527 19.1493 21.3257 18.6683 22.2907H18.6733C18.6733 22.2907 18.4663 22.6677 18.5963 22.7777C18.6623 22.8347 18.8063 22.8777 19.0563 22.7247C20.3989 21.8507 21.5546 20.7188 22.4563 19.3947C23.7867 17.4351 24.5127 15.1281 24.5443 12.7597C24.5797 10.3912 23.9191 8.06431 22.6443 6.06772H22.6453ZM13.5493 14.7857L11.6713 13.2357C7.73733 10.3657 5.69133 7.26972 6.81233 3.45272C6.91519 3.10694 7.03874 2.76766 7.18233 2.43672V2.43272C7.18233 2.43272 7.46033 1.84972 6.85533 2.13772C5.04091 3.12335 3.50968 4.55798 2.40807 6.30441C1.30646 8.05085 0.671297 10.0507 0.563327 12.1127C0.421359 14.7439 1.1422 17.3496 2.61633 19.5337C3.21126 20.369 3.93887 21.1014 4.77033 21.7017H4.76633C8.91433 24.7547 12.4723 23.1477 12.4723 23.1477H12.4753C13.3573 22.775 14.1093 22.1495 14.6364 21.3501C15.1635 20.5508 15.4422 19.6132 15.4373 18.6557C15.441 17.9089 15.2725 17.1712 14.9449 16.5001C14.6173 15.8289 14.1394 15.2423 13.5483 14.7857H13.5493Z" fill="#F2C8ED"/>
-                                    </g>
-                                    <defs>
-                                    <clipPath id="clip0_1349_1533">
-                                    <rect width="24" height="24" fill="white" transform="translate(0.546326 0.286713)"/>
-                                    </clipPath>
-                                    </defs>
+                                <ReactTooltip place="top" effect="solid" id="comparison-tooltip1" />
+
+                                    <svg className = "mb-4" width="36" height="39" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.6897 19.0367L7.93192 12.318C7.15315 11.3985 6.65164 10.2767 6.48579 9.08319C6.31994 7.8897 6.49657 6.67366 6.99513 5.57668C7.49368 4.4797 8.29363 3.54693 9.30181 2.88702C10.31 2.2271 11.4849 1.86719 12.6897 1.84921C14.3598 1.86572 15.9553 2.54343 17.1268 3.73391C18.2982 4.9244 18.9501 6.53061 18.9397 8.20078C18.9404 9.65776 18.4443 11.0714 17.5335 12.2086L12.6897 19.0367ZM12.6897 3.41171C11.4334 3.42614 10.2341 3.93857 9.35521 4.83648C8.47634 5.7344 7.98973 6.94439 8.00223 8.20078C8.00814 9.34739 8.42062 10.4547 9.16629 11.3258L12.6897 16.318L16.3069 11.2242C16.9945 10.366 17.3717 9.30046 17.3772 8.20078C17.3897 6.94439 16.9031 5.7344 16.0243 4.83648C15.1454 3.93857 13.9461 3.42614 12.6897 3.41171Z" fill="#A9DFD8"/>
+                                    <path d="M12.6897 8.88046C13.5527 8.88046 14.2522 8.18091 14.2522 7.31796C14.2522 6.45502 13.5527 5.75546 12.6897 5.75546C11.8268 5.75546 11.1272 6.45502 11.1272 7.31796C11.1272 8.18091 11.8268 8.88046 12.6897 8.88046Z" fill="#A9DFD8"/>
+                                    <path d="M22.0647 9.66171H20.5022V11.2242H22.0647V22.1617H3.31473V11.2242H4.87723V9.66171H3.31473C2.90033 9.66171 2.5029 9.82633 2.20988 10.1194C1.91685 10.4124 1.75223 10.8098 1.75223 11.2242V22.1617C1.75223 22.5761 1.91685 22.9735 2.20988 23.2666C2.5029 23.5596 2.90033 23.7242 3.31473 23.7242H22.0647C22.4791 23.7242 22.8766 23.5596 23.1696 23.2666C23.4626 22.9735 23.6272 22.5761 23.6272 22.1617V11.2242C23.6272 10.8098 23.4626 10.4124 23.1696 10.1194C22.8766 9.82633 22.4791 9.66171 22.0647 9.66171Z" fill="#A9DFD8"/>
                                 </svg>
 
 
-                                <h2 className="text-xl text-[#F2C8ED] font-semibold mb-2">SIMILARITY SCORES</h2>
-                                <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Use large language models similar to ChatGPT to compare to other missions of comparable non-profits.</p>
+
+                                <h2 className="text-xl text-[#A9DFD8] font-semibold mb-2">REGION HEALTH</h2>
+                                <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Compare NTEE code sectors against public data that align with various regional non-profit{"'"}s missions.</p>
+                            </div>
+                            
+                            <div className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
+                                selectedSection === "Anomaly Detection" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
+                                }`}
+                                
+                                onClick={() =>
+                                    setSelectedSection(
+                                        selectedSection === "Anomaly Detection" ? null : "Anomaly Detection"
+                                    )
+                                    }
+                                >
+
+                                <svg className="mb-4" width="36" height="39" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="6" width="6" height="6" fill="#F2C8ED" />
+                                    <rect x="18" y="6" width="6" height="6" fill="#F2C8ED" />
+                                    <rect x="6" y="18" width="6" height="6" fill="#F2C8ED" />
+                                    <rect x="18" y="18" width="6" height="6" fill="#F2C8ED" />
+                                    <circle cx="27" cy="27" r="5" stroke="#F2C8ED" strokeWidth="1.5" fill="none" />
+                                    <line x1="30" y1="30" x2="34" y2="34" stroke="#F2C8ED" strokeWidth="1.5" strokeLinecap="round" />
+                                </svg>
+
+                                <h2 className="text-xl text-[#F2C8ED] font-semibold mb-2">ANOMALY DETECTION</h2>
+                                <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Use a Machine Learning Model to find pototential outliers for nonprofits.</p>
                             </div>
                         
                             <div
                                 className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
-                                    selectedSection === "News Feed" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
+                                    selectedSection === "News Feed" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#c9c9c9] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
                                 }`}
                                 onClick={() =>
                                     setSelectedSection(
@@ -311,10 +312,11 @@ export default function Toolbox() {
                                 >
 
                                 <svg className = "mb-4" width="36" height="39" viewBox="0 0 23 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.10466 22.9153C5.50882 22.9153 4.99893 22.7033 4.57499 22.2794C4.15104 21.8554 3.93871 21.3452 3.93799 20.7486V5.58195C3.93799 4.98612 4.15032 4.47623 4.57499 4.05228C4.99966 3.62834 5.50954 3.41601 6.10466 3.41528H18.0213L23.438 8.83195V20.7486C23.438 21.3444 23.226 21.8547 22.8021 22.2794C22.3781 22.704 21.8679 22.916 21.2713 22.9153H6.10466ZM6.10466 20.7486H21.2713V9.91528H16.938V5.58195H6.10466V20.7486ZM8.27132 18.582H19.1047V16.4153H8.27132V18.582ZM8.27132 9.91528H13.688V7.74862H8.27132V9.91528ZM8.27132 14.2486H19.1047V12.082H8.27132V14.2486Z" fill = {isDarkMode ? "#FEB95A" : "#FFAA00" }/>
+                                    <path d="M6.10466 22.9153C5.50882 22.9153 4.99893 22.7033 4.57499 22.2794C4.15104 21.8554 3.93871 21.3452 3.93799 20.7486V5.58195C3.93799 4.98612 4.15032 4.47623 4.57499 4.05228C4.99966 3.62834 5.50954 3.41601 6.10466 3.41528H18.0213L23.438 8.83195V20.7486C23.438 21.3444 23.226 21.8547 22.8021 22.2794C22.3781 22.704 21.8679 22.916 21.2713 22.9153H6.10466ZM6.10466 20.7486H21.2713V9.91528H16.938V5.58195H6.10466V20.7486ZM8.27132 18.582H19.1047V16.4153H8.27132V18.582ZM8.27132 9.91528H13.688V7.74862H8.27132V9.91528ZM8.27132 14.2486H19.1047V12.082H8.27132V14.2486Z" fill="#FEB95A"/>
                                 </svg>
                                 
-                                <h2 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-[#FEB95A]" : "text-[#FFAA00]"}`} >NEWS FEEDS</h2>
+
+                                <h2 className="text-xl text-[#FEB95A] font-semibold mb-2">NEWS FEEDS</h2>
                                 <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>A tool to understanding larger scale problems and connecting to regional nonprofits via social media and search engines.</p>
                             </div>
                             <div
@@ -353,52 +355,29 @@ export default function Toolbox() {
                                 <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Estimate and budget growth of sectors based on percentages and fiscal variables.</p>
                             </div>
                             <div
-                                className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
-                                    selectedSection === "Co:Lab" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
+                                className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ${
+                                    selectedSection === "Co:Lab" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#c9c9c9] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
                                 }`}
-                                //data-tooltip-id="comparison-tooltip4"
-                                // data-tooltip-content="Currently Under Development"
+                                data-tooltip-id="comparison-tooltip4"
+                                data-tooltip-content="Currently Under Development"
                                 
-                                onClick={() =>
-                                    setSelectedSection(
-                                      selectedSection === "Co:Lab" ? null : "Co:Lab"
-                                    )
-                                  }
+                                // onClick={() =>
+                                //     setSelectedSection(
+                                //       selectedSection === "Co:Lab" ? null : "Co:Lab"
+                                //     )
+                                //   }
                                 >
                                 <ReactTooltip place="top" effect="solid" id="comparison-tooltip4" />
 
                                 <svg className = "mb-4" width="36" height="39" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3.6875 15.4063V14.625H2.125V15.4063C2.125 16.8567 2.70117 18.2477 3.72676 19.2732C4.75235 20.2988 6.14335 20.875 7.59375 20.875H9.9375V19.3125H7.59375C6.55775 19.3125 5.56418 18.901 4.83161 18.1684C4.09905 17.4358 3.6875 16.4423 3.6875 15.4063ZM17.75 7.59375V8.375H19.3125V7.59375C19.3125 6.14335 18.7363 4.75235 17.7107 3.72676C16.6852 2.70117 15.2942 2.125 13.8438 2.125H11.5V3.6875H13.8438C14.3567 3.6875 14.8647 3.78854 15.3386 3.98485C15.8125 4.18115 16.2432 4.46889 16.6059 4.83162C16.9686 5.19434 17.2563 5.62497 17.4527 6.09889C17.649 6.57282 17.75 7.08078 17.75 7.59375ZM7.59375 7.59375H2.90625C2.28465 7.59375 1.68851 7.84068 1.24897 8.28022C0.80943 8.71976 0.5625 9.3159 0.5625 9.9375V11.5H2.125V9.9375C2.125 9.7303 2.20731 9.53159 2.35382 9.38507C2.50034 9.23856 2.69905 9.15625 2.90625 9.15625H7.59375C7.80095 9.15625 7.99966 9.23856 8.14618 9.38507C8.29269 9.53159 8.375 9.7303 8.375 9.9375V11.5H9.9375V9.9375C9.9375 9.3159 9.69057 8.71976 9.25103 8.28022C8.81149 7.84068 8.21535 7.59375 7.59375 7.59375ZM5.25 6.8125C5.86807 6.8125 6.47225 6.62922 6.98616 6.28584C7.50006 5.94246 7.9006 5.45441 8.13712 4.88339C8.37365 4.31237 8.43553 3.68403 8.31495 3.07784C8.19438 2.47165 7.89675 1.91483 7.45971 1.47779C7.02267 1.04075 6.46585 0.743126 5.85966 0.622547C5.25347 0.501969 4.62513 0.563854 4.05411 0.800378C3.4831 1.0369 2.99504 1.43744 2.65166 1.95134C2.30828 2.46525 2.125 3.06943 2.125 3.6875C2.125 4.5163 2.45424 5.31116 3.04029 5.89721C3.62634 6.48326 4.4212 6.8125 5.25 6.8125ZM5.25 2.125C5.55903 2.125 5.86113 2.21664 6.11808 2.38833C6.37503 2.56002 6.5753 2.80405 6.69356 3.08956C6.81182 3.37507 6.84277 3.68923 6.78248 3.99233C6.72219 4.29543 6.57337 4.57384 6.35485 4.79236C6.13633 5.01088 5.85792 5.15969 5.55483 5.21998C5.25173 5.28027 4.93757 5.24933 4.65206 5.13106C4.36655 5.0128 4.12252 4.81253 3.95083 4.55558C3.77914 4.29863 3.6875 3.99653 3.6875 3.6875C3.6875 3.2731 3.85212 2.87567 4.14515 2.58265C4.43817 2.28962 4.8356 2.125 5.25 2.125ZM20.0938 18.5313H15.4062C14.7846 18.5313 14.1885 18.7782 13.749 19.2177C13.3094 19.6573 13.0625 20.2534 13.0625 20.875V22.4375H14.625V20.875C14.625 20.6678 14.7073 20.4691 14.8538 20.3226C15.0003 20.1761 15.199 20.0938 15.4062 20.0938H20.0938C20.301 20.0938 20.4997 20.1761 20.6462 20.3226C20.7927 20.4691 20.875 20.6678 20.875 20.875V22.4375H22.4375V20.875C22.4375 20.2534 22.1906 19.6573 21.751 19.2177C21.3115 18.7782 20.7154 18.5313 20.0938 18.5313ZM14.625 14.625C14.625 15.2431 14.8083 15.8473 15.1517 16.3612C15.495 16.8751 15.9831 17.2756 16.5541 17.5121C17.1251 17.7486 17.7535 17.8105 18.3597 17.69C18.9658 17.5694 19.5227 17.2717 19.9597 16.8347C20.3967 16.3977 20.6944 15.8408 20.815 15.2347C20.9355 14.6285 20.8736 14.0001 20.6371 13.4291C20.4006 12.8581 20.0001 12.37 19.4862 12.0267C18.9723 11.6833 18.3681 11.5 17.75 11.5C16.9212 11.5 16.1263 11.8292 15.5403 12.4153C14.9542 13.0013 14.625 13.7962 14.625 14.625ZM19.3125 14.625C19.3125 14.934 19.2209 15.2361 19.0492 15.4931C18.8775 15.75 18.6335 15.9503 18.3479 16.0686C18.0624 16.1868 17.7483 16.2178 17.4452 16.1575C17.1421 16.0972 16.8637 15.9484 16.6451 15.7299C16.4266 15.5113 16.2778 15.2329 16.2175 14.9298C16.1572 14.6267 16.1882 14.3126 16.3064 14.0271C16.4247 13.7415 16.625 13.4975 16.8819 13.3258C17.1389 13.1541 17.441 13.0625 17.75 13.0625C18.1644 13.0625 18.5618 13.2271 18.8549 13.5201C19.1479 13.8132 19.3125 14.2106 19.3125 14.625Z" fill={isDarkMode ? "#F2C8ED" : "#DB7093"}/>
+                                    <path d="M3.6875 15.4063V14.625H2.125V15.4063C2.125 16.8567 2.70117 18.2477 3.72676 19.2732C4.75235 20.2988 6.14335 20.875 7.59375 20.875H9.9375V19.3125H7.59375C6.55775 19.3125 5.56418 18.901 4.83161 18.1684C4.09905 17.4358 3.6875 16.4423 3.6875 15.4063ZM17.75 7.59375V8.375H19.3125V7.59375C19.3125 6.14335 18.7363 4.75235 17.7107 3.72676C16.6852 2.70117 15.2942 2.125 13.8438 2.125H11.5V3.6875H13.8438C14.3567 3.6875 14.8647 3.78854 15.3386 3.98485C15.8125 4.18115 16.2432 4.46889 16.6059 4.83162C16.9686 5.19434 17.2563 5.62497 17.4527 6.09889C17.649 6.57282 17.75 7.08078 17.75 7.59375ZM7.59375 7.59375H2.90625C2.28465 7.59375 1.68851 7.84068 1.24897 8.28022C0.80943 8.71976 0.5625 9.3159 0.5625 9.9375V11.5H2.125V9.9375C2.125 9.7303 2.20731 9.53159 2.35382 9.38507C2.50034 9.23856 2.69905 9.15625 2.90625 9.15625H7.59375C7.80095 9.15625 7.99966 9.23856 8.14618 9.38507C8.29269 9.53159 8.375 9.7303 8.375 9.9375V11.5H9.9375V9.9375C9.9375 9.3159 9.69057 8.71976 9.25103 8.28022C8.81149 7.84068 8.21535 7.59375 7.59375 7.59375ZM5.25 6.8125C5.86807 6.8125 6.47225 6.62922 6.98616 6.28584C7.50006 5.94246 7.9006 5.45441 8.13712 4.88339C8.37365 4.31237 8.43553 3.68403 8.31495 3.07784C8.19438 2.47165 7.89675 1.91483 7.45971 1.47779C7.02267 1.04075 6.46585 0.743126 5.85966 0.622547C5.25347 0.501969 4.62513 0.563854 4.05411 0.800378C3.4831 1.0369 2.99504 1.43744 2.65166 1.95134C2.30828 2.46525 2.125 3.06943 2.125 3.6875C2.125 4.5163 2.45424 5.31116 3.04029 5.89721C3.62634 6.48326 4.4212 6.8125 5.25 6.8125ZM5.25 2.125C5.55903 2.125 5.86113 2.21664 6.11808 2.38833C6.37503 2.56002 6.5753 2.80405 6.69356 3.08956C6.81182 3.37507 6.84277 3.68923 6.78248 3.99233C6.72219 4.29543 6.57337 4.57384 6.35485 4.79236C6.13633 5.01088 5.85792 5.15969 5.55483 5.21998C5.25173 5.28027 4.93757 5.24933 4.65206 5.13106C4.36655 5.0128 4.12252 4.81253 3.95083 4.55558C3.77914 4.29863 3.6875 3.99653 3.6875 3.6875C3.6875 3.2731 3.85212 2.87567 4.14515 2.58265C4.43817 2.28962 4.8356 2.125 5.25 2.125ZM20.0938 18.5313H15.4062C14.7846 18.5313 14.1885 18.7782 13.749 19.2177C13.3094 19.6573 13.0625 20.2534 13.0625 20.875V22.4375H14.625V20.875C14.625 20.6678 14.7073 20.4691 14.8538 20.3226C15.0003 20.1761 15.199 20.0938 15.4062 20.0938H20.0938C20.301 20.0938 20.4997 20.1761 20.6462 20.3226C20.7927 20.4691 20.875 20.6678 20.875 20.875V22.4375H22.4375V20.875C22.4375 20.2534 22.1906 19.6573 21.751 19.2177C21.3115 18.7782 20.7154 18.5313 20.0938 18.5313ZM14.625 14.625C14.625 15.2431 14.8083 15.8473 15.1517 16.3612C15.495 16.8751 15.9831 17.2756 16.5541 17.5121C17.1251 17.7486 17.7535 17.8105 18.3597 17.69C18.9658 17.5694 19.5227 17.2717 19.9597 16.8347C20.3967 16.3977 20.6944 15.8408 20.815 15.2347C20.9355 14.6285 20.8736 14.0001 20.6371 13.4291C20.4006 12.8581 20.0001 12.37 19.4862 12.0267C18.9723 11.6833 18.3681 11.5 17.75 11.5C16.9212 11.5 16.1263 11.8292 15.5403 12.4153C14.9542 13.0013 14.625 13.7962 14.625 14.625ZM19.3125 14.625C19.3125 14.934 19.2209 15.2361 19.0492 15.4931C18.8775 15.75 18.6335 15.9503 18.3479 16.0686C18.0624 16.1868 17.7483 16.2178 17.4452 16.1575C17.1421 16.0972 16.8637 15.9484 16.6451 15.7299C16.4266 15.5113 16.2778 15.2329 16.2175 14.9298C16.1572 14.6267 16.1882 14.3126 16.3064 14.0271C16.4247 13.7415 16.625 13.4975 16.8819 13.3258C17.1389 13.1541 17.441 13.0625 17.75 13.0625C18.1644 13.0625 18.5618 13.2271 18.8549 13.5201C19.1479 13.8132 19.3125 14.2106 19.3125 14.625Z" fill="#F2C8ED"/>
                                 </svg>
 
-                                <h2 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-[#F2C8ED]" : "text-[#DB7093]"}`} >
-                                    COLLAB:LAB
-                                </h2>
+                                <h2 className="text-xl text-[#F2C8ED] font-semibold mb-2">COLLAB:LAB</h2>
                                 <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Search and compare nonprofits from other sectors in your backyard that may be strong partners.</p>
                             </div>
 
-                            <div className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
-                                selectedSection === "Anomaly Detection" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
-                                }`}
-                                onClick={() =>
-                                    setSelectedSection(
-                                        selectedSection === "Anomaly Detection" ? null : "Anomaly Detection"
-                                    )
-                                    }
-                                >
-
-                                <svg className="mb-4" width="36" height="39" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="6" y="6" width="6" height="6" fill={isDarkMode ? "#FEB95A" : "#FFAA00"} />
-                                    <rect x="18" y="6" width="6" height="6" fill={isDarkMode ? "#FEB95A" : "#FFAA00"} />
-                                    <rect x="6" y="18" width="6" height="6" fill={isDarkMode ? "#FEB95A" : "#FFAA00"} />
-                                    <rect x="18" y="18" width="6" height="6" fill={isDarkMode ? "#FF4500" : "#FF6347"} />
-                                    <circle cx="27" cy="27" r="5" stroke={isDarkMode ? "#FEB95A" : "#FFAA00"} strokeWidth="1.5" fill="none" />
-                                    <line x1="30" y1="30" x2="34" y2="34" stroke={isDarkMode ? "#FEB95A" : "#FFAA00"} strokeWidth="1.5" strokeLinecap="round" />
-                                </svg>
-
-                            <h2 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-[#FEB95A]" : "text-[#FFAA00]"}`} >ANOMALY DETECTION</h2>
-                            <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Use a Machine Learning Model to find pototential outliers for nonprofits.</p>
-                            </div>
+                           
                         </div>
                         </div>
 
@@ -411,7 +390,156 @@ export default function Toolbox() {
                                 
                             )}
                             {selectedSection === "Region Health" && (
-                                <RegionalHealthSection isDarkMode={isDarkMode}/>
+                                <div className="p-6 bg-[#171821] rounded-lg">
+                                <h3 className="text-xl font-semibold text-[#A9DFD8]">
+                                    REGIONAL HEALTH BY SECTOR                                
+                                </h3>
+                                <p className="text-white">
+                                    Compare NTEE code sectors against public data that align with various regional non-profit’s missions. The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
+                                </p>
+                                <div className="mt-12 text-sm">
+
+                                <div className="grid grid-cols-2 gap-4 mb-6">
+                                    <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
+                                                SEARCH FOR A NONPROFIT
+                                            </button>
+                                            <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
+                                                SEARCH BY ZIPCODE
+                                            </button>
+                                            </div>
+                                            <div className="grid grid-cols-2 gap-4 mb-6">
+                                            <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
+                                                <Autosuggest
+                                                    suggestions={suggestions}
+                                                    onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                                                    onSuggestionsClearRequested={onSuggestionsClearRequested}
+                                                    getSuggestionValue={getSuggestionValue}
+                                                    renderSuggestion={renderSuggestion}
+                                                    inputProps={inputProps}
+                                                    renderSuggestionsContainer={renderSuggestionsContainer}
+                                                />
+                                            </button>
+                                            <button className="p-4 bg-[#34344c] rounded-md text-white hover:bg-gray-500 transition-colors">
+                                                <Autosuggest
+                                                suggestions={suggestions}
+                                                onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                                                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                                                getSuggestionValue={getSuggestionValue}
+                                                renderSuggestion={renderSuggestion}
+                                                inputProps={inputProps2}
+                                                renderSuggestionsContainer={renderSuggestionsContainer}
+                                            />
+                                            </button>
+                                </div>
+                                <div className="overflow-x-auto overflow-auto">
+                                    <table className="min-w-full bg-[#21222D] rounded-lg text-white">
+                                        <thead>
+                                        <tr>
+                                            <th className="py-3 px-6 text-left">NONPROFIT</th>
+                                            <th className="py-3 px-6 text-left">ADDRESS</th>
+                                            <th className="py-3 px-6 text-left">ZIP CODE</th>
+                                            <th className="py-3 px-6 text-left">NTEE CODE</th>
+                                            <th className="py-3 px-6 text-left">REVS</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {data.map((row, index) => (
+                                            <tr key={index} className="border-t border-gray-700">
+                                            <td className="py-3 px-6">{row.nonprofit}</td>
+                                            <td className="py-3 px-6">{row.address}</td>
+                                            <td className="py-3 px-6">{row.zip}</td>
+                                            <td className="py-3 px-6">{row.nteeCode}</td>
+                                            <td className="py-3 px-6">{row.revs}</td>
+                                            </tr>
+                                        ))}
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                                <h3 className="text-xl font-semibold mt-12">
+                                    KEY DEMOGRAPHIC DATA
+                                </h3>
+                                <p className="text-white mt-2">
+                                    With your choice of NTEE code K: Food, Agriculture, and Nutrition, the following demographic variables from the U.S. Census are included in the report below
+                                </p>
+                                <div className="grid grid-cols-4 gap-4 mb-6 mt-12 text-md">
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center font-bold text-green-500">
+                                            AGE
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-blue-300">
+                                            RACE
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-blue-500">
+                                            GENDER
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col items-center">
+                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-red-500">
+                                            EDUCATION
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col items-center mt-2">
+                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-orange-500">
+                                            INCOME
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col items-center mt-2">
+                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-purple-500">
+                                            HOUSING
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col items-center mt-2">
+                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-gray-500">
+                                            HEALTH
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col items-center mt-2">
+                                            <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center  font-bold text-pink-500">
+                                            FAMILY
+                                            </div>
+                                        </div>
+                                        </div>
+                                    <h3 className="text-xl font-semibold mt-12">
+                                        INTERACTIVE MAP
+                                    </h3>
+                                    <p className="text-white mt-2">                
+                                        Choose which demographic variable to search below. Then hover over the map for detailed tool tip of the key demographic data from the zip code that aligns with your chosen nonprofit sector.
+                                    </p>
+                                    <div className="grid grid-cols-4 gap-4 p-4 mt-2 text-sm max-w-3xl mx-auto mb-4">
+                                        <button className="bg-green-500 text-white py-2 px-4 rounded-full">
+                                            AGE
+                                        </button>
+                                        <button className="bg-blue-400 text-white py-2 px-4 rounded-full">
+                                            RACE
+                                        </button>
+                                        <button className="bg-blue-800 text-white py-2 px-4 rounded-full">
+                                            GENDER
+                                        </button>
+                                        <button className="bg-red-700 text-white py-2 px-4 rounded-full">
+                                            EDUCATION
+                                        </button>
+                                        <button className="bg-yellow-500 text-white py-2 px-4 rounded-full">
+                                            INCOME
+                                        </button>
+                                        <button className="bg-purple-600 text-white py-2 px-4 rounded-full">
+                                            HOUSING
+                                        </button>
+                                        <button className="bg-gray-500 text-white py-2 px-4 rounded-full">
+                                            HEALTH
+                                        </button>
+                                        <button className="bg-pink-500 text-white py-2 px-4 rounded-full">
+                                            FAMILY
+                                        </button>
+                                        </div>
+                                    <div className = 'rounded-lg'>
+                                        <ChoroplethMap/>
+                                    </div>
+                                </div>
                             )}
                             {selectedSection === "Co:Lab" && (
                                 <COLAB isDarkMode={isDarkMode}></COLAB>
