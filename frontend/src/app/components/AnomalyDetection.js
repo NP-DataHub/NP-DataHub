@@ -76,9 +76,12 @@ export default function AnomalyDetection({ isDarkMode }) {
             </h3>
 
             <p className="mb-6">
-                This tool leverages the Isolation Forest machine learning algorithm to identify potential anomalies in nonprofits&apos; financial data. 
-                When the anomaly score computed by our algorithm is significantly negative, it indicates that the data point is an outlier.   
-                These predictions provide insight into irregularities but are not definitive assessments. 
+            <br />
+                This tool leverages the isolation forest machine learning algorithm to identify potential anomalies in a nonprofit&apos;s financial data. 
+                When the anomaly score computed by our algorithm is significantly negative, it indicates that some data points may be an outlier during a certain time period for an individual nonprofit. 
+                Search by a full NTEE code sector and the results will include all nonprofits nationally. 
+                Then explore each nonprofit&apos;s individual profile page.
+                Please note, these predictions provide insight into irregularities but are not definitive assessments. 
                 Always conduct further research before making critical decisions based on these results.
             </p>
 
