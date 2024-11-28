@@ -81,8 +81,9 @@ export default function AnomalyDetection({ isDarkMode }) {
                 When the anomaly score computed by our algorithm is significantly negative, it indicates that some data points may be an outlier during a certain time period for an individual nonprofit. 
                 Search by a full NTEE code sector and the results will include all nonprofits nationally. 
                 Then explore each nonprofit&apos;s individual profile page.
-                Please note, these predictions provide insight into irregularities but are not definitive assessments. 
-                Always conduct further research before making critical decisions based on these results.
+                Please note, these predictions provide insight into irregularities but are not definitive assessments nor 
+                should they be classified as negative. The algorithm will identify some significant change 
+                in key fiscal variables. Always conduct further research before making critical decisions based on these results.
             </p>
 
             <div className="flex justify-center">
