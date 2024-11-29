@@ -58,7 +58,8 @@ class Database:
                     zip_code = zip_code.zfill(5)  # Pad with leading zeros
                 elif len(zip_code) == 9:  # Exactly 9 digits
                     zip_code = f"{zip_code[:5]}-{zip_code[5:]}"  # Format as ZIP+4
-                # else keep as it is, its invalid
+                else:
+                    zip_code = zip_code[:5] # ensure length == 5
             return [name, state, city, zip_code, address]
         else : #Foreign Address
             country_cd_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:CountryCd', self.namespace)
