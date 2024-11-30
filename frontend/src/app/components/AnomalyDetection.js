@@ -81,6 +81,9 @@ export default function AnomalyDetection({ isDarkMode }) {
                 When the anomaly score computed by our algorithm is significantly negative, it indicates that some data points may be an outlier during a certain time period for an individual nonprofit. 
                 Search by a full NTEE code sector and the results will include all nonprofits nationally. 
                 Then explore each nonprofit&apos;s individual profile page.
+            </p>
+
+            <p className="mb-6">
                 Please note, these predictions provide insight into irregularities but are not definitive assessments nor 
                 should they be classified as negative. The algorithm will identify some significant change 
                 in key fiscal variables. Always conduct further research before making critical decisions based on these results.
@@ -153,28 +156,28 @@ export default function AnomalyDetection({ isDarkMode }) {
                         <>
                             <h4 className="text-lg font-semibold mb-4">Numerical Results</h4>
                             <ul className="space-y-2">
-                                {Object.entries(selectedAnomaly).map(([key, value]) => {
-                                    if (key === "Name") {
-                                        return (
-                                            <li key={key}>
-                                                <strong>{key}:</strong>{" "}
-                                                <a
-                                                    href={`/nonprofit/${selectedAnomaly._id}`}
-                                                    className="text-blue-500 hover:underline"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                >
-                                                    {value}
-                                                </a>
-                                            </li>
-                                        );
-                                    }
-                                    return (
-                                        <li key={key}>
-                                            <strong>{key}:</strong> {value}
-                                        </li>
-                                    );
-                                })}
+                                <li><strong>EIN:</strong> {selectedAnomaly.EIN}</li>
+                                <li><strong>NTEE:</strong> {selectedAnomaly.NTEE}</li>
+                                <li><strong>State:</strong> {selectedAnomaly.State}</li>
+                                <li>
+                                    <strong>Name:</strong>{" "}
+                                    <a
+                                        href={`/nonprofit/${selectedAnomaly._id}`}
+                                        className="text-blue-500 hover:underline"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {selectedAnomaly.Name}
+                                    </a>
+                                </li>
+                                <li><strong>Major Group:</strong> {selectedAnomaly.MajGrp}</li>
+                                <li><strong>Most Recent Year:</strong> {selectedAnomaly.MostRecentYear}</li>
+                                <li><strong>Total Revenue Most Recent Year:</strong> ${selectedAnomaly.TotRev_MostRecent.toLocaleString()}</li>
+                                <li><strong>Total Expenses Most Recent Year:</strong> ${selectedAnomaly.TotExp_MostRecent.toLocaleString()}</li>
+                                <li><strong>Total Assets Most Recent Year:</strong> ${selectedAnomaly.TotAst_MostRecent.toLocaleString()}</li>
+                                <li><strong>Total Liabilities Most Recent Year:</strong> ${selectedAnomaly.TotLia_MostRecent.toLocaleString()}</li>
+                                <li><strong>Anomaly Score:</strong> {selectedAnomaly.AnomalyScore}</li>
+                                <li><strong>Anomaly Label:</strong> {selectedAnomaly.AnomalyLabel}</li>
                             </ul>
                         </>
                     ) : (
