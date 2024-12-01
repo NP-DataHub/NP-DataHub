@@ -1,0 +1,82 @@
+Previous filepath: /tmp/2024-10A/202402959349200035_public.xml and timestamp: None
+Current filepath: /tmp/2024-10A/202432969349201103_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-10A/202412899349202656_public.xml and timestamp: None
+Current filepath: /tmp/2024-10A/202422909349200822_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-10A/202432969349200138_public.xml and timestamp: None
+Current filepath: /tmp/2024-10A/202432769349200513_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-10A/202432909349300418_public.xml and timestamp: 2024-10-16 08:01:09-05:00
+Current filepath: /tmp/2024-10A/202422909349300417_public.xml and timestamp: 2024-10-16 08:01:09-05:00
+Total Revenue: previous is 69380 and current is: 128145
+Total Assets: previous is 675368 and current is: 664717
+Total Liabilities: previous is 846134 and current is: 825007
+Total Expenses: previous is 79856 and current is: 127122
+Total Contributions: previous is 42044 and current is: 84797
+Program Service Revenue: previous is 26524 and current is: 42451
+Investment Income: previous is 1 and current is: 6
+Gross Receipts: previous is 69380 and current is: 128145
+Other salaries and wages: previous is 1428 and current is: 3472
+Payroll Taxes: previous is 518 and current is: 974
+==================================================
+Previous filepath: /tmp/2024-10A/202422769349200227_public.xml and timestamp: 2024-10-02 13:06:43-04:00
+Current filepath: /tmp/2024-10A/202442769349200229_public.xml and timestamp: 2024-10-02 13:06:43-04:00
+No difference found
+==================================================
+Previous filepath: /tmp/2024-10A/202432769349200303_public.xml and timestamp: None
+Current filepath: /tmp/2024-10A/202412759349201471_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-10A/202442899349301239_public.xml and timestamp: 2024-10-15 14:40:29-04:00
+Current filepath: /tmp/2024-10A/202432899349301908_public.xml and timestamp: 2024-10-15 14:40:29-04:00
+Total Revenue: previous is 0 and current is: 135568
+Total Assets: previous is 0 and current is: 1142
+Total Expenses: previous is 1142 and current is: 152027
+Total Contributions: previous is 0 and current is: 111354
+Investment Income: previous is 0 and current is: 814
+Gross Receipts: previous is 0 and current is: 205503
+Fundraising Income: previous is 0 and current is: 23400
+Fundraising Expenses: previous is 0 and current is: 69935
+Gift Grants Membership Fees received 509: previous is 602405 and current is: 713759
+==================================================
+Previous filepath: /tmp/2024-10A/202412769349200221_public.xml and timestamp: None
+Current filepath: /tmp/2024-10A/202432759349201023_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-10A/202412779349100921_public.xml and timestamp: 2024-10-03 16:56:58-05:00
+Current filepath: /tmp/2024-10A/202402779349100520_public.xml and timestamp: 2024-10-03 16:56:58-05:00
+Total Revenue: previous is 5000 and current is: 60
+Total Assets: previous is 5406 and current is: 0
+Total Expenses: previous is 1250 and current is: 5466
+Net Income (Less Deficit): previous is 3750 and current is: -5406
+Contributions Received: previous is 5000 and current is: 0
+Other Income: previous is 0 and current is: 60
+Total Fund net worth: previous is 5406 and current is: 0
+Cash: previous is 5406 and current is: 0
+==================================================
+Previous filepath: /tmp/2024-10A/202412889349301991_public.xml and timestamp: None
+Current filepath: /tmp/2024-10A/202412769349302166_public.xml and timestamp: None
+Total Revenue: previous is 416580 and current is: 400208
+Total Assets: previous is 215741 and current is: 198537
+Total Expenses: previous is 347019 and current is: 250068
+Total Contributions: previous is 0 and current is: 400208
+Gross Receipts: previous is 416580 and current is: 400208
+Gift Grants Membership Fees received 509: previous is 816788 and current is: 400208
+==================================================
+Previous filepath: /tmp/2024-10A/202422779349300307_public.xml and timestamp: 2024-10-03 08:17:32-04:00
+Current filepath: /tmp/2024-10A/202422779349300507_public.xml and timestamp: 2024-10-03 08:17:32-04:00
+Total Revenue: previous is 191534 and current is: 5686
+Total Assets: previous is 138238 and current is: 132504
+Total Expenses: previous is 159657 and current is: 11420
+Total Contributions: previous is 116692 and current is: 3604
+Program Service Revenue: previous is 46292 and current is: 2143
+Investment Income: previous is 8 and current is: 2
+Gross Receipts: previous is 201496 and current is: 6847
+Fundraising Income: previous is 28542 and current is: -63
+Fundraising Expenses: previous is 9962 and current is: 1161
+Gift Grants Membership Fees received 509: previous is 324514 and current is: 211426
+==================================================
