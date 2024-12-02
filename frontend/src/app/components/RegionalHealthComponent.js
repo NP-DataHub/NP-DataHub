@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Autosuggest from 'react-autosuggest';
 import zipData from './zipcode_data';
 import dynamic from 'next/dynamic';
+import debounce from 'lodash.debounce';
+import { useCallback } from "react";
 const Map2 = dynamic(() => import('../components/map2'), { ssr: false});
 
 const CENSUS_KEY = process.env.NEXT_PUBLIC_CENSUS_API_KEY;
@@ -97,7 +99,7 @@ export default function RegionalHealthSection({isDarkMode}) {
 
       
     //Name autosuggestions
-    const fetchSuggestions = async (value, type) => {
+    const fetchSuggestions = useCallback( debounce(async (value, type) => {
         if (value === lastFetchedNameInput) return;
         
         try {
@@ -112,7 +114,8 @@ export default function RegionalHealthSection({isDarkMode}) {
         } catch (error) {
           console.error("Error fetching suggestions:", error);
         }
-    };
+    }, 250), // 250 ms delay
+    [lastFetchedNameInput]);
 
     const getNameSuggestionValue = (suggestion) => suggestion.Nm || '';
     const renderNameSuggestion = (suggestion) => {
@@ -219,7 +222,7 @@ export default function RegionalHealthSection({isDarkMode}) {
 
     //White, Black, American Indian/ Alaska Native, Asian, Native Hawaiian/ Pacific Islander, Other race, Two or more, hispanic
     const handleRaceButtonClick = async (zip) => {
-        const url = `https://api.census.gov/data/2022/acs/acs5/profile?get=DP05_0037E,DP05_0038E,DP05_0039E,DP05_0040E,DP05_0052E,DP05_0057E,DP05_0058E,DP05_0072E&for=zip%20code%20tabulation%20area:${zip}&key=${CENSUS_KEY}`;
+        const url = `https://api.census.gov/data/2022/acs/acs5/profile?get=DP05_0037E,DP05_0038E,DP05_0039E,DP05_0040E,DP05_0052E,DP05_0057E,DP05_0058E&for=zip%20code%20tabulation%20area:${zip}&key=${CENSUS_KEY}`;
        
         try{
             const response = await fetch(url);
@@ -234,9 +237,8 @@ export default function RegionalHealthSection({isDarkMode}) {
             const pacific = parseInt(data[1][4]);
             const other = parseInt(data[1][5]);
             const twoOrMore = parseInt(data[1][6]);
-            const hispanic = parseInt(data[1][7]);
 
-            setPoints([{label: 'White', val: white}, {label: 'African American', val: black}, {label: 'Native American/Alaskian', val: native}, {label: 'Asian', val: asian}, {label: 'Native Hawaiian/Pacific Islander', val: pacific}, {label: 'Hispanic or Latino', val: hispanic}, {label: 'Other', val: other}, {label: 'Two or More', val: twoOrMore}]);
+            setPoints([{label: 'White', val: white}, {label: 'African American', val: black}, {label: 'Native American/Alaskian', val: native}, {label: 'Asian', val: asian}, {label: 'Native Hawaiian/Pacific Islander', val: pacific}, {label: 'Other', val: other}, {label: 'Two or More', val: twoOrMore}]);
 
         } catch (error) {
             console.error("Failed to fetch Race Data:", error);
@@ -284,7 +286,7 @@ export default function RegionalHealthSection({isDarkMode}) {
             setPoints([{label: 'Less than 9th', val: lessthan9}, {label: 'Some Highschool', val: nineto12}, {label: 'High School', val: highSchool}, {label: 'Some College', val: someCollege}, {label: 'Associates', val: associates}, {label: 'Bachelors', val: bachelors}, {label: 'Graduate', val: graduate}]);
 
         } catch (error) {
-            console.error("Failed to fetch Education Data:", error);
+            console.error("Failed to fetch Gender Data:", error);
         }
     };
 
@@ -312,7 +314,7 @@ export default function RegionalHealthSection({isDarkMode}) {
             setPoints([{label: '$0-$9,999', val: lessthan10}, {label: '$10,000-$14,999', val: tento15}, {label: '$15,000-$24,999', val: fifteento25}, {label: '$25,000-$34,999', val: twentyfiveto35}, {label: '$35,000-$49,999', val: thirtyfiveto50}, {label: '$50,000-$74,999', val: fiftyto75}, {label: '$75,000-$99,999', val: seventyfiveto100}, {label: '$100,000-$149,999', val: hundredto150}, {label: '$150,000-$199,999', val: hundredfiftyto200}, {label: '$200,000+', val: twohundredplus}]);
 
         } catch (error) {
-            console.error("Failed to fetch Income Data:", error);
+            console.error("Failed to fetch Gender Data:", error);
         }
     };
 
@@ -331,7 +333,7 @@ export default function RegionalHealthSection({isDarkMode}) {
 
             setPoints([{label: 'Occupied', val: occupied}, {label: 'Vacant', val: vacant}]);
         } catch (error) {
-            console.error("Failed to fetch Housing Data:", error);
+            console.error("Failed to fetch Gender Data:", error);
         }
     };
 
@@ -352,14 +354,14 @@ export default function RegionalHealthSection({isDarkMode}) {
             setPoints([{label: 'Private', val: Private}, {label: 'Public', val: Public}, {label: 'None', val: none}]);
 
         } catch (error) {
-            console.error("Failed to fetch Health Data:", error);
+            console.error("Failed to fetch Gender Data:", error);
         }
     };
 
     //Married, Male Single, Female
     const handleFamiliesButtonClick = async (zip) => {
         const url = `https://api.census.gov/data/2022/acs/acs5/profile?get=DP02_0002E,DP02_0006E,DP02_0010E&for=zip%20code%20tabulation%20area:${zip}&key=${CENSUS_KEY}`;
-       
+    
         try{
             const response = await fetch(url);
             if (!response.ok) throw new Error(`Error: ${response.statusText}`);
@@ -378,27 +380,17 @@ export default function RegionalHealthSection({isDarkMode}) {
     };
 
 
-    return(<div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
-        <h3 className="text-xl font-semibold text-[#A9DFD8]">
-            REGIONAL HEALTH BY SECTOR                                
-        </h3>
+    return(<div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"} rounded-lg`}>
+        <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>REGIONAL HEALTH BY SECTOR</h3>
         <p>
             Compare NTEE code sectors against public data that align with various regional non-profit’s missions. The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
         </p>
         <div className="mt-12 text-sm">
 
-        <div className="grid grid-cols-2 gap-4 mb-6">
-            <button className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white hover:bg-gray-500" : "bg-[#F1F1F1] text-black hover:bg-gray-200"} rounded-md  transition-colors`}
-            onClick={() => handleSearchforNonProfit(nonprofitName)}>
-                        SEARCH FOR A NONPROFIT
-                    </button>
-                    <button className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white hover:bg-gray-500" : "bg-[#F1F1F1] text-black hover:bg-gray-200"} rounded-md  transition-colors`}
-                    onClick={() => handleSearchforZip(zipcode)}>
-                        SEARCH BY ZIPCODE
-                    </button>
+        <div className="grid grid-cols-3 gap-4 mb-6">
                     </div>
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black"} rounded-md  transition-colors`}>
+                    <div className="grid grid-cols-3 gap-4 mb-6">
+                        <div className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black"} rounded-md  transition-colors col-span-2`}>
                             <div className = 'relative'>
                                 <Autosuggest
                                     suggestions={nameSuggestions}
@@ -423,7 +415,13 @@ export default function RegionalHealthSection({isDarkMode}) {
                                 />
                                 </div>
                         </div>
-                    <div className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black"} rounded-md  transition-colors`}>
+                    <button className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white hover:bg-gray-500" : "bg-[#F1F1F1] text-black hover:bg-gray-200"} rounded-md  transition-colors`}
+                    onClick={() => handleSearchforNonProfit(nonprofitName)}>
+                        SEARCH FOR A NONPROFIT
+                    </button>
+                    </div>
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                    <div className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black"} rounded-md  transition-colors col-span-2`}>
                         <div className = 'relative'>
                             {<Autosuggest
                                         suggestions={zipSuggestions}
@@ -447,42 +445,50 @@ export default function RegionalHealthSection({isDarkMode}) {
                                     />}
                         </div>
                     </div>
+                    <button className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white hover:bg-gray-500" : "bg-[#F1F1F1] text-black hover:bg-gray-200"} rounded-md  transition-colors`}
+                    onClick={() => handleSearchforZip(zipcode)}>
+                        SEARCH BY ZIPCODE
+                    </button>
         </div>
-        <div className="overflow-x-auto max-h-96 overflow-auto">
-            <table className={'min-w-full ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"}  rounded-lg'}>
-                <thead>
-                <tr>
-                    <th className="py-3 px-6 text-left">NONPROFIT</th>
-                    <th className="py-3 px-6 text-left">ADDRESS</th>
-                    <th className="py-3 px-6 text-left">ZIP CODE</th>
-                    <th className="py-3 px-6 text-left">NTEE CODE</th>
-                    <th className="py-3 px-6 text-left">REVS</th>
-                </tr>
-                </thead>
-                <tbody>
-                {searchResults.map((row, index) => {
-                    const nonprofitUrl = `/nonprofit/${encodeURIComponent(row._id)}`;
-                    return (
-                        <tr key={index} className="border-t border-gray-700">
-                        <td className="py-3 px-6">
-                            <a href={nonprofitUrl} className="hover:underline">
-                                {row.Nm}
-                            </a>
-                        </td>
-                        <td className="py-3 px-6">{row.Addr}</td>
-                        <td className="py-3 px-6">{row.Zip}</td>
-                        <td className="py-3 px-6">{row.MajGrp}</td>
-                        <td className="py-3 px-6">{row[getLatestYear(row)].TotRev}</td>
-                        </tr>
-                    );
-                })}
-                </tbody>
-            </table>
-            </div>
-        </div>
-        <h3 className="text-xl font-semibold mt-12">
-            KEY DEMOGRAPHIC DATA
-        </h3>
+        
+        {searchResults.length > 0 && (
+
+                    <div className="overflow-x-auto max-h-96 overflow-auto">
+                        <table className={`min-w-full ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} rounded-lg`}>
+                            <thead className="sticky top-0 z-10">
+                                <tr>
+                                    <th className="py-3 px-6 text-left bg-[#21222D]">NONPROFIT</th>
+                                    <th className="py-3 px-6 text-left bg-[#21222D]">ADDRESS</th>
+                                    <th className="py-3 px-6 text-left bg-[#21222D]">ZIP CODE</th>
+                                    <th className="py-3 px-6 text-left bg-[#21222D]">NTEE CODE</th>
+                                    <th className="py-3 px-6 text-left bg-[#21222D]">REVS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {searchResults.map((row, index) => {
+                                    const nonprofitUrl = `/nonprofit/${encodeURIComponent(row._id)}`;
+                                    return (
+                                        <tr key={index} className="border-t border-gray-700">
+                                            <td className="py-3 px-6">
+                                                <a href={nonprofitUrl} className="hover:underline">
+                                                    {row.Nm}
+                                                </a>
+                                            </td>
+                                            <td className="py-3 px-6">{row.Addr}</td>
+                                            <td className="py-3 px-6">{row.Zip}</td>
+                                            <td className="py-3 px-6">{row.MajGrp}</td>
+                                            <td className="py-3 px-6">{row[getLatestYear(row)].TotRev}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+                </div>
+        {/* Add in loading bar while searching have it display in this area*/}
+                
+        <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>KEY DEMOGRAPHIC DATA</h3>
         <p className="mt-2">
             With your choice of Zipcode, the following demographic variables from the U.S. Census are included in the report below. (However, Not all zipcodes line up with the census data, so if you are not getting a result try a zipcode near the one you are looking for.)
         </p>
@@ -531,9 +537,7 @@ export default function RegionalHealthSection({isDarkMode}) {
             </div>
             </div>
 
-            <h3 className="text-xl font-semibold mt-12">
-                INTERACTIVE MAP
-            </h3>
+            <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>INTERACTIVE MAP</h3>
             <p className="mt-2">                
                 Choose which demographic variable to search below. Then hover over the map for detailed tool tip of the key demographic data from the zip code that aligns with your chosen nonprofit sector.
             </p>
