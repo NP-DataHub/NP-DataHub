@@ -222,7 +222,7 @@ export default function RegionalHealthSection({isDarkMode}) {
 
     //White, Black, American Indian/ Alaska Native, Asian, Native Hawaiian/ Pacific Islander, Other race, Two or more, hispanic
     const handleRaceButtonClick = async (zip) => {
-        const url = `https://api.census.gov/data/2022/acs/acs5/profile?get=DP05_0037E,DP05_0038E,DP05_0039E,DP05_0040E,DP05_0052E,DP05_0057E,DP05_0058E,DP05_0072E&for=zip%20code%20tabulation%20area:${zip}&key=${CENSUS_KEY}`;
+        const url = `https://api.census.gov/data/2022/acs/acs5/profile?get=DP05_0037E,DP05_0038E,DP05_0039E,DP05_0040E,DP05_0052E,DP05_0057E,DP05_0058E&for=zip%20code%20tabulation%20area:${zip}&key=${CENSUS_KEY}`;
        
         try{
             const response = await fetch(url);
@@ -237,9 +237,8 @@ export default function RegionalHealthSection({isDarkMode}) {
             const pacific = parseInt(data[1][4]);
             const other = parseInt(data[1][5]);
             const twoOrMore = parseInt(data[1][6]);
-            const hispanic = parseInt(data[1][7]);
 
-            setPoints([{label: 'White', val: white}, {label: 'African American', val: black}, {label: 'Native American/Alaskian', val: native}, {label: 'Asian', val: asian}, {label: 'Native Hawaiian/Pacific Islander', val: pacific}, {label: 'Hispanic or Latino', val: hispanic}, {label: 'Other', val: other}, {label: 'Two or More', val: twoOrMore}]);
+            setPoints([{label: 'White', val: white}, {label: 'African American', val: black}, {label: 'Native American/Alaskian', val: native}, {label: 'Asian', val: asian}, {label: 'Native Hawaiian/Pacific Islander', val: pacific}, {label: 'Other', val: other}, {label: 'Two or More', val: twoOrMore}]);
 
         } catch (error) {
             console.error("Failed to fetch Race Data:", error);
@@ -359,6 +358,27 @@ export default function RegionalHealthSection({isDarkMode}) {
         }
     };
 
+    //Married, Male Single, Female
+    const handleFamiliesButtonClick = async (zip) => {
+        const url = `https://api.census.gov/data/2022/acs/acs5/profile?get=DP02_0002E,DP02_0006E,DP02_0010E&for=zip%20code%20tabulation%20area:${zip}&key=${CENSUS_KEY}`;
+    
+        try{
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+            
+            const data = await response.json();
+
+            const Married = parseInt(data[1][0]);
+            const Male = parseInt(data[1][1]);
+            const Female = parseInt(data[1][2]);
+
+            setPoints([{label: 'Married Households', val: Married}, {label: "Male Single Households", val: Male}, {label: "Female Single Household", val: Female}]);
+
+        } catch (error) {
+            console.error("Failed to fetch Families Data:", error);
+        }
+    };
+
 
     return(<div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"} rounded-lg`}>
         <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>REGIONAL HEALTH BY SECTOR</h3>
@@ -435,13 +455,13 @@ export default function RegionalHealthSection({isDarkMode}) {
 
                     <div className="overflow-x-auto max-h-96 overflow-auto">
                         <table className={`min-w-full ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} rounded-lg`}>
-                            <thead>
+                            <thead className="sticky top-0 z-10">
                                 <tr>
-                                    <th className="py-3 px-6 text-left">NONPROFIT</th>
-                                    <th className="py-3 px-6 text-left">ADDRESS</th>
-                                    <th className="py-3 px-6 text-left">ZIP CODE</th>
-                                    <th className="py-3 px-6 text-left">NTEE CODE</th>
-                                    <th className="py-3 px-6 text-left">REVS</th>
+                                    <th className="py-3 px-6 text-left bg-[#21222D]">NONPROFIT</th>
+                                    <th className="py-3 px-6 text-left bg-[#21222D]">ADDRESS</th>
+                                    <th className="py-3 px-6 text-left bg-[#21222D]">ZIP CODE</th>
+                                    <th className="py-3 px-6 text-left bg-[#21222D]">NTEE CODE</th>
+                                    <th className="py-3 px-6 text-left bg-[#21222D]">REVS</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -550,7 +570,8 @@ export default function RegionalHealthSection({isDarkMode}) {
                 onClick={() => handleHealthButtonClick(zipcode)}>
                     HEALTH
                 </button>
-                <button className="bg-pink-500 text-white py-8 px-16 text-center rounded-full">
+                <button className="bg-pink-500 text-white py-8 px-16 text-center rounded-full"
+                onClick={() => handleFamiliesButtonClick(zipcode)}>
                     FAMILY
                 </button>
                 </div>
