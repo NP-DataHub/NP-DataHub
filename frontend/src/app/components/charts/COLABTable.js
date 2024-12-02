@@ -47,7 +47,7 @@ const COLABTable = ({ similarityList, selectedNonprofit, isDarkMode }) => {
                     <p>{`NTEE Code: ${selectedNonprofit.MajGrp} - ${selectedNTEE ? selectedNTEE : 'No description'}`}</p>
                     <p>{`EIN: ${selectedNonprofit.EIN}`}</p>
                     <p>
-                        <a href="#" onClick={() => handleSelectedNonprofitClick(selectedNonprofit)} style={{ color: '#0099ff' }}>
+                        <a href="#" onClick={() => handleSelectedNonprofitClick(selectedNonprofit)} style={{ color: isDarkMode ? "#F2C8ED" : "#DB7093" }}>
                             Learn more.
                         </a>
                     </p>
@@ -67,13 +67,19 @@ const COLABTable = ({ similarityList, selectedNonprofit, isDarkMode }) => {
                     </thead>
                     <tbody style={{ marginTop: '50px' }}>
                         {similarityList.map((item, index) => (
-                            <tr key={index} style={{ borderBottom: '1px solid #eee', backgroundColor: isDarkMode ? '#2a2b38' : '#c9c9c9', borderRadius: '10px' }}>
+                            <tr key={index} style={{ borderBottom: '1px solid #eee', backgroundColor: isDarkMode ? '#34344c' : '#F1F1F1', borderRadius: '10px' }}>
                                 <td colSpan="4" style={{ padding: '10px', borderRadius: '10px' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <span className='text-2xl'>{item.nonprofit.Nm}</span>
                                         <span style={{ fontSize: '24px', verticalAlign: 'middle' }}>{item.score}</span>
                                     </div>
                                     <div>{`${item.nonprofit.Addr}, ${item.nonprofit.Cty}, ${item.nonprofit.St} ${item.nonprofit.Zip}`}</div>
+                                    <div>{`NTEE Code: ${item.nonprofit.MajGrp} - ${ntee_codes[item.nonprofit.MajGrp] ? ntee_codes[item.nonprofit.MajGrp] : 'No description'}`}</div>
+                                    <div>
+                                        <a href="#" onClick={() => handleSelectedNonprofitClick(item.nonprofit)} style={{ color: isDarkMode ? "#F2C8ED" : "#DB7093" }}>
+                                            Learn more.
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

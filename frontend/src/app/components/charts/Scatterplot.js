@@ -3,7 +3,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { useRouter } from 'next/navigation';
+import ntee_codes from '../ntee';
 import { color } from 'd3';
+import { get } from 'mongoose';
 
 /** 
  * @param data - a list of nonprofits that have been filtered by the user. This data is used to create the scatter plot
@@ -15,6 +17,8 @@ import { color } from 'd3';
  *           Each NTEE code is a different color on the scatter plot
  */
 const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
+
+  console.log("Filters:", filters);
 
   // Handles resizing of the chart
   const chartContainerRef = useRef(null);
@@ -45,6 +49,11 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
     }
   };
 
+  // Get the NTEE code descriptions
+  const getNteeDescription = (nteeCode) => {
+    return ntee_codes[nteeCode] || 'N/A';
+  };
+
 
   // Check for invalid inputs
   if (!Array.isArray(data) || data === null || data === undefined) {
@@ -60,9 +69,9 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
   }
 
   const formatNumber = (num) => {
-    if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
-    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    if (Math.abs(num) >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
+    if (Math.abs(num) >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (Math.abs(num) >= 1000) return (num / 1000).toFixed(1) + 'K';
     return num;
   };
 
@@ -117,10 +126,17 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
     }
   });
 
-  const colors = ['#5470C6', '#91CC75', '#EE6666', '#73C0DE', '#3BA272', '#FC8452', '#9A60B4', '#EA7CCC'];
+  const colors = ['#FF00FF', '#3366ff', '#FF4500', '#00ff00', '#b84dff', '#00FF00', '#00FFFF', '#1E90FF'];
 
   const axisColor = isDarkMode ? '#FFFFFF' : '#000000'; // Adjust color dynamically
 
+  // Rename the keys in the scatter_data object to be the NTEE code descriptions
+  Object.keys(scatter_data).forEach((key) => {
+    if(key === 'All Data') return;
+    scatter_data[`${key} - ${getNteeDescription(key)}`] = scatter_data[key];
+    delete scatter_data[key];
+  });
+  
   const option = {
     tooltip: {
       trigger: 'axis',
@@ -137,13 +153,13 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
         return tooltipContent;
       },
     },
-    grid: {
-      left: 20,
-      bottom: 50,
-      right: 20,
-      top: 80, // Increase top padding for labels and legend
-      containLabel: true,
-    },
+    // grid: {
+    //   // left: 20,
+    //   // bottom: 50,
+    //   // right: 20,
+    //   // top: 80, // Increase top padding for labels and legend
+    //   // containLabel: true,
+    // },
     toolbox: {
       feature: {
         dataZoom: {},
@@ -161,8 +177,10 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
       type: 'value',
       scale: true,
       name: X_axis_label,
-      nameTextStyle: { color: axisColor, fontSize: 14 },
-      axisLabel: { formatter: '{value}', color: axisColor, fontSize: 12 },
+      nameTextStyle: { color: axisColor, fontSize: 18 },
+      axisLabel: { formatter: (value) => formatNumber(value), 
+        color: axisColor, 
+        fontSize: 12 },
       axisLine: { lineStyle: { color: axisColor } },
       splitLine: { show: false },
     },
@@ -170,8 +188,10 @@ const ScatterPlot = ({ data, X_axis_var, Y_axis_var, filters, isDarkMode }) => {
       type: 'value',
       scale: true,
       name: Y_axis_label,
-      nameTextStyle: { color: axisColor, fontSize: 14 },
-      axisLabel: { formatter: '{value}', color: axisColor, fontSize: 12 },
+      nameTextStyle: { color: axisColor, fontSize: 18 },
+      axisLabel: { formatter: (value) => formatNumber(value), 
+        color: axisColor, 
+        fontSize: 12 },
       axisLine: { lineStyle: { color: axisColor } },
       splitLine: { show: false },
     },

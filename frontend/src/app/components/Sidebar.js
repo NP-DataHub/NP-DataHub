@@ -80,7 +80,7 @@ const Sidebar = ({ isDarkMode, onThemeToggle, onUserDataLoaded, currentPage }) =
         <picture className="flex-grow">
           <source
             media="(max-width: 767px)"
-            srcSet={isDarkMode ? "/img/inverted.png" : "/img/nonprofitly_primary_no_back.png"}
+            srcSet={isDarkMode ? "/img/logo_rb_i.png" : "/img/logo_rb.png"}
           />
           <img
             className="h-10 md:h-10 max-h-full cursor-pointer"

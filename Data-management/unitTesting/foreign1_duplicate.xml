@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2019v5.1">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2020-08-26T13:18:54-05:00</ReturnTs>
+    <TaxPeriodEndDt>2020-05-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>761396621</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>CARR RIGGS &amp; INGRAM LLC</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>400 N PENN SUITE 800</AddressLine1Txt>
+        <CityNm>ROSWELL</CityNm>
+        <StateAbbreviationCd>NM</StateAbbreviationCd>
+        <ZIPCd>88201</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990EZ</ReturnTypeCd>
+    <TaxPeriodBeginDt>2019-06-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>123456789</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>ALTRUSA INTERNATIONAL FOUNDATION INC</BusinessNameLine1Txt>
+        <BusinessNameLine2Txt>AKA ALTRUSA INT'L FOUND OF ROSWELL NM</BusinessNameLine2Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>ALTR</BusinessNameControlTxt>
+      <PhoneNum>5756260567</PhoneNum>
+      <ForeignAddress>
+        <AddressLine1Txt>PO BOX 413</AddressLine1Txt>
+        <CityNm>Vancouver</CityNm>
+        <ProvinceOrStateNm>British Columbia</ProvinceOrStateNm>
+        <CountryCd>CA</CountryCd>
+        <ForeignPostalCd>88201</ForeignPostalCd>
+      </ForeignAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>BONITA L JONES</PersonNm>
+      <PersonTitleTxt>TREASURER</PersonTitleTxt>
+      <PhoneNum>5756260567</PhoneNum>
+      <SignatureDt>2020-08-26</SignatureDt>
+      <DiscussWithPaidPreparerInd>0</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>SHELLEY A OLSON</PreparerPersonNm>
+      <PTIN>P01320074</PTIN>
+      <PhoneNum>5756224667</PhoneNum>
+      <PreparationDt>2020-08-26</PreparationDt>
+    </PreparerPersonGrp>
+    <FilingSecurityInformation>
+      <IPAddress>
+        <IPv4AddressTxt>69.92.88.139</IPv4AddressTxt>
+      </IPAddress>
+      <IPDt>2020-08-26</IPDt>
+      <IPTm>12:22:50</IPTm>
+      <IPTimezoneCd>MD</IPTimezoneCd>
+      <FilingLicenseTypeCd>P</FilingLicenseTypeCd>
+      <AtSubmissionCreationDeviceId>DA39A3EE5E6B4B0D3255BFEF95601890AFD80709</AtSubmissionCreationDeviceId>
+      <AtSubmissionFilingDeviceId>3729DDE99C6F3DAD85F367BB9C7948097F4DA668</AtSubmissionFilingDeviceId>
+    </FilingSecurityInformation>
+    <TaxYr>2019</TaxYr>
+    <BuildTS>2020-11-19 02:30:22Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="5">
+    <IRS990EZ documentId="RetDoc1234200001" referenceDocumentId="RetDoc1051800001 RetDoc2278000001">
+      <GroupExemptionNum>9381</GroupExemptionNum>
+      <MethodOfAccountingAccrualInd>X</MethodOfAccountingAccrualInd>
+      <ScheduleBNotRequiredInd>X</ScheduleBNotRequiredInd>
+      <WebsiteAddressTxt>N/A</WebsiteAddressTxt>
+      <Organization501c3Ind referenceDocumentId="RetDoc1039100001">X</Organization501c3Ind>
+      <TypeOfOrganizationCorpInd>X</TypeOfOrganizationCorpInd>
+      <GrossReceiptsAmt>70055</GrossReceiptsAmt>
+      <InfoInScheduleOPartIInd>X</InfoInScheduleOPartIInd>
+      <ContributionsGiftsGrantsEtcAmt>20782</ContributionsGiftsGrantsEtcAmt>
+      <InvestmentIncomeAmt>7427</InvestmentIncomeAmt>
+      <FundraisingGrossIncomeAmt referenceDocumentId="RetDoc1041300001">41846</FundraisingGrossIncomeAmt>
+      <SpecialEventsDirectExpensesAmt>23822</SpecialEventsDirectExpensesAmt>
+      <SpecialEventsNetIncomeLossAmt>18024</SpecialEventsNetIncomeLossAmt>
+      <TotalRevenueAmt>46233</TotalRevenueAmt>
+      <GrantsAndSimilarAmountsPaidAmt>67569</GrantsAndSimilarAmountsPaidAmt>
+      <OtherExpensesTotalAmt>2368</OtherExpensesTotalAmt>
+      <TotalExpensesAmt>69937</TotalExpensesAmt>
+      <ExcessOrDeficitForYearAmt>-23704</ExcessOrDeficitForYearAmt>
+      <NetAssetsOrFundBalancesBOYAmt>277947</NetAssetsOrFundBalancesBOYAmt>
+      <OtherChangesInNetAssetsAmt>-1899</OtherChangesInNetAssetsAmt>
+      <NetAssetsOrFundBalancesEOYAmt>252344</NetAssetsOrFundBalancesEOYAmt>
+      <InfoInScheduleOPartIIInd>X</InfoInScheduleOPartIIInd>
+      <CashSavingsAndInvestmentsGrp>
+        <BOYAmt>277051</BOYAmt>
+        <EOYAmt>252734</EOYAmt>
+      </CashSavingsAndInvestmentsGrp>
+      <OtherAssetsTotalDetail>
+        <BOYAmt>896</BOYAmt>
+        <EOYAmt>10</EOYAmt>
+      </OtherAssetsTotalDetail>
+      <Form990TotalAssetsGrp>
+        <BOYAmt>277947</BOYAmt>
+        <EOYAmt>252744</EOYAmt>
+      </Form990TotalAssetsGrp>
+      <SumOfTotalLiabilitiesGrp>
+        <BOYAmt>0</BOYAmt>
+        <EOYAmt>400</EOYAmt>
+      </SumOfTotalLiabilitiesGrp>
+      <NetAssetsOrFundBalancesGrp>
+        <BOYAmt>277947</BOYAmt>
+        <EOYAmt>252344</EOYAmt>
+      </NetAssetsOrFundBalancesGrp>
+      <InfoInScheduleOPartIIIInd>X</InfoInScheduleOPartIIIInd>
+      <PrimaryExemptPurposeTxt>SCHOLARSHIPS, LITERACY &amp; OTHER COMMUNITY PROJECT FUNDING.</PrimaryExemptPurposeTxt>
+      <ProgramSrvcAccomplishmentGrp>
+        <DescriptionProgramSrvcAccomTxt>SCHOLARSHIPS: SIXTEEN $1,000 SCHOLARSHIPS TO STUDENTS AT EASTERN NEW MEXICO UNIVERSITY ROSWELL, PRIMARILY ISSUED TO ADULT STUDENTS RETURNING TO COLLEGE TO ENHANCE THEIR EDUCATION IN ORDER TO GET BETTER JOBS. TWO $500 SCHOLARSHIPS AT NEW MEXICO MILITARY INSTITUTE.</DescriptionProgramSrvcAccomTxt>
+        <GrantsAndAllocationsAmt>0</GrantsAndAllocationsAmt>
+        <ProgramServiceExpensesAmt>17000</ProgramServiceExpensesAmt>
+      </ProgramSrvcAccomplishmentGrp>
+      <ProgramSrvcAccomplishmentGrp>
+        <DescriptionProgramSrvcAccomTxt>LITERACY: PURCHASE OF CHILDREN'S BOOKS AND BOOKCASES FOR COMMUNITY ORGANIZATIONS CATERING TO LOW-INCOME CHILDREN; GED SCHOLARSHIPS AT EASTERN NEW MEXICO UNIVERSITY ROSWELL; CELEBRATING WORLD LITERACY DAY; SUPPORT OF THE ROSWELL LITERACY COUNCIL PROVIDING ADULT LITERACY TUTORING.</DescriptionProgramSrvcAccomTxt>
+        <GrantsAndAllocationsAmt>0</GrantsAndAllocationsAmt>
+        <ProgramServiceExpensesAmt>12342</ProgramServiceExpensesAmt>
+      </ProgramSrvcAccomplishmentGrp>
+      <ProgramSrvcAccomplishmentGrp>
+        <DescriptionProgramSrvcAccomTxt>COMMUNITY SERVICE PROJECTS: BACKPACKS WITH SCHOOL SUPPLIES FOR LOW-INCOME STUDENTS; CHRISTMAS FOR SHUT-INS (CASH FOR ADULTS CONFINED TO HOME); ADOPT A FAMILY FOR SALVATION ARMY ANGEL TREE PROJECT (7); SUPPORT FOR CHAVES COUNTY CANCER FUND; SUPPLIES FOR FINANCIAL LITERACY CLASSES AT AREA SUPPORT ORGANIZATIONS.</DescriptionProgramSrvcAccomTxt>
+        <GrantsAndAllocationsAmt>0</GrantsAndAllocationsAmt>
+        <ProgramServiceExpensesAmt>13986</ProgramServiceExpensesAmt>
+      </ProgramSrvcAccomplishmentGrp>
+      <ProgramSrvcAccomplishmentGrp>
+        <DescriptionProgramSrvcAccomTxt>STUDENTS OF THE MONTH: $306 SUPPORT TO ALTRUSA INTERNATIONAL FOUNDATION, INC.: $710 GRANT TO ROSWELL LITERACY COUNCIL: $2,000 GRANT TO CITY OF ROSWELL, NM FOR K-9 UNIT: $21,225</DescriptionProgramSrvcAccomTxt>
+        <GrantsAndAllocationsAmt>0</GrantsAndAllocationsAmt>
+        <ProgramServiceExpensesAmt>24241</ProgramServiceExpensesAmt>
+      </ProgramSrvcAccomplishmentGrp>
+      <TotalProgramServiceExpensesAmt>67569</TotalProgramServiceExpensesAmt>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>JOAN BLODGETT</PersonNm>
+        <TitleTxt>PRESIDENT</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>PATTI BRISTOL</PersonNm>
+        <TitleTxt>VICE-PRESIDENT</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>BONNIE JONES</PersonNm>
+        <TitleTxt>TREASURER</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>MARY BELLICINI</PersonNm>
+        <TitleTxt>SECRETARY</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>JOLETHA ALFORD</PersonNm>
+        <TitleTxt>DIRECTOR/ASSISTANT TREASUR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>JANINE TURNBULL</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>CYNTHIA GREEN</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>KATE GROESBECK</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>KATIE ROEHLK</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>KATHLEEN WELLS</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <OfficerDirectorTrusteeEmplGrp>
+        <PersonNm>SHELLEY OLSON</PersonNm>
+        <TitleTxt>DIRECTOR</TitleTxt>
+        <AverageHrsPerWkDevotedToPosRt>0.00</AverageHrsPerWkDevotedToPosRt>
+        <CompensationAmt>0</CompensationAmt>
+        <EmployeeBenefitProgramAmt>0</EmployeeBenefitProgramAmt>
+        <ExpenseAccountOtherAllwncAmt>0</ExpenseAccountOtherAllwncAmt>
+      </OfficerDirectorTrusteeEmplGrp>
+      <InfoInScheduleOPartVInd>X</InfoInScheduleOPartVInd>
+      <ActivitiesNotPreviouslyRptInd>0</ActivitiesNotPreviouslyRptInd>
+      <ChgMadeToOrgnzngDocNotRptInd>0</ChgMadeToOrgnzngDocNotRptInd>
+      <OrganizationHadUBIInd>0</OrganizationHadUBIInd>
+      <SubjectToProxyTaxInd>0</SubjectToProxyTaxInd>
+      <OrganizationDissolvedEtcInd>0</OrganizationDissolvedEtcInd>
+      <DirectIndirectPltclExpendAmt>0</DirectIndirectPltclExpendAmt>
+      <MadeLoansToFromOfficersInd>0</MadeLoansToFromOfficersInd>
+      <TaxImposedUnderIRC4911Amt>0</TaxImposedUnderIRC4911Amt>
+      <TaxImposedUnderIRC4912Amt>0</TaxImposedUnderIRC4912Amt>
+      <TaxImposedUnderIRC4955Amt>0</TaxImposedUnderIRC4955Amt>
+      <EngagedInExcessBenefitTransInd>0</EngagedInExcessBenefitTransInd>
+      <TaxImposedOnOrganizationMgrAmt>0</TaxImposedOnOrganizationMgrAmt>
+      <TaxReimbursedByOrganizationAmt>0</TaxReimbursedByOrganizationAmt>
+      <ProhibitedTaxShelterTransInd>0</ProhibitedTaxShelterTransInd>
+      <StatesWhereCopyOfReturnIsFldCd>NM</StatesWhereCopyOfReturnIsFldCd>
+      <BooksInCareOfDetail>
+        <BusinessName>
+          <BusinessNameLine1Txt>BONITA L JONES</BusinessNameLine1Txt>
+        </BusinessName>
+        <USAddress>
+          <AddressLine1Txt>705 W MESCALERO RD</AddressLine1Txt>
+          <CityNm>ROSWELL</CityNm>
+          <StateAbbreviationCd>NM</StateAbbreviationCd>
+          <ZIPCd>882015226</ZIPCd>
+        </USAddress>
+        <PhoneNum>5756260567</PhoneNum>
+      </BooksInCareOfDetail>
+      <ForeignFinancialAccountInd>0</ForeignFinancialAccountInd>
+      <ForeignOfficeInd>0</ForeignOfficeInd>
+      <DonorAdvisedFndsInd>0</DonorAdvisedFndsInd>
+      <OperateHospitalInd>0</OperateHospitalInd>
+      <TanningServicesProvidedInd>0</TanningServicesProvidedInd>
+      <RelatedOrganizationCtrlEntInd>0</RelatedOrganizationCtrlEntInd>
+      <PoliticalCampaignActyInd>0</PoliticalCampaignActyInd>
+      <LobbyingActivitiesInd>0</LobbyingActivitiesInd>
+      <SchoolOperatingInd>0</SchoolOperatingInd>
+      <TrnsfrExmptNonChrtblRltdOrgInd>1</TrnsfrExmptNonChrtblRltdOrgInd>
+      <RelatedOrgSect527OrgInd>0</RelatedOrgSect527OrgInd>
+      <PartVIOfCompOfHghstPdEmplTxt>NONE</PartVIOfCompOfHghstPdEmplTxt>
+      <PartVIHghstPdCntrctProfSrvcTxt>NONE</PartVIHghstPdCntrctProfSrvcTxt>
+      <FiledScheduleAInd>1</FiledScheduleAInd>
+    </IRS990EZ>
+    <IRS990ScheduleA documentId="RetDoc1039100001">
+      <PubliclySupportedOrg509a2Ind>X</PubliclySupportedOrg509a2Ind>
+      <GiftsGrantsContrisRcvd509Grp>
+        <CurrentTaxYearMinus1YearAmt>30037</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>22417</CurrentTaxYearAmt>
+        <TotalAmt>52454</TotalAmt>
+      </GiftsGrantsContrisRcvd509Grp>
+      <GrossReceiptsAdmissionsGrp>
+        <CurrentTaxYearMinus1YearAmt>50004</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>41846</CurrentTaxYearAmt>
+        <TotalAmt>91850</TotalAmt>
+      </GrossReceiptsAdmissionsGrp>
+      <Total509Grp>
+        <CurrentTaxYearMinus1YearAmt>80041</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>64263</CurrentTaxYearAmt>
+        <TotalAmt>144304</TotalAmt>
+      </Total509Grp>
+      <AmountsRcvdDsqlfyPersonGrp>
+        <TotalAmt>0</TotalAmt>
+      </AmountsRcvdDsqlfyPersonGrp>
+      <SubstantialContributorsAmtGrp>
+        <TotalAmt>0</TotalAmt>
+      </SubstantialContributorsAmtGrp>
+      <SubstAndDsqlfyPrsnsTotGrp>
+        <TotalAmt>0</TotalAmt>
+      </SubstAndDsqlfyPrsnsTotGrp>
+      <PublicSupportTotal509Amt>144304</PublicSupportTotal509Amt>
+      <GrossInvestmentIncome509Grp>
+        <CurrentTaxYearMinus1YearAmt>13430</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>7427</CurrentTaxYearAmt>
+        <TotalAmt>20857</TotalAmt>
+      </GrossInvestmentIncome509Grp>
+      <InvestmentIncomeAndUBTIGrp>
+        <CurrentTaxYearMinus1YearAmt>13430</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>7427</CurrentTaxYearAmt>
+        <TotalAmt>20857</TotalAmt>
+      </InvestmentIncomeAndUBTIGrp>
+      <TotalSupportCalendarYearGrp>
+        <CurrentTaxYearMinus1YearAmt>93471</CurrentTaxYearMinus1YearAmt>
+        <CurrentTaxYearAmt>71690</CurrentTaxYearAmt>
+        <TotalAmt>165161</TotalAmt>
+      </TotalSupportCalendarYearGrp>
+      <PublicSupportCY509Pct>0.87370</PublicSupportCY509Pct>
+      <PublicSupportPY509Pct>0.85630</PublicSupportPY509Pct>
+      <InvestmentIncomeCYPct>0.12630</InvestmentIncomeCYPct>
+      <InvestmentIncomePYPct>0.14370</InvestmentIncomePYPct>
+      <ThirtyThrPctSuprtTestsCY509Ind>X</ThirtyThrPctSuprtTestsCY509Ind>
+      <Form990ScheduleAPartVIGrp>
+        <FormAndLineReferenceDesc>PART III</FormAndLineReferenceDesc>
+        <ExplanationTxt>AMOUNTS FOR PART III REFLECT 2018 AND 2019 AMOUNTS ONLY. PRIOR TO THE 2018 TAX YEAR, GROSS REVENUES EACH YEAR TOTALED LESS THAN $50,000 AND A FORM 990N WAS FILED FOR ALL PRIOR YEARS.</ExplanationTxt>
+      </Form990ScheduleAPartVIGrp>
+    </IRS990ScheduleA>
+    <IRS990ScheduleG documentId="RetDoc1041300001">
+      <FundraisingEventInformationGrp>
+        <Event1Nm>DINNER DANCE</Event1Nm>
+        <GrossReceiptsEvent1Amt>38220</GrossReceiptsEvent1Amt>
+        <GrossRevenueEvent1Amt>38220</GrossRevenueEvent1Amt>
+        <RentFacilityCostsEvent1Amt>2184</RentFacilityCostsEvent1Amt>
+        <FoodAndBeverageEvent1Amt>9608</FoodAndBeverageEvent1Amt>
+        <EntertainmentEvent1Amt>2000</EntertainmentEvent1Amt>
+        <OtherDirectExpensesEvent1Amt>8310</OtherDirectExpensesEvent1Amt>
+        <GrossReceiptsTotalAmt>38220</GrossReceiptsTotalAmt>
+        <GrossRevenueTotalEventsAmt>38220</GrossRevenueTotalEventsAmt>
+        <RentFcltyCostsTotalEventsAmt>2184</RentFcltyCostsTotalEventsAmt>
+        <FoodAndBeverageTotalEventsAmt>9608</FoodAndBeverageTotalEventsAmt>
+        <EntertainmentTotalEventsAmt>2000</EntertainmentTotalEventsAmt>
+        <OthDirectExpnssTotalEventsAmt>8310</OthDirectExpnssTotalEventsAmt>
+        <DirectExpenseSummaryEventsAmt>22102</DirectExpenseSummaryEventsAmt>
+        <NetIncomeSummaryAmt>16118</NetIncomeSummaryAmt>
+      </FundraisingEventInformationGrp>
+    </IRS990ScheduleG>
+    <IRS990ScheduleO documentId="RetDoc1051800001">
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART I, LINE 4 - OTHER INVESTMENT INCOME</FormAndLineReferenceDesc>
+        <ExplanationTxt>DESCRIPTION: INVESTMENT INCOME. AMOUNT: 7,427.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART I, LINE 10 - GRANTS AND SIMILAR AMOUNTS PAID</FormAndLineReferenceDesc>
+        <ExplanationTxt>ACTIVITY CLASSIFICATION: . GRANTEE NAME: COMMUNITY SERVICE PROJECTS. AMOUNT GIVEN: 13,986.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART I, LINE 10 - GRANTS AND SIMILAR AMOUNTS PAID</FormAndLineReferenceDesc>
+        <ExplanationTxt>ACTIVITY CLASSIFICATION: . GRANTEE NAME: LITERACY COMMITTEE PROJECTS. AMOUNT GIVEN: 12,342.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART I, LINE 10 - GRANTS AND SIMILAR AMOUNTS PAID</FormAndLineReferenceDesc>
+        <ExplanationTxt>ACTIVITY CLASSIFICATION: . GRANTEE NAME: STUDENTS OF THE MONTH. AMOUNT GIVEN: 306.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART I, LINE 10 - GRANTS AND SIMILAR AMOUNTS PAID</FormAndLineReferenceDesc>
+        <ExplanationTxt>ACTIVITY CLASSIFICATION: . GRANTEE NAME: EASTERN NEW MEXICO UNIVERSITY &amp; NEW MEXICO GRANTEE NAME: EASTERN NEW MEXICO UNIVERSITY &amp; NEW MEXICO. AMOUNT GIVEN: 17,000.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART I, LINE 10 - GRANTS AND SIMILAR AMOUNTS PAID</FormAndLineReferenceDesc>
+        <ExplanationTxt>ACTIVITY CLASSIFICATION: . GRANTEE NAME: ALTRUSA INTERNATIONAL FOUNDATION, INC.. AMOUNT GIVEN: 710.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART I, LINE 10 - GRANTS AND SIMILAR AMOUNTS PAID</FormAndLineReferenceDesc>
+        <ExplanationTxt>ACTIVITY CLASSIFICATION: . GRANTEE NAME: ROSWELL LITERACY COUNCIL, INC. AMOUNT GIVEN: 2,000.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART I, LINE 10 - GRANTS AND SIMILAR AMOUNTS PAID</FormAndLineReferenceDesc>
+        <ExplanationTxt>ACTIVITY CLASSIFICATION: . GRANTEE NAME: CITY OF ROSWELL, NM FOR K-9 UNIT. AMOUNT GIVEN: 21,225. TOTAL INCLUDED ON FORM 990-EZ, LINE 10: 67,569.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART I, LINE 16 - OTHER EXPENSES</FormAndLineReferenceDesc>
+        <ExplanationTxt>DESCRIPTION: BONDING INSURANCE. AMOUNT: 500. DESCRIPTION: INVESTMENT FEES. AMOUNT: 1,725. DESCRIPTION: NM CORP FILING FEES. AMOUNT: 10. DESCRIPTION: PO BOX RENTAL. AMOUNT: 92. DESCRIPTION: SAFE DEPOSIT FEE. AMOUNT: 32. DESCRIPTION: SUPPLIES. AMOUNT: 9. TOTAL TO FORM 990-EZ, LINE 16: 2,368.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART I, LINE 20 - OTHER CHANGES IN NET ASSETS</FormAndLineReferenceDesc>
+        <ExplanationTxt>DESCRIPTION: UNREALIZED GAINS/LOSSES ON INVESTMENTS. AMOUNT: -1,899.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART II, LINE 24 - OTHER ASSETS</FormAndLineReferenceDesc>
+        <ExplanationTxt>DESCRIPTION: RECEIVABLES. BEG. OF YEAR AMOUNT: 886. END OF YEAR AMOUNT: 0. DESCRIPTION: DEPOSIT ON POST OFFICE BOX KEY. BEG. OF YEAR AMOUNT: 10. END OF YEAR AMOUNT: 10.</ExplanationTxt>
+      </SupplementalInformationDetail>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>FORM 990-EZ, PART II, LINE 26 - OTHER LIABILITIES</FormAndLineReferenceDesc>
+        <ExplanationTxt>DESCRIPTION: ACCOUNTS PAYABLE FOR SILENT AUCTION. BEG. OF YEAR AMOUNT: 0. END OF YEAR AMOUNT: 400.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleO>
+    <TransferPrsnlBnftContractsDecl documentId="RetDoc2278000001">
+      <DeclarationDesc>THE ORGANIZATION DID NOT, DURING THE YEAR, RECEIVE ANY FUNDS, DIRECTLY,OR INDIRECTLY, TO PAY PREMIUMS ON A PERSONAL BENEFIT CONTRACT.THE ORGANIZATION, DID NOT, DURING THE YEAR, PAY ANY PREMIUMS, DIRECTLY,OR INDIRECTLY, ON A PERSONAL BENEFIT CONTRACT.</DeclarationDesc>
+    </TransferPrsnlBnftContractsDecl>
+  </ReturnData>
+</Return>

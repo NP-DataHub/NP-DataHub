@@ -55,22 +55,23 @@ class Database:
             # standard USA zip code format 
             if zip_code != "None":
                 if len(zip_code) < 5:
-                    zip_code = zip_code.zfill(5) # add leading 0 till length becomes 5
-                elif len(zip_code) > 5:
-                    parts = []            
-                    for i in range(0, len(zip_code), 5):
-                        part = zip_code[i:i+5]
-                        parts.append(part)            
-                    zip_code = '-'.join(parts)
+                    zip_code = zip_code.zfill(5)  # Pad with leading zeros
+                elif len(zip_code) == 9:  # Exactly 9 digits
+                    zip_code = f"{zip_code[:5]}-{zip_code[5:]}"  # Format as ZIP+4
+                else:
+                    zip_code = zip_code[:5] # ensure length == 5
+            return [name, state, city, zip_code, address]
         else : #Foreign Address
-            state_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:CountryCd', self.namespace)
-            state = state_element.text.upper() if state_element is not None else "None"
+            country_cd_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:CountryCd', self.namespace)
+            country_cd = country_cd_element.text.upper() if country_cd_element is not None else "None"
             city_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:CityNm', self.namespace)
             city = city_element.text.title() if city_element is not None else "None"
+            province_nm_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:ProvinceOrStateNm', self.namespace)
+            province_nm = province_nm_element.text.title() if province_nm_element is not None else "None"
             zip_code_element = root.find('.//irs:Filer/irs:ForeignAddress/irs:ForeignPostalCd', self.namespace)
             zip_code = zip_code_element.text if zip_code_element is not None else "None"
             address = self.get_information_from_multiple_lines(root, "ForeignAddress", "AddressLine")
-        return [name, state, city, zip_code, address]
+            return [name, country_cd, province_nm, city, zip_code, address]
 
     def get_990_financial_information(self, root):
         total_revenue_element = root.find('.//irs:CYTotalRevenueAmt', self.namespace)
@@ -273,14 +274,25 @@ class Database:
             }
         if include_general_info == 1:
             general_info = self.get_general_information(root)
-            update_fields.update({
-                "Nm": general_info[0],
-                "St": general_info[1],
-                "Cty": general_info[2],
-                "Zip": general_info[3],
-                "Addr": general_info[4],
-                "RetTyp" : return_type
-            })
+            if len(general_info) == 5:  # Domestic
+                update_fields.update({
+                    "Nm": general_info[0],
+                    "St": general_info[1],
+                    "Cty": general_info[2],
+                    "Zip": general_info[3],
+                    "Addr": general_info[4],
+                    "RetTyp" : return_type
+                })
+            else:
+                update_fields.update({
+                    "Nm": general_info[0],
+                    "Ctry": general_info[1],
+                    "ProvNm": general_info[2],
+                    "Cty": general_info[3],
+                    "Zip": general_info[4],
+                    "Addr": general_info[5],
+                    "RetTyp": return_type
+                })
         return update_fields
 
     def compare_and_find_differences(self,prev_info, curr_info, prev_file, curr_file, return_type ):
@@ -292,15 +304,22 @@ class Database:
                 "Gross Receipts", "Fundraising Income", "Fundraising Expenses",
                 "Compensation of current officers", "Other salaries and wages",
                 "Payroll Taxes", "Gift Grants Membership Fees received 509",
-                "Number of employees","Name", "State", "City", "Zip Code", "Address", "Return Type"
-            ]
+                "Number of employees","Name"]
+            if len(curr_info) == 21:
+                labels += ["State", "City", "Zip Code", "Address", "Return Type"]
+            else:
+                labels += ["Country", "Province", "City", "Zip Code", "Address", "Return Type"]
+
         elif return_type == "990EZ":
             labels = [
                 "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
                 "Program Service Revenue", "Investment Income",
-                "Gift Grants Membership Fees received 509", "Name", "State", "City", 
-                "Zip Code", "Address", "Return Type"
-            ]
+                "Gift Grants Membership Fees received 509", "Name"]
+            if len(curr_info) == 13:
+                labels += ["State", "City", "Zip Code", "Address", "Return Type"]
+            else:
+                labels += ["Country", "Province", "City", "Zip Code", "Address", "Return Type"]
+
         else:
             labels = [
                 "Total Revenue", "Total Assets", "Total Liabilities", "Total Expenses",
@@ -308,9 +327,12 @@ class Database:
                 "Dividends", "Net Gain (Sales of Assets)", "Other Income",
                 "Compensation of Officers", "Total Fund net worth",
                 "Investments in US Gov Obligations", "Investments in Corporate Stock",
-                "Investments in Corporate Bonds", "Cash", "Adjusted net income", "Name", 
-                "State", "City", "Zip Code", "Address", "Return Type"
-            ]
+                "Investments in Corporate Bonds", "Cash", "Adjusted net income", "Name"]
+            if len(curr_info) == 23:
+                labels += ["State", "City", "Zip Code", "Address", "Return Type"]
+            else:
+                labels += ["Country", "Province", "City", "Zip Code", "Address", "Return Type"]
+
         lst = [prev_file[0],prev_file[1],curr_file[0],curr_file[1]]
         for i in range(len(prev_info)):
             if prev_info[i] != curr_info[i]:

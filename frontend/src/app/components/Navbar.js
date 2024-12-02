@@ -75,7 +75,7 @@ const Navbar = () => {
         {/* Responsive Logo */}
         <picture className="flex-grow">
           {/* Logo for small screens */}
-          <source media="(max-width: 767px)" srcSet="/img/inverted.png" />
+          <source media="(max-width: 767px)" srcSet="/img/logo_rb_i.png" />
           {/* Logo for medium screens and larger */}
           <img
             className="h-10 md:h-10 max-h-full cursor-pointer" // Added cursor pointer for better UX

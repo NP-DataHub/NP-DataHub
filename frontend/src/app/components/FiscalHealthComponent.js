@@ -140,7 +140,7 @@ export default function FiscalHealthSection({isDarkMode}) {
     } catch (error) {
       console.error("Error fetching suggestions:", error);
     }
-  }, 500), // 500 delay
+  }, 250), // 250 ms delay
   [lastSingleFetchedNameInput,
   lastFirstFetchedNameInput,
   lastSecondFetchedNameInput,
