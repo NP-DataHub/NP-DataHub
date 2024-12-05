@@ -5,6 +5,7 @@ import zipData from './zipcode_data';
 import dynamic from 'next/dynamic';
 import debounce from 'lodash.debounce';
 import { useCallback } from "react";
+import { set } from 'mongoose';
 const Map2 = dynamic(() => import('../components/map2'), { ssr: false});
 
 const CENSUS_KEY = process.env.NEXT_PUBLIC_CENSUS_API_KEY;
@@ -28,6 +29,7 @@ export default function RegionalHealthSection({isDarkMode}) {
     const [percHealth, setpercHealth] = useState("HEALTH");
     const [sizeFamily, setsizeFamily] = useState("FAMILY");
     const [points, setPoints] = useState([]); // Points for the map
+    const [isLoading, setIsLoading] = useState(false);
 
 
     //order of groups goes Median Age, Median Income, Percent housing units occumpied, Percent with health insurance covereage,
@@ -159,6 +161,7 @@ export default function RegionalHealthSection({isDarkMode}) {
 
     //Nonprofit Search
     const handleSearchforNonProfit = async (value) => {
+        setIsLoading(true);
         try {
             const response = await fetch(`/api/regionalHealth?input=${value}&type=name`);
             const data = await response.json();
@@ -170,12 +173,15 @@ export default function RegionalHealthSection({isDarkMode}) {
           }
         } catch (error) {
           console.error("Error fetching Zipcode Serch:", error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
 
     //zipcode search
    const handleSearchforZip = async (value) => {
+        setIsLoading(true);
         try {
             const response = await fetch(`/api/regionalHealth?input=${value}&type=zip`);
             const data = await response.json();
@@ -187,6 +193,8 @@ export default function RegionalHealthSection({isDarkMode}) {
           }
         } catch (error) {
           console.error("Error fetching Zipcode Serch:", error);
+        } finally {
+            setIsLoading(false); 
         }
     };
 
@@ -283,7 +291,7 @@ export default function RegionalHealthSection({isDarkMode}) {
             const bachelors = parseInt(data[1][5]);
             const graduate = parseInt(data[1][6]);
 
-            setPoints([{label: 'Less than 9th', val: lessthan9}, {label: 'Some Highschool', val: nineto12}, {label: 'High School', val: highSchool}, {label: 'Some College', val: someCollege}, {label: 'Associates', val: associates}, {label: 'Bachelors', val: bachelors}, {label: 'Graduate', val: graduate}]);
+            setPoints([{label: 'Less than 9th', val: lessthan9}, {label: 'Some High School', val: nineto12}, {label: 'High School', val: highSchool}, {label: 'Some College', val: someCollege}, {label: 'Associates', val: associates}, {label: 'Bachelors', val: bachelors}, {label: 'Graduate', val: graduate}]);
 
         } catch (error) {
             console.error("Failed to fetch Gender Data:", error);
@@ -382,8 +390,11 @@ export default function RegionalHealthSection({isDarkMode}) {
 
     return(<div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"} rounded-lg`}>
         <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>REGIONAL HEALTH BY SECTOR</h3>
-        <p>
-            Compare NTEE code sectors against public data that align with various regional non-profit’s missions. The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
+        <p className="mt-4">
+        Compare NTEE code sectors against public data that align with various regional nonprofit’s missions. You have two options to search:<br/>
+        1) By a single nonprofit<br/>
+        2) By an entire zip code, which lists all nonprofits in that area<br/>
+        The public data is pulled from the U.S. Census, which offers the strongest baseline across a host of demographic variables.
         </p>
         <div className="mt-12 text-sm">
 
@@ -437,7 +448,7 @@ export default function RegionalHealthSection({isDarkMode}) {
                                         )}
                                         renderSuggestion={renderZipSuggestion}
                                         inputProps={{
-                                        placeholder: 'Enter Zipcode',
+                                        placeholder: 'Enter Zip Code',
                                         value: zipcode,
                                         onChange: (_, { newValue }) => setZipcode(newValue),
                                         className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
@@ -447,7 +458,7 @@ export default function RegionalHealthSection({isDarkMode}) {
                     </div>
                     <button className={`p-4 ${isDarkMode ? "bg-[#34344c] text-white hover:bg-gray-500" : "bg-[#F1F1F1] text-black hover:bg-gray-200"} rounded-md  transition-colors`}
                     onClick={() => handleSearchforZip(zipcode)}>
-                        SEARCH BY ZIPCODE
+                        SEARCH BY ZIP CODE
                     </button>
         </div>
         
@@ -457,11 +468,11 @@ export default function RegionalHealthSection({isDarkMode}) {
                         <table className={`min-w-full ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} rounded-lg`}>
                             <thead className="sticky top-0 z-10">
                                 <tr>
-                                    <th className="py-3 px-6 text-left bg-[#21222D]">NONPROFIT</th>
-                                    <th className="py-3 px-6 text-left bg-[#21222D]">ADDRESS</th>
-                                    <th className="py-3 px-6 text-left bg-[#21222D]">ZIP CODE</th>
-                                    <th className="py-3 px-6 text-left bg-[#21222D]">NTEE CODE</th>
-                                    <th className="py-3 px-6 text-left bg-[#21222D]">REVS</th>
+                                    <th className={`py-3 px-6 text-left ${isDarkMode ? "bg-[#21222D]" : "bg-[#f9f9f9]"}`}>NONPROFIT</th>
+                                    <th className={`py-3 px-6 text-left ${isDarkMode ? "bg-[#21222D]" : "bg-[#f9f9f9]"}`}>ADDRESS</th>
+                                    <th className={`py-3 px-6 text-left ${isDarkMode ? "bg-[#21222D]" : "bg-[#f9f9f9]"}`}>ZIP CODE</th>
+                                    <th className={`py-3 px-6 text-left ${isDarkMode ? "bg-[#21222D]" : "bg-[#f9f9f9]"}`}>NTEE CODE</th>
+                                    <th className={`py-3 px-6 text-left ${isDarkMode ? "bg-[#21222D]" : "bg-[#f9f9f9]"}`}>REVS</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -475,9 +486,9 @@ export default function RegionalHealthSection({isDarkMode}) {
                                                 </a>
                                             </td>
                                             <td className="py-3 px-6">{row.Addr}</td>
-                                            <td className="py-3 px-6">{row.Zip}</td>
+                                            <td className="py-3 px-6 whitespace-nowrap">{row.Zip.length > 5 ? `${row.Zip.slice(0, 5)}-${row.Zip.slice(5)}` : row.Zip}</td>
                                             <td className="py-3 px-6">{row.MajGrp}</td>
-                                            <td className="py-3 px-6">{row[getLatestYear(row)].TotRev}</td>
+                                            <td className="py-3 px-6">{"$"+row[getLatestYear(row)].TotRev.toLocaleString()}</td>
                                         </tr>
                                     );
                                 })}
@@ -486,11 +497,18 @@ export default function RegionalHealthSection({isDarkMode}) {
                     </div>
                 )}
                 </div>
-        {/* Add in loading bar while searching have it display in this area*/}
+        {isLoading ? (
+                <div className="flex items-center justify-center h-full w-full">
+                    <svg className="animate-spin h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </div>
+        ) : null}
                 
-        <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>KEY DEMOGRAPHIC DATA</h3>
-        <p className="mt-2">
-            With your choice of Zipcode, the following demographic variables from the U.S. Census are included in the report below. (However, Not all zipcodes line up with the census data, so if you are not getting a result try a zipcode near the one you are looking for.)
+        <h3 className={`text-xl font-semibold  mt-4 ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>KEY DEMOGRAPHIC DATA</h3>
+        <p className="mt-4">
+        With your choice of zip code, the following demographic variables from the U.S. Census are included in the report below and includes the most recent data from the 2022 American Community Survey (ACS). However, please note that not all zip codes align with the U.S. Census data. If you are not receiving a result, try a zip code next to the first choice. The findings will allow the end user to understand how key demographic data shapes the zip code.
         </p>
         <div className="flex justify-center items-center ">
             <div className="grid grid-cols-4 gap-x-32 gap-y-8 mb-6 mt-12 text-md mx-auto">
@@ -500,7 +518,7 @@ export default function RegionalHealthSection({isDarkMode}) {
                 </div>
                 </div>
                 <div className="flex flex-col items-center w-32 h-32 p-4 rounded-full bg-gray-300 border-white border-2 shadow-lg justify-center">
-                <div className="flex text-center font-bold text-blue-300">
+                <div className="flex text-center font-bold text-red-700">
                     {majRace}
                 </div>
                 </div>
@@ -538,8 +556,8 @@ export default function RegionalHealthSection({isDarkMode}) {
             </div>
 
             <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>INTERACTIVE MAP</h3>
-            <p className="mt-2">                
-                Choose which demographic variable to search below. Then hover over the map for detailed tool tip of the key demographic data from the zip code that aligns with your chosen nonprofit sector.
+            <p className="mt-4">                
+            Choose which demographic variable to search below. Then hover over the map for detailed tool tip of the key demographic data from the zip code that aligns with your chosen nonprofit sector.
             </p>
             <div className="grid grid-cols-4 gap-4 p-4 mt-2 text-sm max-w-3xl mx-auto mb-4">
                 <button className="bg-green-500 text-white py-8 px-16 text-center rounded-full"
