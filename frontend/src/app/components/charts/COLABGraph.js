@@ -220,8 +220,6 @@ const COLABGraph = ({data, filters, onNonprofitClick, isDarkMode, threshold}) =>
               click: (e) => {
                 if (e.dataType === 'node') {
                   handleGraphClick(data[e.dataIndex]);
-                } else {
-                  console.log('Edge clicked - ignoring.');
                 }
               }
             }}
