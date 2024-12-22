@@ -66,7 +66,7 @@ export default function NewsFeedSection({isDarkMode}) {
   );
 
   return (
-    <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"} rounded-lg`}>
+    <div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : " bg-[#ffffff] text-black"} rounded-lg`}>
       <h3 className="text-xl font-semibold text-[#FEB95A]">News Feeds</h3>
       <p className="">
         A tool for understanding larger-scale problems and connecting to regional nonprofits via social media and search engines.
