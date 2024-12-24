@@ -1,0 +1,96 @@
+Previous filepath: /tmp/2024-03A/202440599349201219_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202410659349201406_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-03A/202410589349200106_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202430659349200833_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-03A/202410819349201501_public.xml and timestamp: 2024-03-21 05:00:02-07:00
+Current filepath: /tmp/2024-03A/202400799349201650_public.xml and timestamp: None
+Zip Code: previous is 44622 and current is: 44622-9739
+==================================================
+Previous filepath: /tmp/2024-03A/202410789349201116_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202440789349201304_public.xml and timestamp: None
+Investment Income: previous is 0 and current is: 10560
+==================================================
+Previous filepath: /tmp/2024-03A/202400789349200100_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202430789349200308_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-03A/202410659349201116_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202430639349200708_public.xml and timestamp: None
+Total Revenue: previous is 154997 and current is: 149915
+Total Assets: previous is 58697 and current is: 104176
+Total Expenses: previous is 96300 and current is: 45739
+Gift Grants Membership Fees received 509: previous is 174997 and current is: 149
+==================================================
+Previous filepath: /tmp/2024-03A/202400659349201120_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202400569349200200_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-03A/202410589349200141_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202420589349200822_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-03A/202440689349301719_public.xml and timestamp: 2024-03-08 21:42:38-05:00
+Current filepath: /tmp/2024-03A/202420589349301507_public.xml and timestamp: None
+Total Revenue: previous is 1414981 and current is: 1425000
+Total Assets: previous is 1163841 and current is: 0
+Total Liabilities: previous is 134971 and current is: 0
+Total Expenses: previous is 1119630 and current is: 0
+Total Contributions: previous is 560319 and current is: 1425000
+Program Service Revenue: previous is 854088 and current is: 0
+Investment Income: previous is 19 and current is: 0
+Gross Receipts: previous is 1414981 and current is: 1425000
+Compensation of current officers: previous is 102513 and current is: 0
+Other salaries and wages: previous is 638569 and current is: 0
+Payroll Taxes: previous is 61066 and current is: 0
+Gift Grants Membership Fees received 509: previous is 0 and current is: 225000
+Number of employees: previous is 7 and current is: 4
+Zip Code: previous is 20001-3312 and current is: 20001
+==================================================
+Previous filepath: /tmp/2024-03A/202420659349200832_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202400639349200005_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-03A/202400749349200605_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202430709349200303_public.xml and timestamp: None
+Total Expenses: previous is 117279 and current is: 84802
+==================================================
+Previous filepath: /tmp/2024-03A/202440659349200034_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202440619349200379_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-03A/202440589349200819_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202430599349200028_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-03A/202440599349201219_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202410669349200601_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-03A/202410799349200036_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202400809349200110_public.xml and timestamp: None
+Total Revenue: previous is 0 and current is: 39676
+Total Assets: previous is 9751 and current is: 13484
+Total Expenses: previous is 0 and current is: 48295
+==================================================
+Previous filepath: /tmp/2024-03A/202410739349200101_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202410749349300946_public.xml and timestamp: None
+Total Revenue: previous is 0 and current is: 114239
+Total Assets: previous is 0 and current is: 252607
+Total Expenses: previous is 0 and current is: 102805
+Total Contributions: previous is 0 and current is: 94270
+Investment Income: previous is 0 and current is: 5072
+Gross Receipts: previous is 119932 and current is: 114942
+Return Type: previous is 990EZ and current is: 990
+==================================================
+Previous filepath: /tmp/2024-03A/202440589349200819_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202430659349200733_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-03A/202400659349201310_public.xml and timestamp: None
+Current filepath: /tmp/2024-03A/202400549349201255_public.xml and timestamp: None
+No difference found
+==================================================

@@ -1,0 +1,5 @@
+Previous filepath: /tmp/2021-01G/202142779349200144_public.xml and timestamp: None
+Current filepath: /tmp/2021-01G/202142259349200734_public.xml and timestamp: None
+Total Assets: previous is 78900 and current is: 0
+Total Expenses: previous is 30346 and current is: 56800
+==================================================

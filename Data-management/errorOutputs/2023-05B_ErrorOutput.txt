@@ -1,0 +1,57 @@
+Previous filepath: /tmp/2023-05B/202321349349201522_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202321379349200522_public.xml and timestamp: None
+Total Assets: previous is 227214 and current is: 228168
+==================================================
+Previous filepath: /tmp/2023-05B/202341369349200824_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202321389349201352_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-05B/202321449349301047_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202341359349316519_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-05B/202341439349200644_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202341169349201009_public.xml and timestamp: 2023-04-19 15:38:49-07:00
+Zip Code: previous is 40207-1757 and current is: 40207
+==================================================
+Previous filepath: /tmp/2023-05B/202331309349202158_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202321319349201432_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-05B/202341239349202234_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202331229349201708_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-05B/202341329349200004_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202341319349203824_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-05B/202331359349210248_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202321389349200437_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-05B/202331319349203588_public.xml and timestamp: 2023-05-11 17:56:52-07:00
+Current filepath: /tmp/2023-05B/202331319349203118_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-05B/202341369349200229_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202341359349209379_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-05B/202341309349203894_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202321379349201607_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-05B/202341319349303404_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202321329349302767_public.xml and timestamp: None
+Total Revenue: previous is 296918 and current is: 296890
+Total Expenses: previous is 197645 and current is: 223670
+Total Contributions: previous is 296890 and current is: 296862
+Gross Receipts: previous is 296918 and current is: 296890
+Compensation of current officers: previous is 6403 and current is: 0
+Other salaries and wages: previous is 2828 and current is: 0
+==================================================
+Previous filepath: /tmp/2023-05B/202321339349200222_public.xml and timestamp: None
+Current filepath: /tmp/2023-05B/202341409349200904_public.xml and timestamp: None
+No difference found
+==================================================
