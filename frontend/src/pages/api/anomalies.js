@@ -16,7 +16,6 @@ async function fetchAnomalies(majgrp) {
             .find({ MajGrp: majgrp.toUpperCase(), AnomalyLabel: -1 })
             .toArray();
 
-        console.log("Fetched anomalies:", anomalies); 
         return anomalies;
     } catch (error) {
         console.error("Error while fetching anomalies:", error);
