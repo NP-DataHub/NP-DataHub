@@ -25,7 +25,7 @@ export default function AnomalyDetection({ isDarkMode }) {
         return !sector; // Disable if sector is not provided
     };
     const isFetchSector2Disabled = () => {
-        return !sector2; // Disable if sector is not provided
+        return !sector2;
     };
     const states = {
       AL: 'Alabama',
