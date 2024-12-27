@@ -1,23 +1,31 @@
 'use client';
 
 import React, { useState } from 'react';
-import ntee_codes from "./ntee";
+import TopStatesChart from './charts/TopStatesChart';
 
 export default function AnomalyDetection({ isDarkMode }) {
     const [sector, setSector] = useState('');
     const [loadingSector, setLoadingSector] = useState(false);
     const [error, setError] = useState('');
-
-    const [loadingNp, setLoadingNp] = useState(false);
-    const [errorNp, setErrorNp] = useState('');
-    const isLoading = loadingSector
-
     const [anomalies, setAnomalies] = useState([]);
     const [filteredAnomalies, setFilteredAnomalies] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedAnomaly, setSelectedAnomaly] = useState(null);
+    const [loadingNp, setLoadingNp] = useState(false);
+    const [errorNp, setErrorNp] = useState('');
+
+    const [sector2, setSector2] = useState('');
+    const [loadingSector2, setLoadingSector2] = useState(false);
+    const [error2, setError2] = useState('');
+    const [statsData, setStatsData] = useState([]);
+
+    const isLoading = loadingSector || loadingSector2
+
     const isFetchSectorDisabled = () => {
         return !sector; // Disable if sector is not provided
+    };
+    const isFetchSector2Disabled = () => {
+        return !sector2; // Disable if sector is not provided
     };
     const states = {
       AL: 'Alabama',
@@ -115,33 +123,60 @@ export default function AnomalyDetection({ isDarkMode }) {
     </div>
   );
 
-    const fetchAnomalies = async () => {
-        setLoadingSector(true);
-        setError('');
-        setAnomalies([]);
-        setSelectedAnomaly(null);
+    const fetchAnomalies = async (mode) => {
+        if (mode === 'Nonprofits' && !sector) {
+            setError('Please select a sector.');
+            return;
+        } else if (mode === 'Stats' && !sector2) {
+            setError2('Please select a sector.');
+            return;
+        }
         try {
-            if (!sector) {
-                setError('Please select a sector.');
-                return;
-            }
-
-            setError('');
-            const response = await fetch(`/api/anomalies?majgrp=${sector}`);
-            const data = await response.json();
-            if (data.success) {
-                setAnomalies(data.anomalies);
-                setFilteredAnomalies(data.anomalies);
-            } else {
-                setError('No anomalies found or an error occurred.');
+            if (mode === 'Nonprofits') {
+                setLoadingSector(true);
+                setError('');
+                setAnomalies([]);
+                setSelectedAnomaly(null);
+                const response = await fetch(`/api/anomalies?majgrp=${sector}&mode=${mode}`);
+                const data = await response.json();
+                if (data.success) {
+                    setAnomalies(data.anomalies);
+                    setFilteredAnomalies(data.anomalies);
+                } else {
+                    setError('No anomalies found or an error occurred.');
+                }
             }
         } catch (err) {
-            setError('Failed to fetch data. Please try again.');
+            setError('Failed to fetch anomalies. Please try again.');
             console.error(err);
         } finally {
             setLoadingSector(false);
-                        console.error("test for selected anomaly");
+        }
 
+        try {
+            if (mode === 'Stats') {
+                setLoadingSector2(true);
+                setError2('');
+                setStatsData([]);
+                const response = await fetch(`/api/anomalies?majgrp=${sector2}&mode=${mode}`);
+                const data = await response.json();
+                if (data.success) {
+                    //replace the state abbreviations with full names
+                    const fullStats = Object.keys(data.stats[1]).reduce((acc, key) => {
+                        // Replace state abbreviation with full name
+                        acc[states[key] || key] = data.stats[1][key];
+                        return acc;
+                    }, {});
+                    setStatsData([data.stats[0], fullStats]);
+                } else {
+                    setError2('No stats found or an error occurred.');
+                }
+            }
+        } catch (err) {
+            setError2('Failed to fetch stats. Please try again.');
+            console.error(err);
+        } finally {
+            setLoadingSector2(false);
         }
     };
 
@@ -221,7 +256,7 @@ export default function AnomalyDetection({ isDarkMode }) {
                 </div>
                 <button
                   onClick={() => {
-                    fetchAnomalies();
+                    fetchAnomalies('Nonprofits');
                   }}
                   className={`py-4 mt-6 px-6 rounded-lg font-bold w-full ${
                     isFetchSectorDisabled() || isLoading
@@ -329,6 +364,58 @@ export default function AnomalyDetection({ isDarkMode }) {
                 </div>
               </>
             ) : null}
+            </div>
+            {/* Charts mode */}
+            <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
+                <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#F2C8ED]' : 'text-[#DB7093]'}`}>Anomalies By State</h2>
+                <p className="text-center pb-8">
+                    Visualize the distribution of identified financial anomalies across different states.
+                </p>
+                <div className="flex flex-col gap-6">
+                  <select
+                    value={sector2}
+                    onChange={(e) => {
+                        setSector2(e.target.value);
+                    }}
+                    className={`p-4 border  ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#F1F1F1] text-black border-gray-200"} rounded-lg w-full`}
+                  >
+                    {majorGroups.map((group) => (
+                      <option key={group.value} value={group.value} className="text-black">
+                        {group.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <button
+                  onClick={() => {
+                    fetchAnomalies('Stats');
+                  }}
+                  className={`py-4 mt-6 px-6 rounded-lg font-bold w-full ${
+                    isFetchSector2Disabled()
+                      ? isDarkMode
+                        ? "bg-gray-700 cursor-not-allowed"
+                        : "bg-[#D8D8D8] cursor-not-allowed"
+                      : isDarkMode
+                      ? 'bg-[#D9B4D5] hover:bg-[#F2C8ED] transition duration-300'
+                      : 'bg-[#C56484] hover:bg-[#DB7093] transition duration-300'
+                  }`}
+                  disabled={isFetchSector2Disabled()}
+                >
+                    View
+                </button>
+                {loadingSector2 && <div className="text-center text-lg text-gray-400 mt-6"><SearchLoadingComponent/></div>}
+                {error2 && <div className="text-center text-lg text-red-400 mt-6">Error: {error2}</div>}
+                {statsData.length > 0 && !loadingSector2 && !error2 && (
+                    <div>
+                        <p className="mt-6 text-center">
+                            The search found {statsData[0]} anomalies in this sector using each nonprofit&apos;s most recent financial data.
+                        </p>
+                        <div>
+                            <h2 className="mt-6 text-center">States with the most anomalies in the selected sector</h2>
+                            < TopStatesChart states={statsData[1]} isDarkMode={isDarkMode} />
+                        </div>
+                    </div>
+                )}   
             </div>
         </div>
     );
