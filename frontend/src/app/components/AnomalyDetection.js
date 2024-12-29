@@ -1,5 +1,6 @@
 'use client';
 
+import Autosuggest from 'react-autosuggest';
 import React, { useState } from 'react';
 import TopStatesChart from './charts/TopStatesChart';
 
@@ -27,6 +28,38 @@ export default function AnomalyDetection({ isDarkMode }) {
     const isFetchSector2Disabled = () => {
         return !sector2;
     };
+    const majorGroups = [
+        { value: '', label: 'Select a Sector' },
+        { value: 'A', label: 'A - Arts, Culture, and Humanities' },
+        { value: 'B', label: 'B - Educational Institutions and Related Activities' },
+        { value: 'C', label: 'C - Environmental Quality, Protection and Beautification' },
+        { value: 'D', label: 'D - Animal-Related' },
+        { value: 'E', label: 'E - Health – General and Rehabilitative' },
+        { value: 'F', label: 'F - Mental Health, Crisis Intervention' },
+        { value: 'G', label: 'G - Diseases, Disorders, Medical Disciplines' },
+        { value: 'H', label: 'H - Medical Research' },
+        { value: 'I', label: 'I - Crime and Legal-Related' },
+        { value: 'J', label: 'J - Employment, Job-Related' },
+        { value: 'K', label: 'K - Food, Agriculture, and Nutrition' },
+        { value: 'L', label: 'L - Housing, Shelter' },
+        { value: 'M', label: 'M - Public Safety, Disaster Preparedness, and Relief' },
+        { value: 'N', label: 'N - Recreation, Sports, Leisure, Athletics' },
+        { value: 'O', label: 'O - Youth Development' },
+        { value: 'P', label: 'P - Human Services - Multipurpose and Other' },
+        { value: 'Q', label: 'Q - International, Foreign Affairs, and National Security' },
+        { value: 'R', label: 'R - Civil Rights, Social Action, Advocacy' },
+        { value: 'S', label: 'S - Community Improvement, Capacity Building' },
+        { value: 'T', label: 'T - Philanthropy, Voluntarism, and Grantmaking Foundations' },
+        { value: 'U', label: 'U - Science and Technology Research Institutes, Services' },
+        { value: 'V', label: 'V - Social Science Research Institutes, Services' },
+        { value: 'W', label: 'W - Public, Societal Benefit - Multipurpose and Other' },
+        { value: 'X', label: 'X - Religion-Related, Spiritual Development' },
+        { value: 'Y', label: 'Y - Mutual/Membership Benefit Organizations, Other' },
+        { value: 'Z', label: 'Z - Unknown' },
+    ];
+
+
+    // Helpers for State field
     const states = {
       AL: 'Alabama',
       AK: 'Alaska' ,
@@ -84,35 +117,36 @@ export default function AnomalyDetection({ isDarkMode }) {
       WI: 'Wisconsin',
       WY: 'Wyoming',
     };
-    const majorGroups = [
-        { value: '', label: 'Select a Sector' },
-        { value: 'A', label: 'A - Arts, Culture, and Humanities' },
-        { value: 'B', label: 'B - Educational Institutions and Related Activities' },
-        { value: 'C', label: 'C - Environmental Quality, Protection and Beautification' },
-        { value: 'D', label: 'D - Animal-Related' },
-        { value: 'E', label: 'E - Health – General and Rehabilitative' },
-        { value: 'F', label: 'F - Mental Health, Crisis Intervention' },
-        { value: 'G', label: 'G - Diseases, Disorders, Medical Disciplines' },
-        { value: 'H', label: 'H - Medical Research' },
-        { value: 'I', label: 'I - Crime and Legal-Related' },
-        { value: 'J', label: 'J - Employment, Job-Related' },
-        { value: 'K', label: 'K - Food, Agriculture, and Nutrition' },
-        { value: 'L', label: 'L - Housing, Shelter' },
-        { value: 'M', label: 'M - Public Safety, Disaster Preparedness, and Relief' },
-        { value: 'N', label: 'N - Recreation, Sports, Leisure, Athletics' },
-        { value: 'O', label: 'O - Youth Development' },
-        { value: 'P', label: 'P - Human Services - Multipurpose and Other' },
-        { value: 'Q', label: 'Q - International, Foreign Affairs, and National Security' },
-        { value: 'R', label: 'R - Civil Rights, Social Action, Advocacy' },
-        { value: 'S', label: 'S - Community Improvement, Capacity Building' },
-        { value: 'T', label: 'T - Philanthropy, Voluntarism, and Grantmaking Foundations' },
-        { value: 'U', label: 'U - Science and Technology Research Institutes, Services' },
-        { value: 'V', label: 'V - Social Science Research Institutes, Services' },
-        { value: 'W', label: 'W - Public, Societal Benefit - Multipurpose and Other' },
-        { value: 'X', label: 'X - Religion-Related, Spiritual Development' },
-        { value: 'Y', label: 'Y - Mutual/Membership Benefit Organizations, Other' },
-        { value: 'Z', label: 'Z - Unknown' },
+    const fullStates = [
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+        'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
+        'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
+        'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+        'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
+        'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio',
+        'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',
+        'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia',
+        'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
     ];
+    const [state, setState] = useState('');
+    const [stateSuggestions, setStateSuggestions] = useState([]);
+    const getStateSuggestions = value => {
+      const inputValue = value.trim().toLowerCase();
+      const inputLength = inputValue.length;
+      return inputLength === 0
+          ? []
+          : fullStates.filter(state =>
+              state.toLowerCase().slice(0, inputLength) === inputValue
+          );
+    };
+  const getStateSuggestionValue = suggestion => suggestion;
+  const onStateSuggestionsFetchRequested = ({ value }) => {
+        setStateSuggestions(getStateSuggestions(value));
+  };
+  const onStateSuggestionsClearRequested = () => {
+      setStateSuggestions([]);
+  };
+
 
   const SearchLoadingComponent = () => (
     <div className="flex items-center justify-center h-full w-full">
@@ -137,7 +171,8 @@ export default function AnomalyDetection({ isDarkMode }) {
                 setError('');
                 setAnomalies([]);
                 setSelectedAnomaly(null);
-                const response = await fetch(`/api/anomalies?majgrp=${sector}&mode=${mode}`);
+                const stateParam = state ? `&state=${state}` : '';
+                const response = await fetch(`/api/anomalies?majgrp=${sector}&mode=${mode}${stateParam}`);
                 const data = await response.json();
                 if (data.success) {
                     setAnomalies(data.anomalies);
@@ -231,13 +266,14 @@ export default function AnomalyDetection({ isDarkMode }) {
             <p className="mb-6">
                 Please note, these predictions provide insight into irregularities but are not definitive assessments nor 
                 should they be classified as negative. The algorithm will identify some significant change 
-                in key fiscal variables. Always conduct further research before making critical decisions based on these results.
+                in key fiscal variables (revenues, expenses, assets, and liabilities). Always conduct further research before making critical decisions based on these results.
             </p> 
             {/* All Anomalies Mode */}
             <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
                 <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#F2C8ED]' : 'text-[#DB7093]'}`}>Sector-Wide Anomaly Detection</h2>
                 <p className="text-center pb-8">
-                    Identify nonprofits with potentially anomalous financial data within a selected NTEE sector. View detailed financial information for each identified nonprofit.
+                Identify nonprofits with potentially anomalous financial data within a selected NTEE sector within each state. 
+                Then view detailed financial information for each identified nonprofit. 
                 </p>
                 <div className="flex flex-col gap-6">
                   <select
@@ -253,6 +289,43 @@ export default function AnomalyDetection({ isDarkMode }) {
                       </option>
                     ))}
                   </select>
+                </div>
+                <div className = 'relative mt-6'>
+                  <Autosuggest
+                      suggestions={stateSuggestions}
+                      onSuggestionsFetchRequested={onStateSuggestionsFetchRequested}
+                      onSuggestionsClearRequested={onStateSuggestionsClearRequested}
+                      getSuggestionValue={getStateSuggestionValue}
+                      renderSuggestionsContainer={({ containerProps, children }) => (
+                      <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                          stateSuggestions.length > 0
+                            ? isDarkMode
+                              ? 'bg-[#171821] text-white border border-[#F2C8ED]'
+                              : 'bg-white text-black border border-[#DB7093]'
+                            : ''
+                        }`}
+                      >
+                        {children}
+                      </div>
+                    )}
+                      renderSuggestion={(suggestion) => (
+                        <div
+                          className={`px-4 py-2 cursor-pointer ${
+                            isDarkMode
+                              ? "hover:bg-[#F2C8ED] hover:text-black"
+                              : "hover:bg-[#DB7093] hover:text-black"
+                          }`}
+                        >
+                          {suggestion}
+                        </div>
+                      )}
+                      inputProps={{
+                        placeholder: 'Select State (Optional)',
+                        value: state,
+                        onChange: (event, { newValue }) => setState(newValue),
+                        className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
+                      }}
+                  />
                 </div>
                 <button
                   onClick={() => {
@@ -369,7 +442,7 @@ export default function AnomalyDetection({ isDarkMode }) {
             <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
                 <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#F2C8ED]' : 'text-[#DB7093]'}`}>Anomalies By State</h2>
                 <p className="text-center pb-8">
-                    Visualize the distribution of identified financial anomalies across different states.
+                    Visualize the distribution of identified nonprofits with financial anomalies across different states.
                 </p>
                 <div className="flex flex-col gap-6">
                   <select

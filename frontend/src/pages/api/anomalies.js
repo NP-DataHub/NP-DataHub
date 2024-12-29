@@ -3,17 +3,35 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-async function fetchAnomalies(majgrp) {
+
+async function fetchAnomalies(majgrp, state) {
     const uri = process.env.MONGODB_URI;
     const client = new MongoClient(uri);
 
     try {
         await client.connect();
         const database = client.db('Nonprofitly');
-        const anomalies = await database.collection('anomaly')
-            .find({ MajGrp: majgrp.toUpperCase(), AnomalyLabel: -1 })
-            .toArray();
+        const query = { MajGrp: majgrp.toUpperCase(), AnomalyLabel: -1 };
+        if (state) {
+          const stateToCode = {
+            'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR',
+            'California': 'CA', 'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE',
+            'Florida': 'FL', 'Georgia': 'GA', 'Hawaii': 'HI', 'Idaho': 'ID',
+            'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA', 'Kansas': 'KS',
+            'Kentucky': 'KY', 'Louisiana': 'LA', 'Maine': 'ME', 'Maryland': 'MD',
+            'Massachusetts': 'MA', 'Michigan': 'MI', 'Minnesota': 'MN', 'Mississippi': 'MS',
+            'Missouri': 'MO', 'Montana': 'MT', 'Nebraska': 'NE', 'Nevada': 'NV',
+            'New Hampshire': 'NH', 'New Jersey': 'NJ', 'New Mexico': 'NM', 'New York': 'NY',
+            'North Carolina': 'NC', 'North Dakota': 'ND', 'Ohio': 'OH', 'Oklahoma': 'OK',
+            'Oregon': 'OR', 'Pennsylvania': 'PA', 'Rhode Island': 'RI', 'South Carolina': 'SC',
+            'South Dakota': 'SD', 'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT',
+            'Vermont': 'VT', 'Virginia': 'VA', 'Washington': 'WA', 'West Virginia': 'WV',
+            'Wisconsin': 'WI', 'Wyoming': 'WY'
+          };
+            query.State = stateToCode[state];
+        }
 
+        const anomalies = await database.collection('anomaly').find(query).toArray();
         return anomalies;
     } catch (error) {
         console.error("Error while fetching anomalies:", error);
@@ -52,7 +70,7 @@ async function getStats(majgrp) {
 
 export default async function handler(req, res) {
     if (req.method === 'GET') {
-        const { majgrp, mode } = req.query;
+        const { majgrp, mode, state } = req.query;
 
         if (!majgrp) {
             return res.status(400).json({ success: false, message: "Major group letter is required." });
@@ -60,7 +78,7 @@ export default async function handler(req, res) {
 
         try {
             if (mode === 'Nonprofits') {
-                const anomalies = await fetchAnomalies(majgrp);
+                const anomalies = await fetchAnomalies(majgrp, state);
                 return res.status(200).json({ success: true, anomalies });
             } else if (mode === 'Stats') {
                 const stats = await getStats(majgrp);
