@@ -17,6 +17,12 @@ import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { FaInfoCircle } from "react-icons/fa";
 import COLAB from "../components/COLAB";
 import AnomalyDetection from "../components/AnomalyDetection";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase"; // Your Firestore instance
+import { loadStripe } from "@stripe/stripe-js";
+import { useAuth } from "../components/context"; // Assuming you have a user auth context
+
+
 
 import dynamic from 'next/dynamic';
 const ChoroplethMap = dynamic(() => import('../components/map'), { ssr: false });
@@ -36,6 +42,80 @@ export default function Toolbox() {
             city => city.toLowerCase().slice(0, inputLength) === inputValue
         );
     };
+
+    const [isPremium, setIsPremium] = useState(false);
+    const { currentUser } = useAuth(); // Get the currently logged-in user
+
+
+    useEffect(() => {
+      const checkSubscription = async () => {
+        if (currentUser) {
+          try {
+            const userRef = doc(db, "users", currentUser.uid); // Adjust Firestore collection path
+            const userDoc = await getDoc(userRef);
+  
+            if (userDoc.exists()) {
+              const data = userDoc.data();
+              console.log("User Data:", data);
+  
+              const now = new Date();
+              const expiration = data.subscription_expiration
+                ? new Date(data.subscription_expiration.seconds * 1000) // Convert Firestore Timestamp to JavaScript Date
+                : null;
+  
+              console.log("Current Time:", now);
+              console.log("Expiration Time:", expiration);
+  
+              if (data.premium_user && expiration && expiration > now) {
+                setIsPremium(true);
+              } else {
+                setIsPremium(false);
+              }
+            } else {
+              console.warn("User document does not exist.");
+            }
+          } catch (error) {
+            console.error("Error checking subscription:", error.message);
+          }
+        }
+  
+        setIsLoading(false);
+      };
+  
+      checkSubscription();
+    }, [currentUser, db]);
+
+    const handleSubscription = async () => {
+      try {
+        // Await the resolved Stripe instance from loadStripe
+        const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
+        
+        if (!stripe) {
+          throw new Error("Stripe has not been properly initialized.");
+        }
+    
+        const response = await fetch("/api/create-checkout-session", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: currentUser.uid }), // Ensure currentUser is defined
+        });
+    
+        const { sessionId } = await response.json();
+    
+        // Redirect to Stripe Checkout
+        const { error } = await stripe.redirectToCheckout({ sessionId });
+    
+        if (error) {
+          console.error("Stripe Checkout Error:", error.message);
+        }
+      } catch (error) {
+        console.error("Error handling subscription:", error.message);
+      }
+    };
+    
+    
 
     
     //console.log(nonProfitNames)
@@ -200,6 +280,17 @@ export default function Toolbox() {
           </svg>
         </div>
       );
+
+      
+      // if (!isPremium) {
+      //   return (
+      //     <div className="paywall">
+      //       <h2>Premium Content</h2>
+      //       <p>Subscribe to access this content.</p>
+      //       <button onClick={handleSubscription}>Subscribe Now</button>
+      //     </div>
+      //   );
+      // }
 
     return(
         
