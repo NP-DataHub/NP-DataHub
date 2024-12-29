@@ -1,0 +1,16 @@
+Previous filepath: /tmp/2020-CT1/202003239349200400_public.xml and timestamp: None
+Current filepath: /tmp/2020-CT1/202043239349200019_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2020-CT1/202003099349200915_public.xml and timestamp: None
+Current filepath: /tmp/2020-CT1/202043099349201199_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2020-CT1/202001259349102170_public.xml and timestamp: None
+Current filepath: /tmp/2020-CT1/202040739349100904_public.xml and timestamp: None
+Total Assets: previous is 2203 and current is: 1404
+Total Expenses: previous is 18088 and current is: 18887
+Net Income (Less Deficit): previous is -8651 and current is: -9450
+Total Fund net worth: previous is 2203 and current is: 1404
+Cash: previous is 2203 and current is: 1404
+==================================================

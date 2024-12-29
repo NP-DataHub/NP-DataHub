@@ -223,9 +223,10 @@ class NationalAndStateStatistics:
             row = {"MajGrp": major_group}
             row.update(data)
             final_table.append(row)
-        
+        # Reset Table
+        self.new_collection.drop()
         self.new_collection.insert_many(final_table)
-        print("NationalAndStateStatistics table has been successfully created")
+        print("NationalAndStateStatistics table has been successfully updated")
 
 if __name__ == "__main__":
     obj = NationalAndStateStatistics()

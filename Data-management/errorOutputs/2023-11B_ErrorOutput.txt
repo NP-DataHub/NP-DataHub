@@ -6,7 +6,7 @@ Total Liabilities: previous is 0 and current is: 26321
 Total Expenses: previous is 0 and current is: 111687
 Program Service Revenue: previous is 0 and current is: 52357
 Gift Grants Membership Fees received 509: previous is 211969 and current is: 218410
-Zip Code: previous is 956509418 and current is: 95650
+Zip Code: previous is 95650-9418 and current is: 95650
 Return Type: previous is 990 and current is: 990EZ
 ==================================================
 Previous filepath: /tmp/2023-11B/202333099349300203_public.xml and timestamp: None

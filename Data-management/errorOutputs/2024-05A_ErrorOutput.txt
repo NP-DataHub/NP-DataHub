@@ -1,0 +1,58 @@
+Previous filepath: /tmp/2024-05A/202401369349301400_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202401419349300515_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-05A/202411369349209696_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202411229349200401_public.xml and timestamp: None
+Total Revenue: previous is 129309 and current is: 129310
+Total Assets: previous is 11766 and current is: 11767
+Address: previous is 8128 248Th St and current is: 8128 248 Street
+==================================================
+Previous filepath: /tmp/2024-05A/202401389349201300_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202411449349201011_public.xml and timestamp: None
+Total Revenue: previous is 110578 and current is: 96649
+Total Assets: previous is 70600 and current is: 56671
+==================================================
+Previous filepath: /tmp/2024-05A/202411359349200346_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202421319349200837_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-05A/202401309349201495_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202421349349205707_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-05A/202401219349201830_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202401359349208045_public.xml and timestamp: None
+Total Revenue: previous is 171487 and current is: 115305
+Total Assets: previous is 17967 and current is: 4572
+Total Expenses: previous is 153520 and current is: 110733
+Program Service Revenue: previous is 117704 and current is: 88512
+Gift Grants Membership Fees received 509: previous is 53965 and current is: 26969
+==================================================
+Previous filepath: /tmp/2024-05A/202421279349102207_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202401419349100135_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-05A/202401439349300630_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202411359349309441_public.xml and timestamp: None
+Total Revenue: previous is 128333 and current is: 146714
+Total Expenses: previous is 133970 and current is: 152351
+Total Contributions: previous is 128332 and current is: 146713
+Gross Receipts: previous is 128333 and current is: 146714
+==================================================
+Previous filepath: /tmp/2024-05A/202411279349202551_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202421289349200207_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-05A/202411409349200201_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202401399349200010_public.xml and timestamp: None
+Address: previous is 7331 Mccormick Place and current is: 7351 Mccormick Place
+==================================================
+Previous filepath: /tmp/2024-05A/202411359349202866_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202411349349205961_public.xml and timestamp: None
+Total Expenses: previous is 208764 and current is: 50084
+==================================================
+Previous filepath: /tmp/2024-05A/202401369349200010_public.xml and timestamp: None
+Current filepath: /tmp/2024-05A/202401369349204140_public.xml and timestamp: None
+No difference found
+==================================================

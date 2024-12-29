@@ -1,0 +1,39 @@
+Previous filepath: /tmp/2023-08A/202322249349100502_public.xml and timestamp: 2023-08-12 18:43:00-05:00
+Current filepath: /tmp/2023-08A/202332249349100203_public.xml and timestamp: 2023-08-12 18:43:00-05:00
+Total Revenue: previous is 800 and current is: 4803
+Total Expenses: previous is 800 and current is: 4803
+Other Income: previous is 800 and current is: 4803
+Adjusted net income: previous is 800 and current is: 4803
+==================================================
+Previous filepath: /tmp/2023-08A/202332119349200403_public.xml and timestamp: None
+Current filepath: /tmp/2023-08A/202302109349200705_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-08A/202342349349200619_public.xml and timestamp: None
+Current filepath: /tmp/2023-08A/202312359349200631_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-08A/202312229349200736_public.xml and timestamp: None
+Current filepath: /tmp/2023-08A/202312369349200431_public.xml and timestamp: None
+Total Revenue: previous is 50500 and current is: 13463
+Total Expenses: previous is 31556 and current is: 21061
+Program Service Revenue: previous is 5160 and current is: 2963
+==================================================
+Previous filepath: /tmp/2023-08A/202332159349201003_public.xml and timestamp: None
+Current filepath: /tmp/2023-08A/202312139349201141_public.xml and timestamp: None
+Total Revenue: previous is 168704 and current is: 126049
+==================================================
+Previous filepath: /tmp/2023-08A/202322279349201212_public.xml and timestamp: None
+Current filepath: /tmp/2023-08A/202342279349201129_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-08A/202332199349200503_public.xml and timestamp: 2023-08-07 08:02:23-04:00
+Current filepath: /tmp/2023-08A/202302109349200300_public.xml and timestamp: None
+Total Revenue: previous is 60635 and current is: 60636
+Total Assets: previous is 21578 and current is: 0
+Total Expenses: previous is 39057 and current is: 2605
+==================================================
+Previous filepath: /tmp/2023-08A/202302239349300700_public.xml and timestamp: 2023-08-11 05:15:09-05:00
+Current filepath: /tmp/2023-08A/202332239349200703_public.xml and timestamp: 2023-08-11 05:15:09-05:00
+Return Type: previous is 990 and current is: 990EZ
+==================================================

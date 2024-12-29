@@ -1,0 +1,31 @@
+Previous filepath: /tmp/2024-05B/202441179349201664_public.xml and timestamp: None
+Current filepath: /tmp/2024-05B/202431189349200123_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-05B/202421369349210182_public.xml and timestamp: None
+Current filepath: /tmp/2024-05B/202441309349201544_public.xml and timestamp: 2024-05-09 15:20:50-04:00
+Total Assets: previous is 47939 and current is: 3349
+Total Liabilities: previous is 47939 and current is: 1494
+Gift Grants Membership Fees received 509: previous is 95389 and current is: 0
+Address: previous is 6 Church Road and current is: 6 Church Rd
+==================================================
+Previous filepath: /tmp/2024-05B/202431369349204328_public.xml and timestamp: None
+Current filepath: /tmp/2024-05B/202431369349204858_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-05B/202421359349207842_public.xml and timestamp: None
+Current filepath: /tmp/2024-05B/202431369349206168_public.xml and timestamp: None
+Total Expenses: previous is 129747 and current is: 50235
+==================================================
+Previous filepath: /tmp/2024-05B/202431369349316663_public.xml and timestamp: None
+Current filepath: /tmp/2024-05B/202421369349317912_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-05B/202441229349200149_public.xml and timestamp: None
+Current filepath: /tmp/2024-05B/202431229349200713_public.xml and timestamp: None
+Name: previous is Declare Gods Wonders Inc and current is: Declare Gods Wonders Non Profit
+==================================================
+Previous filepath: /tmp/2024-05B/202431369349210283_public.xml and timestamp: None
+Current filepath: /tmp/2024-05B/202431369349209633_public.xml and timestamp: None
+No difference found
+==================================================

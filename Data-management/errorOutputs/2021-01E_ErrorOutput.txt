@@ -1,0 +1,18 @@
+Previous filepath: /tmp/2021-01E/202123019349301212_public.xml and timestamp: 2021-10-28 08:41:22-05:00
+Current filepath: /tmp/2021-01E/202123019349301302_public.xml and timestamp: 2021-10-28 08:41:22-05:00
+Total Revenue: previous is -521 and current is: 79804
+Total Assets: previous is 0 and current is: 87329
+Total Liabilities: previous is 0 and current is: 51
+Total Expenses: previous is 86757 and current is: 149568
+Total Contributions: previous is 0 and current is: 14624
+Program Service Revenue: previous is 0 and current is: 63855
+Investment Income: previous is -521 and current is: 1325
+Gross Receipts: previous is 11 and current is: 79804
+Other salaries and wages: previous is 0 and current is: 59777
+Payroll Taxes: previous is 0 and current is: 4499
+Number of employees: previous is 0 and current is: 7
+==================================================
+Previous filepath: /tmp/2021-01E/202122949349200922_public.xml and timestamp: None
+Current filepath: /tmp/2021-01E/202123019349200842_public.xml and timestamp: None
+No difference found
+==================================================

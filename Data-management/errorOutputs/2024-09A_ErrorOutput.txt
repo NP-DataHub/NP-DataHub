@@ -1,57 +1,17 @@
-Previous filepath: /tmp/2024-09A/202432489349300748_public.xml and timestamp: None
-Current filepath: /tmp/2024-09A/202422489349301737_public.xml and timestamp: None
-No difference found
-==================================================
-Previous filepath: /tmp/2024-09A/202432419349201163_public.xml and timestamp: None
-Current filepath: /tmp/2024-09A/202442499349201504_public.xml and timestamp: None
+Previous filepath: /tmp/2024-09A/202442499349201504_public.xml and timestamp: None
+Current filepath: /tmp/2024-09A/202432419349201163_public.xml and timestamp: None
 No difference found
 ==================================================
 Previous filepath: /tmp/2024-09A/202422629349200327_public.xml and timestamp: None
 Current filepath: /tmp/2024-09A/202442499349201119_public.xml and timestamp: None
 No difference found
 ==================================================
-Previous filepath: /tmp/2024-09A/202442599349200704_public.xml and timestamp: None
-Current filepath: /tmp/2024-09A/202412609349201791_public.xml and timestamp: None
-Name: previous is Metropolitan DC Chapter The Links Incoporated and current is: Metropolitan DC Chapter The Links Incorporated
-==================================================
-Previous filepath: /tmp/2024-09A/202432489349200838_public.xml and timestamp: None
-Current filepath: /tmp/2024-09A/202442499349201019_public.xml and timestamp: None
+Previous filepath: /tmp/2024-09A/202442499349201019_public.xml and timestamp: None
+Current filepath: /tmp/2024-09A/202432489349200838_public.xml and timestamp: None
 No difference found
-==================================================
-Previous filepath: /tmp/2024-09A/202432569349201108_public.xml and timestamp: None
-Current filepath: /tmp/2024-09A/202422569349201152_public.xml and timestamp: None
-No difference found
-==================================================
-Previous filepath: /tmp/2024-09A/202412639349200821_public.xml and timestamp: None
-Current filepath: /tmp/2024-09A/202422499349201137_public.xml and timestamp: None
-No difference found
-==================================================
-Previous filepath: /tmp/2024-09A/202432619349200338_public.xml and timestamp: 2024-09-17 21:00:22-04:00
-Current filepath: /tmp/2024-09A/202402619349200635_public.xml and timestamp: 2024-09-17 21:00:22-04:00
-Total Revenue: previous is 0 and current is: 36592
-Total Assets: previous is 0 and current is: 3941
-Total Expenses: previous is 3941 and current is: 53336
-Program Service Revenue: previous is 0 and current is: 30322
-Gift Grants Membership Fees received 509: previous is 0 and current is: 6270
 ==================================================
 Previous filepath: /tmp/2024-09A/202402419349300510_public.xml and timestamp: None
 Current filepath: /tmp/2024-09A/202402429349301220_public.xml and timestamp: None
-No difference found
-==================================================
-Previous filepath: /tmp/2024-09A/202432569349200018_public.xml and timestamp: None
-Current filepath: /tmp/2024-09A/202422549349200042_public.xml and timestamp: None
-No difference found
-==================================================
-Previous filepath: /tmp/2024-09A/202422609349300732_public.xml and timestamp: 2024-09-16 08:51:18-05:00
-Current filepath: /tmp/2024-09A/202412609349300441_public.xml and timestamp: 2024-09-16 08:51:18-05:00
-Total Revenue: previous is 10457 and current is: 4633
-Total Assets: previous is 70696 and current is: 0
-Total Expenses: previous is 85664 and current is: 75329
-Investment Income: previous is 6157 and current is: 341
-Gross Receipts: previous is 92849 and current is: 4633
-==================================================
-Previous filepath: /tmp/2024-09A/202422489349100617_public.xml and timestamp: None
-Current filepath: /tmp/2024-09A/202402479349100620_public.xml and timestamp: None
 No difference found
 ==================================================
 Previous filepath: /tmp/2024-09A/202422369349200537_public.xml and timestamp: None
@@ -59,11 +19,51 @@ Current filepath: /tmp/2024-09A/202402539349201460_public.xml and timestamp: Non
 Total Assets: previous is 1174 and current is: 1175
 Total Expenses: previous is 197738 and current is: 197737
 ==================================================
+Previous filepath: /tmp/2024-09A/202432489349300748_public.xml and timestamp: None
+Current filepath: /tmp/2024-09A/202422489349301737_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-09A/202422569349201152_public.xml and timestamp: None
+Current filepath: /tmp/2024-09A/202432569349201108_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-09A/202422489349100617_public.xml and timestamp: None
+Current filepath: /tmp/2024-09A/202402479349100620_public.xml and timestamp: None
+No difference found
+==================================================
 Previous filepath: /tmp/2024-09A/202422679349201202_public.xml and timestamp: None
 Current filepath: /tmp/2024-09A/202412669349200151_public.xml and timestamp: None
-Name: previous is PASS A GRILLE WOMAN'S CLUB and current is: PASS A GRILLE WOMENS CLUB
+Name: previous is Pass A Grille Woman'S Club and current is: Pass A Grille Womens Club
 ==================================================
-Previous filepath: /tmp/2024-09A/202412599349200306_public.xml and timestamp: None
-Current filepath: /tmp/2024-09A/202422529349200202_public.xml and timestamp: None
-Total Assets: previous is 38204 and current is: 13939
+Previous filepath: /tmp/2024-09A/202422529349200202_public.xml and timestamp: None
+Current filepath: /tmp/2024-09A/202412599349200306_public.xml and timestamp: None
+Total Assets: previous is 13939 and current is: 38204
+==================================================
+Previous filepath: /tmp/2024-09A/202412609349201791_public.xml and timestamp: None
+Current filepath: /tmp/2024-09A/202442599349200704_public.xml and timestamp: None
+Name: previous is Metropolitan Dc Chapter The Links Incorporated and current is: Metropolitan Dc Chapter The Links Incoporated
+==================================================
+Previous filepath: /tmp/2024-09A/202412609349300441_public.xml and timestamp: 2024-09-16 08:51:18-05:00
+Current filepath: /tmp/2024-09A/202422609349300732_public.xml and timestamp: 2024-09-16 08:51:18-05:00
+Total Revenue: previous is 4633 and current is: 10457
+Total Assets: previous is 0 and current is: 70696
+Total Expenses: previous is 75329 and current is: 85664
+Investment Income: previous is 341 and current is: 6157
+Gross Receipts: previous is 4633 and current is: 92849
+==================================================
+Previous filepath: /tmp/2024-09A/202402619349200635_public.xml and timestamp: 2024-09-17 21:00:22-04:00
+Current filepath: /tmp/2024-09A/202432619349200338_public.xml and timestamp: 2024-09-17 21:00:22-04:00
+Total Revenue: previous is 36592 and current is: 0
+Total Assets: previous is 3941 and current is: 0
+Total Expenses: previous is 53336 and current is: 3941
+Program Service Revenue: previous is 30322 and current is: 0
+Gift Grants Membership Fees received 509: previous is 6270 and current is: 0
+==================================================
+Previous filepath: /tmp/2024-09A/202422499349201137_public.xml and timestamp: None
+Current filepath: /tmp/2024-09A/202412639349200821_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-09A/202422549349200042_public.xml and timestamp: None
+Current filepath: /tmp/2024-09A/202432569349200018_public.xml and timestamp: None
+No difference found
 ==================================================

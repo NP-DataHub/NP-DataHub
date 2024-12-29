@@ -1,4 +1,0 @@
-Previous filepath: /tmp/2018-2A/201812129349200521_public.xml and timestamp: None
-Current filepath: /tmp/2018-2A/201812149349200201_public.xml and timestamp: None
-Total Assets: previous is 26671 and current is: 26579
-==================================================
