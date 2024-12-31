@@ -37,39 +37,41 @@ export default function About() {
           </div>
         </div>
         <div className="mt-20 mb-12">
-        <div className="flex justify-center items-center flex-wrap gap-8">
-          {[
-            {
-              name: "Brett Orzechowski",
-              role: "Co-Founder",
-              borderColor: "skyblue",
-              imgSrc: "/img/pics/prof.png", // Add the correct image path
-            },
-            {
-              name: "Yotham Sage",
-              role: "Co-Founder",
-              borderColor: "skyblue",
-              imgSrc: "/img/pics/yotham.jpeg", // Add the correct image path
-            },
-            {
-              name: "Youssef Hassan",
-              role: "Software Engineer",
-              borderColor: "skyblue",
-              imgSrc: "/img/pics/youssef.png", // Add the correct image path
-            },
-            {
-              name: "Emmet Whitehead",
-              role: "Software Engineer",
-              borderColor: "skyblue",
-              imgSrc: "/img/pics/emmet.jpg", // Add the correct image path
-            },
-            {
-              name: "Macallan Ringstad",
-              role: "Software Engineer",
-              borderColor: "skyblue",
-              imgSrc: "/img/pics/cal.png", // Add the correct image path
-            },
-          ].map((member, index) => (
+      <div className="flex justify-center items-center flex-wrap gap-8">
+        {[
+          {
+            name: "Brett Orzechowski",
+            role: "Co-Founder",
+            borderColor: "skyblue",
+            imgSrc: "/img/pics/prof.png", // Add the correct image path
+          },
+          {
+            name: "Yotham Sage",
+            role: "Co-Founder",
+            borderColor: "skyblue",
+            imgSrc: "/img/pics/yotham.jpeg", // Add the correct image path
+          },
+          {
+            name: "Youssef Hassan",
+            role: "Software Engineer",
+            borderColor: "skyblue",
+            imgSrc: "/img/pics/youssef.png", // Add the correct image path
+          },
+          {
+            name: "Emmet Whitehead",
+            role: "Software Engineer",
+            borderColor: "skyblue",
+            imgSrc: "/img/pics/emmet.jpg", // Add the correct image path
+          },
+          {
+            name: "Macallan Ringstad",
+            role: "Software Engineer",
+            borderColor: "skyblue",
+            imgSrc: "/img/pics/cal.png", // Add the correct image path
+          },
+        ].map((member, index) => {
+          const [firstName, lastName] = member.name.split(" ");
+          return (
             <div
               key={index}
               className="text-center flex flex-col items-center space-y-4"
@@ -87,12 +89,16 @@ export default function About() {
               </div>
               {/* Name and Role */}
               <div>
-                <p className="text-lg md:text-xl font-semibold">{member.name}</p>
+                <p className="text-lg md:text-xl font-semibold">
+                  <span className="block">{firstName}</span>
+                  <span className="block">{lastName}</span>
+                </p>
                 <p className="text-sm md:text-md">{member.role}</p>
               </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
+      </div>
       </div>
 
 
