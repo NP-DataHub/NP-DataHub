@@ -2,3 +2,5 @@
 frontend/.env
 GNN_testing/MONGO_DB_URI.txt
 model/.env
+# Local Netlify folder
+.netlify
