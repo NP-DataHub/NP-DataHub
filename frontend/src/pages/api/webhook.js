@@ -5,7 +5,7 @@ import * as admin from "firebase-admin";
 if (
   !process.env.STRIPE_SECRET_KEY ||
   !process.env.STRIPE_WEBHOOK_SECRET ||
-  !process.env.FIREBASE_PRIVATE_KEY
+  !process.env.FIREBASE_PRIVATE_KEY_BASE64
 ) {
   throw new Error("Missing required environment variables");
 }
