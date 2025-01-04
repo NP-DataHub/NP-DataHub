@@ -23,7 +23,6 @@ export default async function handler(req, res) {
             userId,
           },
         },
-        payment_method_collection: "if_required",
         success_url: `${req.headers.origin}/toolbox`,
         cancel_url: `${req.headers.origin}/dashboard`,
         metadata: {
