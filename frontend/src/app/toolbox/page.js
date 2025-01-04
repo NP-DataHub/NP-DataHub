@@ -45,7 +45,7 @@ export default function Toolbox() {
 
     const [isPremium, setIsPremium] = useState(false);
     const { currentUser } = useAuth(); // Get the currently logged-in user
-
+      
 
     useEffect(() => {
       const checkSubscription = async () => {
@@ -281,16 +281,76 @@ export default function Toolbox() {
         </div>
       );
 
+      if (!isPremium) {
+        return (
+<div className="paywall bg-gray-100 dark:bg-gray-900 min-h-screen flex flex-col justify-center text-center p-8">
+  <h2 className="text-4xl font-bold mb-4 text-gray-800 dark:text-white">Unlock Premium Access</h2>
+  <p className="text-lg mb-6 text-gray-600 dark:text-gray-300">
+    Gain full access to all premium features that empower you to make better decisions.
+  </p>
+  <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr mb-6">
+    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+      <h3 className="text-xl font-semibold mb-2 text-yellow-500">Fiscal Health</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        Analyze nonprofit fiscal health and compare key financial variables for insights.
+      </p>
+    </div>
+    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+      <h3 className="text-xl font-semibold mb-2 text-yellow-500">Region Health</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        Benchmark nonprofit performance based on regional data to identify community needs.
+      </p>
+    </div>
+    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+      <h3 className="text-xl font-semibold mb-2 text-yellow-500">Anomaly Detection</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        Detect fiscal anomalies in nonprofits using machine learning algorithms.
+      </p>
+    </div>
+    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+      <h3 className="text-xl font-semibold mb-2 text-yellow-500">News Feed</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        Stay informed with real-time news updates relevant to nonprofit sectors.
+      </p>
+    </div>
+    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+      <h3 className="text-xl font-semibold mb-2 text-yellow-500">Calculator</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        Estimate and budget growth using detailed fiscal variables.
+      </p>
+    </div>
+    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+      <h3 className="text-xl font-semibold mb-2 text-yellow-500">Collaborative Lab</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        Discover potential partnerships with nonprofits in your community.
+      </p>
+    </div>
+    <div> </div>
+    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800 ">
+      <h3 className="text-xl font-semibold mb-2 text-yellow-500">S.P.I.N. Tool</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        Find networks and paths between nonprofits across multiple sectors to find similarities, differences, and fiscal outliers.
+      </p>
+    </div>
+  </div>
+  <div className="flex justify-center">
+    <button
+      onClick={handleSubscription}
+      className="px-6 py-3 bg-blue-600 text-white rounded-lg text-lg hover:bg-blue-700 transition-colors max-w-xs w-full"
+    >
+      Subscribe Now
+    </button>
+  </div>
+  <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+    Already subscribed? Refresh the page after upgrading to access all features.
+  </p>
+</div>
+
+
+
+        );
+      }
       
-      // if (!isPremium) {
-      //   return (
-      //     <div className="paywall">
-      //       <h2>Premium Content</h2>
-      //       <p>Subscribe to access this content.</p>
-      //       <button onClick={handleSubscription}>Subscribe Now</button>
-      //     </div>
-      //   );
-      // }
 
     return(
         

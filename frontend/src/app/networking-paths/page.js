@@ -3,6 +3,10 @@ import Sidebar from "../components/Sidebar";
 import React, { useState, useEffect, useRef } from 'react';
 import Footer from '../components/dashboard_footer';
 import SPIN from "../components/SPIN";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase"; // Your Firestore instance
+import { loadStripe } from "@stripe/stripe-js";
+import { useAuth } from "../components/context"; // Assuming you have a user auth context
 
 export default function NetworksPaths() {  // Component name updated to start with an uppercase letter
     const [isLoading, setIsLoading] = useState(true); // State to control the loading state
@@ -12,6 +16,80 @@ export default function NetworksPaths() {  // Component name updated to start wi
     const handleUserDataLoaded = () => {
         setIsLoading(false);
     };
+
+    const [isPremium, setIsPremium] = useState(false);
+    const { currentUser } = useAuth(); // Get the currently logged-in user
+      
+
+    useEffect(() => {
+      const checkSubscription = async () => {
+        if (currentUser) {
+          try {
+            const userRef = doc(db, "users", currentUser.uid); // Adjust Firestore collection path
+            const userDoc = await getDoc(userRef);
+  
+            if (userDoc.exists()) {
+              const data = userDoc.data();
+              console.log("User Data:", data);
+  
+              const now = new Date();
+              const expiration = data.subscription_expiration
+                ? new Date(data.subscription_expiration.seconds * 1000) // Convert Firestore Timestamp to JavaScript Date
+                : null;
+  
+              console.log("Current Time:", now);
+              console.log("Expiration Time:", expiration);
+  
+              if (data.premium_user && expiration && expiration > now) {
+                setIsPremium(true);
+              } else {
+                setIsPremium(false);
+              }
+            } else {
+              console.warn("User document does not exist.");
+            }
+          } catch (error) {
+            console.error("Error checking subscription:", error.message);
+          }
+        }
+  
+        setIsLoading(false);
+      };
+  
+      checkSubscription();
+    }, [currentUser, db]);
+
+    const handleSubscription = async () => {
+      try {
+        // Await the resolved Stripe instance from loadStripe
+        const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
+        
+        if (!stripe) {
+          throw new Error("Stripe has not been properly initialized.");
+        }
+    
+        const response = await fetch("/api/create-checkout-session", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: currentUser.uid }), // Ensure currentUser is defined
+        });
+    
+        const { sessionId } = await response.json();
+    
+        // Redirect to Stripe Checkout
+        const { error } = await stripe.redirectToCheckout({ sessionId });
+    
+        if (error) {
+          console.error("Stripe Checkout Error:", error.message);
+        }
+      } catch (error) {
+        console.error("Error handling subscription:", error.message);
+      }
+    };
+    
+    
 
     const LoadingComponent = () => (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -35,6 +113,64 @@ export default function NetworksPaths() {  // Component name updated to start wi
         localStorage.setItem("theme", newTheme);
         document.documentElement.classList.toggle("dark", newTheme === "dark");
     };
+
+    if (!isPremium) {
+        return (
+          <div className="paywall bg-gray-100 dark:bg-gray-900 min-h-screen flex flex-col items-center justify-center text-center p-8">
+            <h2 className="text-4xl font-bold mb-4 text-gray-800 dark:text-white">Unlock Premium Access</h2>
+            <p className="text-lg mb-6 text-gray-600 dark:text-gray-300">
+              Gain full access to all premium features that empower you to make better decisions.
+            </p>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-6">
+              <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+                <h3 className="text-xl font-semibold mb-2 text-blue-600">Fiscal Health</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Analyze nonprofit fiscal health and compare key financial variables for insights.
+                </p>
+              </div>
+              <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+                <h3 className="text-xl font-semibold mb-2 text-green-600">Region Health</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Benchmark nonprofit performance based on regional data to identify community needs.
+                </p>
+              </div>
+              <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+                <h3 className="text-xl font-semibold mb-2 text-purple-600">Anomaly Detection</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Detect fiscal anomalies in nonprofits using machine learning algorithms.
+                </p>
+              </div>
+              <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+                <h3 className="text-xl font-semibold mb-2 text-yellow-600">News Feed</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Stay informed with real-time news updates relevant to nonprofit sectors.
+                </p>
+              </div>
+              <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+                <h3 className="text-xl font-semibold mb-2 text-indigo-600">Calculator</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Estimate and budget growth using detailed fiscal variables.
+                </p>
+              </div>
+              <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+                <h3 className="text-xl font-semibold mb-2 text-pink-600">Collaborative Lab</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Discover potential partnerships with nonprofits in your community.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={handleSubscription}
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg text-lg hover:bg-blue-700 transition-colors"
+            >
+              Subscribe Now
+            </button>
+            <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+              Already subscribed? Refresh the page after upgrading to access all features.
+            </p>
+          </div>
+        );
+      }
 
     return (
         <div>

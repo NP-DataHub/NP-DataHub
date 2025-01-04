@@ -5,22 +5,29 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      const { userId } = req.body; // Ensure this is being sent from the client
+      const { userId } = req.body; // Passed from the client when user clicks "Subscribe"
 
-      // Replace with your actual Stripe Price ID
+      // Create a Stripe Checkout session
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "subscription",
         line_items: [
           {
-            price: "price_12345", // Replace with your Stripe price ID
+            price: process.env.STRIPE_PRICE_ID, // Your Price ID
             quantity: 1,
           },
         ],
-        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/cancel`,
+        subscription_data: {
+          trial_period_days: 7, // Specify the number of free trial days
+          metadata: {
+            userId,
+          },
+        },
+        payment_method_collection: "if_required",
+        success_url: `${req.headers.origin}/toolbox`,
+        cancel_url: `${req.headers.origin}/dashboard`,
         metadata: {
-          userId, // Optional: Pass additional metadata
+          userId, // Pass userId as metadata to access later in the webhook
         },
       });
 
