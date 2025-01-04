@@ -163,7 +163,7 @@ export default function NetworksPaths() {  // Component name updated to start wi
               onClick={handleSubscription}
               className="px-6 py-3 bg-blue-600 text-white rounded-lg text-lg hover:bg-blue-700 transition-colors"
             >
-              Subscribe Now
+              Start Free Trial Now
             </button>
             <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
               Already subscribed? Refresh the page after upgrading to access all features.
