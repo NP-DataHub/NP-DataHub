@@ -40,7 +40,7 @@ const Footer = ({isDarkMode}) => {
       <footer className= {`${isDarkMode ? "dashboard-color text-white  border-t-2 border-[#2C2D33]" : "bg-white text-black border-t-2 border-gray-200"} w-full py-4 md:py-6 px-4 md:px-10`}>
         <div className="w-full flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <span className="text-xs md:text-sm lg:text-base transition-colors duration-300 ">
-            &copy; 2024 Seven Point Labs
+            &copy; 2025 Seven Point Labs
           </span>
 
           <div className="flex flex-wrap justify-center space-x-4 md:space-x-8">
