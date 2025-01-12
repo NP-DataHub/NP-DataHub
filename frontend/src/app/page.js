@@ -4,7 +4,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
-import Footer from './components/footer'
+import Footer from './components/dashboard_footer'
 import { useRouter} from 'next/navigation'; // Use next/navigation instead of next/router
 import Login from './components/login';
 import { useAuth } from './components/context';
