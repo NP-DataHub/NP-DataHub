@@ -1,0 +1,27 @@
+Previous filepath: /tmp/2024-12A/202413499349200301_public.xml and timestamp: None
+Current filepath: /tmp/2024-12A/202413549349200236_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-12A/202443459349201024_public.xml and timestamp: None
+Current filepath: /tmp/2024-12A/202433449349200833_public.xml and timestamp: None
+Total Assets: previous is 75806 and current is: 64493
+Total Expenses: previous is 28779 and current is: 26550
+==================================================
+Previous filepath: /tmp/2024-12A/202423519349200742_public.xml and timestamp: None
+Current filepath: /tmp/2024-12A/202403429349200105_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-12A/202413469349200811_public.xml and timestamp: None
+Current filepath: /tmp/2024-12A/202433449349201008_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-12A/202433389349200703_public.xml and timestamp: None
+Current filepath: /tmp/2024-12A/202413439349200601_public.xml and timestamp: None
+Total Revenue: previous is 55819 and current is: 55083
+Total Assets: previous is 54039 and current is: 157239
+Gift Grants Membership Fees received 509: previous is 144806 and current is: 149806
+==================================================
+Previous filepath: /tmp/2024-12A/202413479349200221_public.xml and timestamp: None
+Current filepath: /tmp/2024-12A/202413469349200706_public.xml and timestamp: None
+No difference found
+==================================================
