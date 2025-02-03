@@ -59,7 +59,7 @@ async function getNonProfitData(db, nonprofit, address) {
   const chosenYear = years[0]; // Replace with actual user choice if needed
 
   const yearData = npData[chosenYear];
-  if (!yearData || yearData.OthSal === 0 || yearData.OffComp === 0 || yearData.TotExp === 0) {
+  if (!yearData || (yearData.OthSal ?? 1) === 0 || (yearData.OffComp ?? 1) === 0 || (yearData.TotExp ?? 1) === 0) {
     return -1;
   }
   const salariesToExpensesPct = 100 * ((yearData.OffComp + yearData.OthSal) / yearData.TotExp);
