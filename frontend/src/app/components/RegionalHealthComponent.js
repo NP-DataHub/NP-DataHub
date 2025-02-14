@@ -176,7 +176,6 @@ export default function RegionalHealthSection({ isDarkMode }) {
           if (data.success) {
             setSearchResults(data.data);
             setZipcode(data.data[0].Zip);
-            console.log(searchResults);
             getZipInfo(data.data[0].Zip);
           } else {
             setSearchResults([]);
@@ -197,7 +196,6 @@ export default function RegionalHealthSection({ isDarkMode }) {
             const data = await response.json();
           if (data.success) {
             setSearchResults(data.data);
-            // console.log(searchResults);
             getZipInfo(value);
           } else {
             setSearchResults([]);
