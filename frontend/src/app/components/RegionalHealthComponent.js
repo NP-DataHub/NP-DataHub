@@ -167,6 +167,7 @@ export default function RegionalHealthSection({isDarkMode}) {
             const data = await response.json();
           if (data.success) {
             setSearchResults(data.data);
+            setZipcode(data.data[0].Zip);
             getZipInfo(data.data[0].Zip);
           } else {
             setSearchResults([]);
