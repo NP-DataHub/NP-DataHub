@@ -5,22 +5,22 @@ import zipData from './zipcode_data';
 import dynamic from 'next/dynamic';
 import debounce from 'lodash.debounce';
 import { useCallback } from "react";
-import { set } from 'mongoose';
-const Map2 = dynamic(() => import('../components/map2'), { ssr: false});
+import ntee_codes from './ntee'; // Import NTEE data
+const Map2 = dynamic(() => import('../components/map2'), { ssr: false });
 
 const CENSUS_KEY = process.env.NEXT_PUBLIC_CENSUS_API_KEY;
 
-export default function RegionalHealthSection({isDarkMode}) {
+export default function RegionalHealthSection({ isDarkMode }) {
     const [nameSuggestions, setNameSuggestions] = useState([]); // Suggestions for name autocomplete
-    const [nonprofitName, setNonprofitName] = useState(""); //The name of the Nonprofit input
-    const [lastFetchedNameInput, setLastFetchedNameInput] = useState(''); //The lastFetshcedNameInput
-    const [zipSuggestions, setZipSuggestions] = useState([]); //Zip code
+    const [nonprofitName, setNonprofitName] = useState(""); // The name of the Nonprofit input
+    const [lastFetchedNameInput, setLastFetchedNameInput] = useState(''); // The lastFetchedNameInput
+    const [zipSuggestions, setZipSuggestions] = useState([]); // Zip code
     const [zipcode, setZipcode] = useState("");
     const [lat, setLat] = useState(39.8097343);
     const [lng, setLng] = useState(-98.5556199);
     const [zoom, setZoom] = useState(4);
-    const [searchResults, setSearchResults] = useState([]); //Search results
-    const [medAge, setmedAge]= useState("AGE"); //Median Age
+    const [searchResults, setSearchResults] = useState([]); // Search results
+    const [medAge, setmedAge] = useState("AGE"); // Median Age
     const [majRace, setmajRace] = useState("RACE");
     const [majGender, setmajGender] = useState("GENDER");
     const [avgEdu, setavgEdu] = useState("EDUCATION");
@@ -30,8 +30,16 @@ export default function RegionalHealthSection({isDarkMode}) {
     const [sizeFamily, setsizeFamily] = useState("FAMILY");
     const [points, setPoints] = useState([]); // Points for the map
     const [isLoading, setIsLoading] = useState(false);
+    const [tooltipContent, setTooltipContent] = useState(""); // Tooltip content for NTEE code
+    const [hoveredRowIndex, setHoveredRowIndex] = useState(null); // Index of the hovered row
 
 
+    // Function to get NTEE description
+    const getNteeDescription = (code) => {
+        const description = ntee_codes[code] || "No description available";
+        return { code, description };
+    };
+    
     //order of groups goes Median Age, Median Income, Percent housing units occumpied, Percent with health insurance covereage,
     // Average household size, Percent EDU Bachelors or higher, Percent Male pop, Percent female pop,
     //Percent White, Percent Black/African American, Percent Native American/Alaskan Native, Percent Asian, Percent Pacific Islander, 
@@ -168,6 +176,7 @@ export default function RegionalHealthSection({isDarkMode}) {
           if (data.success) {
             setSearchResults(data.data);
             setZipcode(data.data[0].Zip);
+            console.log(searchResults);
             getZipInfo(data.data[0].Zip);
           } else {
             setSearchResults([]);
@@ -188,6 +197,7 @@ export default function RegionalHealthSection({isDarkMode}) {
             const data = await response.json();
           if (data.success) {
             setSearchResults(data.data);
+            // console.log(searchResults);
             getZipInfo(value);
           } else {
             setSearchResults([]);
@@ -464,7 +474,6 @@ export default function RegionalHealthSection({isDarkMode}) {
         </div>
         
         {searchResults.length > 0 && (
-
                     <div className="overflow-x-auto max-h-96 overflow-auto">
                         <table className={`min-w-full ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} rounded-lg`}>
                             <thead className="sticky top-0 z-10">
@@ -488,8 +497,26 @@ export default function RegionalHealthSection({isDarkMode}) {
                                             </td>
                                             <td className="py-3 px-6">{row.Addr}</td>
                                             <td className="py-3 px-6 whitespace-nowrap">{row.Zip.length > 5 ? `${row.Zip.slice(0, 5)}-${row.Zip.slice(5)}` : row.Zip}</td>
-                                            <td className="py-3 px-6">{row.MajGrp}</td>
-                                            <td className="py-3 px-6">{"$"+row[getLatestYear(row)].TotRev.toLocaleString()}</td>
+                                            <td className="py-3 px-6 relative"
+                                                onMouseEnter={(e) => {
+                                                    const { code, description } = getNteeDescription(row.MajGrp);
+                                                    setTooltipContent(`${code}: ${description}`);
+                                                    setHoveredRowIndex(index);
+                                                }}
+                                                onMouseLeave={() => {
+                                                    setTooltipContent("");
+                                                    setHoveredRowIndex(null);
+                                                }}>
+                                                {row.MajGrp}
+                                                {hoveredRowIndex === index && tooltipContent && (
+                                                    <div
+                                                        className={`absolute p-2 rounded shadow-lg z-10 ${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"}`}
+                                                    >
+                                                        {tooltipContent}
+                                                    </div>
+                                                )}
+                                            </td>
+                                            <td className="py-3 px-6">{"$" + row[getLatestYear(row)].TotRev.toLocaleString()}</td>
                                         </tr>
                                     );
                                 })}
@@ -595,7 +622,7 @@ export default function RegionalHealthSection({isDarkMode}) {
                 </button>
                 </div>
             <div className = 'rounded-lg'>
-                <Map2 points={points} lat={lat} lng={lng} zoom={zoom}/>
+                <Map2 points={points} lat={lat} lng={lng} zoom={zoom} searchResults={searchResults}/>
             </div>
         </div>)
 };
