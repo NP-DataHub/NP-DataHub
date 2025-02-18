@@ -2,8 +2,8 @@ name: Update Database
 
 on:
   schedule:
-    # Run on the 1st, 10th, and 20th of every month at 2 a.m
-    - cron: "0 2 1,10,20 * *"
+    # Run everynight at 2 am
+    - cron: "0 2 * * *"
   workflow_dispatch: # Manual trigger
 
 permissions:
@@ -33,7 +33,7 @@ jobs:
     # Step 4: Run the Python script located in the Data-management directory
     - name: Run db_update_runner.py
       run: |
-        python Data-management/db_update_runner.py | tee output.log
+        python Data-management/db_update_runner.py
       env:
         MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
@@ -53,10 +53,3 @@ jobs:
         fi
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    # Step 6: Upload log artifact
-    - name: Upload log artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: output-log
-        path: output.log

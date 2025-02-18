@@ -69,3 +69,7 @@ https://apps.irs.gov/pub/epostcard/990/xml/2024/2024_TEOS_XML_07A.zip
 https://apps.irs.gov/pub/epostcard/990/xml/2024/2024_TEOS_XML_08A.zip
 https://apps.irs.gov/pub/epostcard/990/xml/2024/2024_TEOS_XML_09A.zip
 https://apps.irs.gov/pub/epostcard/990/xml/2024/2024_TEOS_XML_10A.zip
+https://apps.irs.gov/pub/epostcard/990/xml/2024/2024_TEOS_XML_11A.zip
+https://apps.irs.gov/pub/epostcard/990/xml/2024/2024_TEOS_XML_11B.zip
+https://apps.irs.gov/pub/epostcard/990/xml/2024/2024_TEOS_XML_11C.zip
+https://apps.irs.gov/pub/epostcard/990/xml/2024/2024_TEOS_XML_12A.zip

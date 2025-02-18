@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from zipfile import ZipFile
+import subprocess
 
 class WebScraper:
 
@@ -47,11 +48,21 @@ class WebScraper:
                 # Create a folder name by removing the .zip extension
                 folder_name = filename.replace('.zip', '')
                 # Unzip the file
-                with ZipFile(f"/tmp/{filename}", 'r') as zObject:
-                    zObject.extractall(f"/tmp/{folder_name}")
+                try:
+                    with ZipFile(f"/tmp/{filename}", 'r') as zObject:
+                        zObject.extractall(f"/tmp/{folder_name}")
+                    print(f"Extracted: {filename} to folder: {folder_name}")
+                except Exception:
+                    try:
+                        result = subprocess.run(
+                            ["unzip", f"/tmp/{filename}", "-d", f"/tmp/{folder_name}"],
+                            stdout=subprocess.DEVNULL,
+                            stderr=subprocess.DEVNULL
+                        )
+                        print(f"Extracted: {filename} to folder: {folder_name}")
+                    except Exception as e:
+                        print(f"All unzipping attempts failed: {e}")
                 self.created_folders.append(f"/tmp/{folder_name}")
-                print(f"Extracted: {filename} to folder: {folder_name}")
-
                 # Keep track of downloaded zip files
                 with open('Data-management/zip_files_processed.txt', 'a') as processed_file:
                     processed_file.write('\n' + ziplink )

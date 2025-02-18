@@ -272,27 +272,27 @@ class Database:
                 f"{tax_period}.AdjNetInc": financial_info[16],
                 f"{tax_period}.File": file_path
             }
-        if include_general_info == 1:
-            general_info = self.get_general_information(root)
-            if len(general_info) == 5:  # Domestic
-                update_fields.update({
-                    "Nm": general_info[0],
-                    "St": general_info[1],
-                    "Cty": general_info[2],
-                    "Zip": general_info[3],
-                    "Addr": general_info[4],
-                    "RetTyp" : return_type
-                })
-            else:
-                update_fields.update({
-                    "Nm": general_info[0],
-                    "Ctry": general_info[1],
-                    "ProvNm": general_info[2],
-                    "Cty": general_info[3],
-                    "Zip": general_info[4],
-                    "Addr": general_info[5],
-                    "RetTyp": return_type
-                })
+        # if include_general_info == 1:
+        general_info = self.get_general_information(root)
+        if len(general_info) == 5:  # Domestic
+            update_fields.update({
+                "Nm": general_info[0],
+                "St": general_info[1],
+                "Cty": general_info[2],
+                "Zip": general_info[3],
+                "Addr": general_info[4],
+                "RetTyp" : return_type
+            })
+        else:
+            update_fields.update({
+                "Nm": general_info[0],
+                "Ctry": general_info[1],
+                "ProvNm": general_info[2],
+                "Cty": general_info[3],
+                "Zip": general_info[4],
+                "Addr": general_info[5],
+                "RetTyp": return_type
+            })
         return update_fields
 
     def compare_and_find_differences(self,prev_info, curr_info, prev_file, curr_file, return_type ):

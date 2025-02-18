@@ -1,0 +1,33 @@
+Previous filepath: /tmp/2023-07A/202342009349200109_public.xml and timestamp: None
+Current filepath: /tmp/2023-07A/202341999349200419_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-07A/202311959349201116_public.xml and timestamp: None
+Current filepath: /tmp/2023-07A/202341889349200529_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-07A/202332079349200803_public.xml and timestamp: None
+Current filepath: /tmp/2023-07A/202332089349201023_public.xml and timestamp: None
+Total Revenue: previous is 0 and current is: 67821
+Total Expenses: previous is 0 and current is: 56118
+==================================================
+Previous filepath: /tmp/2023-07A/202331779349300308_public.xml and timestamp: None
+Current filepath: /tmp/2023-07A/202321809349300112_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-07A/202321929349200137_public.xml and timestamp: None
+Current filepath: /tmp/2023-07A/202301949349201510_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-07A/202311969349200401_public.xml and timestamp: None
+Current filepath: /tmp/2023-07A/202311969349200101_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2023-07A/202331999349201033_public.xml and timestamp: None
+Current filepath: /tmp/2023-07A/202331749349200338_public.xml and timestamp: None
+Total Assets: previous is 68814 and current is: 59179
+==================================================
+Previous filepath: /tmp/2023-07A/202301959349200500_public.xml and timestamp: None
+Current filepath: /tmp/2023-07A/202341929349200724_public.xml and timestamp: None
+No difference found
+==================================================

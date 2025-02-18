@@ -1,0 +1,36 @@
+Previous filepath: /tmp/2024-11B/202433179349203288_public.xml and timestamp: None
+Current filepath: /tmp/2024-11B/202433149349201318_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-11B/202413269349200141_public.xml and timestamp: None
+Current filepath: /tmp/2024-11B/202433099349200713_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-11B/202423199349318092_public.xml and timestamp: None
+Current filepath: /tmp/2024-11B/202433209349314313_public.xml and timestamp: None
+Total Revenue: previous is 25 and current is: 582557
+Total Expenses: previous is 280726 and current is: 337397
+Total Contributions: previous is R and current is: 566831
+Fundraising Income: previous is 0 and current is: 15701
+Fundraising Expenses: previous is 0 and current is: 9548
+==================================================
+Previous filepath: /tmp/2024-11B/202423199349102612_public.xml and timestamp: 2024-11-14 12:03:44-05:00
+Current filepath: /tmp/2024-11B/202423199349102707_public.xml and timestamp: 2024-11-14 12:03:44-05:00
+Total Revenue: previous is 15 and current is: 46
+Total Assets: previous is 0 and current is: 13972
+Total Expenses: previous is 13987 and current is: 19543
+Net Income (Less Deficit): previous is -13972 and current is: -19497
+Interest Revenue: previous is 15 and current is: 46
+Compensation of Officers: previous is 0 and current is: 700
+Total Fund net worth: previous is 0 and current is: 13972
+Cash: previous is 0 and current is: 5949
+Adjusted net income: previous is 15 and current is: 46
+==================================================
+Previous filepath: /tmp/2024-11B/202433049349200813_public.xml and timestamp: None
+Current filepath: /tmp/2024-11B/202433189349205773_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-11B/202423189349205357_public.xml and timestamp: None
+Current filepath: /tmp/2024-11B/202423239349200937_public.xml and timestamp: None
+No difference found
+==================================================

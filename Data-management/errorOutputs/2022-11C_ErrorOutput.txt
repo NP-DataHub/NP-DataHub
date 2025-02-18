@@ -10,6 +10,5 @@ No difference found
 ==================================================
 Previous filepath: /tmp/2022-11C/202233399349200623_public.xml and timestamp: None
 Current filepath: /tmp/2022-11C/202242879349200849_public.xml and timestamp: None
-Name: previous is PARENTZWORK and current is: PARENTZ WORK
-City: previous is Victorville and current is: VICTORVILLE
+Name: previous is Parentzwork and current is: Parentz Work
 ==================================================

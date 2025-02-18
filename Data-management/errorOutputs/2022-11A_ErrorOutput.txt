@@ -21,14 +21,11 @@ Total Revenue: previous is 69452 and current is: 0
 Total Assets: previous is 97689 and current is: 0
 Total Expenses: previous is 35502 and current is: 0
 Program Service Revenue: previous is 22296 and current is: 0
-City: previous is Anchorage and current is: ANCHORAGE
 ==================================================
 Previous filepath: /tmp/2022-11A/202203199349200045_public.xml and timestamp: None
 Current filepath: /tmp/2022-11A/202203189349200525_public.xml and timestamp: 2022-11-14 08:12:33-05:00
 Gift Grants Membership Fees received 509: previous is 298200 and current is: 156160
-City: previous is BOZEMAN and current is: Bozeman
-Zip Code: previous is 59715 and current is: 597153614
-Address: previous is 19 E LAMME ST and current is: 19 E Lamme St
+Zip Code: previous is 59715 and current is: 59715-3614
 ==================================================
 Previous filepath: /tmp/2022-11A/202213189349207146_public.xml and timestamp: None
 Current filepath: /tmp/2022-11A/202203139349202120_public.xml and timestamp: None

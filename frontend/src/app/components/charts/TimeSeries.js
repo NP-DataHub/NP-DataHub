@@ -111,7 +111,7 @@ const TimeSeries = ({ values, minYear, isDarkMode }) => {
         type: 'category',
         data: Array.from({ length: values.length + 2 }, (_, index) => index + parseInt(minYear)),
         axisTick: { alignWithLabel: true },
-        axisLabel: { fontSize: Math.round(0.015 * dimensions.width) },
+        axisLabel: { fontSize: Math.round(0.01 * dimensions.width) },
         splitLine: { show: false },
       },
     ],
@@ -119,7 +119,7 @@ const TimeSeries = ({ values, minYear, isDarkMode }) => {
       {
         axisLabel: {
           formatter: (value) => '$' + formatNumber(value),
-          fontSize: Math.round(0.015 * dimensions.width),
+          fontSize: Math.round(0.01* dimensions.width),
         },
         axisLine: { show: true },
         splitLine: { show: true, lineStyle: { color: 'rgba(255, 255, 255, 0.1)', type: 'dashed' } },

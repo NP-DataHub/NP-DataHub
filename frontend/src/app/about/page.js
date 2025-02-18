@@ -1,6 +1,6 @@
 "use client";
 import Navbar from "../components/Navbar";
-import Footer from '../components/footer';
+import Footer from '../components/dashboard_footer';
 
 const aboutContent = [
   {
@@ -36,7 +36,72 @@ export default function About() {
             <div className="w-24 md:w-96 rounded-full h-1 bg-white"></div>
           </div>
         </div>
-        
+        <div className="mt-20 mb-12">
+      <div className="flex justify-center items-center flex-wrap gap-8">
+        {[
+          {
+            name: "Brett Orzechowski",
+            role: "Co-Founder",
+            borderColor: "skyblue",
+            imgSrc: "/img/pics/prof.png", // Add the correct image path
+          },
+          {
+            name: "Yotham Sage",
+            role: "Co-Founder",
+            borderColor: "skyblue",
+            imgSrc: "/img/pics/yotham.jpeg", // Add the correct image path
+          },
+          {
+            name: "Youssef Hassan",
+            role: "Software Engineer",
+            borderColor: "skyblue",
+            imgSrc: "/img/pics/youssef.png", // Add the correct image path
+          },
+          {
+            name: "Emmet Whitehead",
+            role: "Software Engineer",
+            borderColor: "skyblue",
+            imgSrc: "/img/pics/emmet.jpg", // Add the correct image path
+          },
+          {
+            name: "Macallan Ringstad",
+            role: "Software Engineer",
+            borderColor: "skyblue",
+            imgSrc: "/img/pics/cal.png", // Add the correct image path
+          },
+        ].map((member, index) => {
+          const [firstName, lastName] = member.name.split(" ");
+          return (
+            <div
+              key={index}
+              className="text-center flex flex-col items-center space-y-4"
+            >
+              {/* Circle with the image */}
+              <div
+                className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 overflow-hidden"
+                style={{ borderColor: member.borderColor }}
+              >
+                <img
+                  src={member.imgSrc}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Name and Role */}
+              <div>
+                <p className="text-lg md:text-xl font-semibold">
+                  <span className="block">{firstName}</span>
+                  <span className="block">{lastName}</span>
+                </p>
+                <p className="text-sm md:text-md">{member.role}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      </div>
+
+
         <div className="max-w-6xl mx-auto">
           {aboutContent.map((section, index) => (
             <div key={index} className="mb-8">

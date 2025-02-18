@@ -19,7 +19,7 @@ const COLABGraph = ({data, filters, onNonprofitClick, isDarkMode, threshold}) =>
   const chartContainerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   useEffect(() => {
-      console.log("I am resizing myself")
+      //console.log("I am resizing myself")
       const handleResize = () => {
         if (chartContainerRef.current) {
           setDimensions({
@@ -36,7 +36,10 @@ const COLABGraph = ({data, filters, onNonprofitClick, isDarkMode, threshold}) =>
 
   // Handle the click event on the graph
   const handleGraphClick = (node) => {
-    onNonprofitClick(node.nonprofit);
+    console.log(node)
+    if(node != undefined){
+      onNonprofitClick(node.nonprofit);
+    }
   };
 
 
@@ -140,7 +143,18 @@ const COLABGraph = ({data, filters, onNonprofitClick, isDarkMode, threshold}) =>
           let score = SimilarityScore(data[i].nonprofit, data[j].nonprofit);
           //console.log("comparing", data[i].nonprofit.Nm, data[j].nonprofit.Nm, score);
           if (score >= threshold){    
-            edges.push({ source: nodes[i].id, target: nodes[j].id});
+            if (score >= threshold) {
+              edges.push({
+                source: nodes[i].id,
+                target: nodes[j].id,
+                similarityScore: score, // Add similarity score to the edge
+                lineStyle: {
+                  color: '#aaa',
+                  width: 2,
+                  cursor: 'default', // Prevent pointer cursor on edges
+                },
+              });
+            }
           }
         }
       }
@@ -153,10 +167,16 @@ const COLABGraph = ({data, filters, onNonprofitClick, isDarkMode, threshold}) =>
       const option = {
         tooltip: {
           formatter: function (params) {
-            //console.log("Params:", params);
-            let tooltipContent = `<div>${params.name}<br/>`;
-            return tooltipContent;
+            if (params.dataType === 'edge') {
+              // Show similarity score for edges
+              return `Similarity Score: ${params.data.similarityScore}`;
             }
+            if (params.dataType === 'node') {
+              // Show node name for nodes
+              return `${params.name}`;
+            }
+            return null;
+          },
         },
         grid: {
           left: 0,
@@ -174,8 +194,9 @@ const COLABGraph = ({data, filters, onNonprofitClick, isDarkMode, threshold}) =>
             type: 'graph',
             layout: 'force',
             symbolSize: 50,
-
-            roam: true,
+            // Initial zoom settings:
+            roam: true, // Allow moving/zooming on the graph by the user
+            zoom: 2.0,
             label: {
               show: true,
             },
@@ -195,7 +216,13 @@ const COLABGraph = ({data, filters, onNonprofitClick, isDarkMode, threshold}) =>
         <div ref={chartContainerRef} style={{ width: '100%', height: '100%' }}>
           <ReactECharts option={option}
             style={{ width: '100%', height: '100%' }}
-            onEvents={ {click: (e) => handleGraphClick(data[e.dataIndex])} }
+            onEvents={{ 
+              click: (e) => {
+                if (e.dataType === 'node') {
+                  handleGraphClick(data[e.dataIndex]);
+                }
+              }
+            }}
           />
         </div>
       );

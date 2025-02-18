@@ -1,0 +1,32 @@
+Previous filepath: /tmp/2024-11A/202403209349202685_public.xml and timestamp: None
+Current filepath: /tmp/2024-11A/202413209349212261_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-11A/202403029349302225_public.xml and timestamp: None
+Current filepath: /tmp/2024-11A/202413029349302351_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-11A/202413209349200316_public.xml and timestamp: None
+Current filepath: /tmp/2024-11A/202413199349201921_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-11A/202413099349302846_public.xml and timestamp: None
+Current filepath: /tmp/2024-11A/202413189349304676_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-11A/202403129349201905_public.xml and timestamp: None
+Current filepath: /tmp/2024-11A/202403119349201965_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-11A/202403219349201525_public.xml and timestamp: None
+Current filepath: /tmp/2024-11A/202413219349201911_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-11A/202413209349200316_public.xml and timestamp: None
+Current filepath: /tmp/2024-11A/202413189349202821_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2024-11A/202402999349200925_public.xml and timestamp: None
+Current filepath: /tmp/2024-11A/202413119349202026_public.xml and timestamp: None
+Total Expenses: previous is 2739 and current is: 76585
+==================================================

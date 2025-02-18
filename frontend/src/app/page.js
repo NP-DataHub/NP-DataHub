@@ -4,8 +4,12 @@ import { HiOutlineMail } from "react-icons/hi";
 import { FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
-import Footer from './components/footer'
-import { useRouter } from 'next/navigation'; // Use next/navigation instead of next/router
+import Footer from './components/dashboard_footer'
+import { useRouter} from 'next/navigation'; // Use next/navigation instead of next/router
+import Login from './components/login';
+import { useAuth } from './components/context';
+import { useState } from 'react';
+
 
 const features = [
   {
@@ -49,8 +53,28 @@ const features = [
     description: "A tool to understanding larger scale problems and connecting to regional nonprofits via social media and search engines."
   }
 ];
+
+
 export default function Home() {
   const router = useRouter();
+  const { currentUser } = useAuth(); // Retrieve current user from context
+  const [showLogin, setShowLogin] = useState(false);
+
+  const handleCloseLogin = () => setShowLogin(false);
+  const handleLoginSuccess = () => {
+    setShowLogin(false);
+    router.push('/dashboard');
+  };
+
+  const handleExploreDataClick = () => {
+    if (currentUser) {
+      // Redirect to dashboard if user is logged in
+      router.push('/dashboard');
+    } else {
+      // Show login modal if not logged in
+      setShowLogin(true);
+    }
+  };
   return (
     <div className="overflow-auto h-screen">
       <Navbar/>
@@ -61,13 +85,13 @@ export default function Home() {
           </h1>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-1 gap-4 max-w-md mx-auto lg:mx-0">
             <button
-                className="text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transitionntransition-duration-300"
-                onClick={() => router.push('/dashboard')}
+                className="text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition transition-duration-300"
+                onClick={handleExploreDataClick}
               >
                 Explore Data
-            </button>
+              </button>
             <button className="text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition transition-duration-300"
-            onClick={() => router.push('/toolbox')}>
+            onClick={handleExploreDataClick}>
               Explore Premium Tools
             </button>
           </div>
@@ -211,14 +235,14 @@ export default function Home() {
           </h1>
           <p className="text-lg md:text-2xl mt-2 font-sans text-black ">Try our platform today.</p>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-1 gap-4 max-w-md mx-auto lg:mx-0">
-            <button
-                className="text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transitionntransition-duration-300"
-                onClick={() => router.push('/dashboard')}
+          <button
+                className="text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition transition-duration-300"
+                onClick={handleExploreDataClick}
               >
                 Explore Data
-            </button>
+              </button>
             <button className="col-span-1  text-lg px-6 py-4 bg-white text-gray-900 rounded-full shadow-md hover:bg-gray-200 transition"
-            onClick={() => router.push('/toolbox')}>
+            onClick={handleExploreDataClick}>
               Explore Premium Tools
             </button>
           </div>
@@ -246,6 +270,12 @@ export default function Home() {
           </div> */}
         </div>
       </section>
+      {showLogin && (
+        <Login
+          onClose={handleCloseLogin}
+          onSuccess={handleLoginSuccess}
+        />
+      )}
       <Footer/>
     </div>
   );

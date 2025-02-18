@@ -1,58 +1,236 @@
 'use client';
 
+import Autosuggest from 'react-autosuggest';
 import React, { useState } from 'react';
-import ntee_codes from "./ntee";
+import TopStatesChart from './charts/TopStatesChart';
 
 export default function AnomalyDetection({ isDarkMode }) {
-    const [nteeCode, setNteeCode] = useState('');
+    const [sector, setSector] = useState('');
+    const [loadingSector, setLoadingSector] = useState(false);
+    const [error, setError] = useState('');
     const [anomalies, setAnomalies] = useState([]);
     const [filteredAnomalies, setFilteredAnomalies] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedAnomaly, setSelectedAnomaly] = useState(null);
-    const [error, setError] = useState('');
+    const [loadingNp, setLoadingNp] = useState(false);
+    const [errorNp, setErrorNp] = useState('');
 
-    const handleNteeChange = (event) => {
-        setNteeCode(event.target.value);
+    const [sector2, setSector2] = useState('');
+    const [loadingSector2, setLoadingSector2] = useState(false);
+    const [error2, setError2] = useState('');
+    const [statsData, setStatsData] = useState([]);
+
+    const isLoading = loadingSector || loadingSector2
+
+    const isFetchSectorDisabled = () => {
+        return !sector; // Disable if sector is not provided
     };
+    const isFetchSector2Disabled = () => {
+        return !sector2;
+    };
+    const majorGroups = [
+        { value: '', label: 'Select a Sector' },
+        { value: 'A', label: 'A - Arts, Culture, and Humanities' },
+        { value: 'B', label: 'B - Educational Institutions and Related Activities' },
+        { value: 'C', label: 'C - Environmental Quality, Protection and Beautification' },
+        { value: 'D', label: 'D - Animal-Related' },
+        { value: 'E', label: 'E - Health – General and Rehabilitative' },
+        { value: 'F', label: 'F - Mental Health, Crisis Intervention' },
+        { value: 'G', label: 'G - Diseases, Disorders, Medical Disciplines' },
+        { value: 'H', label: 'H - Medical Research' },
+        { value: 'I', label: 'I - Crime and Legal-Related' },
+        { value: 'J', label: 'J - Employment, Job-Related' },
+        { value: 'K', label: 'K - Food, Agriculture, and Nutrition' },
+        { value: 'L', label: 'L - Housing, Shelter' },
+        { value: 'M', label: 'M - Public Safety, Disaster Preparedness, and Relief' },
+        { value: 'N', label: 'N - Recreation, Sports, Leisure, Athletics' },
+        { value: 'O', label: 'O - Youth Development' },
+        { value: 'P', label: 'P - Human Services - Multipurpose and Other' },
+        { value: 'Q', label: 'Q - International, Foreign Affairs, and National Security' },
+        { value: 'R', label: 'R - Civil Rights, Social Action, Advocacy' },
+        { value: 'S', label: 'S - Community Improvement, Capacity Building' },
+        { value: 'T', label: 'T - Philanthropy, Voluntarism, and Grantmaking Foundations' },
+        { value: 'U', label: 'U - Science and Technology Research Institutes, Services' },
+        { value: 'V', label: 'V - Social Science Research Institutes, Services' },
+        { value: 'W', label: 'W - Public, Societal Benefit - Multipurpose and Other' },
+        { value: 'X', label: 'X - Religion-Related, Spiritual Development' },
+        { value: 'Y', label: 'Y - Mutual/Membership Benefit Organizations, Other' },
+        { value: 'Z', label: 'Z - Unknown' },
+    ];
 
-    const fetchAnomalies = async () => {
+
+    // Helpers for State field
+    const states = {
+      AL: 'Alabama',
+      AK: 'Alaska' ,
+      AS: 'American Samoa',
+      AZ: 'Arizona',
+      AR: 'Arkansas',
+      CA: 'California',
+      CO: 'Colorado',
+      CT: 'Connecticut',
+      DE: 'Delaware',
+      DC: 'District of Columbia',
+      FL: 'Florida',
+      GA: 'Georgia',
+      GU: 'Guam',
+      HI: 'Hawaii',
+      ID: 'Idaho',
+      IL: 'Illinois',
+      IN: 'Indiana',
+      IA: 'Iowa',
+      KS: 'Kansas',
+      KY: 'Kentucky',
+      LA: 'Louisiana',
+      ME: 'Maine',
+      MD: 'Maryland',
+      MA: 'Massachusetts',
+      MI: 'Michigan',
+      MN: 'Minnesota',
+      MS: 'Mississippi',
+      MO: 'Missouri',
+      MT: 'Montana',
+      NE: 'Nebraska',
+      NV: 'Nevada',
+      NH: 'New Hampshire',
+      NJ: 'New Jersey',
+      NM: 'New Mexico',
+      NY: 'New York',
+      NC: 'North Carolina',
+      ND: 'North Dakota',
+      OH: 'Ohio',
+      OK: 'Oklahoma',
+      OR: 'Oregon',
+      PA: 'Pennsylvania',
+      PR: 'Puerto Rico',
+      RI: 'Rhode Island',
+      SC: 'South Carolina',
+      SD: 'South Dakota',
+      TN: 'Tennessee',
+      TX: 'Texas',
+      UT: 'Utah',
+      VT: 'Vermont',
+      VI: 'Virgin Islands',
+      VA: 'Virginia',
+      WA: 'Washington',
+      WV: 'West Virginia',
+      WI: 'Wisconsin',
+      WY: 'Wyoming',
+    };
+    const fullStates = [
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+        'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
+        'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
+        'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+        'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
+        'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio',
+        'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',
+        'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia',
+        'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+    ];
+    const [state, setState] = useState('');
+    const [stateSuggestions, setStateSuggestions] = useState([]);
+    const getStateSuggestions = value => {
+      const inputValue = value.trim().toLowerCase();
+      const inputLength = inputValue.length;
+      return inputLength === 0
+          ? []
+          : fullStates.filter(state =>
+              state.toLowerCase().slice(0, inputLength) === inputValue
+          );
+    };
+  const getStateSuggestionValue = suggestion => suggestion;
+  const onStateSuggestionsFetchRequested = ({ value }) => {
+        setStateSuggestions(getStateSuggestions(value));
+  };
+  const onStateSuggestionsClearRequested = () => {
+      setStateSuggestions([]);
+  };
+
+
+  const SearchLoadingComponent = () => (
+    <div className="flex items-center justify-center h-full w-full">
+        <svg className="animate-spin h-10 w-10 text-gray-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+    </div>
+  );
+
+    const fetchAnomalies = async (mode) => {
+        if (mode === 'Nonprofits' && !sector) {
+            setError('Please select a sector.');
+            return;
+        } else if (mode === 'Stats' && !sector2) {
+            setError2('Please select a sector.');
+            return;
+        }
         try {
-            if (!nteeCode) {
-                setError('Please select a major group letter.');
-                return;
-            }
-
-            setError('');
-            const response = await fetch(`/api/anomalies?majgrp=${nteeCode}`);
-            const data = await response.json();
-
-            if (data.success) {
-                setAnomalies(data.anomalies);
-                setFilteredAnomalies(data.anomalies);
-            } else {
-                setError('No anomalies found or an error occurred.');
+            if (mode === 'Nonprofits') {
+                setLoadingSector(true);
+                setError('');
+                setAnomalies([]);
+                setSelectedAnomaly(null);
+                const stateParam = state ? `&state=${state}` : '';
+                const response = await fetch(`/api/anomalies?majgrp=${sector}&mode=${mode}${stateParam}`);
+                const data = await response.json();
+                if (data.success) {
+                    setAnomalies(data.anomalies);
+                    setFilteredAnomalies(data.anomalies);
+                } else {
+                    setError('No anomalies found or an error occurred.');
+                }
             }
         } catch (err) {
-            setError('Failed to fetch data. Please try again.');
+            setError('Failed to fetch anomalies. Please try again.');
             console.error(err);
+        } finally {
+            setLoadingSector(false);
+        }
+
+        try {
+            if (mode === 'Stats') {
+                setLoadingSector2(true);
+                setError2('');
+                setStatsData([]);
+                const response = await fetch(`/api/anomalies?majgrp=${sector2}&mode=${mode}`);
+                const data = await response.json();
+                if (data.success) {
+                    //replace the state abbreviations with full names
+                    const fullStats = Object.keys(data.stats[1]).reduce((acc, key) => {
+                        // Replace state abbreviation with full name
+                        acc[states[key] || key] = data.stats[1][key];
+                        return acc;
+                    }, {});
+                    setStatsData([data.stats[0], fullStats]);
+                } else {
+                    setError2('No stats found or an error occurred.');
+                }
+            }
+        } catch (err) {
+            setError2('Failed to fetch stats. Please try again.');
+            console.error(err);
+        } finally {
+            setLoadingSector2(false);
         }
     };
 
     const handleSearch = (event) => {
-        const query = event.target.value.toLowerCase();
+        const query = event.target.value;
         setSearchQuery(query);
 
         setFilteredAnomalies(
             anomalies.filter(
                 (anomaly) =>
-                    anomaly.Name.toLowerCase().includes(query) ||
-                    anomaly.State.toLowerCase().includes(query) ||
-                    anomaly.MostRecentYear.toString().includes(query)
-            )
+                    anomaly.Name.toLowerCase().includes(query.toLowerCase())
+                )
         );
     };
 
     const handleAnomalyClick = async (anomaly) => {
+        setLoadingNp(true);
+        setSelectedAnomaly(null);
+        setErrorNp('');
         try {
             const response = await fetch(`/api/original?name=${encodeURIComponent(anomaly.Name)}`);
             const data = await response.json();
@@ -61,11 +239,13 @@ export default function AnomalyDetection({ isDarkMode }) {
                 setSelectedAnomaly({ ...anomaly, _id: data.nonprofit._id });
             } else {
                 console.error("Failed to find nonprofit in the original collection.");
-                setError("Could not retrieve additional details for the selected anomaly.");
+                setErrorNp("Could not retrieve additional details for the selected anomaly.");
             }
         } catch (err) {
             console.error("Error fetching original nonprofit data:", err);
-            setError("An error occurred while fetching additional details.");
+            setErrorNp("An error occurred while fetching additional details.");
+        } finally {
+            setLoadingNp(false);
         }
     };
 
@@ -86,106 +266,229 @@ export default function AnomalyDetection({ isDarkMode }) {
             <p className="mb-6">
                 Please note, these predictions provide insight into irregularities but are not definitive assessments nor 
                 should they be classified as negative. The algorithm will identify some significant change 
-                in key fiscal variables. Always conduct further research before making critical decisions based on these results.
-            </p>
-
-            <div className="flex justify-center">
-                <div className="w-1/3 pr-4">
-                    <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mb-4`}>
-                        <h4 className="text-lg font-semibold mb-4">Select Major Group</h4>
-                        <select
-                            value={nteeCode}
-                            onChange={handleNteeChange}
-                            className={`mt-2 w-full ${
-                                isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                            } p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#A9DFD8] appearance-none`}
+                in key fiscal variables (revenues, expenses, assets, and liabilities). Always conduct further research before making critical decisions based on these results.
+            </p> 
+            {/* All Anomalies Mode */}
+            <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
+                <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#F2C8ED]' : 'text-[#DB7093]'}`}>Sector-Wide Anomaly Detection</h2>
+                <p className="text-center pb-8">
+                Identify nonprofits with potentially anomalous financial data within a selected NTEE sector within each state. 
+                Then view detailed financial information for each identified nonprofit. 
+                </p>
+                <div className="flex flex-col gap-6">
+                  <select
+                    value={sector}
+                    onChange={(e) => {
+                        setSector(e.target.value);
+                    }}
+                    className={`p-4 border  ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#F1F1F1] text-black border-gray-200"} rounded-lg w-full`}
+                  >
+                    {majorGroups.map((group) => (
+                      <option key={group.value} value={group.value} className="text-black">
+                        {group.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className = 'relative mt-6'>
+                  <Autosuggest
+                      suggestions={stateSuggestions}
+                      onSuggestionsFetchRequested={onStateSuggestionsFetchRequested}
+                      onSuggestionsClearRequested={onStateSuggestionsClearRequested}
+                      getSuggestionValue={getStateSuggestionValue}
+                      renderSuggestionsContainer={({ containerProps, children }) => (
+                      <div {...containerProps} className={`absolute top-0 transform -translate-y-full w-full max-h-96 overflow-y-auto rounded z-10 ${
+                          stateSuggestions.length > 0
+                            ? isDarkMode
+                              ? 'bg-[#171821] text-white border border-[#F2C8ED]'
+                              : 'bg-white text-black border border-[#DB7093]'
+                            : ''
+                        }`}
+                      >
+                        {children}
+                      </div>
+                    )}
+                      renderSuggestion={(suggestion) => (
+                        <div
+                          className={`px-4 py-2 cursor-pointer ${
+                            isDarkMode
+                              ? "hover:bg-[#F2C8ED] hover:text-black"
+                              : "hover:bg-[#DB7093] hover:text-black"
+                          }`}
                         >
-                            <option value="" disabled>Select Major Group</option>
-                            {Object.entries(ntee_codes).map(([code, description]) => (
-                                <option
-                                    key={code}
-                                    value={code}
-                                    className={`${
-                                        isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                                    } hover:bg-[#353637] hover:text-[#A9DFD8] p-2`}
-                                >
-                                    {code} - {description}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-
-                    <button
-                        onClick={fetchAnomalies}
-                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mb-10 w-full"
-                    >
-                        Fetch Anomalies
-                    </button>
-
-                    {error && <div className="text-red-500 mb-4">{error}</div>}
-
-                    {anomalies.length > 0 && (
-                        <>
-                            <h4 className="text-lg font-semibold mb-4">Anomalies Detected</h4>
-                            <input
-                                type="text"
-                                value={searchQuery}
-                                onChange={handleSearch}
-                                placeholder="Search anomalies..."
-                                className={`w-full p-2 mb-4 rounded ${
-                                    isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
-                                } focus:outline-none focus:ring-1 focus:ring-[#A9DFD8] border-white border-2`}
-                            />
-                            <ul className="mb-4 max-h-60 overflow-y-auto border rounded p-4 w-full">
-                                {filteredAnomalies.map((anomaly, index) => (
-                                    <li
-                                        key={index}
-                                        className="mb-2 cursor-pointer hover:bg-gray-200 hover:text-black p-2 rounded"
-                                        onClick={() => handleAnomalyClick(anomaly)}
-                                    >
-                                        <strong>{anomaly.Name}</strong> - {anomaly.State} ({anomaly.MostRecentYear})
-                                    </li>
-                                ))}
-                            </ul>
-                        </>
-                    )}
+                          {suggestion}
+                        </div>
+                      )}
+                      inputProps={{
+                        placeholder: 'Select State (Optional)',
+                        value: state,
+                        onChange: (event, { newValue }) => setState(newValue),
+                        className: `p-4 border ${isDarkMode ? "bg-[#34344c] text-white border-gray-600 placeholder-gray-400" : "bg-[#F1F1F1] text-black border-gray-200 placeholder-gray-490"} rounded-lg w-full focus:outline-none`,
+                      }}
+                  />
                 </div>
+                <button
+                  onClick={() => {
+                    fetchAnomalies('Nonprofits');
+                  }}
+                  className={`py-4 mt-6 px-6 rounded-lg font-bold w-full ${
+                    isFetchSectorDisabled() || isLoading
+                      ? isDarkMode
+                        ? "bg-gray-700 cursor-not-allowed"
+                        : "bg-[#D8D8D8] cursor-not-allowed"
+                      : isDarkMode
+                      ? 'bg-[#D9B4D5] hover:bg-[#F2C8ED] transition duration-300'
+                      : 'bg-[#C56484] hover:bg-[#DB7093] transition duration-300'
+                  }`}
+                  disabled={isFetchSectorDisabled() || isLoading}
+                >
+                    Fetch
+                </button>
+            {loadingSector && <div className="text-center text-lg text-gray-400 mt-6"><SearchLoadingComponent/></div>}
+            {error && <div className="text-center text-lg text-red-400 mt-6">Error: {error}</div>}
+                
+            {anomalies.length > 0 && !loadingSector && !error && (
+                <>
+                    <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={handleSearch}
+                        placeholder="Search nonprofits"
+                        className={`w-full p-2 mb-4 mt-6 rounded ${
+                            isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"
+                        } focus:outline-none focus:ring-1 focus:ring-[#F2C8ED] border-white border-2`}
+                    />
+                    <ul className="mb-4 max-h-60 overflow-y-auto border rounded p-4 w-full">
+                        {filteredAnomalies.map((anomaly, index) => (
+                            <li
+                                key={index}
+                                className="mb-2 cursor-pointer hover:bg-gray-200 hover:text-black p-2 rounded"
+                                onClick={() => handleAnomalyClick(anomaly)}
+                            >
+                                <strong>{anomaly.Name}</strong>
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
+            {loadingNp && <div className="text-center text-lg text-gray-400 mt-6"><SearchLoadingComponent/></div>}
+            {errorNp && <div className="text-center text-lg text-red-400 mt-6">Error: {errorNp}</div>}
 
-                <div className={`w-1/4 ${isDarkMode ? "bg-[#21222D]" : "bg-[#f1f1f1]"} rounded-lg p-4`}>
-                    {selectedAnomaly ? (
-                        <>
-                            <h4 className="text-lg font-semibold mb-4">Numerical Results</h4>
-                            <ul className="space-y-2">
-                                <li><strong>EIN:</strong> {selectedAnomaly.EIN}</li>
-                                <li><strong>NTEE:</strong> {selectedAnomaly.NTEE}</li>
-                                <li><strong>State:</strong> {selectedAnomaly.State}</li>
-                                <li>
-                                    <strong>Name:</strong>{" "}
-                                    <a
-                                        href={`/nonprofit/${selectedAnomaly._id}`}
-                                        className="text-blue-500 hover:underline"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {selectedAnomaly.Name}
-                                    </a>
-                                </li>
-                                <li><strong>Major Group:</strong> {selectedAnomaly.MajGrp}</li>
-                                <li><strong>Most Recent Year:</strong> {selectedAnomaly.MostRecentYear}</li>
-                                <li><strong>Total Revenue Most Recent Year:</strong> ${selectedAnomaly.TotRev_MostRecent.toLocaleString()}</li>
-                                <li><strong>Total Expenses Most Recent Year:</strong> ${selectedAnomaly.TotExp_MostRecent.toLocaleString()}</li>
-                                <li><strong>Total Assets Most Recent Year:</strong> ${selectedAnomaly.TotAst_MostRecent.toLocaleString()}</li>
-                                <li><strong>Total Liabilities Most Recent Year:</strong> ${selectedAnomaly.TotLia_MostRecent.toLocaleString()}</li>
-                                <li><strong>Anomaly Score:</strong> {selectedAnomaly.AnomalyScore}</li>
-                                <li><strong>Anomaly Label:</strong> {selectedAnomaly.AnomalyLabel}</li>
-                            </ul>
-                        </>
-                    ) : (
-                        <p className="text-gray-500">
-                            Select a major group, fetch anomalies, and click on an anomaly to view details here.
+            {selectedAnomaly && !loadingNp && !errorNp && !loadingSector && !error ? (
+              <>
+                <p className="mt-1 text-center">
+                  <a
+                    href={`/nonprofit/${selectedAnomaly._id}`}
+                    className={`text hover:underline ${isDarkMode ? 'text-[#F2C8ED]' : 'text-[#DB7093]'}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {selectedAnomaly.Name}
+                  </a>, located in {states[selectedAnomaly.State]}, was identified as a financial anomaly based on its {selectedAnomaly.MostRecentYear} financials.
+                </p>
+                <div className="flex justify-center gap-8 w-full mt-8">
+                  {[
+                    { title: "REVENUES", value: selectedAnomaly.TotRev_MostRecent },
+                    { title: "EXPENSES", value: selectedAnomaly.TotExp_MostRecent },
+                    { title: "ASSETS", value: selectedAnomaly.TotAst_MostRecent },
+                    { title: "LIABILITIES", value: selectedAnomaly.TotLia_MostRecent },
+                    { 
+                      title: "ANOMALY SCORE", 
+                        value: (() => {
+                          const score = selectedAnomaly.AnomalyScore;
+                          if (score === 0) return "0"; // Handle special case for zero
+                          const scientific = score.toExponential(); // Convert to scientific notation
+                          const coefficient = parseFloat(scientific.split('e')[0]); // Extract coefficient
+                          return coefficient.toFixed(1); // Format to one decimal place
+                        })()
+                    },
+                  ].map((data, index) => {
+                    // Format large values with abbreviations for consistency
+                    const formattedValue = index < 4
+                      ? data.value >= 1e12 ? `${(data.value / 1e12).toFixed(1)}T` :
+                        data.value >= 1e9 ? `${(data.value / 1e9).toFixed(1)}B` :
+                        data.value >= 1e6 ? `${(data.value / 1e6).toFixed(1)}M` :
+                        data.value >= 1e3 ? `${(data.value / 1e3).toFixed(1)}K` :
+                        Math.round(data.value).toLocaleString()
+                      : data.value; // No formatting for anomaly score, already processed
+
+                    // Determine font size based on the formatted value length
+                    const fontSizeClass = formattedValue.length > 6 ? 'text-sm' : 'text-xl';
+
+                    return (
+                      <div key={index} className="flex flex-col items-center">
+                        <div className={`border-4 w-28 h-28 rounded-full flex items-center justify-center font-bold text-center overflow-hidden bg-[#DB7093]
+                          ${isDarkMode ? "border-white" : "border-black"}`}>
+                          <span className={fontSizeClass}>
+                            {index < 4 ? `$${formattedValue}` : formattedValue}
+                          </span>
+                        </div>
+                        <p className="mt-4 text-sm text-center">
+                          {data.title.split(" ").map((word, i) => (
+                            <React.Fragment key={i}>
+                              {word}
+                              <br />
+                            </React.Fragment>
+                          ))}
                         </p>
-                    )}
+                      </div>
+                    );
+                  })}
                 </div>
+              </>
+            ) : null}
+            </div>
+            {/* Charts mode */}
+            <div className={`max-w-4xl mx-auto p-8 mb-12 ${isDarkMode ? "bg-[#171821] text-white border-[#2C2D33]" : "bg-white text-black border-gray-200"} rounded-lg shadow-xl border-2 mt-12`}>
+                <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-[#F2C8ED]' : 'text-[#DB7093]'}`}>Anomalies By State</h2>
+                <p className="text-center pb-8">
+                    Visualize the distribution of identified nonprofits with financial anomalies across different states.
+                </p>
+                <div className="flex flex-col gap-6">
+                  <select
+                    value={sector2}
+                    onChange={(e) => {
+                        setSector2(e.target.value);
+                    }}
+                    className={`p-4 border  ${isDarkMode ? "bg-[#34344c] text-white border-gray-600" : "bg-[#F1F1F1] text-black border-gray-200"} rounded-lg w-full`}
+                  >
+                    {majorGroups.map((group) => (
+                      <option key={group.value} value={group.value} className="text-black">
+                        {group.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <button
+                  onClick={() => {
+                    fetchAnomalies('Stats');
+                  }}
+                  className={`py-4 mt-6 px-6 rounded-lg font-bold w-full ${
+                    isFetchSector2Disabled()
+                      ? isDarkMode
+                        ? "bg-gray-700 cursor-not-allowed"
+                        : "bg-[#D8D8D8] cursor-not-allowed"
+                      : isDarkMode
+                      ? 'bg-[#D9B4D5] hover:bg-[#F2C8ED] transition duration-300'
+                      : 'bg-[#C56484] hover:bg-[#DB7093] transition duration-300'
+                  }`}
+                  disabled={isFetchSector2Disabled()}
+                >
+                    View
+                </button>
+                {loadingSector2 && <div className="text-center text-lg text-gray-400 mt-6"><SearchLoadingComponent/></div>}
+                {error2 && <div className="text-center text-lg text-red-400 mt-6">Error: {error2}</div>}
+                {statsData.length > 0 && !loadingSector2 && !error2 && (
+                    <div>
+                        <p className="mt-6 text-center">
+                            The search found {statsData[0]} anomalies in this sector using each nonprofit&apos;s most recent financial data.
+                        </p>
+                        <div>
+                            <h2 className="mt-6 text-center">States with the most anomalies in the selected sector</h2>
+                            < TopStatesChart states={statsData[1]} isDarkMode={isDarkMode} />
+                        </div>
+                    </div>
+                )}   
             </div>
         </div>
     );
