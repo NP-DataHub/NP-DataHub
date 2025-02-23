@@ -434,7 +434,8 @@ const states = [
         and then allow the end user to calculate the cost per constituent served after salaries and wages for any grant level.
         This is important for budgeting purposes as nonprofits can budget down to the number of individuals in which they&apos;re serving 
         and create a more accurate budget with overhead considerations. 
-        Conversely, this allows grantmakers to gauge whether the nonprofit submitting a proposal is accurately budgeting beyond overhead.
+        Conversely, this allows grantmakers to gauge whether the nonprofit submitting a proposal is accurately budgeting beyond overhead.<br />
+        The chosen nonprofit must have filed a Form 990 in its most recent fiscal year, as it contains the necessary data for these calculations.
         </p>
         <div className="flex flex-col gap-6">
           <div className = 'relative'>
