@@ -72,7 +72,7 @@ export default async function handler(req, res) {
   
     // Proceed if userId exists
     const expirationDate = new Date();
-    expirationDate.setMonth(expirationDate.getMonth() + 1);
+    expirationDate.setMonth(expirationDate.getFullYear() + 1);
   
     try {
       const userRef = db.collection("users").doc(userId);
