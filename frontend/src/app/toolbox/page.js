@@ -295,7 +295,7 @@ export default function Toolbox() {
   <p className="text-lg mb-6 text-gray-600 dark:text-gray-300">
     Gain full access to all premium features that empower you to make better decisions.
   </p>
-  <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr mb-6">
+  <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-fr mb-6">
     <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
       <h3 className="text-xl font-semibold mb-2 text-yellow-500">Fiscal Health</h3>
       <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -312,6 +312,12 @@ export default function Toolbox() {
       <h3 className="text-xl font-semibold mb-2 text-yellow-500">Anomaly Detection</h3>
       <p className="text-sm text-gray-600 dark:text-gray-400">
         Detect fiscal anomalies in nonprofits using machine learning algorithms.
+      </p>
+    </div>
+    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+      <h3 className="text-xl font-semibold mb-2 text-yellow-500">LISTS + RANKINGS</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        A fiscal ranking tool to compare and contrast nonprofits within your sector and region to show discrepancies, gains, and losses.
       </p>
     </div>
     <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
@@ -332,8 +338,7 @@ export default function Toolbox() {
         Discover potential partnerships with nonprofits in your community.
       </p>
     </div>
-    <div> </div>
-    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800 ">
+    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
       <h3 className="text-xl font-semibold mb-2 text-yellow-500">S.P.I.N. Tool</h3>
       <p className="text-sm text-gray-600 dark:text-gray-400">
         Find networks and paths between nonprofits across multiple sectors to find similarities, differences, and fiscal outliers.
