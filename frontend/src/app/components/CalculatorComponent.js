@@ -39,7 +39,7 @@ export default function CalculatorSection({isDarkMode}) {
   });
 
   const majorGroups = [
-    { value: '', label: 'Select a Sector' },
+    { value: '', label: 'Select Sector' },
     { value: 'A', label: 'A - Arts, Culture, and Humanities' },
     { value: 'B', label: 'B - Educational Institutions and Related Activities' },
     { value: 'C', label: 'C - Environmental Quality, Protection and Beautification' },

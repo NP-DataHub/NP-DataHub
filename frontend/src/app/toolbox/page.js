@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import NewsFeedSection from "../components/newsfeed";
 import FiscalHealthSection from "../components/FiscalHealthComponent";
 import CalculatorSection from "../components/CalculatorComponent";
+import ListRanking from "../components/ListRankingComponent"
 import Footer from "../components/dashboard_footer";
 import RegionalHealthSection from "../components/RegionalHealthComponent";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
@@ -294,7 +295,7 @@ export default function Toolbox() {
   <p className="text-lg mb-6 text-gray-600 dark:text-gray-300">
     Gain full access to all premium features that empower you to make better decisions.
   </p>
-  <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr mb-6">
+  <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 auto-rows-fr mb-6">
     <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
       <h3 className="text-xl font-semibold mb-2 text-yellow-500">Fiscal Health</h3>
       <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -311,6 +312,12 @@ export default function Toolbox() {
       <h3 className="text-xl font-semibold mb-2 text-yellow-500">Anomaly Detection</h3>
       <p className="text-sm text-gray-600 dark:text-gray-400">
         Detect fiscal anomalies in nonprofits using machine learning algorithms.
+      </p>
+    </div>
+    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
+      <h3 className="text-xl font-semibold mb-2 text-yellow-500">LISTS + RANKINGS</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        A fiscal ranking tool to compare and contrast nonprofits within your sector and region to show discrepancies, gains, and losses.
       </p>
     </div>
     <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
@@ -331,8 +338,7 @@ export default function Toolbox() {
         Discover potential partnerships with nonprofits in your community.
       </p>
     </div>
-    <div> </div>
-    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800 ">
+    <div className="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800">
       <h3 className="text-xl font-semibold mb-2 text-yellow-500">S.P.I.N. Tool</h3>
       <p className="text-sm text-gray-600 dark:text-gray-400">
         Find networks and paths between nonprofits across multiple sectors to find similarities, differences, and fiscal outliers.
@@ -539,6 +545,32 @@ export default function Toolbox() {
                                 <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>Search and compare nonprofits from other sectors in your backyard that may be strong partners.</p>
                             </div>
 
+                            {/* REMOVE THE LINE BELOW EVENTUALLY WHEN YOU ADD THE OTHER TOOL*/}
+                            <div className="z-10 relative p-6 rounded-lg"></div>
+
+                              <div
+                                className={`z-10 relative p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer ${
+                                    selectedSection === "LIST" ? isDarkMode ? "bg-[#34344c] text-white" : "bg-[#F1F1F1] text-black" : isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"
+                                }`}
+                                onClick={() =>
+                                    setSelectedSection(
+                                      selectedSection === "LIST" ? null : "LIST"
+                                    )
+                                  }
+                                >
+
+                                <svg className = "relative z-10 mb-4" width="36" height="39" viewBox="0 0 23 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21.1994 7.09144L11.2237 1.22339L1.24802 7.09144V18.8276L11.2237 24.6956L21.1994 18.8276V7.09144Z" stroke = {isDarkMode ? "#20AEF3" : "#20AEF3" } stroke-width="1.95" stroke-linejoin="round"/>
+                                    <path d="M6.52927 14.1332V16.4804M11.2237 11.7859V16.4804V11.7859ZM15.9182 9.43872V16.4804V9.43872Z" stroke = {isDarkMode ? "#20AEF3" : "#20AEF3" } stroke-width="1.95" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                
+
+                                <h2 className={`text-xl font-semibold mb-2 ${isDarkMode ? "text-[#20AEF3]" : "text-[#20AEF3]"}`} >
+                                    LISTS + RANKINGS
+                                </h2>
+                                <p className={`text-sm ${isDarkMode ? "text-white" : "text-black" } `}>A fiscal ranking tool to compare and contrast nonprofits within your sector and region to show discrepancies, gains, and losses.</p>
+                            </div>
+
                         </div>
                         </div>
 
@@ -565,6 +597,10 @@ export default function Toolbox() {
                             {selectedSection === "Anomaly Detection" && (
                                 <AnomalyDetection isDarkMode={isDarkMode}></AnomalyDetection>
                             )}
+                            {selectedSection === "LIST" && (
+                                <ListRanking isDarkMode={isDarkMode}></ListRanking>
+                            )}
+
                         </div>
                     </div>
                 </div>
