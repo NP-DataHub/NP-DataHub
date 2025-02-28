@@ -148,7 +148,7 @@ const previousYear = (currentEntry, year) => {
 
 function calculatePercentDifference(oldValue, newValue) {
   if (oldValue === 0) {
-    return newValue === 0 ? 0 : newValue;
+    return null;
   }
   return ((newValue - oldValue) / oldValue) * 100;
 }

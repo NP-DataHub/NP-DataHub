@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import zipData from './zipcode_data';
 import Autosuggest from 'react-autosuggest';
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 export default function ListRanking({isDarkMode}) {
 
@@ -384,9 +385,10 @@ export default function ListRanking({isDarkMode}) {
         <div className="mb-4 flex justify-start">
           <button
             onClick={() => setSortOrder(sortOrder === 'desc' ? 'asc' : 'desc')}
-            className={`px-3 py-1 text-sm rounded ${isDarkMode ? "bg-gray-700 text-white" : "bg-gray-300 text-black"}`}
+            className="p-2 rounded hover:bg-gray-300 dark:hover:bg-gray-700 flex items-center gap-1"
           >
-            Click to switch order
+            <ChevronUp size={20} className={sortOrder === 'asc' ? 'text-black dark:text-white' : 'text-gray-400'} />
+            <ChevronDown size={20} className={sortOrder === 'desc' ? 'text-black dark:text-white' : 'text-gray-400'} />
           </button>
         </div>
       )}
