@@ -55,7 +55,11 @@ export default async function handler(req, res) {
     if (!zip) {
       const sectorData = await db.collection('NationalAndStateStatistics').findOne({ MajGrp: nteeCode });
          // Use state-specific totals when state is provided
-        if (!sectorData || !sectorData[year] || !sectorData[year][stateCode]) {
+         if (!sectorData || !sectorData[year]) {
+          return res.status(404).json({ message: "No data available for the selected year" });
+        }
+
+        if (!sectorData[year][stateCode]) {
           return res.status(404).json({ message: "No state-level data found" });
         }
         total = {

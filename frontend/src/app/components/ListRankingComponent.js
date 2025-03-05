@@ -16,16 +16,18 @@ export default function ListRanking({isDarkMode}) {
 
   const [variable, setVariable] = useState("TotRev");
 
-  const [year, setYear] = useState('');
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
   const [sortOrder, setSortOrder] = useState('desc'); // New state for sort order
+  
+  const [year, setYear] = useState('');
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: currentYear - 2014 }, (_, i) => 2015 + i);
 
   const majorGroups = [
-    { value: '', label: 'Select Sector' },
     { value: 'A', label: 'A - Arts, Culture, and Humanities' },
     { value: 'B', label: 'B - Educational Institutions and Related Activities' },
     { value: 'C', label: 'C - Environmental Quality, Protection and Beautification' },
@@ -274,6 +276,7 @@ export default function ListRanking({isDarkMode}) {
                 } p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#20AEF3]`
               }
               >
+                <option value="">Select Sector</option>
                 {majorGroups.map((group) => (
                   <option
                     key={group.value}
@@ -288,15 +291,19 @@ export default function ListRanking({isDarkMode}) {
 
 
           <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center justify-center h-20`}>
-            <input
-              type="number"
-              placeholder="Enter Year"
+            <select
               value={year}
               onChange={(e) => setYear(e.target.value)}
               className={`w-full p-2 rounded focus:outline-none focus:ring-1 focus:ring-[#20AEF3] 
-                ${isDarkMode ? "bg-[#171821] text-white placeholder:text-white" 
-                             : "bg-[#e0e0e0] text-black placeholder:text-black"}`}
-            />
+                ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#e0e0e0] text-black"}`}
+            >
+              <option value="">Select Year</option>
+              {years.slice(0, -1).map((yr) => (
+                <option key={yr} value={yr}>
+                  {yr}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className={`${isDarkMode ? "bg-[#21222D] text-white" : "bg-[#f9f9f9] text-black"} p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300`}>
