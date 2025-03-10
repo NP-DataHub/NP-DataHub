@@ -281,7 +281,8 @@ class Database:
                 "Cty": general_info[2],
                 "Zip": general_info[3],
                 "Addr": general_info[4],
-                "RetTyp" : return_type
+                "Frgn": 0,
+                "RetTyp": return_type
             })
         else:
             update_fields.update({
@@ -291,6 +292,7 @@ class Database:
                 "Cty": general_info[3],
                 "Zip": general_info[4],
                 "Addr": general_info[5],
+                "Frgn": 1,
                 "RetTyp": return_type
             })
         return update_fields
