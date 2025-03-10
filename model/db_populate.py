@@ -145,7 +145,7 @@ for majgrp_letter in string.ascii_uppercase:
     anomalies_df = df[df['AnomalyLabel'] == -1]
     print(f"Anomalies detected in MajGrp '{majgrp_letter}': {len(anomalies_df)} out of {len(df)} nonprofits.")
 
-    data_to_insert = df[['EIN', 'NTEE', 'State', 'Name', 'MajGrp', 'MostRecentYear',
+    data_to_insert = anomalies_df[['EIN', 'NTEE', 'State', 'Name', 'MajGrp', 'MostRecentYear',
                          'TotRev_MostRecent', 'TotExp_MostRecent', 'TotAst_MostRecent', 'TotLia_MostRecent',
                          'AnomalyScore', 'AnomalyLabel']].to_dict('records')
 
