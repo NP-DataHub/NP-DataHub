@@ -11,9 +11,10 @@ import string
 
 load_dotenv()
 
-MONGODB_URI = os.getenv("MONGODB_URI")
+if not os.getenv('MONGODB_URI'):
+    load_dotenv('frontend/.env')
+client = MongoClient(os.getenv('MONGODB_URI'))
 
-client = MongoClient(MONGODB_URI)
 db = client['Nonprofitly']
 collection = db['NonProfitData']
 anomaly_collection = db['anomaly'] 
