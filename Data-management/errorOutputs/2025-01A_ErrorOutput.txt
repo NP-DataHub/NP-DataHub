@@ -1,0 +1,64 @@
+Previous filepath: /tmp/2025-01A/202520169349200407_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202500169349200400_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-01A/202510159349201526_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202510159349201601_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-01A/202520169349200407_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202530239349200023_public.xml and timestamp: None
+Address: previous is 4680 Mimosa Pl Unit 816 and current is: 4680 Mismosa Pl Unit 816
+==================================================
+Previous filepath: /tmp/2025-01A/202530239349200633_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202520239349200327_public.xml and timestamp: None
+Total Assets: previous is 35831 and current is: 0
+==================================================
+Previous filepath: /tmp/2025-01A/202500169349200005_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202530169349201103_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-01A/202510169349201201_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202520169349200207_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-01A/202500209349200235_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202500219349200320_public.xml and timestamp: None
+Total Assets: previous is 37386 and current is: 58059
+Total Expenses: previous is 104114 and current is: 124500
+==================================================
+Previous filepath: /tmp/2025-01A/202500229349201200_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202530239349200423_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-01A/202500159349201145_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202540159349200439_public.xml and timestamp: None
+Total Revenue: previous is 113293 and current is: 14486
+Total Assets: previous is 106160 and current is: 120646
+Total Expenses: previous is 43068 and current is: 0
+Investment Income: previous is 504 and current is: 0
+==================================================
+Previous filepath: /tmp/2025-01A/202510169349200741_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202510169349200601_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-01A/202510229349201201_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202510239349200211_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-01A/202500169349200000_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202520179349200137_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-01A/202520169349200007_public.xml and timestamp: None
+Current filepath: /tmp/2025-01A/202530169349200008_public.xml and timestamp: None
+Total Assets: previous is 12425 and current is: 13324
+==================================================
+Previous filepath: /tmp/2025-01A/202530179349201038_public.xml and timestamp: 2025-01-17 16:38:28-06:00
+Current filepath: /tmp/2025-01A/202530179349201523_public.xml and timestamp: 2025-01-17 16:38:28-06:00
+Total Revenue: previous is 62537 and current is: 447
+Total Assets: previous is 55434 and current is: 0
+Total Expenses: previous is 78086 and current is: 55881
+Program Service Revenue: previous is 17608 and current is: 170
+Investment Income: previous is 174 and current is: 2
+==================================================
