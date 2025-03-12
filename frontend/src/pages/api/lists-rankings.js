@@ -52,23 +52,23 @@ export default async function handler(req, res) {
       return res.status(404).json({ message: "No data provided with selected filters" });
     }
     let total;
-    if (!zip) {
-      const sectorData = await db.collection('NationalAndStateStatistics').findOne({ MajGrp: nteeCode });
-         // Use state-specific totals when state is provided
-         if (!sectorData || !sectorData[year]) {
-          return res.status(404).json({ message: "No data available for the selected year" });
-        }
+    // if (!zip) {
+    //   const sectorData = await db.collection('NationalAndStateStatistics').findOne({ MajGrp: nteeCode });
+    //      // Use state-specific totals when state is provided
+    //      if (!sectorData || !sectorData[year]) {
+    //       return res.status(404).json({ message: "No data available for the selected year" });
+    //     }
 
-        if (!sectorData[year][stateCode]) {
-          return res.status(404).json({ message: "No state-level data found" });
-        }
-        total = {
-          TotRev: sectorData[year][stateCode]["SumRev"],
-          TotExp: sectorData[year][stateCode]["SumExp"],
-          TotLia: sectorData[year][stateCode]["SumLia"],
-          TotAst: sectorData[year][stateCode]["SumAst"]
-        };
-      } else {
+    //     if (!sectorData[year][stateCode]) {
+    //       return res.status(404).json({ message: "No state-level data found" });
+    //     }
+    //     total = {
+    //       TotRev: sectorData[year][stateCode]["SumRev"],
+    //       TotExp: sectorData[year][stateCode]["SumExp"],
+    //       TotLia: sectorData[year][stateCode]["SumLia"],
+    //       TotAst: sectorData[year][stateCode]["SumAst"]
+    //     };
+    //   } else {
       // If zip is provided, use the total from the `NonProfitData` collection
       const pipeline = [
         { $match: filters },
@@ -91,7 +91,7 @@ export default async function handler(req, res) {
       } else {
         total = { TotRev: 0, TotExp: 0, TotLia: 0, TotAst: 0 };
       }
-    }
+    // }
 
     // Generate response data
     const responseData = npData
