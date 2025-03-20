@@ -1,0 +1,103 @@
+Previous filepath: /tmp/2025-02A/202530359349200803_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202500339349200255_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 51562 and current is: 0
+==================================================
+Previous filepath: /tmp/2025-02A/202500429349300615_public.xml and timestamp: 2025-02-11 09:25:38-05:00
+Current filepath: /tmp/2025-02A/202510429349300421_public.xml and timestamp: 2025-02-11 09:25:38-05:00
+Total Revenue: previous is 17532 and current is: 176319
+Total Assets: previous is 50026 and current is: 53407
+Total Liabilities: previous is 103289 and current is: 100334
+Total Expenses: previous is 23868 and current is: 199360
+Total Contributions: previous is 2830 and current is: 51800
+Program Service Revenue: previous is 14324 and current is: 124513
+Investment Income: previous is 378 and current is: 6
+Gross Receipts: previous is 17532 and current is: 176319
+Other salaries and wages: previous is 20852 and current is: 151068
+Payroll Taxes: previous is 1939 and current is: 14785
+==================================================
+Previous filepath: /tmp/2025-02A/202520299349200637_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202540299349200019_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-02A/202500279349200715_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202520299349200717_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-02A/202500379349301770_public.xml and timestamp: 2025-02-06 17:34:23-05:00
+Current filepath: /tmp/2025-02A/202510379349301681_public.xml and timestamp: 2025-02-06 17:34:23-05:00
+Total Revenue: previous is 4 and current is: 32516
+Total Assets: previous is 0 and current is: 131287
+Total Expenses: previous is 131293 and current is: 533627
+Total Contributions: previous is 0 and current is: 31958
+Investment Income: previous is 4 and current is: 558
+Gross Receipts: previous is 4 and current is: 32516
+Other salaries and wages: previous is 0 and current is: 35041
+Payroll Taxes: previous is 0 and current is: 2696
+Number of employees: previous is 0 and current is: 1
+==================================================
+Previous filepath: /tmp/2025-02A/202500439349201355_public.xml and timestamp: 2025-02-12 14:35:35-06:00
+Current filepath: /tmp/2025-02A/202540439349201124_public.xml and timestamp: 2025-02-12 14:35:35-06:00
+Total Revenue: previous is 46492 and current is: 0
+Total Assets: previous is 30700 and current is: 0
+Total Liabilities: previous is 29294 and current is: 0
+Total Expenses: previous is 152335 and current is: 1406
+Gift Grants Membership Fees received 509: previous is 776641 and current is: 730235
+==================================================
+Previous filepath: /tmp/2025-02A/202520489349200872_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202500519349200235_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-02A/202500389349200745_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202520289349200427_public.xml and timestamp: None
+Name: previous is Little League Baseball Inc and current is: Tim A Graham
+City: previous is Bennington and current is: Plano
+==================================================
+Previous filepath: /tmp/2025-02A/202530249349200028_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202520439349201132_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-02A/202540349349200834_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202520379349201112_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-02A/202500379349200925_public.xml and timestamp: 2025-02-06 10:51:07-07:00
+Current filepath: /tmp/2025-02A/202520369349200037_public.xml and timestamp: None
+Address: previous is 15911 Aldersyde Dr and current is: 15911 Aldersyde Drive
+==================================================
+Previous filepath: /tmp/2025-02A/202520479349200002_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202520479349200212_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-02A/202510469349200601_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202530389349200618_public.xml and timestamp: None
+Total Revenue: previous is 129438 and current is: 151387
+Total Assets: previous is 120000 and current is: 0
+==================================================
+Previous filepath: /tmp/2025-02A/202540319349200924_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202510329349200201_public.xml and timestamp: None
+Name: previous is Vancouver Usa Singers and current is: Vancouver Usa Singers Aka Vancouver Master Chorale
+==================================================
+Previous filepath: /tmp/2025-02A/202530289349200043_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202520299349200122_public.xml and timestamp: None
+Total Liabilities: previous is 116293 and current is: 133521
+==================================================
+Previous filepath: /tmp/2025-02A/202510489349200771_public.xml and timestamp: 2025-02-17 12:02:07-06:00
+Current filepath: /tmp/2025-02A/202540489349200834_public.xml and timestamp: 2025-02-17 12:02:07-06:00
+Total Revenue: previous is 40421 and current is: 46139
+Total Assets: previous is 9141 and current is: 12208
+Total Expenses: previous is 43488 and current is: 47290
+Program Service Revenue: previous is 25487 and current is: 22498
+Gift Grants Membership Fees received 509: previous is 92470 and current is: 47283
+==================================================
+Previous filepath: /tmp/2025-02A/202520379349200337_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202520469349200102_public.xml and timestamp: None
+Total Assets: previous is 0 and current is: 104553
+==================================================
+Previous filepath: /tmp/2025-02A/202510439349200301_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202500459349200620_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-02A/202500279349200715_public.xml and timestamp: None
+Current filepath: /tmp/2025-02A/202540299349200419_public.xml and timestamp: None
+No difference found
+==================================================
