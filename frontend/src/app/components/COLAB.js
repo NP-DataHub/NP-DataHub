@@ -120,56 +120,43 @@ export default function COLAB({isDarkMode}) {
 
 
     const fetchData = async () => {
-
-        setDataIsLoading(true);
-
-        if (nonprofit && nonprofit.trim().length > 0) {
-            // If the user has entered a nonprofit name, fetch nonprofits in the same area (city or zip code)
-            const NAME = nonprofit;
-
-            // Fetch the data
-            let response = await fetch(`/api/sector?Nm=${NAME}`);
-            let nonprofitData = await response.json();
-
-            if(nonprofitData !== null && nonprofitData.data !== undefined){
-                setNonprofitData(nonprofitData.data[0]);
-            }
-            else{
-                //console.error("No data found for the selected nonprofit");
-                setNonprofitData(null);
-            }
-
-            // Get the area data for the selected nonprofit
-            if (nonprofitData !== null && nonprofitData.data.length > 0) {
-                //console.log("Nonprofit data:", nonprofitData.data);
-                // Extract the city and zip code of the selected nonprofit
-                let CITY = null;
-                let ZIP = null;
-                if(nonprofitData.data[0].Cty !== null){
-                    CITY = nonprofitData.data[0].Cty;
+        setDataIsLoading(true); // Start loading
+    
+        try {
+            if (nonprofit && nonprofit.trim().length > 0) {
+                const NAME = nonprofit;
+                let response = await fetch(`/api/sector?Nm=${NAME}`);
+                let nonprofitData = await response.json();
+    
+                if (nonprofitData && nonprofitData.data) {
+                    setNonprofitData(nonprofitData.data[0]);
+                } else {
+                    setNonprofitData(null);
                 }
-                if(nonprofitData.data[0].Zip !== null){
-                    ZIP = nonprofitData.data[0].Zip;
+    
+                if (nonprofitData && nonprofitData.data.length > 0) {
+                    let CITY = nonprofitData.data[0].Cty || null;
+                    let ZIP = nonprofitData.data[0].Zip || null;
+    
+                    if (CITY && ZIP) {
+                        response = await fetch(`/api/sector?Cty=${CITY}&Zip=${ZIP}`);
+                        let fetched_data = await response.json();
+                        setareaData(fetched_data.data);
+                    } else {
+                        console.error("City or Zip missing in nonprofit data");
+                    }
                 }
-
-                // Set the area data with the city and zip code of the selected nonprofit
-                let response = await fetch(`/api/sector?Cty=${CITY}&Zip=${ZIP}`);
-                let fetched_data = await response.json();
-
-                setareaData(fetched_data.data);
-
-            } else {
-                console.error("False data fetch - all inputs are null, check where you are calling fetchData()");
             }
+        } catch (error) {
+            console.error("Error during fetch:", error);
+        } finally {
+            setDataIsLoading(false); // Set loading to false after all data is fetched
         }
-
-        setDataIsLoading(false);
-
     };
 
-     const handleSearch = () => {
-        fetchData();
-        //console.log("computing similarity network");
+    const handleSearch = () => {
+        fetchData(); // Trigger the data fetching
+        // Compute similarity network after data is loaded (if needed)
         computeSimilarityNetwork();
     };
 
@@ -289,37 +276,41 @@ export default function COLAB({isDarkMode}) {
 
 
     // Slider component to set the threshold for similarity score
-    const ThresholdSlider = ({ threshold, setThreshold, isDarkMode }) => (
-        <div
-            className={`flex items-center h-full gap-4 p-2 rounded-lg w-full ${
-                isDarkMode ? "bg-[#34344c]" : "bg-[#F1F1F1]"
-            }`}
-        >
-            <label
-                className={`flex flex-col w-1/3 whitespace-normal text-ellipsis ${
-                    isDarkMode ? "text-white" : "text-black"
+    const ThresholdSlider = ({ threshold, setThreshold, isDarkMode }) => {
+
+        return(
+            <div
+                className={`flex  cursor-pointer items-center h-full gap-4 p-2 rounded-lg w-full ${
+                    isDarkMode ? "bg-[#34344c]" : "bg-[#F1F1F1]"
                 }`}
             >
-                Similarity Threshold:
-            </label>
-            <input
-                type="range"
-                min="1"
-                max="100"
-                value={threshold}
-                onChange={(e) => setThreshold(parseInt(e.target.value, 10))}
-                className={`w-2/3 border ${
-                    isDarkMode
-                        ? "bg-[#34344c] text-white border-gray-600"
-                        : "bg-[#F1F1F1] text-black border-gray-200"
-                } rounded-lg focus:outline-none`}
-                style={{ accentColor: isDarkMode ? "#F2C8ED" : "#DB7093" }}
-            />
-            <span className={`${isDarkMode ? "text-white" : "text-black"}`}>
-                {threshold}
-            </span>
-        </div>
-    );
+                <label
+                    className={`flex flex-col w-1/3 whitespace-normal text-ellipsis ${
+                        isDarkMode ? "text-white" : "text-black"
+                    }`}
+                >
+                    Similarity Threshold:
+                </label>
+                <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value={threshold}
+                    onChange={(e) => setThreshold(parseInt(e.target.value, 10))}
+                    className={`w-2/3 border ${
+                        isDarkMode
+                            ? "bg-[#34344c] text-white border-gray-600"
+                            : "bg-[#F1F1F1] text-black border-gray-200"
+                    } rounded-lg focus:outline-none`}
+                    style={{ accentColor: isDarkMode ? "#F2C8ED" : "#DB7093" }}
+                />
+                <span className={`${isDarkMode ? "text-white" : "text-black"}`}>
+                    {threshold}
+                </span>
+            </div>
+        );
+    };
+    
     return (
 
         <div className={`w-full h-full p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"} rounded-lg`}>
@@ -342,9 +333,9 @@ export default function COLAB({isDarkMode}) {
                 </div>
             </div>
         {/* Name search, threshold slider */}
-        <div className="grid grid-cols-2 gap-4 mb-4 w-full">
+        <div className="flex items-center gap-4 mb-4 w-full">
             {/* Name search autosuggest */}
-            <div className='relative w-full h-full'>
+            <div className='relative w-1/2 h-full'>
                 <Autosuggest
                     suggestions={nameSuggestions}
                     onSuggestionsFetchRequested={onNameSuggestionsFetchRequested}
@@ -380,7 +371,15 @@ export default function COLAB({isDarkMode}) {
             </div>
 
             {/* Search button and slider */}
-            <div className="flex items-center w-full gap-4 h-[52px]">
+            <div className="flex items-center w-1/2 gap-4 h-[52px]">
+                {/* Threshold slider */}
+                <div className='flex items-center w-2/3 h-full'>
+                    <ThresholdSlider 
+                        threshold={threshold} 
+                        setThreshold={setThreshold} 
+                        isDarkMode={isDarkMode} 
+                    />
+                </div>
                 {/* Search button */}
                 <div className="flex items-center w-1/3 h-full">
                     <button
@@ -399,14 +398,6 @@ export default function COLAB({isDarkMode}) {
                         Search
                     </button>
                 </div>
-                {/* Threshold slider */}
-                <div className='flex items-center w-2/3 h-full'>
-                    <ThresholdSlider 
-                        threshold={threshold} 
-                        setThreshold={setThreshold} 
-                        isDarkMode={isDarkMode} 
-                    />
-                </div>
             </div>
         </div>
 
@@ -418,13 +409,13 @@ export default function COLAB({isDarkMode}) {
             ) : areaData ? (
                 <div className="grid grid-cols-2 gap-4 h-full">
                     {/* Graph */}
-                    <div className={`flex flex-col p-4 rounded-lg ${isDarkMode ? "bg-[#34344c]" : "bg-[#F1F1F1]"}`}>
-                        <h2 className="text-center text-3xl">Nonprofit Network</h2>
+                    <div className={`flex flex-col p-4  h-full rounded-lg ${isDarkMode ? "bg-[#34344c]" : "bg-[#F1F1F1]"}`}>
+
                         <COLABGraph data={thresholdedList} filters={[]} onNonprofitClick={handleNonprofitClick} isDarkMode={isDarkMode}  threshold={threshold}/>
                     </div>
                     {/* Table */}
                     <div className={`flex flex-col justify-between h-full p-4 rounded-lg ${isDarkMode ? "bg-[#34344c]" : "bg-[#F1F1F1]"}`}>
-                            <COLABTable similarityList={similarityList} selectedNonprofit={nonprofitData} isDarkMode={isDarkMode} />
+                        <COLABTable similarityList={similarityList} selectedNonprofit={nonprofitData} isDarkMode={isDarkMode} />
                     </div>
                 </div>
             ) : (

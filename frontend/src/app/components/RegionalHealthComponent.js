@@ -7,6 +7,7 @@ import debounce from 'lodash.debounce';
 import { useCallback } from "react";
 import ntee_codes from './ntee'; // Import NTEE data
 const Map2 = dynamic(() => import('../components/map2'), { ssr: false });
+import COLABGraph from './charts/COLABGraph';
 
 const CENSUS_KEY = process.env.NEXT_PUBLIC_CENSUS_API_KEY;
 
@@ -396,7 +397,6 @@ export default function RegionalHealthSection({ isDarkMode }) {
         }
     };
 
-
     return(<div className={`p-6 ${isDarkMode ? "bg-[#171821] text-white" : "bg-[#ffffff] text-black"} rounded-lg`}>
         <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-[#A9DFD8]' : 'text-[#316498]'}`}>REGIONAL HEALTH BY SECTOR</h3>
         <p className="mt-4">
@@ -619,8 +619,9 @@ export default function RegionalHealthSection({ isDarkMode }) {
                     FAMILY
                 </button>
                 </div>
-            <div className = 'rounded-lg'>
-                <Map2 points={points} lat={lat} lng={lng} zoom={zoom} searchResults={searchResults}/>
+            <div className = 'rounded-lg h-[60vh]'>
+                <COLABGraph data={searchResults} filters={[]} onNonprofitClick={null} isDarkMode={isDarkMode} threshold={1000}/>
+
             </div>
         </div>)
 };
