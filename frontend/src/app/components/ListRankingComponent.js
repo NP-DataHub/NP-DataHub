@@ -384,9 +384,9 @@ export default function ListRanking({isDarkMode}) {
         </button>
       </div>
 
+      </div>
       {loading && <div className="text-center text-lg text-gray-400 mt-6"><SearchLoadingComponent/></div>}
       {error && <div className="text-center text-lg text-red-400 mt-6">Error: {error}</div>}
-      </div>
 
       {data && !loading && !error && (
         <div className="mb-4 flex justify-start">
