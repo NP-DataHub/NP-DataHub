@@ -1,0 +1,84 @@
+Previous filepath: /tmp/2025-03A/202530719349301738_public.xml and timestamp: 2025-03-12 15:07:29-05:00
+Current filepath: /tmp/2025-03A/202540719349301579_public.xml and timestamp: 2025-03-12 15:07:29-05:00
+Total Revenue: previous is 0 and current is: 1469851
+Total Assets: previous is 0 and current is: 1358893
+Total Expenses: previous is 0 and current is: 110958
+Total Contributions: previous is 0 and current is: 1463520
+Investment Income: previous is 0 and current is: 6331
+Gross Receipts: previous is 0 and current is: 1469851
+Compensation of current officers: previous is 0 and current is: 26289
+Other salaries and wages: previous is 0 and current is: 52074
+Payroll Taxes: previous is 0 and current is: 8167
+==================================================
+Previous filepath: /tmp/2025-03A/202510769349202001_public.xml and timestamp: 2025-03-17 13:31:59-07:00
+Current filepath: /tmp/2025-03A/202510779349200726_public.xml and timestamp: None
+Total Assets: previous is 73113 and current is: 61418
+Address: previous is Po Box 343 and current is: 1759 E Garwood Rd
+==================================================
+Previous filepath: /tmp/2025-03A/202530729349201373_public.xml and timestamp: None
+Current filepath: /tmp/2025-03A/202500739349200305_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-03A/202530579349302018_public.xml and timestamp: 2025-02-26 23:23:59-05:00
+Current filepath: /tmp/2025-03A/202540579349301799_public.xml and timestamp: 2025-02-26 23:23:59-05:00
+Total Revenue: previous is 13891 and current is: 104476
+Total Assets: previous is 220098 and current is: 225190
+Total Expenses: previous is 18983 and current is: 86290
+Total Contributions: previous is 13821 and current is: 50564
+Program Service Revenue: previous is 40 and current is: 53831
+Investment Income: previous is 30 and current is: 81
+Gross Receipts: previous is 13891 and current is: 104476
+==================================================
+Previous filepath: /tmp/2025-03A/202510559349300331_public.xml and timestamp: None
+Current filepath: /tmp/2025-03A/202500609349300320_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-03A/202530559349300333_public.xml and timestamp: None
+Current filepath: /tmp/2025-03A/202510609349300721_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-03A/202520799349201352_public.xml and timestamp: None
+Current filepath: /tmp/2025-03A/202540669349200909_public.xml and timestamp: None
+Total Assets: previous is 47358 and current is: 47851
+Total Expenses: previous is 17700 and current is: 17871
+==================================================
+Previous filepath: /tmp/2025-03A/202530639349200603_public.xml and timestamp: 2025-03-03 16:42:43-05:00
+Current filepath: /tmp/2025-03A/202540629349201859_public.xml and timestamp: 2025-03-03 16:42:43-05:00
+No difference found
+==================================================
+Previous filepath: /tmp/2025-03A/202510639349301346_public.xml and timestamp: 2025-03-04 16:14:45-06:00
+Current filepath: /tmp/2025-03A/202540639349300329_public.xml and timestamp: 2025-03-04 16:14:45-06:00
+Total Revenue: previous is 36482 and current is: 425004
+Total Assets: previous is 402349 and current is: 500094
+Total Liabilities: previous is 72438 and current is: 116148
+Total Expenses: previous is 76782 and current is: 366637
+Total Contributions: previous is 36349 and current is: 209440
+Program Service Revenue: previous is 0 and current is: 215337
+Investment Income: previous is 133 and current is: 227
+Gross Receipts: previous is 36482 and current is: 425004
+Other salaries and wages: previous is 45633 and current is: 89356
+Address: previous is Villa A 34B S Police Acdmy 2Nd Fl and current is: Villa 34B South Police Acdmy 2Nd Fl
+==================================================
+Previous filepath: /tmp/2025-03A/202500759349200400_public.xml and timestamp: None
+Current filepath: /tmp/2025-03A/202530749349200803_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-03A/202540779349100214_public.xml and timestamp: None
+Current filepath: /tmp/2025-03A/202530799349100633_public.xml and timestamp: None
+Name: previous is Slava Ukrayini-Glory T6O Ukraine and current is: Slava Ukrayini-Glory To Ukraine
+State: previous is IN and current is: CO
+City: previous is West Lafayette and current is: Fort Collins
+Zip Code: previous is 47906 and current is: 80526
+Address: previous is 563 Big Pine Drive and current is: 2519 S Shields St
+==================================================
+Previous filepath: /tmp/2025-03A/202520729349201372_public.xml and timestamp: None
+Current filepath: /tmp/2025-03A/202530739349201553_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-03A/202530659349301103_public.xml and timestamp: None
+Current filepath: /tmp/2025-03A/202540559349301414_public.xml and timestamp: None
+Total Expenses: previous is 337299 and current is: 0
+Compensation of current officers: previous is 27550 and current is: 0
+Other salaries and wages: previous is 8400 and current is: 0
+Payroll Taxes: previous is 643 and current is: 0
+==================================================
