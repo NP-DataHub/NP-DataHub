@@ -1,0 +1,157 @@
+Previous filepath: /tmp/2025-04A/202540909349200924_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202530969349200313_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202501039349201700_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202501029349201010_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202521119349301462_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202541079349300529_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202520879349300617_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202530949349301473_public.xml and timestamp: None
+Total Assets: previous is 39519 and current is: 41837
+Total Expenses: previous is 466281 and current is: 463963
+Total Contributions: previous is 466933 and current is: 1000
+Program Service Revenue: previous is 0 and current is: 465933
+==================================================
+Previous filepath: /tmp/2025-04A/202541109349200004_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202521029349200642_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202540939349202004_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202521079349200332_public.xml and timestamp: None
+Name: previous is Georgia Educators For Equity And Justice Inc and current is: Georgia Educators For Equity And Justice Incorporated
+==================================================
+Previous filepath: /tmp/2025-04A/202501089349200440_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202541029349200004_public.xml and timestamp: None
+Total Revenue: previous is 85130 and current is: 101000
+Total Assets: previous is 34695 and current is: 11300
+Total Expenses: previous is 51635 and current is: 90900
+==================================================
+Previous filepath: /tmp/2025-04A/202531009349301718_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202530979349300728_public.xml and timestamp: None
+Total Assets: previous is 361508 and current is: 607250
+==================================================
+Previous filepath: /tmp/2025-04A/202501089349200440_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202521059349202322_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202520839349201407_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202520909349201432_public.xml and timestamp: None
+Total Assets: previous is 68699 and current is: 70745
+==================================================
+Previous filepath: /tmp/2025-04A/202521039349200912_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202531049349200038_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202531029349201208_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202500949349201610_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202500949349201400_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202530929349201213_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202521149349200447_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202511149349200921_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202521069349200342_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202531029349201213_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 628181 and current is: 0
+==================================================
+Previous filepath: /tmp/2025-04A/202511039349200911_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202531059349200823_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202540989349201119_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202500979349202500_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202530859349301008_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202520879349300322_public.xml and timestamp: None
+Total Expenses: previous is 80266 and current is: 214002
+==================================================
+Previous filepath: /tmp/2025-04A/202500929349201460_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202510929349200001_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202530979349202013_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202531059349201243_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202501049349201140_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202521029349200912_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202530839349201103_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202531089349201603_public.xml and timestamp: None
+City: previous is Roca and current is: Lincoln
+Zip Code: previous is 68430-9650 and current is: 68502
+Address: previous is 15151 S 46Th St and current is: 2900 Kucera Dr
+==================================================
+Previous filepath: /tmp/2025-04A/202500969349201805_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202541069349200419_public.xml and timestamp: None
+Total Revenue: previous is 82607 and current is: 83525
+Total Assets: previous is 69799 and current is: 73216
+Total Expenses: previous is 78404 and current is: 78104
+==================================================
+Previous filepath: /tmp/2025-04A/202510899349200351_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202510869349200836_public.xml and timestamp: None
+Total Revenue: previous is 10000 and current is: 32000
+Total Assets: previous is 9814 and current is: 12000
+Total Expenses: previous is 19696 and current is: 22000
+==================================================
+Previous filepath: /tmp/2025-04A/202511039349201016_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202531029349201313_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202530839349201673_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202520849349200002_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202520849349200137_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202520809349200837_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202501039349200300_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202510909349200201_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202501109349200350_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202501109349200100_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202501139349300705_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202520979349301777_public.xml and timestamp: None
+Total Assets: previous is 225069 and current is: 0
+Total Liabilities: previous is 44982 and current is: 0
+==================================================
+Previous filepath: /tmp/2025-04A/202541039349201414_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202511049349200816_public.xml and timestamp: None
+Address: previous is 14600 Branch Street Suite 113 and current is: 14600 Branch Streetsuite 113
+==================================================
+Previous filepath: /tmp/2025-04A/202540899349200154_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202540899349200214_public.xml and timestamp: None
+Total Revenue: previous is 45936 and current is: 85429
+Total Assets: previous is 134476 and current is: 139068
+Total Liabilities: previous is 73922 and current is: 74553
+Total Expenses: previous is 108446 and current is: 125546
+Program Service Revenue: previous is 7030 and current is: 46523
+==================================================
+Previous filepath: /tmp/2025-04A/202530999349200338_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202531019349202058_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202540809349200824_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202510839349201556_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-04A/202541139349201179_public.xml and timestamp: None
+Current filepath: /tmp/2025-04A/202511139349200016_public.xml and timestamp: None
+Total Revenue: previous is 102469 and current is: -380942
+Total Assets: previous is 40355 and current is: 50750
+==================================================
