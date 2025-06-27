@@ -1,0 +1,81 @@
+Previous filepath: /tmp/2025-05A/202501349349304035_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202511349349304946_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202511349349200141_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202501339349204820_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202521299349302607_public.xml and timestamp: 2025-05-09 09:30:48-04:00
+Current filepath: /tmp/2025-05A/202501299349301045_public.xml and timestamp: 2025-05-09 09:30:48-04:00
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202511359349313971_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202511369349301966_public.xml and timestamp: None
+Total Revenue: previous is 263214 and current is: 264004
+Total Assets: previous is 596773 and current is: 597563
+Total Contributions: previous is 254401 and current is: 255191
+Gross Receipts: previous is 273429 and current is: 274219
+==================================================
+Previous filepath: /tmp/2025-05A/202511209349200501_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202501229349201665_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202501299349201200_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202521299349201717_public.xml and timestamp: None
+Total Expenses: previous is 61638 and current is: 61637
+==================================================
+Previous filepath: /tmp/2025-05A/202501319349200250_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202501319349200095_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202521229349200402_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202521229349200302_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202511359349204996_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202501359349209570_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202501339349202765_public.xml and timestamp: 2025-05-13 08:14:13-07:00
+Current filepath: /tmp/2025-05A/202501179349200000_public.xml and timestamp: None
+Total Revenue: previous is 151296 and current is: 151432
+Total Assets: previous is 79814 and current is: 92584
+Total Liabilities: previous is 0 and current is: 9800
+Total Expenses: previous is 71482 and current is: 68648
+Investment Income: previous is 1296 and current is: 1432
+Gift Grants Membership Fees received 509: previous is 150000 and current is: 151
+Address: previous is 5000 Gulf Fwy Bldg 4 230 and current is: 5000 Gulf Fwy Bldg 4 Room 230
+==================================================
+Previous filepath: /tmp/2025-05A/202501279349202875_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202511279349201831_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202501319349300425_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202501409349300410_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202501349349200705_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202511359349200306_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202511159349201131_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202511169349200701_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202501349349204160_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202511329349205311_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202511359349312736_public.xml and timestamp: 2025-05-15 16:47:06-04:00
+Current filepath: /tmp/2025-05A/202511359349313771_public.xml and timestamp: 2025-05-15 16:47:06-04:00
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05A/202501309349201520_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202501339349204435_public.xml and timestamp: None
+Total Assets: previous is 260927 and current is: 256943
+==================================================
+Previous filepath: /tmp/2025-05A/202501359349203745_public.xml and timestamp: None
+Current filepath: /tmp/2025-05A/202501359349205355_public.xml and timestamp: None
+No difference found
+==================================================
