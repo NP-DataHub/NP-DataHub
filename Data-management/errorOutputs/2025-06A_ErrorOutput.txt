@@ -1,0 +1,123 @@
+Previous filepath: /tmp/2025-06A/202501689349301390_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202531689349301453_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-06A/202531709349301213_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202541779349300309_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-06A/202501609349300405_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202501569349301220_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-06A/202511439349300306_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202521539349301287_public.xml and timestamp: None
+Total Contributions: previous is 0 and current is: 382249
+Program Service Revenue: previous is 382249 and current is: 0
+==================================================
+Previous filepath: /tmp/2025-06A/202541489349301664_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202541469349300609_public.xml and timestamp: None
+Total Revenue: previous is 378406 and current is: 22500
+Program Service Revenue: previous is 355906 and current is: 0
+Gross Receipts: previous is 378406 and current is: 22500
+==================================================
+Previous filepath: /tmp/2025-06A/202531469349300008_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202541689349301204_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-06A/202531699349200548_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202521689349201037_public.xml and timestamp: None
+Address: previous is 245 4Th Ave Apt B and current is: 245 4Th Aveapt B
+==================================================
+Previous filepath: /tmp/2025-06A/202541469349300304_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202521609349300007_public.xml and timestamp: None
+Total Revenue: previous is 389503 and current is: 83333
+Total Expenses: previous is 375359 and current is: 498973
+Total Contributions: previous is 389503 and current is: 83333
+Gross Receipts: previous is 389503 and current is: 83333
+Compensation of current officers: previous is 86618 and current is: 261000
+==================================================
+Previous filepath: /tmp/2025-06A/202501689349200100_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202531689349200008_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-06A/202541849349301134_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202501749349300245_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 664604 and current is: 66460450
+==================================================
+Previous filepath: /tmp/2025-06A/202501809349200000_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202521809349200202_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-06A/202521489349201357_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202521569349200502_public.xml and timestamp: 2025-06-04 11:37:18-04:00
+No difference found
+==================================================
+Previous filepath: /tmp/2025-06A/202501789349200815_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202521719349200207_public.xml and timestamp: None
+Total Revenue: previous is 10564 and current is: 31371
+Total Assets: previous is 20870 and current is: 20807
+Total Expenses: previous is 10501 and current is: 10564
+==================================================
+Previous filepath: /tmp/2025-06A/202501689349201300_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202521689349200702_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-06A/202541849349301134_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202521759349301322_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 664604 and current is: 66460450
+==================================================
+Previous filepath: /tmp/2025-06A/202521719349200717_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202511719349200426_public.xml and timestamp: None
+Total Revenue: previous is 44196 and current is: 144094
+Total Assets: previous is 59044 and current is: 127116
+Total Expenses: previous is 43272 and current is: 76022
+Program Service Revenue: previous is 0 and current is: 4726
+Gift Grants Membership Fees received 509: previous is 273636 and current is: 362736
+==================================================
+Previous filepath: /tmp/2025-06A/202511499349300031_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202521479349301377_public.xml and timestamp: None
+Total Revenue: previous is 5637350 and current is: 5659066
+Total Assets: previous is 9213898 and current is: 9219547
+Total Liabilities: previous is 1224820 and current is: 1249820
+Total Expenses: previous is 6421017 and current is: 6462084
+Program Service Revenue: previous is 5271965 and current is: 5293681
+Gross Receipts: previous is 5637350 and current is: 5659066
+Other salaries and wages: previous is 4828507 and current is: 4842239
+Payroll Taxes: previous is 145653 and current is: 149426
+==================================================
+Previous filepath: /tmp/2025-06A/202511689349301341_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202541679349301494_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-06A/202501759349200225_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202531749349200918_public.xml and timestamp: None
+Total Revenue: previous is 152418 and current is: 152425
+Total Assets: previous is 77932 and current is: 77939
+Name: previous is Lake Havasu City Foe 4299 Auxiliary and current is: Lake Havasu City Foe 4299 Auxiliary10
+==================================================
+Previous filepath: /tmp/2025-06A/202521499349200417_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202531509349200203_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-06A/202531629349200308_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202511689349201026_public.xml and timestamp: None
+Address: previous is 17205 Wesley Chapel Road and current is: 17205 Wesley Chapel Rd
+==================================================
+Previous filepath: /tmp/2025-06A/202501839349200505_public.xml and timestamp: 2025-07-01 18:08:25-07:00
+Current filepath: /tmp/2025-06A/202501819349200000_public.xml and timestamp: None
+Total Revenue: previous is 136787 and current is: 136643
+Total Expenses: previous is 98577 and current is: 98433
+Program Service Revenue: previous is 105463 and current is: 92172
+Gift Grants Membership Fees received 509: previous is 151601 and current is: 135977
+Name: previous is East Marietta National Little League and current is: Little League Baseball Inc
+==================================================
+Previous filepath: /tmp/2025-06A/202501539349300310_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202501639349300205_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-06A/202531699349200548_public.xml and timestamp: None
+Current filepath: /tmp/2025-06A/202511689349200736_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 186067 and current is: 186066
+Address: previous is 245 4Th Ave Apt B and current is: 245 4Th Aveapt B
+==================================================
