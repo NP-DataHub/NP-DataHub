@@ -1,0 +1,80 @@
+Previous filepath: /tmp/2025-08A/202502179349301755_public.xml and timestamp: 2025-08-05 15:10:08-05:00
+Current filepath: /tmp/2025-08A/202532179349301803_public.xml and timestamp: 2025-08-05 15:10:08-05:00
+Total Revenue: previous is 1176789 and current is: 214666
+Total Assets: previous is 113208 and current is: 0
+Total Liabilities: previous is 113208 and current is: 0
+Total Expenses: previous is 1176789 and current is: 214666
+Total Contributions: previous is 1176789 and current is: 214666
+Gross Receipts: previous is 1176789 and current is: 214666
+==================================================
+Previous filepath: /tmp/2025-08A/202502189349300305_public.xml and timestamp: None
+Current filepath: /tmp/2025-08A/202502199349300405_public.xml and timestamp: None
+Total Revenue: previous is 90588 and current is: 168958
+Total Expenses: previous is 78821 and current is: 85145
+Total Contributions: previous is 11078 and current is: 89448
+Gross Receipts: previous is 1142590 and current is: 1220960
+==================================================
+Previous filepath: /tmp/2025-08A/202542119349200049_public.xml and timestamp: None
+Current filepath: /tmp/2025-08A/202532119349200048_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-08A/202532319349201133_public.xml and timestamp: 2025-08-19 17:07:09-04:00
+Current filepath: /tmp/2025-08A/202522319349201162_public.xml and timestamp: 2025-08-19 17:07:09-04:00
+Total Revenue: previous is 480 and current is: 211
+Total Assets: previous is 145497 and current is: 0
+Total Expenses: previous is 6318 and current is: 145708
+Investment Income: previous is 480 and current is: 211
+==================================================
+Previous filepath: /tmp/2025-08A/202502269349100205_public.xml and timestamp: 2025-08-14 08:48:17-05:00
+Current filepath: /tmp/2025-08A/202542269349100204_public.xml and timestamp: 2025-08-14 08:48:17-05:00
+Total Revenue: previous is 844403 and current is: 85368
+Total Assets: previous is 12942686 and current is: 0
+Total Liabilities: previous is 519895 and current is: 0
+Total Expenses: previous is 1401756 and current is: 31243
+Net Income (Less Deficit): previous is -557353 and current is: 54125
+Dividends: previous is 401355 and current is: 85368
+Net Gain (Sales of Assets): previous is 443048 and current is: 0
+Total Fund net worth: previous is 12422791 and current is: 0
+Investments in Corporate Bonds: previous is 6959995 and current is: 0
+==================================================
+Previous filepath: /tmp/2025-08A/202532299349200163_public.xml and timestamp: None
+Current filepath: /tmp/2025-08A/202542289349200504_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-08A/202532099349201113_public.xml and timestamp: None
+Current filepath: /tmp/2025-08A/202512319349201126_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-08A/202512239349201071_public.xml and timestamp: None
+Current filepath: /tmp/2025-08A/202502219349200900_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-08A/202502169349201550_public.xml and timestamp: 2025-08-04 17:20:48-04:00
+Current filepath: /tmp/2025-08A/202502169349200945_public.xml and timestamp: 2025-08-04 17:20:48-04:00
+Total Assets: previous is 6180 and current is: 0
+Total Expenses: previous is 1531 and current is: 1100
+==================================================
+Previous filepath: /tmp/2025-08A/202532099349200788_public.xml and timestamp: None
+Current filepath: /tmp/2025-08A/202542109349200004_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-08A/202502189349300515_public.xml and timestamp: 2025-08-06 10:25:52-05:00
+Current filepath: /tmp/2025-08A/202522189349300822_public.xml and timestamp: 2025-08-06 10:25:52-05:00
+Total Revenue: previous is 4694 and current is: 209426
+Total Assets: previous is 9090 and current is: 27843
+Total Expenses: previous is 23447 and current is: 229880
+Total Contributions: previous is 344 and current is: 37600
+Program Service Revenue: previous is 2350 and current is: 166909
+Gross Receipts: previous is 4760 and current is: 214060
+Fundraising Income: previous is 1930 and current is: 3134
+Fundraising Expenses: previous is 66 and current is: 2328
+Gift Grants Membership Fees received 509: previous is 173261 and current is: 174372
+==================================================
+Previous filepath: /tmp/2025-08A/202542249349300514_public.xml and timestamp: 2025-08-12 10:28:45-05:00
+Current filepath: /tmp/2025-08A/202512269349300946_public.xml and timestamp: 2025-08-12 10:28:45-05:00
+No difference found
+==================================================
+Previous filepath: /tmp/2025-08A/202502169349200705_public.xml and timestamp: None
+Current filepath: /tmp/2025-08A/202502119349200615_public.xml and timestamp: None
+No difference found
+==================================================
