@@ -1,0 +1,100 @@
+Previous filepath: /tmp/2025-09A/202512469349300216_public.xml and timestamp: None
+Current filepath: /tmp/2025-09A/202542599349301424_public.xml and timestamp: None
+Total Liabilities: previous is 582 and current is: 581
+==================================================
+Previous filepath: /tmp/2025-09A/202502469349201105_public.xml and timestamp: 2025-09-03 14:55:38-04:00
+Current filepath: /tmp/2025-09A/202502469349200030_public.xml and timestamp: 2025-09-03 14:55:38-04:00
+Total Assets: previous is 0 and current is: 13525
+Total Expenses: previous is 13525 and current is: 0
+==================================================
+Previous filepath: /tmp/2025-09A/202522689349301112_public.xml and timestamp: None
+Current filepath: /tmp/2025-09A/202522409349300712_public.xml and timestamp: None
+Total Revenue: previous is 373790 and current is: 377806
+Total Assets: previous is 312142 and current is: 316149
+Total Contributions: previous is 373790 and current is: 377806
+Gross Receipts: previous is 373790 and current is: 377806
+==================================================
+Previous filepath: /tmp/2025-09A/202512469349300216_public.xml and timestamp: None
+Current filepath: /tmp/2025-09A/202512589349301106_public.xml and timestamp: None
+Total Revenue: previous is 297633 and current is: 297634
+Investment Income: previous is 60 and current is: 61
+Gross Receipts: previous is 297633 and current is: 297634
+==================================================
+Previous filepath: /tmp/2025-09A/202532549349201313_public.xml and timestamp: 2025-09-11 14:59:21-04:00
+Current filepath: /tmp/2025-09A/202542549349201314_public.xml and timestamp: 2025-09-11 14:59:21-04:00
+Total Revenue: previous is 103043 and current is: 64301
+Total Assets: previous is 64000 and current is: 0
+Total Liabilities: previous is 9 and current is: 0
+Total Expenses: previous is 107138 and current is: 69790
+Gift Grants Membership Fees received 509: previous is 375304 and current is: 336562
+==================================================
+Previous filepath: /tmp/2025-09A/202502519349200710_public.xml and timestamp: None
+Current filepath: /tmp/2025-09A/202512449349200621_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-09A/202522669349200202_public.xml and timestamp: None
+Current filepath: /tmp/2025-09A/202532659349201053_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-09A/202512659349300226_public.xml and timestamp: 2025-09-22 10:26:50-05:00
+Current filepath: /tmp/2025-09A/202532659349300103_public.xml and timestamp: 2025-09-22 10:26:50-05:00
+Total Revenue: previous is 467848 and current is: 12013
+Total Assets: previous is 88807 and current is: 0
+Total Liabilities: previous is 40304 and current is: 0
+Total Expenses: previous is 540921 and current is: 12012
+Total Contributions: previous is 34514 and current is: 11408
+Program Service Revenue: previous is 433331 and current is: 605
+Investment Income: previous is 3 and current is: 0
+Gross Receipts: previous is 467848 and current is: 12013
+Compensation of current officers: previous is 30292 and current is: 0
+Other salaries and wages: previous is 342354 and current is: 0
+Payroll Taxes: previous is 28582 and current is: 0
+Gift Grants Membership Fees received 509: previous is 430950 and current is: 397730
+==================================================
+Previous filepath: /tmp/2025-09A/202532669349200223_public.xml and timestamp: None
+Current filepath: /tmp/2025-09A/202512659349201106_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-09A/202502429349300300_public.xml and timestamp: None
+Current filepath: /tmp/2025-09A/202542409349301684_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-09A/202502519349201265_public.xml and timestamp: 2025-09-08 14:08:03-05:00
+Current filepath: /tmp/2025-09A/202542519349201264_public.xml and timestamp: 2025-09-08 14:08:03-05:00
+Total Revenue: previous is 0 and current is: 193299
+Total Assets: previous is 0 and current is: 286634
+Total Liabilities: previous is 0 and current is: 286634
+Total Expenses: previous is 0 and current is: 506653
+Program Service Revenue: previous is 0 and current is: 181877
+Investment Income: previous is 0 and current is: 11422
+==================================================
+Previous filepath: /tmp/2025-09A/202502519349200710_public.xml and timestamp: None
+Current filepath: /tmp/2025-09A/202512519349200711_public.xml and timestamp: None
+Total Revenue: previous is 46169 and current is: 1392
+Total Assets: previous is 33448 and current is: 26736
+Total Expenses: previous is 23840 and current is: 8104
+Program Service Revenue: previous is 8933 and current is: 0
+Gift Grants Membership Fees received 509: previous is 48486 and current is: 800
+==================================================
+Previous filepath: /tmp/2025-09A/202502519349200710_public.xml and timestamp: None
+Current filepath: /tmp/2025-09A/202512469349200201_public.xml and timestamp: None
+Total Revenue: previous is 46169 and current is: 1392
+Total Assets: previous is 33448 and current is: 26736
+Total Expenses: previous is 23840 and current is: 8104
+Program Service Revenue: previous is 8933 and current is: 0
+Gift Grants Membership Fees received 509: previous is 48486 and current is: 800
+==================================================
+Previous filepath: /tmp/2025-09A/202532659349200613_public.xml and timestamp: 2025-09-22 10:22:19-05:00
+Current filepath: /tmp/2025-09A/202522659349200512_public.xml and timestamp: 2025-09-22 10:22:19-05:00
+Total Revenue: previous is 5344 and current is: 0
+Total Expenses: previous is 2756 and current is: 0
+Address: previous is 8505 Technology Forest Place 604 and current is: 8505 Technology Forest Place
+==================================================
+Previous filepath: /tmp/2025-09A/202522359349201152_public.xml and timestamp: None
+Current filepath: /tmp/2025-09A/202502469349201120_public.xml and timestamp: None
+Name: previous is Cherry Creek School District Parent Teacher Community Council Inc and current is: Creekside Elementary Ptco
+==================================================
+Previous filepath: /tmp/2025-09A/202512479349200726_public.xml and timestamp: None
+Current filepath: /tmp/2025-09A/202542519349201189_public.xml and timestamp: None
+No difference found
+==================================================
