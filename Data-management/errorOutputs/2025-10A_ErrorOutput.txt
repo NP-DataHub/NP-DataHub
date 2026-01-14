@@ -1,0 +1,10 @@
+Previous filepath: /tmp/2025-10A/202502759349301795_public.xml and timestamp: 2025-10-02 17:11:02-05:00
+Current filepath: /tmp/2025-10A/202542759349301794_public.xml and timestamp: 2025-10-02 17:11:02-05:00
+Total Revenue: previous is 324363 and current is: 3820
+Total Assets: previous is 309280 and current is: 318012
+Total Liabilities: previous is 0 and current is: 9720
+Total Expenses: previous is 15083 and current is: 4808
+Total Contributions: previous is 323108 and current is: 500
+Investment Income: previous is 280 and current is: 3320
+Gross Receipts: previous is 324363 and current is: 3820
+==================================================
