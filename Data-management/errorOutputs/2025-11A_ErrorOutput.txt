@@ -1,0 +1,19 @@
+Previous filepath: /tmp/2025-11A/202503199349200045_public.xml and timestamp: None
+Current filepath: /tmp/2025-11A/202503189349202485_public.xml and timestamp: 2025-11-14 09:46:49-07:00
+Gift Grants Membership Fees received 509: previous is 0 and current is: 370071
+Address: previous is 31 Maple Street Po Box 722 and current is: Po Box 722
+==================================================
+Previous filepath: /tmp/2025-11A/202512889349200211_public.xml and timestamp: None
+Current filepath: /tmp/2025-11A/202502839349200205_public.xml and timestamp: None
+Total Revenue: previous is 9642 and current is: 179503
+Total Assets: previous is 132860 and current is: 142412
+Total Liabilities: previous is 11370 and current is: 9940
+Total Expenses: previous is 20623 and current is: 153828
+Program Service Revenue: previous is 3296 and current is: 72950
+Investment Income: previous is 12 and current is: 3882
+Gift Grants Membership Fees received 509: previous is 363400 and current is: 461872
+==================================================
+Previous filepath: /tmp/2025-11A/202503219349207830_public.xml and timestamp: None
+Current filepath: /tmp/2025-11A/202503219349207680_public.xml and timestamp: None
+No difference found
+==================================================
