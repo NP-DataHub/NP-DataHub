@@ -1,0 +1,27 @@
+Previous filepath: /tmp/2025-11B/202542889349302269_public.xml and timestamp: 2025-10-15 12:57:31-07:00
+Current filepath: /tmp/2025-11B/202542889349300849_public.xml and timestamp: 2025-10-15 12:57:31-07:00
+No difference found
+==================================================
+Previous filepath: /tmp/2025-11B/202533159349202073_public.xml and timestamp: None
+Current filepath: /tmp/2025-11B/202543159349200609_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-11B/202543179349205654_public.xml and timestamp: None
+Current filepath: /tmp/2025-11B/202543239349200224_public.xml and timestamp: None
+Address: previous is Po Box 903 and current is: 184 Se Oak St
+==================================================
+Previous filepath: /tmp/2025-11B/202533199349201603_public.xml and timestamp: None
+Current filepath: /tmp/2025-11B/202543179349202174_public.xml and timestamp: None
+Total Revenue: previous is 199304 and current is: 16150
+Total Expenses: previous is 188895 and current is: 179578
+Program Service Revenue: previous is 198554 and current is: 20900
+==================================================
+Previous filepath: /tmp/2025-11B/202543189349310429_public.xml and timestamp: 2025-11-14 14:28:33-06:00
+Current filepath: /tmp/2025-11B/202543189349309699_public.xml and timestamp: 2025-11-14 14:28:33-06:00
+Total Revenue: previous is 3310060 and current is: 3269898
+Total Assets: previous is 3345583 and current is: 1485889
+Total Expenses: previous is 1450366 and current is: 2933855
+Total Contributions: previous is 3261436 and current is: 3249433
+Investment Income: previous is 48624 and current is: 20465
+Gross Receipts: previous is 3310060 and current is: 3269898
+==================================================
