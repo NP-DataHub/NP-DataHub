@@ -85,3 +85,4 @@ https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_09A.zip
 https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_10A.zip
 https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11A.zip
 https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11B.zip
+https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11C.zip

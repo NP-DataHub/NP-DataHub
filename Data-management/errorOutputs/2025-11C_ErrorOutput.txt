@@ -1,0 +1,14 @@
+Previous filepath: /tmp/2025-11C/202533039349200513_public.xml and timestamp: None
+Current filepath: /tmp/2025-11C/202532909349200403_public.xml and timestamp: None
+Total Assets: previous is 47219 and current is: 47019
+Total Expenses: previous is 19231 and current is: 19431
+Gift Grants Membership Fees received 509: previous is 183817 and current is: 183917
+==================================================
+Previous filepath: /tmp/2025-11C/202533019349201113_public.xml and timestamp: None
+Current filepath: /tmp/2025-11C/202532849349200313_public.xml and timestamp: None
+Total Revenue: previous is 194810 and current is: 0
+Total Assets: previous is 95033 and current is: 0
+Total Expenses: previous is 154055 and current is: 0
+Program Service Revenue: previous is 168084 and current is: 0
+Investment Income: previous is 1132 and current is: 0
+==================================================
