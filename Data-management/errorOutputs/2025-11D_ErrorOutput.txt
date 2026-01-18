@@ -1,0 +1,22 @@
+Previous filepath: /tmp/2025-11D/202512979349302306_public.xml and timestamp: 2025-10-24 17:53:23-04:00
+Current filepath: /tmp/2025-11D/202522979349301797_public.xml and timestamp: 2025-10-24 17:53:23-04:00
+Total Revenue: previous is 14499 and current is: 152922
+Total Assets: previous is 0 and current is: 424466
+Total Expenses: previous is 438965 and current is: 104726
+Total Contributions: previous is 13560 and current is: 132321
+Investment Income: previous is 799 and current is: 19589
+Gross Receipts: previous is 14499 and current is: 222077
+Gift Grants Membership Fees received 509: previous is 557311 and current is: 623844
+==================================================
+Previous filepath: /tmp/2025-11D/202522949349302002_public.xml and timestamp: None
+Current filepath: /tmp/2025-11D/202522959349300642_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-11D/202513219349207921_public.xml and timestamp: None
+Current filepath: /tmp/2025-11D/202513219349209076_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-11D/202523029349302402_public.xml and timestamp: None
+Current filepath: /tmp/2025-11D/202513119349300406_public.xml and timestamp: None
+No difference found
+==================================================
