@@ -1,0 +1,73 @@
+Previous filepath: /tmp/2025-12A/202533439349301213_public.xml and timestamp: 2025-12-09 14:22:04-05:00
+Current filepath: /tmp/2025-12A/202513439349301316_public.xml and timestamp: 2025-12-09 14:22:04-05:00
+Total Revenue: previous is 773521 and current is: 39026
+Total Assets: previous is 610247 and current is: 585838
+Total Liabilities: previous is 60146 and current is: 79363
+Total Expenses: previous is 776987 and current is: 84362
+Total Contributions: previous is 571030 and current is: 17474
+Program Service Revenue: previous is 165843 and current is: 19708
+Investment Income: previous is 8046 and current is: 1394
+Gross Receipts: previous is 783919 and current is: 39026
+Fundraising Income: previous is 27332 and current is: 0
+Fundraising Expenses: previous is 6746 and current is: 0
+Other salaries and wages: previous is 486206 and current is: 55603
+Payroll Taxes: previous is 38098 and current is: 4240
+Gift Grants Membership Fees received 509: previous is 2551411 and current is: 1997855
+Number of employees: previous is 22 and current is: 12
+==================================================
+Previous filepath: /tmp/2025-12A/202503289349200310_public.xml and timestamp: None
+Current filepath: /tmp/2025-12A/202523289349200332_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-12A/202503289349301060_public.xml and timestamp: None
+Current filepath: /tmp/2025-12A/202533289349301058_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-12A/202543579349300219_public.xml and timestamp: 2025-12-23 11:24:31-05:00
+Current filepath: /tmp/2025-12A/202513579349301116_public.xml and timestamp: 2025-12-23 11:24:31-05:00
+Total Revenue: previous is 2530405 and current is: 17432568
+Total Assets: previous is 34197442 and current is: 33976977
+Total Liabilities: previous is 1934023 and current is: 1587908
+Total Expenses: previous is 3706318 and current is: 16932549
+Total Contributions: previous is 2360784 and current is: 15916050
+Program Service Revenue: previous is 11420 and current is: 51600
+Investment Income: previous is 129997 and current is: 1353262
+Gross Receipts: previous is 2552031 and current is: 17432568
+Compensation of current officers: previous is 112952 and current is: 425724
+Other salaries and wages: previous is 895060 and current is: 3373531
+Payroll Taxes: previous is 74203 and current is: 282782
+==================================================
+Previous filepath: /tmp/2025-12A/202513509349201051_public.xml and timestamp: None
+Current filepath: /tmp/2025-12A/202523499349201257_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-12A/202513439349300706_public.xml and timestamp: 2025-12-09 14:21:20-05:00
+Current filepath: /tmp/2025-12A/202523439349301412_public.xml and timestamp: 2025-12-09 14:21:20-05:00
+Total Revenue: previous is 387623 and current is: 265637
+Total Assets: previous is 112109 and current is: 197210
+Total Expenses: previous is 371453 and current is: 180536
+Total Contributions: previous is 265533 and current is: 201035
+Program Service Revenue: previous is 122090 and current is: 64602
+Gross Receipts: previous is 387623 and current is: 265637
+Compensation of current officers: previous is 39732 and current is: 34585
+Other salaries and wages: previous is 251158 and current is: 110514
+Payroll Taxes: previous is 27126 and current is: 14467
+Gift Grants Membership Fees received 509: previous is 982629 and current is: 903365
+==================================================
+Previous filepath: /tmp/2025-12A/202523579349200427_public.xml and timestamp: None
+Current filepath: /tmp/2025-12A/202513509349201106_public.xml and timestamp: None
+Total Revenue: previous is 52997 and current is: 54997
+Total Assets: previous is 21663 and current is: 23912
+Total Expenses: previous is 58605 and current is: 58355
+Program Service Revenue: previous is 3743 and current is: 3837
+==================================================
+Previous filepath: /tmp/2025-12A/202503289349200310_public.xml and timestamp: None
+Current filepath: /tmp/2025-12A/202533309349200403_public.xml and timestamp: None
+Total Revenue: previous is 7438 and current is: 10747
+Total Assets: previous is 0 and current is: 7861
+Total Expenses: previous is 1644 and current is: 8376
+==================================================
+Previous filepath: /tmp/2025-12A/202503289349200310_public.xml and timestamp: None
+Current filepath: /tmp/2025-12A/202513299349200951_public.xml and timestamp: None
+Total Expenses: previous is 1644 and current is: 1948
+==================================================
