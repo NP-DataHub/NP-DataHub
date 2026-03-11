@@ -1,0 +1,36 @@
+Previous filepath: /tmp/2026-01A/202610139349200891_public.xml and timestamp: None
+Current filepath: /tmp/2026-01A/202640139349202354_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-01A/202600139349302270_public.xml and timestamp: 2025-12-30 16:14:25-05:00
+Current filepath: /tmp/2026-01A/202640139349302094_public.xml and timestamp: 2025-12-30 16:14:25-05:00
+Total Revenue: previous is 0 and current is: 194215
+Total Assets: previous is 0 and current is: 538969
+Total Liabilities: previous is 0 and current is: 8284
+Total Expenses: previous is 0 and current is: 212963
+Total Contributions: previous is 0 and current is: 54796
+Program Service Revenue: previous is 0 and current is: 86760
+Investment Income: previous is 0 and current is: 10926
+Gross Receipts: previous is 0 and current is: 224415
+Fundraising Income: previous is 0 and current is: 27309
+Other salaries and wages: previous is 0 and current is: 35208
+Payroll Taxes: previous is 0 and current is: 3200
+==================================================
+Previous filepath: /tmp/2026-01A/202630139349200928_public.xml and timestamp: None
+Current filepath: /tmp/2026-01A/202610169349200106_public.xml and timestamp: None
+City: previous is Lancaster and current is: Columbus
+Zip Code: previous is 43130 and current is: 43085
+Address: previous is 109 North Broad Street and current is: 597 High Street Po Box 131
+==================================================
+Previous filepath: /tmp/2026-01A/202630209349200218_public.xml and timestamp: None
+Current filepath: /tmp/2026-01A/202620219349200307_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-01A/202620219349200417_public.xml and timestamp: None
+Current filepath: /tmp/2026-01A/202610229349200311_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-01A/202610169349200511_public.xml and timestamp: None
+Current filepath: /tmp/2026-01A/202600229349200525_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 28776 and current is: 126000
+==================================================
