@@ -1,0 +1,76 @@
+Previous filepath: /tmp/2025-05B/202541359349209599_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202521369349201212_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202541359349209599_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202531359349205353_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202521339349300232_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202521359349317107_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202531259349300903_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202531359349318573_public.xml and timestamp: None
+Name: previous is American Federation Of Teachers and current is: Green River United Faculty Coalition
+==================================================
+Previous filepath: /tmp/2025-05B/202521359349309752_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202531359349303293_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202521379349200202_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202541369349200149_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202531409349200303_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202541399349200234_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202531309349300203_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202531309349300818_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202531319349200518_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202531309349201423_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202531359349210078_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202531369349201803_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202531359349209598_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202521369349201047_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202531269349202348_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202541249349200469_public.xml and timestamp: None
+Total Revenue: previous is 64425 and current is: 66152
+Total Expenses: previous is 59346 and current is: 61073
+==================================================
+Previous filepath: /tmp/2025-05B/202531349349203978_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202521409349200007_public.xml and timestamp: None
+Total Assets: previous is 144839 and current is: 182131
+Total Liabilities: previous is 31057 and current is: 30537
+==================================================
+Previous filepath: /tmp/2025-05B/202541369349200414_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202541329349202779_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202521389349200502_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202531359349208343_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202541319349200514_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202531339349205458_public.xml and timestamp: None
+Total Assets: previous is 282263 and current is: 284785
+==================================================
+Previous filepath: /tmp/2025-05B/202521359349209372_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202541359349208359_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2025-05B/202541359349316429_public.xml and timestamp: None
+Current filepath: /tmp/2025-05B/202521399349300402_public.xml and timestamp: None
+Total Revenue: previous is 12000 and current is: 593716
+Total Contributions: previous is 12000 and current is: 593716
+Gross Receipts: previous is 12000 and current is: 593716
+==================================================
