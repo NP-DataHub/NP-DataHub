@@ -1,0 +1,139 @@
+Previous filepath: /tmp/2026-02A/202620309349200622_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202620469349200462_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202610419349301801_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202630449349300708_public.xml and timestamp: None
+Total Revenue: previous is 26084 and current is: 80719
+Total Expenses: previous is 42266 and current is: 96900
+==================================================
+Previous filepath: /tmp/2026-02A/202610339349201091_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202640389349200714_public.xml and timestamp: None
+Total Assets: previous is 3000 and current is: 3600
+Total Liabilities: previous is 340 and current is: 0
+Total Expenses: previous is 8200 and current is: 34200
+==================================================
+Previous filepath: /tmp/2026-02A/202640289349300344_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202600249349300605_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202600309349200715_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202630319349200403_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202600359349200400_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202610359349201606_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202620339349201237_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202620339349201422_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202610419349302251_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202600419349300110_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202640489349301239_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202600439349301930_public.xml and timestamp: None
+Total Expenses: previous is 3831 and current is: 0
+==================================================
+Previous filepath: /tmp/2026-02A/202640379349301824_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202600269349301135_public.xml and timestamp: 2026-01-26 10:49:16-08:00
+Total Revenue: previous is 340539 and current is: 340538
+Total Assets: previous is 108347 and current is: 109354
+Total Expenses: previous is 290042 and current is: 287076
+Total Contributions: previous is 340539 and current is: 338097
+Investment Income: previous is 0 and current is: 2441
+Gross Receipts: previous is 340539 and current is: 340538
+Compensation of current officers: previous is 159748 and current is: 0
+Other salaries and wages: previous is 0 and current is: 154918
+Payroll Taxes: previous is 4761 and current is: 8585
+Address: previous is 1701 E Atlantic Blvd Suite 4 and current is: 1701 East Atlantic Bl 4
+==================================================
+Previous filepath: /tmp/2026-02A/202640489349301239_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202620489349302202_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202600249349200900_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202600289349200925_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202600339349200100_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202610309349201211_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202620299349200207_public.xml and timestamp: 2026-01-05 10:56:58-05:00
+Current filepath: /tmp/2026-02A/202640339349200414_public.xml and timestamp: None
+Name: previous is Saidia Childrens Home Charity and current is: Saidia Childrens Home Charity Aka The Orphan Support League
+==================================================
+Previous filepath: /tmp/2026-02A/202640309349201004_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202620359349200837_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202600479349301895_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202640489349300509_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202630379349200543_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202640309349200019_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202600339349201455_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202640309349200714_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202610349349301851_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202620359349300637_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202630239349200328_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202640239349200709_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202610449349200116_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202630329349200303_public.xml and timestamp: None
+Total Revenue: previous is 82362 and current is: 82442
+Total Assets: previous is 294979 and current is: 302784
+Total Expenses: previous is 89178 and current is: 89860
+Program Service Revenue: previous is 40398 and current is: 40472
+==================================================
+Previous filepath: /tmp/2026-02A/202610499349300531_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202600509349301905_public.xml and timestamp: None
+Total Revenue: previous is 0 and current is: 238200
+Total Assets: previous is 0 and current is: 633269
+Total Liabilities: previous is 0 and current is: 428100
+==================================================
+Previous filepath: /tmp/2026-02A/202640309349201209_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202600319349200405_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202600309349201210_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202610319349200301_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202610319349200406_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202630309349200813_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202600419349200015_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202600399349200900_public.xml and timestamp: None
+Address: previous is 1900 South Fairview Road and current is: 1900 South Fariview Road
+==================================================
+Previous filepath: /tmp/2026-02A/202610369349200836_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202620369349200807_public.xml and timestamp: None
+Name: previous is Ofami Hope Charities Inc and current is: President
+==================================================
+Previous filepath: /tmp/2026-02A/202600419349201100_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202600369349201020_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-02A/202640379349301904_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202630379349301713_public.xml and timestamp: None
+Total Revenue: previous is 1097825 and current is: 0
+==================================================
+Previous filepath: /tmp/2026-02A/202600319349300600_public.xml and timestamp: None
+Current filepath: /tmp/2026-02A/202630309349302108_public.xml and timestamp: None
+Total Expenses: previous is 204704 and current is: 106027
+Other salaries and wages: previous is 90177 and current is: 0
+Number of employees: previous is 33 and current is: 2
+==================================================
