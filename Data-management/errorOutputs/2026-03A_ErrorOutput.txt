@@ -1,0 +1,82 @@
+Previous filepath: /tmp/2026-03A/202640779349200529_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202630829349201218_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-03A/202600699349201265_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202600709349200505_public.xml and timestamp: None
+Total Assets: previous is 0 and current is: 161678
+==================================================
+Previous filepath: /tmp/2026-03A/202630579349200128_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202610589349200101_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-03A/202600709349200300_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202600699349202005_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-03A/202620619349201477_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202620779349200732_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-03A/202640719349201219_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202640729349200314_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-03A/202600829349200600_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202600809349200405_public.xml and timestamp: None
+Total Assets: previous is 469158 and current is: 469159
+Total Liabilities: previous is 387796 and current is: 387797
+==================================================
+Previous filepath: /tmp/2026-03A/202610699349200821_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202640669349200109_public.xml and timestamp: None
+Total Assets: previous is 41946 and current is: 34946
+Total Expenses: previous is 102258 and current is: 109258
+==================================================
+Previous filepath: /tmp/2026-03A/202620829349300512_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202630809349300618_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-03A/202630779349200933_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202620779349200417_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-03A/202600749349200000_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202620749349200002_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-03A/202640579349200604_public.xml and timestamp: 2026-02-25 18:32:34-05:00
+Current filepath: /tmp/2026-03A/202640819349200519_public.xml and timestamp: None
+Total Expenses: previous is 414 and current is: 424
+==================================================
+Previous filepath: /tmp/2026-03A/202600579349201565_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202620689349201757_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-03A/202610739349200616_public.xml and timestamp: 2026-03-13 21:54:48-04:00
+Current filepath: /tmp/2026-03A/202600729349201515_public.xml and timestamp: None
+Total Revenue: previous is 6534 and current is: 41619
+Total Assets: previous is 11790 and current is: 13872
+Total Expenses: previous is 8575 and current is: 39537
+Gift Grants Membership Fees received 509: previous is 71836 and current is: 10052
+Zip Code: previous is 24019-3237 and current is: 24019
+Address: previous is 7703 Enon Dr and current is: 7703 Enon Drive
+==================================================
+Previous filepath: /tmp/2026-03A/202630859349201313_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202600849349201850_public.xml and timestamp: None
+Total Revenue: previous is 122084 and current is: 86842
+Total Assets: previous is 65170 and current is: 88361
+Total Liabilities: previous is 28936 and current is: 15163
+Total Expenses: previous is 159048 and current is: 127560
+==================================================
+Previous filepath: /tmp/2026-03A/202600699349300220_public.xml and timestamp: 2026-03-10 08:48:21-05:00
+Current filepath: /tmp/2026-03A/202600699349300615_public.xml and timestamp: 2026-03-10 08:48:21-05:00
+No difference found
+==================================================
+Previous filepath: /tmp/2026-03A/202600809349300605_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202630829349300918_public.xml and timestamp: None
+Total Assets: previous is 617076 and current is: 624844
+==================================================
+Previous filepath: /tmp/2026-03A/202630819349200213_public.xml and timestamp: None
+Current filepath: /tmp/2026-03A/202620799349200812_public.xml and timestamp: None
+No difference found
+==================================================
