@@ -1,0 +1,111 @@
+Previous filepath: /tmp/2026-04A/202611039349200746_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202601039349200210_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-04A/202610989349201871_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202631069349200043_public.xml and timestamp: None
+Total Revenue: previous is 122764 and current is: 155916
+Total Assets: previous is 22523 and current is: 47292
+Total Expenses: previous is 104341 and current is: 112724
+Program Service Revenue: previous is 115000 and current is: 101052
+Address: previous is 14115 Ne 189Th St and current is: 14115 Ne 189Th St14115 Ne 189Th St
+==================================================
+Previous filepath: /tmp/2026-04A/202600949349200235_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202600949349200630_public.xml and timestamp: None
+Total Revenue: previous is 17001 and current is: 149824
+Total Assets: previous is 83303 and current is: 90575
+Total Expenses: previous is 45293 and current is: 167701
+Program Service Revenue: previous is 0 and current is: 29797
+Gift Grants Membership Fees received 509: previous is 486365 and current is: 589364
+==================================================
+Previous filepath: /tmp/2026-04A/202601069349200040_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202601059349201510_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-04A/202610879349200721_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202611049349200301_public.xml and timestamp: None
+Total Assets: previous is 11905 and current is: 24142
+Zip Code: previous is 77272 and current is: 77272-0622
+==================================================
+Previous filepath: /tmp/2026-04A/202631059349201383_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202601059349201310_public.xml and timestamp: None
+Total Expenses: previous is 72572 and current is: 72537
+==================================================
+Previous filepath: /tmp/2026-04A/202631119349300903_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202641079349300949_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-04A/202630919349201963_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202600919349200705_public.xml and timestamp: None
+Total Revenue: previous is 68425 and current is: 65425
+Total Assets: previous is 215147 and current is: 196856
+Total Expenses: previous is 96089 and current is: 85149
+==================================================
+Previous filepath: /tmp/2026-04A/202641109349200404_public.xml and timestamp: 2026-04-17 14:43:34-04:00
+Current filepath: /tmp/2026-04A/202621079349200822_public.xml and timestamp: None
+Address: previous is 240 Grant St Se Ste A and current is: 240 Grant Street Se Suite A
+==================================================
+Previous filepath: /tmp/2026-04A/202641099349300354_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202621109349300822_public.xml and timestamp: None
+Total Contributions: previous is 213984 and current is: 213802
+Program Service Revenue: previous is 33314 and current is: 33000
+Gross Receipts: previous is 249707 and current is: 249210
+==================================================
+Previous filepath: /tmp/2026-04A/202620899349200607_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202630909349200738_public.xml and timestamp: None
+Total Revenue: previous is 96921 and current is: 54583
+Total Assets: previous is 96519 and current is: 10818
+==================================================
+Previous filepath: /tmp/2026-04A/202621059349300717_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202620909349301862_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-04A/202610999349201916_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202620989349202052_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-04A/202620999349200817_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202640989349201819_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-04A/202610989349201956_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202611039349201661_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 0 and current is: 399
+==================================================
+Previous filepath: /tmp/2026-04A/202621039349200407_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202601069349200100_public.xml and timestamp: None
+Total Revenue: previous is 57148 and current is: 57295
+Total Assets: previous is 82417 and current is: 79247
+Total Expenses: previous is 65184 and current is: 66327
+Investment Income: previous is 410 and current is: 470
+Gift Grants Membership Fees received 509: previous is 11642 and current is: 10382
+==================================================
+Previous filepath: /tmp/2026-04A/202631119349300903_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202621119349301592_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-04A/202600929349201425_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202601139349200535_public.xml and timestamp: 2026-04-23 13:46:11-05:00
+Total Revenue: previous is 60150 and current is: 50150
+Total Assets: previous is 39955 and current is: 29962
+Total Expenses: previous is 20195 and current is: 20186
+Zip Code: previous is 77293 and current is: 77093
+Address: previous is Po Box 11913 and current is: 8321 Jensen Drive
+==================================================
+Previous filepath: /tmp/2026-04A/202600909349200405_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202610919349200201_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-04A/202631079349200003_public.xml and timestamp: 2026-04-16 23:33:28-07:00
+Current filepath: /tmp/2026-04A/202601069349201230_public.xml and timestamp: None
+Address: previous is Po Box 164 and current is: 800 Wenzel Ln
+==================================================
+Previous filepath: /tmp/2026-04A/202601109349300400_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202641109349301104_public.xml and timestamp: None
+Total Assets: previous is 0 and current is: 426531
+Total Liabilities: previous is 0 and current is: 3530
+==================================================
+Previous filepath: /tmp/2026-04A/202631119349300903_public.xml and timestamp: None
+Current filepath: /tmp/2026-04A/202601119349300925_public.xml and timestamp: None
+No difference found
+==================================================
