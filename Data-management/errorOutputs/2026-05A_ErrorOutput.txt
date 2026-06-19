@@ -1,0 +1,77 @@
+Previous filepath: /tmp/2026-05A/202601239349200630_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202621239349200627_public.xml and timestamp: None
+Total Liabilities: previous is 89584 and current is: 83025
+==================================================
+Previous filepath: /tmp/2026-05A/202601239349200715_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202601249349202665_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05A/202601309349200300_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202601309349200305_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05A/202601349349200000_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202611329349203591_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05A/202601349349205755_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202601359349201665_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05A/202601329349204385_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202611169349200811_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05A/202601299349301350_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202611279349303461_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05A/202601409349100410_public.xml and timestamp: 2026-05-20 10:01:18-05:00
+Current filepath: /tmp/2026-05A/202611409349100411_public.xml and timestamp: 2026-05-20 10:01:18-05:00
+Total Revenue: previous is 4872 and current is: 29030
+Total Assets: previous is 0 and current is: 396332
+Total Expenses: previous is 401204 and current is: 46636
+Net Income (Less Deficit): previous is -396332 and current is: -17606
+Contributions Received: previous is 2200 and current is: 11513
+Dividends: previous is 1336 and current is: 16828
+Net Gain (Sales of Assets): previous is 0 and current is: 689
+Other Income: previous is 1336 and current is: 0
+Total Fund net worth: previous is 0 and current is: 396332
+Investments in US Gov Obligations: previous is 0 and current is: 17652
+Investments in Corporate Stock: previous is 0 and current is: 288110
+Investments in Corporate Bonds: previous is 0 and current is: 89696
+Cash: previous is 0 and current is: 874
+==================================================
+Previous filepath: /tmp/2026-05A/202611329349204776_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202611329349204891_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 45482 and current is: 133588
+==================================================
+Previous filepath: /tmp/2026-05A/202621189349301422_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202611189349300516_public.xml and timestamp: None
+Total Assets: previous is 136199 and current is: 0
+==================================================
+Previous filepath: /tmp/2026-05A/202611339349205191_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202601329349205270_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05A/202601319349204515_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202611359349206081_public.xml and timestamp: None
+City: previous is Humble and current is: Galveston
+Zip Code: previous is 77346 and current is: 77550
+Address: previous is 19610 Forest Fern Dr and current is: 3515 Ave P 12
+==================================================
+Previous filepath: /tmp/2026-05A/202611359349316576_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202611369349301031_public.xml and timestamp: None
+Total Revenue: previous is 0 and current is: 424445
+Total Assets: previous is 0 and current is: 80065
+Investment Income: previous is 0 and current is: 1132
+==================================================
+Previous filepath: /tmp/2026-05A/202601269349200200_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202601359349204950_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05A/202621249349200127_public.xml and timestamp: None
+Current filepath: /tmp/2026-05A/202601219349200610_public.xml and timestamp: None
+Total Assets: previous is 15504 and current is: 127000
+Total Expenses: previous is 115000 and current is: 45000
+==================================================
