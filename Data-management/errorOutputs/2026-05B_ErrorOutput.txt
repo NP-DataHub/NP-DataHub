@@ -1,0 +1,72 @@
+Previous filepath: /tmp/2026-05B/202641339349205494_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202621349349204352_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05B/202641359349305684_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202641359349314899_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05B/202641359349208744_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202631389349200448_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05B/202641359349201709_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202631349349201108_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05B/202621339349202847_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202621349349206917_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05B/202631319349203443_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202621349349205257_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05B/202631359349312143_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202621389349300797_public.xml and timestamp: None
+Total Revenue: previous is 292560 and current is: 383385
+Total Assets: previous is 0 and current is: 135720
+Total Expenses: previous is 0 and current is: 312108
+Total Contributions: previous is 292560 and current is: 294213
+Gross Receipts: previous is 381732 and current is: 383385
+Compensation of current officers: previous is 0 and current is: 150937
+Other salaries and wages: previous is 0 and current is: 15640
+Payroll Taxes: previous is 0 and current is: 28691
+==================================================
+Previous filepath: /tmp/2026-05B/202641329349203119_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202631359349202443_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05B/202641219349201859_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202631249349202003_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05B/202621359349201907_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202631359349202008_public.xml and timestamp: None
+Total Revenue: previous is 144559 and current is: 144578
+Investment Income: previous is 7024 and current is: 7043
+==================================================
+Previous filepath: /tmp/2026-05B/202631239349201018_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202641249349201554_public.xml and timestamp: None
+Total Assets: previous is 43320 and current is: 43120
+Total Expenses: previous is 137436 and current is: 137636
+==================================================
+Previous filepath: /tmp/2026-05B/202631349349307413_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202631349349306698_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05B/202641269349202954_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202641409349200914_public.xml and timestamp: None
+Gift Grants Membership Fees received 509: previous is 359615 and current is: 0
+Address: previous is 2386 Kemper Lane and current is: 2386 Kemper Ln
+==================================================
+Previous filepath: /tmp/2026-05B/202621359349208927_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202631379349200553_public.xml and timestamp: None
+No difference found
+==================================================
+Previous filepath: /tmp/2026-05B/202621349349207307_public.xml and timestamp: None
+Current filepath: /tmp/2026-05B/202621359349200507_public.xml and timestamp: None
+Name: previous is Community Enrichment Laboratory For Learning Sciences and current is: Community Enrichment Laboratory For Learning Sciences Inc
+Zip Code: previous is 21704 and current is: 21703
+Address: previous is 321 Ballenger Center Drsuite 125 and current is: 321 Ballenger Center Dr
+==================================================
