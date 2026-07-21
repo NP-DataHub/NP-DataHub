@@ -1,0 +1,51 @@
+Previous filepath: /tmp/2026-06A/202601689349200530_public.xml and timestamp: 2026-06-17 14:28:18-04:00
+Current filepath: /tmp/2026-06A/202641689349200229_public.xml and timestamp: 2026-06-17 14:28:18-04:00
+Total Revenue: previous is 144 and current is: 56
+Total Assets: previous is 15481 and current is: 0
+Total Expenses: previous is 23467 and current is: 2178
+Investment Income: previous is 144 and current is: 56
+==================================================
+Previous filepath: /tmp/2026-06A/202621489349300622_public.xml and timestamp: None
+Current filepath: /tmp/2026-06A/202601479349300505_public.xml and timestamp: None
+Total Expenses: previous is 7407 and current is: 7336
+==================================================
+Previous filepath: /tmp/2026-06A/202641749349200324_public.xml and timestamp: None
+Current filepath: /tmp/2026-06A/202601619349200205_public.xml and timestamp: None
+Total Revenue: previous is 164398 and current is: 118397
+Total Assets: previous is 19847 and current is: 15059
+Total Liabilities: previous is 42901 and current is: 24155
+Total Expenses: previous is 176978 and current is: 125648
+Program Service Revenue: previous is 72000 and current is: 38505
+==================================================
+Previous filepath: /tmp/2026-06A/202641769349201114_public.xml and timestamp: None
+Current filepath: /tmp/2026-06A/202621709349200422_public.xml and timestamp: None
+Total Revenue: previous is 104245 and current is: 116245
+Total Assets: previous is 7797 and current is: 7898
+Total Expenses: previous is 105878 and current is: 117878
+==================================================
+Previous filepath: /tmp/2026-06A/202621759349100007_public.xml and timestamp: 2026-06-24 09:34:58-05:00
+Current filepath: /tmp/2026-06A/202631759349100303_public.xml and timestamp: 2026-06-24 09:34:58-05:00
+Total Revenue: previous is 0 and current is: 432
+Total Assets: previous is 5281 and current is: 0
+Total Expenses: previous is 7124 and current is: 5713
+Net Income (Less Deficit): previous is -7124 and current is: -5281
+Contributions Received: previous is 0 and current is: 432
+Total Fund net worth: previous is 5281 and current is: 0
+==================================================
+Previous filepath: /tmp/2026-06A/202641499349300049_public.xml and timestamp: 2026-05-29 16:15:46-04:00
+Current filepath: /tmp/2026-06A/202621499349300742_public.xml and timestamp: 2026-05-29 16:15:46-04:00
+Total Revenue: previous is 76439 and current is: 63235
+Total Assets: previous is 21406 and current is: 7538
+Total Expenses: previous is 55033 and current is: 77103
+Total Contributions: previous is 45449 and current is: 15281
+Program Service Revenue: previous is 19132 and current is: 32563
+Gross Receipts: previous is 79502 and current is: 64195
+==================================================
+Previous filepath: /tmp/2026-06A/202611559349100001_public.xml and timestamp: 2026-05-13 12:48:53-04:00
+Current filepath: /tmp/2026-06A/202621559349100807_public.xml and timestamp: 2026-05-13 12:48:53-04:00
+No difference found
+==================================================
+Previous filepath: /tmp/2026-06A/202611559349100001_public.xml and timestamp: 2026-05-13 12:48:53-04:00
+Current filepath: /tmp/2026-06A/202601559349100430_public.xml and timestamp: 2026-05-13 12:48:53-04:00
+No difference found
+==================================================
